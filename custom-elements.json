@@ -1,0 +1,4540 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/data-display/kb-accordion.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Collapsible content panel. Each accordion item manages its own open/closed state.",
+          "name": "KbAccordion",
+          "slots": [
+            {
+              "description": "Clickable header that toggles the panel.",
+              "name": "trigger"
+            },
+            {
+              "description": "Panel body content (hidden when collapsed).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-toggle",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when open state changes, with `detail.open`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-accordion",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbAccordion",
+          "declaration": {
+            "name": "KbAccordion",
+            "module": "src/components/data-display/kb-accordion.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-accordion",
+          "declaration": {
+            "name": "KbAccordion",
+            "module": "src/components/data-display/kb-accordion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/data-display/kb-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Content card container with brutalist styling.",
+          "name": "KbCard",
+          "slots": [
+            {
+              "description": "Card body content.",
+              "name": ""
+            },
+            {
+              "description": "Card header content.",
+              "name": "header"
+            },
+            {
+              "description": "Card footer content.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'elevated'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "interactive",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "interactive"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'elevated'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "interactive",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "interactive"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbCard",
+          "declaration": {
+            "name": "KbCard",
+            "module": "src/components/data-display/kb-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-card",
+          "declaration": {
+            "name": "KbCard",
+            "module": "src/components/data-display/kb-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/data-display/kb-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Styled list container for ordered or unordered content.",
+          "name": "KbList",
+          "slots": [
+            {
+              "description": "List item content (use `<li>` elements).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ListVariant"
+              },
+              "default": "'unordered'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "spacing",
+              "type": {
+                "text": "ListSpacing"
+              },
+              "default": "'normal'",
+              "attribute": "spacing"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ListVariant"
+              },
+              "default": "'unordered'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "spacing",
+              "type": {
+                "text": "ListSpacing"
+              },
+              "default": "'normal'",
+              "fieldName": "spacing"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbList",
+          "declaration": {
+            "name": "KbList",
+            "module": "src/components/data-display/kb-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-list",
+          "declaration": {
+            "name": "KbList",
+            "module": "src/components/data-display/kb-list.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/data-display/kb-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Data table wrapper with brutalist styling.\nWraps a native `<table>` and applies Tailwind classes to it and its descendants.",
+          "name": "KbTable",
+          "slots": [
+            {
+              "description": "Table content (`<thead>`, `<tbody>`, `<tr>`, `<td>`, `<th>`).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TableVariant"
+              },
+              "default": "'simple'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "TableSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TableVariant"
+              },
+              "default": "'simple'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "TableSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbTable",
+          "declaration": {
+            "name": "KbTable",
+            "module": "src/components/data-display/kb-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-table",
+          "declaration": {
+            "name": "KbTable",
+            "module": "src/components/data-display/kb-table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/data-display/kb-tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Interactive tag element with optional close action.",
+          "name": "KbTag",
+          "slots": [
+            {
+              "description": "Tag label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'subtle'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "TagSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "closable"
+            },
+            {
+              "kind": "method",
+              "name": "handleClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when the close button is clicked."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'subtle'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "TagSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "closable"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbTag",
+          "declaration": {
+            "name": "KbTag",
+            "module": "src/components/data-display/kb-tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-tag",
+          "declaration": {
+            "name": "KbTag",
+            "module": "src/components/data-display/kb-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Primary interactive button with brutalist styling.",
+          "name": "KbButton",
+          "slots": [
+            {
+              "description": "Button label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'solid'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'",
+              "attribute": "type"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'solid'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "default": "'button'",
+              "fieldName": "type"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbButton",
+          "declaration": {
+            "name": "KbButton",
+            "module": "src/components/forms/kb-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-button",
+          "declaration": {
+            "name": "KbButton",
+            "module": "src/components/forms/kb-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-checkbox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Checkbox control with brutalist styling.",
+          "name": "KbCheckbox",
+          "slots": [
+            {
+              "description": "Label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "indeterminate"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "checked"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbCheckbox",
+          "declaration": {
+            "name": "KbCheckbox",
+            "module": "src/components/forms/kb-checkbox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-checkbox",
+          "declaration": {
+            "name": "KbCheckbox",
+            "module": "src/components/forms/kb-checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-form-control.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Form field wrapper that provides context (required, invalid, disabled) to child inputs.",
+          "name": "KbFormControl",
+          "slots": [
+            {
+              "description": "Form input and label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "required"
+            },
+            {
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "invalid"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-form-control",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbFormControl",
+          "declaration": {
+            "name": "KbFormControl",
+            "module": "src/components/forms/kb-form-control.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-form-control",
+          "declaration": {
+            "name": "KbFormControl",
+            "module": "src/components/forms/kb-form-control.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-form-label.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Label for form controls. Displays a required indicator when `required` is set.",
+          "name": "KbFormLabel",
+          "slots": [
+            {
+              "description": "Label text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "for",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "for"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "for",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "for"
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "required"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-form-label",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbFormLabel",
+          "declaration": {
+            "name": "KbFormLabel",
+            "module": "src/components/forms/kb-form-label.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-form-label",
+          "declaration": {
+            "name": "KbFormLabel",
+            "module": "src/components/forms/kb-form-label.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-icon-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Icon-only button for toolbar actions and compact controls.",
+          "name": "KbIconButton",
+          "slots": [
+            {
+              "description": "Icon content (SVG or text symbol).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "IconButtonVariant"
+              },
+              "default": "'solid'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "IconButtonVariant"
+              },
+              "default": "'solid'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-icon-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbIconButton",
+          "declaration": {
+            "name": "KbIconButton",
+            "module": "src/components/forms/kb-icon-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-icon-button",
+          "declaration": {
+            "name": "KbIconButton",
+            "module": "src/components/forms/kb-icon-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text input field with brutalist styling.",
+          "name": "KbInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "InputVariant"
+              },
+              "default": "'outline'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "string"
+              },
+              "default": "'text'",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "readonly"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-input",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "kb-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "InputVariant"
+              },
+              "default": "'outline'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "string"
+              },
+              "default": "'text'",
+              "fieldName": "type"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "invalid"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "required"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbInput",
+          "declaration": {
+            "name": "KbInput",
+            "module": "src/components/forms/kb-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-input",
+          "declaration": {
+            "name": "KbInput",
+            "module": "src/components/forms/kb-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Radio button control with brutalist styling.",
+          "name": "KbRadio",
+          "slots": [
+            {
+              "description": "Label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "checked"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-radio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbRadio",
+          "declaration": {
+            "name": "KbRadio",
+            "module": "src/components/forms/kb-radio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-radio",
+          "declaration": {
+            "name": "KbRadio",
+            "module": "src/components/forms/kb-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Dropdown select with brutalist styling and custom arrow.",
+          "name": "KbSelect",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "readonly SelectOption[]"
+              },
+              "default": "[]",
+              "attribute": "options"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "options",
+              "type": {
+                "text": "readonly SelectOption[]"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "invalid"
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "required"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbSelect",
+          "declaration": {
+            "name": "KbSelect",
+            "module": "src/components/forms/kb-select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-select",
+          "declaration": {
+            "name": "KbSelect",
+            "module": "src/components/forms/kb-select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Toggle switch control with brutalist styling.",
+          "name": "KbSwitch",
+          "slots": [
+            {
+              "description": "Label content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "method",
+              "name": "handleToggle",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "checked"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-switch",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbSwitch",
+          "declaration": {
+            "name": "KbSwitch",
+            "module": "src/components/forms/kb-switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-switch",
+          "declaration": {
+            "name": "KbSwitch",
+            "module": "src/components/forms/kb-switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/forms/kb-textarea.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Multi-line text input with brutalist styling.",
+          "name": "KbTextarea",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TextareaVariant"
+              },
+              "default": "'outline'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "invalid"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "readonly"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "required"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-input",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TextareaVariant"
+              },
+              "default": "'outline'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "fieldName": "rows"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "invalid",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "invalid"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "required"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-textarea",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbTextarea",
+          "declaration": {
+            "name": "KbTextarea",
+            "module": "src/components/forms/kb-textarea.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-textarea",
+          "declaration": {
+            "name": "KbTextarea",
+            "module": "src/components/forms/kb-textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/navigation/kb-breadcrumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Breadcrumb navigation trail showing page hierarchy.",
+          "name": "KbBreadcrumb",
+          "slots": [
+            {
+              "description": "Breadcrumb items (use `<a>` or `<span>` elements).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "attribute": "separator"
+            },
+            {
+              "kind": "field",
+              "name": "spacing",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "attribute": "spacing"
+            },
+            {
+              "kind": "field",
+              "name": "spacingClass",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "fieldName": "separator"
+            },
+            {
+              "name": "spacing",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "fieldName": "spacing"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-breadcrumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbBreadcrumb",
+          "declaration": {
+            "name": "KbBreadcrumb",
+            "module": "src/components/navigation/kb-breadcrumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-breadcrumb",
+          "declaration": {
+            "name": "KbBreadcrumb",
+            "module": "src/components/navigation/kb-breadcrumb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/navigation/kb-link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Styled anchor link with brutalist variants.",
+          "name": "KbLink",
+          "slots": [
+            {
+              "description": "Link text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#'",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "LinkVariant"
+              },
+              "default": "'underline'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "external",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "external"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#'",
+              "fieldName": "href"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "LinkVariant"
+              },
+              "default": "'underline'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "external",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "external"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbLink",
+          "declaration": {
+            "name": "KbLink",
+            "module": "src/components/navigation/kb-link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-link",
+          "declaration": {
+            "name": "KbLink",
+            "module": "src/components/navigation/kb-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/navigation/kb-tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tab navigation container. Manages active tab state and emits change events.",
+          "name": "KbTabs",
+          "slots": [
+            {
+              "description": "Tab trigger buttons (use `<button>` or `<kb-button>`).",
+              "name": ""
+            },
+            {
+              "description": "Tab panel content.",
+              "name": "panel"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TabsVariant"
+              },
+              "default": "'line'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "fitted",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "fitted"
+            },
+            {
+              "kind": "method",
+              "name": "handleTabClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getTabSlotElements",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "unknown[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getPanelSlotElements",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "unknown[]"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-tab-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when active tab changes, with `detail.index`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "active"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "TabsVariant"
+              },
+              "default": "'line'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "fitted",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "fitted"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-tabs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbTabs",
+          "declaration": {
+            "name": "KbTabs",
+            "module": "src/components/navigation/kb-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-tabs",
+          "declaration": {
+            "name": "KbTabs",
+            "module": "src/components/navigation/kb-tabs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/overlay/kb-drawer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Slide-out panel overlay from any edge of the viewport.",
+          "name": "KbDrawer",
+          "slots": [
+            {
+              "description": "Drawer body content.",
+              "name": ""
+            },
+            {
+              "description": "Drawer header.",
+              "name": "header"
+            },
+            {
+              "description": "Drawer footer.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "DrawerPlacement"
+              },
+              "default": "'right'",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "DrawerSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnOverlay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-overlay"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnEscape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-escape"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "closable"
+            },
+            {
+              "kind": "field",
+              "name": "boundKeyHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOverlayClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when drawer is dismissed."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "DrawerPlacement"
+              },
+              "default": "'right'",
+              "fieldName": "placement"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "DrawerSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "close-on-overlay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnOverlay"
+            },
+            {
+              "name": "close-on-escape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnEscape"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closable"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-drawer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbDrawer",
+          "declaration": {
+            "name": "KbDrawer",
+            "module": "src/components/overlay/kb-drawer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-drawer",
+          "declaration": {
+            "name": "KbDrawer",
+            "module": "src/components/overlay/kb-drawer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/overlay/kb-modal.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Modal dialog overlay with backdrop and keyboard dismissal.",
+          "name": "KbModal",
+          "slots": [
+            {
+              "description": "Modal body content.",
+              "name": ""
+            },
+            {
+              "description": "Modal header with title.",
+              "name": "header"
+            },
+            {
+              "description": "Modal footer with actions.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ModalSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnOverlay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-overlay"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnEscape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-escape"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "closable"
+            },
+            {
+              "kind": "field",
+              "name": "boundKeyHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOverlayClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when modal is dismissed."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ModalSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "close-on-overlay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnOverlay"
+            },
+            {
+              "name": "close-on-escape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnEscape"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closable"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-modal",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbModal",
+          "declaration": {
+            "name": "KbModal",
+            "module": "src/components/overlay/kb-modal.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-modal",
+          "declaration": {
+            "name": "KbModal",
+            "module": "src/components/overlay/kb-modal.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/overlay/kb-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Interactive content popover anchored to a trigger element.",
+          "name": "KbPopover",
+          "slots": [
+            {
+              "description": "Element that opens the popover.",
+              "name": "trigger"
+            },
+            {
+              "description": "Popover body content.",
+              "name": ""
+            },
+            {
+              "description": "Optional popover header.",
+              "name": "header"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "PopoverPlacement"
+              },
+              "default": "'bottom'",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "PopoverTrigger"
+              },
+              "default": "'click'",
+              "attribute": "trigger"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closeOnEscape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-escape"
+            },
+            {
+              "kind": "field",
+              "name": "boundKeyHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "boundOutsideClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOutsideClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseEnter",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseLeave",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "openPopover",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when popover opens."
+            },
+            {
+              "name": "kb-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when popover closes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "PopoverPlacement"
+              },
+              "default": "'bottom'",
+              "fieldName": "placement"
+            },
+            {
+              "name": "trigger",
+              "type": {
+                "text": "PopoverTrigger"
+              },
+              "default": "'click'",
+              "fieldName": "trigger"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "close-on-escape",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnEscape"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbPopover",
+          "declaration": {
+            "name": "KbPopover",
+            "module": "src/components/overlay/kb-popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-popover",
+          "declaration": {
+            "name": "KbPopover",
+            "module": "src/components/overlay/kb-popover.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/overlay/kb-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text tooltip shown on hover over a trigger element.",
+          "name": "KbTooltip",
+          "slots": [
+            {
+              "description": "Trigger element that activates the tooltip on hover.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "TooltipPlacement"
+              },
+              "default": "'top'",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "delay",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "attribute": "delay"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "visible",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "showTimerId",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "TooltipPlacement"
+              },
+              "default": "'top'",
+              "fieldName": "placement"
+            },
+            {
+              "name": "delay",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "fieldName": "delay"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbTooltip",
+          "declaration": {
+            "name": "KbTooltip",
+            "module": "src/components/overlay/kb-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-tooltip",
+          "declaration": {
+            "name": "KbTooltip",
+            "module": "src/components/overlay/kb-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/feedback/kb-alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Status alert banner for displaying feedback messages.",
+          "name": "KbAlert",
+          "slots": [
+            {
+              "description": "Alert message content.",
+              "name": ""
+            },
+            {
+              "description": "Custom icon override.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "AlertStatus"
+              },
+              "default": "'info'",
+              "attribute": "status"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'subtle'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "closable"
+            },
+            {
+              "kind": "field",
+              "name": "showIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "show-icon"
+            },
+            {
+              "kind": "method",
+              "name": "handleClose",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "type": {
+                "text": "AlertStatus"
+              },
+              "default": "'info'",
+              "fieldName": "status"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'subtle'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "closable"
+            },
+            {
+              "name": "show-icon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "showIcon"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbAlert",
+          "declaration": {
+            "name": "KbAlert",
+            "module": "src/components/feedback/kb-alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-alert",
+          "declaration": {
+            "name": "KbAlert",
+            "module": "src/components/feedback/kb-alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/feedback/kb-badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Compact label for status indicators, counts, or category tags.",
+          "name": "KbBadge",
+          "slots": [
+            {
+              "description": "Badge text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'subtle'",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md'"
+              },
+              "default": "'sm'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'subtle'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md'"
+              },
+              "default": "'sm'",
+              "fieldName": "size"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbBadge",
+          "declaration": {
+            "name": "KbBadge",
+            "module": "src/components/feedback/kb-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-badge",
+          "declaration": {
+            "name": "KbBadge",
+            "module": "src/components/feedback/kb-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/feedback/kb-progress.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Determinate or indeterminate progress bar with brutalist styling.",
+          "name": "KbProgress",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ProgressSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "indeterminate"
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show-value"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            },
+            {
+              "kind": "field",
+              "name": "clampedPercent",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "fieldName": "max"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "min"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ProgressSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "show-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "showValue"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-progress",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbProgress",
+          "declaration": {
+            "name": "KbProgress",
+            "module": "src/components/feedback/kb-progress.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-progress",
+          "declaration": {
+            "name": "KbProgress",
+            "module": "src/components/feedback/kb-progress.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/feedback/kb-spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Animated loading spinner indicator.",
+          "name": "KbSpinner",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "colorScheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "attribute": "color-scheme"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading...'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "speed",
+              "type": {
+                "text": "'slow' | 'normal' | 'fast'"
+              },
+              "default": "'normal'",
+              "attribute": "speed"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "ComponentSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "color-scheme",
+              "type": {
+                "text": "ColorScheme | undefined"
+              },
+              "fieldName": "colorScheme"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading...'",
+              "fieldName": "label"
+            },
+            {
+              "name": "speed",
+              "type": {
+                "text": "'slow' | 'normal' | 'fast'"
+              },
+              "default": "'normal'",
+              "fieldName": "speed"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbSpinner",
+          "declaration": {
+            "name": "KbSpinner",
+            "module": "src/components/feedback/kb-spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-spinner",
+          "declaration": {
+            "name": "KbSpinner",
+            "module": "src/components/feedback/kb-spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/feedback/kb-toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Notification toast popup with auto-dismiss and status styling.",
+          "name": "KbToast",
+          "slots": [
+            {
+              "description": "Toast message content.",
+              "name": ""
+            },
+            {
+              "description": "Optional bold title.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "ToastStatus"
+              },
+              "default": "'info'",
+              "attribute": "status"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "ToastPosition"
+              },
+              "default": "'top-right'",
+              "attribute": "position"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "5000",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "closable"
+            },
+            {
+              "kind": "field",
+              "name": "visible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "visible"
+            },
+            {
+              "kind": "field",
+              "name": "timerId",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "startTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clearTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "kb-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Dispatched when the toast is dismissed."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "type": {
+                "text": "ToastStatus"
+              },
+              "default": "'info'",
+              "fieldName": "status"
+            },
+            {
+              "name": "position",
+              "type": {
+                "text": "ToastPosition"
+              },
+              "default": "'top-right'",
+              "fieldName": "position"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "5000",
+              "fieldName": "duration"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closable"
+            },
+            {
+              "name": "visible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "visible"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbToast",
+          "declaration": {
+            "name": "KbToast",
+            "module": "src/components/feedback/kb-toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-toast",
+          "declaration": {
+            "name": "KbToast",
+            "module": "src/components/feedback/kb-toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/typography/kb-code.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Monospace code display element. Inline by default, block when `block` is set.",
+          "name": "KbCode",
+          "slots": [
+            {
+              "description": "Code content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "block"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "block"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-code",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbCode",
+          "declaration": {
+            "name": "KbCode",
+            "module": "src/components/typography/kb-code.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-code",
+          "declaration": {
+            "name": "KbCode",
+            "module": "src/components/typography/kb-code.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/typography/kb-heading.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Heading element (h1-h6) with brutalist uppercase styling.",
+          "name": "KbHeading",
+          "slots": [
+            {
+              "description": "Heading content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "HeadingLevel"
+              },
+              "default": "'2'",
+              "attribute": "level"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "HeadingSize | undefined"
+              },
+              "attribute": "size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "HeadingLevel"
+              },
+              "default": "'2'",
+              "fieldName": "level"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "HeadingSize | undefined"
+              },
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-heading",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbHeading",
+          "declaration": {
+            "name": "KbHeading",
+            "module": "src/components/typography/kb-heading.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-heading",
+          "declaration": {
+            "name": "KbHeading",
+            "module": "src/components/typography/kb-heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/typography/kb-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Body text element with brutalist typography defaults.",
+          "name": "KbText",
+          "slots": [
+            {
+              "description": "Text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FontSizeValue | undefined"
+              },
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "truncate"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "FontSizeValue | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "truncate"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbText",
+          "declaration": {
+            "name": "KbText",
+            "module": "src/components/typography/kb-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-text",
+          "declaration": {
+            "name": "KbText",
+            "module": "src/components/typography/kb-text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-box.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Fundamental layout primitive. Renders a `<div>` with style prop support.",
+          "name": "KbBox",
+          "slots": [
+            {
+              "description": "Default slot for child content.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-box",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbBox",
+          "declaration": {
+            "name": "KbBox",
+            "module": "src/components/layout/kb-box.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-box",
+          "declaration": {
+            "name": "KbBox",
+            "module": "src/components/layout/kb-box.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-container.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Centered content container with a configurable max-width.",
+          "name": "KbContainer",
+          "slots": [
+            {
+              "description": "Default slot for child content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "DimensionValue | undefined"
+              },
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "center",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "center",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "max",
+              "type": {
+                "text": "DimensionValue | undefined"
+              },
+              "fieldName": "max"
+            },
+            {
+              "name": "center",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "center"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-container",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbContainer",
+          "declaration": {
+            "name": "KbContainer",
+            "module": "src/components/layout/kb-container.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-container",
+          "declaration": {
+            "name": "KbContainer",
+            "module": "src/components/layout/kb-container.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Visual separator between content sections.",
+          "name": "KbDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "Orientation"
+              },
+              "default": "'horizontal'",
+              "attribute": "orientation"
+            },
+            {
+              "kind": "field",
+              "name": "dividerColor",
+              "type": {
+                "text": "ColorValue | undefined"
+              },
+              "attribute": "divider-color"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "Orientation"
+              },
+              "default": "'horizontal'",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "divider-color",
+              "type": {
+                "text": "ColorValue | undefined"
+              },
+              "fieldName": "dividerColor"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbDivider",
+          "declaration": {
+            "name": "KbDivider",
+            "module": "src/components/layout/kb-divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-divider",
+          "declaration": {
+            "name": "KbDivider",
+            "module": "src/components/layout/kb-divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-flex.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Flexbox layout container. Shorthand for `<kb-box display=\"flex\">`.",
+          "name": "KbFlex",
+          "slots": [
+            {
+              "description": "Default slot for child content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "FlexDirectionValue | undefined"
+              },
+              "attribute": "direction"
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "FlexAlignValue | undefined"
+              },
+              "attribute": "align"
+            },
+            {
+              "kind": "field",
+              "name": "justify",
+              "type": {
+                "text": "FlexJustifyValue | undefined"
+              },
+              "attribute": "justify"
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "FlexWrapValue | undefined"
+              },
+              "attribute": "wrap"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "direction",
+              "type": {
+                "text": "FlexDirectionValue | undefined"
+              },
+              "fieldName": "direction"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "FlexAlignValue | undefined"
+              },
+              "fieldName": "align"
+            },
+            {
+              "name": "justify",
+              "type": {
+                "text": "FlexJustifyValue | undefined"
+              },
+              "fieldName": "justify"
+            },
+            {
+              "name": "wrap",
+              "type": {
+                "text": "FlexWrapValue | undefined"
+              },
+              "fieldName": "wrap"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-flex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbFlex",
+          "declaration": {
+            "name": "KbFlex",
+            "module": "src/components/layout/kb-flex.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-flex",
+          "declaration": {
+            "name": "KbFlex",
+            "module": "src/components/layout/kb-flex.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "CSS Grid layout container.",
+          "name": "KbGrid",
+          "slots": [
+            {
+              "description": "Default slot for child content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "rows"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "columns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "columns"
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "rows"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbGrid",
+          "declaration": {
+            "name": "KbGrid",
+            "module": "src/components/layout/kb-grid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-grid",
+          "declaration": {
+            "name": "KbGrid",
+            "module": "src/components/layout/kb-grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/layout/kb-stack.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Linear stack layout. Arranges children vertically or horizontally with consistent spacing.",
+          "name": "KbStack",
+          "slots": [
+            {
+              "description": "Default slot for child content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "StackDirection"
+              },
+              "default": "'vertical'",
+              "attribute": "direction"
+            },
+            {
+              "kind": "field",
+              "name": "spacing",
+              "type": {
+                "text": "SpacingValue | undefined"
+              },
+              "attribute": "spacing"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "direction",
+              "type": {
+                "text": "StackDirection"
+              },
+              "default": "'vertical'",
+              "fieldName": "direction"
+            },
+            {
+              "name": "spacing",
+              "type": {
+                "text": "SpacingValue | undefined"
+              },
+              "fieldName": "spacing"
+            }
+          ],
+          "superclass": {
+            "name": "KbBaseElement",
+            "module": "/src/core/base-element.js"
+          },
+          "tagName": "kb-stack",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KbStack",
+          "declaration": {
+            "name": "KbStack",
+            "module": "src/components/layout/kb-stack.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "kb-stack",
+          "declaration": {
+            "name": "KbStack",
+            "module": "src/components/layout/kb-stack.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

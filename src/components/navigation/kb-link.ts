@@ -1,0 +1,252 @@
+import { html, nothing } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement } from '../../core/base-element.js';
+import { kbClasses } from '../../core/theme.js';
+import type { ColorScheme, ComponentSize } from '../../core/types.js';
+
+type LinkVariant = 'underline' | 'hover-underline' | 'plain' | 'subtle' | 'highlight';
+
+/** Text color + hover text color per colorScheme. */
+const COLOR_TEXT: Record<string, string> = {
+  black: 'text-gray-900 hover:text-black dark:text-zinc-100 dark:hover:text-white',
+  red: 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300',
+  blue: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
+  green: 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300',
+  yellow: 'text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300',
+};
+
+const COLOR_DEFAULT = 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300';
+
+/** Decoration color for underline variant. */
+const COLOR_DECORATION: Record<string, string> = {
+  black: 'decoration-gray-400 hover:decoration-gray-900 dark:decoration-zinc-500 dark:hover:decoration-zinc-100',
+  red: 'decoration-red-300 hover:decoration-red-500 dark:decoration-red-700 dark:hover:decoration-red-400',
+  blue: 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400',
+  green: 'decoration-green-300 hover:decoration-green-500 dark:decoration-green-700 dark:hover:decoration-green-400',
+  yellow: 'decoration-yellow-300 hover:decoration-yellow-600 dark:decoration-yellow-700 dark:hover:decoration-yellow-400',
+};
+
+const COLOR_DECORATION_DEFAULT = 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400';
+
+/** Border color for subtle variant. */
+const COLOR_SUBTLE: Record<string, string> = {
+  black: 'border-gray-300 hover:border-gray-900 dark:border-zinc-600 dark:hover:border-zinc-100',
+  red: 'border-red-200 hover:border-red-500 dark:border-red-800 dark:hover:border-red-400',
+  blue: 'border-blue-200 hover:border-blue-500 dark:border-blue-800 dark:hover:border-blue-400',
+  green: 'border-green-200 hover:border-green-500 dark:border-green-800 dark:hover:border-green-400',
+  yellow: 'border-yellow-200 hover:border-yellow-600 dark:border-yellow-800 dark:hover:border-yellow-400',
+};
+
+const COLOR_SUBTLE_DEFAULT = 'border-gray-200 hover:border-blue-500 dark:border-zinc-700 dark:hover:border-blue-400';
+
+/** Background for highlight variant. */
+const COLOR_HIGHLIGHT: Record<string, string> = {
+  black: 'hover:bg-gray-100 dark:hover:bg-zinc-800',
+  red: 'hover:bg-red-50 dark:hover:bg-red-950',
+  blue: 'hover:bg-blue-50 dark:hover:bg-blue-950',
+  green: 'hover:bg-green-50 dark:hover:bg-green-950',
+  yellow: 'hover:bg-yellow-50 dark:hover:bg-yellow-950',
+};
+
+const COLOR_HIGHLIGHT_DEFAULT = 'hover:bg-blue-50 dark:hover:bg-blue-950';
+
+/** Pseudo-element underline color for hover-underline variant. */
+const COLOR_HOVER_UNDERLINE: Record<string, string> = {
+  black: 'bg-gray-900 dark:bg-zinc-100',
+  red: 'bg-red-500 dark:bg-red-400',
+  blue: 'bg-blue-500 dark:bg-blue-400',
+  green: 'bg-green-500 dark:bg-green-400',
+  yellow: 'bg-yellow-600 dark:bg-yellow-400',
+};
+
+const COLOR_HOVER_UNDERLINE_DEFAULT = 'bg-blue-500 dark:bg-blue-400';
+
+/** Visited text color. */
+const COLOR_VISITED: Record<string, string> = {
+  black: 'visited:text-gray-500 dark:visited:text-zinc-500',
+  red: 'visited:text-red-400 dark:visited:text-red-600',
+  blue: 'visited:text-purple-600 dark:visited:text-purple-400',
+  green: 'visited:text-green-400 dark:visited:text-green-600',
+  yellow: 'visited:text-yellow-500 dark:visited:text-yellow-600',
+};
+
+const COLOR_VISITED_DEFAULT = 'visited:text-purple-600 dark:visited:text-purple-400';
+
+const SIZE_TEXT: Record<ComponentSize, string> = {
+  xs: 'text-xs',
+  sm: 'text-sm',
+  md: 'text-sm',
+  lg: 'text-base',
+  xl: 'text-lg',
+};
+
+const SIZE_GAP: Record<ComponentSize, string> = {
+  xs: 'gap-0.5',
+  sm: 'gap-1',
+  md: 'gap-1',
+  lg: 'gap-1.5',
+  xl: 'gap-2',
+};
+
+const SIZE_ICON: Record<ComponentSize, string> = {
+  xs: '[&>svg]:w-3 [&>svg]:h-3',
+  sm: '[&>svg]:w-3.5 [&>svg]:h-3.5',
+  md: '[&>svg]:w-4 [&>svg]:h-4',
+  lg: '[&>svg]:w-4.5 [&>svg]:h-4.5',
+  xl: '[&>svg]:w-5 [&>svg]:h-5',
+};
+
+const SIZE_EXTERNAL: Record<ComponentSize, string> = {
+  xs: 'w-2.5 h-2.5',
+  sm: 'w-3 h-3',
+  md: 'w-3.5 h-3.5',
+  lg: 'w-4 h-4',
+  xl: 'w-4.5 h-4.5',
+};
+
+const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
+  xs: 'px-1 py-0',
+  sm: 'px-1 py-0',
+  md: 'px-1.5 py-0.5',
+  lg: 'px-1.5 py-0.5',
+  xl: 'px-2 py-0.5',
+};
+
+/**
+ * Styled anchor link with multiple variants, icon slots, sizes,
+ * animated hover effects, and SPA-friendly navigation event.
+ *
+ * @slot - Link text content.
+ * @slot icon-left - Leading icon (SVG auto-sized per `size`).
+ * @slot icon-right - Trailing icon (SVG auto-sized per `size`).
+ *
+ * @fires kb-click - Link clicked. Detail: `{ href: string }`.
+ *
+ * @example
+ * ```html
+ * <kb-link href="/about" variant="hover-underline" size="md">About Us</kb-link>
+ * <kb-link href="https://example.com" external>External Link</kb-link>
+ * ```
+ */
+@customElement('kb-link')
+export class KbLink extends KbBaseElement {
+  override connectedCallback(): void {
+    this.captureDefaultSlotContent();
+    super.connectedCallback();
+  }
+
+  @property({ type: String }) href: string = '#';
+  @property({ type: String }) variant: LinkVariant = 'underline';
+  @property({ type: String }) size: ComponentSize = 'md';
+  @property({ type: Boolean }) external: boolean = false;
+  @property({ type: Boolean }) disabled: boolean = false;
+  @property({ type: Boolean }) truncate: boolean = false;
+  @property({ type: Boolean, attribute: 'show-visited' }) showVisited: boolean = false;
+  @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+
+  private _handleClick(e: Event): void {
+    if (this.disabled) {
+      e.preventDefault();
+      return;
+    }
+    this.dispatchEvent(new CustomEvent('kb-click', {
+      detail: { href: this.href },
+      bubbles: true,
+      composed: true,
+    }));
+  }
+
+  private _getColorClasses(): string {
+    const cs = this.colorScheme;
+    return cs ? (COLOR_TEXT[cs] ?? COLOR_DEFAULT) : COLOR_DEFAULT;
+  }
+
+  override render() {
+    const cs = this.colorScheme;
+    const iconLeft = this.slotted('icon-left');
+    const iconRight = this.slotted('icon-right');
+
+    const colorClasses = this._getColorClasses();
+
+    let variantClasses = '';
+    let hasHoverUnderline = false;
+
+    switch (this.variant) {
+      case 'underline':
+        variantClasses = `underline underline-offset-4 decoration-1 hover:decoration-2 ${cs ? (COLOR_DECORATION[cs] ?? COLOR_DECORATION_DEFAULT) : COLOR_DECORATION_DEFAULT}`;
+        break;
+      case 'hover-underline':
+        hasHoverUnderline = true;
+        variantClasses = 'relative';
+        break;
+      case 'plain':
+        variantClasses = '';
+        break;
+      case 'subtle':
+        variantClasses = `border-b pb-0.5 ${cs ? (COLOR_SUBTLE[cs] ?? COLOR_SUBTLE_DEFAULT) : COLOR_SUBTLE_DEFAULT}`;
+        break;
+      case 'highlight':
+        variantClasses = `${SIZE_HIGHLIGHT_PX[this.size]} ${cs ? (COLOR_HIGHLIGHT[cs] ?? COLOR_HIGHLIGHT_DEFAULT) : COLOR_HIGHLIGHT_DEFAULT}`;
+        break;
+    }
+
+    const visitedClass = this.showVisited
+      ? (cs ? (COLOR_VISITED[cs] ?? COLOR_VISITED_DEFAULT) : COLOR_VISITED_DEFAULT)
+      : '';
+
+    const disabledClass = this.disabled
+      ? 'opacity-40 cursor-not-allowed pointer-events-none'
+      : 'cursor-pointer';
+
+    const truncateClass = this.truncate ? 'truncate max-w-48' : '';
+
+    const classes = this.buildClasses(
+      'font-sans inline-flex items-center',
+      SIZE_TEXT[this.size],
+      SIZE_GAP[this.size],
+      kbClasses.transition,
+      'active:opacity-70',
+      kbClasses.focus,
+      colorClasses,
+      variantClasses,
+      visitedClass,
+      disabledClass,
+      truncateClass,
+    );
+
+    const externalAttrs = this.external
+      ? { target: '_blank', rel: 'noopener noreferrer' }
+      : {};
+
+    const hoverUnderlineColor = cs
+      ? (COLOR_HOVER_UNDERLINE[cs] ?? COLOR_HOVER_UNDERLINE_DEFAULT)
+      : COLOR_HOVER_UNDERLINE_DEFAULT;
+
+    const hoverUnderlineEl = hasHoverUnderline
+      ? html`<span class="absolute bottom-0 left-0 w-full h-px ${hoverUnderlineColor} scale-x-0 group-hover/link:scale-x-100 transition-transform duration-200 origin-left pointer-events-none"></span>`
+      : nothing;
+
+    return html`
+      <a
+        class="${classes} group/link"
+        href=${this.disabled ? 'javascript:void(0)' : this.href}
+        target=${externalAttrs.target ?? ''}
+        rel=${externalAttrs.rel ?? ''}
+        aria-disabled=${this.disabled ? 'true' : 'false'}
+        @click=${this._handleClick}
+      >
+        ${iconLeft ? html`<span class="inline-flex items-center shrink-0 ${SIZE_ICON[this.size]}">${iconLeft}</span>` : nothing}
+        <span class="${this.truncate ? 'truncate' : ''}">${this.defaultSlotContent}</span>
+        ${iconRight ? html`<span class="inline-flex items-center shrink-0 ${SIZE_ICON[this.size]}">${iconRight}</span>` : nothing}
+        ${this.external ? html`<svg class="${SIZE_EXTERNAL[this.size]} shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>` : nothing}
+        ${hoverUnderlineEl}
+      </a>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'kb-link': KbLink;
+  }
+}

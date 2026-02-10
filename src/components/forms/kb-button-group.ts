@@ -1,0 +1,74 @@
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement } from '../../core/base-element.js';
+
+type ButtonGroupDirection = 'horizontal' | 'vertical';
+
+const DIRECTION_CLASSES: Record<ButtonGroupDirection, string> = {
+  horizontal: 'inline-flex flex-row',
+  vertical: 'inline-flex flex-col',
+};
+
+const ATTACHED_HORIZONTAL = '[&>kb-button]:border-r-0 [&>kb-button:last-child]:border-r [&>kb-button+kb-button]:border-l-gray-300 [&>kb-button+kb-button]:dark:border-l-zinc-600';
+const ATTACHED_VERTICAL = '[&>kb-button]:border-b-0 [&>kb-button:last-child]:border-b [&>kb-button+kb-button]:border-t-gray-300 [&>kb-button+kb-button]:dark:border-t-zinc-600';
+
+const ATTACHED_CLASSES: Record<ButtonGroupDirection, string> = {
+  horizontal: ATTACHED_HORIZONTAL,
+  vertical: ATTACHED_VERTICAL,
+};
+
+const SPACED_GAP: Record<ButtonGroupDirection, string> = {
+  horizontal: 'gap-2',
+  vertical: 'gap-2',
+};
+
+/**
+ * Groups multiple `kb-button` elements into a unified control.
+ *
+ * In attached mode (default), buttons share borders for a segmented appearance.
+ * In spaced mode, buttons have a consistent gap between them.
+ *
+ * @slot - Child `kb-button` elements.
+ *
+ * @example
+ * ```html
+ * <kb-button-group>
+ *   <kb-button variant="outline">LEFT</kb-button>
+ *   <kb-button variant="outline">CENTER</kb-button>
+ *   <kb-button variant="outline">RIGHT</kb-button>
+ * </kb-button-group>
+ *
+ * <kb-button-group spaced>
+ *   <kb-button>SAVE</kb-button>
+ *   <kb-button variant="outline">CANCEL</kb-button>
+ * </kb-button-group>
+ * ```
+ */
+@customElement('kb-button-group')
+export class KbButtonGroup extends KbBaseElement {
+  override connectedCallback(): void {
+    this.captureDefaultSlotContent();
+    super.connectedCallback();
+  }
+
+  @property({ type: String }) direction: ButtonGroupDirection = 'horizontal';
+  @property({ type: Boolean }) spaced: boolean = false;
+
+  override render() {
+    const dirClasses = DIRECTION_CLASSES[this.direction] ?? DIRECTION_CLASSES.horizontal;
+
+    const modeClasses = this.spaced
+      ? SPACED_GAP[this.direction] ?? SPACED_GAP.horizontal
+      : ATTACHED_CLASSES[this.direction] ?? ATTACHED_CLASSES.horizontal;
+
+    const classes = this.buildClasses(dirClasses, modeClasses);
+
+    return html`<div class=${classes} role="group">${this.defaultSlotContent}</div>`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'kb-button-group': KbButtonGroup;
+  }
+}
