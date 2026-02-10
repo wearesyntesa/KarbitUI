@@ -1,20 +1,15 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { BG_COLOR, BORDER_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize, ColorScheme } from '../../core/types.js';
 
-type SpinnerVariant = 'border' | 'dots' | 'bars' | 'pulse';
+export type SpinnerVariant = 'border' | 'dots' | 'bars' | 'pulse';
+
+export type SpinnerSpeed = 'slow' | 'normal' | 'fast';
 
 const BORDER_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-4 h-4 border',
-  md: 'w-6 h-6 border-2',
-  lg: 'w-8 h-8 border-2',
-  xl: 'w-12 h-12 border-[3px]',
-};
-
-const TRACK_SIZE: Record<ComponentSize, string> = {
   xs: 'w-3 h-3 border',
   sm: 'w-4 h-4 border',
   md: 'w-6 h-6 border-2',
@@ -46,22 +41,6 @@ const PULSE_SIZE: Record<ComponentSize, string> = {
   xl: 'w-12 h-12',
 };
 
-const SPINNER_BORDER_COLOR: Record<string, string> = {
-  black: 'border-gray-900 dark:border-zinc-100',
-  red: 'border-red-500 dark:border-red-400',
-  blue: 'border-blue-500 dark:border-blue-400',
-  green: 'border-green-500 dark:border-green-400',
-  yellow: 'border-yellow-500 dark:border-yellow-400',
-};
-
-const SPINNER_BG_COLOR: Record<string, string> = {
-  black: 'bg-gray-900 dark:bg-zinc-100',
-  red: 'bg-red-500 dark:bg-red-400',
-  blue: 'bg-blue-500 dark:bg-blue-400',
-  green: 'bg-green-500 dark:bg-green-400',
-  yellow: 'bg-yellow-500 dark:bg-yellow-400',
-};
-
 const TRACK_COLOR = 'border-gray-200 dark:border-zinc-700';
 
 const LABEL_SIZE: Record<ComponentSize, string> = {
@@ -72,7 +51,7 @@ const LABEL_SIZE: Record<ComponentSize, string> = {
   xl: 'text-sm',
 };
 
-const SPEED_DURATION: Record<string, string> = {
+const SPEED_DURATION: Record<SpinnerSpeed, string> = {
   slow: '1.5s',
   normal: '0.75s',
   fast: '0.45s',
@@ -98,26 +77,28 @@ const BAR_DELAYS = ['0s', '0.15s', '0.3s', '0.45s'];
  */
 @customElement('kb-spinner')
 export class KbSpinner extends KbBaseElement {
+  /** Spinner animation style. @defaultValue 'border' */
   @property({ type: String }) variant: SpinnerVariant = 'border';
+  /** Spinner dimensions. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Color scheme for the spinner stroke/fill. When unset, defaults to blue. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Accessible label text, also used as visible text when `showLabel` is true. @defaultValue 'Loading...' */
   @property({ type: String }) label: string = 'Loading...';
+  /** Display the label text below or beside the spinner. @defaultValue false */
   @property({ type: Boolean, attribute: 'show-label' }) showLabel: boolean = false;
-  @property({ type: String }) speed: 'slow' | 'normal' | 'fast' = 'normal';
+  /** Animation speed. @defaultValue 'normal' */
+  @property({ type: String }) speed: SpinnerSpeed = 'normal';
+  /** Show a grey track ring behind the spinning border. Only applies to `'border'` variant. @defaultValue false */
   @property({ type: Boolean }) track: boolean = false;
+  /** Label position relative to the spinner. @defaultValue 'bottom' */
   @property({ type: String, attribute: 'label-position' }) labelPosition: 'bottom' | 'right' = 'bottom';
+  /** Wrap slot content with a semi-transparent overlay and center the spinner above it. @defaultValue false */
   @property({ type: Boolean }) overlay: boolean = false;
-
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
   private _renderBorder() {
     const sizeClasses = BORDER_SIZE[this.size] ?? BORDER_SIZE.md;
-    const borderColor = this.colorScheme
-      ? SPINNER_BORDER_COLOR[this.colorScheme] ?? 'border-blue-500 dark:border-blue-400'
-      : 'border-blue-500 dark:border-blue-400';
+    const borderColor = lookupScheme(BORDER_COLOR, this.colorScheme) ?? 'border-blue-500 dark:border-blue-400';
 
     const duration = SPEED_DURATION[this.speed] ?? SPEED_DURATION.normal;
     const spinStyle = `animation:spin ${duration} linear infinite`;
@@ -129,7 +110,7 @@ export class KbSpinner extends KbBaseElement {
 
     if (!this.track) return spinnerEl;
 
-    const trackSizeClasses = TRACK_SIZE[this.size] ?? TRACK_SIZE.md;
+    const trackSizeClasses = BORDER_SIZE[this.size] ?? BORDER_SIZE.md;
     return html`<span class="relative inline-flex items-center justify-center">
       <span class="absolute rounded-full ${trackSizeClasses} ${TRACK_COLOR}"></span>
       ${spinnerEl}
@@ -138,9 +119,7 @@ export class KbSpinner extends KbBaseElement {
 
   private _renderDots() {
     const cfg = DOT_SIZE[this.size] ?? DOT_SIZE.md;
-    const bgColor = this.colorScheme
-      ? SPINNER_BG_COLOR[this.colorScheme] ?? 'bg-blue-500 dark:bg-blue-400'
-      : 'bg-blue-500 dark:bg-blue-400';
+    const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
     return html`<span class="inline-flex items-center ${cfg.gap}">
       ${DOT_DELAYS.map(
@@ -154,9 +133,7 @@ export class KbSpinner extends KbBaseElement {
 
   private _renderBars() {
     const cfg = BAR_SIZE[this.size] ?? BAR_SIZE.md;
-    const bgColor = this.colorScheme
-      ? SPINNER_BG_COLOR[this.colorScheme] ?? 'bg-blue-500 dark:bg-blue-400'
-      : 'bg-blue-500 dark:bg-blue-400';
+    const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
     return html`<span class="inline-flex items-center ${cfg.gap} ${cfg.height}">
       ${BAR_DELAYS.map(
@@ -170,9 +147,7 @@ export class KbSpinner extends KbBaseElement {
 
   private _renderPulse() {
     const sizeClasses = PULSE_SIZE[this.size] ?? PULSE_SIZE.md;
-    const bgColor = this.colorScheme
-      ? SPINNER_BG_COLOR[this.colorScheme] ?? 'bg-blue-500 dark:bg-blue-400'
-      : 'bg-blue-500 dark:bg-blue-400';
+    const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
     return html`<span class="inline-block rounded-full ${sizeClasses} ${bgColor} animate-kb-spinner-pulse"></span>`;
   }

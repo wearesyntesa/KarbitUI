@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
-type ButtonGroupDirection = 'horizontal' | 'vertical';
+export type ButtonGroupDirection = 'horizontal' | 'vertical';
 
 const DIRECTION_CLASSES: Record<ButtonGroupDirection, string> = {
   horizontal: 'inline-flex flex-row',
@@ -46,12 +46,9 @@ const SPACED_GAP: Record<ButtonGroupDirection, string> = {
  */
 @customElement('kb-button-group')
 export class KbButtonGroup extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Layout direction of the grouped buttons. @defaultValue 'horizontal' */
   @property({ type: String }) direction: ButtonGroupDirection = 'horizontal';
+  /** Use spaced mode (gap between buttons) instead of attached mode (shared borders). @defaultValue false */
   @property({ type: Boolean }) spaced: boolean = false;
 
   override render() {

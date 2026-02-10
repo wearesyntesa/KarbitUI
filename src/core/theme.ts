@@ -52,6 +52,7 @@ export type Theme = typeof theme;
 export const kbClasses = {
   border: 'border border-gray-200 dark:border-zinc-700',
   borderBottom: 'border-b border-gray-200 dark:border-zinc-700',
+  borderTop: 'border-t border-gray-200 dark:border-zinc-700',
   surface: 'bg-white dark:bg-zinc-900',
   surfaceMuted: 'bg-gray-50 dark:bg-zinc-800',
   textPrimary: 'text-slate-900 dark:text-zinc-50',
@@ -62,3 +63,5 @@ export const kbClasses = {
   disabled: 'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
   transition: 'transition-all duration-150 ease-in-out',
 } as const;
+
+export type KbClasses = typeof kbClasses;

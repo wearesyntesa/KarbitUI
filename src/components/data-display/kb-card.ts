@@ -4,7 +4,7 @@ import { KbBaseElement } from '../../core/base-element.js';
 import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 
-type CardVariant = 'outline' | 'elevated' | 'filled' | 'ghost';
+export type CardVariant = 'outline' | 'elevated' | 'filled' | 'ghost';
 
 const cardRecipe = recipe({
   base: `font-sans ${kbClasses.transition}`,
@@ -39,6 +39,8 @@ const GHOST_INTERACTIVE_CLASSES = [
   kbClasses.focus,
 ].join(' ');
 
+const PASSIVE_HOVER_CLASSES = 'hover:border-gray-300 dark:hover:border-zinc-600';
+
 /**
  * Content card container with structured minimal styling.
  *
@@ -65,16 +67,16 @@ const GHOST_INTERACTIVE_CLASSES = [
 export class KbCard extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** Visual variant controlling border, background, and elevation. @defaultValue 'outline' */
   @property({ type: String }) variant: CardVariant = 'outline';
+  /** Inner padding size. @defaultValue 'md' */
   @property({ type: String }) size: 'sm' | 'md' | 'lg' = 'md';
+  /** When true, the card is focusable and emits `kb-click` on activation. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
+  /** URL to navigate to — renders the card as an anchor element. @defaultValue '' */
   @property({ type: String }) href: string = '';
+  /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
-
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
   private _handleClick(): void {
     if (!this.interactive) return;
@@ -113,9 +115,14 @@ export class KbCard extends KbBaseElement {
       ? (isGhost ? GHOST_INTERACTIVE_CLASSES : INTERACTIVE_CLASSES)
       : '';
 
+    const passiveHover = !this.interactive && !isGhost && !this.href
+      ? PASSIVE_HOVER_CLASSES
+      : '';
+
     const baseClasses = this.buildClasses(
       cardRecipe({ variant: this.variant, size: this.size }),
       interactiveClasses,
+      passiveHover,
       this.href ? 'block no-underline text-inherit' : '',
     );
 

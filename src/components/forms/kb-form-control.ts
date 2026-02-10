@@ -32,13 +32,11 @@ const FORM_CHILD_TAGS = ['KB-INPUT', 'KB-TEXTAREA', 'KB-SELECT'] as const;
 export class KbFormControl extends KbBaseElement {
   static override hostDisplay = 'block';
 
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Mark the field as required. Propagated to child input and label. @defaultValue false */
   @property({ type: Boolean, reflect: true }) required: boolean = false;
+  /** Mark the field as invalid. Propagated to child input; switches helper → error text. @defaultValue false */
   @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  /** Disable the field. Propagated to child input. @defaultValue false */
   @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
   override firstUpdated(): void {

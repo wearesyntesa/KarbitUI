@@ -17,10 +17,6 @@ import { KbBaseElement } from '../../core/base-element.js';
 @customElement('kb-box')
 export class KbBox extends KbBaseElement {
   static override hostDisplay = 'block';
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
   override render() {
     const classes = this.buildClasses();

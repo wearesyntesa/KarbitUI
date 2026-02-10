@@ -19,3 +19,40 @@ export const Narrow: S = { args: { max: 'sm' } };
 export const Wide: S = { args: { max: '5xl' } };
 
 export const NotCentered: S = { args: { center: false } };
+
+export const SizeSmall: S = { args: { size: 'sm' } };
+
+export const SizeMedium: S = { args: { size: 'md' } };
+
+export const SizeLarge: S = { args: { size: 'lg' } };
+
+export const SizeXL: S = { args: { size: 'xl' } };
+
+export const Size2XL: S = { args: { size: '2xl' } };
+
+export const SizeFull: S = { args: { size: 'full' } };
+
+export const AllSizes: S = {
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      ${(['sm', 'md', 'lg', 'xl', '2xl', 'full'] as const).map(
+        (size) => html`
+          <kb-container size=${size} bg="gray-100" p="4">
+            <p class="text-xs font-mono text-slate-500">size="${size}"</p>
+          </kb-container>
+        `,
+      )}
+    </div>
+  `,
+};
+
+export const Nested: S = {
+  render: () => html`
+    <kb-container size="xl" bg="gray-100" p="6">
+      <p class="text-xs font-mono text-slate-500 mb-4">OUTER: size="xl"</p>
+      <kb-container size="md" bg="gray-200" p="4">
+        <p class="text-xs font-mono text-slate-500">INNER: size="md"</p>
+      </kb-container>
+    </kb-container>
+  `,
+};

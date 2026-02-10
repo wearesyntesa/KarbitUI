@@ -1,7 +1,8 @@
 import { html, svg } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
+import type { KbToggleDetail } from '../../core/events.js';
 
 let nextAccordionId = 0;
 
@@ -33,18 +34,26 @@ export class KbAccordion extends KbBaseElement {
   private get _triggerId(): string { return `kb-acc-t-${this._uid}`; }
   private get _panelId(): string { return `kb-acc-p-${this._uid}`; }
 
+  /** Whether the panel is expanded. Reflected to attribute for CSS targeting. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
+  /** Prevents toggling and applies disabled styles to the trigger button. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
 
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
+  @state() private _pressed = false;
+
+  private _onPointerDown(): void {
+    if (this.disabled) return;
+    this._pressed = true;
+  }
+
+  private _onPointerUp(): void {
+    this._pressed = false;
   }
 
   private _toggle(): void {
     if (this.disabled) return;
     this.open = !this.open;
-    this.dispatchEvent(new CustomEvent('kb-toggle', {
+    this.dispatchEvent(new CustomEvent<KbToggleDetail>('kb-toggle', {
       detail: { open: this.open },
       bubbles: true,
       composed: true,
@@ -52,6 +61,8 @@ export class KbAccordion extends KbBaseElement {
   }
 
   override render() {
+    const pressClass = this._pressed && !this.disabled ? 'scale-[0.998]' : '';
+
     const triggerClasses = this.buildClasses(
       'flex items-center justify-between w-full',
       'px-4 py-3.5',
@@ -63,6 +74,7 @@ export class KbAccordion extends KbBaseElement {
       'hover:bg-gray-50 dark:hover:bg-zinc-800/60',
       'active:bg-gray-100 dark:active:bg-zinc-700/50',
       this.disabled ? kbClasses.disabled : '',
+      pressClass,
     );
 
     const chevronClasses = [
@@ -84,6 +96,9 @@ export class KbAccordion extends KbBaseElement {
           id=${this._triggerId}
           class=${triggerClasses}
           @click=${this._toggle}
+          @pointerdown=${() => this._onPointerDown()}
+          @pointerup=${() => this._onPointerUp()}
+          @pointerleave=${() => this._onPointerUp()}
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls=${this._panelId}
           ?disabled=${this.disabled}

@@ -3,12 +3,14 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
+import type { KbTabChangeDetail } from '../../core/events.js';
+import type { KnownColorScheme } from '../../core/types.js';
 
-type TabsVariant = 'line' | 'enclosed' | 'solid' | 'unstyled';
-type TabsSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-type TabsOrientation = 'horizontal' | 'vertical';
-type TabsColorScheme = 'blue' | 'red' | 'green' | 'yellow' | 'black';
-type TabsAlign = 'start' | 'center' | 'end';
+export type TabsVariant = 'line' | 'enclosed' | 'solid' | 'unstyled';
+export type TabsSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type TabsOrientation = 'horizontal' | 'vertical';
+export type TabsColorScheme = KnownColorScheme;
+export type TabsAlign = 'start' | 'center' | 'end';
 
 /** Size → text, padding, gap, icon size maps */
 const SIZE_TEXT: Record<TabsSize, string> = {
@@ -84,7 +86,7 @@ const SIZE_INDICATOR_W_VERT: Record<TabsSize, string> = {
 };
 
 /** ColorScheme maps */
-const COLOR_ACTIVE_TEXT: Record<TabsColorScheme, string> = {
+const COLOR_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
   blue: 'text-blue-500 dark:text-blue-400',
   red: 'text-red-500 dark:text-red-400',
   green: 'text-green-600 dark:text-green-400',
@@ -92,7 +94,7 @@ const COLOR_ACTIVE_TEXT: Record<TabsColorScheme, string> = {
   black: 'text-slate-900 dark:text-zinc-50',
 };
 
-const COLOR_INDICATOR: Record<TabsColorScheme, string> = {
+const COLOR_INDICATOR: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 dark:bg-blue-400',
   red: 'bg-red-500 dark:bg-red-400',
   green: 'bg-green-600 dark:bg-green-400',
@@ -100,7 +102,7 @@ const COLOR_INDICATOR: Record<TabsColorScheme, string> = {
   black: 'bg-slate-900 dark:bg-zinc-50',
 };
 
-const COLOR_SOLID_ACTIVE_BG: Record<TabsColorScheme, string> = {
+const COLOR_SOLID_ACTIVE_BG: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 dark:bg-blue-600',
   red: 'bg-red-500 dark:bg-red-600',
   green: 'bg-green-600 dark:bg-green-700',
@@ -108,7 +110,7 @@ const COLOR_SOLID_ACTIVE_BG: Record<TabsColorScheme, string> = {
   black: 'bg-slate-900 dark:bg-zinc-100',
 };
 
-const COLOR_SOLID_ACTIVE_TEXT: Record<TabsColorScheme, string> = {
+const COLOR_SOLID_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
   blue: 'text-white',
   red: 'text-white',
   green: 'text-white',
@@ -116,12 +118,22 @@ const COLOR_SOLID_ACTIVE_TEXT: Record<TabsColorScheme, string> = {
   black: 'text-white dark:text-zinc-900',
 };
 
-const COLOR_ENCLOSED_ACTIVE_BORDER: Record<TabsColorScheme, string> = {
+const COLOR_ENCLOSED_ACTIVE_BORDER: Record<KnownColorScheme, string> = {
   blue: 'border-t-blue-500 dark:border-t-blue-400',
   red: 'border-t-red-500 dark:border-t-red-400',
   green: 'border-t-green-600 dark:border-t-green-400',
   yellow: 'border-t-yellow-600 dark:border-t-yellow-400',
   black: 'border-t-slate-900 dark:border-t-zinc-50',
+};
+
+const disabledTabsConverter = {
+  fromAttribute(value: string | null): number[] {
+    if (!value) return [];
+    return value.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !Number.isNaN(n));
+  },
+  toAttribute(value: number[]): string {
+    return value.join(',');
+  },
 };
 
 interface IndicatorPosition {
@@ -153,37 +165,44 @@ interface IndicatorPosition {
 export class KbTabs extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** Zero-based index of the currently active tab. @defaultValue 0 */
   @property({ type: Number }) active: number = 0;
+  /** Visual variant controlling tab styling — `'line'` (indicator bar), `'enclosed'` (bordered tabs), `'solid'` (filled background), or `'unstyled'`. @defaultValue 'line' */
   @property({ type: String }) variant: TabsVariant = 'line';
+  /** Tab text and padding size. @defaultValue 'md' */
   @property({ type: String }) size: TabsSize = 'md';
-  @property({ type: String, attribute: 'color-scheme' }) colorScheme: TabsColorScheme = 'blue';
+  /** Accent color scheme for active tab indicator and text. @defaultValue 'blue' */
+  @property({ type: String, attribute: 'color-scheme' }) colorScheme: KnownColorScheme = 'blue';
+  /** Stretch tabs to fill the available width equally. @defaultValue false */
   @property({ type: Boolean }) fitted: boolean = false;
+  /** Tab list layout direction. @defaultValue 'horizontal' */
   @property({ type: String }) orientation: TabsOrientation = 'horizontal';
+  /** Horizontal/vertical alignment of tabs within the tab list. @defaultValue 'start' */
   @property({ type: String }) align: TabsAlign = 'start';
-  @property({ type: String, attribute: 'disabled-tabs' }) disabledTabs: string = '';
+  /** Array of zero-based tab indices that should be disabled. Attribute accepts comma-separated numbers. @defaultValue [] */
+  @property({ attribute: 'disabled-tabs', converter: disabledTabsConverter }) disabledTabs: number[] = [];
 
   @state() private _indicatorPos: IndicatorPosition = { offset: 0, size: 0 };
   @state() private _panelKey: number = 0;
 
   private _resizeObserver: ResizeObserver | null = null;
   private _tabButtons: HTMLButtonElement[] = [];
-
-  private get _disabledSet(): Set<number> {
-    if (!this.disabledTabs) return new Set();
-    return new Set(
-      this.disabledTabs
-        .split(',')
-        .map((s) => parseInt(s.trim(), 10))
-        .filter((n) => !Number.isNaN(n)),
-    );
-  }
+  private _disabledSet: Set<number> = new Set();
+  private _cachedTabs: HTMLElement[] = [];
+  private _cachedPanels: HTMLElement[] = [];
+  private _cachedIcons: Map<number, HTMLElement> = new Map();
 
   private get _isVertical(): boolean {
     return this.orientation === 'vertical';
   }
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
+    this._cachedTabs = Array.from(this.querySelectorAll<HTMLElement>('[slot^="tab-"]'));
+    this._cachedPanels = Array.from(this.querySelectorAll<HTMLElement>('[slot^="panel-"]'));
+    this._cachedTabs.forEach((_, i) => {
+      const icon = this.querySelector<HTMLElement>(`[slot="icon-${i}"]`);
+      if (icon) this._cachedIcons.set(i, icon);
+    });
     super.connectedCallback();
     this._resizeObserver = new ResizeObserver(() => {
       this._measureIndicator();
@@ -194,6 +213,13 @@ export class KbTabs extends KbBaseElement {
     super.disconnectedCallback();
     this._resizeObserver?.disconnect();
     this._resizeObserver = null;
+  }
+
+  protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (changed.has('disabledTabs')) {
+      this._disabledSet = new Set(this.disabledTabs);
+    }
   }
 
   override firstUpdated(): void {
@@ -241,7 +267,7 @@ export class KbTabs extends KbBaseElement {
     const previousIndex = this.active;
     this.active = index;
     this.dispatchEvent(
-      new CustomEvent('kb-tab-change', {
+      new CustomEvent<KbTabChangeDetail>('kb-tab-change', {
         detail: { index, previousIndex },
         bubbles: true,
         composed: true,
@@ -290,8 +316,8 @@ export class KbTabs extends KbBaseElement {
   }
 
   override render() {
-    const tabs = Array.from(this.querySelectorAll<HTMLElement>('[slot^="tab-"]'));
-    const panels = Array.from(this.querySelectorAll<HTMLElement>('[slot^="panel-"]'));
+    const tabs = this._cachedTabs;
+    const panels = this._cachedPanels;
     const disabled = this._disabledSet;
     const isVert = this._isVertical;
     const v = this.variant;
@@ -407,7 +433,7 @@ export class KbTabs extends KbBaseElement {
           ${tabs.map((tab, index) => {
             const isActive = index === this.active;
             const isDisabled = disabled.has(index);
-            const icon = this.querySelector<HTMLElement>(`[slot="icon-${index}"]`);
+            const icon = this._cachedIcons.get(index);
             return html`
               <button
                 class=${getTabClasses(index)}

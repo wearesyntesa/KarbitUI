@@ -1,24 +1,17 @@
 import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
 
-type ProgressSize = 'xs' | 'sm' | 'md' | 'lg';
+export type ProgressSize = 'xs' | 'sm' | 'md' | 'lg';
 
 const SIZE_MAP: Record<ProgressSize, string> = {
   xs: 'h-1',
   sm: 'h-1.5',
   md: 'h-2.5',
   lg: 'h-4',
-};
-
-const PROGRESS_FILL_COLOR: Record<string, string> = {
-  black: 'bg-gray-900 dark:bg-zinc-100',
-  red: 'bg-red-500 dark:bg-red-400',
-  blue: 'bg-blue-500 dark:bg-blue-400',
-  green: 'bg-green-500 dark:bg-green-400',
-  yellow: 'bg-yellow-500 dark:bg-yellow-400',
 };
 
 const AUTO_COLOR_THRESHOLDS: Array<{ max: number; classes: string }> = [
@@ -53,24 +46,35 @@ export class KbProgress extends KbBaseElement {
   static override hostDisplay = 'block';
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     requestAnimationFrame(() => {
       this._mounted = true;
     });
   }
 
+  /** Current progress value between `min` and `max`. @defaultValue 0 */
   @property({ type: Number }) value: number = 0;
+  /** Maximum progress value. @defaultValue 100 */
   @property({ type: Number }) max: number = 100;
+  /** Minimum progress value. @defaultValue 0 */
   @property({ type: Number }) min: number = 0;
+  /** Bar height preset. @defaultValue 'md' */
   @property({ type: String }) size: ProgressSize = 'md';
+  /** Show an animated indeterminate (looping) fill instead of a determinate bar. @defaultValue false */
   @property({ type: Boolean }) indeterminate: boolean = false;
+  /** Display the percentage or custom `valueLabel` next to the bar. @defaultValue false */
   @property({ type: Boolean, attribute: 'show-value' }) showValue: boolean = false;
+  /** Custom text displayed instead of the computed percentage when `showValue` is true. */
   @property({ type: String, attribute: 'value-label' }) valueLabel?: string;
+  /** Color scheme for the fill bar. When unset, defaults to blue (or auto-color thresholds). */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Apply a diagonal stripe pattern to the fill bar. @defaultValue false */
   @property({ type: Boolean }) striped: boolean = false;
+  /** Animate the stripe pattern. Requires `striped` to be true. @defaultValue false */
   @property({ type: Boolean }) animated: boolean = false;
+  /** Number of visual segments dividing the track. `0` disables segmentation. @defaultValue 0 */
   @property({ type: Number }) segments: number = 0;
+  /** Automatically change fill color based on value thresholds (blue → yellow → red). @defaultValue false */
   @property({ type: Boolean, attribute: 'auto-color' }) autoColor: boolean = false;
 
   @state() private _mounted = false;
@@ -84,7 +88,7 @@ export class KbProgress extends KbBaseElement {
 
   private _resolveFillColor(): string {
     if (this.colorScheme) {
-      return PROGRESS_FILL_COLOR[this.colorScheme] ?? 'bg-blue-500 dark:bg-blue-400';
+      return lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
     }
     if (this.autoColor) {
       const percent = this.clampedPercent;

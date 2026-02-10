@@ -27,3 +27,31 @@ export const ThreeColumns: S = {};
 export const TwoColumns: S = { args: { columns: '2' } };
 
 export const FourColumns: S = { args: { columns: '4' } };
+
+export const SingleColumn: S = { args: { columns: '1' } };
+
+export const WithRows: S = { args: { columns: '3', rows: '2' } };
+
+export const DashboardLayout: S = {
+  render: () => html`
+    <kb-grid columns="3" gap="4">
+      <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700 col-span-2">
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">MAIN CONTENT</p>
+        <p class="text-sm">Spans two columns.</p>
+      </kb-box>
+      <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">SIDEBAR</p>
+        <p class="text-sm">Single column.</p>
+      </kb-box>
+      <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET A</p>
+      </kb-box>
+      <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET B</p>
+      </kb-box>
+      <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET C</p>
+      </kb-box>
+    </kb-grid>
+  `,
+};

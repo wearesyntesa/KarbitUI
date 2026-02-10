@@ -1,71 +1,19 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import type { KbInputDetail, KbChangeValueDetail } from '../../core/events.js';
+import {
+  VARIANT_WRAPPER, VARIANT_WRAPPER_INVALID,
+  SIZE_PADDING, SIZE_TEXT, SIZE_ICON, SIZE_GAP, CLEAR_SIZE, SPINNER_SIZE, FOCUS_RING,
+  type FormVariant,
+} from '../../core/form-tokens.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
 
-type InputVariant = 'outline' | 'filled' | 'flushed';
-
-/** Wrapper border/bg classes per variant. Focus handled via focus-within on wrapper. */
-const VARIANT_WRAPPER: Record<InputVariant, string> = {
-  outline: `bg-white border border-gray-200 dark:border-zinc-700 dark:bg-transparent hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:hover:border-blue-500 dark:focus-within:hover:border-blue-400`,
-  filled: `bg-gray-100 border border-gray-100 hover:bg-gray-200/60 dark:bg-zinc-800 dark:border-zinc-800 dark:hover:bg-zinc-700 focus-within:bg-white focus-within:border-gray-300 dark:focus-within:bg-transparent dark:focus-within:border-zinc-600`,
-  flushed: `bg-transparent border-b border-gray-200 dark:border-zinc-700 hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400`,
-};
-
-const VARIANT_WRAPPER_INVALID: Record<InputVariant, string> = {
-  outline: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  filled: 'border-red-500 dark:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  flushed: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-};
-
-const SIZE_PADDING: Record<ComponentSize, string> = {
-  xs: 'px-2 py-1',
-  sm: 'px-3 py-1.5',
-  md: 'px-4 py-2',
-  lg: 'px-5 py-3',
-  xl: 'px-6 py-4',
-};
-
-const SIZE_TEXT: Record<ComponentSize, string> = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  md: 'text-sm',
-  lg: 'text-base',
-  xl: 'text-lg',
-};
-
-const SIZE_ICON: Record<ComponentSize, string> = {
-  xs: '[&>svg]:w-3 [&>svg]:h-3',
-  sm: '[&>svg]:w-4 [&>svg]:h-4',
-  md: '[&>svg]:w-4.5 [&>svg]:h-4.5',
-  lg: '[&>svg]:w-5 [&>svg]:h-5',
-  xl: '[&>svg]:w-6 [&>svg]:h-6',
-};
-
-const SIZE_GAP: Record<ComponentSize, string> = {
-  xs: 'gap-1',
-  sm: 'gap-1.5',
-  md: 'gap-2',
-  lg: 'gap-2.5',
-  xl: 'gap-3',
-};
-
-const CLEAR_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3',
-  sm: 'w-3.5 h-3.5',
-  md: 'w-4 h-4',
-  lg: 'w-4.5 h-4.5',
-  xl: 'w-5 h-5',
-};
-
-const SPINNER_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-3.5 h-3.5 border',
-  md: 'w-4 h-4 border-2',
-  lg: 'w-4.5 h-4.5 border-2',
-  xl: 'w-5 h-5 border-2',
-};
+export type InputType =
+  | 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
+  | 'search' | 'date' | 'time' | 'datetime-local'
+  | (string & {});
 
 /**
  * Text input with icon/addon slots, clearable, loading state, and focus accent.
@@ -90,29 +38,37 @@ const SPINNER_SIZE: Record<ComponentSize, string> = {
  */
 @customElement('kb-input')
 export class KbInput extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
-  @property({ type: String }) variant: InputVariant = 'outline';
+  /** Form input visual variant. @defaultValue 'outline' */
+  @property({ type: String }) variant: FormVariant = 'outline';
+  /** Input size controlling padding, font size, and icon sizing. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Placeholder text shown when the input is empty. */
   @property({ type: String }) placeholder?: string;
+  /** Current input value. Two-way bindable. @defaultValue '' */
   @property({ type: String }) value: string = '';
-  @property({ type: String }) type: string = 'text';
+  /** HTML input type attribute (e.g. `'text'`, `'password'`, `'email'`). @defaultValue 'text' */
+  @property({ type: String }) type: InputType = 'text';
+  /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
+  /** Maximum character count. When set, enforces length via the native `maxlength` attribute. */
   @property({ type: Number, attribute: 'max-length' }) maxLength?: number;
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Mark the input as invalid with error border styling. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Make the input read-only (focusable but not editable). @defaultValue false */
   @property({ type: Boolean }) readonly: boolean = false;
+  /** Mark the input as required for form validation. @defaultValue false */
   @property({ type: Boolean }) required: boolean = false;
+  /** Show a clear button when the input has a value. @defaultValue false */
   @property({ type: Boolean }) clearable: boolean = false;
+  /** Show a loading spinner in place of the trailing icon. @defaultValue false */
   @property({ type: Boolean }) loading: boolean = false;
 
   private _handleInput(e: Event): void {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.dispatchEvent(new CustomEvent('kb-input', {
+    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
       detail: { value: this.value },
       bubbles: true,
       composed: true,
@@ -122,8 +78,8 @@ export class KbInput extends KbBaseElement {
   private _handleChange(e: Event): void {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: this.value },
+    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
+      detail: { source: 'input', value: this.value },
       bubbles: true,
       composed: true,
     }));
@@ -139,7 +95,7 @@ export class KbInput extends KbBaseElement {
 
   private _handleClear(): void {
     this.value = '';
-    this.dispatchEvent(new CustomEvent('kb-input', {
+    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
       detail: { value: '' },
       bubbles: true,
       composed: true,
@@ -228,9 +184,7 @@ export class KbInput extends KbBaseElement {
       ? html`<span class="shrink-0 flex items-center"><span class="${SPINNER_SIZE[this.size]} rounded-full border-current border-t-transparent animate-spin" style="border-style:solid"></span></span>`
       : nothing;
 
-    const focusRing = isFlushed
-      ? ''
-      : 'focus-within:outline-2 focus-within:outline-blue-500 focus-within:outline-offset-2';
+    const focusRing = isFlushed ? '' : FOCUS_RING;
 
     return html`
       <div class="${outerClasses} ${focusRing}">

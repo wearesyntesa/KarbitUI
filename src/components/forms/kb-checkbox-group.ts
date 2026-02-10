@@ -4,6 +4,7 @@ import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
 import type { KbCheckbox } from './kb-checkbox.js';
+import type { KbChangeGroupDetail } from '../../core/events.js';
 
 /**
  * Groups `kb-checkbox` elements, tracks selected values,
@@ -29,7 +30,6 @@ export class KbCheckboxGroup extends KbBaseElement {
   static override hostDisplay = 'block';
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     this.addEventListener('kb-change', this._onChildChange as EventListener);
   }
@@ -39,10 +39,15 @@ export class KbCheckboxGroup extends KbBaseElement {
     this.removeEventListener('kb-change', this._onChildChange as EventListener);
   }
 
+  /** Layout direction of the grouped checkboxes. @defaultValue 'vertical' */
   @property({ type: String }) direction: Orientation = 'vertical';
+  /** Size propagated to child checkboxes that don't set their own size. */
   @property({ type: String }) size?: ComponentSize;
+  /** Color scheme propagated to child checkboxes that don't set their own. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Minimum number of checkboxes that must remain checked. */
   @property({ type: Number }) min?: number;
+  /** Maximum number of checkboxes that can be checked simultaneously. */
   @property({ type: Number }) max?: number;
 
   @state() private _values: string[] = [];
@@ -80,8 +85,8 @@ export class KbCheckboxGroup extends KbBaseElement {
 
     this._syncValues();
 
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { values: [...this._values] },
+    this.dispatchEvent(new CustomEvent<KbChangeGroupDetail>('kb-change', {
+      detail: { source: 'checkbox-group', values: [...this._values] },
       bubbles: true,
       composed: true,
     }));

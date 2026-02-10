@@ -27,7 +27,6 @@ export class KbAccordionGroup extends KbBaseElement {
   @property({ type: Boolean, attribute: 'allow-multiple' }) allowMultiple: boolean = false;
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     this.addEventListener('kb-toggle', this._handleItemToggle as EventListener);
   }

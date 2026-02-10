@@ -4,11 +4,13 @@ import { KbBaseElement } from '../../core/base-element.js';
 import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 
-type HeadingLevel = '1' | '2' | '3' | '4' | '5' | '6';
-type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+export type HeadingLevel = '1' | '2' | '3' | '4' | '5' | '6';
+export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+export type HeadingWeight = 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
+export type HeadingTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'success' | 'warning' | 'error';
 
 const headingRecipe = recipe({
-  base: `font-sans font-bold ${kbClasses.textPrimary}`,
+  base: `font-sans ${kbClasses.textPrimary}`,
   variants: {
     size: {
       xs: 'text-xs',
@@ -20,8 +22,15 @@ const headingRecipe = recipe({
       '3xl': 'text-3xl',
       '4xl': 'text-4xl',
     },
+    weight: {
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
+      extrabold: 'font-extrabold',
+      black: 'font-black',
+    },
   },
-  defaultVariants: { size: 'xl' },
+  defaultVariants: { size: 'xl', weight: 'bold' },
 });
 
 const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
@@ -33,6 +42,16 @@ const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
   '6': 'md',
 };
 
+const TONE_MAP: Record<HeadingTone, string> = {
+  primary: kbClasses.textPrimary,
+  secondary: kbClasses.textSecondary,
+  muted: kbClasses.textMuted,
+  accent: 'text-blue-500 dark:text-blue-400',
+  success: 'text-green-600 dark:text-green-400',
+  warning: 'text-yellow-600 dark:text-yellow-400',
+  error: 'text-red-600 dark:text-red-400',
+};
+
 /**
  * Heading element (h1-h6) with structured minimal typography.
  *
@@ -41,23 +60,36 @@ const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
  * @example
  * ```html
  * <kb-heading level="2" size="3xl">Section Title</kb-heading>
+ * <kb-heading level="1" weight="black" tone="accent">Feature</kb-heading>
+ * <kb-heading level="3" truncate>Very long heading text...</kb-heading>
  * ```
  */
 @customElement('kb-heading')
 export class KbHeading extends KbBaseElement {
   static override hostDisplay = 'block';
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
+  /** Semantic heading level (`'1'`–`'6'`). Determines the rendered `<h1>`–`<h6>` element and default size. @defaultValue '2' */
   @property({ type: String }) level: HeadingLevel = '2';
+  /** Explicit size override. When unset, derived from `level` (e.g. level `'1'` → `'4xl'`). */
   @property({ type: String }) size?: HeadingSize;
+  /** Font weight. @defaultValue 'bold' */
+  @property({ type: String }) weight: HeadingWeight = 'bold';
+  /** Semantic color tone. When unset, uses the recipe's default primary tone. */
+  @property({ type: String }) tone?: HeadingTone;
+  /** Truncate overflowing text with an ellipsis on a single line. @defaultValue false */
+  @property({ type: Boolean }) truncate: boolean = false;
 
   override render() {
     const resolvedSize = this.size ?? SIZE_FOR_LEVEL[this.level];
-    const recipeClasses = headingRecipe({ size: resolvedSize });
-    const classes = this.buildClasses(recipeClasses);
+    const recipeClasses = headingRecipe({ size: resolvedSize, weight: this.weight });
+
+    const toneClasses = this.tone
+      ? TONE_MAP[this.tone] ?? ''
+      : '';
+
+    const truncateClass = this.truncate ? 'truncate' : '';
+
+    const classes = this.buildClasses(recipeClasses, toneClasses, truncateClass);
 
     switch (this.level) {
       case '1': return html`<h1 class=${classes}>${this.defaultSlotContent}</h1>`;

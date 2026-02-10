@@ -4,6 +4,7 @@ import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
 import type { KbRadio } from './kb-radio.js';
+import type { KbChangeValueDetail } from '../../core/events.js';
 
 /**
  * Groups `kb-radio` elements, enforces single selection,
@@ -29,7 +30,6 @@ export class KbRadioGroup extends KbBaseElement {
   static override hostDisplay = 'block';
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     this.addEventListener('kb-change', this._onChildChange as EventListener);
   }
@@ -39,9 +39,13 @@ export class KbRadioGroup extends KbBaseElement {
     this.removeEventListener('kb-change', this._onChildChange as EventListener);
   }
 
+  /** Layout direction of the grouped radios. @defaultValue 'vertical' */
   @property({ type: String }) direction: Orientation = 'vertical';
+  /** Form field name propagated to child radios that don't set their own. */
   @property({ type: String }) name?: string;
+  /** Size propagated to child radios that don't set their own size. */
   @property({ type: String }) size?: ComponentSize;
+  /** Color scheme propagated to child radios that don't set their own. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
 
   private _getRadios(): KbRadio[] {
@@ -64,8 +68,8 @@ export class KbRadioGroup extends KbBaseElement {
       }
     }
 
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: ce.detail.value },
+    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
+      detail: { source: 'radio-group', value: ce.detail.value },
       bubbles: true,
       composed: true,
     }));

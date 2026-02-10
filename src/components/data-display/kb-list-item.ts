@@ -30,16 +30,16 @@ import type { KbList } from './kb-list.js';
 export class KbListItem extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** Override parent list `interactive` setting for this item. Falls back to parent `<kb-list>` value when `undefined`. */
   @property({ type: Boolean }) interactive: boolean | undefined = undefined;
+  /** Override parent list `dividers` setting for this item. Falls back to parent `<kb-list>` value when `undefined`. */
   @property({ type: Boolean }) divider: boolean | undefined = undefined;
+  /** Disables the item, preventing interaction and applying reduced opacity. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** URL to navigate to — renders the item as an anchor element. @defaultValue '' */
   @property({ type: String }) href: string = '';
+  /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
-
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
   private get _parentList(): KbList | null {
     return this.closest('kb-list') as KbList | null;

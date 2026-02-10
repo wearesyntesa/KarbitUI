@@ -1,12 +1,13 @@
 import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { FOCUSABLE_SELECTORS } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
-type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
-type PopoverTrigger = 'click' | 'hover';
-type PopoverSize = 'xs' | 'sm' | 'md' | 'lg';
+export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
+export type PopoverTrigger = 'click' | 'hover';
+export type PopoverSize = 'xs' | 'sm' | 'md' | 'lg';
 
 const PLACEMENT_CLASSES: Record<PopoverPlacement, string> = {
   top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -81,8 +82,6 @@ const ARROW_CLASSES: Record<PopoverPlacement, string> = {
   left: `${ARROW_BASE} -right-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-t border-r border-gray-200 dark:border-zinc-700`,
 };
 
-const FOCUSABLE_SELECTORS = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
 const DISMISS_DURATION = 120;
 
 /**
@@ -109,18 +108,31 @@ const DISMISS_DURATION = 120;
  */
 @customElement('kb-popover')
 export class KbPopover extends KbBaseElement {
+  /** Position of the popover relative to the trigger element. @defaultValue 'bottom' */
   @property({ type: String }) placement: PopoverPlacement = 'bottom';
+  /** How the popover is activated — `'click'` toggles on click, `'hover'` on mouse enter/leave. @defaultValue 'click' */
   @property({ type: String }) trigger: PopoverTrigger = 'click';
+  /** Popover panel width and padding size. @defaultValue 'sm' */
   @property({ type: String }) size: PopoverSize = 'sm';
+  /** Programmatically control visibility. Reflected to attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
+  /** Close the popover when the Escape key is pressed. @defaultValue true */
   @property({ type: Boolean, attribute: 'close-on-escape' }) closeOnEscape: boolean = true;
+  /** Close the popover when clicking outside of it. @defaultValue true */
   @property({ type: Boolean, attribute: 'close-on-outside' }) closeOnOutside: boolean = true;
+  /** Show a close button in the header area. @defaultValue false */
   @property({ type: Boolean }) closable: boolean = false;
+  /** Render a small arrow pointing toward the trigger element. @defaultValue false */
   @property({ type: Boolean, attribute: 'show-arrow' }) showArrow: boolean = false;
+  /** Distance between the popover and the trigger (0–4 Tailwind spacing units). @defaultValue 2 */
   @property({ type: Number }) offset: number = 2;
+  /** Delay in ms before showing the popover on hover trigger. @defaultValue 0 */
   @property({ type: Number, attribute: 'open-delay' }) openDelay: number = 0;
+  /** Delay in ms before hiding the popover after mouse leaves (hover trigger). @defaultValue 150 */
   @property({ type: Number, attribute: 'close-delay' }) closeDelay: number = 150;
+  /** Automatically focus the first focusable element inside the popover when opened. @defaultValue false */
   @property({ type: Boolean, attribute: 'auto-focus' }) autoFocus: boolean = false;
+  /** Trap keyboard focus within the popover while open. @defaultValue false */
   @property({ type: Boolean, attribute: 'trap-focus' }) trapFocus: boolean = false;
 
   @state() private _visible: boolean = false;
@@ -134,7 +146,6 @@ export class KbPopover extends KbBaseElement {
   private _closeTimerId: ReturnType<typeof setTimeout> | null = null;
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     document.addEventListener('keydown', this._boundKeyHandler);
     document.addEventListener('click', this._boundOutsideClick, true);

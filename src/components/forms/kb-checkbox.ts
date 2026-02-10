@@ -2,7 +2,9 @@ import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ColorScheme, ComponentSize } from '../../core/types.js';
+import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
+import type { KbChangeCheckboxDetail } from '../../core/events.js';
+import { lookupScheme } from '../../core/color-schemes.js';
 
 const SIZE_MAP: Record<ComponentSize, {
   box: string;
@@ -17,7 +19,7 @@ const SIZE_MAP: Record<ComponentSize, {
   xl: { box: 'w-7 h-7', label: 'text-lg gap-3.5', icon: 'w-5 h-5', description: 'text-sm' },
 };
 
-const COLOR_SCHEME_CHECKED: Record<string, string> = {
+const COLOR_SCHEME_CHECKED: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 border-blue-500 dark:bg-blue-500 dark:border-blue-500',
   red: 'bg-red-500 border-red-500 dark:bg-red-600 dark:border-red-600',
   green: 'bg-green-500 border-green-500 dark:bg-green-600 dark:border-green-600',
@@ -25,7 +27,7 @@ const COLOR_SCHEME_CHECKED: Record<string, string> = {
   black: 'bg-gray-900 border-gray-900 dark:bg-zinc-100 dark:border-zinc-100',
 };
 
-const COLOR_SCHEME_ICON: Record<string, string> = {
+const COLOR_SCHEME_ICON: Record<KnownColorScheme, string> = {
   blue: 'text-white',
   red: 'text-white',
   green: 'text-white',
@@ -33,7 +35,7 @@ const COLOR_SCHEME_ICON: Record<string, string> = {
   black: 'text-white dark:text-zinc-900',
 };
 
-const COLOR_SCHEME_HOVER: Record<string, string> = {
+const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = {
   blue: 'group-hover/cb:border-blue-400 dark:group-hover/cb:border-blue-400',
   red: 'group-hover/cb:border-red-400 dark:group-hover/cb:border-red-400',
   green: 'group-hover/cb:border-green-400 dark:group-hover/cb:border-green-400',
@@ -64,18 +66,21 @@ const DEFAULT_HOVER = 'group-hover/cb:border-gray-500 dark:group-hover/cb:border
  */
 @customElement('kb-checkbox')
 export class KbCheckbox extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Checkbox size controlling box dimensions, label text, and icon size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Whether the checkbox is checked. Reflects to the `checked` attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Show a horizontal dash icon instead of a checkmark (third state). @defaultValue false */
   @property({ type: Boolean }) indeterminate: boolean = false;
+  /** Apply error border styling when unchecked. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Color scheme for the checked/indeterminate state background and icon. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
+  /** Value included in `kb-change` event detail and form submissions. */
   @property({ type: String }) value?: string;
 
   @state() private _pressed = false;
@@ -88,8 +93,8 @@ export class KbCheckbox extends KbBaseElement {
     } else {
       this.checked = !this.checked;
     }
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { checked: this.checked, value: this.value },
+    this.dispatchEvent(new CustomEvent<KbChangeCheckboxDetail>('kb-change', {
+      detail: { source: 'checkbox', checked: this.checked, value: this.value ?? '' },
       bubbles: true,
       composed: true,
     }));
@@ -109,15 +114,15 @@ export class KbCheckbox extends KbBaseElement {
     const cs = this.colorScheme;
 
     const checkedBg = isActive
-      ? (cs ? COLOR_SCHEME_CHECKED[cs] : undefined) ?? DEFAULT_CHECKED
+      ? lookupScheme(COLOR_SCHEME_CHECKED, cs) ?? DEFAULT_CHECKED
       : 'bg-white dark:bg-transparent';
 
     const iconColor = isActive
-      ? (cs ? COLOR_SCHEME_ICON[cs] : undefined) ?? DEFAULT_ICON
+      ? lookupScheme(COLOR_SCHEME_ICON, cs) ?? DEFAULT_ICON
       : '';
 
     const hoverBorder = !isActive && !this.disabled
-      ? (cs ? COLOR_SCHEME_HOVER[cs] : undefined) ?? DEFAULT_HOVER
+      ? lookupScheme(COLOR_SCHEME_HOVER, cs) ?? DEFAULT_HOVER
       : '';
 
     const borderColor = this.invalid && !isActive

@@ -1,10 +1,11 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
+import type { StyleProps } from '../../core/style-map.js';
 import { kbClasses } from '../../core/theme.js';
 
-type ToastStatus = 'info' | 'success' | 'warning' | 'error';
-type ToastPosition = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
+export type ToastStatus = 'info' | 'success' | 'warning' | 'error';
+export type ToastPosition = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
 
 const STATUS_ICONS: Record<ToastStatus, TemplateResult> = {
   info: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
@@ -77,10 +78,15 @@ const isTopPosition = (pos: ToastPosition): boolean =>
 export class KbToast extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** Semantic status controlling icon, border accent, and progress bar color. @defaultValue 'info' */
   @property({ type: String }) status: ToastStatus = 'info';
+  /** Screen position where the toast appears. @defaultValue 'top-right' */
   @property({ type: String }) position: ToastPosition = 'top-right';
+  /** Auto-dismiss delay in milliseconds. Pauses on hover. @defaultValue 5000 */
   @property({ type: Number }) duration: number = 5000;
+  /** Show a close button for manual dismissal. @defaultValue true */
   @property({ type: Boolean }) closable: boolean = true;
+  /** Show the status icon before the message content. @defaultValue true */
   @property({ type: Boolean, attribute: 'show-icon' }) showIcon: boolean = true;
 
   @state() private _dismissing = false;
@@ -90,8 +96,13 @@ export class KbToast extends KbBaseElement {
   private _startTime = 0;
   private _remaining = 0;
 
+  protected override collectStyleProps(): Partial<StyleProps> {
+    const props = super.collectStyleProps();
+    delete props.position;
+    return props;
+  }
+
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     this._remaining = this.duration;
     this._startTimer();
@@ -135,14 +146,7 @@ export class KbToast extends KbBaseElement {
     this._clearTimer();
     this._dismissing = true;
     this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
-
-    const el = this.renderRoot.querySelector('[data-kb-toast]') as HTMLElement | null;
-    if (el) {
-      el.addEventListener('transitionend', () => this.remove(), { once: true });
-      setTimeout(() => this.remove(), 350);
-    } else {
-      this.remove();
-    }
+    dismissWithAnimation(this, '[data-kb-toast]', 350);
   }
 
   override render() {

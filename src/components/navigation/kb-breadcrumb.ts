@@ -3,6 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
+import type { KbNavigateDetail } from '../../core/events.js';
 
 /** Single breadcrumb item. Last item in the array is treated as current page. */
 export interface BreadcrumbItem {
@@ -10,7 +11,7 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-type SeparatorType = 'chevron' | 'slash' | 'arrow' | 'dot' | 'pipe';
+export type SeparatorType = 'chevron' | 'slash' | 'arrow' | 'dot' | 'pipe';
 
 const SIZE_TEXT: Record<ComponentSize, string> = {
   xs: 'text-xs',
@@ -69,15 +70,19 @@ function isSeparatorType(value: string): value is SeparatorType {
 export class KbBreadcrumb extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** Array of breadcrumb items. The last item is treated as the current page. @defaultValue [] */
   @property({ type: Array }) items: BreadcrumbItem[] = [];
+  /** Separator between items — a preset name (`'chevron'`, `'slash'`, `'arrow'`, `'dot'`, `'pipe'`) or any custom string. @defaultValue 'chevron' */
   @property({ type: String }) separator: string = 'chevron';
+  /** Text and gap size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Maximum visible items before collapsing middle items behind an ellipsis button. `0` disables collapsing. @defaultValue 0 */
   @property({ type: Number, attribute: 'max-items' }) maxItems: number = 0;
 
   @state() private _expanded = false;
 
   private _handleItemClick(index: number, item: BreadcrumbItem, e: Event): void {
-    this.dispatchEvent(new CustomEvent('kb-navigate', {
+    this.dispatchEvent(new CustomEvent<KbNavigateDetail>('kb-navigate', {
       detail: { index, item },
       bubbles: true,
       composed: true,
@@ -122,7 +127,7 @@ export class KbBreadcrumb extends KbBaseElement {
     }
 
     return html`<a
-      class="relative cursor-pointer ${kbClasses.textSecondary} hover:text-slate-900 dark:hover:text-zinc-50 ${kbClasses.transition} group/crumb truncate max-w-48"
+      class="relative cursor-pointer ${kbClasses.textSecondary} hover:text-slate-900 dark:hover:text-zinc-50 active:opacity-70 ${kbClasses.transition} group/crumb truncate max-w-48"
       href=${item.href ?? 'javascript:void(0)'}
       @click=${(e: Event) => this._handleItemClick(index, item, e)}
     ><span>${item.label}</span><span class="absolute bottom-0 left-0 w-full h-px bg-current scale-x-0 group-hover/crumb:scale-x-100 transition-transform duration-200 origin-left"></span></a>`;

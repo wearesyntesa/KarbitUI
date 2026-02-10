@@ -5,9 +5,19 @@ import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { FontSizeValue } from '../../core/types.js';
 
+export type TextVariant = 'body' | 'label' | 'caption' | 'overline';
+export type TextTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'success' | 'warning' | 'error';
+export type TextAs = 'p' | 'span' | 'div' | 'label';
+
 const textRecipe = recipe({
-  base: `font-sans ${kbClasses.textPrimary}`,
+  base: '',
   variants: {
+    variant: {
+      body: `font-sans ${kbClasses.textPrimary}`,
+      label: 'font-mono text-xs uppercase tracking-widest',
+      caption: 'font-sans text-xs',
+      overline: 'font-mono text-[10px] font-semibold uppercase tracking-widest',
+    },
     size: {
       xs: 'text-xs',
       sm: 'text-sm',
@@ -17,8 +27,35 @@ const textRecipe = recipe({
       '2xl': 'text-xl',
     },
   },
-  defaultVariants: { size: 'base' },
+  defaultVariants: { variant: 'body', size: 'base' },
 });
+
+const TONE_MAP: Record<TextTone, string> = {
+  primary: kbClasses.textPrimary,
+  secondary: kbClasses.textSecondary,
+  muted: kbClasses.textMuted,
+  accent: 'text-blue-500 dark:text-blue-400',
+  success: 'text-green-600 dark:text-green-400',
+  warning: 'text-yellow-600 dark:text-yellow-400',
+  error: 'text-red-600 dark:text-red-400',
+};
+
+/** Default tone per variant when no explicit tone is set. */
+const VARIANT_DEFAULT_TONE: Record<TextVariant, string> = {
+  body: kbClasses.textPrimary,
+  label: kbClasses.textSecondary,
+  caption: kbClasses.textSecondary,
+  overline: kbClasses.textSecondary,
+};
+
+const CLAMP_MAP: Record<number, string> = {
+  1: 'line-clamp-1',
+  2: 'line-clamp-2',
+  3: 'line-clamp-3',
+  4: 'line-clamp-4',
+  5: 'line-clamp-5',
+  6: 'line-clamp-6',
+};
 
 /**
  * Body text element with structured minimal typography.
@@ -28,24 +65,60 @@ const textRecipe = recipe({
  * @example
  * ```html
  * <kb-text size="lg" font-weight="bold">Bold statement.</kb-text>
+ * <kb-text variant="label">Field label</kb-text>
+ * <kb-text variant="caption" tone="muted">Updated 3 min ago</kb-text>
+ * <kb-text variant="overline">Section</kb-text>
+ * <kb-text clamp="2">Long text that clamps to two lines...</kb-text>
  * ```
  */
 @customElement('kb-text')
 export class KbText extends KbBaseElement {
   static override hostDisplay = 'block';
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
+  /** Typography preset controlling font family, case, and tracking. @defaultValue 'body' */
+  @property({ type: String }) variant: TextVariant = 'body';
+  /** Font size override. When variant is `'body'`, defaults to `'base'`; other variants use their recipe size. */
   @property({ type: String }) size?: FontSizeValue;
+  /** Semantic color tone. Falls back to the variant's default tone when unset. */
+  @property({ type: String }) tone?: TextTone;
+  /** Maximum visible lines before truncation with an ellipsis (1–6). */
+  @property({ type: Number }) clamp?: number;
+  /** Prevent text wrapping with `whitespace-nowrap`. @defaultValue false */
+  @property({ type: Boolean, attribute: 'no-wrap' }) noWrap: boolean = false;
+  /** Truncate overflowing text with an ellipsis on a single line. @defaultValue false */
   @property({ type: Boolean }) truncate: boolean = false;
+  /** HTML element to render. @defaultValue 'p' */
+  @property({ type: String }) as: TextAs = 'p';
 
   override render() {
-    const recipeClasses = textRecipe({ size: (this.size ?? 'base') as 'base' });
+    const sizeOverride = this.variant === 'body' ? (this.size ?? 'base') : this.size;
+    const recipeClasses = textRecipe({
+      variant: this.variant,
+      ...(sizeOverride ? { size: sizeOverride as 'base' } : {}),
+    });
+
+    const toneClasses = this.tone
+      ? TONE_MAP[this.tone] ?? VARIANT_DEFAULT_TONE[this.variant]
+      : VARIANT_DEFAULT_TONE[this.variant];
+
     const truncateClass = this.truncate ? 'truncate' : '';
-    const classes = this.buildClasses(recipeClasses, truncateClass);
-    return html`<p class=${classes}>${this.defaultSlotContent}</p>`;
+    const noWrapClass = this.noWrap ? 'whitespace-nowrap' : '';
+    const clampClass = this.clamp ? CLAMP_MAP[this.clamp] ?? '' : '';
+
+    const classes = this.buildClasses(
+      recipeClasses,
+      toneClasses,
+      truncateClass,
+      noWrapClass,
+      clampClass,
+    );
+
+    switch (this.as) {
+      case 'span': return html`<span class=${classes}>${this.defaultSlotContent}</span>`;
+      case 'div': return html`<div class=${classes}>${this.defaultSlotContent}</div>`;
+      case 'label': return html`<label class=${classes}>${this.defaultSlotContent}</label>`;
+      default: return html`<p class=${classes}>${this.defaultSlotContent}</p>`;
+    }
   }
 }
 

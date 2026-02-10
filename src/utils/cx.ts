@@ -1,4 +1,4 @@
-type ClassInput = string | undefined | null | false | 0 | ClassInput[];
+export type ClassInput = string | undefined | null | false | 0 | ClassInput[];
 
 export function cx(...inputs: ClassInput[]): string {
   const classes: string[] = [];

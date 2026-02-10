@@ -2,9 +2,11 @@ import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ColorScheme, ComponentSize } from '../../core/types.js';
+import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
+import type { KbChangeCheckedDetail } from '../../core/events.js';
+import { lookupScheme } from '../../core/color-schemes.js';
 
-type LabelPosition = 'left' | 'right';
+export type SwitchLabelPosition = 'left' | 'right';
 
 const SIZE_MAP: Record<ComponentSize, {
   track: string;
@@ -23,8 +25,7 @@ const SIZE_MAP: Record<ComponentSize, {
   xl: { track: 'w-14 h-7', thumb: 'w-7 h-7', translate: 'translate-x-7', label: 'text-lg', description: 'text-sm', gap: 'gap-3.5', icon: 'w-3.5 h-3.5', spinner: 'w-3.5 h-3.5 border-2' },
 };
 
-/** Checked track background per color scheme. */
-const COLOR_SCHEME_TRACK: Record<string, string> = {
+const COLOR_SCHEME_TRACK: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 border-blue-500 dark:bg-blue-500 dark:border-blue-500',
   red: 'bg-red-500 border-red-500 dark:bg-red-600 dark:border-red-600',
   green: 'bg-green-500 border-green-500 dark:bg-green-600 dark:border-green-600',
@@ -33,7 +34,7 @@ const COLOR_SCHEME_TRACK: Record<string, string> = {
 };
 
 /** Unchecked hover border per color scheme. */
-const COLOR_SCHEME_HOVER: Record<string, string> = {
+const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = {
   blue: 'group-hover/sw:border-blue-400 dark:group-hover/sw:border-blue-400',
   red: 'group-hover/sw:border-red-400 dark:group-hover/sw:border-red-400',
   green: 'group-hover/sw:border-green-400 dark:group-hover/sw:border-green-400',
@@ -42,7 +43,7 @@ const COLOR_SCHEME_HOVER: Record<string, string> = {
 };
 
 /** Icon color inside thumb per color scheme (used when checked). */
-const COLOR_SCHEME_ICON: Record<string, string> = {
+const COLOR_SCHEME_ICON: Record<KnownColorScheme, string> = {
   blue: 'text-blue-500 dark:text-blue-500',
   red: 'text-red-500 dark:text-red-600',
   green: 'text-green-500 dark:text-green-600',
@@ -73,19 +74,23 @@ const DEFAULT_ICON = 'text-blue-500 dark:text-blue-500';
  */
 @customElement('kb-switch')
 export class KbSwitch extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Switch size controlling track, thumb, and label dimensions. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Whether the switch is on. Reflects to the `checked` attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Apply error border styling when unchecked. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Show a loading spinner inside the thumb and disable interaction. @defaultValue false */
   @property({ type: Boolean }) loading: boolean = false;
+  /** Show check/cross icons inside the thumb. @defaultValue false */
   @property({ type: Boolean, attribute: 'show-icons' }) showIcons: boolean = false;
+  /** Color scheme for the checked state track, icon, and hover border. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
-  @property({ type: String, attribute: 'label-position' }) labelPosition: LabelPosition = 'right';
+  /** Position of the label relative to the switch track. @defaultValue 'right' */
+  @property({ type: String, attribute: 'label-position' }) labelPosition: SwitchLabelPosition = 'right';
+  /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
 
   @state() private _pressed: boolean = false;
@@ -93,8 +98,8 @@ export class KbSwitch extends KbBaseElement {
   private _handleToggle(): void {
     if (this.disabled || this.loading) return;
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { checked: this.checked },
+    this.dispatchEvent(new CustomEvent<KbChangeCheckedDetail>('kb-change', {
+      detail: { source: 'switch', checked: this.checked },
       bubbles: true,
       composed: true,
     }));
@@ -113,14 +118,10 @@ export class KbSwitch extends KbBaseElement {
     const isDisabled = this.disabled || this.loading;
 
     // Track classes
-    const trackChecked = this.colorScheme
-      ? COLOR_SCHEME_TRACK[this.colorScheme] ?? DEFAULT_TRACK
-      : DEFAULT_TRACK;
+    const trackChecked = lookupScheme(COLOR_SCHEME_TRACK, this.colorScheme) ?? DEFAULT_TRACK;
 
     const trackUncheckedHover = !isDisabled && !this.checked
-      ? (this.colorScheme
-          ? COLOR_SCHEME_HOVER[this.colorScheme] ?? DEFAULT_HOVER
-          : DEFAULT_HOVER)
+      ? lookupScheme(COLOR_SCHEME_HOVER, this.colorScheme) ?? DEFAULT_HOVER
       : '';
 
     const trackInvalid = this.invalid && !this.checked
@@ -150,7 +151,7 @@ export class KbSwitch extends KbBaseElement {
 
     // Thumb icon (check when on, X when off)
     const iconColor = this.checked
-      ? (this.colorScheme ? COLOR_SCHEME_ICON[this.colorScheme] ?? DEFAULT_ICON : DEFAULT_ICON)
+      ? lookupScheme(COLOR_SCHEME_ICON, this.colorScheme) ?? DEFAULT_ICON
       : kbClasses.textMuted;
 
     const thumbContent = this.loading

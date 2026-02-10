@@ -28,14 +28,13 @@ const SIZE_MAP: Record<ComponentSize, string> = {
  */
 @customElement('kb-form-label')
 export class KbFormLabel extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** `for` attribute linking the label to a form element by ID. */
   @property({ type: String }) for?: string;
+  /** Label size controlling font size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Show a red asterisk after the label text. @defaultValue false */
   @property({ type: Boolean }) required: boolean = false;
+  /** Show "(optional)" after the label text. Hidden when `required` is true. @defaultValue false */
   @property({ type: Boolean }) optional: boolean = false;
 
   override render() {
@@ -57,7 +56,7 @@ export class KbFormLabel extends KbBaseElement {
       : nothing;
 
     const infoSlot = infoEl
-      ? html`<span class="inline-flex items-center text-slate-400 dark:text-zinc-500 [&>svg]:w-3.5 [&>svg]:h-3.5 cursor-help">${infoEl}</span>`
+      ? html`<span class="inline-flex items-center text-slate-400 dark:text-zinc-500 hover:text-slate-600 dark:hover:text-zinc-300 ${kbClasses.transition} [&>svg]:w-3.5 [&>svg]:h-3.5 cursor-help">${infoEl}</span>`
       : nothing;
 
     return html`

@@ -1,12 +1,13 @@
 import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
+import { STATIC_SOLID, STATIC_OUTLINE, STATIC_SUBTLE, BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
 
-type TagVariant = 'solid' | 'outline' | 'subtle';
-type TagSize = 'sm' | 'md' | 'lg';
+export type TagVariant = 'solid' | 'outline' | 'subtle';
+export type TagSize = 'sm' | 'md' | 'lg';
 
 const tagRecipe = recipe({
   base: 'inline-flex items-center font-mono font-semibold uppercase tracking-widest whitespace-nowrap select-none',
@@ -28,46 +29,14 @@ const tagRecipe = recipe({
 /** Default variant colors when no colorScheme is specified. */
 const VARIANT_DEFAULT_COLOR: Record<TagVariant, string> = {
   solid: 'bg-slate-900 text-white border-slate-900 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100',
-  outline: 'text-slate-900 border-gray-200 dark:text-zinc-50 dark:border-zinc-700',
+  outline: 'text-slate-900 border-gray-300 dark:text-zinc-50 dark:border-zinc-600',
   subtle: 'bg-gray-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300',
-};
-
-const TAG_COLOR_SOLID: Record<string, string> = {
-  black: 'bg-gray-900 border-gray-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900',
-  red: 'bg-red-500 border-red-500 text-white dark:bg-red-600 dark:border-red-600',
-  blue: 'bg-blue-500 border-blue-500 text-white dark:bg-blue-600 dark:border-blue-600',
-  green: 'bg-green-500 border-green-500 text-white dark:bg-green-600 dark:border-green-600',
-  yellow: 'bg-yellow-500 border-yellow-500 text-black dark:bg-yellow-500 dark:border-yellow-500 dark:text-black',
-};
-
-const TAG_COLOR_OUTLINE: Record<string, string> = {
-  black: 'border-gray-900 text-gray-900 dark:border-zinc-100 dark:text-zinc-100',
-  red: 'border-red-500 text-red-700 dark:border-red-400 dark:text-red-400',
-  blue: 'border-blue-500 text-blue-700 dark:border-blue-400 dark:text-blue-400',
-  green: 'border-green-500 text-green-700 dark:border-green-400 dark:text-green-400',
-  yellow: 'border-yellow-500 text-yellow-700 dark:border-yellow-400 dark:text-yellow-400',
-};
-
-const TAG_COLOR_SUBTLE: Record<string, string> = {
-  black: 'bg-gray-100 text-gray-800 dark:bg-zinc-800 dark:text-zinc-200',
-  red: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
-  blue: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-  green: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-  yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
 };
 
 const INTERACTIVE_HOVER: Record<TagVariant, string> = {
   solid: 'hover:opacity-80 active:opacity-70',
   outline: 'hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
   subtle: 'hover:bg-gray-200/80 active:bg-gray-200 dark:hover:bg-zinc-700 dark:active:bg-zinc-600',
-};
-
-const DOT_COLOR: Record<string, string> = {
-  black: 'bg-gray-900 dark:bg-zinc-100',
-  red: 'bg-red-500 dark:bg-red-400',
-  blue: 'bg-blue-500 dark:bg-blue-400',
-  green: 'bg-green-500 dark:bg-green-400',
-  yellow: 'bg-yellow-500 dark:bg-yellow-400',
 };
 
 const DOT_SIZE: Record<TagSize, string> = {
@@ -107,18 +76,21 @@ const CLOSE_SIZE: Record<TagSize, string> = {
  */
 @customElement('kb-tag')
 export class KbTag extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Visual variant controlling fill, border, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: TagVariant = 'subtle';
+  /** Tag size affecting font size and padding. @defaultValue 'md' */
   @property({ type: String }) size: TagSize = 'md';
+  /** Color scheme for the tag. Overrides default variant colors. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Show a close button that dismisses the tag with animation. @defaultValue false */
   @property({ type: Boolean }) closable: boolean = false;
+  /** Make the tag focusable and clickable, emitting `kb-click`. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
+  /** Show a small colored dot indicator before the label. @defaultValue false */
   @property({ type: Boolean }) dot: boolean = false;
+  /** Enable HTML5 drag-and-drop on this tag. @defaultValue false */
   @property({ type: Boolean, attribute: 'kb-draggable' }) kbDraggable: boolean = false;
+  /** Value identifier used for drag data and reorder events. @defaultValue '' */
   @property({ type: String }) value: string = '';
 
   @state() private _dismissing = false;
@@ -154,24 +126,17 @@ export class KbTag extends KbBaseElement {
     e.stopPropagation();
     this._dismissing = true;
     this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
-
-    const el = this.renderRoot.querySelector('[data-kb-tag-inner]') as HTMLElement | null;
-    if (el) {
-      el.addEventListener('transitionend', () => this.remove(), { once: true });
-      setTimeout(() => this.remove(), 200);
-    } else {
-      this.remove();
-    }
+    dismissWithAnimation(this, '[data-kb-tag-inner]', 200);
   }
 
   override render() {
     const recipeClasses = tagRecipe({ variant: this.variant, size: this.size });
     const colorClasses = this.colorScheme
       ? this.variant === 'solid'
-        ? TAG_COLOR_SOLID[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
+        ? lookupScheme(STATIC_SOLID, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
         : this.variant === 'outline'
-          ? TAG_COLOR_OUTLINE[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
-          : TAG_COLOR_SUBTLE[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
+          ? lookupScheme(STATIC_OUTLINE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
+          : lookupScheme(STATIC_SUBTLE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
       : VARIANT_DEFAULT_COLOR[this.variant];
 
     const cursorClass = this.kbDraggable
@@ -204,7 +169,7 @@ export class KbTag extends KbBaseElement {
 
     const iconContent = this.slotted('icon');
     const dotEl = this.dot
-      ? html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${this.colorScheme ? DOT_COLOR[this.colorScheme] ?? 'bg-current' : 'bg-current'}"></span>`
+      ? html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current'}"></span>`
       : nothing;
 
     const closeEl = this.closable

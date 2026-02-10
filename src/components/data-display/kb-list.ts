@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 
-type ListVariant = 'plain' | 'ordered';
-type ListSpacing = 'compact' | 'normal' | 'loose';
+export type ListVariant = 'plain' | 'ordered';
+export type ListSpacing = 'compact' | 'normal' | 'loose';
 
 const SPACING_MAP: Record<ListSpacing, string> = {
   compact: 'gap-0',
@@ -34,21 +34,19 @@ const SPACING_MAP: Record<ListSpacing, string> = {
 export class KbList extends KbBaseElement {
   static override hostDisplay = 'block';
 
+  /** List variant — `'plain'` (unordered) or `'ordered'` (monospace-numbered items). @defaultValue 'plain' */
   @property({ type: String }) variant: ListVariant = 'plain';
+  /** Vertical spacing between items. @defaultValue 'normal' */
   @property({ type: String }) spacing: ListSpacing = 'normal';
+  /** Show border separators between items. @defaultValue false */
   @property({ type: Boolean }) dividers: boolean = false;
+  /** Make all child items hoverable, focusable, and clickable. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
-
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
 
   override render() {
     const classes = this.buildClasses(
       `flex flex-col font-sans ${kbClasses.textPrimary}`,
       SPACING_MAP[this.spacing] ?? SPACING_MAP.normal,
-      this.dividers ? '' : '',
     );
 
     return html`<div role="list" class=${classes}>${this.defaultSlotContent}</div>`;

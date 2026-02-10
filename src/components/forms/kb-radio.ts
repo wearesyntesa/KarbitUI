@@ -2,7 +2,9 @@ import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ColorScheme, ComponentSize } from '../../core/types.js';
+import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
+import type { KbChangeRadioDetail } from '../../core/events.js';
+import { lookupScheme } from '../../core/color-schemes.js';
 
 const SIZE_MAP: Record<ComponentSize, {
   outer: string;
@@ -17,7 +19,7 @@ const SIZE_MAP: Record<ComponentSize, {
   xl: { outer: 'w-7 h-7', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
 };
 
-const COLOR_SCHEME_CHECKED: Record<string, string> = {
+const COLOR_SCHEME_CHECKED: Record<KnownColorScheme, string> = {
   blue: 'border-blue-500 dark:border-blue-400',
   red: 'border-red-500 dark:border-red-400',
   green: 'border-green-500 dark:border-green-400',
@@ -25,7 +27,7 @@ const COLOR_SCHEME_CHECKED: Record<string, string> = {
   black: 'border-gray-900 dark:border-zinc-100',
 };
 
-const COLOR_SCHEME_DOT: Record<string, string> = {
+const COLOR_SCHEME_DOT: Record<KnownColorScheme, string> = {
   blue: 'fill-blue-500 dark:fill-blue-400',
   red: 'fill-red-500 dark:fill-red-400',
   green: 'fill-green-500 dark:fill-green-400',
@@ -33,7 +35,7 @@ const COLOR_SCHEME_DOT: Record<string, string> = {
   black: 'fill-gray-900 dark:fill-zinc-100',
 };
 
-const COLOR_SCHEME_HOVER: Record<string, string> = {
+const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = {
   blue: 'group-hover/radio:border-blue-400 dark:group-hover/radio:border-blue-400',
   red: 'group-hover/radio:border-red-400 dark:group-hover/radio:border-red-400',
   green: 'group-hover/radio:border-green-400 dark:group-hover/radio:border-green-400',
@@ -64,17 +66,19 @@ const DEFAULT_HOVER = 'group-hover/radio:border-gray-500 dark:group-hover/radio:
  */
 @customElement('kb-radio')
 export class KbRadio extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Radio button size controlling circle dimensions, label text, and dot size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Whether this radio is selected. Reflects to the `checked` attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) checked: boolean = false;
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Apply error border styling when unchecked. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Color scheme for the selected state border and dot fill. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Form field name. Should match across radios in the same group. */
   @property({ type: String }) name?: string;
+  /** Value emitted in `kb-change` event detail when this radio is selected. @defaultValue '' */
   @property({ type: String }) value: string = '';
 
   @state() private _pressed = false;
@@ -82,8 +86,8 @@ export class KbRadio extends KbBaseElement {
   private _select(): void {
     if (this.disabled || this.checked) return;
     this.checked = true;
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: this.value, checked: true },
+    this.dispatchEvent(new CustomEvent<KbChangeRadioDetail>('kb-change', {
+      detail: { source: 'radio', value: this.value, checked: true },
       bubbles: true,
       composed: true,
     }));
@@ -102,15 +106,15 @@ export class KbRadio extends KbBaseElement {
     const cs = this.colorScheme;
 
     const checkedBorder = this.checked
-      ? (cs ? COLOR_SCHEME_CHECKED[cs] : undefined) ?? DEFAULT_CHECKED
+      ? lookupScheme(COLOR_SCHEME_CHECKED, cs) ?? DEFAULT_CHECKED
       : '';
 
     const dotColor = this.checked
-      ? (cs ? COLOR_SCHEME_DOT[cs] : undefined) ?? DEFAULT_DOT
+      ? lookupScheme(COLOR_SCHEME_DOT, cs) ?? DEFAULT_DOT
       : '';
 
     const hoverBorder = !this.checked && !this.disabled
-      ? (cs ? COLOR_SCHEME_HOVER[cs] : undefined) ?? DEFAULT_HOVER
+      ? lookupScheme(COLOR_SCHEME_HOVER, cs) ?? DEFAULT_HOVER
       : '';
 
     const borderColor = this.invalid && !this.checked

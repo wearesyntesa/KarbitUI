@@ -1,12 +1,13 @@
 import { html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
+import { STATIC_SOLID, STATIC_OUTLINE, STATIC_SUBTLE, BG_COLOR, BG_COLOR_PING, lookupScheme } from '../../core/color-schemes.js';
 import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
 
-type BadgeVariant = 'solid' | 'outline' | 'subtle';
-type BadgeSize = 'xs' | 'sm' | 'md';
+export type BadgeVariant = 'solid' | 'outline' | 'subtle';
+export type BadgeSize = 'xs' | 'sm' | 'md';
 
 const badgeRecipe = recipe({
   base: 'inline-flex items-center font-mono font-semibold uppercase tracking-widest whitespace-nowrap select-none',
@@ -31,50 +32,10 @@ const VARIANT_DEFAULT_COLOR: Record<BadgeVariant, string> = {
   subtle: 'bg-gray-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300',
 };
 
-const BADGE_COLOR_SOLID: Record<string, string> = {
-  black: 'bg-gray-900 border-gray-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900',
-  red: 'bg-red-500 border-red-500 text-white dark:bg-red-600 dark:border-red-600',
-  blue: 'bg-blue-500 border-blue-500 text-white dark:bg-blue-600 dark:border-blue-600',
-  green: 'bg-green-500 border-green-500 text-white dark:bg-green-600 dark:border-green-600',
-  yellow: 'bg-yellow-500 border-yellow-500 text-black dark:bg-yellow-500 dark:border-yellow-500 dark:text-black',
-};
-
-const BADGE_COLOR_OUTLINE: Record<string, string> = {
-  black: 'border-gray-900 text-gray-900 dark:border-zinc-100 dark:text-zinc-100',
-  red: 'border-red-500 text-red-700 dark:border-red-400 dark:text-red-400',
-  blue: 'border-blue-500 text-blue-700 dark:border-blue-400 dark:text-blue-400',
-  green: 'border-green-500 text-green-700 dark:border-green-400 dark:text-green-400',
-  yellow: 'border-yellow-500 text-yellow-700 dark:border-yellow-400 dark:text-yellow-400',
-};
-
-const BADGE_COLOR_SUBTLE: Record<string, string> = {
-  black: 'bg-gray-100 text-gray-800 dark:bg-zinc-800 dark:text-zinc-200',
-  red: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
-  blue: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-  green: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-  yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
-};
-
 const INTERACTIVE_HOVER: Record<BadgeVariant, string> = {
   solid: 'hover:opacity-80 active:opacity-70',
   outline: 'hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
   subtle: 'hover:bg-gray-200/80 active:bg-gray-200 dark:hover:bg-zinc-700 dark:active:bg-zinc-600',
-};
-
-const DOT_COLOR: Record<string, string> = {
-  black: 'bg-gray-900 dark:bg-zinc-100',
-  red: 'bg-red-500 dark:bg-red-400',
-  blue: 'bg-blue-500 dark:bg-blue-400',
-  green: 'bg-green-500 dark:bg-green-400',
-  yellow: 'bg-yellow-500 dark:bg-yellow-400',
-};
-
-const PING_COLOR: Record<string, string> = {
-  black: 'bg-gray-900/75 dark:bg-zinc-100/75',
-  red: 'bg-red-500/75 dark:bg-red-400/75',
-  blue: 'bg-blue-500/75 dark:bg-blue-400/75',
-  green: 'bg-green-500/75 dark:bg-green-400/75',
-  yellow: 'bg-yellow-500/75 dark:bg-yellow-400/75',
 };
 
 const DOT_SIZE: Record<BadgeSize, string> = {
@@ -93,6 +54,12 @@ const PING_SIZE: Record<BadgeSize, string> = {
   xs: 'w-1.5 h-1.5 -top-0.5 -right-0.5',
   sm: 'w-2 h-2 -top-0.5 -right-0.5',
   md: 'w-2.5 h-2.5 -top-1 -right-1',
+};
+
+const PING_DOT_SIZE: Record<BadgeSize, string> = {
+  xs: 'w-1.5 h-1.5',
+  sm: 'w-2 h-2',
+  md: 'w-2.5 h-2.5',
 };
 
 /**
@@ -117,18 +84,21 @@ const PING_SIZE: Record<BadgeSize, string> = {
  */
 @customElement('kb-badge')
 export class KbBadge extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Visual variant controlling border, background, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: BadgeVariant = 'subtle';
+  /** Badge size controlling padding, font size, and dot/close sizing. @defaultValue 'sm' */
   @property({ type: String }) size: BadgeSize = 'sm';
+  /** Color scheme override. When unset, the variant's default color is used. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Show a status dot before the badge label. @defaultValue false */
   @property({ type: Boolean }) dot: boolean = false;
+  /** Animate the status dot with a ping effect. Requires `dot` to be true. @defaultValue false */
   @property({ type: Boolean }) pulse: boolean = false;
+  /** Show a notification ping indicator on the badge corner. @defaultValue false */
   @property({ type: Boolean }) ping: boolean = false;
+  /** Make the badge clickable with hover/focus styles and `kb-click` events. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
+  /** Show a close button that dismisses the badge with animation. @defaultValue false */
   @property({ type: Boolean }) closable: boolean = false;
 
   @state() private _dismissing = false;
@@ -150,24 +120,17 @@ export class KbBadge extends KbBaseElement {
     e.stopPropagation();
     this._dismissing = true;
     this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
-
-    const el = this.renderRoot.querySelector('[data-kb-badge-inner]') as HTMLElement | null;
-    if (el) {
-      el.addEventListener('transitionend', () => this.remove(), { once: true });
-      setTimeout(() => this.remove(), 200);
-    } else {
-      this.remove();
-    }
+    dismissWithAnimation(this, '[data-kb-badge-inner]', 200);
   }
 
   override render() {
     const recipeClasses = badgeRecipe({ variant: this.variant, size: this.size });
     const colorClasses = this.colorScheme
       ? this.variant === 'solid'
-        ? BADGE_COLOR_SOLID[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
+        ? lookupScheme(STATIC_SOLID, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
         : this.variant === 'outline'
-          ? BADGE_COLOR_OUTLINE[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
-          : BADGE_COLOR_SUBTLE[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
+          ? lookupScheme(STATIC_OUTLINE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
+          : lookupScheme(STATIC_SUBTLE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
       : VARIANT_DEFAULT_COLOR[this.variant];
 
     const interactiveClasses = this.interactive
@@ -188,7 +151,7 @@ export class KbBadge extends KbBaseElement {
 
     const iconContent = this.slotted('icon');
 
-    const dotColor = this.colorScheme ? DOT_COLOR[this.colorScheme] ?? 'bg-current' : 'bg-current';
+    const dotColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current';
     const dotEl = this.dot
       ? this.pulse
         ? html`<span class="relative inline-flex shrink-0 ${DOT_SIZE[this.size]}">
@@ -206,12 +169,12 @@ export class KbBadge extends KbBaseElement {
         ><svg class="${CLOSE_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`
       : nothing;
 
-    const pingColor = this.colorScheme ? PING_COLOR[this.colorScheme] ?? 'bg-current/75' : 'bg-current/75';
-    const pingDotColor = this.colorScheme ? DOT_COLOR[this.colorScheme] ?? 'bg-current' : 'bg-current';
+    const pingColor = lookupScheme(BG_COLOR_PING, this.colorScheme) ?? 'bg-current/75';
+    const pingDotColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current';
     const pingEl = this.ping
       ? html`<span class="absolute ${PING_SIZE[this.size]} flex">
           <span class="animate-ping absolute inset-0 rounded-full ${pingColor}"></span>
-          <span class="relative rounded-full ${PING_SIZE[this.size].split(' ').slice(0, 2).join(' ')} ${pingDotColor}"></span>
+          <span class="relative rounded-full ${PING_DOT_SIZE[this.size]} ${pingDotColor}"></span>
         </span>`
       : nothing;
 

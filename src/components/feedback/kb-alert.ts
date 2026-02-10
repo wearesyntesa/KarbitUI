@@ -1,11 +1,12 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
 import { recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
+import type { KbToggleDetail } from '../../core/events.js';
 
-type AlertStatus = 'info' | 'success' | 'warning' | 'error';
-type AlertVariant = 'solid' | 'outline' | 'subtle' | 'left-accent';
+export type AlertStatus = 'info' | 'success' | 'warning' | 'error';
+export type AlertVariant = 'solid' | 'outline' | 'subtle' | 'left-accent';
 
 const STATUS_ICONS: Record<AlertStatus, TemplateResult> = {
   info: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
@@ -86,7 +87,6 @@ const alertRecipe = recipe({
 export class KbAlert extends KbBaseElement {
   static override hostDisplay = 'block';
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     this._startTimer();
   }
@@ -96,11 +96,17 @@ export class KbAlert extends KbBaseElement {
     this._clearTimer();
   }
 
+  /** Semantic status controlling icon and color scheme. @defaultValue 'info' */
   @property({ type: String }) status: AlertStatus = 'info';
+  /** Visual variant controlling border, background, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: AlertVariant = 'subtle';
+  /** Alert size controlling padding and font size. @defaultValue 'md' */
   @property({ type: String }) size: 'sm' | 'md' | 'lg' = 'md';
+  /** Show a close button that dismisses the alert with animation. @defaultValue false */
   @property({ type: Boolean }) closable: boolean = false;
+  /** Show the status icon before the message content. @defaultValue true */
   @property({ type: Boolean, attribute: 'show-icon' }) showIcon: boolean = true;
+  /** Auto-dismiss delay in milliseconds. `0` disables auto-dismiss. @defaultValue 0 */
   @property({ type: Number }) duration: number = 0;
 
   @state() private _dismissing = false;
@@ -125,20 +131,13 @@ export class KbAlert extends KbBaseElement {
     this._clearTimer();
     this._dismissing = true;
     this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
-
-    const el = this.renderRoot.querySelector('[data-kb-alert-outer]') as HTMLElement | null;
-    if (el) {
-      el.addEventListener('transitionend', () => this.remove(), { once: true });
-      setTimeout(() => this.remove(), 300);
-    } else {
-      this.remove();
-    }
+    dismissWithAnimation(this, '[data-kb-alert-outer]', 300);
   }
 
   private _toggleDetail(): void {
     this._detailOpen = !this._detailOpen;
     this.dispatchEvent(
-      new CustomEvent('kb-toggle', {
+      new CustomEvent<KbToggleDetail>('kb-toggle', {
         bubbles: true,
         composed: true,
         detail: { open: this._detailOpen },

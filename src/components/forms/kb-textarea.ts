@@ -1,56 +1,16 @@
 import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import {
+  VARIANT_WRAPPER, VARIANT_WRAPPER_INVALID,
+  SIZE_PADDING, SIZE_TEXT, CLEAR_SIZE, SPINNER_SIZE, FOCUS_RING,
+  type FormVariant,
+} from '../../core/form-tokens.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
+import type { KbInputDetail, KbChangeValueDetail } from '../../core/events.js';
 
-type TextareaVariant = 'outline' | 'filled' | 'flushed';
-type ResizeMode = 'vertical' | 'horizontal' | 'both' | 'none';
-
-/** Wrapper border/bg per variant — mirrors kb-input/kb-select. */
-const VARIANT_WRAPPER: Record<TextareaVariant, string> = {
-  outline: 'bg-white border border-gray-200 dark:border-zinc-700 dark:bg-transparent hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:hover:border-blue-500 dark:focus-within:hover:border-blue-400',
-  filled: 'bg-gray-100 border border-gray-100 hover:bg-gray-200/60 dark:bg-zinc-800 dark:border-zinc-800 dark:hover:bg-zinc-700 focus-within:bg-white focus-within:border-gray-300 dark:focus-within:bg-transparent dark:focus-within:border-zinc-600',
-  flushed: 'bg-transparent border-b border-gray-200 dark:border-zinc-700 hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400',
-};
-
-const VARIANT_WRAPPER_INVALID: Record<TextareaVariant, string> = {
-  outline: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  filled: 'border-red-500 dark:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  flushed: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-};
-
-const SIZE_PADDING: Record<ComponentSize, string> = {
-  xs: 'px-2 py-1',
-  sm: 'px-3 py-1.5',
-  md: 'px-4 py-2',
-  lg: 'px-5 py-3',
-  xl: 'px-6 py-4',
-};
-
-const SIZE_TEXT: Record<ComponentSize, string> = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  md: 'text-sm',
-  lg: 'text-base',
-  xl: 'text-lg',
-};
-
-const CLEAR_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3',
-  sm: 'w-3.5 h-3.5',
-  md: 'w-4 h-4',
-  lg: 'w-4.5 h-4.5',
-  xl: 'w-5 h-5',
-};
-
-const SPINNER_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-3.5 h-3.5 border',
-  md: 'w-4 h-4 border-2',
-  lg: 'w-4.5 h-4.5 border-2',
-  xl: 'w-5 h-5 border-2',
-};
+export type ResizeMode = 'vertical' | 'horizontal' | 'both' | 'none';
 
 const COUNTER_TEXT: Record<ComponentSize, string> = {
   xs: 'text-[10px]',
@@ -84,20 +44,35 @@ const RESIZE_MAP: Record<ResizeMode, string> = {
  */
 @customElement('kb-textarea')
 export class KbTextarea extends KbBaseElement {
-  @property({ type: String }) variant: TextareaVariant = 'outline';
+  /** Form textarea visual variant. @defaultValue 'outline' */
+  @property({ type: String }) variant: FormVariant = 'outline';
+  /** Textarea size controlling padding, font size, and action sizing. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Placeholder text shown when the textarea is empty. */
   @property({ type: String }) placeholder?: string;
+  /** Current textarea value. Two-way bindable. @defaultValue '' */
   @property({ type: String }) value: string = '';
+  /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
+  /** Initial visible row count. @defaultValue 4 */
   @property({ type: Number }) rows: number = 4;
+  /** Maximum character count. Enables the character counter when set. */
   @property({ type: Number, attribute: 'max-length' }) maxLength?: number;
+  /** CSS resize behavior. Overridden to `'none'` when `autoResize` is enabled. @defaultValue 'vertical' */
   @property({ type: String }) resize: ResizeMode = 'vertical';
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Mark the textarea as invalid with error border styling. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Make the textarea read-only (focusable but not editable). @defaultValue false */
   @property({ type: Boolean }) readonly: boolean = false;
+  /** Mark the textarea as required for form validation. @defaultValue false */
   @property({ type: Boolean }) required: boolean = false;
+  /** Show a clear button when the textarea has a value. @defaultValue false */
   @property({ type: Boolean }) clearable: boolean = false;
+  /** Show a loading spinner in the action area. @defaultValue false */
   @property({ type: Boolean }) loading: boolean = false;
+  /** Automatically grow the textarea height to fit content. Disables manual resizing. @defaultValue false */
   @property({ type: Boolean, attribute: 'auto-resize' }) autoResize: boolean = false;
 
   private _handleInput(e: Event): void {
@@ -108,7 +83,7 @@ export class KbTextarea extends KbBaseElement {
       this._adjustHeight(target);
     }
 
-    this.dispatchEvent(new CustomEvent('kb-input', {
+    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
       detail: { value: this.value },
       bubbles: true,
       composed: true,
@@ -118,8 +93,8 @@ export class KbTextarea extends KbBaseElement {
   private _handleChange(e: Event): void {
     const target = e.target as HTMLTextAreaElement;
     this.value = target.value;
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: this.value },
+    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
+      detail: { source: 'textarea', value: this.value },
       bubbles: true,
       composed: true,
     }));
@@ -143,7 +118,7 @@ export class KbTextarea extends KbBaseElement {
       }
       textarea.focus();
     }
-    this.dispatchEvent(new CustomEvent('kb-input', {
+    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
       detail: { value: '' },
       bubbles: true,
       composed: true,
@@ -201,9 +176,7 @@ export class KbTextarea extends KbBaseElement {
       isFlushed ? wrapperBorder : '',
     ].filter(Boolean).join(' ');
 
-    const focusRing = isFlushed
-      ? ''
-      : 'focus-within:outline-2 focus-within:outline-blue-500 focus-within:outline-offset-2';
+    const focusRing = isFlushed ? '' : FOCUS_RING;
 
     // Top-right action buttons (clear / loading)
     const hasActions = showClear || showLoading;

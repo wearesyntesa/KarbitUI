@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Brutalist design system built on Lit with Chakra UI-like API and Tailwind CSS",
   "type": "module",
-  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -18,9 +17,13 @@
     "./react": {
       "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js"
-    }
+    },
+    "./*": null
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/components/**/*.js",
+    "./dist/react/**/*.js"
+  ],
   "customElements": "custom-elements.json",
   "files": [
     "dist",

@@ -2,12 +2,14 @@ import { html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ColorScheme, ComponentSize } from '../../core/types.js';
+import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
+import type { KbClickLinkDetail } from '../../core/events.js';
+import { lookupScheme } from '../../core/color-schemes.js';
 
-type LinkVariant = 'underline' | 'hover-underline' | 'plain' | 'subtle' | 'highlight';
+export type LinkVariant = 'underline' | 'hover-underline' | 'plain' | 'subtle' | 'highlight';
 
 /** Text color + hover text color per colorScheme. */
-const COLOR_TEXT: Record<string, string> = {
+const COLOR_TEXT: Record<KnownColorScheme, string> = {
   black: 'text-gray-900 hover:text-black dark:text-zinc-100 dark:hover:text-white',
   red: 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300',
   blue: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
@@ -18,7 +20,7 @@ const COLOR_TEXT: Record<string, string> = {
 const COLOR_DEFAULT = 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300';
 
 /** Decoration color for underline variant. */
-const COLOR_DECORATION: Record<string, string> = {
+const COLOR_DECORATION: Record<KnownColorScheme, string> = {
   black: 'decoration-gray-400 hover:decoration-gray-900 dark:decoration-zinc-500 dark:hover:decoration-zinc-100',
   red: 'decoration-red-300 hover:decoration-red-500 dark:decoration-red-700 dark:hover:decoration-red-400',
   blue: 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400',
@@ -29,7 +31,7 @@ const COLOR_DECORATION: Record<string, string> = {
 const COLOR_DECORATION_DEFAULT = 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400';
 
 /** Border color for subtle variant. */
-const COLOR_SUBTLE: Record<string, string> = {
+const COLOR_SUBTLE: Record<KnownColorScheme, string> = {
   black: 'border-gray-300 hover:border-gray-900 dark:border-zinc-600 dark:hover:border-zinc-100',
   red: 'border-red-200 hover:border-red-500 dark:border-red-800 dark:hover:border-red-400',
   blue: 'border-blue-200 hover:border-blue-500 dark:border-blue-800 dark:hover:border-blue-400',
@@ -40,7 +42,7 @@ const COLOR_SUBTLE: Record<string, string> = {
 const COLOR_SUBTLE_DEFAULT = 'border-gray-200 hover:border-blue-500 dark:border-zinc-700 dark:hover:border-blue-400';
 
 /** Background for highlight variant. */
-const COLOR_HIGHLIGHT: Record<string, string> = {
+const COLOR_HIGHLIGHT: Record<KnownColorScheme, string> = {
   black: 'hover:bg-gray-100 dark:hover:bg-zinc-800',
   red: 'hover:bg-red-50 dark:hover:bg-red-950',
   blue: 'hover:bg-blue-50 dark:hover:bg-blue-950',
@@ -51,7 +53,7 @@ const COLOR_HIGHLIGHT: Record<string, string> = {
 const COLOR_HIGHLIGHT_DEFAULT = 'hover:bg-blue-50 dark:hover:bg-blue-950';
 
 /** Pseudo-element underline color for hover-underline variant. */
-const COLOR_HOVER_UNDERLINE: Record<string, string> = {
+const COLOR_HOVER_UNDERLINE: Record<KnownColorScheme, string> = {
   black: 'bg-gray-900 dark:bg-zinc-100',
   red: 'bg-red-500 dark:bg-red-400',
   blue: 'bg-blue-500 dark:bg-blue-400',
@@ -62,13 +64,15 @@ const COLOR_HOVER_UNDERLINE: Record<string, string> = {
 const COLOR_HOVER_UNDERLINE_DEFAULT = 'bg-blue-500 dark:bg-blue-400';
 
 /** Visited text color. */
-const COLOR_VISITED: Record<string, string> = {
+const COLOR_VISITED: Record<KnownColorScheme, string> = {
   black: 'visited:text-gray-500 dark:visited:text-zinc-500',
   red: 'visited:text-red-400 dark:visited:text-red-600',
   blue: 'visited:text-purple-600 dark:visited:text-purple-400',
   green: 'visited:text-green-400 dark:visited:text-green-600',
   yellow: 'visited:text-yellow-500 dark:visited:text-yellow-600',
 };
+
+const EXTERNAL_ATTRS = { target: '_blank', rel: 'noopener noreferrer' } as const;
 
 const COLOR_VISITED_DEFAULT = 'visited:text-purple-600 dark:visited:text-purple-400';
 
@@ -130,18 +134,21 @@ const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
  */
 @customElement('kb-link')
 export class KbLink extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** URL the link navigates to. @defaultValue '#' */
   @property({ type: String }) href: string = '#';
+  /** Visual variant controlling underline and hover behavior. @defaultValue 'underline' */
   @property({ type: String }) variant: LinkVariant = 'underline';
+  /** Text and icon size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Open link in a new tab with `rel="noopener noreferrer"` and show an external icon. @defaultValue false */
   @property({ type: Boolean }) external: boolean = false;
+  /** Disables the link, preventing navigation and applying reduced opacity. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Truncate link text with ellipsis when it overflows. @defaultValue false */
   @property({ type: Boolean }) truncate: boolean = false;
+  /** Apply visited-link color styling. @defaultValue false */
   @property({ type: Boolean, attribute: 'show-visited' }) showVisited: boolean = false;
+  /** Color scheme for text, decoration, and hover effects. Overrides the default blue. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
 
   private _handleClick(e: Event): void {
@@ -149,7 +156,7 @@ export class KbLink extends KbBaseElement {
       e.preventDefault();
       return;
     }
-    this.dispatchEvent(new CustomEvent('kb-click', {
+    this.dispatchEvent(new CustomEvent<KbClickLinkDetail>('kb-click', {
       detail: { href: this.href },
       bubbles: true,
       composed: true,
@@ -158,7 +165,7 @@ export class KbLink extends KbBaseElement {
 
   private _getColorClasses(): string {
     const cs = this.colorScheme;
-    return cs ? (COLOR_TEXT[cs] ?? COLOR_DEFAULT) : COLOR_DEFAULT;
+    return lookupScheme(COLOR_TEXT, cs) ?? COLOR_DEFAULT;
   }
 
   override render() {
@@ -173,7 +180,7 @@ export class KbLink extends KbBaseElement {
 
     switch (this.variant) {
       case 'underline':
-        variantClasses = `underline underline-offset-4 decoration-1 hover:decoration-2 ${cs ? (COLOR_DECORATION[cs] ?? COLOR_DECORATION_DEFAULT) : COLOR_DECORATION_DEFAULT}`;
+        variantClasses = `underline underline-offset-4 decoration-1 hover:decoration-2 ${lookupScheme(COLOR_DECORATION, cs) ?? COLOR_DECORATION_DEFAULT}`;
         break;
       case 'hover-underline':
         hasHoverUnderline = true;
@@ -183,15 +190,15 @@ export class KbLink extends KbBaseElement {
         variantClasses = '';
         break;
       case 'subtle':
-        variantClasses = `border-b pb-0.5 ${cs ? (COLOR_SUBTLE[cs] ?? COLOR_SUBTLE_DEFAULT) : COLOR_SUBTLE_DEFAULT}`;
+        variantClasses = `border-b pb-0.5 ${lookupScheme(COLOR_SUBTLE, cs) ?? COLOR_SUBTLE_DEFAULT}`;
         break;
       case 'highlight':
-        variantClasses = `${SIZE_HIGHLIGHT_PX[this.size]} ${cs ? (COLOR_HIGHLIGHT[cs] ?? COLOR_HIGHLIGHT_DEFAULT) : COLOR_HIGHLIGHT_DEFAULT}`;
+        variantClasses = `${SIZE_HIGHLIGHT_PX[this.size]} ${lookupScheme(COLOR_HIGHLIGHT, cs) ?? COLOR_HIGHLIGHT_DEFAULT}`;
         break;
     }
 
     const visitedClass = this.showVisited
-      ? (cs ? (COLOR_VISITED[cs] ?? COLOR_VISITED_DEFAULT) : COLOR_VISITED_DEFAULT)
+      ? lookupScheme(COLOR_VISITED, cs) ?? COLOR_VISITED_DEFAULT
       : '';
 
     const disabledClass = this.disabled
@@ -214,13 +221,7 @@ export class KbLink extends KbBaseElement {
       truncateClass,
     );
 
-    const externalAttrs = this.external
-      ? { target: '_blank', rel: 'noopener noreferrer' }
-      : {};
-
-    const hoverUnderlineColor = cs
-      ? (COLOR_HOVER_UNDERLINE[cs] ?? COLOR_HOVER_UNDERLINE_DEFAULT)
-      : COLOR_HOVER_UNDERLINE_DEFAULT;
+    const hoverUnderlineColor = lookupScheme(COLOR_HOVER_UNDERLINE, cs) ?? COLOR_HOVER_UNDERLINE_DEFAULT;
 
     const hoverUnderlineEl = hasHoverUnderline
       ? html`<span class="absolute bottom-0 left-0 w-full h-px ${hoverUnderlineColor} scale-x-0 group-hover/link:scale-x-100 transition-transform duration-200 origin-left pointer-events-none"></span>`
@@ -230,8 +231,8 @@ export class KbLink extends KbBaseElement {
       <a
         class="${classes} group/link"
         href=${this.disabled ? 'javascript:void(0)' : this.href}
-        target=${externalAttrs.target ?? ''}
-        rel=${externalAttrs.rel ?? ''}
+        target=${this.external ? EXTERNAL_ATTRS.target : ''}
+        rel=${this.external ? EXTERNAL_ATTRS.rel : ''}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         @click=${this._handleClick}
       >

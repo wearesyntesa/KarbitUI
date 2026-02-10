@@ -3,9 +3,9 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { cx } from '../../utils/cx.js';
 
-type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
-type TooltipSize = 'xs' | 'sm' | 'md';
-type TooltipVariant = 'dark' | 'light';
+export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
+export type TooltipSize = 'xs' | 'sm' | 'md';
+export type TooltipVariant = 'dark' | 'light';
 
 const PLACEMENT_CLASSES: Record<TooltipPlacement, string> = {
   top: 'bottom-full left-1/2 -translate-x-1/2',
@@ -92,15 +92,25 @@ let tooltipIdCounter = 0;
  */
 @customElement('kb-tooltip')
 export class KbTooltip extends KbBaseElement {
+  /** Text content shown inside the tooltip. No tooltip renders when empty. @defaultValue '' */
   @property({ type: String }) label: string = '';
+  /** Position of the tooltip relative to the trigger element. @defaultValue 'top' */
   @property({ type: String }) placement: TooltipPlacement = 'top';
+  /** Tooltip text and padding size. @defaultValue 'sm' */
   @property({ type: String }) size: TooltipSize = 'sm';
+  /** Color variant — `'dark'` (inverted) or `'light'` (surface-colored). @defaultValue 'dark' */
   @property({ type: String }) variant: TooltipVariant = 'dark';
+  /** Prevents the tooltip from showing. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Programmatically control visibility. Reflected to attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
+  /** Render a small arrow pointing toward the trigger element. @defaultValue true */
   @property({ type: Boolean, attribute: 'show-arrow' }) showArrow: boolean = true;
+  /** Distance between the tooltip and the trigger (0–4 Tailwind spacing units). @defaultValue 2 */
   @property({ type: Number }) offset: number = 2;
+  /** Delay in ms before showing the tooltip on hover. @defaultValue 200 */
   @property({ type: Number, attribute: 'open-delay' }) openDelay: number = 200;
+  /** Delay in ms before hiding the tooltip after mouse leaves. @defaultValue 0 */
   @property({ type: Number, attribute: 'close-delay' }) closeDelay: number = 0;
 
   @state() private _visible: boolean = false;
@@ -112,7 +122,6 @@ export class KbTooltip extends KbBaseElement {
   private readonly _tooltipId = `kb-tooltip-${++tooltipIdCounter}`;
 
   override connectedCallback(): void {
-    this.captureDefaultSlotContent();
     super.connectedCallback();
     if (this.open) {
       this._show();

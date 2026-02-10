@@ -1,9 +1,11 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import type { StyleProps } from '../../core/style-map.js';
 import type { KbTag } from './kb-tag.js';
+import type { KbReorderDetail } from '../../core/events.js';
 
-type TagGroupGap = 'sm' | 'md' | 'lg';
+export type TagGroupGap = 'sm' | 'md' | 'lg';
 
 const GAP_MAP: Record<TagGroupGap, string> = {
   sm: 'gap-1.5',
@@ -35,13 +37,17 @@ const INDICATOR_CLASSES = 'w-0.5 h-5 bg-blue-500 rounded-full shrink-0 transitio
 export class KbTagGroup extends KbBaseElement {
   static override hostDisplay = 'block';
 
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
+  /** Enable drag-and-drop reordering of child `kb-tag[kb-draggable]` elements. @defaultValue false */
   @property({ type: Boolean }) reorderable: boolean = false;
+  /** Spacing between tags. @defaultValue 'md' */
   @property({ type: String }) gap: TagGroupGap = 'md';
+
+  /** Exclude `gap` from style-props system — this component owns the `gap` property directly. */
+  protected override collectStyleProps(): Partial<StyleProps> {
+    const props = super.collectStyleProps();
+    delete props.gap;
+    return props;
+  }
 
   private _indicator: HTMLElement | null = null;
   private _dragOverTag: Element | null = null;
@@ -158,7 +164,7 @@ export class KbTagGroup extends KbBaseElement {
       (t) => t.value || t.textContent?.trim() || '',
     );
     this.dispatchEvent(
-      new CustomEvent('kb-reorder', {
+      new CustomEvent<KbReorderDetail>('kb-reorder', {
         bubbles: true,
         composed: true,
         detail: { order },

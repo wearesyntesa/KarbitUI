@@ -1,96 +1,32 @@
 import { html, nothing } from 'lit';
+import type { TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import {
+  VARIANT_WRAPPER, VARIANT_WRAPPER_INVALID,
+  SIZE_PADDING, SIZE_TEXT, SIZE_ICON, SIZE_GAP, CLEAR_SIZE, SPINNER_SIZE, FOCUS_RING,
+  type FormVariant,
+} from '../../core/form-tokens.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
+import type { KbChangeValueDetail } from '../../core/events.js';
 
-type SelectVariant = 'outline' | 'filled' | 'flushed';
-
-interface SelectOption {
+export interface SelectOption {
   readonly value: string;
   readonly label: string;
   readonly disabled?: boolean;
 }
 
-interface SelectOptionGroup {
+export interface SelectOptionGroup {
   readonly group: string;
   readonly options: readonly SelectOption[];
 }
 
-type SelectOptionOrGroup = SelectOption | SelectOptionGroup;
+export type SelectOptionOrGroup = SelectOption | SelectOptionGroup;
 
 function isOptionGroup(opt: SelectOptionOrGroup): opt is SelectOptionGroup {
   return 'group' in opt && 'options' in opt;
 }
-
-/** Wrapper border/bg per variant — mirrors kb-input exactly. */
-const VARIANT_WRAPPER: Record<SelectVariant, string> = {
-  outline: 'bg-white border border-gray-200 dark:border-zinc-700 dark:bg-transparent hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:hover:border-blue-500 dark:focus-within:hover:border-blue-400',
-  filled: 'bg-gray-100 border border-gray-100 hover:bg-gray-200/60 dark:bg-zinc-800 dark:border-zinc-800 dark:hover:bg-zinc-700 focus-within:bg-white focus-within:border-gray-300 dark:focus-within:bg-transparent dark:focus-within:border-zinc-600',
-  flushed: 'bg-transparent border-b border-gray-200 dark:border-zinc-700 hover:border-gray-400 dark:hover:border-zinc-500 focus-within:border-blue-500 dark:focus-within:border-blue-400',
-};
-
-const VARIANT_WRAPPER_INVALID: Record<SelectVariant, string> = {
-  outline: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  filled: 'border-red-500 dark:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-  flushed: 'border-red-500 dark:border-red-500 hover:border-red-500 dark:hover:border-red-500 focus-within:border-red-500 dark:focus-within:border-red-500',
-};
-
-const SIZE_PADDING: Record<ComponentSize, string> = {
-  xs: 'px-2 py-1',
-  sm: 'px-3 py-1.5',
-  md: 'px-4 py-2',
-  lg: 'px-5 py-3',
-  xl: 'px-6 py-4',
-};
-
-const SIZE_TEXT: Record<ComponentSize, string> = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  md: 'text-sm',
-  lg: 'text-base',
-  xl: 'text-lg',
-};
-
-const SIZE_ICON: Record<ComponentSize, string> = {
-  xs: '[&>svg]:w-3 [&>svg]:h-3',
-  sm: '[&>svg]:w-4 [&>svg]:h-4',
-  md: '[&>svg]:w-4.5 [&>svg]:h-4.5',
-  lg: '[&>svg]:w-5 [&>svg]:h-5',
-  xl: '[&>svg]:w-6 [&>svg]:h-6',
-};
-
-const SIZE_GAP: Record<ComponentSize, string> = {
-  xs: 'gap-1',
-  sm: 'gap-1.5',
-  md: 'gap-2',
-  lg: 'gap-2.5',
-  xl: 'gap-3',
-};
-
-const CHEVRON_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3',
-  sm: 'w-3.5 h-3.5',
-  md: 'w-4 h-4',
-  lg: 'w-4.5 h-4.5',
-  xl: 'w-5 h-5',
-};
-
-const CLEAR_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3',
-  sm: 'w-3.5 h-3.5',
-  md: 'w-4 h-4',
-  lg: 'w-4.5 h-4.5',
-  xl: 'w-5 h-5',
-};
-
-const SPINNER_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-3.5 h-3.5 border',
-  md: 'w-4 h-4 border-2',
-  lg: 'w-4.5 h-4.5 border-2',
-  xl: 'w-5 h-5 border-2',
-};
 
 /**
  * Styled select dropdown with wrapper pattern, icon slot, animated chevron, clearable, loading, and option group support.
@@ -115,21 +51,27 @@ const SPINNER_SIZE: Record<ComponentSize, string> = {
  */
 @customElement('kb-select')
 export class KbSelect extends KbBaseElement {
-  override connectedCallback(): void {
-    this.captureDefaultSlotContent();
-    super.connectedCallback();
-  }
-
-  @property({ type: String }) variant: SelectVariant = 'outline';
+  /** Form select visual variant. @defaultValue 'outline' */
+  @property({ type: String }) variant: FormVariant = 'outline';
+  /** Select size controlling padding, font size, and icon sizing. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
+  /** Placeholder text shown as a disabled option when no value is selected. */
   @property({ type: String }) placeholder?: string;
+  /** Currently selected value. @defaultValue '' */
   @property({ type: String }) value: string = '';
+  /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
+  /** Array of options or option groups to render in the dropdown. */
   @property({ type: Array }) options: readonly SelectOptionOrGroup[] = [];
+  /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
+  /** Mark the select as invalid with error border styling. @defaultValue false */
   @property({ type: Boolean }) invalid: boolean = false;
+  /** Mark the select as required for form validation. @defaultValue false */
   @property({ type: Boolean }) required: boolean = false;
+  /** Show a clear button when a value is selected. @defaultValue false */
   @property({ type: Boolean }) clearable: boolean = false;
+  /** Show a loading spinner in place of the chevron. @defaultValue false */
   @property({ type: Boolean }) loading: boolean = false;
 
   @state() private _focused: boolean = false;
@@ -137,8 +79,8 @@ export class KbSelect extends KbBaseElement {
   private _handleChange(e: Event): void {
     const target = e.target as HTMLSelectElement;
     this.value = target.value;
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: this.value },
+    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
+      detail: { source: 'select', value: this.value },
       bubbles: true,
       composed: true,
     }));
@@ -156,8 +98,8 @@ export class KbSelect extends KbBaseElement {
 
   private _handleClear(): void {
     this.value = '';
-    this.dispatchEvent(new CustomEvent('kb-change', {
-      detail: { value: '' },
+    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
+      detail: { source: 'select', value: '' },
       bubbles: true,
       composed: true,
     }));
@@ -170,7 +112,7 @@ export class KbSelect extends KbBaseElement {
   }
 
   private _renderOptions() {
-    const items: unknown[] = [];
+    const items: TemplateResult[] = [];
     for (const opt of this.options) {
       if (isOptionGroup(opt)) {
         items.push(html`
@@ -222,9 +164,7 @@ export class KbSelect extends KbBaseElement {
 
     const iconClasses = `shrink-0 flex items-center ${kbClasses.textMuted} ${SIZE_ICON[this.size]}`;
 
-    const focusRing = isFlushed
-      ? ''
-      : 'focus-within:outline-2 focus-within:outline-blue-500 focus-within:outline-offset-2';
+    const focusRing = isFlushed ? '' : FOCUS_RING;
 
     const iconEl = iconSlot
       ? html`<span class="${iconClasses}">${iconSlot}</span>`
@@ -233,7 +173,7 @@ export class KbSelect extends KbBaseElement {
     const chevronRotate = this._focused ? 'rotate-180' : 'rotate-0';
     const chevronEl = !showLoading
       ? html`<span class="shrink-0 flex items-center pointer-events-none ${kbClasses.textMuted} transition-transform duration-200 ${chevronRotate}">
-          <svg class="${CHEVRON_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m6 9 6 6 6-6"/></svg>
+           <svg class="${CLEAR_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m6 9 6 6 6-6"/></svg>
         </span>`
       : nothing;
 

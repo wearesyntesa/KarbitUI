@@ -16,7 +16,7 @@ type RequiredVariantProps<
   [K in keyof V as K extends keyof D ? K : never]?: keyof V[K] & string;
 };
 
-type CompoundVariant<V extends RecipeVariantRecord> = {
+export type CompoundVariant<V extends RecipeVariantRecord> = {
   [K in keyof V]?: keyof V[K] & string;
 } & { readonly class: string };
 

@@ -24,6 +24,11 @@ const GENERATED_STYLE_PROPERTIES = buildLitProperties();
 /**
  * Base element for all KarbitUI components.
  * Uses Light DOM. Supports Chakra-like style props mapped to Tailwind classes.
+ *
+ * Style props are typed via declaration merging with the `StyleProps` interface
+ * (see below the class). Consumers get full autocomplete for Tailwind-mapped
+ * values (e.g. `gap="4"`, `bg="blue-500"`) while still accepting arbitrary
+ * strings via the `(string & {})` escape hatch on each value type.
  */
 export class KbBaseElement extends LitElement {
   /** Host element display value. Override to 'block' for block-level components. */
@@ -35,88 +40,12 @@ export class KbBaseElement extends LitElement {
     };
   }
 
-  declare p?: string;
-  declare px?: string;
-  declare py?: string;
-  declare pt?: string;
-  declare pr?: string;
-  declare pb?: string;
-  declare pl?: string;
-
-  declare m?: string;
-  declare mx?: string;
-  declare my?: string;
-  declare mt?: string;
-  declare mr?: string;
-  declare mb?: string;
-  declare ml?: string;
-
-  declare bg?: string;
-  declare color?: string;
-  declare opacity?: string;
-
-  declare w?: string;
-  declare h?: string;
-  declare minW?: string;
-  declare maxW?: string;
-  declare minH?: string;
-  declare maxH?: string;
-
-  declare border?: string;
-  declare borderColor?: string;
-  declare borderTop?: string;
-  declare borderRight?: string;
-  declare borderBottom?: string;
-  declare borderLeft?: string;
-  declare rounded?: string;
-  declare shadow?: string;
-
-  declare display?: string;
-  declare position?: string;
-  declare top?: string;
-  declare right?: string;
-  declare bottom?: string;
-  declare left?: string;
-  declare zIndex?: string;
-  declare overflow?: string;
-  declare overflowX?: string;
-  declare overflowY?: string;
-
-  declare gap?: string;
-  declare gapX?: string;
-  declare gapY?: string;
-  declare alignItems?: string;
-  declare justifyContent?: string;
-  declare flexDir?: string;
-  declare flexWrap?: string;
-  declare flexGrow?: string;
-  declare flexShrink?: string;
-  declare flex?: string;
-
-  declare gridCols?: string;
-  declare gridRows?: string;
-  declare colSpan?: string;
-  declare rowSpan?: string;
-
-  declare fontSize?: string;
-  declare fontWeight?: string;
-  declare fontFamily?: string;
-  declare textAlign?: string;
-  declare lineHeight?: string;
-  declare letterSpacing?: string;
-  declare textDecoration?: string;
-  declare textTransform?: string;
-
-  declare cursor?: string;
-  declare userSelect?: string;
-  declare pointerEvents?: string;
-  declare transition?: string;
-
   override createRenderRoot(): this {
     return this;
   }
 
   override connectedCallback(): void {
+    this.captureDefaultSlotContent();
     const display = (this.constructor as typeof KbBaseElement).hostDisplay;
     if (display && !this.style.display) {
       this.style.display = display;
@@ -164,5 +93,21 @@ export class KbBaseElement extends LitElement {
 
   protected buildClasses(...additional: (string | undefined | null | false)[]): string {
     return cx(this.getStyleClasses(), ...additional);
+  }
+}
+
+export interface KbBaseElement extends StyleProps {}
+
+/**
+ * Waits for a CSS transition to finish on a child element, then removes the host.
+ * Falls back to a timeout if `transitionend` never fires.
+ */
+export function dismissWithAnimation(host: HTMLElement, selector: string, fallbackMs: number): void {
+  const el = host.querySelector(selector) as HTMLElement | null;
+  if (el) {
+    el.addEventListener('transitionend', () => host.remove(), { once: true });
+    setTimeout(() => host.remove(), fallbackMs);
+  } else {
+    host.remove();
   }
 }
