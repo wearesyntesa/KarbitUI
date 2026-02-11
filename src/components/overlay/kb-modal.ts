@@ -1,10 +1,6 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {
-  KbOverlayBase,
-  BACKDROP_CLASSES, HEADER_PX, BODY_PX, FOOTER_PX,
-  type OverlaySize,
-} from '../../core/overlay-base.js';
+import { BACKDROP_CLASSES, KbOverlayBase, type OverlaySize } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
@@ -17,12 +13,12 @@ const SIZE_MAX_W: Record<OverlaySize, string> = {
   lg: 'max-w-2xl',
   xl: 'max-w-4xl',
   full: 'max-w-[calc(100vw-2rem)]',
-};
+} as const satisfies Record<OverlaySize, string>;
 
 const PLACEMENT_CLASSES: Record<ModalPlacement, string> = {
   center: 'items-center',
   top: 'items-start pt-16',
-};
+} as const satisfies Record<ModalPlacement, string>;
 
 const DISMISS_DURATION = 150;
 
@@ -50,12 +46,16 @@ const DISMISS_DURATION = 150;
  * ```
  */
 @customElement('kb-modal')
-export class KbModal extends KbOverlayBase {
+export class KbModal extends KbOverlayBase<'header' | 'footer'> {
   /** Vertical positioning of the dialog within the viewport. @defaultValue 'center' */
   @property({ type: String }) placement: ModalPlacement = 'center';
 
   protected override get _closeLabel(): string {
     return 'Close modal';
+  }
+
+  private _stopPropagation(e: Event): void {
+    e.stopPropagation();
   }
 
   protected override _animateDismiss(): void {
@@ -79,17 +79,14 @@ export class KbModal extends KbOverlayBase {
     this._finishDismiss(panel, DISMISS_DURATION);
   }
 
-  override render() {
-    if (!this._visible && !this.open) return nothing;
+  override render(): TemplateResult | typeof nothing {
+    if (!(this._visible || this.open)) return nothing;
 
     const s = this.size;
     const sizeClass = SIZE_MAX_W[s] ?? SIZE_MAX_W.md;
     const placementClass = PLACEMENT_CLASSES[this.placement] ?? PLACEMENT_CLASSES.center;
 
-    const wrapperClasses = this.buildClasses(
-      'fixed inset-0 z-50 flex justify-center p-4',
-      placementClass,
-    );
+    const wrapperClasses = this.buildClasses('fixed inset-0 z-50 flex justify-center p-4', placementClass);
 
     const overlayClasses = cx(
       'kb-modal-overlay fixed inset-0 z-40',
@@ -112,36 +109,10 @@ export class KbModal extends KbOverlayBase {
     return html`
       <div class=${overlayClasses} @click=${this._handleOverlayClick}></div>
       <div class=${wrapperClasses} @click=${this._handleOverlayClick}>
-        <div class=${panelClasses} role="dialog" aria-modal="true" @click=${(e: Event) => e.stopPropagation()}>
-          ${headerEl || this.closable
-            ? html`
-              <div class=${cx(
-                'flex items-center justify-between flex-shrink-0',
-                HEADER_PX[s],
-                kbClasses.borderBottom,
-              )}>
-                ${headerEl
-                  ? html`<div class=${kbClasses.label}>${headerEl}</div>`
-                  : html`<div></div>`}
-                ${this._renderCloseButton()}
-              </div>`
-            : nothing}
-          <div class=${cx(
-            'flex-1 overflow-y-auto',
-            BODY_PX[s],
-            kbClasses.textPrimary,
-          )}>
-            ${this.defaultSlotContent}
-          </div>
-          ${footerEl
-            ? html`
-              <div class=${cx(
-                'flex-shrink-0 flex items-center justify-end gap-3 border-t border-gray-200 dark:border-zinc-700',
-                FOOTER_PX[s],
-              )}>
-                ${footerEl}
-              </div>`
-            : nothing}
+        <div class=${panelClasses} role="dialog" aria-modal="true" @click=${this._stopPropagation}>
+          ${this._renderOverlayHeader(s, headerEl)}
+          ${this._renderOverlayBody(s)}
+          ${this._renderOverlayFooter(s, footerEl)}
         </div>
       </div>
     `;

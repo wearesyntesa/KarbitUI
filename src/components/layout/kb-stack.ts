@@ -27,7 +27,7 @@ type StackDirection = Orientation | 'horizontal' | 'vertical';
  */
 @customElement('kb-stack')
 export class KbStack extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Stack direction. `'vertical'` stacks top-to-bottom, `'horizontal'` left-to-right. @defaultValue 'vertical' */
   @property({ type: String }) direction: StackDirection = 'vertical';
@@ -44,21 +44,19 @@ export class KbStack extends KbBaseElement {
       if (i > 0) {
         result.push(html`<kb-divider orientation=${dividerOrientation}></kb-divider>`);
       }
-      result.push(nodes[i]);
+      result.push(nodes[i] as Node);
     }
     return result;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const isHorizontal = this.direction === 'horizontal';
     const dirClass = isHorizontal ? 'flex-row' : 'flex-col';
     const spacingClass = this.spacing ? `gap-${this.spacing}` : '';
     const stretchClass = this.divider && isHorizontal ? 'items-stretch' : '';
 
     const classes = this.buildClasses('flex', dirClass, spacingClass, stretchClass);
-    const content = this.divider
-      ? this._interleaveWithDividers(this.defaultSlotContent)
-      : this.defaultSlotContent;
+    const content = this.divider ? this._interleaveWithDividers(this.defaultSlotContent) : this.defaultSlotContent;
 
     return html`<div class=${classes}>${content}</div>`;
   }

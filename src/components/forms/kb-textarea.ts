@@ -1,14 +1,24 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import {
-  VARIANT_WRAPPER, VARIANT_WRAPPER_INVALID,
-  SIZE_PADDING, SIZE_TEXT, CLEAR_SIZE, SPINNER_SIZE, FOCUS_RING,
+  CLEAR_SIZE,
+  FOCUS_RING,
+  FORM_CLEAR_CLASSES,
+  FORM_INPUT_BASE,
+  FORM_PLACEHOLDER,
   type FormVariant,
+  renderFormSpinner,
+  SIZE_PADDING,
+  SIZE_TEXT,
+  SPINNER_SIZE,
+  VARIANT_WRAPPER,
+  VARIANT_WRAPPER_INVALID,
 } from '../../core/form-tokens.js';
+import { renderCloseIcon } from '../../core/icons.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
-import type { KbInputDetail, KbChangeValueDetail } from '../../core/events.js';
+import { cx } from '../../utils/cx.js';
 
 export type ResizeMode = 'vertical' | 'horizontal' | 'both' | 'none';
 
@@ -18,14 +28,14 @@ const COUNTER_TEXT: Record<ComponentSize, string> = {
   md: 'text-xs',
   lg: 'text-sm',
   xl: 'text-sm',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const RESIZE_MAP: Record<ResizeMode, string> = {
   vertical: 'resize-y',
   horizontal: 'resize-x',
   both: 'resize',
   none: 'resize-none',
-};
+} as const satisfies Record<ResizeMode, string>;
 
 /**
  * Multi-line text input with wrapper pattern, auto-resize, clearable, loading,
@@ -83,29 +93,21 @@ export class KbTextarea extends KbBaseElement {
       this._adjustHeight(target);
     }
 
-    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-input', { value: this.value });
   }
 
   private _handleChange(e: Event): void {
     const target = e.target as HTMLTextAreaElement;
     this.value = target.value;
-    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
-      detail: { source: 'textarea', value: this.value },
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-change', { source: 'textarea', value: this.value });
   }
 
   private _handleFocus(): void {
-    this.dispatchEvent(new CustomEvent('kb-focus', { bubbles: true, composed: true }));
+    this.emit('kb-focus');
   }
 
   private _handleBlur(): void {
-    this.dispatchEvent(new CustomEvent('kb-blur', { bubbles: true, composed: true }));
+    this.emit('kb-blur');
   }
 
   private _handleClear(): void {
@@ -118,12 +120,9 @@ export class KbTextarea extends KbBaseElement {
       }
       textarea.focus();
     }
-    this.dispatchEvent(new CustomEvent<KbInputDetail>('kb-input', {
-      detail: { value: '' },
-      bubbles: true,
-      composed: true,
-    }));
-    this.dispatchEvent(new CustomEvent('kb-clear', { bubbles: true, composed: true }));
+    this.emit('kb-input', { value: '' });
+    this.emit('kb-change', { source: 'textarea', value: '' });
+    this.emit('kb-clear');
   }
 
   private _adjustHeight(textarea: HTMLTextAreaElement): void {
@@ -141,7 +140,7 @@ export class KbTextarea extends KbBaseElement {
     }
   }
 
-  override render() {
+  override render(): TemplateResult {
     const isFlushed = this.variant === 'flushed';
 
     const showClear = this.clearable && this.value.length > 0 && !this.disabled && !this.readonly;
@@ -152,9 +151,7 @@ export class KbTextarea extends KbBaseElement {
     const charLimit = this.maxLength ?? 0;
     const charRatio = charLimit > 0 ? charCount / charLimit : 0;
 
-    const wrapperBorder = this.invalid
-      ? VARIANT_WRAPPER_INVALID[this.variant]
-      : VARIANT_WRAPPER[this.variant];
+    const wrapperBorder = this.invalid ? VARIANT_WRAPPER_INVALID[this.variant] : VARIANT_WRAPPER[this.variant];
 
     const outerClasses = this.buildClasses(
       'flex flex-col w-full font-sans relative',
@@ -165,16 +162,16 @@ export class KbTextarea extends KbBaseElement {
 
     const resizeClass = this.autoResize ? 'resize-none' : RESIZE_MAP[this.resize];
 
-    const textareaClasses = [
-      'flex-1 min-w-0 bg-transparent outline-none border-none',
+    const textareaClasses = cx(
+      FORM_INPUT_BASE,
       SIZE_PADDING[this.size],
       SIZE_TEXT[this.size],
       kbClasses.textPrimary,
-      'placeholder:text-slate-400 dark:placeholder:text-zinc-500',
+      FORM_PLACEHOLDER,
       resizeClass,
       this.autoResize ? 'overflow-hidden' : '',
       isFlushed ? wrapperBorder : '',
-    ].filter(Boolean).join(' ');
+    );
 
     const focusRing = isFlushed ? '' : FOCUS_RING;
 
@@ -182,29 +179,34 @@ export class KbTextarea extends KbBaseElement {
     const hasActions = showClear || showLoading;
     const actionsEl = hasActions
       ? html`<div class="absolute top-0 right-0 flex items-center gap-1 ${SIZE_PADDING[this.size]} pointer-events-none">
-          ${showClear
-            ? html`<button
-                class="pointer-events-auto shrink-0 flex items-center cursor-pointer bg-transparent border-none p-0 ${kbClasses.textMuted} hover:text-slate-700 dark:hover:text-zinc-200 ${kbClasses.transition}"
-                @click=${() => this._handleClear()}
+          ${
+            showClear
+              ? html`<button
+                class="pointer-events-auto ${FORM_CLEAR_CLASSES}"
+                @click=${this._handleClear}
                 type="button"
                 aria-label="Clear textarea"
                 tabindex="-1"
-              ><svg class="${CLEAR_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`
-            : nothing}
-          ${showLoading
-            ? html`<span class="pointer-events-auto shrink-0 flex items-center"><span class="${SPINNER_SIZE[this.size]} rounded-full border-current border-t-transparent animate-spin ${kbClasses.textMuted}" style="border-style:solid"></span></span>`
-            : nothing}
+              >${renderCloseIcon(CLEAR_SIZE[this.size])}</button>`
+              : nothing
+          }
+          ${
+            showLoading
+              ? renderFormSpinner(SPINNER_SIZE[this.size], `pointer-events-auto ${kbClasses.textMuted}`)
+              : nothing
+          }
         </div>`
       : nothing;
 
     // Bottom counter bar
+    let counterColor: string;
+    if (charRatio >= 1) counterColor = 'text-red-500 dark:text-red-400';
+    else if (charRatio >= 0.8) counterColor = 'text-yellow-600 dark:text-yellow-400';
+    else counterColor = kbClasses.textMuted;
+
     const counterEl = showCounter
       ? html`<div class="flex justify-end ${SIZE_PADDING[this.size]} pt-0">
-          <span class="${COUNTER_TEXT[this.size]} font-mono tabular-nums ${
-            charRatio >= 1 ? 'text-red-500 dark:text-red-400'
-            : charRatio >= 0.8 ? 'text-yellow-600 dark:text-yellow-400'
-            : kbClasses.textMuted
-          }">${charCount} / ${charLimit}</span>
+          <span class="${COUNTER_TEXT[this.size]} font-mono tabular-nums ${counterColor}">${charCount} / ${charLimit}</span>
         </div>`
       : nothing;
 
@@ -223,8 +225,8 @@ export class KbTextarea extends KbBaseElement {
           maxlength=${this.maxLength ?? nothing}
           @input=${this._handleInput}
           @change=${this._handleChange}
-          @focus=${() => this._handleFocus()}
-          @blur=${() => this._handleBlur()}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
         ></textarea>
         ${actionsEl}
         ${counterEl}

@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -10,7 +10,7 @@ const SPACING_MAP: Record<ListSpacing, string> = {
   compact: 'gap-0',
   normal: 'gap-1',
   loose: 'gap-2',
-};
+} as const satisfies Record<ListSpacing, string>;
 
 /**
  * List container for structured item display.
@@ -32,7 +32,7 @@ const SPACING_MAP: Record<ListSpacing, string> = {
  */
 @customElement('kb-list')
 export class KbList extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** List variant — `'plain'` (unordered) or `'ordered'` (monospace-numbered items). @defaultValue 'plain' */
   @property({ type: String }) variant: ListVariant = 'plain';
@@ -43,7 +43,7 @@ export class KbList extends KbBaseElement {
   /** Make all child items hoverable, focusable, and clickable. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
 
-  override render() {
+  override render(): TemplateResult {
     const classes = this.buildClasses(
       `flex flex-col font-sans ${kbClasses.textPrimary}`,
       SPACING_MAP[this.spacing] ?? SPACING_MAP.normal,

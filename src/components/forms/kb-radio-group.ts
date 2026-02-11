@@ -1,10 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
 import type { KbRadio } from './kb-radio.js';
-import type { KbChangeValueDetail } from '../../core/events.js';
 
 /**
  * Groups `kb-radio` elements, enforces single selection,
@@ -26,8 +25,8 @@ import type { KbChangeValueDetail } from '../../core/events.js';
  * ```
  */
 @customElement('kb-radio-group')
-export class KbRadioGroup extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbRadioGroup extends KbBaseElement<'label'> {
+  static override hostDisplay = 'block' as const;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -47,6 +46,8 @@ export class KbRadioGroup extends KbBaseElement {
   @property({ type: String }) size?: ComponentSize;
   /** Color scheme propagated to child radios that don't set their own. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
+  /** Currently selected value. Reflects the checked radio's value. Can be set programmatically. */
+  @property({ type: String }) value?: string;
 
   private _getRadios(): KbRadio[] {
     return Array.from(this.querySelectorAll('kb-radio')) as KbRadio[];
@@ -68,23 +69,32 @@ export class KbRadioGroup extends KbBaseElement {
       }
     }
 
-    this.dispatchEvent(new CustomEvent<KbChangeValueDetail>('kb-change', {
-      detail: { source: 'radio-group', value: ce.detail.value },
-      bubbles: true,
-      composed: true,
-    }));
+    this.value = ce.detail.value;
+    this.emit('kb-change', { source: 'radio-group', value: ce.detail.value });
   };
 
   override firstUpdated(): void {
     const radios = this._getRadios();
     for (const radio of radios) {
       if (this.name && !radio.hasAttribute('name')) radio.name = this.name;
+      // biome-ignore lint/style/useExplicitLengthCheck: .size is a component variant prop, not a collection size
       if (this.size && !radio.hasAttribute('size')) radio.size = this.size;
       if (this.colorScheme && !radio.hasAttribute('color-scheme')) radio.colorScheme = this.colorScheme;
     }
+    const checked = radios.find((r) => r.checked);
+    if (checked) this.value = checked.value;
   }
 
-  override render() {
+  protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (changed.has('value') && changed.get('value') !== undefined && this.value !== undefined) {
+      for (const radio of this._getRadios()) {
+        radio.checked = radio.value === this.value;
+      }
+    }
+  }
+
+  override render(): TemplateResult {
     const labelEl = this.slotted('label');
     const dirClass = this.direction === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col';
 

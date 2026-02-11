@@ -152,9 +152,11 @@ export const WithBothIcons: S = {
 export const IconSizes: S = {
   render: () => html`
     <div style="display:flex;flex-direction:column;gap:12px">
-      ${(['xs', 'sm', 'md', 'lg', 'xl'] as const).map(size => html`
+      ${(['xs', 'sm', 'md', 'lg', 'xl'] as const).map(
+        (size) => html`
         <kb-link href="#" size=${size}><span slot="icon-left">${homeSvg}</span>${size} with icon</kb-link>
-      `)}
+      `,
+      )}
     </div>
   `,
 };

@@ -2,14 +2,14 @@ export class LRUCache<K, V> {
   private cache: Map<K, V>;
   private readonly maxSize: number;
 
-  constructor(maxSize = 500) {
+  constructor(maxSize: number = 500) {
     this.cache = new Map();
     this.maxSize = maxSize;
   }
 
   get(key: K): V | undefined {
     const value = this.cache.get(key);
-    if (value === undefined) return undefined;
+    if (value === undefined) return;
 
     this.cache.delete(key);
     this.cache.set(key, value);
@@ -17,10 +17,8 @@ export class LRUCache<K, V> {
   }
 
   set(key: K, value: V): void {
-    if (this.cache.has(key)) {
-      this.cache.delete(key);
-    } else if (this.cache.size >= this.maxSize) {
-      const firstKey = this.cache.keys().next().value!;
+    if (!this.cache.delete(key) && this.cache.size >= this.maxSize) {
+      const firstKey = this.cache.keys().next().value as K;
       this.cache.delete(firstKey);
     }
     this.cache.set(key, value);

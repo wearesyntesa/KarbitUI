@@ -1,9 +1,8 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { StyleProps } from '../../core/style-map.js';
 import type { KbTag } from './kb-tag.js';
-import type { KbReorderDetail } from '../../core/events.js';
 
 export type TagGroupGap = 'sm' | 'md' | 'lg';
 
@@ -11,9 +10,10 @@ const GAP_MAP: Record<TagGroupGap, string> = {
   sm: 'gap-1.5',
   md: 'gap-2.5',
   lg: 'gap-4',
-};
+} as const satisfies Record<TagGroupGap, string>;
 
-const INDICATOR_CLASSES = 'w-0.5 h-5 bg-blue-500 rounded-full shrink-0 transition-opacity duration-100 pointer-events-none';
+const INDICATOR_CLASSES =
+  'w-0.5 h-5 bg-blue-500 rounded-full shrink-0 transition-opacity duration-100 pointer-events-none';
 
 /**
  * Flex-wrap container for `kb-tag` elements with optional drag-and-drop reordering.
@@ -35,7 +35,7 @@ const INDICATOR_CLASSES = 'w-0.5 h-5 bg-blue-500 rounded-full shrink-0 transitio
  */
 @customElement('kb-tag-group')
 export class KbTagGroup extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Enable drag-and-drop reordering of child `kb-tag[kb-draggable]` elements. @defaultValue false */
   @property({ type: Boolean }) reorderable: boolean = false;
@@ -141,12 +141,10 @@ export class KbTagGroup extends KbBaseElement {
     this._hideIndicator();
 
     const container = this._getContainer();
-    if (!container || !targetTag) return;
+    if (!(container && targetTag)) return;
 
     const tags = this._getTagChildren();
-    const draggedTag = tags.find(
-      (t) => (t.value || t.textContent?.trim() || '') === tagValue,
-    );
+    const draggedTag = tags.find((t) => (t.value || t.textContent?.trim() || '') === tagValue);
     if (!draggedTag || draggedTag === targetTag) return;
 
     if (insertBefore) {
@@ -160,16 +158,8 @@ export class KbTagGroup extends KbBaseElement {
       }
     }
 
-    const order = this._getTagChildren().map(
-      (t) => t.value || t.textContent?.trim() || '',
-    );
-    this.dispatchEvent(
-      new CustomEvent<KbReorderDetail>('kb-reorder', {
-        bubbles: true,
-        composed: true,
-        detail: { order },
-      }),
-    );
+    const order = this._getTagChildren().map((t) => t.value || t.textContent?.trim() || '');
+    this.emit('kb-reorder', { order });
   };
 
   private _hideIndicator(): void {
@@ -186,12 +176,9 @@ export class KbTagGroup extends KbBaseElement {
     this._indicator = null;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const gapClass = GAP_MAP[this.gap] ?? GAP_MAP.md;
-    const classes = this.buildClasses(
-      'flex flex-wrap items-center',
-      gapClass,
-    );
+    const classes = this.buildClasses('flex flex-wrap items-center', gapClass);
 
     return html`
       <div

@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -29,8 +29,8 @@ const FORM_CHILD_TAGS = ['KB-INPUT', 'KB-TEXTAREA', 'KB-SELECT'] as const;
  * ```
  */
 @customElement('kb-form-control')
-export class KbFormControl extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbFormControl extends KbBaseElement<'helper' | 'error' | 'counter'> {
+  static override hostDisplay = 'block' as const;
 
   /** Mark the field as required. Propagated to child input and label. @defaultValue false */
   @property({ type: Boolean, reflect: true }) required: boolean = false;
@@ -51,9 +51,7 @@ export class KbFormControl extends KbBaseElement {
 
   private _propagateContext(): void {
     const label = this.querySelector('kb-form-label') as KbFormLabel | null;
-    if (label) {
-      if (this.required && !label.hasAttribute('required')) label.required = true;
-    }
+    if (label && this.required && !label.hasAttribute('required')) label.required = true;
 
     for (const tag of FORM_CHILD_TAGS) {
       const child = this.querySelector(tag) as FormChild | null;
@@ -64,7 +62,7 @@ export class KbFormControl extends KbBaseElement {
     }
   }
 
-  override render() {
+  override render(): TemplateResult {
     const helperEl = this.slotted('helper');
     const errorEl = this.slotted('error');
     const counterEl = this.slotted('counter');
@@ -73,20 +71,25 @@ export class KbFormControl extends KbBaseElement {
     const showHelper = !showError && helperEl;
     const showBottom = showError || showHelper || counterEl;
 
+    let feedbackEl = nothing as typeof nothing | ReturnType<typeof html>;
+    if (showError) {
+      feedbackEl = html`<span class="text-xs text-red-500 dark:text-red-400 animate-kb-fade-in">${errorEl}</span>`;
+    } else if (showHelper) {
+      feedbackEl = html`<span class="text-xs ${kbClasses.textMuted}">${helperEl}</span>`;
+    }
+
     const classes = this.buildClasses('flex flex-col gap-1.5 font-sans');
 
     const bottomRow = showBottom
       ? html`<div class="flex items-start justify-between gap-4 min-h-[1.25rem]">
           <span class="flex-1">
-            ${showError
-              ? html`<span class="text-xs text-red-500 dark:text-red-400 animate-kb-fade-in">${errorEl}</span>`
-              : showHelper
-                ? html`<span class="text-xs ${kbClasses.textMuted}">${helperEl}</span>`
-                : nothing}
+            ${feedbackEl}
           </span>
-          ${counterEl
-            ? html`<span class="text-xs ${kbClasses.textMuted} shrink-0 tabular-nums">${counterEl}</span>`
-            : nothing}
+          ${
+            counterEl
+              ? html`<span class="text-xs ${kbClasses.textMuted} shrink-0 tabular-nums">${counterEl}</span>`
+              : nothing
+          }
         </div>`
       : nothing;
 

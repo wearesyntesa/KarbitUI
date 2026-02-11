@@ -6,7 +6,8 @@ import '../../src/components/layout/kb-container.js';
 export default {
   title: 'Layout/Container',
   component: 'kb-container',
-  render: (args) => html`<kb-container ${spreadAttrs(args)}>Contained content with max-width constraint.</kb-container>`,
+  render: (args) =>
+    html`<kb-container ${spreadAttrs(args)}>Contained content with max-width constraint.</kb-container>`,
   args: { bg: 'gray-100', p: '6' },
 } satisfies Meta;
 

@@ -147,10 +147,12 @@ export const Loading: S = {
 export const AllColorSizeCombos: S = {
   render: () => html`
     <div style="display:grid;grid-template-columns:repeat(5,auto);gap:12px;align-items:center">
-      ${(['blue', 'red', 'green', 'yellow', 'black'] as const).map(color =>
-        (['xs', 'sm', 'md', 'lg', 'xl'] as const).map(size => html`
+      ${(['blue', 'red', 'green', 'yellow', 'black'] as const).map((color) =>
+        (['xs', 'sm', 'md', 'lg', 'xl'] as const).map(
+          (size) => html`
           <kb-switch checked show-icons color-scheme=${color} size=${size}></kb-switch>
-        `)
+        `,
+        ),
       )}
     </div>
   `,

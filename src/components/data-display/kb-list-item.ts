@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -27,8 +27,8 @@ import type { KbList } from './kb-list.js';
  * ```
  */
 @customElement('kb-list-item')
-export class KbListItem extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'> {
+  static override hostDisplay = 'block' as const;
 
   /** Override parent list `interactive` setting for this item. Falls back to parent `<kb-list>` value when `undefined`. */
   @property({ type: Boolean }) interactive: boolean | undefined = undefined;
@@ -41,8 +41,20 @@ export class KbListItem extends KbBaseElement {
   /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
 
+  private _cachedParent: KbList | null = null;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._cachedParent = this.closest('kb-list') as KbList | null;
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this._cachedParent = null;
+  }
+
   private get _parentList(): KbList | null {
-    return this.closest('kb-list') as KbList | null;
+    return this._cachedParent;
   }
 
   private get _isInteractive(): boolean {
@@ -68,10 +80,7 @@ export class KbListItem extends KbBaseElement {
 
   private _handleClick(): void {
     if (this.disabled) return;
-    this.dispatchEvent(new CustomEvent('kb-click', {
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-click');
   }
 
   private _handleKeyDown(e: KeyboardEvent): void {
@@ -82,7 +91,7 @@ export class KbListItem extends KbBaseElement {
     }
   }
 
-  private _renderContent() {
+  private _renderContent(): TemplateResult {
     const iconEl = this.slotted('icon');
     const secondaryEl = this.slotted('secondary');
     const trailingEl = this.slotted('trailing');
@@ -90,26 +99,26 @@ export class KbListItem extends KbBaseElement {
 
     return html`
       <div class="flex items-center gap-3 min-w-0">
-        ${orderIndex !== null
-          ? html`<span class="font-mono text-xs tracking-widest ${kbClasses.textMuted} shrink-0 select-none">${orderIndex}</span>`
-          : nothing}
-        ${iconEl
-          ? html`<span class="shrink-0 ${kbClasses.textSecondary}">${iconEl}</span>`
-          : nothing}
+        ${
+          orderIndex !== null
+            ? html`<span class="font-mono text-xs tracking-widest ${kbClasses.textMuted} shrink-0 select-none">${orderIndex}</span>`
+            : nothing
+        }
+        ${iconEl ? html`<span class="shrink-0 ${kbClasses.textSecondary}">${iconEl}</span>` : nothing}
         <div class="flex-1 min-w-0">
           <div class="truncate">${this.defaultSlotContent}</div>
-          ${secondaryEl
-            ? html`<div class="text-sm ${kbClasses.textSecondary} mt-0.5 truncate">${secondaryEl}</div>`
-            : nothing}
+          ${
+            secondaryEl
+              ? html`<div class="text-sm ${kbClasses.textSecondary} mt-0.5 truncate">${secondaryEl}</div>`
+              : nothing
+          }
         </div>
-        ${trailingEl
-          ? html`<span class="shrink-0 ${kbClasses.textMuted}">${trailingEl}</span>`
-          : nothing}
+        ${trailingEl ? html`<span class="shrink-0 ${kbClasses.textMuted}">${trailingEl}</span>` : nothing}
       </div>
     `;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const isInteractive = this._isInteractive || !!this.href;
     const showDivider = this._showDivider;
 
@@ -120,7 +129,7 @@ export class KbListItem extends KbBaseElement {
       isInteractive && !this.disabled
         ? `cursor-pointer select-none hover:bg-gray-50 dark:hover:bg-zinc-800/60 active:bg-gray-100 dark:active:bg-zinc-700/50 ${kbClasses.focus}`
         : '',
-      this.disabled ? 'opacity-40 cursor-not-allowed pointer-events-none' : '',
+      this.disabled ? kbClasses.disabledLook : '',
       this.href ? 'block no-underline text-inherit' : '',
     );
 

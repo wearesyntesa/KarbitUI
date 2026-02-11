@@ -1,11 +1,5 @@
 import { noChange } from 'lit';
-import {
-  directive,
-  Directive,
-  type ElementPart,
-  type PartInfo,
-  PartType,
-} from 'lit/directive.js';
+import { Directive, directive, type ElementPart, type PartInfo, PartType } from 'lit/directive.js';
 
 type ArgsRecord = Record<string, unknown>;
 

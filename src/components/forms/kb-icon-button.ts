@@ -1,13 +1,13 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { INTERACTIVE_SOLID, INTERACTIVE_OUTLINE, INTERACTIVE_GHOST } from '../../core/color-schemes.js';
-import { recipe } from '../../core/recipe.js';
+import { INTERACTIVE_GHOST, INTERACTIVE_OUTLINE, INTERACTIVE_SOLID, lookupScheme } from '../../core/color-schemes.js';
+import { LOADING_SIZE } from '../../core/icons.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ComponentSize, ColorScheme } from '../../core/types.js';
+import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
 
-export type IconButtonVariant = 'solid' | 'outline' | 'ghost';
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const iconButtonRecipe = recipe({
   base: `inline-flex items-center justify-center ${kbClasses.transition} cursor-pointer select-none aspect-square ${kbClasses.focus}`,
   variants: {
@@ -27,24 +27,21 @@ const iconButtonRecipe = recipe({
   defaultVariants: { variant: 'solid', size: 'md' },
 });
 
-const VARIANT_DEFAULT_COLOR: Record<IconButtonVariant, string> = {
-  solid: 'bg-blue-500 text-white border-blue-500 hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:active:bg-blue-700',
-  outline: 'bg-white text-slate-900 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 dark:bg-transparent dark:text-zinc-50 dark:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:border-zinc-500 dark:active:bg-zinc-700',
-  ghost: 'bg-transparent text-slate-900 hover:bg-gray-100 active:bg-gray-200 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
-};
+export type IconButtonVariant = InferVariant<typeof iconButtonRecipe, 'variant'>;
 
-const COLOR_SCHEME_MAP: Record<IconButtonVariant, Record<ColorScheme, string>> = {
+const VARIANT_DEFAULT_COLOR: Record<IconButtonVariant, string> = {
+  solid:
+    'bg-blue-500 text-white border-blue-500 hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:active:bg-blue-700',
+  outline:
+    'bg-white text-slate-900 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 dark:bg-transparent dark:text-zinc-50 dark:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:border-zinc-500 dark:active:bg-zinc-700',
+  ghost:
+    'bg-transparent text-slate-900 hover:bg-gray-100 active:bg-gray-200 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
+} as const satisfies Record<IconButtonVariant, string>;
+
+const COLOR_SCHEME_MAP: Record<IconButtonVariant, Record<KnownColorScheme, string>> = {
   solid: INTERACTIVE_SOLID,
   outline: INTERACTIVE_OUTLINE,
   ghost: INTERACTIVE_GHOST,
-};
-
-const LOADING_SIZE: Record<ComponentSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-3.5 h-3.5 border',
-  md: 'w-4 h-4 border-2',
-  lg: 'w-5 h-5 border-2',
-  xl: 'w-6 h-6 border-2',
 };
 
 /**
@@ -85,18 +82,14 @@ export class KbIconButton extends KbBaseElement {
     this._pressed = false;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const recipeClasses = iconButtonRecipe({ variant: this.variant, size: this.size });
-    const disabledClasses = (this.disabled || this.loading) ? kbClasses.disabled : '';
+    const disabledClasses = this.disabled || this.loading ? kbClasses.disabled : '';
 
     const colorMap = COLOR_SCHEME_MAP[this.variant];
-    const colorClasses = this.colorScheme && colorMap
-      ? colorMap[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
-      : VARIANT_DEFAULT_COLOR[this.variant];
+    const colorClasses = lookupScheme(colorMap, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant];
 
-    const pressClass = this._pressed && !this.disabled && !this.loading
-      ? 'scale-[0.95]'
-      : '';
+    const pressClass = this._pressed && !this.disabled && !this.loading ? 'scale-[0.95]' : '';
 
     const classes = this.buildClasses(recipeClasses, colorClasses, disabledClasses, pressClass);
 
@@ -107,13 +100,14 @@ export class KbIconButton extends KbBaseElement {
         aria-label=${this.label}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-busy=${this.loading ? 'true' : 'false'}
-        @pointerdown=${() => this._onPointerDown()}
-        @pointerup=${() => this._onPointerUp()}
-        @pointerleave=${() => this._onPointerUp()}
+        @pointerdown=${this._onPointerDown}
+        @pointerup=${this._onPointerUp}
+        @pointerleave=${this._onPointerUp}
       >
-        ${this.loading
-          ? html`<span class="inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size]}"></span>`
-          : this.defaultSlotContent
+        ${
+          this.loading
+            ? html`<span class="inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size]}"></span>`
+            : this.defaultSlotContent
         }
       </button>
     `;

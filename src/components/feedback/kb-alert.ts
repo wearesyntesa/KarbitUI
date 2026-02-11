@@ -1,20 +1,11 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
-import { recipe } from '../../core/recipe.js';
+import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
+import { renderCloseIcon, STATUS_ICONS } from '../../core/icons.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
-import type { KbToggleDetail } from '../../core/events.js';
 
-export type AlertStatus = 'info' | 'success' | 'warning' | 'error';
-export type AlertVariant = 'solid' | 'outline' | 'subtle' | 'left-accent';
-
-const STATUS_ICONS: Record<AlertStatus, TemplateResult> = {
-  info: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
-  success: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M20 6 9 17l-5-5"/></svg>`,
-  warning: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
-  error: html`<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`,
-};
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const alertRecipe = recipe({
   base: `flex items-start gap-3 font-sans w-full select-none`,
   variants: {
@@ -28,7 +19,7 @@ const alertRecipe = recipe({
       solid: '',
       outline: 'bg-white dark:bg-transparent border',
       subtle: 'border border-transparent',
-      'left-accent': `bg-white dark:bg-transparent border border-gray-200 dark:border-zinc-700 border-l-4`,
+      'left-accent': `bg-white dark:bg-transparent border ${kbClasses.borderColor} border-l-4`,
     },
     size: {
       sm: 'px-3 py-2 text-sm',
@@ -42,13 +33,29 @@ const alertRecipe = recipe({
     { status: 'success', variant: 'solid', class: 'bg-green-500 text-white border border-green-500' },
     { status: 'warning', variant: 'solid', class: 'bg-yellow-400 text-slate-900 border border-yellow-400' },
     { status: 'error', variant: 'solid', class: 'bg-red-500 text-white border border-red-500' },
-    { status: 'info', variant: 'outline', class: 'border-blue-500 text-blue-700 dark:text-blue-400 dark:border-blue-500' },
-    { status: 'success', variant: 'outline', class: 'border-green-500 text-green-700 dark:text-green-400 dark:border-green-500' },
-    { status: 'warning', variant: 'outline', class: 'border-yellow-500 text-yellow-700 dark:text-yellow-400 dark:border-yellow-500' },
+    {
+      status: 'info',
+      variant: 'outline',
+      class: 'border-blue-500 text-blue-700 dark:text-blue-400 dark:border-blue-500',
+    },
+    {
+      status: 'success',
+      variant: 'outline',
+      class: 'border-green-500 text-green-700 dark:text-green-400 dark:border-green-500',
+    },
+    {
+      status: 'warning',
+      variant: 'outline',
+      class: 'border-yellow-500 text-yellow-700 dark:text-yellow-400 dark:border-yellow-500',
+    },
     { status: 'error', variant: 'outline', class: 'border-red-500 text-red-700 dark:text-red-400 dark:border-red-500' },
     { status: 'info', variant: 'subtle', class: 'bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-300' },
     { status: 'success', variant: 'subtle', class: 'bg-green-50 text-green-800 dark:bg-green-950 dark:text-green-300' },
-    { status: 'warning', variant: 'subtle', class: 'bg-yellow-50 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300' },
+    {
+      status: 'warning',
+      variant: 'subtle',
+      class: 'bg-yellow-50 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
+    },
     { status: 'error', variant: 'subtle', class: 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300' },
     { status: 'info', variant: 'left-accent', class: 'border-l-blue-500 text-blue-800 dark:text-blue-300' },
     { status: 'success', variant: 'left-accent', class: 'border-l-green-500 text-green-800 dark:text-green-300' },
@@ -56,6 +63,9 @@ const alertRecipe = recipe({
     { status: 'error', variant: 'left-accent', class: 'border-l-red-500 text-red-800 dark:text-red-300' },
   ],
 });
+
+export type AlertStatus = InferVariant<typeof alertRecipe, 'status'>;
+export type AlertVariant = InferVariant<typeof alertRecipe, 'variant'>;
 
 /**
  * Status alert banner for displaying feedback messages.
@@ -84,8 +94,8 @@ const alertRecipe = recipe({
  * ```
  */
 @customElement('kb-alert')
-export class KbAlert extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon'> {
+  static override hostDisplay = 'block' as const;
   override connectedCallback(): void {
     super.connectedCallback();
     this._startTimer();
@@ -130,22 +140,16 @@ export class KbAlert extends KbBaseElement {
   private _dismiss(): void {
     this._clearTimer();
     this._dismissing = true;
-    this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+    this.emit('kb-close');
     dismissWithAnimation(this, '[data-kb-alert-outer]', 300);
   }
 
   private _toggleDetail(): void {
     this._detailOpen = !this._detailOpen;
-    this.dispatchEvent(
-      new CustomEvent<KbToggleDetail>('kb-toggle', {
-        bubbles: true,
-        composed: true,
-        detail: { open: this._detailOpen },
-      }),
-    );
+    this.emit('kb-toggle', { open: this._detailOpen });
   }
 
-  override render() {
+  override render(): TemplateResult {
     const recipeClasses = alertRecipe({ status: this.status, variant: this.variant, size: this.size });
 
     const outerClasses = this._dismissing
@@ -158,57 +162,55 @@ export class KbAlert extends KbBaseElement {
     const actionEl = this.slotted('action');
     const detailEl = this.slotted('detail');
 
-    const closeIcon = html`<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+    const closeIcon = renderCloseIcon('w-4 h-4', 2.5);
     const chevronIcon = html`<svg class="w-3.5 h-3.5 transition-transform duration-200 ease-in-out ${this._detailOpen ? 'rotate-180' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="m6 9 6 6 6-6"/></svg>`;
 
     return html`
       <div data-kb-alert-outer class=${outerClasses}>
         <div class="overflow-hidden">
           <div class=${classes} role="alert">
-            ${this.showIcon
-              ? html`<span class="flex-shrink-0 mt-0.5" aria-hidden="true">
+            ${
+              this.showIcon
+                ? html`<span class="flex-shrink-0 mt-0.5" aria-hidden="true">
                   ${this.slotted('icon') ?? STATUS_ICONS[this.status]}
                 </span>`
-              : nothing
+                : nothing
             }
             <div class="flex-1 min-w-0 font-sans">
-              ${titleEl
-                ? html`<div class="font-semibold mb-0.5">${titleEl}</div>`
-                : nothing
-              }
+              ${titleEl ? html`<div class="font-semibold mb-0.5">${titleEl}</div>` : nothing}
               <div>${this.defaultSlotContent}</div>
-              ${detailEl
-                ? html`
+              ${
+                detailEl
+                  ? html`
                   <div class="grid ${this._detailOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'} transition-[grid-template-rows] duration-200 ease-in-out">
                     <div class="overflow-hidden">
                       <div class="pt-2 text-sm opacity-80">${detailEl}</div>
                     </div>
                   </div>
                 `
-                : nothing
+                  : nothing
               }
-              ${actionEl
-                ? html`<div class="mt-2 flex items-center gap-2">${actionEl}</div>`
-                : nothing
-              }
+              ${actionEl ? html`<div class="mt-2 flex items-center gap-2">${actionEl}</div>` : nothing}
             </div>
             <div class="flex items-center gap-1 flex-shrink-0 ml-auto">
-              ${detailEl
-                ? html`<button
+              ${
+                detailEl
+                  ? html`<button
                     class="cursor-pointer p-1 opacity-50 hover:opacity-100 ${kbClasses.transition} bg-transparent border-none text-current"
-                    @click=${() => this._toggleDetail()}
+                    @click=${this._toggleDetail}
                     aria-label=${this._detailOpen ? 'Hide details' : 'Show details'}
                     aria-expanded=${this._detailOpen ? 'true' : 'false'}
                   >${chevronIcon}</button>`
-                : nothing
+                  : nothing
               }
-              ${this.closable
-                ? html`<button
+              ${
+                this.closable
+                  ? html`<button
                     class="cursor-pointer p-1 opacity-50 hover:opacity-100 ${kbClasses.transition} bg-transparent border-none text-current"
-                    @click=${() => this._dismiss()}
+                    @click=${this._dismiss}
                     aria-label="Close alert"
                   >${closeIcon}</button>`
-                : nothing
+                  : nothing
               }
             </div>
           </div>

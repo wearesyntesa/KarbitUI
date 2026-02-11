@@ -188,7 +188,7 @@ export const Interactive: S = {
       const cells = Array.from(row.querySelectorAll('td'));
       const endpoint = cells[0]?.textContent ?? '';
       const info = document.getElementById('table-click-output');
-      if (info) info.textContent = 'Clicked row ' + e.detail.index + ': ' + endpoint;
+      if (info) info.textContent = `Clicked row ${e.detail.index}: ${endpoint}`;
     }}>
       ${basicContent}
     </kb-table>

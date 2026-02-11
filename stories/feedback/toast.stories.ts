@@ -6,7 +6,8 @@ import '../../src/components/feedback/kb-toast.js';
 export default {
   title: 'Feedback/Toast',
   component: 'kb-toast',
-  render: (args) => html`<kb-toast ${spreadAttrs(args)} style="position:static;">This is a toast notification.</kb-toast>`,
+  render: (args) =>
+    html`<kb-toast ${spreadAttrs(args)} style="position:static;">This is a toast notification.</kb-toast>`,
   args: { status: 'info', duration: 0 },
 } satisfies Meta;
 
@@ -18,7 +19,7 @@ export const Success: S = { args: { status: 'success' } };
 
 export const Warning: S = { args: { status: 'warning' } };
 
-export const Error: S = { args: { status: 'error' } };
+export const ErrorStatus: S = { args: { status: 'error' } };
 
 export const WithTitle: S = {
   render: () => html`

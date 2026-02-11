@@ -1,14 +1,11 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { recipe } from '../../core/recipe.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { FontSizeValue } from '../../core/types.js';
 
-export type TextVariant = 'body' | 'label' | 'caption' | 'overline';
-export type TextTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'success' | 'warning' | 'error';
-export type TextAs = 'p' | 'span' | 'div' | 'label';
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const textRecipe = recipe({
   base: '',
   variants: {
@@ -30,6 +27,10 @@ const textRecipe = recipe({
   defaultVariants: { variant: 'body', size: 'base' },
 });
 
+export type TextVariant = InferVariant<typeof textRecipe, 'variant'>;
+export type TextTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'success' | 'warning' | 'error';
+export type TextAs = 'p' | 'span' | 'div' | 'label';
+
 const TONE_MAP: Record<TextTone, string> = {
   primary: kbClasses.textPrimary,
   secondary: kbClasses.textSecondary,
@@ -38,7 +39,7 @@ const TONE_MAP: Record<TextTone, string> = {
   success: 'text-green-600 dark:text-green-400',
   warning: 'text-yellow-600 dark:text-yellow-400',
   error: 'text-red-600 dark:text-red-400',
-};
+} as const satisfies Record<TextTone, string>;
 
 /** Default tone per variant when no explicit tone is set. */
 const VARIANT_DEFAULT_TONE: Record<TextVariant, string> = {
@@ -46,7 +47,7 @@ const VARIANT_DEFAULT_TONE: Record<TextVariant, string> = {
   label: kbClasses.textSecondary,
   caption: kbClasses.textSecondary,
   overline: kbClasses.textSecondary,
-};
+} as const satisfies Record<TextVariant, string>;
 
 const CLAMP_MAP: Record<number, string> = {
   1: 'line-clamp-1',
@@ -73,7 +74,7 @@ const CLAMP_MAP: Record<number, string> = {
  */
 @customElement('kb-text')
 export class KbText extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Typography preset controlling font family, case, and tracking. @defaultValue 'body' */
   @property({ type: String }) variant: TextVariant = 'body';
@@ -90,7 +91,7 @@ export class KbText extends KbBaseElement {
   /** HTML element to render. @defaultValue 'p' */
   @property({ type: String }) as: TextAs = 'p';
 
-  override render() {
+  override render(): TemplateResult {
     const sizeOverride = this.variant === 'body' ? (this.size ?? 'base') : this.size;
     const recipeClasses = textRecipe({
       variant: this.variant,
@@ -98,26 +99,24 @@ export class KbText extends KbBaseElement {
     });
 
     const toneClasses = this.tone
-      ? TONE_MAP[this.tone] ?? VARIANT_DEFAULT_TONE[this.variant]
+      ? (TONE_MAP[this.tone] ?? VARIANT_DEFAULT_TONE[this.variant])
       : VARIANT_DEFAULT_TONE[this.variant];
 
     const truncateClass = this.truncate ? 'truncate' : '';
     const noWrapClass = this.noWrap ? 'whitespace-nowrap' : '';
-    const clampClass = this.clamp ? CLAMP_MAP[this.clamp] ?? '' : '';
+    const clampClass = this.clamp ? (CLAMP_MAP[this.clamp] ?? '') : '';
 
-    const classes = this.buildClasses(
-      recipeClasses,
-      toneClasses,
-      truncateClass,
-      noWrapClass,
-      clampClass,
-    );
+    const classes = this.buildClasses(recipeClasses, toneClasses, truncateClass, noWrapClass, clampClass);
 
     switch (this.as) {
-      case 'span': return html`<span class=${classes}>${this.defaultSlotContent}</span>`;
-      case 'div': return html`<div class=${classes}>${this.defaultSlotContent}</div>`;
-      case 'label': return html`<label class=${classes}>${this.defaultSlotContent}</label>`;
-      default: return html`<p class=${classes}>${this.defaultSlotContent}</p>`;
+      case 'span':
+        return html`<span class=${classes}>${this.defaultSlotContent}</span>`;
+      case 'div':
+        return html`<div class=${classes}>${this.defaultSlotContent}</div>`;
+      case 'label':
+        return html`<label class=${classes}>${this.defaultSlotContent}</label>`;
+      default:
+        return html`<p class=${classes}>${this.defaultSlotContent}</p>`;
     }
   }
 }

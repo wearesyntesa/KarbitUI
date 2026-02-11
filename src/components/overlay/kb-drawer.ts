@@ -1,10 +1,6 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {
-  KbOverlayBase,
-  BACKDROP_CLASSES, HEADER_PX, BODY_PX, FOOTER_PX,
-  type OverlaySize,
-} from '../../core/overlay-base.js';
+import { BACKDROP_CLASSES, KbOverlayBase, type OverlaySize } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
@@ -15,28 +11,28 @@ const SIZE_MAP: Record<DrawerPlacement, Record<OverlaySize, string>> = {
   right: { xs: 'w-60', sm: 'w-72', md: 'w-96', lg: 'w-[32rem]', xl: 'w-[40rem]', full: 'w-full' },
   top: { xs: 'h-40', sm: 'h-52', md: 'h-72', lg: 'h-96', xl: 'h-[32rem]', full: 'h-full' },
   bottom: { xs: 'h-40', sm: 'h-52', md: 'h-72', lg: 'h-96', xl: 'h-[32rem]', full: 'h-full' },
-};
+} as const satisfies Record<DrawerPlacement, Record<OverlaySize, string>>;
 
 const PLACEMENT_CLASSES: Record<DrawerPlacement, string> = {
   left: 'inset-y-0 left-0',
   right: 'inset-y-0 right-0',
   top: 'inset-x-0 top-0',
   bottom: 'inset-x-0 bottom-0',
-};
+} as const satisfies Record<DrawerPlacement, string>;
 
 const SLIDE_IN_ANIM: Record<DrawerPlacement, string> = {
   left: 'animate-kb-slide-in-left',
   right: 'animate-kb-slide-in-right',
   top: 'animate-kb-slide-in-down',
   bottom: 'animate-kb-slide-in-up',
-};
+} as const satisfies Record<DrawerPlacement, string>;
 
 const SLIDE_OUT_TRANSFORM: Record<DrawerPlacement, string> = {
   left: 'translateX(-100%)',
   right: 'translateX(100%)',
   top: 'translateY(-100%)',
   bottom: 'translateY(100%)',
-};
+} as const satisfies Record<DrawerPlacement, string>;
 
 const DISMISS_DURATION = 200;
 
@@ -61,7 +57,7 @@ const DISMISS_DURATION = 200;
  * ```
  */
 @customElement('kb-drawer')
-export class KbDrawer extends KbOverlayBase {
+export class KbDrawer extends KbOverlayBase<'header' | 'footer'> {
   /** Edge of the viewport from which the drawer slides in. @defaultValue 'right' */
   @property({ type: String }) placement: DrawerPlacement = 'right';
 
@@ -89,8 +85,8 @@ export class KbDrawer extends KbOverlayBase {
     this._finishDismiss(panel, DISMISS_DURATION);
   }
 
-  override render() {
-    if (!this._visible && !this.open) return nothing;
+  override render(): TemplateResult | typeof nothing {
+    if (!(this._visible || this.open)) return nothing;
 
     const p = this.placement;
     const s = this.size;
@@ -119,35 +115,9 @@ export class KbDrawer extends KbOverlayBase {
     return html`
       <div class=${overlayClasses} @click=${this._handleOverlayClick}></div>
       <div class=${panelClasses} role="dialog" aria-modal="true">
-        ${headerEl || this.closable
-          ? html`
-            <div class=${cx(
-              'flex items-center justify-between flex-shrink-0',
-              HEADER_PX[s],
-              kbClasses.borderBottom,
-            )}>
-              ${headerEl
-                ? html`<div class=${kbClasses.label}>${headerEl}</div>`
-                : html`<div></div>`}
-              ${this._renderCloseButton()}
-            </div>`
-          : nothing}
-        <div class=${cx(
-          'flex-1 overflow-y-auto',
-          BODY_PX[s],
-          kbClasses.textPrimary,
-        )}>
-          ${this.defaultSlotContent}
-        </div>
-        ${footerEl
-          ? html`
-            <div class=${cx(
-              'flex-shrink-0 flex items-center justify-end gap-3 border-t border-gray-200 dark:border-zinc-700',
-              FOOTER_PX[s],
-            )}>
-              ${footerEl}
-            </div>`
-          : nothing}
+        ${this._renderOverlayHeader(s, headerEl)}
+        ${this._renderOverlayBody(s)}
+        ${this._renderOverlayFooter(s, footerEl)}
       </div>
     `;
   }

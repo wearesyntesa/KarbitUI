@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
@@ -7,20 +7,22 @@ export type ButtonGroupDirection = 'horizontal' | 'vertical';
 const DIRECTION_CLASSES: Record<ButtonGroupDirection, string> = {
   horizontal: 'inline-flex flex-row',
   vertical: 'inline-flex flex-col',
-};
+} as const satisfies Record<ButtonGroupDirection, string>;
 
-const ATTACHED_HORIZONTAL = '[&>kb-button]:border-r-0 [&>kb-button:last-child]:border-r [&>kb-button+kb-button]:border-l-gray-300 [&>kb-button+kb-button]:dark:border-l-zinc-600';
-const ATTACHED_VERTICAL = '[&>kb-button]:border-b-0 [&>kb-button:last-child]:border-b [&>kb-button+kb-button]:border-t-gray-300 [&>kb-button+kb-button]:dark:border-t-zinc-600';
+const ATTACHED_HORIZONTAL =
+  '[&>kb-button]:border-r-0 [&>kb-button:last-child]:border-r [&>kb-button+kb-button]:border-l-gray-300 [&>kb-button+kb-button]:dark:border-l-zinc-600';
+const ATTACHED_VERTICAL =
+  '[&>kb-button]:border-b-0 [&>kb-button:last-child]:border-b [&>kb-button+kb-button]:border-t-gray-300 [&>kb-button+kb-button]:dark:border-t-zinc-600';
 
 const ATTACHED_CLASSES: Record<ButtonGroupDirection, string> = {
   horizontal: ATTACHED_HORIZONTAL,
   vertical: ATTACHED_VERTICAL,
-};
+} as const satisfies Record<ButtonGroupDirection, string>;
 
 const SPACED_GAP: Record<ButtonGroupDirection, string> = {
   horizontal: 'gap-2',
   vertical: 'gap-2',
-};
+} as const satisfies Record<ButtonGroupDirection, string>;
 
 /**
  * Groups multiple `kb-button` elements into a unified control.
@@ -51,12 +53,12 @@ export class KbButtonGroup extends KbBaseElement {
   /** Use spaced mode (gap between buttons) instead of attached mode (shared borders). @defaultValue false */
   @property({ type: Boolean }) spaced: boolean = false;
 
-  override render() {
+  override render(): TemplateResult {
     const dirClasses = DIRECTION_CLASSES[this.direction] ?? DIRECTION_CLASSES.horizontal;
 
     const modeClasses = this.spaced
-      ? SPACED_GAP[this.direction] ?? SPACED_GAP.horizontal
-      : ATTACHED_CLASSES[this.direction] ?? ATTACHED_CLASSES.horizontal;
+      ? (SPACED_GAP[this.direction] ?? SPACED_GAP.horizontal)
+      : (ATTACHED_CLASSES[this.direction] ?? ATTACHED_CLASSES.horizontal);
 
     const classes = this.buildClasses(dirClasses, modeClasses);
 

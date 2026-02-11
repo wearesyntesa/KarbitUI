@@ -20,7 +20,7 @@ export const Success: S = { args: { status: 'success' } };
 
 export const Warning: S = { args: { status: 'warning' } };
 
-export const Error: S = { args: { status: 'error' } };
+export const ErrorStatus: S = { args: { status: 'error' } };
 
 export const Solid: S = { args: { variant: 'solid' } };
 

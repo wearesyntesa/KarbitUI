@@ -1,19 +1,39 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { cx } from '../utils/cx.js';
 import { KbBaseElement } from './base-element.js';
 import { kbClasses } from './theme.js';
-import { cx } from '../utils/cx.js';
 
-export type OverlaySize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+import type { ComponentSize } from './types.js';
+
+export type OverlaySize = ComponentSize | 'full';
 export type OverlayBackdrop = 'normal' | 'blur' | 'transparent';
 
-export const FOCUSABLE_SELECTORS = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+export const FOCUSABLE_SELECTORS =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/** Trap Tab/Shift+Tab cycling within a container element. */
+export function handleTabTrap(container: HTMLElement, e: KeyboardEvent): void {
+  const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
+  if (focusable.length === 0) return;
+
+  const first = focusable[0] as HTMLElement;
+  const last = focusable[focusable.length - 1] as HTMLElement;
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
 
 export const BACKDROP_CLASSES: Record<OverlayBackdrop, string> = {
   normal: 'bg-black/50',
   blur: 'bg-black/30 backdrop-blur-sm',
   transparent: 'bg-transparent',
-};
+} as const satisfies Record<OverlayBackdrop, string>;
 
 export const CLOSE_ICON_SIZE: Record<OverlaySize, string> = {
   xs: 'w-4 h-4',
@@ -22,7 +42,7 @@ export const CLOSE_ICON_SIZE: Record<OverlaySize, string> = {
   lg: 'w-5 h-5',
   xl: 'w-6 h-6',
   full: 'w-6 h-6',
-};
+} as const satisfies Record<OverlaySize, string>;
 
 export const HEADER_PX: Record<OverlaySize, string> = {
   xs: 'px-4 py-2.5',
@@ -31,7 +51,7 @@ export const HEADER_PX: Record<OverlaySize, string> = {
   lg: 'px-6 py-4',
   xl: 'px-6 py-4',
   full: 'px-8 py-5',
-};
+} as const satisfies Record<OverlaySize, string>;
 
 export const BODY_PX: Record<OverlaySize, string> = {
   xs: 'px-4 py-3',
@@ -40,7 +60,7 @@ export const BODY_PX: Record<OverlaySize, string> = {
   lg: 'px-6 py-5',
   xl: 'px-6 py-5',
   full: 'px-8 py-6',
-};
+} as const satisfies Record<OverlaySize, string>;
 
 export const FOOTER_PX: Record<OverlaySize, string> = {
   xs: 'px-4 py-2.5',
@@ -49,7 +69,7 @@ export const FOOTER_PX: Record<OverlaySize, string> = {
   lg: 'px-6 py-4',
   xl: 'px-6 py-4',
   full: 'px-8 py-5',
-};
+} as const satisfies Record<OverlaySize, string>;
 
 /**
  * Abstract base for full-screen overlay components (modal, drawer).
@@ -58,8 +78,8 @@ export const FOOTER_PX: Record<OverlaySize, string> = {
  * keyboard dismissal, overlay click dismissal, and close button rendering.
  * Subclasses must implement `_animateDismiss()`, `_closeLabel`, and `render()`.
  */
-export abstract class KbOverlayBase extends KbBaseElement {
-  static override hostDisplay = 'block';
+export abstract class KbOverlayBase<S extends string = string> extends KbBaseElement<S> {
+  static override hostDisplay = 'block' as const;
 
   /** Whether the overlay is open. Reflects to the `open` attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
@@ -119,6 +139,16 @@ export abstract class KbOverlayBase extends KbBaseElement {
     }
   }
 
+  /** Programmatically open the overlay. Equivalent to setting `open = true`. */
+  show(): void {
+    this.open = true;
+  }
+
+  /** Programmatically close the overlay with dismiss animation. */
+  close(): void {
+    this._close();
+  }
+
   protected _show(): void {
     this._dismissing = false;
     this._visible = true;
@@ -130,7 +160,7 @@ export abstract class KbOverlayBase extends KbBaseElement {
       if (this.autoFocus) {
         this._focusFirst();
       }
-      this.dispatchEvent(new CustomEvent('kb-open', { bubbles: true, composed: true }));
+      this.emit('kb-open');
     });
   }
 
@@ -181,20 +211,7 @@ export abstract class KbOverlayBase extends KbBaseElement {
   private _handleTabTrap(e: KeyboardEvent): void {
     const panel = this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
-
-    const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
-    if (!focusable.length) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
+    handleTabTrap(panel, e);
   }
 
   protected _handleOverlayClick(e: Event): void {
@@ -215,13 +232,13 @@ export abstract class KbOverlayBase extends KbBaseElement {
       this._dismissing = false;
       this._restoreScroll();
       this._restoreFocus();
-      this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+      this.emit('kb-close');
     };
     panel?.addEventListener('transitionend', onFinish, { once: true });
     this._dismissTimeout = setTimeout(onFinish, durationMs + 50);
   }
 
-  protected _renderCloseButton() {
+  protected _renderCloseButton(): TemplateResult | typeof nothing {
     if (!this.closable) return nothing;
 
     const iconSize = CLOSE_ICON_SIZE[this.size] ?? CLOSE_ICON_SIZE.md;
@@ -243,5 +260,35 @@ export abstract class KbOverlayBase extends KbBaseElement {
         </svg>
       </button>
     `;
+  }
+
+  /** Render the standard overlay header row (title slot + close button + border). */
+  protected _renderOverlayHeader(s: OverlaySize, headerEl: Element | null): TemplateResult | typeof nothing {
+    if (!(headerEl || this.closable)) return nothing;
+    return html`
+      <div class=${cx('flex items-center justify-between flex-shrink-0', HEADER_PX[s], kbClasses.borderBottom)}>
+        ${headerEl ? html`<div class=${kbClasses.label}>${headerEl}</div>` : html`<div></div>`}
+        ${this._renderCloseButton()}
+      </div>`;
+  }
+
+  /** Render the standard overlay body with scrollable overflow. */
+  protected _renderOverlayBody(s: OverlaySize): TemplateResult {
+    return html`
+      <div class=${cx('flex-1 overflow-y-auto', BODY_PX[s], kbClasses.textPrimary)}>
+        ${this.defaultSlotContent}
+      </div>`;
+  }
+
+  /** Render the standard overlay footer row with top border (only when footer slot is provided). */
+  protected _renderOverlayFooter(s: OverlaySize, footerEl: Element | null): TemplateResult | typeof nothing {
+    if (!footerEl) return nothing;
+    return html`
+      <div class=${cx(
+        `flex-shrink-0 flex items-center justify-end gap-3 border-t ${kbClasses.borderColor}`,
+        FOOTER_PX[s],
+      )}>
+        ${footerEl}
+      </div>`;
   }
 }

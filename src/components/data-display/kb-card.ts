@@ -1,11 +1,11 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { recipe } from '../../core/recipe.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
+import { cx } from '../../utils/cx.js';
 
-export type CardVariant = 'outline' | 'elevated' | 'filled' | 'ghost';
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const cardRecipe = recipe({
   base: `font-sans ${kbClasses.transition}`,
   variants: {
@@ -24,20 +24,22 @@ const cardRecipe = recipe({
   defaultVariants: { variant: 'outline', size: 'md' },
 });
 
-const INTERACTIVE_CLASSES = [
+export type CardVariant = InferVariant<typeof cardRecipe, 'variant'>;
+
+const INTERACTIVE_CLASSES: string = cx(
   'cursor-pointer select-none',
   'hover:border-gray-300 dark:hover:border-zinc-500',
   'hover:bg-gray-50/50 dark:hover:bg-zinc-800/30',
   'active:bg-gray-100 dark:active:bg-zinc-700/50',
   kbClasses.focus,
-].join(' ');
+);
 
-const GHOST_INTERACTIVE_CLASSES = [
+const GHOST_INTERACTIVE_CLASSES: string = cx(
   'cursor-pointer select-none',
   'hover:bg-gray-50 dark:hover:bg-zinc-800/50',
   'active:bg-gray-100 dark:active:bg-zinc-700/50',
   kbClasses.focus,
-].join(' ');
+);
 
 const PASSIVE_HOVER_CLASSES = 'hover:border-gray-300 dark:hover:border-zinc-600';
 
@@ -64,8 +66,8 @@ const PASSIVE_HOVER_CLASSES = 'hover:border-gray-300 dark:hover:border-zinc-600'
  * ```
  */
 @customElement('kb-card')
-export class KbCard extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbCard extends KbBaseElement<'header' | 'footer'> {
+  static override hostDisplay = 'block' as const;
 
   /** Visual variant controlling border, background, and elevation. @defaultValue 'outline' */
   @property({ type: String }) variant: CardVariant = 'outline';
@@ -80,10 +82,7 @@ export class KbCard extends KbBaseElement {
 
   private _handleClick(): void {
     if (!this.interactive) return;
-    this.dispatchEvent(new CustomEvent('kb-click', {
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-click');
   }
 
   private _handleKeyDown(e: KeyboardEvent): void {
@@ -94,30 +93,31 @@ export class KbCard extends KbBaseElement {
     }
   }
 
-  private _renderContent() {
+  private _renderContent(): TemplateResult {
     const headerEl = this.slotted('header');
     const footerEl = this.slotted('footer');
 
     return html`
-      ${headerEl
-        ? html`<div class="${kbClasses.label} mb-3 pb-3 ${kbClasses.borderBottom}">${headerEl}</div>`
-        : nothing}
+      ${
+        headerEl ? html`<div class="${kbClasses.label} mb-3 pb-3 ${kbClasses.borderBottom}">${headerEl}</div>` : nothing
+      }
       <div class=${kbClasses.textPrimary}>${this.defaultSlotContent}</div>
-      ${footerEl
-        ? html`<div class="mt-3 pt-3 border-t border-gray-200 dark:border-zinc-700 text-sm ${kbClasses.textSecondary}">${footerEl}</div>`
-        : nothing}
+      ${
+        footerEl
+          ? html`<div class="mt-3 pt-3 border-t ${kbClasses.borderColor} text-sm ${kbClasses.textSecondary}">${footerEl}</div>`
+          : nothing
+      }
     `;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const isGhost = this.variant === 'ghost';
-    const interactiveClasses = this.interactive
-      ? (isGhost ? GHOST_INTERACTIVE_CLASSES : INTERACTIVE_CLASSES)
-      : '';
+    let interactiveClasses = '';
+    if (this.interactive) {
+      interactiveClasses = isGhost ? GHOST_INTERACTIVE_CLASSES : INTERACTIVE_CLASSES;
+    }
 
-    const passiveHover = !this.interactive && !isGhost && !this.href
-      ? PASSIVE_HOVER_CLASSES
-      : '';
+    const passiveHover = this.interactive || isGhost || this.href ? '' : PASSIVE_HOVER_CLASSES;
 
     const baseClasses = this.buildClasses(
       cardRecipe({ variant: this.variant, size: this.size }),

@@ -1,8 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
+import { cx } from '../../utils/cx.js';
 
 /**
  * Callback that transforms raw code text into highlighted HTML.
@@ -98,21 +99,19 @@ export class KbCode extends KbBaseElement {
   }
 
   private _extractRawText(): string {
-    return this.defaultSlotContent
-      .map((n) => n.textContent ?? '')
-      .join('');
+    return this.defaultSlotContent.map((n) => n.textContent ?? '').join('');
   }
 
   /** When highlighting is active, remove original slot nodes so they don't appear alongside Lit's rendered output in Light DOM. */
   private _cleanupSlotForHighlighting(): void {
-    if (!this.language || !KbCode.highlighter) return;
+    if (!(this.language && KbCode.highlighter)) return;
     for (const node of this.defaultSlotContent) {
       node.parentNode?.removeChild(node);
     }
   }
 
   private _getHighlightedContent(): ReturnType<typeof html> | ReturnType<typeof unsafeHTML> | Node[] {
-    if (!this.language || !KbCode.highlighter) {
+    if (!(this.language && KbCode.highlighter)) {
       return this.defaultSlotContent;
     }
 
@@ -143,13 +142,12 @@ export class KbCode extends KbBaseElement {
     }, 1500);
   }
 
-  override render() {
-    const baseClasses = [
-      'font-mono bg-gray-50 border border-gray-200',
-      'dark:bg-zinc-800 dark:border-zinc-700',
+  override render(): TemplateResult {
+    const baseClasses = cx(
+      `font-mono ${kbClasses.surfaceMuted} ${kbClasses.border}`,
       'text-sm text-slate-900 dark:text-zinc-50',
       kbClasses.transition,
-    ].join(' ');
+    );
 
     const content = this._getHighlightedContent();
 
@@ -164,7 +162,7 @@ export class KbCode extends KbBaseElement {
         hasFilename ? 'border-t-0' : '',
       );
 
-      const btnClasses = [
+      const btnClasses = cx(
         `absolute ${hasFilename ? 'top-10' : 'top-2'} right-2 z-10`,
         'opacity-0 group-hover/code:opacity-100',
         'inline-flex items-center justify-center',
@@ -178,13 +176,13 @@ export class KbCode extends KbBaseElement {
         kbClasses.transition,
         kbClasses.focus,
         this._copied ? 'opacity-100 text-green-600 dark:text-green-400 border-green-400 dark:border-green-500' : '',
-      ].join(' ');
+      );
 
       const clipboardIcon = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4V4h11v1"/></svg>`;
       const checkIcon = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M20 6 9 17l-5-5"/></svg>`;
 
       const filenameHeader = hasFilename
-        ? html`<div class="flex items-center px-4 py-2 border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800/80">
+        ? html`<div class="flex items-center px-4 py-2 ${kbClasses.border} bg-gray-50 dark:bg-zinc-800/80">
             <span class="font-mono text-xs ${kbClasses.textSecondary} select-none">${this.filename}</span>
           </div>`
         : nothing;
@@ -196,7 +194,7 @@ export class KbCode extends KbBaseElement {
             type="button"
             class=${btnClasses}
             aria-label=${this._copied ? 'Copied' : 'Copy code'}
-            @click=${() => this._handleCopy()}
+            @click=${this._handleCopy}
           >${this._copied ? checkIcon : clipboardIcon}</button>
           <pre class=${preClasses}><code>${content}</code></pre>
         </div>

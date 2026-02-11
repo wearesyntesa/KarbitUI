@@ -36,7 +36,7 @@ const preview: Preview = {
   },
   decorators: [
     (story, context) => {
-      const theme = (context.globals['theme'] as string) || 'light';
+      const theme = (context.globals.theme as string) || 'light';
       const isDark = theme === 'dark';
 
       // Sync dark class on <html> — Storybook may add its own, so we override explicitly

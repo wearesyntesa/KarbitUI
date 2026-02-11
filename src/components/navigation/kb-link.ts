@@ -1,10 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
-import type { KbClickLinkDetail } from '../../core/events.js';
-import { lookupScheme } from '../../core/color-schemes.js';
 
 export type LinkVariant = 'underline' | 'hover-underline' | 'plain' | 'subtle' | 'highlight';
 
@@ -15,7 +14,7 @@ const COLOR_TEXT: Record<KnownColorScheme, string> = {
   blue: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
   green: 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300',
   yellow: 'text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_DEFAULT = 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300';
 
@@ -25,10 +24,12 @@ const COLOR_DECORATION: Record<KnownColorScheme, string> = {
   red: 'decoration-red-300 hover:decoration-red-500 dark:decoration-red-700 dark:hover:decoration-red-400',
   blue: 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400',
   green: 'decoration-green-300 hover:decoration-green-500 dark:decoration-green-700 dark:hover:decoration-green-400',
-  yellow: 'decoration-yellow-300 hover:decoration-yellow-600 dark:decoration-yellow-700 dark:hover:decoration-yellow-400',
-};
+  yellow:
+    'decoration-yellow-300 hover:decoration-yellow-600 dark:decoration-yellow-700 dark:hover:decoration-yellow-400',
+} as const satisfies Record<KnownColorScheme, string>;
 
-const COLOR_DECORATION_DEFAULT = 'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400';
+const COLOR_DECORATION_DEFAULT =
+  'decoration-blue-300 hover:decoration-blue-500 dark:decoration-blue-700 dark:hover:decoration-blue-400';
 
 /** Border color for subtle variant. */
 const COLOR_SUBTLE: Record<KnownColorScheme, string> = {
@@ -37,7 +38,7 @@ const COLOR_SUBTLE: Record<KnownColorScheme, string> = {
   blue: 'border-blue-200 hover:border-blue-500 dark:border-blue-800 dark:hover:border-blue-400',
   green: 'border-green-200 hover:border-green-500 dark:border-green-800 dark:hover:border-green-400',
   yellow: 'border-yellow-200 hover:border-yellow-600 dark:border-yellow-800 dark:hover:border-yellow-400',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_SUBTLE_DEFAULT = 'border-gray-200 hover:border-blue-500 dark:border-zinc-700 dark:hover:border-blue-400';
 
@@ -48,7 +49,7 @@ const COLOR_HIGHLIGHT: Record<KnownColorScheme, string> = {
   blue: 'hover:bg-blue-50 dark:hover:bg-blue-950',
   green: 'hover:bg-green-50 dark:hover:bg-green-950',
   yellow: 'hover:bg-yellow-50 dark:hover:bg-yellow-950',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_HIGHLIGHT_DEFAULT = 'hover:bg-blue-50 dark:hover:bg-blue-950';
 
@@ -59,7 +60,7 @@ const COLOR_HOVER_UNDERLINE: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 dark:bg-blue-400',
   green: 'bg-green-500 dark:bg-green-400',
   yellow: 'bg-yellow-600 dark:bg-yellow-400',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_HOVER_UNDERLINE_DEFAULT = 'bg-blue-500 dark:bg-blue-400';
 
@@ -70,7 +71,7 @@ const COLOR_VISITED: Record<KnownColorScheme, string> = {
   blue: 'visited:text-purple-600 dark:visited:text-purple-400',
   green: 'visited:text-green-400 dark:visited:text-green-600',
   yellow: 'visited:text-yellow-500 dark:visited:text-yellow-600',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const EXTERNAL_ATTRS = { target: '_blank', rel: 'noopener noreferrer' } as const;
 
@@ -82,7 +83,7 @@ const SIZE_TEXT: Record<ComponentSize, string> = {
   md: 'text-sm',
   lg: 'text-base',
   xl: 'text-lg',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const SIZE_GAP: Record<ComponentSize, string> = {
   xs: 'gap-0.5',
@@ -90,7 +91,7 @@ const SIZE_GAP: Record<ComponentSize, string> = {
   md: 'gap-1',
   lg: 'gap-1.5',
   xl: 'gap-2',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const SIZE_ICON: Record<ComponentSize, string> = {
   xs: '[&>svg]:w-3 [&>svg]:h-3',
@@ -98,7 +99,7 @@ const SIZE_ICON: Record<ComponentSize, string> = {
   md: '[&>svg]:w-4 [&>svg]:h-4',
   lg: '[&>svg]:w-4.5 [&>svg]:h-4.5',
   xl: '[&>svg]:w-5 [&>svg]:h-5',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const SIZE_EXTERNAL: Record<ComponentSize, string> = {
   xs: 'w-2.5 h-2.5',
@@ -106,7 +107,7 @@ const SIZE_EXTERNAL: Record<ComponentSize, string> = {
   md: 'w-3.5 h-3.5',
   lg: 'w-4 h-4',
   xl: 'w-4.5 h-4.5',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
   xs: 'px-1 py-0',
@@ -114,7 +115,7 @@ const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
   md: 'px-1.5 py-0.5',
   lg: 'px-1.5 py-0.5',
   xl: 'px-2 py-0.5',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 /**
  * Styled anchor link with multiple variants, icon slots, sizes,
@@ -133,7 +134,7 @@ const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
  * ```
  */
 @customElement('kb-link')
-export class KbLink extends KbBaseElement {
+export class KbLink extends KbBaseElement<'icon-left' | 'icon-right'> {
   /** URL the link navigates to. @defaultValue '#' */
   @property({ type: String }) href: string = '#';
   /** Visual variant controlling underline and hover behavior. @defaultValue 'underline' */
@@ -156,11 +157,7 @@ export class KbLink extends KbBaseElement {
       e.preventDefault();
       return;
     }
-    this.dispatchEvent(new CustomEvent<KbClickLinkDetail>('kb-click', {
-      detail: { href: this.href },
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-click', { href: this.href });
   }
 
   private _getColorClasses(): string {
@@ -168,7 +165,7 @@ export class KbLink extends KbBaseElement {
     return lookupScheme(COLOR_TEXT, cs) ?? COLOR_DEFAULT;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const cs = this.colorScheme;
     const iconLeft = this.slotted('icon-left');
     const iconRight = this.slotted('icon-right');
@@ -197,13 +194,9 @@ export class KbLink extends KbBaseElement {
         break;
     }
 
-    const visitedClass = this.showVisited
-      ? lookupScheme(COLOR_VISITED, cs) ?? COLOR_VISITED_DEFAULT
-      : '';
+    const visitedClass = this.showVisited ? (lookupScheme(COLOR_VISITED, cs) ?? COLOR_VISITED_DEFAULT) : '';
 
-    const disabledClass = this.disabled
-      ? 'opacity-40 cursor-not-allowed pointer-events-none'
-      : 'cursor-pointer';
+    const disabledClass = this.disabled ? kbClasses.disabledLook : 'cursor-pointer';
 
     const truncateClass = this.truncate ? 'truncate max-w-48' : '';
 

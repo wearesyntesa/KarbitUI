@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/index.ts",
+    "src/react/index.ts",
+    "src/core/theme.ts",
+    "src/core/recipe.ts",
+    "src/core/types.ts",
+    "src/core/events.ts",
+    "src/utils/cx.ts"
+  ],
+  "project": ["src/**/*.ts"],
+  "ignore": ["custom-elements-manifest.config.mjs", "tailwind.config.ts"],
+  "ignoreDependencies": ["@storybook/*", "@cspell/dict-*"]
+}

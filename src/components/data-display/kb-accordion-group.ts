@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { KbAccordion } from './kb-accordion.js';
@@ -21,7 +21,7 @@ import type { KbAccordion } from './kb-accordion.js';
  */
 @customElement('kb-accordion-group')
 export class KbAccordionGroup extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** When false (default), opening one item closes all others. */
   @property({ type: Boolean, attribute: 'allow-multiple' }) allowMultiple: boolean = false;
@@ -50,7 +50,7 @@ export class KbAccordionGroup extends KbBaseElement {
     }
   };
 
-  override render() {
+  override render(): TemplateResult {
     return html`<div class=${this.buildClasses()}>${this.defaultSlotContent}</div>`;
   }
 }

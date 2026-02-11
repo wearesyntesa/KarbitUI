@@ -1,14 +1,13 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { recipe } from '../../core/recipe.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 
 export type HeadingLevel = '1' | '2' | '3' | '4' | '5' | '6';
-export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
-export type HeadingWeight = 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
 export type HeadingTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'success' | 'warning' | 'error';
 
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const headingRecipe = recipe({
   base: `font-sans ${kbClasses.textPrimary}`,
   variants: {
@@ -33,6 +32,9 @@ const headingRecipe = recipe({
   defaultVariants: { size: 'xl', weight: 'bold' },
 });
 
+export type HeadingSize = InferVariant<typeof headingRecipe, 'size'>;
+export type HeadingWeight = InferVariant<typeof headingRecipe, 'weight'>;
+
 const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
   '1': '4xl',
   '2': '3xl',
@@ -40,7 +42,7 @@ const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
   '4': 'xl',
   '5': 'lg',
   '6': 'md',
-};
+} as const satisfies Record<HeadingLevel, HeadingSize>;
 
 const TONE_MAP: Record<HeadingTone, string> = {
   primary: kbClasses.textPrimary,
@@ -50,7 +52,7 @@ const TONE_MAP: Record<HeadingTone, string> = {
   success: 'text-green-600 dark:text-green-400',
   warning: 'text-yellow-600 dark:text-yellow-400',
   error: 'text-red-600 dark:text-red-400',
-};
+} as const satisfies Record<HeadingTone, string>;
 
 /**
  * Heading element (h1-h6) with structured minimal typography.
@@ -66,7 +68,7 @@ const TONE_MAP: Record<HeadingTone, string> = {
  */
 @customElement('kb-heading')
 export class KbHeading extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Semantic heading level (`'1'`–`'6'`). Determines the rendered `<h1>`–`<h6>` element and default size. @defaultValue '2' */
   @property({ type: String }) level: HeadingLevel = '2';
@@ -79,26 +81,31 @@ export class KbHeading extends KbBaseElement {
   /** Truncate overflowing text with an ellipsis on a single line. @defaultValue false */
   @property({ type: Boolean }) truncate: boolean = false;
 
-  override render() {
+  override render(): TemplateResult {
     const resolvedSize = this.size ?? SIZE_FOR_LEVEL[this.level];
     const recipeClasses = headingRecipe({ size: resolvedSize, weight: this.weight });
 
-    const toneClasses = this.tone
-      ? TONE_MAP[this.tone] ?? ''
-      : '';
+    const toneClasses = this.tone ? (TONE_MAP[this.tone] ?? '') : '';
 
     const truncateClass = this.truncate ? 'truncate' : '';
 
     const classes = this.buildClasses(recipeClasses, toneClasses, truncateClass);
 
     switch (this.level) {
-      case '1': return html`<h1 class=${classes}>${this.defaultSlotContent}</h1>`;
-      case '2': return html`<h2 class=${classes}>${this.defaultSlotContent}</h2>`;
-      case '3': return html`<h3 class=${classes}>${this.defaultSlotContent}</h3>`;
-      case '4': return html`<h4 class=${classes}>${this.defaultSlotContent}</h4>`;
-      case '5': return html`<h5 class=${classes}>${this.defaultSlotContent}</h5>`;
-      case '6': return html`<h6 class=${classes}>${this.defaultSlotContent}</h6>`;
-      default: return html`<h2 class=${classes}>${this.defaultSlotContent}</h2>`;
+      case '1':
+        return html`<h1 class=${classes}>${this.defaultSlotContent}</h1>`;
+      case '2':
+        return html`<h2 class=${classes}>${this.defaultSlotContent}</h2>`;
+      case '3':
+        return html`<h3 class=${classes}>${this.defaultSlotContent}</h3>`;
+      case '4':
+        return html`<h4 class=${classes}>${this.defaultSlotContent}</h4>`;
+      case '5':
+        return html`<h5 class=${classes}>${this.defaultSlotContent}</h5>`;
+      case '6':
+        return html`<h6 class=${classes}>${this.defaultSlotContent}</h6>`;
+      default:
+        return html`<h2 class=${classes}>${this.defaultSlotContent}</h2>`;
     }
   }
 }

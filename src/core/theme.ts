@@ -53,6 +53,7 @@ export const kbClasses = {
   border: 'border border-gray-200 dark:border-zinc-700',
   borderBottom: 'border-b border-gray-200 dark:border-zinc-700',
   borderTop: 'border-t border-gray-200 dark:border-zinc-700',
+  borderColor: 'border-gray-200 dark:border-zinc-700',
   surface: 'bg-white dark:bg-zinc-900',
   surfaceMuted: 'bg-gray-50 dark:bg-zinc-800',
   textPrimary: 'text-slate-900 dark:text-zinc-50',
@@ -61,6 +62,7 @@ export const kbClasses = {
   label: 'font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400',
   focus: 'focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2',
   disabled: 'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
+  disabledLook: 'opacity-40 cursor-not-allowed pointer-events-none',
   transition: 'transition-all duration-150 ease-in-out',
 } as const;
 

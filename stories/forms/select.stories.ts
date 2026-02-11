@@ -21,8 +21,8 @@ type S = StoryObj;
 export const Default: S = {
   render: (args) => html`
     <kb-select
-      placeholder=${args['placeholder'] ?? 'Choose a framework'}
-      size=${args['size'] ?? 'md'}
+      placeholder=${args.placeholder ?? 'Choose a framework'}
+      size=${args.size ?? 'md'}
       .options=${frameworkOptions}
     ></kb-select>
   `,
@@ -118,11 +118,13 @@ export const WithIcon: S = {
 export const IconAllSizes: S = {
   render: () => html`
     <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
-      ${(['xs', 'sm', 'md', 'lg', 'xl'] as const).map(size => html`
+      ${(['xs', 'sm', 'md', 'lg', 'xl'] as const).map(
+        (size) => html`
         <kb-select size=${size} placeholder="${size} with icon" .options=${frameworkOptions}>
           <span slot="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m21 21-4.35-4.35"/><circle cx="11" cy="11" r="8"/></svg></span>
         </kb-select>
-      `)}
+      `,
+      )}
     </div>
   `,
 };
@@ -159,21 +161,30 @@ export const WithDisabledOption: S = {
 export const OptionGroups: S = {
   render: () => html`
     <kb-select placeholder="Choose a technology" .options=${[
-      { group: 'Frontend', options: [
-        { value: 'react', label: 'React' },
-        { value: 'vue', label: 'Vue' },
-        { value: 'svelte', label: 'Svelte' },
-      ]},
-      { group: 'Backend', options: [
-        { value: 'node', label: 'Node.js' },
-        { value: 'deno', label: 'Deno' },
-        { value: 'bun', label: 'Bun' },
-      ]},
-      { group: 'Database', options: [
-        { value: 'postgres', label: 'PostgreSQL' },
-        { value: 'mysql', label: 'MySQL' },
-        { value: 'sqlite', label: 'SQLite', disabled: true },
-      ]},
+      {
+        group: 'Frontend',
+        options: [
+          { value: 'react', label: 'React' },
+          { value: 'vue', label: 'Vue' },
+          { value: 'svelte', label: 'Svelte' },
+        ],
+      },
+      {
+        group: 'Backend',
+        options: [
+          { value: 'node', label: 'Node.js' },
+          { value: 'deno', label: 'Deno' },
+          { value: 'bun', label: 'Bun' },
+        ],
+      },
+      {
+        group: 'Database',
+        options: [
+          { value: 'postgres', label: 'PostgreSQL' },
+          { value: 'mysql', label: 'MySQL' },
+          { value: 'sqlite', label: 'SQLite', disabled: true },
+        ],
+      },
     ]}></kb-select>
   `,
 };
@@ -181,16 +192,22 @@ export const OptionGroups: S = {
 export const OptionGroupsWithIcon: S = {
   render: () => html`
     <kb-select clearable placeholder="Select stack" .options=${[
-      { group: 'Languages', options: [
-        { value: 'ts', label: 'TypeScript' },
-        { value: 'rust', label: 'Rust' },
-        { value: 'go', label: 'Go' },
-      ]},
-      { group: 'Runtimes', options: [
-        { value: 'node', label: 'Node.js' },
-        { value: 'deno', label: 'Deno' },
-        { value: 'bun', label: 'Bun' },
-      ]},
+      {
+        group: 'Languages',
+        options: [
+          { value: 'ts', label: 'TypeScript' },
+          { value: 'rust', label: 'Rust' },
+          { value: 'go', label: 'Go' },
+        ],
+      },
+      {
+        group: 'Runtimes',
+        options: [
+          { value: 'node', label: 'Node.js' },
+          { value: 'deno', label: 'Deno' },
+          { value: 'bun', label: 'Bun' },
+        ],
+      },
     ]}>
       <span slot="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m8 6 4-4 4 4"/><path d="M12 2v10.3"/><path d="M4 13.5V4a2 2 0 0 1 2-2h2"/><path d="M20 13.5V4a2 2 0 0 0-2-2h-2"/><rect x="2" y="14" width="20" height="8" rx="0"/></svg></span>
     </kb-select>
@@ -212,14 +229,20 @@ export const KitchenSink: S = {
       <kb-select disabled placeholder="Disabled" .options=${frameworkOptions}></kb-select>
       <kb-select loading placeholder="Loading..." .options=${[]}></kb-select>
       <kb-select clearable placeholder="Option groups" .options=${[
-        { group: 'Frontend', options: [
-          { value: 'react', label: 'React' },
-          { value: 'vue', label: 'Vue' },
-        ]},
-        { group: 'Backend', options: [
-          { value: 'node', label: 'Node.js' },
-          { value: 'deno', label: 'Deno' },
-        ]},
+        {
+          group: 'Frontend',
+          options: [
+            { value: 'react', label: 'React' },
+            { value: 'vue', label: 'Vue' },
+          ],
+        },
+        {
+          group: 'Backend',
+          options: [
+            { value: 'node', label: 'Node.js' },
+            { value: 'deno', label: 'Deno' },
+          ],
+        },
       ]}>
         <span slot="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10"/></svg></span>
       </kb-select>

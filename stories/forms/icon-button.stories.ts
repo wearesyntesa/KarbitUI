@@ -10,8 +10,7 @@ const plusIcon = html`<span style="font-size:1.4em;">+</span>`;
 export default {
   title: 'Forms/IconButton',
   component: 'kb-icon-button',
-  render: (args) =>
-    html`<kb-icon-button ${spreadAttrs(args)}>${starIcon}</kb-icon-button>`,
+  render: (args) => html`<kb-icon-button ${spreadAttrs(args)}>${starIcon}</kb-icon-button>`,
   args: { label: 'Star', variant: 'solid', size: 'md' },
 } satisfies Meta;
 

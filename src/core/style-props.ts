@@ -1,50 +1,67 @@
-import { STYLE_PROP_KEYS, mapPropToClass, type StyleProps, type StylePropName } from './style-map.js';
 import { LRUCache } from '../utils/cache.js';
+import { mapPropToClass, STYLE_PROP_KEYS, type StylePropName, type StyleProps } from './style-map.js';
 
 export type { StyleProps, StylePropName };
 export { STYLE_PROP_KEYS };
 
-const stylePropsCache = new LRUCache<string, string>(500);
+const stylePropsCache: LRUCache<string, string> = new LRUCache<string, string>(500);
 
-export function stylePropsToClasses(props: Partial<StyleProps>): string {
-  const cacheKey = buildCacheKey(props);
+/**
+ * Single-pass style prop resolution. Builds the cache key and maps classes
+ * in one iteration of STYLE_PROP_KEYS. On cache hit the pre-computed classes
+ * are returned directly; on miss the already-collected pairs are mapped
+ * without re-reading the element.
+ */
+export function resolveStyleClasses(el: Record<string, unknown>): string {
+  let cacheKey = '';
+  let pairCount = 0;
+  const pairKeys: StylePropName[] = [];
+  const pairVals: string[] = [];
+
+  for (const key of STYLE_PROP_KEYS) {
+    const value = el[key];
+    if (typeof value === 'string' && value !== '') {
+      cacheKey += `${key}:${value};`;
+      pairKeys[pairCount] = key;
+      pairVals[pairCount] = value;
+      pairCount++;
+    }
+  }
+
+  if (!pairCount) return '';
+
   const cached = stylePropsCache.get(cacheKey);
   if (cached !== undefined) return cached;
 
-  const classes: string[] = [];
-
-  for (const key of STYLE_PROP_KEYS) {
-    const value = props[key];
-    if (value === undefined || value === null || value === '') continue;
-    const cls = mapPropToClass(key, String(value));
-    if (cls) classes.push(cls);
+  let result = '';
+  for (let i = 0; i < pairCount; i++) {
+    const key = pairKeys[i] as StylePropName;
+    const val = pairVals[i] as string;
+    const cls = mapPropToClass(key, val);
+    if (cls) {
+      result = result ? `${result} ${cls}` : cls;
+    }
   }
 
-  const result = classes.join(' ');
   stylePropsCache.set(cacheKey, result);
   return result;
 }
 
-function buildCacheKey(props: Partial<StyleProps>): string {
-  let key = '';
-  for (const propKey of STYLE_PROP_KEYS) {
-    const value = props[propKey];
-    if (value !== undefined && value !== null && value !== '') {
-      key += `${propKey}:${String(value)};`;
-    }
-  }
-  return key;
+/** @deprecated Use `resolveStyleClasses` for single-pass resolution. */
+export function stylePropsToClasses(props: Partial<StyleProps>): string {
+  return resolveStyleClasses(props as Record<string, unknown>);
 }
 
+const STYLE_PROP_SET: ReadonlySet<string> = new Set(STYLE_PROP_KEYS);
+
 export function extractStyleProps<T extends Record<string, unknown>>(
-  allProps: T
+  allProps: T,
 ): { styleProps: Partial<StyleProps>; restProps: Omit<T, keyof StyleProps> } {
   const styleProps: Partial<StyleProps> = {};
   const restProps = {} as Record<string, unknown>;
-  const stylePropSet: ReadonlySet<string> = new Set(STYLE_PROP_KEYS);
 
   for (const [key, value] of Object.entries(allProps)) {
-    if (stylePropSet.has(key) && typeof value === 'string') {
+    if (STYLE_PROP_SET.has(key) && typeof value === 'string') {
       (styleProps as Record<string, string>)[key] = value;
     } else {
       restProps[key] = value;

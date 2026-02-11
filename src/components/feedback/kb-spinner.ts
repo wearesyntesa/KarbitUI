@@ -1,9 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, BORDER_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ComponentSize, ColorScheme } from '../../core/types.js';
+import type { ColorScheme, ComponentSize } from '../../core/types.js';
 
 export type SpinnerVariant = 'border' | 'dots' | 'bars' | 'pulse';
 
@@ -15,7 +15,7 @@ const BORDER_SIZE: Record<ComponentSize, string> = {
   md: 'w-6 h-6 border-2',
   lg: 'w-8 h-8 border-2',
   xl: 'w-12 h-12 border-[3px]',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const DOT_SIZE: Record<ComponentSize, { dot: string; gap: string }> = {
   xs: { dot: 'w-1 h-1', gap: 'gap-0.5' },
@@ -23,7 +23,7 @@ const DOT_SIZE: Record<ComponentSize, { dot: string; gap: string }> = {
   md: { dot: 'w-2 h-2', gap: 'gap-1.5' },
   lg: { dot: 'w-2.5 h-2.5', gap: 'gap-2' },
   xl: { dot: 'w-3.5 h-3.5', gap: 'gap-2.5' },
-};
+} as const satisfies Record<ComponentSize, { dot: string; gap: string }>;
 
 const BAR_SIZE: Record<ComponentSize, { bar: string; height: string; gap: string }> = {
   xs: { bar: 'w-0.5', height: 'h-3', gap: 'gap-0.5' },
@@ -31,7 +31,7 @@ const BAR_SIZE: Record<ComponentSize, { bar: string; height: string; gap: string
   md: { bar: 'w-1', height: 'h-6', gap: 'gap-1' },
   lg: { bar: 'w-1', height: 'h-8', gap: 'gap-1' },
   xl: { bar: 'w-1.5', height: 'h-12', gap: 'gap-1.5' },
-};
+} as const satisfies Record<ComponentSize, { bar: string; height: string; gap: string }>;
 
 const PULSE_SIZE: Record<ComponentSize, string> = {
   xs: 'w-3 h-3',
@@ -39,9 +39,9 @@ const PULSE_SIZE: Record<ComponentSize, string> = {
   md: 'w-6 h-6',
   lg: 'w-8 h-8',
   xl: 'w-12 h-12',
-};
+} as const satisfies Record<ComponentSize, string>;
 
-const TRACK_COLOR = 'border-gray-200 dark:border-zinc-700';
+const TRACK_COLOR: string = kbClasses.borderColor;
 
 const LABEL_SIZE: Record<ComponentSize, string> = {
   xs: 'text-[10px]',
@@ -49,16 +49,16 @@ const LABEL_SIZE: Record<ComponentSize, string> = {
   md: 'text-xs',
   lg: 'text-sm',
   xl: 'text-sm',
-};
+} as const satisfies Record<ComponentSize, string>;
 
 const SPEED_DURATION: Record<SpinnerSpeed, string> = {
   slow: '1.5s',
   normal: '0.75s',
   fast: '0.45s',
-};
+} as const satisfies Record<SpinnerSpeed, string>;
 
-const DOT_DELAYS = ['0s', '0.16s', '0.32s'];
-const BAR_DELAYS = ['0s', '0.15s', '0.3s', '0.45s'];
+const DOT_DELAYS: string[] = ['0s', '0.16s', '0.32s'];
+const BAR_DELAYS: string[] = ['0s', '0.15s', '0.3s', '0.45s'];
 
 /**
  * Animated loading spinner indicator.
@@ -96,7 +96,7 @@ export class KbSpinner extends KbBaseElement {
   /** Wrap slot content with a semi-transparent overlay and center the spinner above it. @defaultValue false */
   @property({ type: Boolean }) overlay: boolean = false;
 
-  private _renderBorder() {
+  private _renderBorder(): TemplateResult {
     const sizeClasses = BORDER_SIZE[this.size] ?? BORDER_SIZE.md;
     const borderColor = lookupScheme(BORDER_COLOR, this.colorScheme) ?? 'border-blue-500 dark:border-blue-400';
 
@@ -117,7 +117,7 @@ export class KbSpinner extends KbBaseElement {
     </span>`;
   }
 
-  private _renderDots() {
+  private _renderDots(): TemplateResult {
     const cfg = DOT_SIZE[this.size] ?? DOT_SIZE.md;
     const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
@@ -131,7 +131,7 @@ export class KbSpinner extends KbBaseElement {
     </span>`;
   }
 
-  private _renderBars() {
+  private _renderBars(): TemplateResult {
     const cfg = BAR_SIZE[this.size] ?? BAR_SIZE.md;
     const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
@@ -145,15 +145,15 @@ export class KbSpinner extends KbBaseElement {
     </span>`;
   }
 
-  private _renderPulse() {
+  private _renderPulse(): TemplateResult {
     const sizeClasses = PULSE_SIZE[this.size] ?? PULSE_SIZE.md;
     const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
 
     return html`<span class="inline-block rounded-full ${sizeClasses} ${bgColor} animate-kb-spinner-pulse"></span>`;
   }
 
-  override render() {
-    let spinnerEl;
+  override render(): TemplateResult {
+    let spinnerEl: ReturnType<typeof this._renderBorder>;
     switch (this.variant) {
       case 'dots':
         spinnerEl = this._renderDots();
@@ -172,9 +172,8 @@ export class KbSpinner extends KbBaseElement {
       ? html`<span class="font-mono ${LABEL_SIZE[this.size] ?? 'text-xs'} ${kbClasses.textSecondary} select-none">${this.label}</span>`
       : nothing;
 
-    const layoutClass = this.labelPosition === 'right'
-      ? 'inline-flex items-center gap-2'
-      : 'inline-flex flex-col items-center gap-1.5';
+    const layoutClass =
+      this.labelPosition === 'right' ? 'inline-flex items-center gap-2' : 'inline-flex flex-col items-center gap-1.5';
 
     const wrapperClasses = this.buildClasses(layoutClass);
 

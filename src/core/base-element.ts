@@ -1,8 +1,9 @@
-import { LitElement } from 'lit';
 import type { PropertyDeclaration } from 'lit';
+import { LitElement } from 'lit';
+import { type ClassInput, cx } from '../utils/cx.js';
+import type { KbEventDetailMap } from './events.js';
 import { STYLE_PROP_DEFS, STYLE_PROP_KEYS, type StyleProps } from './style-map.js';
-import { stylePropsToClasses } from './style-props.js';
-import { cx } from '../utils/cx.js';
+import { resolveStyleClasses, stylePropsToClasses } from './style-props.js';
 
 type LitPropertyMap = Record<string, PropertyDeclaration>;
 
@@ -19,7 +20,9 @@ function buildLitProperties(): LitPropertyMap {
   return props;
 }
 
-const GENERATED_STYLE_PROPERTIES = buildLitProperties();
+const GENERATED_STYLE_PROPERTIES: LitPropertyMap = buildLitProperties();
+
+export type HostDisplay = '' | 'block' | 'inline-block' | 'flex' | 'grid' | 'inline-flex' | 'inline-grid' | 'contents';
 
 /**
  * Base element for all KarbitUI components.
@@ -30,12 +33,13 @@ const GENERATED_STYLE_PROPERTIES = buildLitProperties();
  * values (e.g. `gap="4"`, `bg="blue-500"`) while still accepting arbitrary
  * strings via the `(string & {})` escape hatch on each value type.
  */
-export class KbBaseElement extends LitElement {
+// biome-ignore lint/suspicious/noUnsafeDeclarationMerging: intentional Lit pattern — declaration merging adds StyleProps to the class
+export class KbBaseElement<S extends string = string> extends LitElement {
   /** Host element display value. Override to 'block' for block-level components. */
-  static hostDisplay: string = '';
+  static hostDisplay: HostDisplay = '';
   static override get properties(): LitPropertyMap {
     return {
-      ...super.properties,
+      ...LitElement.properties,
       ...GENERATED_STYLE_PROPERTIES,
     };
   }
@@ -61,8 +65,7 @@ export class KbBaseElement extends LitElement {
     this._defaultSlotNodes = Array.from(this.childNodes).filter(
       (n) =>
         !(n instanceof Element && n.hasAttribute('slot')) &&
-        (n.nodeType === Node.ELEMENT_NODE ||
-          (n.nodeType === Node.TEXT_NODE && (n.textContent?.trim() ?? '') !== '')),
+        (n.nodeType === Node.ELEMENT_NODE || (n.nodeType === Node.TEXT_NODE && (n.textContent?.trim() ?? '') !== '')),
     );
   }
 
@@ -72,7 +75,7 @@ export class KbBaseElement extends LitElement {
   }
 
   /** Returns the named-slot child element, or `null`. */
-  protected slotted(name: string): Element | null {
+  protected slotted(name: S): Element | null {
     return this.querySelector(`[slot="${name}"]`);
   }
 
@@ -88,15 +91,40 @@ export class KbBaseElement extends LitElement {
   }
 
   protected getStyleClasses(): string {
-    return stylePropsToClasses(this.collectStyleProps());
+    // Subclasses that override collectStyleProps (to exclude owned props) fall
+    // back to the two-step path. The base case uses the single-pass resolver
+    // that builds the cache key and maps classes in one iteration.
+    if (this.collectStyleProps !== KbBaseElement.prototype.collectStyleProps) {
+      return stylePropsToClasses(this.collectStyleProps());
+    }
+    return resolveStyleClasses(this as unknown as Record<string, unknown>);
   }
 
-  protected buildClasses(...additional: (string | undefined | null | false)[]): string {
+  protected buildClasses(...additional: ClassInput[]): string {
     return cx(this.getStyleClasses(), ...additional);
+  }
+
+  /** Type-safe event emitter. Validates event name and detail type against `KbEventDetailMap`. Always dispatches with `bubbles: true, composed: true`. */
+  protected emit<K extends keyof KbEventDetailMap>(
+    ...args: KbEventDetailMap[K] extends undefined
+      ? [event: K]
+      : undefined extends KbEventDetailMap[K]
+        ? [event: K, detail?: KbEventDetailMap[K]]
+        : [event: K, detail: KbEventDetailMap[K]]
+  ): boolean {
+    const [event, detail] = args;
+    return this.dispatchEvent(
+      new CustomEvent(event, {
+        bubbles: true,
+        composed: true,
+        detail,
+      }),
+    );
   }
 }
 
-export interface KbBaseElement extends StyleProps {}
+// biome-ignore lint/correctness/noUnusedVariables: S must match class generic for declaration merging
+export interface KbBaseElement<S extends string = string> extends StyleProps {}
 
 /**
  * Waits for a CSS transition to finish on a child element, then removes the host.

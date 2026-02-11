@@ -1,12 +1,16 @@
-import type { BreadcrumbItem } from '../components/navigation/kb-breadcrumb.js';
-import type { SortDirection } from '../components/data-display/kb-table.js';
+import type { BreadcrumbItem, SortDirection } from './types.js';
 
 // -- kb-change source discriminant --
 
 export type KbChangeSource =
-  | 'input' | 'textarea' | 'select'
-  | 'checkbox' | 'radio' | 'switch'
-  | 'checkbox-group' | 'radio-group';
+  | 'input'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'switch'
+  | 'checkbox-group'
+  | 'radio-group';
 
 // -- Individual event detail interfaces --
 
@@ -34,7 +38,7 @@ export interface KbChangeRadioDetail {
 
 export interface KbChangeGroupDetail {
   readonly source: 'checkbox-group';
-  readonly values: string[];
+  readonly values: readonly string[];
 }
 
 export interface KbInputDetail {
@@ -70,13 +74,23 @@ export interface KbNavigateDetail {
 }
 
 export interface KbReorderDetail {
-  readonly order: string[];
+  readonly order: readonly string[];
 }
+
+// -- Aggregate types --
+
+/** Discriminated union of all `kb-change` event details. Narrow via `detail.source`. */
+export type KbChangeDetail =
+  | KbChangeValueDetail
+  | KbChangeCheckedDetail
+  | KbChangeCheckboxDetail
+  | KbChangeRadioDetail
+  | KbChangeGroupDetail;
 
 // -- Aggregate event-name → detail map --
 
 export interface KbEventDetailMap {
-  'kb-change': KbChangeValueDetail | KbChangeCheckedDetail | KbChangeCheckboxDetail | KbChangeRadioDetail | KbChangeGroupDetail;
+  'kb-change': KbChangeDetail;
   'kb-input': KbInputDetail;
   'kb-click': KbClickLinkDetail | undefined;
   'kb-close': undefined;
@@ -92,20 +106,24 @@ export interface KbEventDetailMap {
   'kb-reorder': KbReorderDetail;
 }
 
+/** Union of all KarbitUI event names. */
+export type KbEventName = keyof KbEventDetailMap;
+
 // -- Typed CustomEvent helper --
 
-export type KbCustomEvent<K extends keyof KbEventDetailMap> =
-  KbEventDetailMap[K] extends undefined
-    ? CustomEvent<undefined>
-    : CustomEvent<KbEventDetailMap[K]>;
+export type KbCustomEvent<K extends keyof KbEventDetailMap> = KbEventDetailMap[K] extends undefined
+  ? CustomEvent<undefined>
+  : CustomEvent<KbEventDetailMap[K]>;
+
+/** Convenience handler type for KarbitUI events. */
+export type KbEventHandler<K extends keyof KbEventDetailMap> = (event: KbCustomEvent<K>) => void;
 
 // -- Global event map augmentation for addEventListener type safety --
 
 type KbEventMap = {
-  [K in keyof KbEventDetailMap]:
-    KbEventDetailMap[K] extends undefined
-      ? CustomEvent<undefined>
-      : CustomEvent<KbEventDetailMap[K]>;
+  [K in keyof KbEventDetailMap]: KbEventDetailMap[K] extends undefined
+    ? CustomEvent<undefined>
+    : CustomEvent<KbEventDetailMap[K]>;
 };
 
 declare global {

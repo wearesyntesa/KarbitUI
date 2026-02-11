@@ -1,7 +1,7 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { FOCUSABLE_SELECTORS } from '../../core/overlay-base.js';
+import { FOCUSABLE_SELECTORS, handleTabTrap } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
@@ -14,7 +14,7 @@ const PLACEMENT_CLASSES: Record<PopoverPlacement, string> = {
   bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
   left: 'right-full top-1/2 -translate-y-1/2 mr-2',
   right: 'left-full top-1/2 -translate-y-1/2 ml-2',
-};
+} as const satisfies Record<PopoverPlacement, string>;
 
 const OFFSET_CLASSES: Record<PopoverPlacement, Record<number, string>> = {
   top: { 0: 'mb-0', 1: 'mb-1', 2: 'mb-2', 3: 'mb-3', 4: 'mb-4' },
@@ -28,59 +28,59 @@ const SIZE_MIN_W: Record<PopoverSize, string> = {
   sm: 'min-w-[200px]',
   md: 'min-w-[260px]',
   lg: 'min-w-[340px]',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const SIZE_MAX_W: Record<PopoverSize, string> = {
   xs: 'max-w-[240px]',
   sm: 'max-w-xs',
   md: 'max-w-sm',
   lg: 'max-w-md',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const HEADER_PX: Record<PopoverSize, string> = {
   xs: 'px-2.5 py-1.5',
   sm: 'px-3 py-2',
   md: 'px-3.5 py-2.5',
   lg: 'px-4 py-3',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const BODY_PX: Record<PopoverSize, string> = {
   xs: 'px-2.5 py-2',
   sm: 'px-3 py-2.5',
   md: 'px-3.5 py-3',
   lg: 'px-4 py-3.5',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const FOOTER_PX: Record<PopoverSize, string> = {
   xs: 'px-2.5 py-1.5',
   sm: 'px-3 py-2',
   md: 'px-3.5 py-2.5',
   lg: 'px-4 py-3',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const BODY_TEXT: Record<PopoverSize, string> = {
   xs: 'text-xs',
   sm: 'text-sm',
   md: 'text-sm',
   lg: 'text-base',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const CLOSE_ICON_SIZE: Record<PopoverSize, string> = {
   xs: 'w-3 h-3',
   sm: 'w-3.5 h-3.5',
   md: 'w-4 h-4',
   lg: 'w-4 h-4',
-};
+} as const satisfies Record<PopoverSize, string>;
 
 const ARROW_SURFACE = 'bg-white dark:bg-zinc-900';
 const ARROW_BASE = 'absolute w-2 h-2 rotate-45';
 
 const ARROW_CLASSES: Record<PopoverPlacement, string> = {
-  bottom: `${ARROW_BASE} -top-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-t border-l border-gray-200 dark:border-zinc-700`,
-  top: `${ARROW_BASE} -bottom-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-b border-r border-gray-200 dark:border-zinc-700`,
-  right: `${ARROW_BASE} -left-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-b border-l border-gray-200 dark:border-zinc-700`,
-  left: `${ARROW_BASE} -right-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-t border-r border-gray-200 dark:border-zinc-700`,
-};
+  bottom: `${ARROW_BASE} -top-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-t border-l ${kbClasses.borderColor}`,
+  top: `${ARROW_BASE} -bottom-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-b border-r ${kbClasses.borderColor}`,
+  right: `${ARROW_BASE} -left-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-b border-l ${kbClasses.borderColor}`,
+  left: `${ARROW_BASE} -right-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-t border-r ${kbClasses.borderColor}`,
+} as const satisfies Record<PopoverPlacement, string>;
 
 const DISMISS_DURATION = 120;
 
@@ -107,7 +107,7 @@ const DISMISS_DURATION = 120;
  * ```
  */
 @customElement('kb-popover')
-export class KbPopover extends KbBaseElement {
+export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   /** Position of the popover relative to the trigger element. @defaultValue 'bottom' */
   @property({ type: String }) placement: PopoverPlacement = 'bottom';
   /** How the popover is activated — `'click'` toggles on click, `'hover'` on mouse enter/leave. @defaultValue 'click' */
@@ -172,9 +172,18 @@ export class KbPopover extends KbBaseElement {
   }
 
   private _clearTimers(): void {
-    if (this._openTimerId !== null) { clearTimeout(this._openTimerId); this._openTimerId = null; }
-    if (this._closeTimerId !== null) { clearTimeout(this._closeTimerId); this._closeTimerId = null; }
-    if (this._dismissTimeout !== null) { clearTimeout(this._dismissTimeout); this._dismissTimeout = null; }
+    if (this._openTimerId !== null) {
+      clearTimeout(this._openTimerId);
+      this._openTimerId = null;
+    }
+    if (this._closeTimerId !== null) {
+      clearTimeout(this._closeTimerId);
+      this._closeTimerId = null;
+    }
+    if (this._dismissTimeout !== null) {
+      clearTimeout(this._dismissTimeout);
+      this._dismissTimeout = null;
+    }
   }
 
   private _show(): void {
@@ -188,7 +197,7 @@ export class KbPopover extends KbBaseElement {
       if (this.autoFocus) {
         this._focusFirst();
       }
-      this.dispatchEvent(new CustomEvent('kb-open', { bubbles: true, composed: true }));
+      this.emit('kb-open');
     });
   }
 
@@ -213,7 +222,7 @@ export class KbPopover extends KbBaseElement {
       this._visible = false;
       this._dismissing = false;
       this._restoreFocus();
-      this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+      this.emit('kb-close');
     };
 
     panel?.addEventListener('transitionend', onFinish, { once: true });
@@ -226,7 +235,7 @@ export class KbPopover extends KbBaseElement {
   }
 
   private _close(): void {
-    if (!this.open && !this._visible) return;
+    if (!(this.open || this._visible)) return;
     this.open = false;
     if (!this._dismissing) {
       this._animateDismiss();
@@ -262,24 +271,11 @@ export class KbPopover extends KbBaseElement {
   private _handleTabTrap(e: KeyboardEvent): void {
     const panel = this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
-
-    const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
-    if (!focusable.length) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
+    handleTabTrap(panel, e);
   }
 
   private _handleOutsideClick(e: MouseEvent): void {
-    if (!this._visible || !this.closeOnOutside || this._dismissing) return;
+    if (!(this._visible && this.closeOnOutside) || this._dismissing) return;
     if (!this.contains(e.target as Node)) {
       this._close();
     }
@@ -323,7 +319,7 @@ export class KbPopover extends KbBaseElement {
       this._openTimerId = null;
     }
 
-    if (!this.open && !this._visible) return;
+    if (!(this.open || this._visible)) return;
 
     const delay = this.closeDelay;
     if (delay > 0) {
@@ -336,7 +332,7 @@ export class KbPopover extends KbBaseElement {
     }
   }
 
-  private _renderCloseButton() {
+  private _renderCloseButton(): TemplateResult | typeof nothing {
     if (!this.closable) return nothing;
 
     const iconSize = CLOSE_ICON_SIZE[this.size] ?? CLOSE_ICON_SIZE.sm;
@@ -360,7 +356,7 @@ export class KbPopover extends KbBaseElement {
     `;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const wrapperClasses = this.buildClasses('relative inline-block');
 
     const triggerEl = this.slotted('trigger');
@@ -401,41 +397,33 @@ export class KbPopover extends KbBaseElement {
         >
           ${triggerEl}
         </span>
-        ${this._visible || this.open
-          ? html`
+        ${
+          this._visible || this.open
+            ? html`
             <div class=${panelClasses} role="dialog">
               ${this.showArrow ? html`<div class=${arrowClasses}></div>` : nothing}
-              ${headerEl || this.closable
-                ? html`
-                  <div class=${cx(
-                    'flex items-center justify-between',
-                    HEADER_PX[s],
-                    kbClasses.borderBottom,
-                  )}>
-                    ${headerEl
-                      ? html`<div class=${kbClasses.label}>${headerEl}</div>`
-                      : html`<div></div>`}
+              ${
+                headerEl || this.closable
+                  ? html`
+                  <div class=${cx('flex items-center justify-between', HEADER_PX[s], kbClasses.borderBottom)}>
+                    ${headerEl ? html`<div class=${kbClasses.label}>${headerEl}</div>` : html`<div></div>`}
                     ${this._renderCloseButton()}
                   </div>`
-                : nothing}
-              <div class=${cx(
-                BODY_TEXT[s],
-                BODY_PX[s],
-                kbClasses.textPrimary,
-              )}>
+                  : nothing
+              }
+              <div class=${cx(BODY_TEXT[s], BODY_PX[s], kbClasses.textPrimary)}>
                 ${this.defaultSlotContent}
               </div>
-              ${footerEl
-                ? html`
-                  <div class=${cx(
-                    'flex items-center gap-2 border-t border-gray-200 dark:border-zinc-700',
-                    FOOTER_PX[s],
-                  )}>
+              ${
+                footerEl
+                  ? html`
+                  <div class=${cx(`flex items-center gap-2 border-t ${kbClasses.borderColor}`, FOOTER_PX[s])}>
                     ${footerEl}
                   </div>`
-                : nothing}
+                  : nothing
+              }
             </div>`
-          : nothing
+            : nothing
         }
       </span>
     `;

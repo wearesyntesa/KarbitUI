@@ -1,6 +1,7 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -12,7 +13,7 @@ const PLACEMENT_CLASSES: Record<TooltipPlacement, string> = {
   bottom: 'top-full left-1/2 -translate-x-1/2',
   left: 'right-full top-1/2 -translate-y-1/2',
   right: 'left-full top-1/2 -translate-y-1/2',
-};
+} as const satisfies Record<TooltipPlacement, string>;
 
 const OFFSET_CLASSES: Record<TooltipPlacement, Record<number, string>> = {
   top: { 0: 'mb-0', 1: 'mb-1', 2: 'mb-2', 3: 'mb-3', 4: 'mb-4' },
@@ -25,24 +26,24 @@ const SIZE_TEXT: Record<TooltipSize, string> = {
   xs: 'text-[10px]',
   sm: 'text-xs',
   md: 'text-sm',
-};
+} as const satisfies Record<TooltipSize, string>;
 
 const SIZE_PX: Record<TooltipSize, string> = {
   xs: 'px-1.5 py-0.5',
   sm: 'px-2 py-1',
   md: 'px-2.5 py-1.5',
-};
+} as const satisfies Record<TooltipSize, string>;
 
 const SIZE_MAX_W: Record<TooltipSize, string> = {
   xs: 'max-w-[160px]',
   sm: 'max-w-[200px]',
   md: 'max-w-[280px]',
-};
+} as const satisfies Record<TooltipSize, string>;
 
 const VARIANT_CLASSES: Record<TooltipVariant, string> = {
   dark: 'bg-zinc-900 text-zinc-50 border-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-200',
   light: 'bg-white text-slate-900 border-gray-200 dark:bg-zinc-800 dark:text-zinc-50 dark:border-zinc-700',
-};
+} as const satisfies Record<TooltipVariant, string>;
 
 const ARROW_BASE = 'absolute w-2 h-2 rotate-45';
 
@@ -54,25 +55,25 @@ const ARROW_BORDER_DARK: Record<TooltipPlacement, string> = {
   top: 'border-b border-r border-zinc-700 dark:border-zinc-200',
   right: 'border-b border-l border-zinc-700 dark:border-zinc-200',
   left: 'border-t border-r border-zinc-700 dark:border-zinc-200',
-};
+} as const satisfies Record<TooltipPlacement, string>;
 
 const ARROW_BORDER_LIGHT: Record<TooltipPlacement, string> = {
-  bottom: 'border-t border-l border-gray-200 dark:border-zinc-700',
-  top: 'border-b border-r border-gray-200 dark:border-zinc-700',
-  right: 'border-b border-l border-gray-200 dark:border-zinc-700',
-  left: 'border-t border-r border-gray-200 dark:border-zinc-700',
-};
+  bottom: `border-t border-l ${kbClasses.borderColor}`,
+  top: `border-b border-r ${kbClasses.borderColor}`,
+  right: `border-b border-l ${kbClasses.borderColor}`,
+  left: `border-t border-r ${kbClasses.borderColor}`,
+} as const satisfies Record<TooltipPlacement, string>;
 
 const ARROW_POSITION: Record<TooltipPlacement, string> = {
   bottom: '-top-1 left-1/2 -translate-x-1/2',
   top: '-bottom-1 left-1/2 -translate-x-1/2',
   right: '-left-1 top-1/2 -translate-y-1/2',
   left: '-right-1 top-1/2 -translate-y-1/2',
-};
+} as const satisfies Record<TooltipPlacement, string>;
 
 const DISMISS_DURATION = 100;
 
-let tooltipIdCounter = 0;
+let tooltipIdCounter: number = 0;
 
 /**
  * Text tooltip shown on hover/focus over a trigger element with animated
@@ -144,9 +145,18 @@ export class KbTooltip extends KbBaseElement {
   }
 
   private _clearTimers(): void {
-    if (this._openTimerId !== null) { clearTimeout(this._openTimerId); this._openTimerId = null; }
-    if (this._closeTimerId !== null) { clearTimeout(this._closeTimerId); this._closeTimerId = null; }
-    if (this._dismissTimeout !== null) { clearTimeout(this._dismissTimeout); this._dismissTimeout = null; }
+    if (this._openTimerId !== null) {
+      clearTimeout(this._openTimerId);
+      this._openTimerId = null;
+    }
+    if (this._closeTimerId !== null) {
+      clearTimeout(this._closeTimerId);
+      this._closeTimerId = null;
+    }
+    if (this._dismissTimeout !== null) {
+      clearTimeout(this._dismissTimeout);
+      this._dismissTimeout = null;
+    }
   }
 
   private _show(): void {
@@ -156,12 +166,12 @@ export class KbTooltip extends KbBaseElement {
     this._visible = true;
 
     requestAnimationFrame(() => {
-      this.dispatchEvent(new CustomEvent('kb-open', { bubbles: true, composed: true }));
+      this.emit('kb-open');
     });
   }
 
   private _hide(): void {
-    if (!this._visible && !this.open) return;
+    if (!(this._visible || this.open)) return;
     this.open = false;
     if (!this._dismissing) {
       this._animateDismiss();
@@ -187,7 +197,7 @@ export class KbTooltip extends KbBaseElement {
       tip?.removeEventListener('transitionend', onFinish);
       this._visible = false;
       this._dismissing = false;
-      this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+      this.emit('kb-close');
     };
 
     tip?.addEventListener('transitionend', onFinish, { once: true });
@@ -219,7 +229,7 @@ export class KbTooltip extends KbBaseElement {
       this._openTimerId = null;
     }
 
-    if (!this._visible && !this.open) return;
+    if (!(this._visible || this.open)) return;
 
     const delay = this.closeDelay;
     if (delay > 0) {
@@ -238,7 +248,7 @@ export class KbTooltip extends KbBaseElement {
   }
 
   private _handleFocusOut(): void {
-    if (!this._visible && !this.open) return;
+    if (!(this._visible || this.open)) return;
     this._hide();
   }
 
@@ -257,7 +267,7 @@ export class KbTooltip extends KbBaseElement {
     return `${ARROW_BASE} ${position} ${surface} ${border}`;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const p = this.placement;
     const s = this.size;
 
@@ -289,13 +299,14 @@ export class KbTooltip extends KbBaseElement {
         <span aria-describedby=${this._visible ? this._tooltipId : nothing}>
           ${this.defaultSlotContent}
         </span>
-        ${this._visible || this.open
-          ? html`
+        ${
+          this._visible || this.open
+            ? html`
             <span id=${this._tooltipId} class=${tipClasses} role="tooltip">
               ${this.showArrow ? html`<span class=${this._getArrowClasses()}></span>` : nothing}
               ${this.label}
             </span>`
-          : nothing
+            : nothing
         }
       </span>
     `;

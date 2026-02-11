@@ -26,7 +26,8 @@ export const Colored: S = {
 
 export const WithBorder: S = {
   args: { p: '6', border: '', rounded: 'none', bg: 'white' },
-  render: (args) => html`<kb-box ${spreadAttrs(args)} class="border border-gray-200 dark:border-zinc-700">Bordered box</kb-box>`,
+  render: (args) =>
+    html`<kb-box ${spreadAttrs(args)} class="border border-gray-200 dark:border-zinc-700">Bordered box</kb-box>`,
 };
 
 export const Shadow: S = {

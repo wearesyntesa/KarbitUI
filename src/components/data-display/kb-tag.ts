@@ -1,22 +1,27 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
-import { STATIC_SOLID, STATIC_OUTLINE, STATIC_SUBTLE, BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
-import { recipe } from '../../core/recipe.js';
+import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
+import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
+import { renderCloseIcon } from '../../core/icons.js';
+import {
+  CLOSE_BUTTON_CLASSES,
+  DISMISS_HIDDEN,
+  DISMISS_VISIBLE,
+  LABEL_INTERACTIVE_HOVER,
+  LABEL_RECIPE_BASE,
+  LABEL_VARIANT_STRUCTURE,
+  resolveStaticColor,
+} from '../../core/label-tokens.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
-export type TagVariant = 'solid' | 'outline' | 'subtle';
-export type TagSize = 'sm' | 'md' | 'lg';
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const tagRecipe = recipe({
-  base: 'inline-flex items-center font-mono font-semibold uppercase tracking-widest whitespace-nowrap select-none',
+  base: LABEL_RECIPE_BASE,
   variants: {
-    variant: {
-      solid: 'border',
-      outline: 'bg-transparent border',
-      subtle: 'border border-transparent',
-    },
+    variant: LABEL_VARIANT_STRUCTURE,
     size: {
       sm: 'text-[10px] px-2.5 py-1 gap-1.5',
       md: 'text-xs px-3.5 py-1.5 gap-2',
@@ -26,30 +31,27 @@ const tagRecipe = recipe({
   defaultVariants: { variant: 'subtle', size: 'md' },
 });
 
+export type TagVariant = InferVariant<typeof tagRecipe, 'variant'>;
+export type TagSize = InferVariant<typeof tagRecipe, 'size'>;
+
 /** Default variant colors when no colorScheme is specified. */
 const VARIANT_DEFAULT_COLOR: Record<TagVariant, string> = {
   solid: 'bg-slate-900 text-white border-slate-900 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100',
   outline: 'text-slate-900 border-gray-300 dark:text-zinc-50 dark:border-zinc-600',
   subtle: 'bg-gray-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300',
-};
-
-const INTERACTIVE_HOVER: Record<TagVariant, string> = {
-  solid: 'hover:opacity-80 active:opacity-70',
-  outline: 'hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
-  subtle: 'hover:bg-gray-200/80 active:bg-gray-200 dark:hover:bg-zinc-700 dark:active:bg-zinc-600',
-};
+} as const satisfies Record<TagVariant, string>;
 
 const DOT_SIZE: Record<TagSize, string> = {
   sm: 'w-1.5 h-1.5',
   md: 'w-2 h-2',
   lg: 'w-2.5 h-2.5',
-};
+} as const satisfies Record<TagSize, string>;
 
 const CLOSE_SIZE: Record<TagSize, string> = {
   sm: 'w-3 h-3',
   md: 'w-3.5 h-3.5',
   lg: 'w-4 h-4',
-};
+} as const satisfies Record<TagSize, string>;
 
 /**
  * Tag element for labels, statuses, and categories.
@@ -75,7 +77,7 @@ const CLOSE_SIZE: Record<TagSize, string> = {
  * ```
  */
 @customElement('kb-tag')
-export class KbTag extends KbBaseElement {
+export class KbTag extends KbBaseElement<'icon'> {
   /** Visual variant controlling fill, border, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: TagVariant = 'subtle';
   /** Tag size affecting font size and padding. @defaultValue 'md' */
@@ -98,7 +100,7 @@ export class KbTag extends KbBaseElement {
 
   private _handleClick(): void {
     if (!this.interactive) return;
-    this.dispatchEvent(new CustomEvent('kb-click', { bubbles: true, composed: true }));
+    this.emit('kb-click');
   }
 
   private _handleKeydown(e: KeyboardEvent): void {
@@ -125,35 +127,26 @@ export class KbTag extends KbBaseElement {
   private _handleClose(e: MouseEvent): void {
     e.stopPropagation();
     this._dismissing = true;
-    this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+    this.emit('kb-close');
     dismissWithAnimation(this, '[data-kb-tag-inner]', 200);
   }
 
-  override render() {
+  override render(): TemplateResult {
     const recipeClasses = tagRecipe({ variant: this.variant, size: this.size });
-    const colorClasses = this.colorScheme
-      ? this.variant === 'solid'
-        ? lookupScheme(STATIC_SOLID, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-        : this.variant === 'outline'
-          ? lookupScheme(STATIC_OUTLINE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-          : lookupScheme(STATIC_SUBTLE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-      : VARIANT_DEFAULT_COLOR[this.variant];
+    const colorClasses = resolveStaticColor(this.variant, this.colorScheme, VARIANT_DEFAULT_COLOR);
 
-    const cursorClass = this.kbDraggable
-      ? this._dragging ? 'cursor-grabbing' : 'cursor-grab'
-      : this.interactive ? 'cursor-pointer' : '';
+    let cursorClass = '';
+    if (this.kbDraggable) {
+      cursorClass = this._dragging ? 'cursor-grabbing' : 'cursor-grab';
+    } else if (this.interactive) {
+      cursorClass = 'cursor-pointer';
+    }
 
     const interactiveClasses = this.interactive
-      ? [
-          kbClasses.focus,
-          kbClasses.transition,
-          INTERACTIVE_HOVER[this.variant] ?? '',
-        ].join(' ')
+      ? cx(kbClasses.focus, kbClasses.transition, LABEL_INTERACTIVE_HOVER[this.variant] ?? '')
       : kbClasses.transition;
 
-    const dismissClasses = this._dismissing
-      ? 'opacity-0 scale-95'
-      : 'opacity-100 scale-100';
+    const dismissClasses = this._dismissing ? DISMISS_HIDDEN : DISMISS_VISIBLE;
 
     const dragClasses = this._dragging ? 'opacity-40' : '';
 
@@ -162,7 +155,7 @@ export class KbTag extends KbBaseElement {
       colorClasses,
       interactiveClasses,
       cursorClass,
-      'transition-all duration-150 ease-in-out',
+      kbClasses.transition,
       dismissClasses,
       dragClasses,
     );
@@ -174,10 +167,10 @@ export class KbTag extends KbBaseElement {
 
     const closeEl = this.closable
       ? html`<button
-          class="shrink-0 cursor-pointer opacity-50 hover:opacity-100 ${kbClasses.transition} leading-none p-0 bg-transparent border-none text-current"
-          @click=${(e: MouseEvent) => this._handleClose(e)}
+          class="${CLOSE_BUTTON_CLASSES}"
+          @click=${this._handleClose}
           aria-label="Remove tag"
-        ><svg class="${CLOSE_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`
+        >${renderCloseIcon(CLOSE_SIZE[this.size], 2.5)}</button>`
       : nothing;
 
     return html`
@@ -188,9 +181,9 @@ export class KbTag extends KbBaseElement {
         tabindex=${this.interactive ? '0' : nothing}
         role=${this.interactive ? 'button' : nothing}
         @click=${this._handleClick}
-        @keydown=${(e: KeyboardEvent) => this._handleKeydown(e)}
-        @dragstart=${(e: DragEvent) => this._handleDragStart(e)}
-        @dragend=${() => this._handleDragEnd()}
+        @keydown=${this._handleKeydown}
+        @dragstart=${this._handleDragStart}
+        @dragend=${this._handleDragEnd}
       >
         ${dotEl}
         ${iconContent}

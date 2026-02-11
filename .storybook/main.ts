@@ -8,10 +8,7 @@ export default defineMain({
     return mergeConfig(config, {
       css: {
         postcss: {
-          plugins: [
-            (await import('tailwindcss')).default,
-            (await import('autoprefixer')).default,
-          ],
+          plugins: [(await import('tailwindcss')).default, (await import('autoprefixer')).default],
         },
       },
     });

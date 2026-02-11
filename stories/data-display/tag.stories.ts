@@ -46,9 +46,18 @@ export const Interactive: S = {
   args: { interactive: true, variant: 'outline' },
   render: (args) => html`
     <div class="flex items-center gap-3">
-      <kb-tag ${spreadAttrs(args)} @kb-click=${() => { const el = document.getElementById('tag-click-out'); if (el) el.textContent = 'Clicked: Design'; }}>Design</kb-tag>
-      <kb-tag ${spreadAttrs(args)} @kb-click=${() => { const el = document.getElementById('tag-click-out'); if (el) el.textContent = 'Clicked: Engineering'; }}>Engineering</kb-tag>
-      <kb-tag ${spreadAttrs(args)} @kb-click=${() => { const el = document.getElementById('tag-click-out'); if (el) el.textContent = 'Clicked: Research'; }}>Research</kb-tag>
+      <kb-tag ${spreadAttrs(args)} @kb-click=${() => {
+        const el = document.getElementById('tag-click-out');
+        if (el) el.textContent = 'Clicked: Design';
+      }}>Design</kb-tag>
+      <kb-tag ${spreadAttrs(args)} @kb-click=${() => {
+        const el = document.getElementById('tag-click-out');
+        if (el) el.textContent = 'Clicked: Engineering';
+      }}>Engineering</kb-tag>
+      <kb-tag ${spreadAttrs(args)} @kb-click=${() => {
+        const el = document.getElementById('tag-click-out');
+        if (el) el.textContent = 'Clicked: Research';
+      }}>Research</kb-tag>
     </div>
     <p id="tag-click-out" class="mt-4 font-mono text-xs text-slate-500 dark:text-zinc-400 h-5">Click a tag</p>
   `,
@@ -223,7 +232,7 @@ export const Reorderable: S = {
       <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag to reorder</p>
       <kb-tag-group reorderable @kb-reorder=${(e: CustomEvent<{ order: string[] }>) => {
         const el = document.getElementById('reorder-output');
-        if (el) el.textContent = 'Order: ' + e.detail.order.join(', ');
+        if (el) el.textContent = `Order: ${e.detail.order.join(', ')}`;
       }}>
         <kb-tag kb-draggable value="alpha" variant="outline">Alpha</kb-tag>
         <kb-tag kb-draggable value="beta" variant="outline">Beta</kb-tag>
@@ -242,7 +251,7 @@ export const ReorderableWithClose: S = {
       <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Reorderable + Closable Filters</p>
       <kb-tag-group reorderable @kb-reorder=${(e: CustomEvent<{ order: string[] }>) => {
         const el = document.getElementById('reorder-close-output');
-        if (el) el.textContent = 'Order: ' + e.detail.order.join(', ');
+        if (el) el.textContent = `Order: ${e.detail.order.join(', ')}`;
       }}>
         <kb-tag kb-draggable closable value="region" variant="outline" color-scheme="blue">Region: US East</kb-tag>
         <kb-tag kb-draggable closable value="status" variant="outline" color-scheme="green">Status: Active</kb-tag>

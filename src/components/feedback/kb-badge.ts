@@ -1,22 +1,27 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement, dismissWithAnimation } from '../../core/base-element.js';
-import { STATIC_SOLID, STATIC_OUTLINE, STATIC_SUBTLE, BG_COLOR, BG_COLOR_PING, lookupScheme } from '../../core/color-schemes.js';
-import { recipe } from '../../core/recipe.js';
+import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
+import { BG_COLOR, BG_COLOR_PING, lookupScheme } from '../../core/color-schemes.js';
+import { renderCloseIcon } from '../../core/icons.js';
+import {
+  CLOSE_BUTTON_CLASSES,
+  DISMISS_HIDDEN,
+  DISMISS_VISIBLE,
+  LABEL_INTERACTIVE_HOVER,
+  LABEL_RECIPE_BASE,
+  LABEL_VARIANT_STRUCTURE,
+  resolveStaticColor,
+} from '../../core/label-tokens.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
-export type BadgeVariant = 'solid' | 'outline' | 'subtle';
-export type BadgeSize = 'xs' | 'sm' | 'md';
-
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const badgeRecipe = recipe({
-  base: 'inline-flex items-center font-mono font-semibold uppercase tracking-widest whitespace-nowrap select-none',
+  base: LABEL_RECIPE_BASE,
   variants: {
-    variant: {
-      solid: 'border',
-      outline: 'bg-transparent border',
-      subtle: 'border border-transparent',
-    },
+    variant: LABEL_VARIANT_STRUCTURE,
     size: {
       xs: 'text-[10px] px-1 py-0 gap-1',
       sm: 'text-xs px-1.5 py-0.5 gap-1.5',
@@ -26,41 +31,38 @@ const badgeRecipe = recipe({
   defaultVariants: { variant: 'subtle', size: 'sm' },
 });
 
+export type BadgeVariant = InferVariant<typeof badgeRecipe, 'variant'>;
+export type BadgeSize = InferVariant<typeof badgeRecipe, 'size'>;
+
 const VARIANT_DEFAULT_COLOR: Record<BadgeVariant, string> = {
   solid: 'bg-slate-900 text-white border-slate-900 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100',
   outline: 'text-slate-900 border-gray-200 dark:text-zinc-50 dark:border-zinc-700',
   subtle: 'bg-gray-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300',
-};
-
-const INTERACTIVE_HOVER: Record<BadgeVariant, string> = {
-  solid: 'hover:opacity-80 active:opacity-70',
-  outline: 'hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
-  subtle: 'hover:bg-gray-200/80 active:bg-gray-200 dark:hover:bg-zinc-700 dark:active:bg-zinc-600',
-};
+} as const satisfies Record<BadgeVariant, string>;
 
 const DOT_SIZE: Record<BadgeSize, string> = {
   xs: 'w-1.5 h-1.5',
   sm: 'w-1.5 h-1.5',
   md: 'w-2 h-2',
-};
+} as const satisfies Record<BadgeSize, string>;
 
 const CLOSE_SIZE: Record<BadgeSize, string> = {
   xs: 'w-2.5 h-2.5',
   sm: 'w-3 h-3',
   md: 'w-3 h-3',
-};
+} as const satisfies Record<BadgeSize, string>;
 
 const PING_SIZE: Record<BadgeSize, string> = {
   xs: 'w-1.5 h-1.5 -top-0.5 -right-0.5',
   sm: 'w-2 h-2 -top-0.5 -right-0.5',
   md: 'w-2.5 h-2.5 -top-1 -right-1',
-};
+} as const satisfies Record<BadgeSize, string>;
 
 const PING_DOT_SIZE: Record<BadgeSize, string> = {
   xs: 'w-1.5 h-1.5',
   sm: 'w-2 h-2',
   md: 'w-2.5 h-2.5',
-};
+} as const satisfies Record<BadgeSize, string>;
 
 /**
  * Compact label for status indicators, counts, or category tags.
@@ -83,7 +85,7 @@ const PING_DOT_SIZE: Record<BadgeSize, string> = {
  * ```
  */
 @customElement('kb-badge')
-export class KbBadge extends KbBaseElement {
+export class KbBadge extends KbBaseElement<'icon'> {
   /** Visual variant controlling border, background, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: BadgeVariant = 'subtle';
   /** Badge size controlling padding, font size, and dot/close sizing. @defaultValue 'sm' */
@@ -105,7 +107,7 @@ export class KbBadge extends KbBaseElement {
 
   private _handleClick(): void {
     if (!this.interactive) return;
-    this.dispatchEvent(new CustomEvent('kb-click', { bubbles: true, composed: true }));
+    this.emit('kb-click');
   }
 
   private _handleKeydown(e: KeyboardEvent): void {
@@ -119,54 +121,47 @@ export class KbBadge extends KbBaseElement {
   private _handleClose(e: MouseEvent): void {
     e.stopPropagation();
     this._dismissing = true;
-    this.dispatchEvent(new CustomEvent('kb-close', { bubbles: true, composed: true }));
+    this.emit('kb-close');
     dismissWithAnimation(this, '[data-kb-badge-inner]', 200);
   }
 
-  override render() {
+  override render(): TemplateResult {
     const recipeClasses = badgeRecipe({ variant: this.variant, size: this.size });
-    const colorClasses = this.colorScheme
-      ? this.variant === 'solid'
-        ? lookupScheme(STATIC_SOLID, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-        : this.variant === 'outline'
-          ? lookupScheme(STATIC_OUTLINE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-          : lookupScheme(STATIC_SUBTLE, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant]
-      : VARIANT_DEFAULT_COLOR[this.variant];
+    const colorClasses = resolveStaticColor(this.variant, this.colorScheme, VARIANT_DEFAULT_COLOR);
 
     const interactiveClasses = this.interactive
-      ? [kbClasses.focus, kbClasses.transition, INTERACTIVE_HOVER[this.variant] ?? '', 'cursor-pointer'].join(' ')
+      ? cx(kbClasses.focus, kbClasses.transition, LABEL_INTERACTIVE_HOVER[this.variant] ?? '', 'cursor-pointer')
       : kbClasses.transition;
 
-    const dismissClasses = this._dismissing
-      ? 'opacity-0 scale-95'
-      : 'opacity-100 scale-100';
+    const dismissClasses = this._dismissing ? DISMISS_HIDDEN : DISMISS_VISIBLE;
 
     const classes = this.buildClasses(
       recipeClasses,
       colorClasses,
       interactiveClasses,
-      'transition-all duration-150 ease-in-out',
+      kbClasses.transition,
       dismissClasses,
     );
 
     const iconContent = this.slotted('icon');
 
     const dotColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current';
-    const dotEl = this.dot
-      ? this.pulse
+    let dotEl = nothing as typeof nothing | ReturnType<typeof html>;
+    if (this.dot) {
+      dotEl = this.pulse
         ? html`<span class="relative inline-flex shrink-0 ${DOT_SIZE[this.size]}">
             <span class="absolute inset-0 rounded-full ${dotColor} animate-ping opacity-75"></span>
             <span class="relative rounded-full ${dotColor} ${DOT_SIZE[this.size]}"></span>
           </span>`
-        : html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${dotColor}"></span>`
-      : nothing;
+        : html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${dotColor}"></span>`;
+    }
 
     const closeEl = this.closable
       ? html`<button
-          class="shrink-0 cursor-pointer opacity-50 hover:opacity-100 ${kbClasses.transition} leading-none p-0 bg-transparent border-none text-current"
-          @click=${(e: MouseEvent) => this._handleClose(e)}
+          class="${CLOSE_BUTTON_CLASSES}"
+          @click=${this._handleClose}
           aria-label="Remove badge"
-        ><svg class="${CLOSE_SIZE[this.size]}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`
+        >${renderCloseIcon(CLOSE_SIZE[this.size], 2.5)}</button>`
       : nothing;
 
     const pingColor = lookupScheme(BG_COLOR_PING, this.colorScheme) ?? 'bg-current/75';
@@ -189,7 +184,7 @@ export class KbBadge extends KbBaseElement {
           tabindex=${this.interactive ? '0' : nothing}
           role=${this.interactive ? 'button' : nothing}
           @click=${this._handleClick}
-          @keydown=${(e: KeyboardEvent) => this._handleKeydown(e)}
+          @keydown=${this._handleKeydown}
         >
           ${dotEl}
           ${iconContent}

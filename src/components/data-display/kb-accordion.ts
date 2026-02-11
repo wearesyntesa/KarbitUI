@@ -1,12 +1,12 @@
-import { html, svg } from 'lit';
+import { html, svg, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { KbToggleDetail } from '../../core/events.js';
+import { cx } from '../../utils/cx.js';
 
-let nextAccordionId = 0;
+let nextAccordionId: number = 0;
 
-const chevronIcon = svg`<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>`;
+const chevronIcon: TemplateResult = svg`<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>`;
 
 /**
  * Collapsible content panel with smooth expand/collapse animation.
@@ -27,12 +27,12 @@ const chevronIcon = svg`<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-widt
  * ```
  */
 @customElement('kb-accordion')
-export class KbAccordion extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbAccordion extends KbBaseElement<'trigger'> {
+  static override hostDisplay = 'block' as const;
 
   private _uid = ++nextAccordionId;
-  private get _triggerId(): string { return `kb-acc-t-${this._uid}`; }
-  private get _panelId(): string { return `kb-acc-p-${this._uid}`; }
+  private _triggerId = `kb-acc-t-${this._uid}`;
+  private _panelId = `kb-acc-p-${this._uid}`;
 
   /** Whether the panel is expanded. Reflected to attribute for CSS targeting. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
@@ -53,14 +53,10 @@ export class KbAccordion extends KbBaseElement {
   private _toggle(): void {
     if (this.disabled) return;
     this.open = !this.open;
-    this.dispatchEvent(new CustomEvent<KbToggleDetail>('kb-toggle', {
-      detail: { open: this.open },
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-toggle', { open: this.open });
   }
 
-  override render() {
+  override render(): TemplateResult {
     const pressClass = this._pressed && !this.disabled ? 'scale-[0.998]' : '';
 
     const triggerClasses = this.buildClasses(
@@ -77,28 +73,28 @@ export class KbAccordion extends KbBaseElement {
       pressClass,
     );
 
-    const chevronClasses = [
+    const chevronClasses = cx(
       'w-4 h-4 shrink-0 transition-transform duration-200 ease-in-out',
       kbClasses.textSecondary,
       this.open ? 'rotate-180' : '',
-    ].join(' ');
+    );
 
-    const wrapperClasses = [
+    const wrapperClasses = cx(
       'grid transition-[grid-template-rows] duration-200 ease-in-out',
       this.open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
-    ].join(' ');
+    );
 
     const triggerEl = this.slotted('trigger');
 
     return html`
-      <div class=${`${kbClasses.borderBottom}`}>
+      <div class=${kbClasses.borderBottom}>
         <button
           id=${this._triggerId}
           class=${triggerClasses}
           @click=${this._toggle}
-          @pointerdown=${() => this._onPointerDown()}
-          @pointerup=${() => this._onPointerUp()}
-          @pointerleave=${() => this._onPointerUp()}
+          @pointerdown=${this._onPointerDown}
+          @pointerup=${this._onPointerUp}
+          @pointerleave=${this._onPointerUp}
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls=${this._panelId}
           ?disabled=${this.disabled}

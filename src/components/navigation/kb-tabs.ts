@@ -1,10 +1,10 @@
-import { html, nothing } from 'lit';
+import { type ComplexAttributeConverter, html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
+import { ICON_SIZE } from '../../core/component-tokens.js';
 import { kbClasses } from '../../core/theme.js';
-import { cx } from '../../utils/cx.js';
-import type { KbTabChangeDetail } from '../../core/events.js';
 import type { KnownColorScheme } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
 export type TabsVariant = 'line' | 'enclosed' | 'solid' | 'unstyled';
 export type TabsSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -19,7 +19,7 @@ const SIZE_TEXT: Record<TabsSize, string> = {
   md: 'text-xs',
   lg: 'text-sm',
   xl: 'text-base',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_PX: Record<TabsSize, string> = {
   xs: 'px-2',
@@ -27,7 +27,7 @@ const SIZE_PX: Record<TabsSize, string> = {
   md: 'px-4',
   lg: 'px-5',
   xl: 'px-6',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_PY: Record<TabsSize, string> = {
   xs: 'py-1',
@@ -35,7 +35,7 @@ const SIZE_PY: Record<TabsSize, string> = {
   md: 'py-2',
   lg: 'py-2.5',
   xl: 'py-3',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_GAP: Record<TabsSize, string> = {
   xs: 'gap-0.5',
@@ -43,15 +43,7 @@ const SIZE_GAP: Record<TabsSize, string> = {
   md: 'gap-1.5',
   lg: 'gap-2',
   xl: 'gap-2.5',
-};
-
-const SIZE_ICON: Record<TabsSize, string> = {
-  xs: '[&>svg]:w-3 [&>svg]:h-3',
-  sm: '[&>svg]:w-3.5 [&>svg]:h-3.5',
-  md: '[&>svg]:w-4 [&>svg]:h-4',
-  lg: '[&>svg]:w-5 [&>svg]:h-5',
-  xl: '[&>svg]:w-6 [&>svg]:h-6',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_PANEL_PT: Record<TabsSize, string> = {
   xs: 'pt-2',
@@ -59,7 +51,7 @@ const SIZE_PANEL_PT: Record<TabsSize, string> = {
   md: 'pt-4',
   lg: 'pt-5',
   xl: 'pt-6',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_PANEL_PL: Record<TabsSize, string> = {
   xs: 'pl-2',
@@ -67,7 +59,7 @@ const SIZE_PANEL_PL: Record<TabsSize, string> = {
   md: 'pl-4',
   lg: 'pl-5',
   xl: 'pl-6',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_INDICATOR_H: Record<TabsSize, string> = {
   xs: 'h-[1.5px]',
@@ -75,7 +67,7 @@ const SIZE_INDICATOR_H: Record<TabsSize, string> = {
   md: 'h-0.5',
   lg: 'h-0.5',
   xl: 'h-[3px]',
-};
+} as const satisfies Record<TabsSize, string>;
 
 const SIZE_INDICATOR_W_VERT: Record<TabsSize, string> = {
   xs: 'w-[1.5px]',
@@ -83,7 +75,7 @@ const SIZE_INDICATOR_W_VERT: Record<TabsSize, string> = {
   md: 'w-0.5',
   lg: 'w-0.5',
   xl: 'w-[3px]',
-};
+} as const satisfies Record<TabsSize, string>;
 
 /** ColorScheme maps */
 const COLOR_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
@@ -92,7 +84,7 @@ const COLOR_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
   green: 'text-green-600 dark:text-green-400',
   yellow: 'text-yellow-600 dark:text-yellow-400',
   black: 'text-slate-900 dark:text-zinc-50',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_INDICATOR: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 dark:bg-blue-400',
@@ -100,7 +92,7 @@ const COLOR_INDICATOR: Record<KnownColorScheme, string> = {
   green: 'bg-green-600 dark:bg-green-400',
   yellow: 'bg-yellow-600 dark:bg-yellow-400',
   black: 'bg-slate-900 dark:bg-zinc-50',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_SOLID_ACTIVE_BG: Record<KnownColorScheme, string> = {
   blue: 'bg-blue-500 dark:bg-blue-600',
@@ -108,7 +100,7 @@ const COLOR_SOLID_ACTIVE_BG: Record<KnownColorScheme, string> = {
   green: 'bg-green-600 dark:bg-green-700',
   yellow: 'bg-yellow-500 dark:bg-yellow-600',
   black: 'bg-slate-900 dark:bg-zinc-100',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_SOLID_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
   blue: 'text-white',
@@ -116,7 +108,7 @@ const COLOR_SOLID_ACTIVE_TEXT: Record<KnownColorScheme, string> = {
   green: 'text-white',
   yellow: 'text-white',
   black: 'text-white dark:text-zinc-900',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
 const COLOR_ENCLOSED_ACTIVE_BORDER: Record<KnownColorScheme, string> = {
   blue: 'border-t-blue-500 dark:border-t-blue-400',
@@ -124,12 +116,27 @@ const COLOR_ENCLOSED_ACTIVE_BORDER: Record<KnownColorScheme, string> = {
   green: 'border-t-green-600 dark:border-t-green-400',
   yellow: 'border-t-yellow-600 dark:border-t-yellow-400',
   black: 'border-t-slate-900 dark:border-t-zinc-50',
-};
+} as const satisfies Record<KnownColorScheme, string>;
 
-const disabledTabsConverter = {
+const ALIGN_HORIZONTAL: Record<TabsAlign, string> = {
+  start: 'justify-start',
+  center: 'justify-center',
+  end: 'justify-end',
+} as const satisfies Record<TabsAlign, string>;
+
+const ALIGN_VERTICAL: Record<TabsAlign, string> = {
+  start: 'items-start',
+  center: 'items-center',
+  end: 'items-end',
+} as const satisfies Record<TabsAlign, string>;
+
+const disabledTabsConverter: ComplexAttributeConverter<number[]> = {
   fromAttribute(value: string | null): number[] {
     if (!value) return [];
-    return value.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !Number.isNaN(n));
+    return value
+      .split(',')
+      .map((s) => parseInt(s.trim(), 10))
+      .filter((n) => !Number.isNaN(n));
   },
   toAttribute(value: number[]): string {
     return value.join(',');
@@ -163,7 +170,7 @@ interface IndicatorPosition {
  */
 @customElement('kb-tabs')
 export class KbTabs extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Zero-based index of the currently active tab. @defaultValue 0 */
   @property({ type: Number }) active: number = 0;
@@ -183,7 +190,6 @@ export class KbTabs extends KbBaseElement {
   @property({ attribute: 'disabled-tabs', converter: disabledTabsConverter }) disabledTabs: number[] = [];
 
   @state() private _indicatorPos: IndicatorPosition = { offset: 0, size: 0 };
-  @state() private _panelKey: number = 0;
 
   private _resizeObserver: ResizeObserver | null = null;
   private _tabButtons: HTMLButtonElement[] = [];
@@ -230,9 +236,6 @@ export class KbTabs extends KbBaseElement {
     if (changed.has('active') || changed.has('orientation') || changed.has('variant') || changed.has('size')) {
       requestAnimationFrame(() => this._measureIndicator());
     }
-    if (changed.has('active')) {
-      this._panelKey++;
-    }
   }
 
   private _measureIndicator(): void {
@@ -266,18 +269,12 @@ export class KbTabs extends KbBaseElement {
     if (index === this.active) return;
     const previousIndex = this.active;
     this.active = index;
-    this.dispatchEvent(
-      new CustomEvent<KbTabChangeDetail>('kb-tab-change', {
-        detail: { index, previousIndex },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    this.emit('kb-tab-change', { index, previousIndex });
   }
 
   private _handleKeydown(e: KeyboardEvent): void {
     const tabs = this._tabButtons;
-    if (!tabs.length) return;
+    if (tabs.length === 0) return;
 
     const disabled = this._disabledSet;
     const isVert = this._isVertical;
@@ -309,13 +306,13 @@ export class KbTabs extends KbBaseElement {
 
   private _findNextEnabled(from: number, direction: 1 | -1, count: number, disabled: Set<number>): number | undefined {
     for (let i = 1; i <= count; i++) {
-      const idx = ((from + direction * i) % count + count) % count;
+      const idx = (((from + direction * i) % count) + count) % count;
       if (!disabled.has(idx)) return idx;
     }
-    return undefined;
+    return;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const tabs = this._cachedTabs;
     const panels = this._cachedPanels;
     const disabled = this._disabledSet;
@@ -324,40 +321,39 @@ export class KbTabs extends KbBaseElement {
     const s = this.size;
     const cs = this.colorScheme;
 
-    const alignMap: Record<TabsAlign, string> = {
-      start: isVert ? 'items-start' : 'justify-start',
-      center: isVert ? 'items-center' : 'justify-center',
-      end: isVert ? 'items-end' : 'justify-end',
-    };
+    const alignClasses = isVert ? ALIGN_VERTICAL : ALIGN_HORIZONTAL;
 
     // ---- Tab list classes ----
     const tabListClasses = cx(
       'relative flex',
       isVert ? 'flex-col' : 'flex-row',
-      !this.fitted && alignMap[this.align],
-      v === 'line' && !isVert ? 'border-b border-gray-200 dark:border-zinc-700' : '',
-      v === 'line' && isVert ? 'border-r border-gray-200 dark:border-zinc-700' : '',
-      v === 'enclosed' && !isVert ? 'border-b border-gray-200 dark:border-zinc-700' : '',
-      v === 'enclosed' && isVert ? 'border-r border-gray-200 dark:border-zinc-700' : '',
+      !this.fitted && alignClasses[this.align],
+      v === 'line' && !isVert ? `border-b ${kbClasses.borderColor}` : '',
+      v === 'line' && isVert ? `border-r ${kbClasses.borderColor}` : '',
+      v === 'enclosed' && !isVert ? `border-b ${kbClasses.borderColor}` : '',
+      v === 'enclosed' && isVert ? `border-r ${kbClasses.borderColor}` : '',
       v === 'solid' ? `${kbClasses.surfaceMuted} ${kbClasses.border} p-1 gap-1` : '',
     );
 
     // ---- Tab button classes per index ----
+    const tabBase = cx(
+      'relative inline-flex items-center font-mono uppercase tracking-widest cursor-pointer select-none',
+      kbClasses.transition,
+      SIZE_TEXT[s],
+      SIZE_PX[s],
+      SIZE_PY[s],
+      SIZE_GAP[s],
+      kbClasses.focus,
+    );
+
     const getTabClasses = (index: number): string => {
       const isActive = index === this.active;
       const isDisabled = disabled.has(index);
-      const fitClass = this.fitted ? 'flex-1 text-center justify-center' : '';
 
       const base = cx(
-        'relative inline-flex items-center font-mono uppercase tracking-widest cursor-pointer select-none',
-        kbClasses.transition,
-        SIZE_TEXT[s],
-        SIZE_PX[s],
-        SIZE_PY[s],
-        SIZE_GAP[s],
-        fitClass,
-        kbClasses.focus,
-        isDisabled && 'opacity-40 cursor-not-allowed pointer-events-none',
+        tabBase,
+        this.fitted && 'flex-1 text-center justify-center',
+        isDisabled && kbClasses.disabledLook,
       );
 
       if (v === 'line') {
@@ -365,21 +361,23 @@ export class KbTabs extends KbBaseElement {
           base,
           !isVert && '-mb-px',
           isVert && '-mr-px',
-          isActive ? COLOR_ACTIVE_TEXT[cs] : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-50',
+          isActive
+            ? COLOR_ACTIVE_TEXT[cs]
+            : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-50',
         );
       }
 
       if (v === 'enclosed') {
         return cx(
           base,
-          'border border-gray-200 dark:border-zinc-700',
+          `border ${kbClasses.borderColor}`,
           !isVert && '-mb-px',
           isVert && '-mr-px',
           isActive
             ? cx(
                 'bg-white dark:bg-zinc-900 border-t-2',
                 COLOR_ENCLOSED_ACTIVE_BORDER[cs],
-                !isVert ? 'border-b-white dark:border-b-zinc-900' : '',
+                isVert ? '' : 'border-b-white dark:border-b-zinc-900',
                 isVert ? 'border-r-white dark:border-r-zinc-900' : '',
                 COLOR_ACTIVE_TEXT[cs],
               )
@@ -397,35 +395,30 @@ export class KbTabs extends KbBaseElement {
       }
 
       // unstyled
-      return cx(
-        base,
-        isActive ? COLOR_ACTIVE_TEXT[cs] : 'text-slate-500 dark:text-zinc-400',
-      );
+      return cx(base, isActive ? COLOR_ACTIVE_TEXT[cs] : 'text-slate-500 dark:text-zinc-400');
     };
 
     // ---- Sliding indicator (line variant only) ----
     const showIndicator = v === 'line' && this._indicatorPos.size > 0;
-    const indicatorStyle = showIndicator
-      ? isVert
+    let indicatorStyle = '';
+    if (showIndicator) {
+      indicatorStyle = isVert
         ? `top:${this._indicatorPos.offset}px;height:${this._indicatorPos.size}px;right:0;`
-        : `left:${this._indicatorPos.offset}px;width:${this._indicatorPos.size}px;bottom:0;`
-      : '';
+        : `left:${this._indicatorPos.offset}px;width:${this._indicatorPos.size}px;bottom:0;`;
+    }
 
     // ---- Panel classes ----
     const panelClasses = cx(
       'font-sans',
       kbClasses.textPrimary,
-      v === 'enclosed' && !isVert ? 'border border-gray-200 dark:border-zinc-700 border-t-0 p-4' : '',
-      v === 'enclosed' && isVert ? 'border border-gray-200 dark:border-zinc-700 border-l-0 p-4' : '',
+      v === 'enclosed' && !isVert ? `border ${kbClasses.borderColor} border-t-0 p-4` : '',
+      v === 'enclosed' && isVert ? `border ${kbClasses.borderColor} border-l-0 p-4` : '',
       v !== 'enclosed' && !isVert ? SIZE_PANEL_PT[s] : '',
       v !== 'enclosed' && isVert ? SIZE_PANEL_PL[s] : '',
     );
 
     // ---- Outer layout ----
-    const outerClasses = cx(
-      'flex',
-      isVert ? 'flex-row' : 'flex-col',
-    );
+    const outerClasses = cx('flex', isVert ? 'flex-row' : 'flex-col');
 
     return html`
       <div class=${outerClasses}>
@@ -443,15 +436,16 @@ export class KbTabs extends KbBaseElement {
                 aria-controls=${`kb-tabpanel-${index}`}
                 id=${`kb-tab-${index}`}
                 tabindex=${isActive ? '0' : '-1'}
-                @click=${() => this._handleTabClick(index)}
+                @click=${(): void => this._handleTabClick(index)}
               >
-                ${icon ? html`<span class=${SIZE_ICON[s]}>${icon}</span>` : nothing}
+                ${icon ? html`<span class=${ICON_SIZE[s]}>${icon}</span>` : nothing}
                 ${tab}
               </button>
             `;
           })}
-          ${showIndicator
-            ? html`<div
+          ${
+            showIndicator
+              ? html`<div
                 class=${cx(
                   'absolute transition-all duration-300 ease-out',
                   COLOR_INDICATOR[cs],
@@ -459,17 +453,20 @@ export class KbTabs extends KbBaseElement {
                 )}
                 style=${indicatorStyle}
               ></div>`
-            : nothing}
+              : nothing
+          }
         </div>
         <div class=${cx(panelClasses, 'flex-1')} role="tabpanel" aria-labelledby=${`kb-tab-${this.active}`} id=${`kb-tabpanel-${this.active}`}>
-          ${panels.map((panel, index) => html`
+          ${panels.map(
+            (panel, index) => html`
             <div
               style=${index === this.active ? '' : 'display:none'}
               class=${index === this.active ? 'animate-kb-fade-in' : ''}
             >
               ${panel}
             </div>
-          `)}
+          `,
+          )}
         </div>
       </div>
     `;

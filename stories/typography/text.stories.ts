@@ -11,7 +11,10 @@ export default {
   argTypes: {
     variant: { control: 'select', options: ['body', 'label', 'caption', 'overline'] },
     size: { control: 'select', options: ['xs', 'sm', 'base', 'lg', 'xl', '2xl'] },
-    tone: { control: 'select', options: [undefined, 'primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error'] },
+    tone: {
+      control: 'select',
+      options: [undefined, 'primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error'],
+    },
     as: { control: 'select', options: ['p', 'span', 'div', 'label'] },
     truncate: { control: 'boolean' },
     'no-wrap': { control: 'boolean' },

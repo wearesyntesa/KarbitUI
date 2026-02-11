@@ -9,10 +9,7 @@ const basicItems = [
   { label: 'Electronics' },
 ];
 
-const shortItems = [
-  { label: 'Home', href: '#' },
-  { label: 'Current Page' },
-];
+const shortItems = [{ label: 'Home', href: '#' }, { label: 'Current Page' }];
 
 const longItems = [
   { label: 'Home', href: '#' },
@@ -123,11 +120,7 @@ export const CollapsedWithArrow: S = {
 
 export const NoHref: S = {
   render: () => html`
-    <kb-breadcrumb .items=${[
-      { label: 'Dashboard' },
-      { label: 'Settings' },
-      { label: 'Profile' },
-    ]}></kb-breadcrumb>
+    <kb-breadcrumb .items=${[{ label: 'Dashboard' }, { label: 'Settings' }, { label: 'Profile' }]}></kb-breadcrumb>
   `,
 };
 

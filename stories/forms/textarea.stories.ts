@@ -3,8 +3,10 @@ import { html } from 'lit';
 import '../../src/components/forms/kb-textarea.js';
 
 const loremShort = 'The quick brown fox jumps over the lazy dog.';
-const loremLong = 'The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow.';
-const lorem280 = 'The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf.';
+const loremLong =
+  'The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow.';
+const lorem280 =
+  'The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf.';
 
 export default {
   title: 'Forms/Textarea',

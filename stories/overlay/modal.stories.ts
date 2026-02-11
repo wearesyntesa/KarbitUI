@@ -165,9 +165,12 @@ export const ScrollableBody: S = {
     <kb-modal open size="md">
       <span slot="header">TERMS OF SERVICE</span>
       <div>
-        ${Array.from({ length: 20 }, (_, i) => html`
+        ${Array.from(
+          { length: 20 },
+          (_, i) => html`
           <p style="margin-bottom: 12px">Section ${i + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-        `)}
+        `,
+        )}
       </div>
       <span slot="footer">
         <kb-button variant="outline" size="sm">DECLINE</kb-button>

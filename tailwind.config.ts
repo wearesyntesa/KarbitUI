@@ -1,10 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const karbitPreset: Config = {
-  content: [
-    './src/**/*.ts',
-    './stories/**/*.ts',
-  ],
+  content: ['./src/**/*.ts', './stories/**/*.ts'],
   darkMode: 'class',
   theme: {
     extend: {

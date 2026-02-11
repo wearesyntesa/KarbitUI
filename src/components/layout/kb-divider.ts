@@ -1,8 +1,9 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { Orientation, ColorValue } from '../../core/types.js';
+import type { ColorValue, Orientation } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
 export type DividerVariant = 'solid' | 'dashed' | 'dotted';
 export type DividerThickness = 'thin' | 'medium' | 'thick';
@@ -11,19 +12,19 @@ const VARIANT_MAP: Record<DividerVariant, string> = {
   solid: 'border-solid',
   dashed: 'border-dashed',
   dotted: 'border-dotted',
-};
+} as const satisfies Record<DividerVariant, string>;
 
 const THICKNESS_H: Record<DividerThickness, string> = {
   thin: 'border-t',
   medium: 'border-t-2',
   thick: 'border-t-4',
-};
+} as const satisfies Record<DividerThickness, string>;
 
 const THICKNESS_V: Record<DividerThickness, string> = {
   thin: 'border-l',
   medium: 'border-l-2',
   thick: 'border-l-4',
-};
+} as const satisfies Record<DividerThickness, string>;
 
 /**
  * Visual separator between content sections.
@@ -42,7 +43,7 @@ const THICKNESS_V: Record<DividerThickness, string> = {
  */
 @customElement('kb-divider')
 export class KbDivider extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
   /** Divider axis. `'horizontal'` draws a top border, `'vertical'` a left border. @defaultValue 'horizontal' */
   @property({ type: String }) orientation: Orientation = 'horizontal';
   /** Custom border color as a Tailwind color value (e.g. `'blue-500'`). Falls back to theme border. */
@@ -67,19 +68,15 @@ export class KbDivider extends KbBaseElement {
     }
   }
 
-  override render() {
+  override render(): TemplateResult {
     const isHorizontal = this.orientation === 'horizontal';
 
-    const colorClass = this.dividerColor
-      ? `border-${this.dividerColor}`
-      : 'border-gray-200 dark:border-zinc-700';
+    const colorClass = this.dividerColor ? `border-${this.dividerColor}` : kbClasses.borderColor;
 
     const variantClass = VARIANT_MAP[this.variant];
-    const thicknessClass = isHorizontal
-      ? THICKNESS_H[this.thickness]
-      : THICKNESS_V[this.thickness];
+    const thicknessClass = isHorizontal ? THICKNESS_H[this.thickness] : THICKNESS_V[this.thickness];
 
-    const lineClasses = [variantClass, thicknessClass, colorClass].join(' ');
+    const lineClasses = cx(variantClass, thicknessClass, colorClass);
 
     if (this.label) {
       return this._renderLabeled(isHorizontal, lineClasses);
@@ -88,41 +85,36 @@ export class KbDivider extends KbBaseElement {
     return this._renderPlain(isHorizontal, lineClasses);
   }
 
-  private _renderPlain(isHorizontal: boolean, lineClasses: string) {
+  private _renderPlain(isHorizontal: boolean, lineClasses: string): TemplateResult {
     const sizeClass = isHorizontal ? 'w-full h-0' : 'h-full w-0';
 
+    let scaleClass: string;
+    if (this._mounted) scaleClass = isHorizontal ? 'scale-x-100' : 'scale-y-100';
+    else scaleClass = isHorizontal ? 'scale-x-0' : 'scale-y-0';
+
     const animationClasses = this.animated
-      ? [
-          'transition-transform duration-300 ease-out',
-          isHorizontal ? 'origin-left' : 'origin-top',
-          this._mounted
-            ? (isHorizontal ? 'scale-x-100' : 'scale-y-100')
-            : (isHorizontal ? 'scale-x-0' : 'scale-y-0'),
-        ].join(' ')
+      ? cx('transition-transform duration-300 ease-out', isHorizontal ? 'origin-left' : 'origin-top', scaleClass)
       : '';
 
     const classes = this.buildClasses(sizeClass, lineClasses, animationClasses);
     return html`<div role="separator" aria-orientation=${this.orientation} class=${classes}></div>`;
   }
 
-  private _renderLabeled(isHorizontal: boolean, lineClasses: string) {
+  private _renderLabeled(isHorizontal: boolean, lineClasses: string): TemplateResult {
     const containerDir = isHorizontal ? 'flex items-center' : 'flex flex-col items-center';
     const lineGrowClass = isHorizontal ? 'flex-1 h-0' : 'flex-1 w-0';
 
     const animationClasses = this.animated
-      ? [
-          'transition-opacity duration-300 ease-out',
-          this._mounted ? 'opacity-100' : 'opacity-0',
-        ].join(' ')
+      ? cx('transition-opacity duration-300 ease-out', this._mounted ? 'opacity-100' : 'opacity-0')
       : '';
 
     const containerClasses = this.buildClasses(containerDir, 'gap-3', animationClasses);
 
-    const labelClasses = [
+    const labelClasses = cx(
       'font-mono text-xs shrink-0 select-none',
       kbClasses.textSecondary,
-      !isHorizontal ? '[writing-mode:vertical-rl]' : '',
-    ].join(' ');
+      isHorizontal ? '' : '[writing-mode:vertical-rl]',
+    );
 
     return html`
       <div role="separator" aria-orientation=${this.orientation} aria-label=${this.label || nothing} class=${containerClasses}>

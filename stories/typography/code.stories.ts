@@ -1,18 +1,55 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import { spreadAttrs } from '../_define.js';
 import { KbCode } from '../../src/components/typography/kb-code.js';
+import { spreadAttrs } from '../_define.js';
 
 // ── Demo highlighter (mimics what Prism/highlight.js would produce) ──────────
 // This is NOT shipped with KarbitUI — it's a story-only demo showing how the
 // pluggable hook works. In real usage, wire up Prism.js, highlight.js, or Shiki.
 
 const JS_KEYWORDS = new Set([
-  'const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while',
-  'class', 'extends', 'import', 'export', 'from', 'default', 'new', 'this',
-  'typeof', 'instanceof', 'async', 'await', 'yield', 'throw', 'try', 'catch',
-  'finally', 'switch', 'case', 'break', 'continue', 'do', 'in', 'of', 'void',
-  'delete', 'null', 'undefined', 'true', 'false', 'type', 'interface', 'enum',
+  'const',
+  'let',
+  'var',
+  'function',
+  'return',
+  'if',
+  'else',
+  'for',
+  'while',
+  'class',
+  'extends',
+  'import',
+  'export',
+  'from',
+  'default',
+  'new',
+  'this',
+  'typeof',
+  'instanceof',
+  'async',
+  'await',
+  'yield',
+  'throw',
+  'try',
+  'catch',
+  'finally',
+  'switch',
+  'case',
+  'break',
+  'continue',
+  'do',
+  'in',
+  'of',
+  'void',
+  'delete',
+  'null',
+  'undefined',
+  'true',
+  'false',
+  'type',
+  'interface',
+  'enum',
 ]);
 
 function esc(s: string): string {
@@ -21,7 +58,8 @@ function esc(s: string): string {
 
 function demoHighlight(code: string): string {
   // Tokenize with a simple regex — good enough for demo purposes
-  const TOKEN_RE = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|(\b\d+(?:\.\d+)?\b)|(\b[a-zA-Z_$][\w$]*\b)/g;
+  const TOKEN_RE =
+    /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|(\b\d+(?:\.\d+)?\b)|(\b[a-zA-Z_$][\w$]*\b)/g;
 
   let result = '';
   let lastIndex = 0;

@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { DimensionValue } from '../../core/types.js';
@@ -12,7 +12,7 @@ const SIZE_MAP: Record<ContainerSize, string> = {
   xl: 'max-w-7xl',
   '2xl': 'max-w-screen-2xl',
   full: 'max-w-full',
-};
+} as const satisfies Record<ContainerSize, string>;
 
 /**
  * Centered content container with a configurable max-width.
@@ -34,7 +34,7 @@ const SIZE_MAP: Record<ContainerSize, string> = {
  */
 @customElement('kb-container')
 export class KbContainer extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Named max-width preset. Takes precedence over `max` when set. */
   @property({ type: String }) size?: ContainerSize;
@@ -43,12 +43,12 @@ export class KbContainer extends KbBaseElement {
   /** Horizontally center the container with `mx-auto`. @defaultValue true */
   @property({ type: Boolean, reflect: true }) center: boolean = true;
 
-  override render() {
-    const maxClass = this.size
-      ? SIZE_MAP[this.size]
-      : this.max
-        ? `max-w-${this.max}`
-        : 'max-w-7xl';
+  override render(): TemplateResult {
+    let maxClass: string;
+    // biome-ignore lint/style/useExplicitLengthCheck: .size is a component variant prop, not a collection size
+    if (this.size) maxClass = SIZE_MAP[this.size];
+    else if (this.max) maxClass = `max-w-${this.max}`;
+    else maxClass = 'max-w-7xl';
 
     const centerClass = this.center ? 'mx-auto' : '';
     const classes = this.buildClasses('w-full', 'px-4', maxClass, centerClass);

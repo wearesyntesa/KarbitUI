@@ -1,22 +1,34 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
-import type { KbRowClickDetail, KbSortDetail } from '../../core/events.js';
+import type { SortDirection } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
 export type TableVariant = 'simple' | 'striped' | 'bordered';
 export type TableSize = 'sm' | 'md' | 'lg';
-export type SortDirection = 'asc' | 'desc';
 
-const SIZE_MAP: Record<TableSize, { cell: string; header: string; text: string; headerText: string; toolbarPx: string }> = {
-  sm: { cell: 'px-5 py-3.5', header: 'px-5 py-3.5', text: 'text-sm', headerText: 'text-[11px]', toolbarPx: 'px-5 py-3' },
+const SIZE_MAP: Record<
+  TableSize,
+  { cell: string; header: string; text: string; headerText: string; toolbarPx: string }
+> = {
+  sm: {
+    cell: 'px-5 py-3.5',
+    header: 'px-5 py-3.5',
+    text: 'text-sm',
+    headerText: 'text-[11px]',
+    toolbarPx: 'px-5 py-3',
+  },
   md: { cell: 'px-6 py-5', header: 'px-6 py-4', text: 'text-[15px]', headerText: 'text-xs', toolbarPx: 'px-6 py-4' },
   lg: { cell: 'px-8 py-6', header: 'px-8 py-5', text: 'text-base', headerText: 'text-xs', toolbarPx: 'px-8 py-5' },
-};
+} as const satisfies Record<
+  TableSize,
+  { cell: string; header: string; text: string; headerText: string; toolbarPx: string }
+>;
 
-const HOVER_CLASSES = 'hover:bg-gray-50/80 dark:hover:bg-zinc-800/50';
+const HOVER_CLASSES: string = 'hover:bg-gray-50/80 dark:hover:bg-zinc-800/50';
 
-const INTERACTIVE_ROW_CLASSES_LIST = [
+const INTERACTIVE_ROW_CLASSES_LIST: string[] = [
   'cursor-pointer',
   'select-none',
   ...HOVER_CLASSES.split(' '),
@@ -26,14 +38,16 @@ const INTERACTIVE_ROW_CLASSES_LIST = [
   ...kbClasses.transition.split(' '),
 ];
 
-const SORT_INDICATOR_ATTR = 'data-kb-sort-indicator';
-const RESIZE_HANDLE_ATTR = 'data-kb-resize-handle';
+const SORT_INDICATOR_ATTR: string = 'data-kb-sort-indicator';
+const RESIZE_HANDLE_ATTR: string = 'data-kb-resize-handle';
 
 const VARIANT_CLASSES: Record<TableVariant, string> = {
   simple: '',
-  striped: '[&_tbody_tr:nth-child(even):not([hidden])]:bg-gray-50/50 dark:[&_tbody_tr:nth-child(even):not([hidden])]:bg-zinc-800/30',
-  bordered: '[&_th]:border [&_th]:border-gray-200 dark:[&_th]:border-zinc-700 [&_td]:border [&_td]:border-gray-200 dark:[&_td]:border-zinc-700',
-};
+  striped:
+    '[&_tbody_tr:nth-child(even):not([hidden])]:bg-gray-50/50 dark:[&_tbody_tr:nth-child(even):not([hidden])]:bg-zinc-800/30',
+  bordered:
+    '[&_th]:border [&_th]:border-gray-200 dark:[&_th]:border-zinc-700 [&_td]:border [&_td]:border-gray-200 dark:[&_td]:border-zinc-700',
+} as const satisfies Record<TableVariant, string>;
 
 /**
  * Data table with sorting, searching, column resizing, and interactive rows.
@@ -71,7 +85,7 @@ const VARIANT_CLASSES: Record<TableVariant, string> = {
  */
 @customElement('kb-table')
 export class KbTable extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Visual variant — `'simple'` (default lines), `'striped'` (alternating row bg), or `'bordered'` (cell borders). @defaultValue 'simple' */
   @property({ type: String }) variant: TableVariant = 'simple';
@@ -102,10 +116,13 @@ export class KbTable extends KbBaseElement {
 
   // ── Interactive rows ──────────────────────────────────────────────
 
-  private _boundRowHandlers = new WeakMap<HTMLTableRowElement, {
-    click: () => void;
-    keydown: (e: KeyboardEvent) => void;
-  }>();
+  private _boundRowHandlers = new WeakMap<
+    HTMLTableRowElement,
+    {
+      click: () => void;
+      keydown: (e: KeyboardEvent) => void;
+    }
+  >();
 
   override updated(changed: Map<PropertyKey, unknown>): void {
     if (changed.has('interactive')) {
@@ -117,7 +134,9 @@ export class KbTable extends KbBaseElement {
     if (changed.has('resizable')) {
       this._applyResizableColumns();
     }
-    this._syncRowCounts();
+    if (this._totalCount === 0 || changed.has('_searchQuery') || changed.has('interactive')) {
+      this._syncRowCounts();
+    }
   }
 
   override disconnectedCallback(): void {
@@ -131,7 +150,7 @@ export class KbTable extends KbBaseElement {
     const rows = this.querySelectorAll<HTMLTableRowElement>('tbody tr');
 
     if (!this.interactive) {
-      rows.forEach((row) => this._detachRow(row));
+      for (const row of rows) this._detachRow(row);
       return;
     }
 
@@ -164,22 +183,18 @@ export class KbTable extends KbBaseElement {
 
     row.removeAttribute('tabindex');
     row.removeAttribute('role');
-    INTERACTIVE_ROW_CLASSES_LIST.forEach((cls) => row.classList.remove(cls));
+    for (const cls of INTERACTIVE_ROW_CLASSES_LIST) row.classList.remove(cls);
     row.removeEventListener('click', handlers.click);
     row.removeEventListener('keydown', handlers.keydown);
     this._boundRowHandlers.delete(row);
   }
 
   private _cleanupInteractiveRows(): void {
-    this.querySelectorAll<HTMLTableRowElement>('tbody tr').forEach((row) => this._detachRow(row));
+    for (const row of this.querySelectorAll<HTMLTableRowElement>('tbody tr')) this._detachRow(row);
   }
 
   private _fireRowClick(index: number, row: HTMLTableRowElement): void {
-    this.dispatchEvent(new CustomEvent<KbRowClickDetail>('kb-row-click', {
-      bubbles: true,
-      composed: true,
-      detail: { index, row },
-    }));
+    this.emit('kb-row-click', { index, row });
   }
 
   // ── Sortable ──────────────────────────────────────────────────────
@@ -190,7 +205,7 @@ export class KbTable extends KbBaseElement {
     const headers = Array.from(this.querySelectorAll<HTMLTableCellElement>('thead th'));
 
     if (!this.sortable) {
-      headers.forEach((th) => this._detachSortHeader(th));
+      for (const th of headers) this._detachSortHeader(th);
       return;
     }
 
@@ -205,7 +220,7 @@ export class KbTable extends KbBaseElement {
         th.style.userSelect = 'none';
         th.style.position = 'relative';
 
-        const handler = () => this._handleSortClick(colIndex);
+        const handler = (): void => this._handleSortClick(colIndex);
         th.addEventListener('click', handler);
         this._sortClickHandlers.set(th, handler);
       }
@@ -227,7 +242,7 @@ export class KbTable extends KbBaseElement {
   }
 
   private _cleanupSortableHeaders(): void {
-    this.querySelectorAll<HTMLTableCellElement>('thead th').forEach((th) => this._detachSortHeader(th));
+    for (const th of this.querySelectorAll<HTMLTableCellElement>('thead th')) this._detachSortHeader(th);
   }
 
   private _handleSortClick(colIndex: number): void {
@@ -240,11 +255,7 @@ export class KbTable extends KbBaseElement {
 
     this._performSort();
 
-    this.dispatchEvent(new CustomEvent<KbSortDetail>('kb-sort', {
-      bubbles: true,
-      composed: true,
-      detail: { column: this._sortCol, direction: this._sortDir },
-    }));
+    this.emit('kb-sort', { column: this._sortCol, direction: this._sortDir });
   }
 
   private _performSort(): void {
@@ -257,21 +268,20 @@ export class KbTable extends KbBaseElement {
 
     const th = this.querySelectorAll<HTMLTableCellElement>('thead th')[col];
     const isNumeric = th?.getAttribute('data-sort') === 'number';
+    const numRegex = /[^0-9.-]/g;
 
-    rows.sort((a, b) => {
-      const aText = (a.cells[col]?.textContent ?? '').trim();
-      const bText = (b.cells[col]?.textContent ?? '').trim();
-
-      if (isNumeric) {
-        const aNum = parseFloat(aText.replace(/[^0-9.\-]/g, ''));
-        const bNum = parseFloat(bText.replace(/[^0-9.\-]/g, ''));
-        return ((!isNaN(aNum) ? aNum : 0) - (!isNaN(bNum) ? bNum : 0)) * dir;
-      }
-
-      return aText.localeCompare(bText) * dir;
+    const keyed = rows.map((row) => {
+      const text = (row.cells[col]?.textContent ?? '').trim();
+      return { row, key: isNumeric ? parseFloat(text.replace(numRegex, '')) || 0 : text };
     });
 
-    rows.forEach((row) => tbody.appendChild(row));
+    keyed.sort((a, b) =>
+      isNumeric
+        ? ((a.key as number) - (b.key as number)) * dir
+        : (a.key as string).localeCompare(b.key as string) * dir,
+    );
+
+    for (const { row } of keyed) tbody.appendChild(row);
   }
 
   private _updateSortIndicator(th: HTMLTableCellElement, colIndex: number): void {
@@ -280,12 +290,12 @@ export class KbTable extends KbBaseElement {
     if (this._sortCol !== colIndex) {
       if (indicator) {
         indicator.textContent = '';
-        indicator.className = 'ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono transition-all duration-150 ease-in-out';
+        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono ${kbClasses.transition}`;
         indicator.textContent = '↕';
       } else {
         indicator = document.createElement('span');
         indicator.setAttribute(SORT_INDICATOR_ATTR, '');
-        indicator.className = 'ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono transition-all duration-150 ease-in-out';
+        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono ${kbClasses.transition}`;
         indicator.textContent = '↕';
         th.appendChild(indicator);
       }
@@ -298,13 +308,14 @@ export class KbTable extends KbBaseElement {
       th.appendChild(indicator);
     }
 
-    indicator.className = 'ml-2 inline-block text-blue-500 dark:text-blue-400 text-[10px] font-mono transition-all duration-150 ease-in-out';
+    indicator.className = `ml-2 inline-block text-blue-500 dark:text-blue-400 text-[10px] font-mono ${kbClasses.transition}`;
     indicator.textContent = this._sortDir === 'asc' ? '↑' : '↓';
   }
 
   // ── Searchable ────────────────────────────────────────────────────
 
   private _searchTimeout: ReturnType<typeof setTimeout> | undefined;
+  private _rowTextCache = new WeakMap<HTMLTableRowElement, string>();
 
   private _handleSearchInput(e: Event): void {
     const value = (e.target as HTMLInputElement).value;
@@ -329,7 +340,11 @@ export class KbTable extends KbBaseElement {
         visible++;
         return;
       }
-      const text = (row.textContent ?? '').toLowerCase();
+      let text = this._rowTextCache.get(row);
+      if (text === undefined) {
+        text = (row.textContent ?? '').toLowerCase();
+        this._rowTextCache.set(row, text);
+      }
       const match = text.includes(query);
       row.hidden = !match;
       if (match) visible++;
@@ -400,13 +415,13 @@ export class KbTable extends KbBaseElement {
     document.body.style.cursor = 'col-resize';
     document.body.style.userSelect = 'none';
 
-    const onMove = (ev: MouseEvent) => {
+    const onMove = (ev: MouseEvent): void => {
       const delta = ev.clientX - startX;
       const newWidth = Math.max(MIN_WIDTH, startWidth + delta);
       th.style.width = `${newWidth}px`;
     };
 
-    const onUp = () => {
+    const onUp = (): void => {
       document.body.style.cursor = prevCursor;
       document.body.style.userSelect = prevSelect;
       document.removeEventListener('mousemove', onMove);
@@ -436,26 +451,29 @@ export class KbTable extends KbBaseElement {
 
   // ── Render ────────────────────────────────────────────────────────
 
-  override render() {
+  override render(): TemplateResult {
     const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
 
-    const hoverClasses = this.hoverable && !this.interactive
-      ? '[&_tbody_tr:hover]:bg-gray-50/80 dark:[&_tbody_tr:hover]:bg-zinc-800/50'
-      : '';
+    const hoverClasses =
+      this.hoverable && !this.interactive
+        ? '[&_tbody_tr:hover]:bg-gray-50/80 dark:[&_tbody_tr:hover]:bg-zinc-800/50'
+        : '';
 
     const stickyClasses = this.stickyHeader
       ? '[&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10 [&_thead_th]:bg-white dark:[&_thead_th]:bg-zinc-900'
       : '';
 
-    const cellBorderClasses = this.variant === 'bordered'
-      ? ''
-      : '[&_td]:border-b [&_td]:border-gray-100 dark:[&_td]:border-zinc-800 [&_tbody_tr:last-child_td]:border-b-0';
+    const cellBorderClasses =
+      this.variant === 'bordered'
+        ? ''
+        : '[&_td]:border-b [&_td]:border-gray-100 dark:[&_td]:border-zinc-800 [&_tbody_tr:last-child_td]:border-b-0';
 
-    const headerBorderClasses = this.variant === 'bordered'
-      ? ''
-      : '[&_thead_tr]:border-b [&_thead_tr]:border-gray-200 dark:[&_thead_tr]:border-zinc-700';
+    const headerBorderClasses =
+      this.variant === 'bordered'
+        ? ''
+        : '[&_thead_tr]:border-b [&_thead_tr]:border-gray-200 dark:[&_thead_tr]:border-zinc-700';
 
-    const tableClasses = [
+    const tableClasses = cx(
       'w-full border-collapse',
       kbClasses.textPrimary,
       sizeConfig.text,
@@ -468,7 +486,7 @@ export class KbTable extends KbBaseElement {
       `[&_tr]:${kbClasses.transition}`,
       hoverClasses,
       stickyClasses,
-    ].filter(Boolean).join(' ');
+    );
 
     const containerClasses = this.buildClasses(
       kbClasses.border,
@@ -494,7 +512,7 @@ export class KbTable extends KbBaseElement {
               type="text"
               placeholder=${this.searchPlaceholder}
               class="w-full pl-10 pr-4 py-2 text-sm font-sans ${kbClasses.border} ${kbClasses.surface} ${kbClasses.textPrimary} placeholder:${kbClasses.textMuted} ${kbClasses.focus} ${kbClasses.transition} outline-none"
-              @input=${(e: Event) => this._handleSearchInput(e)}
+              @input=${this._handleSearchInput}
             />
           </div>
           <span class="font-mono text-[11px] tracking-widest uppercase ${kbClasses.textMuted} whitespace-nowrap">${countText}</span>
@@ -502,10 +520,10 @@ export class KbTable extends KbBaseElement {
       `
       : nothing;
 
-    const innerClasses = [
+    const innerClasses = cx(
       this.stickyHeader ? 'flex-1 min-h-0 overflow-y-auto' : '',
       this.resizable ? 'overflow-x-auto' : '',
-    ].filter(Boolean).join(' ');
+    );
 
     return html`
       <div class=${containerClasses}>

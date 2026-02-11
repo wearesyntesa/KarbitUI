@@ -1,10 +1,9 @@
-import { html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, nothing, type TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
 import type { KbCheckbox } from './kb-checkbox.js';
-import type { KbChangeGroupDetail } from '../../core/events.js';
 
 /**
  * Groups `kb-checkbox` elements, tracks selected values,
@@ -26,8 +25,8 @@ import type { KbChangeGroupDetail } from '../../core/events.js';
  * ```
  */
 @customElement('kb-checkbox-group')
-export class KbCheckboxGroup extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbCheckboxGroup extends KbBaseElement<'label'> {
+  static override hostDisplay = 'block' as const;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -49,15 +48,15 @@ export class KbCheckboxGroup extends KbBaseElement {
   @property({ type: Number }) min?: number;
   /** Maximum number of checkboxes that can be checked simultaneously. */
   @property({ type: Number }) max?: number;
-
-  @state() private _values: string[] = [];
+  /** Currently checked values. Reflects child checkbox states. Can be set programmatically. */
+  @property({ type: Array }) values: string[] = [];
 
   private _getCheckboxes(): KbCheckbox[] {
     return Array.from(this.querySelectorAll('kb-checkbox')) as KbCheckbox[];
   }
 
   private _syncValues(): void {
-    this._values = this._getCheckboxes()
+    this.values = this._getCheckboxes()
       .filter((cb) => cb.checked)
       .map((cb) => cb.value ?? '');
   }
@@ -85,23 +84,30 @@ export class KbCheckboxGroup extends KbBaseElement {
 
     this._syncValues();
 
-    this.dispatchEvent(new CustomEvent<KbChangeGroupDetail>('kb-change', {
-      detail: { source: 'checkbox-group', values: [...this._values] },
-      bubbles: true,
-      composed: true,
-    }));
+    this.emit('kb-change', { source: 'checkbox-group', values: [...this.values] });
   };
 
   override firstUpdated(): void {
     const checkboxes = this._getCheckboxes();
     for (const cb of checkboxes) {
+      // biome-ignore lint/style/useExplicitLengthCheck: .size is a component variant prop, not a collection size
       if (this.size && !cb.hasAttribute('size')) cb.size = this.size;
       if (this.colorScheme && !cb.hasAttribute('color-scheme')) cb.colorScheme = this.colorScheme;
     }
     this._syncValues();
   }
 
-  override render() {
+  protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (changed.has('values') && changed.get('values') !== undefined) {
+      const valSet = new Set(this.values);
+      for (const cb of this._getCheckboxes()) {
+        cb.checked = valSet.has(cb.value ?? '');
+      }
+    }
+  }
+
+  override render(): TemplateResult {
     const labelEl = this.slotted('label');
     const dirClass = this.direction === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col';
 

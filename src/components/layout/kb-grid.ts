@@ -1,5 +1,5 @@
-import { html } from 'lit';
 import type { PropertyValues } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
@@ -19,7 +19,7 @@ import { KbBaseElement } from '../../core/base-element.js';
  */
 @customElement('kb-grid')
 export class KbGrid extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Number of grid columns (e.g. `'3'`, `'none'`). Maps to the `gridCols` style prop. */
   @property({ type: String }) columns?: string;
@@ -32,7 +32,7 @@ export class KbGrid extends KbBaseElement {
     if (this.rows && !this.gridRows) this.gridRows = this.rows;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const classes = this.buildClasses('grid');
     return html`<div class=${classes}>${this.defaultSlotContent}</div>`;
   }

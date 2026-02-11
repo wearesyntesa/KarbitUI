@@ -12,7 +12,10 @@ export default {
     level: { control: 'select', options: ['1', '2', '3', '4', '5', '6'] },
     size: { control: 'select', options: [undefined, 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] },
     weight: { control: 'select', options: ['medium', 'semibold', 'bold', 'extrabold', 'black'] },
-    tone: { control: 'select', options: [undefined, 'primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error'] },
+    tone: {
+      control: 'select',
+      options: [undefined, 'primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error'],
+    },
     truncate: { control: 'boolean' },
   },
 } satisfies Meta;

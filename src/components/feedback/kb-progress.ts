@@ -1,9 +1,10 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme } from '../../core/types.js';
+import { cx } from '../../utils/cx.js';
 
 export type ProgressSize = 'xs' | 'sm' | 'md' | 'lg';
 
@@ -12,7 +13,7 @@ const SIZE_MAP: Record<ProgressSize, string> = {
   sm: 'h-1.5',
   md: 'h-2.5',
   lg: 'h-4',
-};
+} as const satisfies Record<ProgressSize, string>;
 
 const AUTO_COLOR_THRESHOLDS: Array<{ max: number; classes: string }> = [
   { max: 60, classes: 'bg-blue-500 dark:bg-blue-400' },
@@ -20,7 +21,8 @@ const AUTO_COLOR_THRESHOLDS: Array<{ max: number; classes: string }> = [
   { max: Infinity, classes: 'bg-red-500 dark:bg-red-400' },
 ];
 
-const STRIPE_BG = 'linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)';
+const STRIPE_BG =
+  'linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)';
 const STRIPE_SIZE = '1rem 1rem';
 
 /**
@@ -42,8 +44,8 @@ const STRIPE_SIZE = '1rem 1rem';
  * ```
  */
 @customElement('kb-progress')
-export class KbProgress extends KbBaseElement {
-  static override hostDisplay = 'block';
+export class KbProgress extends KbBaseElement<'label'> {
+  static override hostDisplay = 'block' as const;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -98,7 +100,7 @@ export class KbProgress extends KbBaseElement {
     return 'bg-blue-500 dark:bg-blue-400';
   }
 
-  override render() {
+  override render(): TemplateResult {
     const sizeClass = SIZE_MAP[this.size] ?? SIZE_MAP.md;
     const fillColor = this._resolveFillColor();
     const percent = this.clampedPercent;
@@ -111,50 +113,53 @@ export class KbProgress extends KbBaseElement {
       sizeClass,
     );
 
-    const fillAnimationClass = this.indeterminate
-      ? 'animate-kb-progress-indeterminate'
-      : this._mounted ? 'transition-all duration-500 ease-out' : '';
+    let fillAnimationClass = '';
+    if (this.indeterminate) fillAnimationClass = 'animate-kb-progress-indeterminate';
+    else if (this._mounted) fillAnimationClass = 'transition-all duration-500 ease-out';
 
-    const stripedAnimationClass = this.striped && this.animated && !this.indeterminate
-      ? 'animate-kb-progress-stripes'
-      : '';
+    const stripedAnimationClass =
+      this.striped && this.animated && !this.indeterminate ? 'animate-kb-progress-stripes' : '';
 
-    const fillClasses = [
+    const fillClasses = cx(
       fillColor,
       'h-full',
       this.indeterminate ? 'w-1/3' : '',
       fillAnimationClass,
       stripedAnimationClass,
-    ].filter(Boolean).join(' ');
+    );
 
     const fillStyle = this.indeterminate
       ? ''
       : [
           `width:${this._mounted ? percent : 0}%`,
           this.striped ? `background-image:${STRIPE_BG};background-size:${STRIPE_SIZE}` : '',
-        ].filter(Boolean).join(';');
+        ]
+          .filter(Boolean)
+          .join(';');
 
-    const segmentEls = this.segments > 1
-      ? Array.from({ length: this.segments - 1 }, (_, i) => {
-          const pos = ((i + 1) / this.segments) * 100;
-          return html`<span
+    const segmentEls =
+      this.segments > 1
+        ? Array.from({ length: this.segments - 1 }, (_, i) => {
+            const pos = ((i + 1) / this.segments) * 100;
+            return html`<span
             class="absolute top-0 bottom-0 w-px bg-white/30 dark:bg-zinc-900/50"
             style="left:${pos}%"
           ></span>`;
-        })
-      : nothing;
+          })
+        : nothing;
 
     const hasLabel = !!labelContent;
-    const headerRow = hasLabel || this.showValue
-      ? html`<div class="flex items-baseline justify-between mb-1.5">
-          ${hasLabel
-            ? html`<span class="${kbClasses.label}">${labelContent}</span>`
-            : html`<span></span>`}
-          ${this.showValue && !this.indeterminate
-            ? html`<span class="font-mono text-xs ${kbClasses.textSecondary}">${displayValue}</span>`
-            : nothing}
+    const headerRow =
+      hasLabel || this.showValue
+        ? html`<div class="flex items-baseline justify-between mb-1.5">
+          ${hasLabel ? html`<span class="${kbClasses.label}">${labelContent}</span>` : html`<span></span>`}
+          ${
+            this.showValue && !this.indeterminate
+              ? html`<span class="font-mono text-xs ${kbClasses.textSecondary}">${displayValue}</span>`
+              : nothing
+          }
         </div>`
-      : nothing;
+        : nothing;
 
     return html`
       ${headerRow}

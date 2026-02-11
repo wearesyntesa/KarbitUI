@@ -1,11 +1,20 @@
-import { html, nothing } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import { INTERACTIVE_SOLID, INTERACTIVE_OUTLINE, INTERACTIVE_GHOST, INTERACTIVE_LINK } from '../../core/color-schemes.js';
-import { recipe } from '../../core/recipe.js';
+import {
+  INTERACTIVE_GHOST,
+  INTERACTIVE_LINK,
+  INTERACTIVE_OUTLINE,
+  INTERACTIVE_SOLID,
+  lookupScheme,
+} from '../../core/color-schemes.js';
+import { ICON_SIZE } from '../../core/component-tokens.js';
+import { LOADING_SIZE } from '../../core/icons.js';
+import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
-import type { ColorScheme } from '../../core/types.js';
+import type { ColorScheme, KnownColorScheme } from '../../core/types.js';
 
+// biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const buttonRecipe = recipe({
   base: `inline-flex items-center justify-center font-sans font-semibold uppercase tracking-wide ${kbClasses.transition} cursor-pointer select-none ${kbClasses.focus}`,
   variants: {
@@ -26,37 +35,24 @@ const buttonRecipe = recipe({
   defaultVariants: { variant: 'solid', size: 'md' },
 });
 
-export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'link';
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonVariant = InferVariant<typeof buttonRecipe, 'variant'>;
+export type ButtonSize = InferVariant<typeof buttonRecipe, 'size'>;
 
 const VARIANT_DEFAULT_COLOR: Record<ButtonVariant, string> = {
-  solid: 'bg-blue-500 text-white border-blue-500 hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 active:border-blue-700 dark:bg-blue-600 dark:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:active:bg-blue-700',
-  outline: 'bg-white text-slate-900 border-gray-300 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 dark:bg-transparent dark:text-zinc-50 dark:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:border-zinc-500 dark:active:bg-zinc-700',
-  ghost: 'bg-transparent text-slate-900 hover:bg-gray-100 active:bg-gray-200 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
+  solid:
+    'bg-blue-500 text-white border-blue-500 hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 active:border-blue-700 dark:bg-blue-600 dark:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500 dark:active:bg-blue-700',
+  outline:
+    'bg-white text-slate-900 border-gray-300 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 dark:bg-transparent dark:text-zinc-50 dark:border-zinc-600 dark:hover:bg-zinc-800 dark:hover:border-zinc-500 dark:active:bg-zinc-700',
+  ghost:
+    'bg-transparent text-slate-900 hover:bg-gray-100 active:bg-gray-200 dark:text-zinc-50 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
   link: 'bg-transparent text-blue-500 decoration-blue-500/40 hover:decoration-blue-500 hover:text-blue-600 dark:text-blue-400 dark:decoration-blue-400/40 dark:hover:decoration-blue-400 dark:hover:text-blue-300',
-};
+} as const satisfies Record<ButtonVariant, string>;
 
-const COLOR_SCHEME_MAP: Record<ButtonVariant, Record<ColorScheme, string>> = {
+const COLOR_SCHEME_MAP: Record<ButtonVariant, Record<KnownColorScheme, string>> = {
   solid: INTERACTIVE_SOLID,
   outline: INTERACTIVE_OUTLINE,
   ghost: INTERACTIVE_GHOST,
   link: INTERACTIVE_LINK,
-};
-
-const LOADING_SIZE: Record<ButtonSize, string> = {
-  xs: 'w-3 h-3 border',
-  sm: 'w-3.5 h-3.5 border',
-  md: 'w-4 h-4 border-2',
-  lg: 'w-5 h-5 border-2',
-  xl: 'w-6 h-6 border-2',
-};
-
-const ICON_SIZE: Record<ButtonSize, string> = {
-  xs: '[&>svg]:w-3 [&>svg]:h-3',
-  sm: '[&>svg]:w-3.5 [&>svg]:h-3.5',
-  md: '[&>svg]:w-4 [&>svg]:h-4',
-  lg: '[&>svg]:w-5 [&>svg]:h-5',
-  xl: '[&>svg]:w-6 [&>svg]:h-6',
 };
 
 /**
@@ -81,7 +77,7 @@ const ICON_SIZE: Record<ButtonSize, string> = {
  * ```
  */
 @customElement('kb-button')
-export class KbButton extends KbBaseElement {
+export class KbButton extends KbBaseElement<'icon-left' | 'icon-right'> {
   /** Visual variant controlling border, background, and text styles. @defaultValue 'solid' */
   @property({ type: String }) variant: ButtonVariant = 'solid';
   /** Button size controlling padding, font size, and icon sizing. @defaultValue 'md' */
@@ -110,24 +106,18 @@ export class KbButton extends KbBaseElement {
     this._pressed = false;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const recipeClasses = buttonRecipe({ variant: this.variant, size: this.size });
 
-    const disabledClasses = (this.disabled || this.loading)
-      ? kbClasses.disabled
-      : '';
+    const disabledClasses = this.disabled || this.loading ? kbClasses.disabled : '';
 
     const colorMap = COLOR_SCHEME_MAP[this.variant];
-    const colorClasses = this.colorScheme && colorMap
-      ? colorMap[this.colorScheme] ?? VARIANT_DEFAULT_COLOR[this.variant]
-      : VARIANT_DEFAULT_COLOR[this.variant];
+    const colorClasses = lookupScheme(colorMap, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant];
 
     const widthClass = this.fullWidth ? 'w-full' : '';
     const iconSizeClass = ICON_SIZE[this.size] ?? ICON_SIZE.md;
 
-    const pressClass = this._pressed && !this.disabled && !this.loading
-      ? 'scale-[0.97]'
-      : '';
+    const pressClass = this._pressed && !this.disabled && !this.loading ? 'scale-[0.97]' : '';
 
     const classes = this.buildClasses(
       recipeClasses,
@@ -143,6 +133,20 @@ export class KbButton extends KbBaseElement {
 
     const spinnerClasses = `inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size] ?? LOADING_SIZE.md}`;
 
+    let leftContent = nothing as typeof nothing | ReturnType<typeof html>;
+    if (this.loading) {
+      leftContent = html`<span class=${spinnerClasses}></span>`;
+    } else if (iconLeft) {
+      leftContent = html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconLeft}</span>`;
+    }
+
+    let mainContent: typeof nothing | ReturnType<typeof html> | Node[] = nothing;
+    if (this.loading && this.loadingText !== undefined) {
+      mainContent = html`<span>${this.loadingText}</span>`;
+    } else if (!this.loading) {
+      mainContent = this.defaultSlotContent;
+    }
+
     return html`
       <button
         class=${classes}
@@ -150,25 +154,16 @@ export class KbButton extends KbBaseElement {
         ?disabled=${this.disabled || this.loading}
         aria-busy=${this.loading ? 'true' : 'false'}
         aria-disabled=${this.disabled ? 'true' : 'false'}
-        @pointerdown=${() => this._onPointerDown()}
-        @pointerup=${() => this._onPointerUp()}
-        @pointerleave=${() => this._onPointerUp()}
+        @pointerdown=${this._onPointerDown}
+        @pointerup=${this._onPointerUp}
+        @pointerleave=${this._onPointerUp}
       >
-        ${this.loading
-          ? html`<span class=${spinnerClasses}></span>`
-          : iconLeft
-            ? html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconLeft}</span>`
+        ${leftContent}
+        ${mainContent}
+        ${
+          !this.loading && iconRight
+            ? html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconRight}</span>`
             : nothing
-        }
-        ${this.loading && this.loadingText !== undefined
-          ? html`<span>${this.loadingText}</span>`
-          : this.loading
-            ? nothing
-            : this.defaultSlotContent
-        }
-        ${!this.loading && iconRight
-          ? html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconRight}</span>`
-          : nothing
         }
       </button>
     `;

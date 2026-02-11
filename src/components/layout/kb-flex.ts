@@ -1,8 +1,8 @@
-import { html } from 'lit';
 import type { PropertyValues } from 'lit';
+import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import type { FlexDirectionValue, FlexAlignValue, FlexJustifyValue, FlexWrapValue } from '../../core/types.js';
+import type { FlexAlignValue, FlexDirectionValue, FlexJustifyValue, FlexWrapValue } from '../../core/types.js';
 
 /**
  * Flexbox layout container. Shorthand for `<kb-box display="flex">`.
@@ -19,7 +19,7 @@ import type { FlexDirectionValue, FlexAlignValue, FlexJustifyValue, FlexWrapValu
  */
 @customElement('kb-flex')
 export class KbFlex extends KbBaseElement {
-  static override hostDisplay = 'block';
+  static override hostDisplay = 'block' as const;
 
   /** Flex direction. Maps to the `flexDir` style prop. @defaultValue undefined (browser default: row) */
   @property({ type: String }) direction?: FlexDirectionValue;
@@ -38,7 +38,7 @@ export class KbFlex extends KbBaseElement {
     if (this.wrap && !this.flexWrap) this.flexWrap = this.wrap;
   }
 
-  override render() {
+  override render(): TemplateResult {
     const classes = this.buildClasses('flex');
     return html`<div class=${classes}>${this.defaultSlotContent}</div>`;
   }
