@@ -156,7 +156,7 @@ export class KbCode extends KbBaseElement {
     const text = this._rawText || (this.querySelector('code')?.textContent ?? '');
     try {
       await navigator.clipboard.writeText(text);
-      // biome-ignore lint/nursery/noUselessCatchBinding: pattern required by project convention
+      // biome-ignore lint/complexity/noUselessCatchBinding: pattern required by project convention
     } catch (_e: unknown) {
       /* clipboard write failed - no-op */
     }
