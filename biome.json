@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -44,6 +44,7 @@
       "complexity": {
         "noExcessiveCognitiveComplexity": "warn",
         "noExcessiveNestedTestSuites": "error",
+        "noUselessCatchBinding": "error",
         "noUselessStringConcat": "error",
         "noUselessUndefinedInitialization": "error",
         "useSimplifiedLogicExpression": "warn"
@@ -100,13 +101,11 @@
         "noEvolvingTypes": "error",
         "noExplicitAny": "error",
         "noMisplacedAssertion": "error",
+        "noUnusedExpressions": "error",
         "useErrorMessage": "error"
       },
       "nursery": {
         "noShadow": "warn",
-        "noUnusedExpressions": "error",
-        "noUselessCatchBinding": "error",
-        "noUselessUndefined": "warn",
         "useSortedClasses": "error",
         "useExplicitType": "error"
       }
