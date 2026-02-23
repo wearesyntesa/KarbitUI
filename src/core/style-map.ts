@@ -4,7 +4,7 @@ function displayTransform(value: string): string {
   return value === 'none' ? 'hidden' : value;
 }
 
-// biome-ignore lint/nursery/useExplicitType: typeof STYLE_PROP_DEFS is used downstream to derive StylePropName/StyleProps — an explicit annotation would widen the type
+// biome-ignore lint/nursery/useExplicitType: typeof STYLE_PROP_DEFS is used downstream to derive StylePropName/StyleProps - an explicit annotation would widen the type
 export const STYLE_PROP_DEFS = {
   p: { prefix: 'p', category: 'spacing', attribute: 'p' },
   px: { prefix: 'px', category: 'spacing', attribute: 'px' },
@@ -82,6 +82,16 @@ export const STYLE_PROP_DEFS = {
   userSelect: { prefix: 'select', category: 'userSelect', attribute: 'user-select' },
   pointerEvents: { prefix: 'pointer-events', category: 'pointerEvents', attribute: 'pointer-events' },
   transition: { prefix: 'transition', category: 'transition', attribute: 'transition' },
+
+  alignSelf: { prefix: 'self', category: 'alignSelf', attribute: 'align-self' },
+  justifySelf: { prefix: 'justify-self', category: 'justifySelf', attribute: 'justify-self' },
+  aspectRatio: { prefix: 'aspect', category: 'aspectRatio', attribute: 'aspect-ratio' },
+  objectFit: { prefix: 'object', category: 'objectFit', attribute: 'object-fit' },
+  visibility: { prefix: '', category: 'visibility', attribute: 'visibility' },
+  whitespace: { prefix: 'whitespace', category: 'whitespace', attribute: 'whitespace' },
+  borderStyle: { prefix: 'border', category: 'borderStyle', attribute: 'border-style' },
+  inset: { prefix: 'inset', category: 'inset', attribute: 'inset' },
+  order: { prefix: 'order', category: 'order', attribute: 'order' },
 } as const satisfies Record<string, StylePropDef>;
 
 export type StylePropName = keyof typeof STYLE_PROP_DEFS;

@@ -3,15 +3,17 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/feedback/kb-toast.js';
 
+type Args = { status?: string; duration?: number; closable?: boolean };
+
 export default {
   title: 'Feedback/Toast',
   component: 'kb-toast',
   render: (args) =>
     html`<kb-toast ${spreadAttrs(args)} style="position:static;">This is a toast notification.</kb-toast>`,
   args: { status: 'info', duration: 0 },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Info: S = {};
 

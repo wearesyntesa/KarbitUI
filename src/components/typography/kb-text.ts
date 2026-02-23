@@ -1,3 +1,4 @@
+import type { PropertyValues } from 'lit';
 import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
@@ -41,7 +42,6 @@ const TONE_MAP: Record<TextTone, string> = {
   error: 'text-red-600 dark:text-red-400',
 } as const satisfies Record<TextTone, string>;
 
-/** Default tone per variant when no explicit tone is set. */
 const VARIANT_DEFAULT_TONE: Record<TextVariant, string> = {
   body: kbClasses.textPrimary,
   label: kbClasses.textSecondary,
@@ -91,13 +91,20 @@ export class KbText extends KbBaseElement {
   /** HTML element to render. @defaultValue 'p' */
   @property({ type: String }) as: TextAs = 'p';
 
-  override render(): TemplateResult {
-    const sizeOverride = this.variant === 'body' ? (this.size ?? 'base') : this.size;
-    const recipeClasses = textRecipe({
-      variant: this.variant,
-      ...(sizeOverride ? { size: sizeOverride as 'base' } : {}),
-    });
+  private _cachedRecipeClasses = '';
 
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (changed.has('variant') || changed.has('size')) {
+      const sizeOverride = this.variant === 'body' ? (this.size ?? 'base') : this.size;
+      this._cachedRecipeClasses = textRecipe({
+        variant: this.variant,
+        ...(sizeOverride ? { size: sizeOverride as 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' } : {}),
+      });
+    }
+  }
+
+  override render(): TemplateResult {
     const toneClasses = this.tone
       ? (TONE_MAP[this.tone] ?? VARIANT_DEFAULT_TONE[this.variant])
       : VARIANT_DEFAULT_TONE[this.variant];
@@ -106,7 +113,7 @@ export class KbText extends KbBaseElement {
     const noWrapClass = this.noWrap ? 'whitespace-nowrap' : '';
     const clampClass = this.clamp ? (CLAMP_MAP[this.clamp] ?? '') : '';
 
-    const classes = this.buildClasses(recipeClasses, toneClasses, truncateClass, noWrapClass, clampClass);
+    const classes = this.buildClasses(this._cachedRecipeClasses, toneClasses, truncateClass, noWrapClass, clampClass);
 
     switch (this.as) {
       case 'span':

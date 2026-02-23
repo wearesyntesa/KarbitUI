@@ -3,7 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
+import { arrayHasChanged } from '../../utils/has-changed.js';
 import type { KbCheckbox } from './kb-checkbox.js';
+
+let cbGroupCounter = 0;
 
 /**
  * Groups `kb-checkbox` elements, tracks selected values,
@@ -28,14 +31,23 @@ import type { KbCheckbox } from './kb-checkbox.js';
 export class KbCheckboxGroup extends KbBaseElement<'label'> {
   static override hostDisplay = 'block' as const;
 
+  private readonly _labelId: string = `kb-cbg-label-${cbGroupCounter++}`;
+  private _childObserver: MutationObserver | undefined;
+
   override connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener('kb-change', this._onChildChange as EventListener);
+    this._childObserver = new MutationObserver(() => {
+      this._propagatePropsToChildren();
+    });
+    this._childObserver.observe(this, { childList: true });
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
     this.removeEventListener('kb-change', this._onChildChange as EventListener);
+    this._childObserver?.disconnect();
+    this._childObserver = undefined;
   }
 
   /** Layout direction of the grouped checkboxes. @defaultValue 'vertical' */
@@ -49,16 +61,17 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
   /** Maximum number of checkboxes that can be checked simultaneously. */
   @property({ type: Number }) max?: number;
   /** Currently checked values. Reflects child checkbox states. Can be set programmatically. */
-  @property({ type: Array }) values: string[] = [];
+  @property({ type: Array, hasChanged: arrayHasChanged }) values: string[] = [];
 
   private _getCheckboxes(): KbCheckbox[] {
     return Array.from(this.querySelectorAll('kb-checkbox')) as KbCheckbox[];
   }
 
-  private _syncValues(): void {
-    this.values = this._getCheckboxes()
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value ?? '');
+  private _syncValues(checkboxes: KbCheckbox[]): void {
+    const next = checkboxes.filter((cb) => cb.checked).map((cb) => cb.value ?? '');
+    if (arrayHasChanged(next, this.values)) {
+      this.values = next;
+    }
   }
 
   private _onChildChange = (e: Event): void => {
@@ -82,19 +95,24 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
       return;
     }
 
-    this._syncValues();
+    this._syncValues(checkboxes);
 
     this.emit('kb-change', { source: 'checkbox-group', values: [...this.values] });
   };
 
   override firstUpdated(): void {
+    this._propagatePropsToChildren();
+    this._syncValues(this._getCheckboxes());
+  }
+
+  /** Push group-level props to child checkboxes that don't have explicit overrides. */
+  private _propagatePropsToChildren(): void {
     const checkboxes = this._getCheckboxes();
     for (const cb of checkboxes) {
       // biome-ignore lint/style/useExplicitLengthCheck: .size is a component variant prop, not a collection size
       if (this.size && !cb.hasAttribute('size')) cb.size = this.size;
       if (this.colorScheme && !cb.hasAttribute('color-scheme')) cb.colorScheme = this.colorScheme;
     }
-    this._syncValues();
   }
 
   protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
@@ -114,8 +132,8 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
     const wrapperClasses = this.buildClasses('flex flex-col gap-2');
 
     return html`
-      <div class=${wrapperClasses} role="group" aria-label=${labelEl?.textContent?.trim() ?? nothing}>
-        ${labelEl ? html`<span class="${kbClasses.label} mb-1">${labelEl}</span>` : nothing}
+      <div class=${wrapperClasses} role="group" aria-labelledby=${labelEl ? this._labelId : nothing}>
+        ${labelEl ? html`<span id=${this._labelId} class="${kbClasses.label} select-none mb-1">${labelEl}</span>` : nothing}
         <div class="flex ${dirClass} gap-3">
           ${this.defaultSlotContent}
         </div>

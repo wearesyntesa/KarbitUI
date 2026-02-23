@@ -28,8 +28,8 @@ export class KbGrid extends KbBaseElement {
 
   override willUpdate(changed: PropertyValues): void {
     super.willUpdate(changed);
-    if (this.columns && !this.gridCols) this.gridCols = this.columns;
-    if (this.rows && !this.gridRows) this.gridRows = this.rows;
+    if (changed.has('columns') && this.columns) this.gridCols = this.columns;
+    if (changed.has('rows') && this.rows) this.gridRows = this.rows;
   }
 
   override render(): TemplateResult {

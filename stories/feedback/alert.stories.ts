@@ -5,14 +5,16 @@ import '../../src/components/feedback/kb-alert.js';
 import '../../src/components/forms/kb-button.js';
 import '../../src/components/navigation/kb-link.js';
 
+type Args = { status?: string; variant?: string; size?: string; closable?: boolean; showIcon?: boolean };
+
 export default {
   title: 'Feedback/Alert',
   component: 'kb-alert',
   render: (args) => html`<kb-alert ${spreadAttrs(args)}>This is an alert message.</kb-alert>`,
   args: { status: 'info', variant: 'subtle' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Info: S = {};
 

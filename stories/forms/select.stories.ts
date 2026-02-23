@@ -10,13 +10,15 @@ const frameworkOptions = [
   { value: 'angular', label: 'Angular' },
 ];
 
+type Args = { placeholder?: string; size?: string };
+
 export default {
   title: 'Forms/Select',
   component: 'kb-select',
   args: { placeholder: 'Choose a framework', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {
   render: (args) => html`

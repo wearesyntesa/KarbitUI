@@ -4,13 +4,15 @@ import '../../src/components/overlay/kb-tooltip.js';
 import '../../src/components/forms/kb-button.js';
 import '../../src/components/forms/kb-icon-button.js';
 
+type Args = { label?: string; placement?: string };
+
 export default {
   title: 'Overlay/Tooltip',
   component: 'kb-tooltip',
   args: { label: 'Tooltip text', placement: 'top' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {
   render: () => html`

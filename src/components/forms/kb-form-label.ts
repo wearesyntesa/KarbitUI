@@ -42,7 +42,7 @@ export class KbFormLabel extends KbBaseElement<'info'> {
     const infoEl = this.slotted('info');
 
     const classes = this.buildClasses(
-      'inline-flex items-center gap-1.5 font-mono uppercase tracking-widest',
+      'inline-flex items-center gap-1.5 font-mono uppercase tracking-widest select-none',
       sizeClass,
       kbClasses.textSecondary,
     );
@@ -57,11 +57,11 @@ export class KbFormLabel extends KbBaseElement<'info'> {
         : nothing;
 
     const infoSlot = infoEl
-      ? html`<span class="inline-flex items-center text-slate-400 dark:text-zinc-500 hover:text-slate-600 dark:hover:text-zinc-300 ${kbClasses.transition} [&>svg]:w-3.5 [&>svg]:h-3.5 cursor-help">${infoEl}</span>`
+      ? html`<span class="inline-flex items-center text-slate-400 dark:text-zinc-500 hover:text-slate-600 dark:hover:text-zinc-300 ${kbClasses.transitionColors} [&_svg]:w-3.5 [&_svg]:h-3.5 cursor-help">${infoEl}</span>`
       : nothing;
 
     return html`
-      <label class=${classes} for=${this.for ?? ''}>
+      <label class=${classes} for=${this.for ?? nothing}>
         ${this.defaultSlotContent}${requiredMark}${optionalMark}${infoSlot}
       </label>
     `;

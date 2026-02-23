@@ -2,13 +2,15 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '../../src/components/forms/kb-switch.js';
 
+type Args = { size?: string };
+
 export default {
   title: 'Forms/Switch',
   component: 'kb-switch',
   args: { size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {
   render: () => html`<kb-switch>Enable notifications</kb-switch>`,

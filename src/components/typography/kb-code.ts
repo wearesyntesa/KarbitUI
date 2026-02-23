@@ -5,6 +5,9 @@ import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
+const CLIPBOARD_ICON: TemplateResult = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4V4h11v1"/></svg>`;
+const CHECK_ICON: TemplateResult = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M20 6 9 17l-5-5"/></svg>`;
+
 /**
  * Callback that transforms raw code text into highlighted HTML.
  *
@@ -67,7 +70,14 @@ export type CodeHighlighter = (code: string, language: string) => string;
  */
 @customElement('kb-code')
 export class KbCode extends KbBaseElement {
-  /** Pluggable syntax highlighter. Set once to enable highlighting for all `kb-code` instances with a `language` prop. */
+  /**
+   * Pluggable syntax highlighter. Set once to enable highlighting for all `kb-code` instances with a `language` prop.
+   *
+   * **Security warning:** The returned HTML is rendered via `unsafeHTML` without sanitization.
+   * Ensure the highlighter never passes untrusted or user-supplied markup through to its
+   * return value. Libraries like Prism.js and highlight.js escape input by default, but
+   * custom implementations must do so explicitly to prevent XSS.
+   */
   static highlighter: CodeHighlighter | null = null;
 
   override connectedCallback(): void {
@@ -75,6 +85,15 @@ export class KbCode extends KbBaseElement {
     this._syncHostDisplay();
     this._rawText = this._extractRawText();
     this._cleanupSlotForHighlighting();
+  }
+
+  override disconnectedCallback(): void {
+    clearTimeout(this._copyTimeout);
+    for (const node of this.defaultSlotContent) {
+      (node as HTMLElement).hidden = false;
+      (node as HTMLElement).removeAttribute('aria-hidden');
+    }
+    super.disconnectedCallback();
   }
 
   /** Display as a full-width block with copy button. When `false`, renders as inline `<code>`. @defaultValue false */
@@ -92,6 +111,11 @@ export class KbCode extends KbBaseElement {
     if (changed.has('block')) {
       this._syncHostDisplay();
     }
+    if (changed.has('language')) {
+      this._rawText = this._extractRawText();
+      this._cleanupSlotForHighlighting();
+      this.requestUpdate();
+    }
   }
 
   private _syncHostDisplay(): void {
@@ -102,14 +126,21 @@ export class KbCode extends KbBaseElement {
     return this.defaultSlotContent.map((n) => n.textContent ?? '').join('');
   }
 
-  /** When highlighting is active, remove original slot nodes so they don't appear alongside Lit's rendered output in Light DOM. */
+  // When highlighting is active, hide original slot nodes so they don't appear alongside Lit's rendered output in Light DOM.
   private _cleanupSlotForHighlighting(): void {
     if (!(this.language && KbCode.highlighter)) return;
     for (const node of this.defaultSlotContent) {
-      node.parentNode?.removeChild(node);
+      (node as HTMLElement).hidden = true;
+      (node as HTMLElement).setAttribute('aria-hidden', 'true');
     }
   }
 
+  /**
+   * Returns highlighted HTML content or raw slot nodes.
+   *
+   * **Security warning:** When a `highlighter` is set, the result is rendered with
+   * `unsafeHTML` — the highlighter callback must return pre-sanitized HTML.
+   */
   private _getHighlightedContent(): ReturnType<typeof html> | ReturnType<typeof unsafeHTML> | Node[] {
     if (!(this.language && KbCode.highlighter)) {
       return this.defaultSlotContent;
@@ -125,14 +156,9 @@ export class KbCode extends KbBaseElement {
     const text = this._rawText || (this.querySelector('code')?.textContent ?? '');
     try {
       await navigator.clipboard.writeText(text);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
+      // biome-ignore lint/nursery/noUselessCatchBinding: pattern required by project convention
+    } catch (_e: unknown) {
+      /* clipboard write failed - no-op */
     }
 
     this._copied = true;
@@ -146,7 +172,7 @@ export class KbCode extends KbBaseElement {
     const baseClasses = cx(
       `font-mono ${kbClasses.surfaceMuted} ${kbClasses.border}`,
       'text-sm text-slate-900 dark:text-zinc-50',
-      kbClasses.transition,
+      kbClasses.transitionColors,
     );
 
     const content = this._getHighlightedContent();
@@ -169,17 +195,14 @@ export class KbCode extends KbBaseElement {
         'w-7 h-7 text-xs',
         'border border-gray-200 dark:border-zinc-600',
         'bg-white dark:bg-zinc-800',
-        'text-slate-500 dark:text-zinc-400',
+        kbClasses.textSecondary,
         'hover:text-slate-900 dark:hover:text-zinc-100',
         'hover:border-gray-400 dark:hover:border-zinc-400',
         'cursor-pointer select-none',
-        kbClasses.transition,
+        kbClasses.transitionColors,
         kbClasses.focus,
         this._copied ? 'opacity-100 text-green-600 dark:text-green-400 border-green-400 dark:border-green-500' : '',
       );
-
-      const clipboardIcon = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="9" y="9" width="13" height="13"/><path d="M5 15H4V4h11v1"/></svg>`;
-      const checkIcon = html`<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M20 6 9 17l-5-5"/></svg>`;
 
       const filenameHeader = hasFilename
         ? html`<div class="flex items-center px-4 py-2 ${kbClasses.border} bg-gray-50 dark:bg-zinc-800/80">
@@ -195,7 +218,7 @@ export class KbCode extends KbBaseElement {
             class=${btnClasses}
             aria-label=${this._copied ? 'Copied' : 'Copy code'}
             @click=${this._handleCopy}
-          >${this._copied ? checkIcon : clipboardIcon}</button>
+          >${this._copied ? CHECK_ICON : CLIPBOARD_ICON}</button>
           <pre class=${preClasses}><code>${content}</code></pre>
         </div>
       `;

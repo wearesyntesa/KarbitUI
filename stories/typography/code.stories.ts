@@ -98,13 +98,15 @@ KbCode.highlighter = (_code, _lang) => demoHighlight(_code);
 
 // ── Stories ──────────────────────────────────────────────────────────────────
 
+type Args = { block?: boolean };
+
 export default {
   title: 'Typography/Code',
   component: 'kb-code',
   render: (args) => html`<kb-code ${spreadAttrs(args)}>const x = 42;</kb-code>`,
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Inline: S = {};
 

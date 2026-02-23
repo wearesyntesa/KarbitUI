@@ -1,14 +1,17 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import {
-  buildDefaultGroupHover,
-  buildGroupHoverScheme,
   CHECKED_FILL_SCHEME,
   DEFAULT_CHECKED_FILL,
   FORM_DESCRIPTION_WRAPPER,
+  FORM_DISABLED_CONTROL,
+  FORM_DISABLED_LABEL,
+  FORM_DISABLED_WRAPPER,
   FORM_INVALID_TEXT,
+  SWITCH_DEFAULT_HOVER,
+  SWITCH_HOVER_SCHEME,
 } from '../../core/form-tokens.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
@@ -95,10 +98,8 @@ const SIZE_MAP: Record<
 
 const COLOR_SCHEME_TRACK: Record<KnownColorScheme, string> = CHECKED_FILL_SCHEME;
 
-/** Unchecked hover border per color scheme. */
-const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = buildGroupHoverScheme('sw');
+const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = SWITCH_HOVER_SCHEME;
 
-/** Icon color inside thumb per color scheme (used when checked). */
 const COLOR_SCHEME_ICON: Record<KnownColorScheme, string> = {
   blue: 'text-blue-500 dark:text-blue-500',
   red: 'text-red-500 dark:text-red-600',
@@ -108,7 +109,7 @@ const COLOR_SCHEME_ICON: Record<KnownColorScheme, string> = {
 } as const satisfies Record<KnownColorScheme, string>;
 
 const DEFAULT_TRACK: string = DEFAULT_CHECKED_FILL;
-const DEFAULT_HOVER: string = buildDefaultGroupHover('sw');
+const DEFAULT_HOVER: string = SWITCH_DEFAULT_HOVER;
 const DEFAULT_ICON: string = 'text-blue-500 dark:text-blue-500';
 
 /**
@@ -149,7 +150,11 @@ export class KbSwitch extends KbBaseElement<'description'> {
   /** Form field name, used in form submissions. */
   @property({ type: String }) name?: string;
 
-  @state() private _pressed: boolean = false;
+  private _trackEl: HTMLElement | null = null;
+
+  override firstUpdated(): void {
+    this._trackEl = this.querySelector<HTMLElement>('[role="switch"]');
+  }
 
   private _handleToggle(): void {
     if (this.disabled || this.loading) return;
@@ -164,76 +169,97 @@ export class KbSwitch extends KbBaseElement<'description'> {
     }
   }
 
-  private _onPointerDown(): void {
-    if (!(this.disabled || this.loading)) this._pressed = true;
+  private _onFocus(): void {
+    this.emit('kb-focus');
   }
 
-  private _onPointerUp(): void {
-    this._pressed = false;
+  private _onBlur(): void {
+    this.emit('kb-blur');
   }
 
-  override render(): TemplateResult {
-    const s = SIZE_MAP[this.size];
-    const descSlot = this.slotted('description');
+  private _onPointerDown(_e: PointerEvent): void {
+    if (this.disabled || this.loading) return;
+    if (this._trackEl) springPressDown(this._trackEl, 0.95);
+  }
+
+  private _onPointerUp(_e: PointerEvent): void {
+    if (this._trackEl) springPressUp(this._trackEl);
+  }
+
+  private _computeTrackClasses(s: (typeof SIZE_MAP)[ComponentSize]): string {
     const isDisabled = this.disabled || this.loading;
-
-    // Track classes
     const trackChecked = lookupScheme(COLOR_SCHEME_TRACK, this.colorScheme) ?? DEFAULT_TRACK;
-
     const trackUncheckedHover =
       isDisabled || this.checked ? '' : (lookupScheme(COLOR_SCHEME_HOVER, this.colorScheme) ?? DEFAULT_HOVER);
-
     const trackInvalid = this.invalid && !this.checked ? 'border-red-500 dark:border-red-500' : '';
 
-    const trackClasses = cx(
+    const trackBg = this.checked
+      ? trackChecked
+      : `bg-gray-300 border-gray-400 dark:bg-zinc-700 dark:border-zinc-600 ${trackUncheckedHover}`;
+
+    return cx(
       s.track,
       'border relative inline-flex items-center shrink-0',
-      'transition-all duration-200',
-      this.checked
-        ? trackChecked
-        : `bg-gray-200 border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 ${trackUncheckedHover}`,
+      'transition-colors duration-200 ease-in-out',
+      trackBg,
       trackInvalid,
-      this._pressed && !isDisabled ? 'scale-95' : '',
       'focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2',
+      this.disabled ? FORM_DISABLED_CONTROL : '',
     );
+  }
 
-    // Thumb classes — bouncy overshoot transition
-    const thumbClasses = cx(
-      s.thumb,
-      'absolute left-0 flex items-center justify-center',
-      'bg-white dark:bg-zinc-200',
-      'transition-transform duration-200',
-      this.checked ? s.translate : 'translate-x-0',
-    );
+  private _renderThumbContent(s: (typeof SIZE_MAP)[ComponentSize]): TemplateResult | typeof nothing {
+    if (this.loading) {
+      return html`<span class="${s.spinner} rounded-full border-current border-t-transparent animate-spin" style="border-style:solid"></span>`;
+    }
+    if (!this.showIcons) return nothing;
 
-    // Thumb icon (check when on, X when off)
     const iconColor = this.checked
       ? (lookupScheme(COLOR_SCHEME_ICON, this.colorScheme) ?? DEFAULT_ICON)
       : kbClasses.textMuted;
 
-    let thumbContent = nothing as typeof nothing | ReturnType<typeof html>;
-    if (this.loading) {
-      thumbContent = html`<span class="${s.spinner} rounded-full border-current border-t-transparent animate-spin" style="border-style:solid"></span>`;
-    } else if (this.showIcons) {
-      thumbContent = this.checked
-        ? html`<svg class="${s.icon} ${iconColor}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M20 6 9 17l-5-5"/></svg>`
-        : html`<svg class="${s.icon} ${kbClasses.textMuted}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+    if (this.checked) {
+      return html`<svg class="${s.icon} ${iconColor}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M20 6 9 17l-5-5"/></svg>`;
     }
+    return html`<svg class="${s.icon} ${kbClasses.textMuted}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+  }
 
-    // Label + description
+  private _renderLabelBlock(s: (typeof SIZE_MAP)[ComponentSize]): TemplateResult | typeof nothing {
+    const descSlot = this.slotted('description');
     const hasLabel = this.defaultSlotContent.length > 0;
-    const labelBlock =
-      hasLabel || descSlot
-        ? html`<span class="${FORM_DESCRIPTION_WRAPPER}">
-          ${hasLabel ? html`<span class="${s.label} ${kbClasses.textPrimary}">${this.defaultSlotContent}</span>` : nothing}
-          ${descSlot ? html`<span class="${s.description} ${this.invalid ? FORM_INVALID_TEXT : kbClasses.textSecondary}">${descSlot}</span>` : nothing}
-        </span>`
-        : nothing;
+    if (!(hasLabel || descSlot)) return nothing;
 
-    // Wrapper
+    const labelClass: string = this.disabled ? FORM_DISABLED_LABEL : '';
+
+    const labelEl = hasLabel
+      ? html`<span class="${s.label} ${kbClasses.textPrimary} ${labelClass}">${this.defaultSlotContent}</span>`
+      : nothing;
+
+    const descEl = descSlot
+      ? html`<span class="${s.description} ${this.invalid ? FORM_INVALID_TEXT : kbClasses.textSecondary}">${descSlot}</span>`
+      : nothing;
+
+    return html`<span class="${FORM_DESCRIPTION_WRAPPER}">
+      ${labelEl}
+      ${descEl}
+    </span>`;
+  }
+
+  override render(): TemplateResult {
+    const s = SIZE_MAP[this.size];
+    const isDisabled = this.disabled || this.loading;
+
+    const thumbClasses = cx(
+      s.thumb,
+      'absolute left-0 flex items-center justify-center',
+      'bg-white dark:bg-zinc-200 border border-gray-300 dark:border-zinc-600',
+      'transition-transform duration-200',
+      this.checked ? s.translate : 'translate-x-0',
+    );
+
     const wrapperClasses = this.buildClasses(
       `group/sw inline-flex items-center font-sans ${s.gap} select-none`,
-      isDisabled ? kbClasses.disabled : 'cursor-pointer',
+      isDisabled ? FORM_DISABLED_WRAPPER : 'cursor-pointer',
       this.labelPosition === 'left' ? 'flex-row-reverse' : '',
     );
 
@@ -254,18 +280,20 @@ export class KbSwitch extends KbBaseElement<'description'> {
           name=${this.name ?? ''}
         />
         <span
-          class=${trackClasses}
+          class=${this._computeTrackClasses(s)}
           role="switch"
           tabindex=${isDisabled ? '-1' : '0'}
           aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this._handleToggle}
           @keydown=${this._handleKeydown}
+          @focus=${this._onFocus}
+          @blur=${this._onBlur}
         >
           <span class=${thumbClasses} style="transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)">
-            ${thumbContent}
+            ${this._renderThumbContent(s)}
           </span>
         </span>
-        ${labelBlock}
+        ${this._renderLabelBlock(s)}
       </label>
     `;
   }

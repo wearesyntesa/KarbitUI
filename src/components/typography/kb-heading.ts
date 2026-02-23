@@ -1,4 +1,4 @@
-import { html, type TemplateResult } from 'lit';
+import { html, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
@@ -81,15 +81,22 @@ export class KbHeading extends KbBaseElement {
   /** Truncate overflowing text with an ellipsis on a single line. @defaultValue false */
   @property({ type: Boolean }) truncate: boolean = false;
 
-  override render(): TemplateResult {
-    const resolvedSize = this.size ?? SIZE_FOR_LEVEL[this.level];
-    const recipeClasses = headingRecipe({ size: resolvedSize, weight: this.weight });
+  private _cachedRecipeClasses = '';
 
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (this._cachedRecipeClasses === '' || changed.has('level') || changed.has('size') || changed.has('weight')) {
+      const resolvedSize = this.size ?? SIZE_FOR_LEVEL[this.level];
+      this._cachedRecipeClasses = headingRecipe({ size: resolvedSize, weight: this.weight });
+    }
+  }
+
+  override render(): TemplateResult {
     const toneClasses = this.tone ? (TONE_MAP[this.tone] ?? '') : '';
 
     const truncateClass = this.truncate ? 'truncate' : '';
 
-    const classes = this.buildClasses(recipeClasses, toneClasses, truncateClass);
+    const classes = this.buildClasses(this._cachedRecipeClasses, toneClasses, truncateClass);
 
     switch (this.level) {
       case '1':

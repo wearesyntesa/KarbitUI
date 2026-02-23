@@ -133,7 +133,7 @@
       }
     },
     {
-      "includes": ["src/react/index.ts"],
+      "includes": ["src/react/index.ts", "src/react/components/**"],
       "linter": {
         "rules": {
           "nursery": {

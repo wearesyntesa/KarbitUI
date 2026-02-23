@@ -116,6 +116,19 @@ const scrollableContent = html`
   </tbody>
 `;
 
+type Args = {
+  variant?: string;
+  size?: string;
+  hoverable?: boolean;
+  caption?: string;
+  sortable?: boolean;
+  searchable?: boolean;
+  resizable?: boolean;
+  searchPlaceholder?: string;
+  interactive?: boolean;
+  stickyHeader?: boolean;
+};
+
 export default {
   title: 'Data Display/Table',
   component: 'kb-table',
@@ -133,9 +146,9 @@ export default {
     caption: { control: 'text' },
     searchPlaceholder: { control: 'text' },
   },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Simple: S = {};
 

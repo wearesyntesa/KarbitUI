@@ -1,9 +1,6 @@
-// Core
-
 export { KbAccordion } from './components/data-display/kb-accordion.js';
 export { KbAccordionGroup } from './components/data-display/kb-accordion-group.js';
 export type { CardVariant } from './components/data-display/kb-card.js';
-// Data Display
 export { KbCard } from './components/data-display/kb-card.js';
 export type { ListSpacing, ListVariant } from './components/data-display/kb-list.js';
 export { KbList } from './components/data-display/kb-list.js';
@@ -14,8 +11,7 @@ export type { TagSize, TagVariant } from './components/data-display/kb-tag.js';
 export { KbTag } from './components/data-display/kb-tag.js';
 export type { TagGroupGap } from './components/data-display/kb-tag-group.js';
 export { KbTagGroup } from './components/data-display/kb-tag-group.js';
-export type { AlertStatus, AlertVariant } from './components/feedback/kb-alert.js';
-// Feedback
+export type { AlertSize, AlertStatus, AlertVariant } from './components/feedback/kb-alert.js';
 export { KbAlert } from './components/feedback/kb-alert.js';
 export type { BadgeSize, BadgeVariant } from './components/feedback/kb-badge.js';
 export { KbBadge } from './components/feedback/kb-badge.js';
@@ -26,7 +22,6 @@ export { KbSpinner } from './components/feedback/kb-spinner.js';
 export type { ToastPosition, ToastStatus } from './components/feedback/kb-toast.js';
 export { KbToast } from './components/feedback/kb-toast.js';
 export type { ButtonSize, ButtonVariant } from './components/forms/kb-button.js';
-// Forms
 export { KbButton } from './components/forms/kb-button.js';
 export type { ButtonGroupDirection } from './components/forms/kb-button-group.js';
 export { KbButtonGroup } from './components/forms/kb-button-group.js';
@@ -46,7 +41,6 @@ export type { SwitchLabelPosition } from './components/forms/kb-switch.js';
 export { KbSwitch } from './components/forms/kb-switch.js';
 export type { ResizeMode } from './components/forms/kb-textarea.js';
 export { KbTextarea } from './components/forms/kb-textarea.js';
-// Layout
 export { KbBox } from './components/layout/kb-box.js';
 export type { ContainerSize } from './components/layout/kb-container.js';
 export { KbContainer } from './components/layout/kb-container.js';
@@ -66,12 +60,10 @@ export type {
   TabsSize,
   TabsVariant,
 } from './components/navigation/kb-tabs.js';
-// Navigation
 export { KbTabs } from './components/navigation/kb-tabs.js';
 export type { DrawerPlacement } from './components/overlay/kb-drawer.js';
 export { KbDrawer } from './components/overlay/kb-drawer.js';
 export type { ModalPlacement } from './components/overlay/kb-modal.js';
-// Overlay
 export { KbModal } from './components/overlay/kb-modal.js';
 export type { PopoverPlacement, PopoverSize, PopoverTrigger } from './components/overlay/kb-popover.js';
 export { KbPopover } from './components/overlay/kb-popover.js';
@@ -82,15 +74,16 @@ export { KbCode } from './components/typography/kb-code.js';
 export type { HeadingLevel, HeadingSize, HeadingTone, HeadingWeight } from './components/typography/kb-heading.js';
 export { KbHeading } from './components/typography/kb-heading.js';
 export type { TextAs, TextTone, TextVariant } from './components/typography/kb-text.js';
-// Typography
 export { KbText } from './components/typography/kb-text.js';
-// Base element types
 export type { HostDisplay } from './core/base-element.js';
-export { dismissWithAnimation, KbBaseElement } from './core/base-element.js';
 export {
-  BG_COLOR,
-  BG_COLOR_PING,
-  BORDER_COLOR,
+  dismissWithAnimation,
+  KbBaseElement,
+  prefersReducedMotion,
+  springPressDown,
+  springPressUp,
+} from './core/base-element.js';
+export {
   INTERACTIVE_GHOST,
   INTERACTIVE_LINK,
   INTERACTIVE_OUTLINE,
@@ -101,7 +94,6 @@ export {
   STATIC_SOLID,
   STATIC_SUBTLE,
 } from './core/color-schemes.js';
-export { ICON_SIZE } from './core/component-tokens.js';
 export type {
   KbChangeCheckboxDetail,
   KbChangeCheckedDetail,
@@ -112,6 +104,7 @@ export type {
   KbChangeValueDetail,
   KbClickLinkDetail,
   KbCustomEvent,
+  KbDragDetail,
   KbEventDetailMap,
   KbEventHandler,
   KbEventName,
@@ -120,52 +113,17 @@ export type {
   KbReorderDetail,
   KbRowClickDetail,
   KbSortDetail,
+  KbSourceDetail,
   KbTabChangeDetail,
   KbToggleDetail,
 } from './core/events.js';
+export { narrowKbChange } from './core/events.js';
 export type { FormVariant } from './core/form-tokens.js';
-export {
-  CLEAR_SIZE,
-  FOCUS_RING,
-  FORM_CLEAR_CLASSES,
-  FORM_DESCRIPTION_WRAPPER,
-  FORM_INPUT_BASE,
-  FORM_INVALID_BORDER,
-  FORM_INVALID_TEXT,
-  FORM_PLACEHOLDER,
-  FORM_UNCHECKED_BORDER,
-  renderFormSpinner,
-  SIZE_GAP,
-  SIZE_ICON,
-  SIZE_PADDING,
-  SIZE_TEXT,
-  SPINNER_SIZE,
-  VARIANT_WRAPPER,
-  VARIANT_WRAPPER_INVALID,
-} from './core/form-tokens.js';
 export type { StatusType } from './core/icons.js';
-export { LOADING_SIZE, renderCloseIcon, STATUS_ICONS } from './core/icons.js';
+export { ICON_ERROR, ICON_INFO, ICON_SUCCESS, ICON_WARNING } from './core/icons.js';
 export type { LabelVariant } from './core/label-tokens.js';
-export {
-  CLOSE_BUTTON_CLASSES,
-  DISMISS_HIDDEN,
-  DISMISS_VISIBLE,
-  LABEL_INTERACTIVE_HOVER,
-  LABEL_RECIPE_BASE,
-  LABEL_VARIANT_STRUCTURE,
-  resolveStaticColor,
-} from './core/label-tokens.js';
 export type { OverlayBackdrop, OverlaySize } from './core/overlay-base.js';
-export {
-  BACKDROP_CLASSES,
-  BODY_PX,
-  CLOSE_ICON_SIZE,
-  FOCUSABLE_SELECTORS,
-  FOOTER_PX,
-  HEADER_PX,
-  handleTabTrap,
-  KbOverlayBase,
-} from './core/overlay-base.js';
+export { KbOverlayBase } from './core/overlay-base.js';
 export type {
   CompoundVariant,
   InferAllVariants,
@@ -177,13 +135,14 @@ export type {
   RecipeVariantRecord,
 } from './core/recipe.js';
 export { recipe } from './core/recipe.js';
-export { mapPropToClass, STYLE_PROP_DEFS } from './core/style-map.js';
-// Types
 export type { StylePropName, StyleProps } from './core/style-props.js';
-export { extractStyleProps, resolveStyleClasses, STYLE_PROP_KEYS, stylePropsToClasses } from './core/style-props.js';
+export { resolveStyleClasses } from './core/style-props.js';
 export type { KbClasses, Theme } from './core/theme.js';
 export { kbClasses, theme } from './core/theme.js';
 export type {
+  AlignSelfValue,
+  AspectRatioValue,
+  BorderStyleValue,
   BorderWidthValue,
   BreadcrumbItem,
   ColorScheme,
@@ -204,11 +163,15 @@ export type {
   FontWeightValue,
   GridSpanValue,
   GridTrackValue,
+  InsetValue,
+  JustifySelfValue,
   KbTagName,
   KnownColorScheme,
   LetterSpacingValue,
   LineHeightValue,
+  ObjectFitValue,
   OpacityValue,
+  OrderValue,
   Orientation,
   OverflowValue,
   PointerEventsValue,
@@ -226,10 +189,11 @@ export type {
   TextTransformValue,
   TransitionValue,
   UserSelectValue,
+  VisibilityValue,
+  WhitespaceValue,
   ZIndexValue,
 } from './core/types.js';
-// Utility types
-export type { OptionalKeys, RequiredKeys, Simplify, StrictOmit, ValueOf } from './core/utility-types.js';
+export type { LiteralUnion, OptionalKeys, RequiredKeys, Simplify, StrictOmit, ValueOf } from './core/utility-types.js';
 export { LRUCache } from './utils/cache.js';
 export type { ClassInput } from './utils/cx.js';
 export { cx } from './utils/cx.js';

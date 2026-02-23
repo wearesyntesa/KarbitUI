@@ -13,14 +13,16 @@ const cells = html`
   <kb-box p="4" bg="yellow-100">6</kb-box>
 `;
 
+type Args = { columns?: string; rows?: string; gap?: string };
+
 export default {
   title: 'Layout/Grid',
   component: 'kb-grid',
   render: (args) => html`<kb-grid ${spreadAttrs(args)}>${cells}</kb-grid>`,
   args: { columns: '3', gap: '4' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const ThreeColumns: S = {};
 

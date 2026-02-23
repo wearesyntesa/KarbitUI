@@ -1,5 +1,6 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { prefersReducedMotion } from '../../core/base-element.js';
 import { BACKDROP_CLASSES, KbOverlayBase, type OverlaySize } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
@@ -20,21 +21,23 @@ const PLACEMENT_CLASSES: Record<DrawerPlacement, string> = {
   bottom: 'inset-x-0 bottom-0',
 } as const satisfies Record<DrawerPlacement, string>;
 
-const SLIDE_IN_ANIM: Record<DrawerPlacement, string> = {
-  left: 'animate-kb-slide-in-left',
-  right: 'animate-kb-slide-in-right',
-  top: 'animate-kb-slide-in-down',
-  bottom: 'animate-kb-slide-in-up',
-} as const satisfies Record<DrawerPlacement, string>;
+const SLIDE_ENTER: Record<DrawerPlacement, Keyframe[]> = {
+  left: [{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }],
+  right: [{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }],
+  top: [{ transform: 'translateY(-100%)' }, { transform: 'translateY(0)' }],
+  bottom: [{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }],
+} as const;
 
-const SLIDE_OUT_TRANSFORM: Record<DrawerPlacement, string> = {
-  left: 'translateX(-100%)',
-  right: 'translateX(100%)',
-  top: 'translateY(-100%)',
-  bottom: 'translateY(100%)',
-} as const satisfies Record<DrawerPlacement, string>;
+const SLIDE_EXIT: Record<DrawerPlacement, Keyframe[]> = {
+  left: [{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }],
+  right: [{ transform: 'translateX(0)' }, { transform: 'translateX(100%)' }],
+  top: [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }],
+  bottom: [{ transform: 'translateY(0)' }, { transform: 'translateY(100%)' }],
+} as const;
 
-const DISMISS_DURATION = 200;
+const ANIM_DURATION_MS = 200;
+const ENTER_EASING = 'cubic-bezier(0.2, 0, 0, 1)';
+const EXIT_EASING = 'cubic-bezier(0.4, 0, 1, 1)';
 
 /**
  * Slide-out panel overlay from any edge of the viewport with animated
@@ -61,43 +64,144 @@ export class KbDrawer extends KbOverlayBase<'header' | 'footer'> {
   /** Edge of the viewport from which the drawer slides in. @defaultValue 'right' */
   @property({ type: String }) placement: DrawerPlacement = 'right';
 
+  private _animatedIn: boolean = false;
+  private _enterAnimations: Animation[] = [];
+  /** Cached backdrop overlay element. Populated alongside `_panelEl` after first render. */
+  private _overlayEl: HTMLElement | null = null;
+
   protected override get _closeLabel(): string {
     return 'Close drawer';
   }
 
+  protected override _cachePanel(): void {
+    super._cachePanel();
+    this._overlayEl = this.querySelector<HTMLElement>('.kb-drawer-overlay');
+  }
+
+  override updated(changed: Map<PropertyKey, unknown>): void {
+    super.updated(changed);
+    if (this._visible && !this._dismissing && !this._animatedIn) {
+      this._animatedIn = true;
+      this._animateEnter();
+    }
+  }
+
+  private _animateEnter(): void {
+    this._enterAnimations = [];
+    const panel = this._panelEl;
+    const overlay = this._overlayEl;
+    const p = this.placement;
+    const dur = prefersReducedMotion() ? 0 : ANIM_DURATION_MS;
+    if (panel) {
+      panel.classList.add('will-change-transform');
+      const anim = panel.animate(SLIDE_ENTER[p] ?? SLIDE_ENTER.right, {
+        duration: dur,
+        easing: ENTER_EASING,
+        fill: 'forwards',
+      });
+      anim.finished.then(
+        () => {
+          anim.commitStyles();
+          anim.cancel();
+          panel.classList.remove('will-change-transform');
+        },
+        (_e: unknown) => {
+          /* cancelled - no-op */
+          panel.classList.remove('will-change-transform');
+        },
+      );
+      this._enterAnimations.push(anim);
+    }
+    if (overlay) {
+      const anim = overlay.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: dur,
+        easing: 'ease-out',
+        fill: 'forwards',
+      });
+      anim.finished.then(
+        () => {
+          anim.commitStyles();
+          anim.cancel();
+        },
+        (_e: unknown) => {
+          /* cancelled - no-op */
+        },
+      );
+      this._enterAnimations.push(anim);
+    }
+  }
+
+  override disconnectedCallback(): void {
+    for (const anim of this._enterAnimations) anim.cancel();
+    this._enterAnimations = [];
+    super.disconnectedCallback();
+  }
+
   protected override _animateDismiss(): void {
     if (!this._visible || this._dismissing) return;
+    for (const a of this._enterAnimations) a.cancel();
+    this._enterAnimations = [];
     this._dismissing = true;
+    this._animatedIn = false;
 
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
-    const overlay = panel?.previousElementSibling as HTMLElement | null;
+    const panel = this._panelEl;
+    const overlay = this._overlayEl;
+    const p = this.placement;
+    const dur = prefersReducedMotion() ? 0 : ANIM_DURATION_MS;
 
     if (panel) {
-      panel.style.transition = `transform ${DISMISS_DURATION}ms ease-in, opacity ${DISMISS_DURATION}ms ease-in`;
-      panel.style.transform = SLIDE_OUT_TRANSFORM[this.placement] ?? SLIDE_OUT_TRANSFORM.right;
+      panel.classList.add('will-change-transform');
+      const anim = panel.animate(SLIDE_EXIT[p] ?? SLIDE_EXIT.right, {
+        duration: dur,
+        easing: EXIT_EASING,
+        fill: 'forwards',
+      });
+      anim.finished.then(
+        () => {
+          anim.commitStyles();
+          anim.cancel();
+          panel.classList.remove('will-change-transform');
+          this._finishDismiss(null, 0);
+        },
+        () => {
+          panel.classList.remove('will-change-transform');
+          this._finishDismiss(null, 0);
+        },
+      );
+    } else {
+      this._finishDismiss(null, 0);
     }
 
     if (overlay) {
-      overlay.style.transition = `opacity ${DISMISS_DURATION}ms ease-in`;
-      overlay.style.opacity = '0';
+      const overlayAnim = overlay.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: dur,
+        easing: 'ease-in',
+        fill: 'forwards',
+      });
+      overlayAnim.finished.then(
+        () => {
+          overlayAnim.commitStyles();
+          overlayAnim.cancel();
+        },
+        (_e: unknown) => {
+          /* cancelled - no-op */
+        },
+      );
     }
-
-    this._finishDismiss(panel, DISMISS_DURATION);
   }
 
-  override render(): TemplateResult | typeof nothing {
-    if (!(this._visible || this.open)) return nothing;
+  override render(): TemplateResult {
+    if (!(this._visible || this.open))
+      return html`<span hidden>${this.defaultSlotContent}${this.slotted('header')}${this.slotted('footer')}</span>`;
 
     const p = this.placement;
     const s = this.size;
     const placementClass = PLACEMENT_CLASSES[p] ?? PLACEMENT_CLASSES.right;
     const sizeClass = SIZE_MAP[p]?.[s] ?? SIZE_MAP.right.md;
-    const slideAnim = this._dismissing ? '' : (SLIDE_IN_ANIM[p] ?? SLIDE_IN_ANIM.right);
 
     const overlayClasses = this.buildClasses(
-      'fixed inset-0 z-50',
+      'kb-drawer-overlay fixed inset-0 z-50',
       BACKDROP_CLASSES[this.backdrop] ?? BACKDROP_CLASSES.normal,
-      !this._dismissing && 'animate-kb-fade-in',
     );
 
     const panelClasses = cx(
@@ -106,15 +210,22 @@ export class KbDrawer extends KbOverlayBase<'header' | 'footer'> {
       sizeClass,
       kbClasses.surface,
       kbClasses.border,
-      slideAnim,
     );
+    const zStyle = this._assignedZIndex > 0 ? `z-index:${this._assignedZIndex}` : '';
 
     const headerEl = this.slotted('header');
     const footerEl = this.slotted('footer');
 
     return html`
       <div class=${overlayClasses} @click=${this._handleOverlayClick}></div>
-      <div class=${panelClasses} role="dialog" aria-modal="true">
+      <div
+          class=${panelClasses}
+          style="contain:content${zStyle ? `;${zStyle}` : ''}"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby=${headerEl ? this._titleId : nothing}
+          aria-label=${!headerEl && this.ariaLabel ? this.ariaLabel : nothing}
+        >
         ${this._renderOverlayHeader(s, headerEl)}
         ${this._renderOverlayBody(s)}
         ${this._renderOverlayFooter(s, footerEl)}

@@ -4,45 +4,45 @@ import { mapPropToClass, STYLE_PROP_KEYS, type StylePropName, type StyleProps } 
 export type { StyleProps, StylePropName };
 export { STYLE_PROP_KEYS };
 
-const stylePropsCache: LRUCache<string, string> = new LRUCache<string, string>(500);
+/** LRU cache — promotes hot entries on access instead of FIFO eviction. */
+// biome-ignore lint/nursery/useExplicitType: type inferred from constructor generic
+const stylePropsCache = new LRUCache<string, string>(500);
+
+function buildStyleClasses(el: Record<string, unknown>, excluded?: ReadonlySet<string>): string {
+  let result = '';
+  for (const key of STYLE_PROP_KEYS) {
+    if (excluded?.has(key)) continue;
+    const value = el[key];
+    if (typeof value === 'string' && value !== '') {
+      const cls = mapPropToClass(key as StylePropName, value);
+      if (cls) result = result ? `${result} ${cls}` : cls;
+    }
+  }
+  return result;
+}
 
 /**
- * Single-pass style prop resolution. Builds the cache key and maps classes
- * in one iteration of STYLE_PROP_KEYS. On cache hit the pre-computed classes
- * are returned directly; on miss the already-collected pairs are mapped
- * without re-reading the element.
+ * Two-pass style prop resolution. First pass builds the cache key with zero
+ * heap allocation - no arrays created. On cache hit, returns immediately.
+ * Only on cache miss does the second pass allocate and map classes.
  */
-export function resolveStyleClasses(el: Record<string, unknown>): string {
+export function resolveStyleClasses(el: Record<string, unknown>, excluded?: ReadonlySet<string>): string {
   let cacheKey = '';
-  let pairCount = 0;
-  const pairKeys: StylePropName[] = [];
-  const pairVals: string[] = [];
 
   for (const key of STYLE_PROP_KEYS) {
+    if (excluded?.has(key)) continue;
     const value = el[key];
     if (typeof value === 'string' && value !== '') {
       cacheKey += `${key}:${value};`;
-      pairKeys[pairCount] = key;
-      pairVals[pairCount] = value;
-      pairCount++;
     }
   }
 
-  if (!pairCount) return '';
+  if (!cacheKey) return '';
 
   const cached = stylePropsCache.get(cacheKey);
   if (cached !== undefined) return cached;
 
-  let result = '';
-  for (let i = 0; i < pairCount; i++) {
-    const key = pairKeys[i] as StylePropName;
-    const val = pairVals[i] as string;
-    const cls = mapPropToClass(key, val);
-    if (cls) {
-      result = result ? `${result} ${cls}` : cls;
-    }
-  }
-
+  const result = buildStyleClasses(el, excluded);
   stylePropsCache.set(cacheKey, result);
   return result;
 }

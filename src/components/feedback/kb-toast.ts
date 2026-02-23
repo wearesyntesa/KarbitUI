@@ -2,7 +2,6 @@ import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { renderCloseIcon, STATUS_ICONS } from '../../core/icons.js';
-import type { StyleProps } from '../../core/style-map.js';
 import { kbClasses } from '../../core/theme.js';
 
 export type ToastStatus = 'info' | 'success' | 'warning' | 'error';
@@ -84,18 +83,15 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
   /** Show the status icon before the message content. @defaultValue true */
   @property({ type: Boolean, attribute: 'show-icon' }) showIcon: boolean = true;
 
+  /** Exclude `position` from style-props system - this component owns the `position` property directly. */
+  protected override _excludedStyleProps: ReadonlySet<string> = new Set(['position']);
+
   @state() private _dismissing = false;
   @state() private _paused = false;
 
   private _timerId: ReturnType<typeof setTimeout> | undefined;
   private _startTime = 0;
   private _remaining = 0;
-
-  protected override collectStyleProps(): Partial<StyleProps> {
-    const props = super.collectStyleProps();
-    delete props.position;
-    return props;
-  }
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -157,7 +153,7 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
     const dismissClasses = this._dismissing ? `opacity-0 ${exitTranslate}` : `opacity-100 ${enterAnim}`;
 
     const classes = this.buildClasses(
-      `z-50 flex flex-col min-w-[300px] max-w-md ${kbClasses.border} border-l-4 ${kbClasses.surface} font-sans select-none overflow-hidden transition-[opacity,transform] duration-300 ease-in-out`,
+      `z-50 flex flex-col min-w-[300px] max-w-md ${kbClasses.border} border-l-4 ${kbClasses.surface} font-sans select-none overflow-hidden will-change-transform transition-[opacity,transform] duration-200 ease-in-out`,
       posClasses,
       statusBorder,
       dismissClasses,
@@ -172,7 +168,7 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
       this.duration > 0
         ? html`<span
           class="block h-0.5 ${PROGRESS_COLOR[this.status] ?? PROGRESS_COLOR.info}"
-          style="animation:kb-toast-countdown ${this.duration}ms linear forwards;${this._paused ? 'animation-play-state:paused' : 'animation-play-state:running'}"
+          style="transform-origin:left;animation:kb-toast-countdown ${this.duration}ms linear forwards;${this._paused ? 'animation-play-state:paused' : 'animation-play-state:running'}"
         ></span>`
         : nothing;
 
@@ -181,7 +177,6 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
         data-kb-toast
         class=${classes}
         role="alert"
-        aria-live="assertive"
         @mouseenter=${this._onMouseEnter}
         @mouseleave=${this._onMouseLeave}
       >
@@ -199,7 +194,7 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
           ${
             this.closable
               ? html`<button
-                class="flex-shrink-0 cursor-pointer p-1 opacity-50 hover:opacity-100 ${kbClasses.transition} bg-transparent border-none ${kbClasses.textPrimary}"
+                class="flex-shrink-0 cursor-pointer p-2 opacity-50 hover:opacity-100 ${kbClasses.transitionColors} bg-transparent border-none ${kbClasses.textPrimary}"
                 @click=${this._dismiss}
                 aria-label="Dismiss notification"
               >${closeIcon}</button>`

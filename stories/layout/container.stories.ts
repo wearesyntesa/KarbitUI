@@ -3,15 +3,17 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/layout/kb-container.js';
 
+type Args = { bg?: string; p?: string; max?: string; center?: boolean; size?: string };
+
 export default {
   title: 'Layout/Container',
   component: 'kb-container',
   render: (args) =>
     html`<kb-container ${spreadAttrs(args)}>Contained content with max-width constraint.</kb-container>`,
   args: { bg: 'gray-100', p: '6' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

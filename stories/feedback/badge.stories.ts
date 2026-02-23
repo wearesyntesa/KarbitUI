@@ -3,14 +3,16 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/feedback/kb-badge.js';
 
+type Args = { variant?: string; size?: string };
+
 export default {
   title: 'Feedback/Badge',
   component: 'kb-badge',
   render: (args) => html`<kb-badge ${spreadAttrs(args)}>Badge</kb-badge>`,
   args: { variant: 'subtle', size: 'sm' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Subtle: S = {};
 

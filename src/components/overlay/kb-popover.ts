@@ -1,6 +1,7 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { FOCUSABLE_SELECTORS, handleTabTrap } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
@@ -9,11 +10,11 @@ export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 export type PopoverTrigger = 'click' | 'hover';
 export type PopoverSize = 'xs' | 'sm' | 'md' | 'lg';
 
-const PLACEMENT_CLASSES: Record<PopoverPlacement, string> = {
-  top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
-  bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
-  left: 'right-full top-1/2 -translate-y-1/2 mr-2',
-  right: 'left-full top-1/2 -translate-y-1/2 ml-2',
+const PLACEMENT_BASE: Record<PopoverPlacement, string> = {
+  top: 'bottom-full left-1/2 -translate-x-1/2',
+  bottom: 'top-full left-1/2 -translate-x-1/2',
+  left: 'right-full top-1/2 -translate-y-1/2',
+  right: 'left-full top-1/2 -translate-y-1/2',
 } as const satisfies Record<PopoverPlacement, string>;
 
 const OFFSET_CLASSES: Record<PopoverPlacement, Record<number, string>> = {
@@ -72,17 +73,32 @@ const CLOSE_ICON_SIZE: Record<PopoverSize, string> = {
   lg: 'w-4 h-4',
 } as const satisfies Record<PopoverSize, string>;
 
-const ARROW_SURFACE = 'bg-white dark:bg-zinc-900';
 const ARROW_BASE = 'absolute w-2 h-2 rotate-45';
 
 const ARROW_CLASSES: Record<PopoverPlacement, string> = {
-  bottom: `${ARROW_BASE} -top-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-t border-l ${kbClasses.borderColor}`,
-  top: `${ARROW_BASE} -bottom-1 left-1/2 -translate-x-1/2 ${ARROW_SURFACE} border-b border-r ${kbClasses.borderColor}`,
-  right: `${ARROW_BASE} -left-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-b border-l ${kbClasses.borderColor}`,
-  left: `${ARROW_BASE} -right-1 top-1/2 -translate-y-1/2 ${ARROW_SURFACE} border-t border-r ${kbClasses.borderColor}`,
+  bottom: `${ARROW_BASE} -top-1 left-1/2 -translate-x-1/2 ${kbClasses.surface} border-t border-l ${kbClasses.borderColor}`,
+  top: `${ARROW_BASE} -bottom-1 left-1/2 -translate-x-1/2 ${kbClasses.surface} border-b border-r ${kbClasses.borderColor}`,
+  right: `${ARROW_BASE} -left-1 top-1/2 -translate-y-1/2 ${kbClasses.surface} border-b border-l ${kbClasses.borderColor}`,
+  left: `${ARROW_BASE} -right-1 top-1/2 -translate-y-1/2 ${kbClasses.surface} border-t border-r ${kbClasses.borderColor}`,
 } as const satisfies Record<PopoverPlacement, string>;
 
-const DISMISS_DURATION = 120;
+const DISMISS_DURATION = 100;
+
+let _popoverIdCounter = 0;
+
+const ENTER_ANIMATION: Record<PopoverPlacement, string> = {
+  top: 'animate-kb-pop-top',
+  bottom: 'animate-kb-pop-bottom',
+  left: 'animate-kb-pop-left',
+  right: 'animate-kb-pop-right',
+} as const satisfies Record<PopoverPlacement, string>;
+
+const EXIT_TRANSLATE: Record<PopoverPlacement, string> = {
+  top: '0 6px',
+  bottom: '0 -6px',
+  left: '6px 0',
+  right: '-6px 0',
+} as const satisfies Record<PopoverPlacement, string>;
 
 /**
  * Interactive content popover anchored to a trigger element with animated
@@ -110,7 +126,7 @@ const DISMISS_DURATION = 120;
 export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   /** Position of the popover relative to the trigger element. @defaultValue 'bottom' */
   @property({ type: String }) placement: PopoverPlacement = 'bottom';
-  /** How the popover is activated — `'click'` toggles on click, `'hover'` on mouse enter/leave. @defaultValue 'click' */
+  /** How the popover is activated - `'click'` toggles on click, `'hover'` on mouse enter/leave. @defaultValue 'click' */
   @property({ type: String }) trigger: PopoverTrigger = 'click';
   /** Popover panel width and padding size. @defaultValue 'sm' */
   @property({ type: String }) size: PopoverSize = 'sm';
@@ -134,21 +150,28 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   @property({ type: Boolean, attribute: 'auto-focus' }) autoFocus: boolean = false;
   /** Trap keyboard focus within the popover while open. @defaultValue false */
   @property({ type: Boolean, attribute: 'trap-focus' }) trapFocus: boolean = false;
+  /**
+   * Accessible label for the dialog when no visible header is provided.
+   * Used as `aria-label` on the `role="dialog"` element.
+   * When a header slot is present, `aria-labelledby` is used automatically instead.
+   */
+  @property({ type: String, attribute: 'aria-label' }) override ariaLabel: string | null = null;
 
   @state() private _visible: boolean = false;
   @state() private _dismissing: boolean = false;
+  @state() private _isInteractiveTrigger: boolean = false;
 
+  private readonly _titleId: string = `kb-popover-title-${++_popoverIdCounter}`;
   private _boundKeyHandler = this._handleKeyDown.bind(this);
   private _boundOutsideClick = this._handleOutsideClick.bind(this);
   private _previouslyFocused: HTMLElement | null = null;
-  private _dismissTimeout: ReturnType<typeof setTimeout> | null = null;
+  private _exitAnimation: Animation | null = null;
   private _openTimerId: ReturnType<typeof setTimeout> | null = null;
   private _closeTimerId: ReturnType<typeof setTimeout> | null = null;
+  private _panelEl: HTMLElement | null = null;
 
   override connectedCallback(): void {
     super.connectedCallback();
-    document.addEventListener('keydown', this._boundKeyHandler);
-    document.addEventListener('click', this._boundOutsideClick, true);
     if (this.open) {
       this._show();
     }
@@ -169,6 +192,20 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
         this._animateDismiss();
       }
     }
+    // Cache panel element once visible
+    if (this._visible && !this._panelEl) {
+      this._panelEl = this.querySelector<HTMLElement>('[role="dialog"]');
+    }
+    if (!this._visible) {
+      this._panelEl = null;
+    }
+    // Cache interactive-trigger flag whenever trigger slot content may have changed
+    const triggerEl = this.slotted('trigger');
+    this._isInteractiveTrigger =
+      triggerEl instanceof HTMLButtonElement ||
+      triggerEl instanceof HTMLAnchorElement ||
+      triggerEl instanceof HTMLInputElement ||
+      (triggerEl !== null && (triggerEl.hasAttribute('tabindex') || triggerEl.hasAttribute('role')));
   }
 
   private _clearTimers(): void {
@@ -180,9 +217,9 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
       clearTimeout(this._closeTimerId);
       this._closeTimerId = null;
     }
-    if (this._dismissTimeout !== null) {
-      clearTimeout(this._dismissTimeout);
-      this._dismissTimeout = null;
+    if (this._exitAnimation !== null) {
+      this._exitAnimation.cancel();
+      this._exitAnimation = null;
     }
   }
 
@@ -191,42 +228,58 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
     this._dismissing = false;
     this._visible = true;
 
+    document.addEventListener('keydown', this._boundKeyHandler);
+    document.addEventListener('click', this._boundOutsideClick, true);
     this._previouslyFocused = document.activeElement as HTMLElement | null;
 
-    requestAnimationFrame(() => {
-      if (this.autoFocus) {
+    this.emit('kb-open');
+
+    if (this.autoFocus) {
+      requestAnimationFrame(() => {
         this._focusFirst();
-      }
-      this.emit('kb-open');
-    });
+      });
+    }
   }
 
   private _animateDismiss(): void {
     if (!this._visible || this._dismissing) return;
     this._dismissing = true;
 
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
-
-    if (panel) {
-      panel.style.transition = `transform ${DISMISS_DURATION}ms ease-in, opacity ${DISMISS_DURATION}ms ease-in`;
-      panel.style.transform = 'scale(0.95)';
-      panel.style.opacity = '0';
-    }
+    const panel = this._panelEl ?? this.querySelector<HTMLElement>('[role="dialog"]');
 
     const onFinish = (): void => {
-      if (this._dismissTimeout !== null) {
-        clearTimeout(this._dismissTimeout);
-        this._dismissTimeout = null;
-      }
-      panel?.removeEventListener('transitionend', onFinish);
+      this._exitAnimation = null;
+      document.removeEventListener('keydown', this._boundKeyHandler);
+      document.removeEventListener('click', this._boundOutsideClick, true);
       this._visible = false;
       this._dismissing = false;
+      this._panelEl = null;
       this._restoreFocus();
       this.emit('kb-close');
     };
 
-    panel?.addEventListener('transitionend', onFinish, { once: true });
-    this._dismissTimeout = setTimeout(onFinish, DISMISS_DURATION + 50);
+    if (panel) {
+      const exitTranslate = EXIT_TRANSLATE[this.placement] ?? EXIT_TRANSLATE.bottom;
+      const anim = panel.animate(
+        [
+          { translate: '0 0', opacity: 1 },
+          { translate: exitTranslate, opacity: 0 },
+        ],
+        {
+          duration: prefersReducedMotion() ? 0 : DISMISS_DURATION,
+          easing: 'cubic-bezier(0.4, 0, 1, 1)',
+          fill: 'forwards',
+        },
+      );
+      this._exitAnimation = anim;
+      anim.finished.then(() => {
+        anim.commitStyles();
+        anim.cancel();
+        onFinish();
+      }, onFinish);
+    } else {
+      onFinish();
+    }
   }
 
   private _openPopover(): void {
@@ -248,7 +301,7 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   }
 
   private _focusFirst(): void {
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
+    const panel = this._panelEl ?? this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
     const first = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
     first?.focus();
@@ -269,7 +322,7 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   }
 
   private _handleTabTrap(e: KeyboardEvent): void {
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
+    const panel = this._panelEl ?? this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
     handleTabTrap(panel, e);
   }
@@ -287,6 +340,14 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
       this._close();
     } else {
       this._openPopover();
+    }
+  }
+
+  private _handleTriggerKeyDown(e: KeyboardEvent): void {
+    if (this.trigger !== 'click') return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleTriggerClick();
     }
   }
 
@@ -332,6 +393,28 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
     }
   }
 
+  private _handleFocusIn(): void {
+    if (this.trigger !== 'hover') return;
+    if (this._visible || this.open) return;
+
+    if (this._closeTimerId !== null) {
+      clearTimeout(this._closeTimerId);
+      this._closeTimerId = null;
+    }
+
+    this._openPopover();
+  }
+
+  private _handleFocusOut(e: FocusEvent): void {
+    if (this.trigger !== 'hover') return;
+    if (!(this._visible || this.open)) return;
+
+    const related = e.relatedTarget as Node | null;
+    if (related && this.contains(related)) return;
+
+    this._close();
+  }
+
   private _renderCloseButton(): TemplateResult | typeof nothing {
     if (!this.closable) return nothing;
 
@@ -340,10 +423,10 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
     return html`
       <button
         class=${cx(
-          'cursor-pointer flex-shrink-0',
+          'cursor-pointer flex-shrink-0 select-none',
           kbClasses.textSecondary,
-          'hover:text-slate-900 dark:hover:text-zinc-50',
-          kbClasses.transition,
+          kbClasses.hoverTextPrimary,
+          kbClasses.transitionColors,
           kbClasses.focus,
         )}
         @click=${this._close}
@@ -356,75 +439,90 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
     `;
   }
 
-  override render(): TemplateResult {
-    const wrapperClasses = this.buildClasses('relative inline-block');
+  private _renderHeader(headerEl: Element | null): TemplateResult | typeof nothing {
+    if (!(headerEl || this.closable)) return nothing;
+    const s = this.size;
+    return html`
+      <div class=${cx('flex items-center justify-between', HEADER_PX[s], kbClasses.borderBottom)}>
+        ${headerEl ? html`<div id=${this._titleId} class="${kbClasses.label} select-none">${headerEl}</div>` : html`<div></div>`}
+        ${this._renderCloseButton()}
+      </div>`;
+  }
 
-    const triggerEl = this.slotted('trigger');
+  private _renderFooter(footerEl: Element | null): TemplateResult | typeof nothing {
+    if (!footerEl) return nothing;
+    return html`
+      <div class=${cx(`flex items-center gap-2 border-t ${kbClasses.borderColor}`, FOOTER_PX[this.size])}>
+        ${footerEl}
+      </div>`;
+  }
+
+  private _renderPanel(headerEl: Element | null, footerEl: Element | null): TemplateResult | typeof nothing {
+    if (!(this._visible || this.open)) return nothing;
 
     const p = this.placement;
     const s = this.size;
 
-    const basePlacement = PLACEMENT_CLASSES[p] ?? PLACEMENT_CLASSES.bottom;
+    const basePlacement = PLACEMENT_BASE[p] ?? PLACEMENT_BASE.bottom;
     const offsetVal = Math.max(0, Math.min(4, this.offset));
     const offsetClass = OFFSET_CLASSES[p]?.[offsetVal] ?? '';
+    const arrowClasses = ARROW_CLASSES[p] ?? ARROW_CLASSES.bottom;
 
     const panelClasses = cx(
       'absolute z-50',
-      basePlacement.replace(/m[trbl]-\d+/g, ''),
+      basePlacement,
       offsetClass,
       SIZE_MIN_W[s],
       SIZE_MAX_W[s],
       kbClasses.surface,
       kbClasses.border,
       'font-sans',
-      !this._dismissing && 'animate-kb-scale-in',
+      !this._dismissing && ENTER_ANIMATION[p],
     );
 
+    return html`
+      <div
+        class=${panelClasses}
+        style="contain:content"
+        role="dialog"
+        aria-labelledby=${headerEl ? this._titleId : nothing}
+        aria-label=${!headerEl && this.ariaLabel ? this.ariaLabel : nothing}
+        aria-modal=${this.trapFocus ? 'true' : nothing}
+      >
+        ${this.showArrow ? html`<div class=${arrowClasses}></div>` : nothing}
+        ${this._renderHeader(headerEl)}
+        <div class=${cx(BODY_TEXT[s], BODY_PX[s], kbClasses.textPrimary)}>
+          ${this.defaultSlotContent}
+        </div>
+        ${this._renderFooter(footerEl)}
+      </div>`;
+  }
+
+  override render(): TemplateResult {
+    const showPanel = this._visible || this.open;
+    const wrapperClasses = this.buildClasses('relative inline-block');
+    const triggerEl = this.slotted('trigger');
     const headerEl = this.slotted('header');
     const footerEl = this.slotted('footer');
-    const arrowClasses = ARROW_CLASSES[p] ?? ARROW_CLASSES.bottom;
 
     return html`
       <span
         class=${wrapperClasses}
         @mouseenter=${this._handleMouseEnter}
         @mouseleave=${this._handleMouseLeave}
+        @focusin=${this._handleFocusIn}
+        @focusout=${this._handleFocusOut}
       >
         <span
+          tabindex=${ifDefined(this._isInteractiveTrigger ? undefined : '0')}
           @click=${this._handleTriggerClick}
+          @keydown=${this._handleTriggerKeyDown}
           aria-haspopup="dialog"
           aria-expanded=${this._visible ? 'true' : 'false'}
         >
           ${triggerEl}
         </span>
-        ${
-          this._visible || this.open
-            ? html`
-            <div class=${panelClasses} role="dialog">
-              ${this.showArrow ? html`<div class=${arrowClasses}></div>` : nothing}
-              ${
-                headerEl || this.closable
-                  ? html`
-                  <div class=${cx('flex items-center justify-between', HEADER_PX[s], kbClasses.borderBottom)}>
-                    ${headerEl ? html`<div class=${kbClasses.label}>${headerEl}</div>` : html`<div></div>`}
-                    ${this._renderCloseButton()}
-                  </div>`
-                  : nothing
-              }
-              <div class=${cx(BODY_TEXT[s], BODY_PX[s], kbClasses.textPrimary)}>
-                ${this.defaultSlotContent}
-              </div>
-              ${
-                footerEl
-                  ? html`
-                  <div class=${cx(`flex items-center gap-2 border-t ${kbClasses.borderColor}`, FOOTER_PX[s])}>
-                    ${footerEl}
-                  </div>`
-                  : nothing
-              }
-            </div>`
-            : nothing
-        }
+        ${showPanel ? this._renderPanel(headerEl, footerEl) : html`<span hidden>${this.defaultSlotContent}${headerEl}${footerEl}</span>`}
       </span>
     `;
   }

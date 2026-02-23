@@ -3,13 +3,15 @@ import { html } from 'lit';
 import '../../src/components/overlay/kb-popover.js';
 import '../../src/components/forms/kb-button.js';
 
+type Args = { placement?: string; trigger?: string };
+
 export default {
   title: 'Overlay/Popover',
   component: 'kb-popover',
   args: { placement: 'bottom', trigger: 'click' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {
   render: () => html`

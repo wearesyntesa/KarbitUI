@@ -4,8 +4,6 @@ import { KbBaseElement } from '../../core/base-element.js';
 import type { Orientation, SpacingValue } from '../../core/types.js';
 import './kb-divider.js';
 
-type StackDirection = Orientation | 'horizontal' | 'vertical';
-
 /**
  * Linear stack layout. Arranges children vertically or horizontally with consistent spacing.
  *
@@ -30,13 +28,19 @@ export class KbStack extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
   /** Stack direction. `'vertical'` stacks top-to-bottom, `'horizontal'` left-to-right. @defaultValue 'vertical' */
-  @property({ type: String }) direction: StackDirection = 'vertical';
+  @property({ type: String }) direction: Orientation = 'vertical';
   /** Gap between children as a Tailwind spacing value (e.g. `'4'`, `'8'`). */
   @property({ type: String }) spacing?: SpacingValue;
   /** Insert `<kb-divider>` elements between children automatically. @defaultValue false */
   @property({ type: Boolean }) divider: boolean = false;
 
+  private _dividerCache: Array<Node | TemplateResult> | null = null;
+  private _dividerCacheKey: Node[] | null = null;
+
   private _interleaveWithDividers(nodes: Node[]): Array<Node | TemplateResult> {
+    if (nodes === this._dividerCacheKey && this._dividerCache !== null) {
+      return this._dividerCache;
+    }
     const isHorizontal = this.direction === 'horizontal';
     const dividerOrientation = isHorizontal ? 'vertical' : 'horizontal';
     const result: Array<Node | TemplateResult> = [];
@@ -46,6 +50,8 @@ export class KbStack extends KbBaseElement {
       }
       result.push(nodes[i] as Node);
     }
+    this._dividerCacheKey = nodes;
+    this._dividerCache = result;
     return result;
   }
 

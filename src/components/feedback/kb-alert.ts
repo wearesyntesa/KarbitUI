@@ -1,4 +1,4 @@
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { renderCloseIcon, STATUS_ICONS } from '../../core/icons.js';
@@ -66,6 +66,9 @@ const alertRecipe = recipe({
 
 export type AlertStatus = InferVariant<typeof alertRecipe, 'status'>;
 export type AlertVariant = InferVariant<typeof alertRecipe, 'variant'>;
+export type AlertSize = 'sm' | 'md' | 'lg';
+
+const CLOSE_ICON: ReturnType<typeof renderCloseIcon> = renderCloseIcon('w-4 h-4', 2.5);
 
 /**
  * Status alert banner for displaying feedback messages.
@@ -111,7 +114,7 @@ export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon
   /** Visual variant controlling border, background, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: AlertVariant = 'subtle';
   /** Alert size controlling padding and font size. @defaultValue 'md' */
-  @property({ type: String }) size: 'sm' | 'md' | 'lg' = 'md';
+  @property({ type: String }) size: AlertSize = 'md';
   /** Show a close button that dismisses the alert with animation. @defaultValue false */
   @property({ type: Boolean }) closable: boolean = false;
   /** Show the status icon before the message content. @defaultValue true */
@@ -123,6 +126,14 @@ export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon
   @state() private _detailOpen = false;
 
   private _timerId: ReturnType<typeof setTimeout> | undefined;
+  private _cachedRecipeClasses = '';
+
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (this._cachedRecipeClasses === '' || changed.has('status') || changed.has('variant') || changed.has('size')) {
+      this._cachedRecipeClasses = alertRecipe({ status: this.status, variant: this.variant, size: this.size });
+    }
+  }
 
   private _startTimer(): void {
     if (this.duration > 0) {
@@ -150,19 +161,17 @@ export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon
   }
 
   override render(): TemplateResult {
-    const recipeClasses = alertRecipe({ status: this.status, variant: this.variant, size: this.size });
-
     const outerClasses = this._dismissing
       ? 'grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-200 ease-in-out'
-      : 'grid grid-rows-[1fr] opacity-100 transition-[grid-template-rows,opacity] duration-200 ease-in-out animate-kb-fade-in';
+      : 'grid grid-rows-[1fr] opacity-100 transition-[grid-template-rows,opacity] duration-200 ease-in-out';
 
-    const classes = this.buildClasses(recipeClasses);
+    const classes = this.buildClasses(this._cachedRecipeClasses);
 
     const titleEl = this.slotted('title');
     const actionEl = this.slotted('action');
     const detailEl = this.slotted('detail');
 
-    const closeIcon = renderCloseIcon('w-4 h-4', 2.5);
+    const closeIcon = CLOSE_ICON;
     const chevronIcon = html`<svg class="w-3.5 h-3.5 transition-transform duration-200 ease-in-out ${this._detailOpen ? 'rotate-180' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="m6 9 6 6 6-6"/></svg>`;
 
     return html`
@@ -196,7 +205,7 @@ export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon
               ${
                 detailEl
                   ? html`<button
-                    class="cursor-pointer p-1 opacity-50 hover:opacity-100 ${kbClasses.transition} bg-transparent border-none text-current"
+                    class="cursor-pointer p-2 opacity-50 hover:opacity-100 ${kbClasses.transitionColors} bg-transparent border-none text-current"
                     @click=${this._toggleDetail}
                     aria-label=${this._detailOpen ? 'Hide details' : 'Show details'}
                     aria-expanded=${this._detailOpen ? 'true' : 'false'}
@@ -206,7 +215,7 @@ export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon
               ${
                 this.closable
                   ? html`<button
-                    class="cursor-pointer p-1 opacity-50 hover:opacity-100 ${kbClasses.transition} bg-transparent border-none text-current"
+                    class="cursor-pointer p-2 opacity-50 hover:opacity-100 ${kbClasses.transitionColors} bg-transparent border-none text-current"
                     @click=${this._dismiss}
                     aria-label="Close alert"
                   >${closeIcon}</button>`

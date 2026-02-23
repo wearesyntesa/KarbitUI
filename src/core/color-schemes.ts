@@ -1,13 +1,18 @@
 import { __DEV__ } from '../utils/dev.js';
 import type { ColorScheme, KnownColorScheme } from './types.js';
 
-const KNOWN_SCHEMES: ReadonlySet<KnownColorScheme> = new Set<KnownColorScheme>([
-  'black',
-  'red',
-  'blue',
-  'green',
-  'yellow',
-]);
+/** Compile-time exhaustiveness check: every `KnownColorScheme` must appear. */
+const _exhaustive: Record<KnownColorScheme, true> = {
+  black: true,
+  red: true,
+  blue: true,
+  green: true,
+  yellow: true,
+};
+
+const KNOWN_SCHEMES: ReadonlySet<KnownColorScheme> = new Set<KnownColorScheme>(
+  Object.keys(_exhaustive) as KnownColorScheme[],
+);
 
 export function isKnownScheme(scheme: string): scheme is KnownColorScheme {
   return KNOWN_SCHEMES.has(scheme as KnownColorScheme);
@@ -31,7 +36,6 @@ export function lookupScheme(
   return;
 }
 
-/** Interactive solid — opaque fill with hover/active/dark states. Used by buttons. */
 export const INTERACTIVE_SOLID: Record<KnownColorScheme, string> = {
   black:
     'bg-gray-900 border-gray-900 text-white hover:bg-gray-800 hover:border-gray-800 active:bg-black active:border-black dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300 dark:hover:border-zinc-300 dark:active:bg-zinc-400 dark:active:border-zinc-400',
@@ -43,7 +47,6 @@ export const INTERACTIVE_SOLID: Record<KnownColorScheme, string> = {
     'bg-yellow-500 border-yellow-500 text-black hover:bg-yellow-600 hover:border-yellow-600 active:bg-yellow-700 active:border-yellow-700 dark:bg-yellow-500 dark:border-yellow-500 dark:text-black dark:hover:bg-yellow-400 dark:hover:border-yellow-400 dark:active:bg-yellow-600 dark:active:border-yellow-600',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Interactive outline — bordered with color-fill on hover. Used by buttons. */
 export const INTERACTIVE_OUTLINE: Record<KnownColorScheme, string> = {
   black:
     'bg-white text-gray-900 border-gray-900 hover:bg-gray-900 hover:text-white active:bg-black dark:bg-transparent dark:text-zinc-100 dark:border-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:active:bg-zinc-300',
@@ -55,7 +58,6 @@ export const INTERACTIVE_OUTLINE: Record<KnownColorScheme, string> = {
     'bg-white text-yellow-600 border-yellow-500 hover:bg-yellow-500 hover:text-black active:bg-yellow-600 dark:bg-transparent dark:text-yellow-400 dark:border-yellow-500 dark:hover:bg-yellow-500 dark:hover:text-black dark:active:bg-yellow-600',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Interactive ghost — transparent with tinted hover. Used by buttons. */
 export const INTERACTIVE_GHOST: Record<KnownColorScheme, string> = {
   black:
     'bg-transparent text-gray-900 hover:bg-gray-100 active:bg-gray-200 dark:text-zinc-100 dark:hover:bg-zinc-800 dark:active:bg-zinc-700',
@@ -67,7 +69,6 @@ export const INTERACTIVE_GHOST: Record<KnownColorScheme, string> = {
     'bg-transparent text-yellow-600 hover:bg-yellow-50 active:bg-yellow-100 dark:text-yellow-400 dark:hover:bg-yellow-950 dark:active:bg-yellow-900',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Interactive link — underline decoration with color hover. Used by buttons. */
 export const INTERACTIVE_LINK: Record<KnownColorScheme, string> = {
   black:
     'bg-transparent text-gray-900 decoration-gray-900/40 hover:decoration-gray-900 dark:text-zinc-100 dark:decoration-zinc-100/40 dark:hover:decoration-zinc-100',
@@ -79,7 +80,6 @@ export const INTERACTIVE_LINK: Record<KnownColorScheme, string> = {
     'bg-transparent text-yellow-500 decoration-yellow-500/40 hover:decoration-yellow-500 hover:text-yellow-600 dark:text-yellow-400 dark:decoration-yellow-400/40 dark:hover:decoration-yellow-400 dark:hover:text-yellow-300',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Static solid — opaque fill without hover states. Used by tags, badges. */
 export const STATIC_SOLID: Record<KnownColorScheme, string> = {
   black: 'bg-gray-900 border-gray-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-900',
   red: 'bg-red-500 border-red-500 text-white dark:bg-red-600 dark:border-red-600',
@@ -88,7 +88,6 @@ export const STATIC_SOLID: Record<KnownColorScheme, string> = {
   yellow: 'bg-yellow-500 border-yellow-500 text-black dark:bg-yellow-500 dark:border-yellow-500 dark:text-black',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Static outline — bordered text without hover states. Used by tags, badges. */
 export const STATIC_OUTLINE: Record<KnownColorScheme, string> = {
   black: 'border-gray-900 text-gray-900 dark:border-zinc-100 dark:text-zinc-100',
   red: 'border-red-500 text-red-700 dark:border-red-400 dark:text-red-400',
@@ -97,7 +96,6 @@ export const STATIC_OUTLINE: Record<KnownColorScheme, string> = {
   yellow: 'border-yellow-500 text-yellow-700 dark:border-yellow-400 dark:text-yellow-400',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Static subtle — tinted background without hover states. Used by tags, badges. */
 export const STATIC_SUBTLE: Record<KnownColorScheme, string> = {
   black: 'bg-gray-100 text-gray-800 dark:bg-zinc-800 dark:text-zinc-200',
   red: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
@@ -106,7 +104,6 @@ export const STATIC_SUBTLE: Record<KnownColorScheme, string> = {
   yellow: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Solid background fill — no text/border. Used by dots, spinner bg, progress fill. */
 export const BG_COLOR: Record<KnownColorScheme, string> = {
   black: 'bg-gray-900 dark:bg-zinc-100',
   red: 'bg-red-500 dark:bg-red-400',
@@ -115,7 +112,6 @@ export const BG_COLOR: Record<KnownColorScheme, string> = {
   yellow: 'bg-yellow-500 dark:bg-yellow-400',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Border color — matches the BG_COLOR palette. Used by spinner border variant. */
 export const BORDER_COLOR: Record<KnownColorScheme, string> = {
   black: 'border-gray-900 dark:border-zinc-100',
   red: 'border-red-500 dark:border-red-400',
@@ -124,7 +120,6 @@ export const BORDER_COLOR: Record<KnownColorScheme, string> = {
   yellow: 'border-yellow-500 dark:border-yellow-400',
 } as const satisfies Record<KnownColorScheme, string>;
 
-/** Background fill at 75% opacity — used for ping animation. */
 export const BG_COLOR_PING: Record<KnownColorScheme, string> = {
   black: 'bg-gray-900/75 dark:bg-zinc-100/75',
   red: 'bg-red-500/75 dark:bg-red-400/75',

@@ -3,14 +3,24 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/forms/kb-input.js';
 
+type Args = {
+  placeholder?: string;
+  variant?: string;
+  size?: string;
+  value?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  type?: string;
+};
+
 export default {
   title: 'Forms/Input',
   component: 'kb-input',
   render: (args) => html`<kb-input ${spreadAttrs(args)}></kb-input>`,
   args: { placeholder: 'Type something...', variant: 'outline', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Outline: S = {};
 

@@ -3,6 +3,17 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/typography/kb-text.js';
 
+type Args = {
+  variant?: string;
+  size?: string;
+  tone?: string;
+  as?: string;
+  truncate?: boolean;
+  'no-wrap'?: boolean;
+  clamp?: number;
+  maxW?: string;
+};
+
 export default {
   title: 'Typography/Text',
   component: 'kb-text',
@@ -20,9 +31,9 @@ export default {
     'no-wrap': { control: 'boolean' },
     clamp: { control: 'number' },
   },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

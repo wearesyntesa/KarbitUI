@@ -1,6 +1,6 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { BG_COLOR, BORDER_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize } from '../../core/types.js';
@@ -100,7 +100,7 @@ export class KbSpinner extends KbBaseElement {
     const sizeClasses = BORDER_SIZE[this.size] ?? BORDER_SIZE.md;
     const borderColor = lookupScheme(BORDER_COLOR, this.colorScheme) ?? 'border-blue-500 dark:border-blue-400';
 
-    const duration = SPEED_DURATION[this.speed] ?? SPEED_DURATION.normal;
+    const duration = prefersReducedMotion() ? '0.01ms' : (SPEED_DURATION[this.speed] ?? SPEED_DURATION.normal);
     const spinStyle = `animation:spin ${duration} linear infinite`;
 
     const spinnerEl = html`<span

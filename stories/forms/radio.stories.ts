@@ -4,14 +4,16 @@ import { spreadAttrs } from '../_define.js';
 import '../../src/components/forms/kb-radio.js';
 import '../../src/components/forms/kb-radio-group.js';
 
+type Args = { name?: string; value?: string; size?: string; checked?: boolean; disabled?: boolean };
+
 export default {
   title: 'Forms/Radio',
   component: 'kb-radio',
   render: (args) => html`<kb-radio ${spreadAttrs(args)}>Option A</kb-radio>`,
   args: { name: 'demo', value: 'a', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

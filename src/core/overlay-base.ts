@@ -6,13 +6,16 @@ import { kbClasses } from './theme.js';
 
 import type { ComponentSize } from './types.js';
 
+let _overlayIdCounter = 0;
+let _zIndexCounter = 0;
+const Z_BASE = 50;
+
 export type OverlaySize = ComponentSize | 'full';
 export type OverlayBackdrop = 'normal' | 'blur' | 'transparent';
 
 export const FOCUSABLE_SELECTORS =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/** Trap Tab/Shift+Tab cycling within a container element. */
 export function handleTabTrap(container: HTMLElement, e: KeyboardEvent): void {
   const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
   if (focusable.length === 0) return;
@@ -81,6 +84,9 @@ export const FOOTER_PX: Record<OverlaySize, string> = {
 export abstract class KbOverlayBase<S extends string = string> extends KbBaseElement<S> {
   static override hostDisplay = 'block' as const;
 
+  private static _scrollLockCount: number = 0;
+  private static _scrollbarWidth: number = 0;
+
   /** Whether the overlay is open. Reflects to the `open` attribute. @defaultValue false */
   @property({ type: Boolean, reflect: true }) open: boolean = false;
   /** Panel size preset controlling width (modal) or width/height (drawer). @defaultValue 'md' */
@@ -99,21 +105,33 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   @property({ type: Boolean, attribute: 'auto-focus' }) autoFocus: boolean = true;
   /** Trap Tab/Shift+Tab focus cycling within the overlay panel. @defaultValue true */
   @property({ type: Boolean, attribute: 'trap-focus' }) trapFocus: boolean = true;
+  /**
+   * Accessible label for the dialog when no visible header is provided.
+   * Used as `aria-label` on the `role="dialog"` element.
+   * When a header slot is present, `aria-labelledby` is used automatically instead.
+   */
+  @property({ type: String, attribute: 'aria-label' }) override ariaLabel: string | null = null;
 
   @state() protected _visible: boolean = false;
   @state() protected _dismissing: boolean = false;
 
+  protected readonly _titleId: string = `kb-overlay-title-${++_overlayIdCounter}`;
+
   private _boundKeyHandler = this._handleKeyDown.bind(this);
-  private _savedBodyOverflow: string = '';
   private _previouslyFocused: HTMLElement | null = null;
+  private _inertedElements: Element[] = [];
+  protected _assignedZIndex: number = 0;
   protected _dismissTimeout: ReturnType<typeof setTimeout> | null = null;
+  /** Cached reference to the `[role="dialog"]` panel element. Populated after first render. */
+  protected _panelEl: HTMLElement | null = null;
+  /** Guards against `_finishDismiss` being invoked twice (transitionend + setTimeout race). */
+  private _dismissFinished: boolean = false;
 
   protected abstract _animateDismiss(): void;
   protected abstract get _closeLabel(): string;
 
   override connectedCallback(): void {
     super.connectedCallback();
-    document.addEventListener('keydown', this._boundKeyHandler);
     if (this.open) {
       this._show();
     }
@@ -130,6 +148,9 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (this._visible && !this._panelEl) {
+      this._cachePanel();
+    }
     if (changed.has('open')) {
       if (this.open) {
         this._show();
@@ -137,6 +158,11 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
         this._animateDismiss();
       }
     }
+  }
+
+  /** Caches the `[role="dialog"]` element after it has been rendered into the light DOM. */
+  protected _cachePanel(): void {
+    this._panelEl = this.querySelector<HTMLElement>('[role="dialog"]');
   }
 
   /** Programmatically open the overlay. Equivalent to setting `open = true`. */
@@ -150,13 +176,18 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   }
 
   protected _show(): void {
+    if (this._visible) return;
     this._dismissing = false;
     this._visible = true;
-    this._lockBodyScroll();
+    this._assignedZIndex = Z_BASE + ++_zIndexCounter;
 
+    document.addEventListener('keydown', this._boundKeyHandler);
     this._previouslyFocused = document.activeElement as HTMLElement | null;
 
+    this._applyInert();
+
     requestAnimationFrame(() => {
+      this._lockBodyScroll();
       if (this.autoFocus) {
         this._focusFirst();
       }
@@ -173,22 +204,48 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
 
   private _lockBodyScroll(): void {
     if (!this.lockScroll) return;
-    this._savedBodyOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    if (++KbOverlayBase._scrollLockCount === 1) {
+      KbOverlayBase._scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      if (KbOverlayBase._scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${KbOverlayBase._scrollbarWidth}px`;
+      }
+    }
   }
 
   protected _restoreScroll(): void {
     if (!this.lockScroll) return;
-    document.body.style.overflow = this._savedBodyOverflow;
+    if (KbOverlayBase._scrollLockCount > 0 && --KbOverlayBase._scrollLockCount === 0) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      KbOverlayBase._scrollbarWidth = 0;
+    }
+  }
+
+  private _applyInert(): void {
+    const siblings = this.parentElement?.children;
+    if (!siblings) return;
+    for (const sibling of Array.from(siblings)) {
+      if (sibling === this) continue;
+      const el = sibling as HTMLElement;
+      // Skip siblings already inerted by a previously opened overlay (P-15).
+      if (el.inert) continue;
+      el.inert = true;
+      this._inertedElements.push(sibling);
+    }
   }
 
   protected _restoreFocus(): void {
+    for (const el of this._inertedElements) {
+      (el as HTMLElement).inert = false;
+    }
+    this._inertedElements = [];
     this._previouslyFocused?.focus();
     this._previouslyFocused = null;
   }
 
   protected _focusFirst(): void {
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
+    const panel = this._panelEl ?? this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
     const first = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTORS);
     first?.focus();
@@ -209,7 +266,7 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   }
 
   private _handleTabTrap(e: KeyboardEvent): void {
-    const panel = this.querySelector<HTMLElement>('[role="dialog"]');
+    const panel = this._panelEl ?? this.querySelector<HTMLElement>('[role="dialog"]');
     if (!panel) return;
     handleTabTrap(panel, e);
   }
@@ -220,16 +277,23 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
     }
   }
 
-  /** Wire up transitionend + fallback timeout, then clean up overlay state and dispatch kb-close. */
+  /** Awaits the CSS transition on `panel` (with a `durationMs + 50 ms` fallback timeout), then resets overlay state and emits `kb-close`. Subclasses call this after starting their exit transition. */
   protected _finishDismiss(panel: HTMLElement | null, durationMs: number): void {
+    this._dismissFinished = false;
     const onFinish = (): void => {
+      if (this._dismissFinished) return;
+      this._dismissFinished = true;
       if (this._dismissTimeout !== null) {
         clearTimeout(this._dismissTimeout);
         this._dismissTimeout = null;
       }
       panel?.removeEventListener('transitionend', onFinish);
+      document.removeEventListener('keydown', this._boundKeyHandler);
       this._visible = false;
       this._dismissing = false;
+      this._panelEl = null;
+      if (_zIndexCounter > 0) --_zIndexCounter;
+      this._assignedZIndex = 0;
       this._restoreScroll();
       this._restoreFocus();
       this.emit('kb-close');
@@ -246,10 +310,10 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
     return html`
       <button
         class=${cx(
-          'cursor-pointer flex-shrink-0',
+          'cursor-pointer flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center select-none',
           kbClasses.textSecondary,
-          'hover:text-slate-900 dark:hover:text-zinc-50',
-          kbClasses.transition,
+          kbClasses.hoverTextPrimary,
+          kbClasses.transitionColors,
           kbClasses.focus,
         )}
         @click=${this._close}
@@ -262,17 +326,15 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
     `;
   }
 
-  /** Render the standard overlay header row (title slot + close button + border). */
   protected _renderOverlayHeader(s: OverlaySize, headerEl: Element | null): TemplateResult | typeof nothing {
     if (!(headerEl || this.closable)) return nothing;
     return html`
       <div class=${cx('flex items-center justify-between flex-shrink-0', HEADER_PX[s], kbClasses.borderBottom)}>
-        ${headerEl ? html`<div class=${kbClasses.label}>${headerEl}</div>` : html`<div></div>`}
+        ${headerEl ? html`<div id=${this._titleId} class="${kbClasses.label} select-none">${headerEl}</div>` : html`<div></div>`}
         ${this._renderCloseButton()}
       </div>`;
   }
 
-  /** Render the standard overlay body with scrollable overflow. */
   protected _renderOverlayBody(s: OverlaySize): TemplateResult {
     return html`
       <div class=${cx('flex-1 overflow-y-auto', BODY_PX[s], kbClasses.textPrimary)}>
@@ -280,7 +342,6 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
       </div>`;
   }
 
-  /** Render the standard overlay footer row with top border (only when footer slot is provided). */
   protected _renderOverlayFooter(s: OverlaySize, footerEl: Element | null): TemplateResult | typeof nothing {
     if (!footerEl) return nothing;
     return html`

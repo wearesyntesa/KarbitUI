@@ -1,23 +1,14 @@
 import type { BreadcrumbItem, SortDirection } from './types.js';
 
-// -- kb-change source discriminant --
-
-export type KbChangeSource =
-  | 'input'
-  | 'textarea'
-  | 'select'
-  | 'checkbox'
-  | 'radio'
-  | 'switch'
-  | 'checkbox-group'
-  | 'radio-group';
-
-// -- Individual event detail interfaces --
-
 export interface KbChangeValueDetail {
   readonly source: 'input' | 'textarea' | 'select' | 'radio-group';
   readonly value: string;
 }
+
+/** Narrowed `KbChangeValueDetail` for a specific source. */
+export type KbChangeValueDetailFor<S extends KbChangeValueDetail['source']> = Omit<KbChangeValueDetail, 'source'> & {
+  readonly source: S;
+};
 
 export interface KbChangeCheckedDetail {
   readonly source: 'switch';
@@ -77,7 +68,15 @@ export interface KbReorderDetail {
   readonly order: readonly string[];
 }
 
-// -- Aggregate types --
+/** Optional `source` field for zero-detail lifecycle events. */
+export interface KbSourceDetail {
+  readonly source?: string;
+}
+
+/** Detail for `kb-drag-start` / `kb-drag-end` events fired by `kb-tag-group`. */
+export interface KbDragDetail {
+  readonly value: string;
+}
 
 /** Discriminated union of all `kb-change` event details. Narrow via `detail.source`. */
 export type KbChangeDetail =
@@ -87,29 +86,41 @@ export type KbChangeDetail =
   | KbChangeRadioDetail
   | KbChangeGroupDetail;
 
-// -- Aggregate event-name → detail map --
+/** All valid `source` values across `kb-change` event details. Derived from `KbChangeDetail`. */
+export type KbChangeSource = KbChangeDetail['source'];
+
+/** Type guard to narrow a {@link KbChangeDetail} to the detail type for a specific source. */
+export function narrowKbChange<S extends KbChangeSource>(
+  detail: KbChangeDetail,
+  source: S,
+): detail is Extract<KbChangeDetail, { source: S }> {
+  return detail.source === source;
+}
 
 export interface KbEventDetailMap {
   'kb-change': KbChangeDetail;
   'kb-input': KbInputDetail;
-  'kb-click': KbClickLinkDetail | undefined;
-  'kb-close': undefined;
-  'kb-open': undefined;
-  'kb-focus': undefined;
-  'kb-blur': undefined;
-  'kb-clear': undefined;
+  /** Generic click for interactive elements without a URL (cards, tags, badges, list-items). */
+  'kb-click': undefined;
+  /** Link-specific click carrying the href. **Breaking**: previously merged into `kb-click`. */
+  'kb-link-click': KbClickLinkDetail;
+  'kb-close': KbSourceDetail | undefined;
+  'kb-open': KbSourceDetail | undefined;
+  'kb-focus': KbSourceDetail | undefined;
+  'kb-blur': KbSourceDetail | undefined;
+  'kb-clear': KbSourceDetail | undefined;
   'kb-toggle': KbToggleDetail;
   'kb-sort': KbSortDetail;
   'kb-row-click': KbRowClickDetail;
   'kb-tab-change': KbTabChangeDetail;
   'kb-navigate': KbNavigateDetail;
   'kb-reorder': KbReorderDetail;
+  'kb-drag-start': KbDragDetail;
+  'kb-drag-end': KbDragDetail;
 }
 
 /** Union of all KarbitUI event names. */
 export type KbEventName = keyof KbEventDetailMap;
-
-// -- Typed CustomEvent helper --
 
 export type KbCustomEvent<K extends keyof KbEventDetailMap> = KbEventDetailMap[K] extends undefined
   ? CustomEvent<undefined>
@@ -117,8 +128,6 @@ export type KbCustomEvent<K extends keyof KbEventDetailMap> = KbEventDetailMap[K
 
 /** Convenience handler type for KarbitUI events. */
 export type KbEventHandler<K extends keyof KbEventDetailMap> = (event: KbCustomEvent<K>) => void;
-
-// -- Global event map augmentation for addEventListener type safety --
 
 type KbEventMap = {
   [K in keyof KbEventDetailMap]: KbEventDetailMap[K] extends undefined

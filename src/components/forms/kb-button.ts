@@ -1,6 +1,6 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import {
   INTERACTIVE_GHOST,
   INTERACTIVE_LINK,
@@ -16,7 +16,7 @@ import type { ColorScheme, KnownColorScheme } from '../../core/types.js';
 
 // biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const buttonRecipe = recipe({
-  base: `inline-flex items-center justify-center font-sans font-semibold uppercase tracking-wide ${kbClasses.transition} cursor-pointer select-none ${kbClasses.focus}`,
+  base: `inline-flex items-center justify-center font-sans font-semibold uppercase tracking-wide ${kbClasses.transitionColors} cursor-pointer select-none ${kbClasses.focus}`,
   variants: {
     variant: {
       solid: 'border',
@@ -95,57 +95,75 @@ export class KbButton extends KbBaseElement<'icon-left' | 'icon-right'> {
   /** Stretch the button to fill its container width. @defaultValue false */
   @property({ type: Boolean, attribute: 'full-width' }) fullWidth: boolean = false;
 
-  @state() private _pressed = false;
+  private _cachedRecipeClasses = '';
 
-  private _onPointerDown(): void {
-    if (this.disabled || this.loading) return;
-    this._pressed = true;
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (this._cachedRecipeClasses === '' || changed.has('variant') || changed.has('size')) {
+      this._cachedRecipeClasses = buttonRecipe({ variant: this.variant, size: this.size });
+    }
+    if (changed.has('loading') || changed.has('loadingText')) {
+      // When loading, the label slot is always replaced (either by the spinner alone,
+      // or by the spinner + loadingText). In Light DOM, captured nodes remain as
+      // direct host children and must be explicitly hidden — returning `nothing`
+      // from render() is not enough.
+      this.setDefaultSlotVisible(!this.loading);
+    }
   }
 
-  private _onPointerUp(): void {
-    this._pressed = false;
+  private _onPointerDown(e: PointerEvent): void {
+    if (this.disabled || this.loading) return;
+    const btn = e.currentTarget as HTMLElement;
+    springPressDown(btn, 0.97);
+  }
+
+  private _onPointerUp(e: PointerEvent): void {
+    const btn = e.currentTarget as HTMLElement;
+    springPressUp(btn);
+  }
+
+  private _renderLeftContent(): TemplateResult | typeof nothing {
+    if (this.loading) {
+      const spinnerClasses = `inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size] ?? LOADING_SIZE.md}`;
+      return html`<span class=${spinnerClasses}></span>`;
+    }
+    const iconLeft = this.slotted('icon-left');
+    if (iconLeft) {
+      const iconSize: string = ICON_SIZE[this.size] ?? ICON_SIZE.md;
+      return html`<span class="flex-shrink-0 leading-[0] ${iconSize}" aria-hidden="true">${iconLeft}</span>`;
+    }
+    return nothing;
+  }
+
+  private _renderMainContent(): TemplateResult | Node[] | typeof nothing {
+    if (this.loading && this.loadingText !== undefined) {
+      return html`<span>${this.loadingText}</span>`;
+    }
+    if (!this.loading) {
+      return this.defaultSlotContent;
+    }
+    return nothing;
+  }
+
+  private _renderRightIcon(): TemplateResult | typeof nothing {
+    if (this.loading) return nothing;
+    const iconRight = this.slotted('icon-right');
+    if (iconRight) {
+      const iconSize: string = ICON_SIZE[this.size] ?? ICON_SIZE.md;
+      return html`<span class="flex-shrink-0 leading-[0] ${iconSize}" aria-hidden="true">${iconRight}</span>`;
+    }
+    return nothing;
   }
 
   override render(): TemplateResult {
-    const recipeClasses = buttonRecipe({ variant: this.variant, size: this.size });
-
     const disabledClasses = this.disabled || this.loading ? kbClasses.disabled : '';
 
     const colorMap = COLOR_SCHEME_MAP[this.variant];
     const colorClasses = lookupScheme(colorMap, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant];
 
     const widthClass = this.fullWidth ? 'w-full' : '';
-    const iconSizeClass = ICON_SIZE[this.size] ?? ICON_SIZE.md;
 
-    const pressClass = this._pressed && !this.disabled && !this.loading ? 'scale-[0.97]' : '';
-
-    const classes = this.buildClasses(
-      recipeClasses,
-      colorClasses,
-      disabledClasses,
-      widthClass,
-      iconSizeClass,
-      pressClass,
-    );
-
-    const iconLeft = this.slotted('icon-left');
-    const iconRight = this.slotted('icon-right');
-
-    const spinnerClasses = `inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size] ?? LOADING_SIZE.md}`;
-
-    let leftContent = nothing as typeof nothing | ReturnType<typeof html>;
-    if (this.loading) {
-      leftContent = html`<span class=${spinnerClasses}></span>`;
-    } else if (iconLeft) {
-      leftContent = html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconLeft}</span>`;
-    }
-
-    let mainContent: typeof nothing | ReturnType<typeof html> | Node[] = nothing;
-    if (this.loading && this.loadingText !== undefined) {
-      mainContent = html`<span>${this.loadingText}</span>`;
-    } else if (!this.loading) {
-      mainContent = this.defaultSlotContent;
-    }
+    const classes = this.buildClasses(this._cachedRecipeClasses, colorClasses, disabledClasses, widthClass);
 
     return html`
       <button
@@ -158,13 +176,9 @@ export class KbButton extends KbBaseElement<'icon-left' | 'icon-right'> {
         @pointerup=${this._onPointerUp}
         @pointerleave=${this._onPointerUp}
       >
-        ${leftContent}
-        ${mainContent}
-        ${
-          !this.loading && iconRight
-            ? html`<span class="flex-shrink-0 leading-[0]" aria-hidden="true">${iconRight}</span>`
-            : nothing
-        }
+        ${this._renderLeftContent()}
+        ${this._renderMainContent()}
+        ${this._renderRightIcon()}
       </button>
     `;
   }

@@ -7,13 +7,15 @@ import { resolveStyleClasses, stylePropsToClasses } from './style-props.js';
 
 type LitPropertyMap = Record<string, PropertyDeclaration>;
 
+const EMPTY_NODES: readonly Node[] = [];
+
 function buildLitProperties(): LitPropertyMap {
   const props: LitPropertyMap = {};
   for (const key of STYLE_PROP_KEYS) {
     const def = STYLE_PROP_DEFS[key];
     props[key] = {
       type: String,
-      reflect: true,
+      reflect: false,
       attribute: def.attribute ?? key,
     };
   }
@@ -33,9 +35,8 @@ export type HostDisplay = '' | 'block' | 'inline-block' | 'flex' | 'grid' | 'inl
  * values (e.g. `gap="4"`, `bg="blue-500"`) while still accepting arbitrary
  * strings via the `(string & {})` escape hatch on each value type.
  */
-// biome-ignore lint/suspicious/noUnsafeDeclarationMerging: intentional Lit pattern — declaration merging adds StyleProps to the class
+// biome-ignore lint/suspicious/noUnsafeDeclarationMerging: intentional Lit pattern - declaration merging adds StyleProps to the class
 export class KbBaseElement<S extends string = string> extends LitElement {
-  /** Host element display value. Override to 'block' for block-level components. */
   static hostDisplay: HostDisplay = '';
   static override get properties(): LitPropertyMap {
     return {
@@ -45,6 +46,9 @@ export class KbBaseElement<S extends string = string> extends LitElement {
   }
 
   override createRenderRoot(): this {
+    const anchor = document.createComment('');
+    this.prepend(anchor);
+    this.renderOptions.renderBefore = anchor;
     return this;
   }
 
@@ -57,9 +61,17 @@ export class KbBaseElement<S extends string = string> extends LitElement {
     super.connectedCallback();
   }
 
-  private _defaultSlotNodes: Node[] | undefined;
+  override disconnectedCallback(): void {
+    this._slotObserver?.disconnect();
+    this._slotObserver = undefined;
+    super.disconnectedCallback();
+  }
 
-  /** Capture default-slot children (no `slot` attribute) before Lit renders. Call before `super.connectedCallback()`. Only captures once — subsequent calls (e.g. after DOM move) are no-ops since Lit owns the DOM after first render. */
+  private _defaultSlotNodes: Node[] | undefined;
+  private _slotCache: Map<string, Element | null> = new Map();
+  private _slotObserver: MutationObserver | undefined;
+  private _cachedStyleClasses: string = '';
+
   protected captureDefaultSlotContent(): void {
     if (this._defaultSlotNodes !== undefined) return;
     this._defaultSlotNodes = Array.from(this.childNodes).filter(
@@ -69,19 +81,61 @@ export class KbBaseElement<S extends string = string> extends LitElement {
     );
   }
 
-  /** Returns previously captured default-slot children, or empty array. */
   protected get defaultSlotContent(): Node[] {
-    return this._defaultSlotNodes ?? [];
+    return (this._defaultSlotNodes ?? EMPTY_NODES) as Node[];
   }
 
-  /** Returns the named-slot child element, or `null`. */
+  /**
+   * Shows or hides the captured default slot content nodes.
+   *
+   * In Light DOM, captured nodes remain as direct host children and are always
+   * visible to the browser even when `render()` returns `nothing` for them.
+   * Call this method to imperatively toggle their visibility when conditional
+   * rendering cannot suppress them (e.g. loading states, closed overlays).
+   *
+   * Text nodes are wrapped in a `<span data-kb-slot>` on first call since they
+   * have no `style` property of their own.
+   */
+  protected setDefaultSlotVisible(visible: boolean): void {
+    for (const node of this._defaultSlotNodes ?? EMPTY_NODES) {
+      if (node instanceof HTMLElement) {
+        node.style.display = visible ? '' : 'none';
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        // Lazily wrap text nodes so we can toggle display on them
+        if (!this._defaultSlotTextWrapper) {
+          const wrapper = document.createElement('span');
+          wrapper.dataset.kbSlot = '';
+          node.parentNode?.insertBefore(wrapper, node);
+          wrapper.appendChild(node);
+          this._defaultSlotTextWrapper = wrapper;
+        }
+        this._defaultSlotTextWrapper.style.display = visible ? '' : 'none';
+      }
+    }
+  }
+
+  private _defaultSlotTextWrapper: HTMLSpanElement | undefined;
+
   protected slotted(name: S): Element | null {
-    return this.querySelector(`[slot="${name}"]`);
+    if (this._slotCache.has(name)) {
+      return this._slotCache.get(name) ?? null;
+    }
+    if (!this._slotObserver) {
+      this._slotObserver = new MutationObserver(() => {
+        this._slotCache.clear();
+        this.requestUpdate();
+      });
+      this._slotObserver.observe(this, { childList: true });
+    }
+    const el = this.querySelector(`[slot="${name}"]`);
+    this._slotCache.set(name, el);
+    return el;
   }
 
   protected collectStyleProps(): Partial<StyleProps> {
     const props: Record<string, string> = {};
     for (const key of STYLE_PROP_KEYS) {
+      if (this._excludedStyleProps?.has(key)) continue;
       const value = (this as unknown as Record<string, unknown>)[key];
       if (typeof value === 'string' && value !== '') {
         props[key] = value;
@@ -90,14 +144,26 @@ export class KbBaseElement<S extends string = string> extends LitElement {
     return props as Partial<StyleProps>;
   }
 
-  protected getStyleClasses(): string {
-    // Subclasses that override collectStyleProps (to exclude owned props) fall
-    // back to the two-step path. The base case uses the single-pass resolver
-    // that builds the cache key and maps classes in one iteration.
+  /**
+   * Optional set of style-prop keys to exclude from class resolution.
+   * Subclasses that own a prop that collides with a style-prop key (e.g. `gap`, `position`)
+   * should populate this in their class body instead of overriding `collectStyleProps`.
+   */
+  protected _excludedStyleProps?: ReadonlySet<string>;
+
+  protected override willUpdate(_changed: Map<PropertyKey, unknown>): void {
     if (this.collectStyleProps !== KbBaseElement.prototype.collectStyleProps) {
-      return stylePropsToClasses(this.collectStyleProps());
+      this._cachedStyleClasses = stylePropsToClasses(this.collectStyleProps());
+    } else {
+      this._cachedStyleClasses = resolveStyleClasses(
+        this as unknown as Record<string, unknown>,
+        this._excludedStyleProps,
+      );
     }
-    return resolveStyleClasses(this as unknown as Record<string, unknown>);
+  }
+
+  protected getStyleClasses(): string {
+    return this._cachedStyleClasses;
   }
 
   protected buildClasses(...additional: ClassInput[]): string {
@@ -105,7 +171,7 @@ export class KbBaseElement<S extends string = string> extends LitElement {
   }
 
   /** Type-safe event emitter. Validates event name and detail type against `KbEventDetailMap`. Always dispatches with `bubbles: true, composed: true`. */
-  protected emit<K extends keyof KbEventDetailMap>(
+  emit<K extends keyof KbEventDetailMap>(
     ...args: KbEventDetailMap[K] extends undefined
       ? [event: K]
       : undefined extends KbEventDetailMap[K]
@@ -133,9 +199,72 @@ export interface KbBaseElement<S extends string = string> extends StyleProps {}
 export function dismissWithAnimation(host: HTMLElement, selector: string, fallbackMs: number): void {
   const el = host.querySelector(selector) as HTMLElement | null;
   if (el) {
-    el.addEventListener('transitionend', () => host.remove(), { once: true });
-    setTimeout(() => host.remove(), fallbackMs);
+    const timerId: ReturnType<typeof setTimeout> = setTimeout(() => host.remove(), fallbackMs);
+    el.addEventListener(
+      'transitionend',
+      () => {
+        clearTimeout(timerId);
+        host.remove();
+      },
+      { once: true },
+    );
   } else {
     host.remove();
   }
+}
+
+// Cached at module level - avoids creating a new MediaQueryList on every animation call.
+// SSR guard: `window` may be undefined in Node/SSR environments.
+const _reducedMotionMQL: MediaQueryList | null =
+  typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+let _prefersReducedMotion: boolean = _reducedMotionMQL?.matches ?? false;
+_reducedMotionMQL?.addEventListener('change', (e: MediaQueryListEvent) => {
+  _prefersReducedMotion = e.matches;
+});
+
+/** Returns `true` when the user has requested reduced motion via OS/browser preference. */
+export function prefersReducedMotion(): boolean {
+  return _prefersReducedMotion;
+}
+
+const SPRING_EASING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+/** Imperative scale-down on pointer press. Cancels any running animation on the element. No-ops under reduced motion. */
+export function springPressDown(el: HTMLElement, scale: number): Animation {
+  for (const a of el.getAnimations()) a.cancel();
+  const anim = el.animate([{ transform: `scale(${scale})` }], {
+    duration: prefersReducedMotion() ? 0 : 100,
+    easing: 'ease-out',
+    fill: 'forwards',
+  });
+  anim.finished.then(
+    () => {
+      anim.commitStyles();
+      anim.cancel();
+    },
+    (_e: unknown) => {
+      /* cancelled - no-op */
+    },
+  );
+  return anim;
+}
+
+/** Imperative spring-back to scale(1) on pointer release. Uses overshoot easing for tactile feel. Instant under reduced motion. */
+export function springPressUp(el: HTMLElement): Animation {
+  for (const a of el.getAnimations()) a.cancel();
+  const anim = el.animate([{ transform: 'scale(1)' }], {
+    duration: prefersReducedMotion() ? 0 : 200,
+    easing: SPRING_EASING,
+    fill: 'forwards',
+  });
+  anim.finished.then(
+    () => {
+      anim.commitStyles();
+      anim.cancel();
+    },
+    (_e: unknown) => {
+      /* cancelled - no-op */
+    },
+  );
+  return anim;
 }

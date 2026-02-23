@@ -8,13 +8,15 @@ const loremLong =
 const lorem280 =
   'The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf.';
 
+type Args = { placeholder?: string; variant?: string; size?: string };
+
 export default {
   title: 'Forms/Textarea',
   component: 'kb-textarea',
   args: { placeholder: 'Write something...', variant: 'outline', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Outline: S = {
   render: () => html`

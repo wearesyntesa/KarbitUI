@@ -3,13 +3,15 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/layout/kb-divider.js';
 
+type Args = { dividerColor?: string; variant?: string; thickness?: string; label?: string; animated?: boolean };
+
 export default {
   title: 'Layout/Divider',
   component: 'kb-divider',
   render: (args) => html`<kb-divider ${spreadAttrs(args)}></kb-divider>`,
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Horizontal: S = {};
 

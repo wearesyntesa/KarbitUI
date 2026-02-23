@@ -4,14 +4,22 @@ import { spreadAttrs } from '../_define.js';
 import '../../src/components/forms/kb-checkbox.js';
 import '../../src/components/forms/kb-checkbox-group.js';
 
+type Args = {
+  size?: string;
+  checked?: boolean;
+  indeterminate?: boolean;
+  disabled?: boolean;
+  invalid?: boolean;
+};
+
 export default {
   title: 'Forms/Checkbox',
   component: 'kb-checkbox',
   render: (args) => html`<kb-checkbox ${spreadAttrs(args)}>Accept terms</kb-checkbox>`,
   args: { size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

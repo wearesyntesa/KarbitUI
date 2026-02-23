@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { SortDirection } from '../../core/types.js';
@@ -35,7 +35,7 @@ const INTERACTIVE_ROW_CLASSES_LIST: string[] = [
   'active:bg-gray-100/60',
   'dark:active:bg-zinc-800/70',
   ...kbClasses.focus.split(' '),
-  ...kbClasses.transition.split(' '),
+  ...kbClasses.transitionColors.split(' '),
 ];
 
 const SORT_INDICATOR_ATTR: string = 'data-kb-sort-indicator';
@@ -48,6 +48,8 @@ const VARIANT_CLASSES: Record<TableVariant, string> = {
   bordered:
     '[&_th]:border [&_th]:border-gray-200 dark:[&_th]:border-zinc-700 [&_td]:border [&_td]:border-gray-200 dark:[&_td]:border-zinc-700',
 } as const satisfies Record<TableVariant, string>;
+
+let tableInstanceCounter = 0;
 
 /**
  * Data table with sorting, searching, column resizing, and interactive rows.
@@ -87,7 +89,10 @@ const VARIANT_CLASSES: Record<TableVariant, string> = {
 export class KbTable extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
-  /** Visual variant — `'simple'` (default lines), `'striped'` (alternating row bg), or `'bordered'` (cell borders). @defaultValue 'simple' */
+  /** A-2: Unique id for the table element so search input can reference it via aria-controls. */
+  private _tableId = `kb-table-${tableInstanceCounter++}`;
+
+  /** Visual variant - `'simple'` (default lines), `'striped'` (alternating row bg), or `'bordered'` (cell borders). @defaultValue 'simple' */
   @property({ type: String }) variant: TableVariant = 'simple';
   /** Cell and header padding size. @defaultValue 'md' */
   @property({ type: String }) size: TableSize = 'md';
@@ -107,14 +112,17 @@ export class KbTable extends KbBaseElement {
   @property({ type: Boolean }) resizable: boolean = false;
   /** Placeholder text shown in the search input. @defaultValue 'Search...' */
   @property({ type: String, attribute: 'search-placeholder' }) searchPlaceholder: string = 'Search...';
+  /** Text shown when no rows match the search query (or the table has no rows). @defaultValue 'No results' */
+  @property({ type: String, attribute: 'empty-text' }) emptyText: string = 'No results';
 
-  @state() private _sortCol: number = -1;
-  @state() private _sortDir: SortDirection = 'asc';
-  @state() private _searchQuery: string = '';
-  @state() private _visibleCount: number = -1;
-  @state() private _totalCount: number = 0;
-
-  // ── Interactive rows ──────────────────────────────────────────────
+  private _sortCol: number = -1;
+  private _sortDir: SortDirection = 'asc';
+  private _searchQuery: string = '';
+  private _visibleCount: number = -1;
+  private _totalCount: number = 0;
+  private _countSpanRef: WeakRef<HTMLSpanElement> | null = null;
+  private _emptyRow: HTMLTableRowElement | null = null;
+  private _tbodyEl: HTMLTableSectionElement | null = null;
 
   private _boundRowHandlers = new WeakMap<
     HTMLTableRowElement,
@@ -124,30 +132,72 @@ export class KbTable extends KbBaseElement {
     }
   >();
 
+  private _cachedBodyRows: HTMLTableRowElement[] | null = null;
+  private _cachedHeaderCells: HTMLTableCellElement[] | null = null;
+
+  private _getBodyRows(): HTMLTableRowElement[] {
+    if (this._cachedBodyRows === null) {
+      this._cachedBodyRows = Array.from(
+        this.querySelectorAll<HTMLTableRowElement>('tbody tr:not([data-kb-empty-row])'),
+      );
+    }
+    return this._cachedBodyRows;
+  }
+
+  private _getHeaderCells(): HTMLTableCellElement[] {
+    if (this._cachedHeaderCells === null) {
+      this._cachedHeaderCells = Array.from(this.querySelectorAll<HTMLTableCellElement>('thead th'));
+    }
+    return this._cachedHeaderCells;
+  }
+
+  private _invalidateDomCaches(): void {
+    this._cachedBodyRows = null;
+    this._cachedHeaderCells = null;
+  }
+
+  override firstUpdated(): void {
+    this._tbodyEl = this.querySelector('tbody');
+  }
+
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (changed.has('interactive') || changed.has('sortable') || changed.has('resizable')) {
+      this._invalidateDomCaches();
+    }
     if (changed.has('interactive')) {
       this._applyInteractiveRows();
     }
-    if (changed.has('sortable') || changed.has('_sortCol') || changed.has('_sortDir')) {
+    if (changed.has('sortable')) {
       this._applySortableHeaders();
     }
     if (changed.has('resizable')) {
       this._applyResizableColumns();
     }
-    if (this._totalCount === 0 || changed.has('_searchQuery') || changed.has('interactive')) {
+    if (this._totalCount === 0 || changed.has('interactive')) {
       this._syncRowCounts();
+    }
+    if (changed.has('emptyText') && this._emptyRow) {
+      const td = this._emptyRow.querySelector('td');
+      if (td) td.textContent = this.emptyText;
+    }
+    if (this.searchable && !this._countSpanRef?.deref()) {
+      const span = this.querySelector<HTMLSpanElement>('[data-kb-count-span]');
+      if (span) this._countSpanRef = new WeakRef(span);
     }
   }
 
   override disconnectedCallback(): void {
+    clearTimeout(this._searchTimeout);
     this._cleanupInteractiveRows();
     this._cleanupSortableHeaders();
     this._cleanupResizableColumns();
+    this._emptyRow?.remove();
+    this._emptyRow = null;
     super.disconnectedCallback();
   }
 
   private _applyInteractiveRows(): void {
-    const rows = this.querySelectorAll<HTMLTableRowElement>('tbody tr');
+    const rows = this._getBodyRows();
 
     if (!this.interactive) {
       for (const row of rows) this._detachRow(row);
@@ -190,19 +240,18 @@ export class KbTable extends KbBaseElement {
   }
 
   private _cleanupInteractiveRows(): void {
-    for (const row of this.querySelectorAll<HTMLTableRowElement>('tbody tr')) this._detachRow(row);
+    for (const row of this._getBodyRows()) this._detachRow(row);
   }
 
   private _fireRowClick(index: number, row: HTMLTableRowElement): void {
     this.emit('kb-row-click', { index, row });
   }
 
-  // ── Sortable ──────────────────────────────────────────────────────
-
   private _sortClickHandlers = new WeakMap<HTMLTableCellElement, () => void>();
+  private _sortKeyDownHandlers = new WeakMap<HTMLTableCellElement, (e: KeyboardEvent) => void>();
 
   private _applySortableHeaders(): void {
-    const headers = Array.from(this.querySelectorAll<HTMLTableCellElement>('thead th'));
+    const headers = this._getHeaderCells();
 
     if (!this.sortable) {
       for (const th of headers) this._detachSortHeader(th);
@@ -219,10 +268,20 @@ export class KbTable extends KbBaseElement {
         th.style.cursor = 'pointer';
         th.style.userSelect = 'none';
         th.style.position = 'relative';
+        th.setAttribute('tabindex', '0');
 
-        const handler = (): void => this._handleSortClick(colIndex);
-        th.addEventListener('click', handler);
-        this._sortClickHandlers.set(th, handler);
+        const clickHandler = (): void => this._handleSortClick(colIndex);
+        const keyDownHandler = (e: KeyboardEvent): void => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this._handleSortClick(colIndex);
+          }
+        };
+
+        th.addEventListener('click', clickHandler);
+        th.addEventListener('keydown', keyDownHandler);
+        this._sortClickHandlers.set(th, clickHandler);
+        this._sortKeyDownHandlers.set(th, keyDownHandler);
       }
 
       this._updateSortIndicator(th, colIndex);
@@ -236,13 +295,19 @@ export class KbTable extends KbBaseElement {
       this._sortClickHandlers.delete(th);
       th.style.cursor = '';
       th.style.userSelect = '';
+      th.removeAttribute('tabindex');
+    }
+    const keyDownHandler = this._sortKeyDownHandlers.get(th);
+    if (keyDownHandler) {
+      th.removeEventListener('keydown', keyDownHandler);
+      this._sortKeyDownHandlers.delete(th);
     }
     const indicator = th.querySelector(`[${SORT_INDICATOR_ATTR}]`);
     indicator?.remove();
   }
 
   private _cleanupSortableHeaders(): void {
-    for (const th of this.querySelectorAll<HTMLTableCellElement>('thead th')) this._detachSortHeader(th);
+    for (const th of this._getHeaderCells()) this._detachSortHeader(th);
   }
 
   private _handleSortClick(colIndex: number): void {
@@ -254,19 +319,20 @@ export class KbTable extends KbBaseElement {
     }
 
     this._performSort();
+    this._applySortableHeaders();
 
     this.emit('kb-sort', { column: this._sortCol, direction: this._sortDir });
   }
 
   private _performSort(): void {
-    const tbody = this.querySelector('tbody');
+    const tbody = this._tbodyEl ?? this.querySelector('tbody');
     if (!tbody || this._sortCol < 0) return;
 
     const rows = Array.from(tbody.querySelectorAll<HTMLTableRowElement>('tr'));
     const col = this._sortCol;
     const dir = this._sortDir === 'asc' ? 1 : -1;
 
-    const th = this.querySelectorAll<HTMLTableCellElement>('thead th')[col];
+    const th = this._getHeaderCells()[col];
     const isNumeric = th?.getAttribute('data-sort') === 'number';
     const numRegex = /[^0-9.-]/g;
 
@@ -281,7 +347,9 @@ export class KbTable extends KbBaseElement {
         : (a.key as string).localeCompare(b.key as string) * dir,
     );
 
-    for (const { row } of keyed) tbody.appendChild(row);
+    const fragment = document.createDocumentFragment();
+    for (const { row } of keyed) fragment.appendChild(row);
+    tbody.appendChild(fragment);
   }
 
   private _updateSortIndicator(th: HTMLTableCellElement, colIndex: number): void {
@@ -290,15 +358,16 @@ export class KbTable extends KbBaseElement {
     if (this._sortCol !== colIndex) {
       if (indicator) {
         indicator.textContent = '';
-        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono ${kbClasses.transition}`;
+        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
         indicator.textContent = '↕';
       } else {
         indicator = document.createElement('span');
         indicator.setAttribute(SORT_INDICATOR_ATTR, '');
-        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono ${kbClasses.transition}`;
+        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
         indicator.textContent = '↕';
         th.appendChild(indicator);
       }
+      th.setAttribute('aria-sort', 'none');
       return;
     }
 
@@ -308,11 +377,10 @@ export class KbTable extends KbBaseElement {
       th.appendChild(indicator);
     }
 
-    indicator.className = `ml-2 inline-block text-blue-500 dark:text-blue-400 text-[10px] font-mono ${kbClasses.transition}`;
+    indicator.className = `ml-2 inline-block text-blue-500 dark:text-blue-400 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
     indicator.textContent = this._sortDir === 'asc' ? '↑' : '↓';
+    th.setAttribute('aria-sort', this._sortDir === 'asc' ? 'ascending' : 'descending');
   }
-
-  // ── Searchable ────────────────────────────────────────────────────
 
   private _searchTimeout: ReturnType<typeof setTimeout> | undefined;
   private _rowTextCache = new WeakMap<HTMLTableRowElement, string>();
@@ -327,18 +395,21 @@ export class KbTable extends KbBaseElement {
   }
 
   private _filterRows(): void {
-    const tbody = this.querySelector('tbody');
-    if (!tbody) return;
+    const rows = this._getBodyRows();
+    if (rows.length === 0) return;
 
-    const rows = tbody.querySelectorAll<HTMLTableRowElement>('tr');
     const query = this._searchQuery.toLowerCase().trim();
 
+    if (!query) {
+      this._rowTextCache = new WeakMap<HTMLTableRowElement, string>();
+    }
+
     let visible = 0;
-    rows.forEach((row) => {
+    for (const row of rows) {
       if (!query) {
         row.hidden = false;
         visible++;
-        return;
+        continue;
       }
       let text = this._rowTextCache.get(row);
       if (text === undefined) {
@@ -348,27 +419,69 @@ export class KbTable extends KbBaseElement {
       const match = text.includes(query);
       row.hidden = !match;
       if (match) visible++;
-    });
+    }
 
     this._visibleCount = visible;
     this._totalCount = rows.length;
+    this._updateCountSpan();
+    this._syncEmptyRow();
   }
 
   private _syncRowCounts(): void {
-    const rows = this.querySelectorAll<HTMLTableRowElement>('tbody tr');
+    const rows = this._getBodyRows();
     this._totalCount = rows.length;
     if (this._visibleCount < 0) {
       this._visibleCount = rows.length;
     }
+    this._updateCountSpan();
+    this._syncEmptyRow();
   }
 
-  // ── Resizable ─────────────────────────────────────────────────────
+  private _updateCountSpan(): void {
+    const span = this._countSpanRef?.deref();
+    if (!span) return;
+    const showCount = this._searchQuery.trim() !== '';
+    span.textContent = showCount ? `${this._visibleCount} of ${this._totalCount}` : `${this._totalCount} rows`;
+  }
+
+  private _syncEmptyRow(): void {
+    const tbody = this._tbodyEl ?? this.querySelector('tbody');
+    if (!tbody) return;
+
+    const hasVisible = this._visibleCount > 0;
+
+    if (hasVisible) {
+      this._emptyRow?.remove();
+      this._emptyRow = null;
+      return;
+    }
+
+    if (!this._emptyRow) {
+      const colCount = this._getHeaderCells().length || 1;
+      const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = colCount;
+      td.className = `${sizeConfig.cell} text-center font-sans text-sm select-none ${kbClasses.textMuted}`;
+      td.setAttribute('data-kb-empty-row', '');
+      tr.setAttribute('data-kb-empty-row', '');
+      tr.appendChild(td);
+      this._emptyRow = tr;
+    }
+
+    const td = this._emptyRow.querySelector('td');
+    if (td) td.textContent = this.emptyText;
+
+    if (!this._emptyRow.parentElement) {
+      tbody.appendChild(this._emptyRow);
+    }
+  }
 
   private _resizeHandles = new WeakMap<HTMLTableCellElement, HTMLDivElement>();
   private _resizeInitialized = false;
 
   private _applyResizableColumns(): void {
-    const headers = Array.from(this.querySelectorAll<HTMLTableCellElement>('thead th'));
+    const headers = this._getHeaderCells();
     const table = this.querySelector('table');
 
     if (!this.resizable || headers.length === 0 || !table) {
@@ -377,9 +490,9 @@ export class KbTable extends KbBaseElement {
     }
 
     if (!this._resizeInitialized) {
-      headers.forEach((th) => {
-        const width = th.getBoundingClientRect().width;
-        th.style.width = `${width}px`;
+      const widths = headers.map((th) => th.getBoundingClientRect().width);
+      headers.forEach((th, i) => {
+        th.style.width = `${widths[i]}px`;
       });
       table.style.tableLayout = 'fixed';
       this._resizeInitialized = true;
@@ -393,48 +506,46 @@ export class KbTable extends KbBaseElement {
 
       const handle = document.createElement('div');
       handle.setAttribute(RESIZE_HANDLE_ATTR, '');
-      handle.style.cssText = 'position:absolute;right:-1px;top:0;bottom:0;width:3px;cursor:col-resize;z-index:1;';
+      handle.style.cssText = 'position:absolute;right:-4px;top:0;bottom:0;width:8px;cursor:col-resize;z-index:1;';
       handle.className = 'hover:bg-blue-500/40 active:bg-blue-500/60';
 
-      handle.addEventListener('mousedown', (e) => this._startResize(e, th));
+      handle.addEventListener('pointerdown', (e) => this._startResize(e, th));
       th.appendChild(handle);
       this._resizeHandles.set(th, handle);
     });
   }
 
-  private _startResize(e: MouseEvent, th: HTMLTableCellElement): void {
+  private _startResize(e: PointerEvent, th: HTMLTableCellElement): void {
     e.preventDefault();
     e.stopPropagation();
+
+    const handle = e.currentTarget as HTMLElement;
+    handle.setPointerCapture(e.pointerId);
 
     const startX = e.clientX;
     const startWidth = th.getBoundingClientRect().width;
     const MIN_WIDTH = 40;
 
-    const prevCursor = document.body.style.cursor;
-    const prevSelect = document.body.style.userSelect;
-    document.body.style.cursor = 'col-resize';
-    document.body.style.userSelect = 'none';
-
-    const onMove = (ev: MouseEvent): void => {
+    const onMove = (ev: PointerEvent): void => {
       const delta = ev.clientX - startX;
       const newWidth = Math.max(MIN_WIDTH, startWidth + delta);
       th.style.width = `${newWidth}px`;
     };
 
     const onUp = (): void => {
-      document.body.style.cursor = prevCursor;
-      document.body.style.userSelect = prevSelect;
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
+      handle.removeEventListener('pointermove', onMove);
+      handle.removeEventListener('pointerup', onUp);
+      handle.removeEventListener('pointercancel', onUp);
     };
 
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    handle.addEventListener('pointermove', onMove);
+    handle.addEventListener('pointerup', onUp);
+    handle.addEventListener('pointercancel', onUp);
   }
 
   private _cleanupResizableColumns(): void {
-    const headers = this.querySelectorAll<HTMLTableCellElement>('thead th');
-    headers.forEach((th) => {
+    const headers = this._getHeaderCells();
+    for (const th of headers) {
       const handle = this._resizeHandles.get(th);
       if (handle) {
         handle.remove();
@@ -442,14 +553,12 @@ export class KbTable extends KbBaseElement {
       }
       th.style.width = '';
       th.style.position = '';
-    });
+    }
 
     const table = this.querySelector('table');
     if (table) table.style.tableLayout = '';
     this._resizeInitialized = false;
   }
-
-  // ── Render ────────────────────────────────────────────────────────
 
   override render(): TemplateResult {
     const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
@@ -483,7 +592,7 @@ export class KbTable extends KbBaseElement {
       `[&_th]:${sizeConfig.header} [&_th]:text-left [&_th]:font-mono [&_th]:font-medium [&_th]:uppercase [&_th]:tracking-widest [&_th]:${sizeConfig.headerText}`,
       '[&_th]:text-slate-400 dark:[&_th]:text-zinc-500',
       `[&_td]:${sizeConfig.cell}`,
-      `[&_tr]:${kbClasses.transition}`,
+      `[&_tr]:${kbClasses.transitionColors}`,
       hoverClasses,
       stickyClasses,
     );
@@ -495,7 +604,7 @@ export class KbTable extends KbBaseElement {
     );
 
     const captionEl = this.caption
-      ? html`<div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} ${kbClasses.label}">${this.caption}</div>`
+      ? html`<div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} ${kbClasses.label} select-none">${this.caption}</div>`
       : nothing;
 
     const showCount = this.searchable && this._searchQuery.trim() !== '';
@@ -505,17 +614,19 @@ export class KbTable extends KbBaseElement {
       ? html`
         <div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} flex items-center gap-4">
           <div class="relative flex-1 max-w-sm">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 dark:text-zinc-600 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg aria-hidden="true" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 dark:text-zinc-600 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
             </svg>
             <input
               type="text"
               placeholder=${this.searchPlaceholder}
-              class="w-full pl-10 pr-4 py-2 text-sm font-sans ${kbClasses.border} ${kbClasses.surface} ${kbClasses.textPrimary} placeholder:${kbClasses.textMuted} ${kbClasses.focus} ${kbClasses.transition} outline-none"
+              aria-label="Search table"
+              aria-controls=${this._tableId}
+              class="w-full pl-10 pr-4 py-2 text-sm font-sans ${kbClasses.border} ${kbClasses.surface} ${kbClasses.textPrimary} placeholder:${kbClasses.textMuted} ${kbClasses.focus} ${kbClasses.transitionColors} outline-none"
               @input=${this._handleSearchInput}
             />
           </div>
-          <span class="font-mono text-[11px] tracking-widest uppercase ${kbClasses.textMuted} whitespace-nowrap">${countText}</span>
+          <span data-kb-count-span class="font-mono text-[11px] tracking-widest uppercase select-none ${kbClasses.textMuted} whitespace-nowrap">${countText}</span>
         </div>
       `
       : nothing;
@@ -530,7 +641,7 @@ export class KbTable extends KbBaseElement {
         ${captionEl}
         ${toolbarEl}
         <div class=${innerClasses || nothing}>
-          <table class=${tableClasses}>${this.defaultSlotContent}</table>
+          <table id=${this._tableId} class=${tableClasses}>${this.defaultSlotContent}</table>
         </div>
       </div>
     `;

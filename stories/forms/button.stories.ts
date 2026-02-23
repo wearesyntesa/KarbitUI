@@ -4,14 +4,21 @@ import { spreadAttrs } from '../_define.js';
 import '../../src/components/forms/kb-button.js';
 import '../../src/components/forms/kb-button-group.js';
 
+type Args = {
+  variant?: string;
+  size?: string;
+  disabled?: boolean;
+  loading?: boolean;
+};
+
 export default {
   title: 'Forms/Button',
   component: 'kb-button',
   render: (args) => html`<kb-button ${spreadAttrs(args)}>CLICK ME</kb-button>`,
   args: { variant: 'solid', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Solid: S = {};
 

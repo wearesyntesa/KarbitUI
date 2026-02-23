@@ -26,13 +26,23 @@ export class KbAccordionGroup extends KbBaseElement {
   /** When false (default), opening one item closes all others. */
   @property({ type: Boolean, attribute: 'allow-multiple' }) allowMultiple: boolean = false;
 
+  private _items: KbAccordion[] = [];
+  private _itemObserver: MutationObserver | undefined;
+
   override connectedCallback(): void {
     super.connectedCallback();
+    this._items = Array.from(this.querySelectorAll<KbAccordion>('kb-accordion'));
+    this._itemObserver = new MutationObserver(() => {
+      this._items = Array.from(this.querySelectorAll<KbAccordion>('kb-accordion'));
+    });
+    this._itemObserver.observe(this, { childList: true });
     this.addEventListener('kb-toggle', this._handleItemToggle as EventListener);
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    this._itemObserver?.disconnect();
+    this._itemObserver = undefined;
     this.removeEventListener('kb-toggle', this._handleItemToggle as EventListener);
   }
 
@@ -42,8 +52,7 @@ export class KbAccordionGroup extends KbBaseElement {
     const target = e.target as KbAccordion;
     if (!target.open) return;
 
-    const items = this.querySelectorAll<KbAccordion>('kb-accordion');
-    for (const item of items) {
+    for (const item of this._items) {
       if (item !== target && item.open) {
         item.open = false;
       }

@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
@@ -15,7 +15,9 @@ const SIZE_MAP: Record<ProgressSize, string> = {
   lg: 'h-4',
 } as const satisfies Record<ProgressSize, string>;
 
-const AUTO_COLOR_THRESHOLDS: Array<{ max: number; classes: string }> = [
+const DEFAULT_FILL = 'bg-blue-500 dark:bg-blue-400';
+
+const AUTO_COLOR_THRESHOLDS: ReadonlyArray<{ readonly max: number; readonly classes: string }> = [
   { max: 60, classes: 'bg-blue-500 dark:bg-blue-400' },
   { max: 85, classes: 'bg-yellow-500 dark:bg-yellow-400' },
   { max: Infinity, classes: 'bg-red-500 dark:bg-red-400' },
@@ -47,13 +49,6 @@ const STRIPE_SIZE = '1rem 1rem';
 export class KbProgress extends KbBaseElement<'label'> {
   static override hostDisplay = 'block' as const;
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    requestAnimationFrame(() => {
-      this._mounted = true;
-    });
-  }
-
   /** Current progress value between `min` and `max`. @defaultValue 0 */
   @property({ type: Number }) value: number = 0;
   /** Maximum progress value. @defaultValue 100 */
@@ -79,90 +74,80 @@ export class KbProgress extends KbBaseElement<'label'> {
   /** Automatically change fill color based on value thresholds (blue → yellow → red). @defaultValue false */
   @property({ type: Boolean, attribute: 'auto-color' }) autoColor: boolean = false;
 
-  @state() private _mounted = false;
+  /** Cached computed values rebuilt in `willUpdate`. */
+  private _cachedPercent = 0;
+  private _cachedFillColor = DEFAULT_FILL;
+  private _cachedFillStyle = '';
 
-  private get clampedPercent(): number {
+  private _computePercent(): number {
     const range = this.max - this.min;
     if (range <= 0) return 0;
-    const clamped = Math.min(Math.max(this.value - this.min, 0), range);
-    return Math.round((clamped / range) * 100);
+    return Math.round((Math.min(Math.max(this.value - this.min, 0), range) / range) * 100);
   }
 
-  private _resolveFillColor(): string {
+  private _resolveFillColor(percent: number): string {
     if (this.colorScheme) {
-      return lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
+      return lookupScheme(BG_COLOR, this.colorScheme) ?? DEFAULT_FILL;
     }
     if (this.autoColor) {
-      const percent = this.clampedPercent;
-      const threshold = AUTO_COLOR_THRESHOLDS.find((t) => percent <= t.max);
-      return threshold?.classes ?? 'bg-blue-500 dark:bg-blue-400';
+      return AUTO_COLOR_THRESHOLDS.find((t) => percent <= t.max)?.classes ?? DEFAULT_FILL;
     }
-    return 'bg-blue-500 dark:bg-blue-400';
+    return DEFAULT_FILL;
+  }
+
+  private _buildFillStyle(percent: number): string {
+    if (this.indeterminate) return '';
+    const parts = [`width:${percent}%`, `--kb-progress-scale:${percent / 100}`];
+    if (this.striped) parts.push(`background-image:${STRIPE_BG}`, `background-size:${STRIPE_SIZE}`);
+    return parts.join(';');
+  }
+
+  protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    this._cachedPercent = this._computePercent();
+    this._cachedFillColor = this._resolveFillColor(this._cachedPercent);
+    this._cachedFillStyle = this._buildFillStyle(this._cachedPercent);
+  }
+
+  private _renderHeader(labelContent: Element | null, displayValue: string): TemplateResult | typeof nothing {
+    if (!(labelContent || this.showValue)) return nothing;
+
+    return html`<div class="flex items-baseline justify-between mb-1.5">
+      ${labelContent ? html`<span class="${kbClasses.label} select-none">${labelContent}</span>` : html`<span></span>`}
+      ${this.showValue && !this.indeterminate ? html`<span class="font-mono text-xs select-none ${kbClasses.textSecondary}">${displayValue}</span>` : nothing}
+    </div>`;
+  }
+
+  private _renderSegments(): TemplateResult[] | typeof nothing {
+    if (this.segments <= 1) return nothing;
+    return Array.from({ length: this.segments - 1 }, (_, i): TemplateResult => {
+      const pos = ((i + 1) / this.segments) * 100;
+      return html`<span
+        class="absolute top-0 bottom-0 w-px bg-white/30 dark:bg-zinc-900/50"
+        style="left:${pos}%"
+      ></span>`;
+    });
   }
 
   override render(): TemplateResult {
+    const percent = this._cachedPercent;
+    const fillColor = this._cachedFillColor;
     const sizeClass = SIZE_MAP[this.size] ?? SIZE_MAP.md;
-    const fillColor = this._resolveFillColor();
-    const percent = this.clampedPercent;
-
-    const labelContent = this.slotted('label');
-    const displayValue = this.valueLabel ?? `${percent}%`;
 
     const trackClasses = this.buildClasses(
       `w-full bg-gray-200 dark:bg-zinc-800 ${kbClasses.border} overflow-hidden relative`,
       sizeClass,
     );
 
-    let fillAnimationClass = '';
-    if (this.indeterminate) fillAnimationClass = 'animate-kb-progress-indeterminate';
-    else if (this._mounted) fillAnimationClass = 'transition-all duration-500 ease-out';
-
-    const stripedAnimationClass =
-      this.striped && this.animated && !this.indeterminate ? 'animate-kb-progress-stripes' : '';
-
     const fillClasses = cx(
       fillColor,
-      'h-full',
-      this.indeterminate ? 'w-1/3' : '',
-      fillAnimationClass,
-      stripedAnimationClass,
+      'h-full origin-left',
+      this.indeterminate ? 'w-1/3 animate-kb-progress-indeterminate' : 'animate-kb-progress-fill',
+      this.striped && this.animated && !this.indeterminate ? 'animate-kb-progress-stripes' : '',
     );
 
-    const fillStyle = this.indeterminate
-      ? ''
-      : [
-          `width:${this._mounted ? percent : 0}%`,
-          this.striped ? `background-image:${STRIPE_BG};background-size:${STRIPE_SIZE}` : '',
-        ]
-          .filter(Boolean)
-          .join(';');
-
-    const segmentEls =
-      this.segments > 1
-        ? Array.from({ length: this.segments - 1 }, (_, i) => {
-            const pos = ((i + 1) / this.segments) * 100;
-            return html`<span
-            class="absolute top-0 bottom-0 w-px bg-white/30 dark:bg-zinc-900/50"
-            style="left:${pos}%"
-          ></span>`;
-          })
-        : nothing;
-
-    const hasLabel = !!labelContent;
-    const headerRow =
-      hasLabel || this.showValue
-        ? html`<div class="flex items-baseline justify-between mb-1.5">
-          ${hasLabel ? html`<span class="${kbClasses.label}">${labelContent}</span>` : html`<span></span>`}
-          ${
-            this.showValue && !this.indeterminate
-              ? html`<span class="font-mono text-xs ${kbClasses.textSecondary}">${displayValue}</span>`
-              : nothing
-          }
-        </div>`
-        : nothing;
-
     return html`
-      ${headerRow}
+      ${this._renderHeader(this.slotted('label'), this.valueLabel ?? `${percent}%`)}
       <div
         class=${trackClasses}
         role="progressbar"
@@ -171,8 +156,8 @@ export class KbProgress extends KbBaseElement<'label'> {
         aria-valuemax=${this.max}
         aria-label=${this.indeterminate ? 'Loading' : `${percent}% complete`}
       >
-        <div class=${fillClasses} style=${fillStyle}></div>
-        ${segmentEls}
+        <div class=${fillClasses} style=${this._cachedFillStyle}></div>
+        ${this._renderSegments()}
       </div>
     `;
   }

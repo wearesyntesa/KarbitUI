@@ -1,6 +1,6 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorValue, Orientation } from '../../core/types.js';
 import { cx } from '../../utils/cx.js';
@@ -57,13 +57,14 @@ export class KbDivider extends KbBaseElement {
   /** Animate in with a scale/opacity transition on mount. @defaultValue false */
   @property({ type: Boolean }) animated: boolean = false;
 
-  @state() private _mounted = false;
+  private _mounted = false;
 
   override connectedCallback(): void {
     super.connectedCallback();
     if (this.animated) {
       requestAnimationFrame(() => {
         this._mounted = true;
+        this.requestUpdate();
       });
     }
   }
@@ -93,7 +94,12 @@ export class KbDivider extends KbBaseElement {
     else scaleClass = isHorizontal ? 'scale-x-0' : 'scale-y-0';
 
     const animationClasses = this.animated
-      ? cx('transition-transform duration-300 ease-out', isHorizontal ? 'origin-left' : 'origin-top', scaleClass)
+      ? cx(
+          'transition-transform ease-out',
+          prefersReducedMotion() ? 'duration-0' : 'duration-300',
+          isHorizontal ? 'origin-left' : 'origin-top',
+          scaleClass,
+        )
       : '';
 
     const classes = this.buildClasses(sizeClass, lineClasses, animationClasses);
@@ -105,7 +111,11 @@ export class KbDivider extends KbBaseElement {
     const lineGrowClass = isHorizontal ? 'flex-1 h-0' : 'flex-1 w-0';
 
     const animationClasses = this.animated
-      ? cx('transition-opacity duration-300 ease-out', this._mounted ? 'opacity-100' : 'opacity-0')
+      ? cx(
+          'transition-opacity ease-out',
+          prefersReducedMotion() ? 'duration-0' : 'duration-300',
+          this._mounted ? 'opacity-100' : 'opacity-0',
+        )
       : '';
 
     const containerClasses = this.buildClasses(containerDir, 'gap-3', animationClasses);

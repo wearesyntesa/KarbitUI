@@ -7,14 +7,16 @@ const starIcon = html`<span style="font-size:1.2em;">&#9733;</span>`;
 const closeIcon = html`<span style="font-size:1.4em;">&times;</span>`;
 const plusIcon = html`<span style="font-size:1.4em;">+</span>`;
 
+type Args = { label?: string; variant?: string; size?: string; disabled?: boolean; loading?: boolean };
+
 export default {
   title: 'Forms/IconButton',
   component: 'kb-icon-button',
   render: (args) => html`<kb-icon-button ${spreadAttrs(args)}>${starIcon}</kb-icon-button>`,
   args: { label: 'Star', variant: 'solid', size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Solid: S = {};
 

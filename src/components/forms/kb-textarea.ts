@@ -3,10 +3,11 @@ import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import {
   CLEAR_SIZE,
-  FOCUS_RING,
   FORM_CLEAR_CLASSES,
+  FORM_DISABLED_CONTROL,
   FORM_INPUT_BASE,
   FORM_PLACEHOLDER,
+  FORM_READONLY_CONTROL,
   type FormVariant,
   renderFormSpinner,
   SIZE_PADDING,
@@ -54,6 +55,8 @@ const RESIZE_MAP: Record<ResizeMode, string> = {
  */
 @customElement('kb-textarea')
 export class KbTextarea extends KbBaseElement {
+  /** Forwarded `id` applied to the native `<textarea>` element. Allows external `<label for="...">` to work. */
+  @property({ type: String, attribute: 'input-id' }) inputId?: string;
   /** Form textarea visual variant. @defaultValue 'outline' */
   @property({ type: String }) variant: FormVariant = 'outline';
   /** Textarea size controlling padding, font size, and action sizing. @defaultValue 'md' */
@@ -84,6 +87,16 @@ export class KbTextarea extends KbBaseElement {
   @property({ type: Boolean }) loading: boolean = false;
   /** Automatically grow the textarea height to fit content. Disables manual resizing. @defaultValue false */
   @property({ type: Boolean, attribute: 'auto-resize' }) autoResize: boolean = false;
+
+  /** R-2: Cached close icon template, rebuilt when `size` changes. */
+  private _cachedCloseIcon: TemplateResult | null = null;
+
+  override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (this._cachedCloseIcon === null || changed.has('size')) {
+      this._cachedCloseIcon = renderCloseIcon(CLEAR_SIZE[this.size]);
+    }
+  }
 
   private _handleInput(e: Event): void {
     const target = e.target as HTMLTextAreaElement;
@@ -126,8 +139,10 @@ export class KbTextarea extends KbBaseElement {
   }
 
   private _adjustHeight(textarea: HTMLTextAreaElement): void {
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
+    requestAnimationFrame(() => {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    });
   }
 
   override updated(changedProperties: Map<PropertyKey, unknown>): void {
@@ -140,30 +155,73 @@ export class KbTextarea extends KbBaseElement {
     }
   }
 
-  override render(): TemplateResult {
-    const isFlushed = this.variant === 'flushed';
-
+  private _renderActions(): TemplateResult | typeof nothing {
     const showClear = this.clearable && this.value.length > 0 && !this.disabled && !this.readonly;
     const showLoading = this.loading && !this.disabled;
-    const showCounter = this.maxLength !== undefined;
+    if (!(showClear || showLoading)) return nothing;
+
+    const clearEl = showClear
+      ? html`<button
+          class="pointer-events-auto ${FORM_CLEAR_CLASSES}"
+          @click=${this._handleClear}
+          type="button"
+          aria-label="Clear textarea"
+          tabindex="-1"
+        >${this._cachedCloseIcon}</button>`
+      : nothing;
+
+    const loadingEl = showLoading
+      ? renderFormSpinner(SPINNER_SIZE[this.size], `pointer-events-auto ${kbClasses.textMuted}`)
+      : nothing;
+
+    return html`<div class="absolute top-0 right-0 flex items-center gap-1 ${SIZE_PADDING[this.size]} pointer-events-none">
+      ${clearEl}
+      ${loadingEl}
+    </div>`;
+  }
+
+  private _renderCounter(): TemplateResult | typeof nothing {
+    if (this.maxLength === undefined) return nothing;
 
     const charCount = this.value.length;
-    const charLimit = this.maxLength ?? 0;
+    const charLimit = this.maxLength;
     const charRatio = charLimit > 0 ? charCount / charLimit : 0;
+
+    let counterColor: string;
+    if (charRatio >= 1) counterColor = 'text-red-500 dark:text-red-400';
+    else if (charRatio >= 0.8) counterColor = 'text-yellow-600 dark:text-yellow-400';
+    else counterColor = kbClasses.textMuted;
+
+    return html`<div class="flex justify-end ${SIZE_PADDING[this.size]} pt-0">
+      <span class="${COUNTER_TEXT[this.size]} font-mono tabular-nums select-none ${counterColor}">${charCount} / ${charLimit}</span>
+    </div>`;
+  }
+
+  private _borderStateClass(): string {
+    if (this.disabled) return FORM_DISABLED_CONTROL;
+    if (this.readonly) return FORM_READONLY_CONTROL;
+    return '';
+  }
+
+  override render(): TemplateResult {
+    const isFlushed = this.variant === 'flushed';
+    const borderState = this._borderStateClass();
 
     const wrapperBorder = this.invalid ? VARIANT_WRAPPER_INVALID[this.variant] : VARIANT_WRAPPER[this.variant];
 
     const outerClasses = this.buildClasses(
       'flex flex-col w-full font-sans relative',
-      kbClasses.transition,
+      kbClasses.transitionColors,
       isFlushed ? '' : wrapperBorder,
       this.disabled ? kbClasses.disabled : '',
+      borderState,
     );
 
     const resizeClass = this.autoResize ? 'resize-none' : RESIZE_MAP[this.resize];
 
     const textareaClasses = cx(
       FORM_INPUT_BASE,
+      'flex-none w-full',
       SIZE_PADDING[this.size],
       SIZE_TEXT[this.size],
       kbClasses.textPrimary,
@@ -171,49 +229,14 @@ export class KbTextarea extends KbBaseElement {
       resizeClass,
       this.autoResize ? 'overflow-hidden' : '',
       isFlushed ? wrapperBorder : '',
+      isFlushed ? borderState : '',
     );
 
-    const focusRing = isFlushed ? '' : FOCUS_RING;
-
-    // Top-right action buttons (clear / loading)
-    const hasActions = showClear || showLoading;
-    const actionsEl = hasActions
-      ? html`<div class="absolute top-0 right-0 flex items-center gap-1 ${SIZE_PADDING[this.size]} pointer-events-none">
-          ${
-            showClear
-              ? html`<button
-                class="pointer-events-auto ${FORM_CLEAR_CLASSES}"
-                @click=${this._handleClear}
-                type="button"
-                aria-label="Clear textarea"
-                tabindex="-1"
-              >${renderCloseIcon(CLEAR_SIZE[this.size])}</button>`
-              : nothing
-          }
-          ${
-            showLoading
-              ? renderFormSpinner(SPINNER_SIZE[this.size], `pointer-events-auto ${kbClasses.textMuted}`)
-              : nothing
-          }
-        </div>`
-      : nothing;
-
-    // Bottom counter bar
-    let counterColor: string;
-    if (charRatio >= 1) counterColor = 'text-red-500 dark:text-red-400';
-    else if (charRatio >= 0.8) counterColor = 'text-yellow-600 dark:text-yellow-400';
-    else counterColor = kbClasses.textMuted;
-
-    const counterEl = showCounter
-      ? html`<div class="flex justify-end ${SIZE_PADDING[this.size]} pt-0">
-          <span class="${COUNTER_TEXT[this.size]} font-mono tabular-nums ${counterColor}">${charCount} / ${charLimit}</span>
-        </div>`
-      : nothing;
-
     return html`
-      <div class="${outerClasses} ${focusRing}">
+      <div class=${outerClasses}>
         <textarea
           class=${textareaClasses}
+          id=${this.inputId ?? nothing}
           .value=${this.value}
           placeholder=${this.placeholder ?? ''}
           rows=${this.rows}
@@ -228,8 +251,8 @@ export class KbTextarea extends KbBaseElement {
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
         ></textarea>
-        ${actionsEl}
-        ${counterEl}
+        ${this._renderActions()}
+        ${this._renderCounter()}
       </div>
     `;
   }

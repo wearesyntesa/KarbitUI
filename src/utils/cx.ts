@@ -1,5 +1,9 @@
 export type ClassInput = string | undefined | null | false | 0 | ClassInput[];
 
+function appendClass(current: string, addition: string): string {
+  return current ? `${current} ${addition}` : addition;
+}
+
 export function cx(...inputs: ClassInput[]): string {
   let result = '';
 
@@ -7,11 +11,11 @@ export function cx(...inputs: ClassInput[]): string {
     if (!input) continue;
 
     if (typeof input === 'string') {
-      result = result ? `${result} ${input}` : input;
+      result = appendClass(result, input);
     } else if (Array.isArray(input)) {
       const nested = cx(...input);
       if (nested) {
-        result = result ? `${result} ${nested}` : nested;
+        result = appendClass(result, nested);
       }
     }
   }

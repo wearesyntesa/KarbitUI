@@ -4,6 +4,8 @@ import { spreadAttrs } from '../_define.js';
 import '../../src/components/data-display/kb-tag.js';
 import '../../src/components/data-display/kb-tag-group.js';
 
+type Args = { variant?: string; size?: string; closable?: boolean; interactive?: boolean };
+
 export default {
   title: 'Data Display/Tag',
   component: 'kb-tag',
@@ -17,9 +19,9 @@ export default {
     interactive: { control: 'boolean' },
     dot: { control: 'boolean' },
   },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Subtle: S = {};
 

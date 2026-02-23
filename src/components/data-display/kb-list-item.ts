@@ -36,12 +36,23 @@ export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'>
   @property({ type: Boolean }) divider: boolean | undefined = undefined;
   /** Disables the item, preventing interaction and applying reduced opacity. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
-  /** URL to navigate to — renders the item as an anchor element. @defaultValue '' */
+  /** URL to navigate to - renders the item as an anchor element. @defaultValue '' */
   @property({ type: String }) href: string = '';
   /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
 
   private _cachedParent: KbList | null = null;
+  /** 1-based order index pushed by the parent kb-list; 0 when not in an ordered list. */
+  private _parentIndex: number = 0;
+  /** Whether a successor sibling exists; controls bottom-border divider rendering. */
+  private _hasNextSibling: boolean = false;
+
+  /** Receives O(1) per-item metadata from parent kb-list on every child-list mutation. */
+  _fromParent(index: number, hasNext: boolean): void {
+    this._parentIndex = index;
+    this._hasNextSibling = hasNext;
+    this.requestUpdate();
+  }
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -65,17 +76,13 @@ export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'>
   private get _showDivider(): boolean {
     if (this.divider !== undefined) return this.divider;
     if (!this._parentList?.dividers) return false;
-    const siblings = this._parentList.querySelectorAll('kb-list-item');
-    const arr = Array.from(siblings);
-    return arr.indexOf(this) < arr.length - 1;
+    return this._hasNextSibling;
   }
 
   private get _orderIndex(): string | null {
     const parent = this._parentList;
     if (!parent || parent.variant !== 'ordered') return null;
-    const items = Array.from(parent.querySelectorAll('kb-list-item'));
-    const idx = items.indexOf(this) + 1;
-    return idx.toString().padStart(2, '0');
+    return this._parentIndex.toString().padStart(2, '0');
   }
 
   private _handleClick(): void {
@@ -124,7 +131,7 @@ export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'>
 
     const baseClasses = this.buildClasses(
       `px-3 py-2.5 font-sans text-sm ${kbClasses.textPrimary}`,
-      kbClasses.transition,
+      kbClasses.transitionColors,
       showDivider ? kbClasses.borderBottom : '',
       isInteractive && !this.disabled
         ? `cursor-pointer select-none hover:bg-gray-50 dark:hover:bg-zinc-800/60 active:bg-gray-100 dark:active:bg-zinc-700/50 ${kbClasses.focus}`

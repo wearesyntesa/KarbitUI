@@ -10,14 +10,16 @@ const items = html`
   <kb-box p="4" bg="white">Third</kb-box>
 `;
 
+type Args = { spacing?: string; direction?: string; divider?: boolean };
+
 export default {
   title: 'Layout/Stack',
   component: 'kb-stack',
   render: (args) => html`<kb-stack ${spreadAttrs(args)}>${items}</kb-stack>`,
   args: { spacing: '4' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Vertical: S = {};
 

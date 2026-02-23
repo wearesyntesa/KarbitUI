@@ -37,14 +37,24 @@ const fiveTabs = html`
   <div slot="panel-4"><p>Application configuration and preferences.</p></div>
 `;
 
+type Args = {
+  variant?: string;
+  active?: number;
+  size?: string;
+  'color-scheme'?: string;
+  orientation?: string;
+  fitted?: boolean;
+  align?: string;
+};
+
 export default {
   title: 'Navigation/Tabs',
   component: 'kb-tabs',
   render: (args) => html`<kb-tabs ${spreadAttrs(args)}>${basicTabs}</kb-tabs>`,
   args: { variant: 'line', active: 0, size: 'md', 'color-scheme': 'blue', orientation: 'horizontal' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 /** Default line variant with sliding blue indicator. */
 export const Line: S = {};

@@ -1,6 +1,6 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
@@ -99,7 +99,7 @@ export class KbTooltip extends KbBaseElement {
   @property({ type: String }) placement: TooltipPlacement = 'top';
   /** Tooltip text and padding size. @defaultValue 'sm' */
   @property({ type: String }) size: TooltipSize = 'sm';
-  /** Color variant — `'dark'` (inverted) or `'light'` (surface-colored). @defaultValue 'dark' */
+  /** Color variant - `'dark'` (inverted) or `'light'` (surface-colored). @defaultValue 'dark' */
   @property({ type: String }) variant: TooltipVariant = 'dark';
   /** Prevents the tooltip from showing. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
@@ -119,8 +119,10 @@ export class KbTooltip extends KbBaseElement {
 
   private _openTimerId: ReturnType<typeof setTimeout> | null = null;
   private _closeTimerId: ReturnType<typeof setTimeout> | null = null;
-  private _dismissTimeout: ReturnType<typeof setTimeout> | null = null;
+  private _exitAnimation: Animation | null = null;
   private readonly _tooltipId = `kb-tooltip-${++tooltipIdCounter}`;
+  private _tipEl: HTMLElement | null = null;
+  private _cachedArrowClasses: string = '';
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -134,6 +136,13 @@ export class KbTooltip extends KbBaseElement {
     this._clearTimers();
   }
 
+  protected override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (this._cachedArrowClasses === '' || changed.has('placement') || changed.has('variant')) {
+      this._cachedArrowClasses = this._getArrowClasses();
+    }
+  }
+
   override updated(changed: Map<PropertyKey, unknown>): void {
     if (changed.has('open')) {
       if (this.open) {
@@ -141,6 +150,13 @@ export class KbTooltip extends KbBaseElement {
       } else if (changed.get('open') === true) {
         this._animateDismiss();
       }
+    }
+    // Cache tip element once visible; clear when hidden
+    if (this._visible && !this._tipEl) {
+      this._tipEl = this.querySelector<HTMLElement>(`#${this._tooltipId}`);
+    }
+    if (!this._visible) {
+      this._tipEl = null;
     }
   }
 
@@ -153,9 +169,9 @@ export class KbTooltip extends KbBaseElement {
       clearTimeout(this._closeTimerId);
       this._closeTimerId = null;
     }
-    if (this._dismissTimeout !== null) {
-      clearTimeout(this._dismissTimeout);
-      this._dismissTimeout = null;
+    if (this._exitAnimation !== null) {
+      this._exitAnimation.cancel();
+      this._exitAnimation = null;
     }
   }
 
@@ -164,10 +180,7 @@ export class KbTooltip extends KbBaseElement {
     this._clearTimers();
     this._dismissing = false;
     this._visible = true;
-
-    requestAnimationFrame(() => {
-      this.emit('kb-open');
-    });
+    this.emit('kb-open');
   }
 
   private _hide(): void {
@@ -182,26 +195,31 @@ export class KbTooltip extends KbBaseElement {
     if (!this._visible || this._dismissing) return;
     this._dismissing = true;
 
-    const tip = this.querySelector<HTMLElement>(`#${this._tooltipId}`);
-
-    if (tip) {
-      tip.style.transition = `opacity ${DISMISS_DURATION}ms ease-in`;
-      tip.style.opacity = '0';
-    }
+    const tip = this._tipEl ?? this.querySelector<HTMLElement>(`#${this._tooltipId}`);
 
     const onFinish = (): void => {
-      if (this._dismissTimeout !== null) {
-        clearTimeout(this._dismissTimeout);
-        this._dismissTimeout = null;
-      }
-      tip?.removeEventListener('transitionend', onFinish);
+      this._exitAnimation = null;
       this._visible = false;
       this._dismissing = false;
+      this._tipEl = null;
       this.emit('kb-close');
     };
 
-    tip?.addEventListener('transitionend', onFinish, { once: true });
-    this._dismissTimeout = setTimeout(onFinish, DISMISS_DURATION + 50);
+    if (tip) {
+      const anim = tip.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: prefersReducedMotion() ? 0 : DISMISS_DURATION,
+        easing: 'ease-in',
+        fill: 'forwards',
+      });
+      this._exitAnimation = anim;
+      anim.finished.then(() => {
+        anim.commitStyles();
+        anim.cancel();
+        onFinish();
+      }, onFinish);
+    } else {
+      onFinish();
+    }
   }
 
   private _handleMouseEnter(): void {
@@ -284,7 +302,7 @@ export class KbTooltip extends KbBaseElement {
       SIZE_PX[s],
       SIZE_MAX_W[s],
       VARIANT_CLASSES[this.variant],
-      !this._dismissing && 'animate-kb-fade-in',
+      !this._dismissing && 'animate-kb-fade-in-fast',
     );
 
     return html`
@@ -296,14 +314,14 @@ export class KbTooltip extends KbBaseElement {
         @focusout=${this._handleFocusOut}
         @keydown=${this._handleKeyDown}
       >
-        <span aria-describedby=${this._visible ? this._tooltipId : nothing}>
+        <span aria-describedby=${this._tooltipId}>
           ${this.defaultSlotContent}
         </span>
         ${
           this._visible || this.open
             ? html`
-            <span id=${this._tooltipId} class=${tipClasses} role="tooltip">
-              ${this.showArrow ? html`<span class=${this._getArrowClasses()}></span>` : nothing}
+            <span id=${this._tooltipId} class="${tipClasses} select-none" style="contain:content" role="tooltip">
+              ${this.showArrow ? html`<span class=${this._cachedArrowClasses}></span>` : nothing}
               ${this.label}
             </span>`
             : nothing

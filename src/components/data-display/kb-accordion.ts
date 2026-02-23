@@ -1,6 +1,6 @@
-import { html, svg, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { html, nothing, svg, type TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
 
@@ -39,15 +39,15 @@ export class KbAccordion extends KbBaseElement<'trigger'> {
   /** Prevents toggling and applies disabled styles to the trigger button. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
 
-  @state() private _pressed = false;
-
-  private _onPointerDown(): void {
+  private _onPointerDown(e: PointerEvent): void {
     if (this.disabled) return;
-    this._pressed = true;
+    const btn = e.currentTarget as HTMLElement;
+    springPressDown(btn, 0.998);
   }
 
-  private _onPointerUp(): void {
-    this._pressed = false;
+  private _onPointerUp(e: PointerEvent): void {
+    const btn = e.currentTarget as HTMLElement;
+    springPressUp(btn);
   }
 
   private _toggle(): void {
@@ -57,20 +57,17 @@ export class KbAccordion extends KbBaseElement<'trigger'> {
   }
 
   override render(): TemplateResult {
-    const pressClass = this._pressed && !this.disabled ? 'scale-[0.998]' : '';
-
     const triggerClasses = this.buildClasses(
       'flex items-center justify-between w-full',
       'px-4 py-3.5',
       'font-sans font-semibold text-sm tracking-wide',
       kbClasses.textPrimary,
       'cursor-pointer select-none',
-      kbClasses.transition,
+      kbClasses.transitionColors,
       kbClasses.focus,
       'hover:bg-gray-50 dark:hover:bg-zinc-800/60',
       'active:bg-gray-100 dark:active:bg-zinc-700/50',
       this.disabled ? kbClasses.disabled : '',
-      pressClass,
     );
 
     const chevronClasses = cx(
@@ -97,6 +94,7 @@ export class KbAccordion extends KbBaseElement<'trigger'> {
           @pointerleave=${this._onPointerUp}
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls=${this._panelId}
+          aria-disabled=${this.disabled ? 'true' : nothing}
           ?disabled=${this.disabled}
         >
           <span class="flex-1 text-left">${triggerEl}</span>

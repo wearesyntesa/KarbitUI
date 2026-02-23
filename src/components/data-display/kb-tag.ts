@@ -34,7 +34,6 @@ const tagRecipe = recipe({
 export type TagVariant = InferVariant<typeof tagRecipe, 'variant'>;
 export type TagSize = InferVariant<typeof tagRecipe, 'size'>;
 
-/** Default variant colors when no colorScheme is specified. */
 const VARIANT_DEFAULT_COLOR: Record<TagVariant, string> = {
   solid: 'bg-slate-900 text-white border-slate-900 dark:bg-zinc-100 dark:text-zinc-900 dark:border-zinc-100',
   outline: 'text-slate-900 border-gray-300 dark:text-zinc-50 dark:border-zinc-600',
@@ -143,8 +142,8 @@ export class KbTag extends KbBaseElement<'icon'> {
     }
 
     const interactiveClasses = this.interactive
-      ? cx(kbClasses.focus, kbClasses.transition, LABEL_INTERACTIVE_HOVER[this.variant] ?? '')
-      : kbClasses.transition;
+      ? cx(kbClasses.focus, kbClasses.transitionColors, LABEL_INTERACTIVE_HOVER[this.variant] ?? '')
+      : kbClasses.transitionColors;
 
     const dismissClasses = this._dismissing ? DISMISS_HIDDEN : DISMISS_VISIBLE;
 
@@ -155,7 +154,7 @@ export class KbTag extends KbBaseElement<'icon'> {
       colorClasses,
       interactiveClasses,
       cursorClass,
-      kbClasses.transition,
+      this._dismissing ? 'transition-[opacity,transform] duration-150 ease-in-out' : '',
       dismissClasses,
       dragClasses,
     );
@@ -167,7 +166,7 @@ export class KbTag extends KbBaseElement<'icon'> {
 
     const closeEl = this.closable
       ? html`<button
-          class="${CLOSE_BUTTON_CLASSES}"
+          class="${CLOSE_BUTTON_CLASSES} p-1.5"
           @click=${this._handleClose}
           aria-label="Remove tag"
         >${renderCloseIcon(CLOSE_SIZE[this.size], 2.5)}</button>`

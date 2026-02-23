@@ -65,9 +65,8 @@ export const WithCounter: S = {
     <div style="max-width:400px;">
       <kb-form-control>
         <kb-form-label>Bio</kb-form-label>
-        <kb-textarea placeholder="Tell us about yourself..." rows="3"></kb-textarea>
+        <kb-textarea placeholder="Tell us about yourself..." rows="3" max-length="200"></kb-textarea>
         <span slot="helper">Keep it brief.</span>
-        <span slot="counter">0/200</span>
       </kb-form-control>
     </div>
   `,
@@ -162,9 +161,8 @@ export const KitchenSink: S = {
 
       <kb-form-control>
         <kb-form-label optional>Bio</kb-form-label>
-        <kb-textarea placeholder="Tell us about yourself..." rows="3"></kb-textarea>
+        <kb-textarea placeholder="Tell us about yourself..." rows="3" max-length="200"></kb-textarea>
         <span slot="helper">Keep it brief and professional.</span>
-        <span slot="counter">0/200</span>
       </kb-form-control>
 
       <kb-form-control disabled>

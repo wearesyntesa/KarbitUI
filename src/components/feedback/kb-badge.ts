@@ -1,4 +1,4 @@
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, BG_COLOR_PING, lookupScheme } from '../../core/color-schemes.js';
@@ -105,6 +105,15 @@ export class KbBadge extends KbBaseElement<'icon'> {
 
   @state() private _dismissing = false;
 
+  private _cachedRecipeClasses = '';
+
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (this._cachedRecipeClasses === '' || changed.has('variant') || changed.has('size')) {
+      this._cachedRecipeClasses = badgeRecipe({ variant: this.variant, size: this.size });
+    }
+  }
+
   private _handleClick(): void {
     if (!this.interactive) return;
     this.emit('kb-click');
@@ -126,20 +135,19 @@ export class KbBadge extends KbBaseElement<'icon'> {
   }
 
   override render(): TemplateResult {
-    const recipeClasses = badgeRecipe({ variant: this.variant, size: this.size });
     const colorClasses = resolveStaticColor(this.variant, this.colorScheme, VARIANT_DEFAULT_COLOR);
 
     const interactiveClasses = this.interactive
-      ? cx(kbClasses.focus, kbClasses.transition, LABEL_INTERACTIVE_HOVER[this.variant] ?? '', 'cursor-pointer')
-      : kbClasses.transition;
+      ? cx(kbClasses.focus, kbClasses.transitionColors, LABEL_INTERACTIVE_HOVER[this.variant] ?? '', 'cursor-pointer')
+      : kbClasses.transitionColors;
 
     const dismissClasses = this._dismissing ? DISMISS_HIDDEN : DISMISS_VISIBLE;
 
     const classes = this.buildClasses(
-      recipeClasses,
+      this._cachedRecipeClasses,
       colorClasses,
       interactiveClasses,
-      kbClasses.transition,
+      this._dismissing ? 'transition-[opacity,transform] duration-150 ease-in-out' : '',
       dismissClasses,
     );
 
@@ -158,7 +166,7 @@ export class KbBadge extends KbBaseElement<'icon'> {
 
     const closeEl = this.closable
       ? html`<button
-          class="${CLOSE_BUTTON_CLASSES}"
+          class="${CLOSE_BUTTON_CLASSES} p-1.5"
           @click=${this._handleClose}
           aria-label="Remove badge"
         >${renderCloseIcon(CLOSE_SIZE[this.size], 2.5)}</button>`

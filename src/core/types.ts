@@ -1,4 +1,6 @@
-export type SpacingValue =
+import type { LiteralUnion } from './utility-types.js';
+
+export type SpacingValue = LiteralUnion<
   | '0'
   | '0.5'
   | '1'
@@ -35,9 +37,9 @@ export type SpacingValue =
   | '96'
   | 'px'
   | 'auto'
-  | (string & {});
+>;
 
-export type ColorValue =
+export type ColorValue = LiteralUnion<
   | 'black'
   | 'white'
   | 'transparent'
@@ -66,9 +68,9 @@ export type ColorValue =
       | 'pink'
       | 'rose'}-${50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950}`
   | `kb-${'black' | 'white' | 'red' | 'blue' | 'yellow' | 'green'}`
-  | (string & {});
+>;
 
-export type DimensionValue =
+export type DimensionValue = LiteralUnion<
   | SpacingValue
   | 'full'
   | 'screen'
@@ -96,13 +98,13 @@ export type DimensionValue =
   | '5/12'
   | '7/12'
   | '11/12'
-  | (string & {});
+>;
 
-export type BorderWidthValue = '0' | '1' | '2' | '3' | '4' | '8' | (string & {});
+export type BorderWidthValue = LiteralUnion<'0' | '1' | '2' | '3' | '4' | '8'>;
 
-export type ShadowValue = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {});
+export type ShadowValue = LiteralUnion<'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner'>;
 
-export type DisplayValue =
+export type DisplayValue = LiteralUnion<
   | 'block'
   | 'inline-block'
   | 'inline'
@@ -112,39 +114,35 @@ export type DisplayValue =
   | 'inline-grid'
   | 'hidden'
   | 'none'
-  | (string & {});
+  | 'contents'
+  | 'flow-root'
+>;
 
-export type FlexAlignValue = 'start' | 'end' | 'center' | 'baseline' | 'stretch' | (string & {});
+export type FlexAlignValue = LiteralUnion<'start' | 'end' | 'center' | 'baseline' | 'stretch'>;
 
-export type FlexJustifyValue = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | (string & {});
+export type FlexJustifyValue = LiteralUnion<'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'>;
 
-export type FlexDirectionValue = 'row' | 'row-reverse' | 'col' | 'col-reverse' | (string & {});
+export type FlexDirectionValue = LiteralUnion<'row' | 'row-reverse' | 'col' | 'col-reverse'>;
 
-export type FlexWrapValue = 'wrap' | 'wrap-reverse' | 'nowrap' | (string & {});
+export type FlexWrapValue = LiteralUnion<'wrap' | 'wrap-reverse' | 'nowrap'>;
 
-export type TextAlignValue = 'left' | 'center' | 'right' | 'justify' | (string & {});
+export type TextAlignValue = LiteralUnion<'left' | 'center' | 'right' | 'justify' | 'start' | 'end'>;
 
-export type FontWeightValue =
-  | 'thin'
-  | 'extralight'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black'
-  | (string & {});
+export type FontWeightValue = LiteralUnion<
+  'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black'
+>;
 
-export type FontSizeValue = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | (string & {});
+export type FontSizeValue = LiteralUnion<
+  'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl'
+>;
 
-export type PositionValue = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky' | (string & {});
+export type PositionValue = LiteralUnion<'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'>;
 
-export type OverflowValue = 'auto' | 'hidden' | 'visible' | 'scroll' | (string & {});
+export type OverflowValue = LiteralUnion<'auto' | 'hidden' | 'visible' | 'scroll'>;
 
-export type RoundedValue = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | (string & {});
+export type RoundedValue = LiteralUnion<'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'>;
 
-export type OpacityValue =
+export type OpacityValue = LiteralUnion<
   | '0'
   | '5'
   | '10'
@@ -166,11 +164,11 @@ export type OpacityValue =
   | '90'
   | '95'
   | '100'
-  | (string & {});
+>;
 
-export type ZIndexValue = '0' | '10' | '20' | '30' | '40' | '50' | 'auto' | (string & {});
+export type ZIndexValue = LiteralUnion<'0' | '10' | '20' | '30' | '40' | '50' | 'auto'>;
 
-export type CursorValue =
+export type CursorValue = LiteralUnion<
   | 'auto'
   | 'default'
   | 'pointer'
@@ -185,82 +183,63 @@ export type CursorValue =
   | 'crosshair'
   | 'col-resize'
   | 'row-resize'
-  | (string & {});
+>;
 
-export type FlexValue = '1' | 'auto' | 'initial' | 'none' | (string & {});
+export type FlexValue = LiteralUnion<'1' | 'auto' | 'initial' | 'none'>;
 
-export type FlexGrowShrinkValue = '0' | '1' | (string & {});
+export type FlexGrowShrinkValue = LiteralUnion<'0' | '1'>;
 
-export type GridTrackValue =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12'
-  | 'none'
-  | 'subgrid'
-  | (string & {});
+export type GridTrackValue = LiteralUnion<
+  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | 'none' | 'subgrid'
+>;
 
-export type GridSpanValue =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12'
-  | 'auto'
-  | 'full'
-  | (string & {});
+export type GridSpanValue = LiteralUnion<
+  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | 'auto' | 'full'
+>;
 
-export type FontFamilyValue = 'sans' | 'serif' | 'mono' | (string & {});
+export type FontFamilyValue = LiteralUnion<'sans' | 'serif' | 'mono'>;
 
-export type LineHeightValue =
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | 'none'
-  | 'tight'
-  | 'snug'
-  | 'normal'
-  | 'relaxed'
-  | 'loose'
-  | (string & {});
+export type LineHeightValue = LiteralUnion<
+  '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'
+>;
 
-export type LetterSpacingValue = 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest' | (string & {});
+export type LetterSpacingValue = LiteralUnion<'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest'>;
 
-export type TextDecorationValue = 'underline' | 'overline' | 'line-through' | 'no-underline' | (string & {});
+export type TextDecorationValue = LiteralUnion<'underline' | 'overline' | 'line-through' | 'no-underline'>;
 
-export type TextTransformValue = 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case' | (string & {});
+export type TextTransformValue = LiteralUnion<'uppercase' | 'lowercase' | 'capitalize' | 'normal-case'>;
 
-export type UserSelectValue = 'none' | 'text' | 'all' | 'auto' | (string & {});
+export type UserSelectValue = LiteralUnion<'none' | 'text' | 'all' | 'auto'>;
 
-export type PointerEventsValue = 'none' | 'auto' | (string & {});
+export type PointerEventsValue = LiteralUnion<'none' | 'auto'>;
 
-export type TransitionValue = 'none' | 'all' | 'colors' | 'opacity' | 'shadow' | 'transform' | (string & {});
+export type TransitionValue = LiteralUnion<'none' | 'all' | 'colors' | 'opacity' | 'shadow' | 'transform'>;
+
+export type AlignSelfValue = LiteralUnion<'auto' | 'start' | 'end' | 'center' | 'baseline' | 'stretch'>;
+
+export type JustifySelfValue = LiteralUnion<'auto' | 'start' | 'end' | 'center' | 'stretch'>;
+
+export type AspectRatioValue = LiteralUnion<'auto' | 'square' | 'video'>;
+
+export type ObjectFitValue = LiteralUnion<'contain' | 'cover' | 'fill' | 'none' | 'scale-down'>;
+
+export type VisibilityValue = LiteralUnion<'visible' | 'invisible' | 'collapse'>;
+
+export type WhitespaceValue = LiteralUnion<'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap' | 'break-spaces'>;
+
+export type BorderStyleValue = LiteralUnion<'solid' | 'dashed' | 'dotted' | 'double' | 'none'>;
+
+export type InsetValue = SpacingValue;
+
+export type OrderValue = LiteralUnion<
+  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | 'first' | 'last' | 'none'
+>;
 
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type KnownColorScheme = 'black' | 'red' | 'blue' | 'green' | 'yellow';
 
-export type ColorScheme = KnownColorScheme | (string & {});
+export type ColorScheme = LiteralUnion<KnownColorScheme>;
 
 export type Orientation = 'horizontal' | 'vertical';
 
@@ -303,6 +282,15 @@ export type StyleValueCategory =
   | 'userSelect'
   | 'pointerEvents'
   | 'transition'
+  | 'alignSelf'
+  | 'justifySelf'
+  | 'aspectRatio'
+  | 'objectFit'
+  | 'visibility'
+  | 'whitespace'
+  | 'borderStyle'
+  | 'inset'
+  | 'order'
   | 'raw';
 
 export interface StyleValueTypeMap {
@@ -337,6 +325,15 @@ export interface StyleValueTypeMap {
   userSelect: UserSelectValue;
   pointerEvents: PointerEventsValue;
   transition: TransitionValue;
+  alignSelf: AlignSelfValue;
+  justifySelf: JustifySelfValue;
+  aspectRatio: AspectRatioValue;
+  objectFit: ObjectFitValue;
+  visibility: VisibilityValue;
+  whitespace: WhitespaceValue;
+  borderStyle: BorderStyleValue;
+  inset: InsetValue;
+  order: OrderValue;
   raw: string;
 }
 

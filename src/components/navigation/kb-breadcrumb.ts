@@ -1,8 +1,10 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { BreadcrumbItem, ComponentSize } from '../../core/types.js';
+import { arrayHasChanged } from '../../utils/has-changed.js';
 
 export type SeparatorType = 'chevron' | 'slash' | 'arrow' | 'dot' | 'pipe';
 
@@ -27,7 +29,7 @@ const SIZE_SEP: Record<ComponentSize, string> = {
   sm: 'w-3 h-3',
   md: 'w-3.5 h-3.5',
   lg: 'w-4 h-4',
-  xl: 'w-4.5 h-4.5',
+  xl: 'w-[1.125rem] h-[1.125rem]',
 } as const satisfies Record<ComponentSize, string>;
 
 const SIZE_ELLIPSIS_PY: Record<ComponentSize, string> = {
@@ -64,8 +66,8 @@ export class KbBreadcrumb extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
   /** Array of breadcrumb items. The last item is treated as the current page. @defaultValue [] */
-  @property({ type: Array }) items: BreadcrumbItem[] = [];
-  /** Separator between items — a preset name (`'chevron'`, `'slash'`, `'arrow'`, `'dot'`, `'pipe'`) or any custom string. @defaultValue 'chevron' */
+  @property({ type: Array, hasChanged: arrayHasChanged }) items: BreadcrumbItem[] = [];
+  /** Separator between items - a preset name (`'chevron'`, `'slash'`, `'arrow'`, `'dot'`, `'pipe'`) or any custom string. @defaultValue 'chevron' */
   @property({ type: String }) separator: string = 'chevron';
   /** Text and gap size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
@@ -73,6 +75,16 @@ export class KbBreadcrumb extends KbBaseElement {
   @property({ type: Number, attribute: 'max-items' }) maxItems: number = 0;
 
   @state() private _expanded = false;
+
+  /** R-8: Cached separator template, rebuilt only when `separator` or `size` changes. */
+  private _cachedSeparator: TemplateResult | null = null;
+
+  override willUpdate(changed: Map<PropertyKey, unknown>): void {
+    super.willUpdate(changed);
+    if (this._cachedSeparator === null || changed.has('separator') || changed.has('size')) {
+      this._cachedSeparator = this._buildSeparator();
+    }
+  }
 
   private _handleItemClick(index: number, item: BreadcrumbItem, e: Event): void {
     this.emit('kb-navigate', { index, item });
@@ -82,11 +94,22 @@ export class KbBreadcrumb extends KbBaseElement {
     }
   }
 
+  private _handleNavClick(e: MouseEvent): void {
+    const anchor = (e.target as Element).closest<HTMLAnchorElement>('a[data-kb-crumb-index]');
+    if (!anchor) return;
+    const index = Number(anchor.dataset.kbCrumbIndex);
+    if (!Number.isFinite(index)) return;
+    const item = this.items[index];
+    if (!item) return;
+    this._handleItemClick(index, item, e);
+  }
+
   private _handleExpand(): void {
     this._expanded = true;
   }
 
-  private _renderSeparator(): TemplateResult {
+  /** R-8: Build the separator template (called only when inputs change). */
+  private _buildSeparator(): TemplateResult {
     const sepClasses = `flex-shrink-0 ${kbClasses.textMuted} select-none`;
 
     if (isSeparatorType(this.separator)) {
@@ -107,19 +130,24 @@ export class KbBreadcrumb extends KbBaseElement {
     return html`<span class="${sepClasses}" aria-hidden="true">${this.separator}</span>`;
   }
 
+  /** Returns the cached separator template. */
+  private _renderSeparator(): TemplateResult {
+    return this._cachedSeparator ?? this._buildSeparator();
+  }
+
   private _renderItem(item: BreadcrumbItem, index: number, isCurrent: boolean): TemplateResult {
     if (isCurrent) {
       return html`<span
-        class="font-semibold ${kbClasses.textPrimary} truncate max-w-48"
+        class="font-semibold select-none ${kbClasses.textPrimary} truncate max-w-48"
         aria-current="page"
       >${item.label}</span>`;
     }
 
     return html`<a
-      class="relative cursor-pointer ${kbClasses.textSecondary} hover:text-slate-900 dark:hover:text-zinc-50 active:opacity-70 ${kbClasses.transition} group/crumb truncate max-w-48"
-      href=${item.href ?? 'javascript:void(0)'}
-      @click=${(e: Event): void => this._handleItemClick(index, item, e)}
-    ><span>${item.label}</span><span class="absolute bottom-0 left-0 w-full h-px bg-current scale-x-0 group-hover/crumb:scale-x-100 transition-transform duration-200 origin-left"></span></a>`;
+      class="relative cursor-pointer ${kbClasses.textSecondary} ${kbClasses.hoverTextPrimary} active:opacity-70 ${kbClasses.transitionColors} group/crumb truncate max-w-48"
+      href=${item.href ?? nothing}
+      data-kb-crumb-index=${index}
+    ><span>${item.label}</span><span class="absolute bottom-0 left-0 w-full h-px bg-current scale-x-0 group-hover/crumb:scale-x-100 transition-transform duration-200 ease-in-out origin-left"></span></a>`;
   }
 
   private _getVisibleItems(): { before: BreadcrumbItem[]; collapsed: BreadcrumbItem[]; after: BreadcrumbItem[] } {
@@ -144,43 +172,52 @@ export class KbBreadcrumb extends KbBaseElement {
   }
 
   override render(): TemplateResult | typeof nothing {
-    const navClasses = this.buildClasses(
-      'flex items-center flex-wrap font-sans',
-      SIZE_TEXT[this.size],
-      SIZE_GAP[this.size],
-      kbClasses.textSecondary,
-    );
+    const navClasses = this.buildClasses('font-sans', SIZE_TEXT[this.size], kbClasses.textSecondary);
+
+    const listClasses = `flex items-center flex-wrap ${SIZE_GAP[this.size]} list-none m-0 p-0`;
 
     const { before, collapsed, after } = this._getVisibleItems();
     const totalBefore = before.length;
     const totalCollapsed = collapsed.length;
-    const sep = this._renderSeparator();
 
-    const parts: unknown[] = [];
-
-    before.forEach((item, i) => {
-      if (i > 0) parts.push(sep);
-      const globalIndex = i;
-      parts.push(this._renderItem(item, globalIndex, globalIndex === this.items.length - 1));
-    });
-
-    if (totalCollapsed > 0) {
-      if (totalBefore > 0) parts.push(sep);
-      parts.push(html`<button
-        class="cursor-pointer bg-transparent border ${kbClasses.borderColor} ${SIZE_ELLIPSIS_PY[this.size]} ${SIZE_TEXT[this.size]} ${kbClasses.textMuted} hover:text-slate-700 dark:hover:text-zinc-200 hover:border-gray-400 dark:hover:border-zinc-500 ${kbClasses.transition} font-mono leading-none select-none"
-        type="button"
-        aria-label="Show ${totalCollapsed} more breadcrumb items"
-        @click=${this._handleExpand}
-      >\u2026</button>`);
-    }
-
-    after.forEach((item, i) => {
-      parts.push(sep);
-      const globalIndex = totalBefore + totalCollapsed + i;
-      parts.push(this._renderItem(item, globalIndex, globalIndex === this.items.length - 1));
-    });
-
-    return this.items.length > 0 ? html`<nav class=${navClasses} aria-label="Breadcrumb">${parts}</nav>` : nothing;
+    return this.items.length > 0
+      ? html`<nav class=${navClasses} aria-label="Breadcrumb" @click=${this._handleNavClick}>
+          <ol class=${listClasses}>
+            ${repeat(
+              before,
+              (item) => item.href ?? item.label,
+              (item, i) => html`<li class="flex items-center ${SIZE_GAP[this.size]}">
+              ${i > 0 ? this._renderSeparator() : nothing}
+              ${this._renderItem(item, i, i === this.items.length - 1)}
+            </li>`,
+            )}
+            ${
+              totalCollapsed > 0
+                ? html`<li class="flex items-center ${SIZE_GAP[this.size]}">
+              ${totalBefore > 0 ? this._renderSeparator() : nothing}
+              <button
+                class="cursor-pointer bg-transparent border ${kbClasses.borderColor} ${SIZE_ELLIPSIS_PY[this.size]} ${SIZE_TEXT[this.size]} ${kbClasses.textMuted} hover:text-slate-700 dark:hover:text-zinc-200 hover:border-gray-400 dark:hover:border-zinc-500 ${kbClasses.transitionColors} font-mono leading-none select-none"
+                type="button"
+                aria-label="Show ${totalCollapsed} more breadcrumb items"
+                @click=${this._handleExpand}
+              >\u2026</button>
+            </li>`
+                : nothing
+            }
+            ${repeat(
+              after,
+              (item) => item.href ?? item.label,
+              (item, i) => {
+                const globalIndex = totalBefore + totalCollapsed + i;
+                return html`<li class="flex items-center ${SIZE_GAP[this.size]}">
+                 ${this._renderSeparator()}
+                 ${this._renderItem(item, globalIndex, globalIndex === this.items.length - 1)}
+               </li>`;
+              },
+            )}
+          </ol>
+        </nav>`
+      : nothing;
   }
 }
 

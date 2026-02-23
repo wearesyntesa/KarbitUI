@@ -1,14 +1,19 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import {
-  buildDefaultGroupHover,
-  buildGroupHoverScheme,
+  CHECKED_FILL_SCHEME,
+  DEFAULT_CHECKED_FILL,
   FORM_DESCRIPTION_WRAPPER,
+  FORM_DISABLED_CONTROL,
+  FORM_DISABLED_LABEL,
+  FORM_DISABLED_WRAPPER,
   FORM_INVALID_BORDER,
   FORM_INVALID_TEXT,
   FORM_UNCHECKED_BORDER,
+  RADIO_DEFAULT_HOVER,
+  RADIO_HOVER_SCHEME,
 } from '../../core/form-tokens.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/types.js';
@@ -18,47 +23,49 @@ const SIZE_MAP: Record<
   ComponentSize,
   {
     outer: string;
+    tapWrap: string;
     inner: string;
     label: string;
     description: string;
   }
 > = {
-  xs: { outer: 'w-3.5 h-3.5', inner: 'r="4"', label: 'text-xs gap-1.5', description: 'text-[10px]' },
-  sm: { outer: 'w-4 h-4', inner: 'r="4.5"', label: 'text-sm gap-2', description: 'text-xs' },
-  md: { outer: 'w-5 h-5', inner: 'r="5"', label: 'text-sm gap-2.5', description: 'text-xs' },
-  lg: { outer: 'w-6 h-6', inner: 'r="5.5"', label: 'text-base gap-3', description: 'text-sm' },
-  xl: { outer: 'w-7 h-7', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
+  xs: {
+    outer: 'w-3.5 h-3.5',
+    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
+    inner: 'r="4"',
+    label: 'text-xs gap-1.5',
+    description: 'text-[10px]',
+  },
+  sm: { outer: 'w-4 h-4', tapWrap: '', inner: 'r="4.5"', label: 'text-sm gap-2', description: 'text-xs' },
+  md: { outer: 'w-5 h-5', tapWrap: '', inner: 'r="5"', label: 'text-sm gap-2.5', description: 'text-xs' },
+  lg: { outer: 'w-6 h-6', tapWrap: '', inner: 'r="5.5"', label: 'text-base gap-3', description: 'text-sm' },
+  xl: { outer: 'w-7 h-7', tapWrap: '', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
 } as const satisfies Record<
   ComponentSize,
   {
     outer: string;
+    tapWrap: string;
     inner: string;
     label: string;
     description: string;
   }
 >;
 
-const COLOR_SCHEME_CHECKED: Record<KnownColorScheme, string> = {
-  blue: 'border-blue-500 dark:border-blue-400',
-  red: 'border-red-500 dark:border-red-400',
-  green: 'border-green-500 dark:border-green-400',
-  yellow: 'border-yellow-500 dark:border-yellow-400',
-  black: 'border-gray-900 dark:border-zinc-100',
-} as const satisfies Record<KnownColorScheme, string>;
+const COLOR_SCHEME_CHECKED: Record<KnownColorScheme, string> = CHECKED_FILL_SCHEME;
 
 const COLOR_SCHEME_DOT: Record<KnownColorScheme, string> = {
-  blue: 'fill-blue-500 dark:fill-blue-400',
-  red: 'fill-red-500 dark:fill-red-400',
-  green: 'fill-green-500 dark:fill-green-400',
-  yellow: 'fill-yellow-500 dark:fill-yellow-400',
-  black: 'fill-gray-900 dark:fill-zinc-100',
+  blue: 'fill-white',
+  red: 'fill-white',
+  green: 'fill-white',
+  yellow: 'fill-black dark:fill-black',
+  black: 'fill-white dark:fill-zinc-900',
 } as const satisfies Record<KnownColorScheme, string>;
 
-const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = buildGroupHoverScheme('radio');
+const COLOR_SCHEME_HOVER: Record<KnownColorScheme, string> = RADIO_HOVER_SCHEME;
 
-const DEFAULT_CHECKED: string = 'border-blue-500 dark:border-blue-400';
-const DEFAULT_DOT: string = 'fill-blue-500 dark:fill-blue-400';
-const DEFAULT_HOVER: string = buildDefaultGroupHover('radio');
+const DEFAULT_CHECKED: string = DEFAULT_CHECKED_FILL;
+const DEFAULT_DOT: string = 'fill-white';
+const DEFAULT_HOVER: string = RADIO_DEFAULT_HOVER;
 
 /**
  * Radio button control with animated dot, colorScheme support,
@@ -93,21 +100,35 @@ export class KbRadio extends KbBaseElement<'description'> {
   @property({ type: String }) name?: string;
   /** Value emitted in `kb-change` event detail when this radio is selected. @defaultValue '' */
   @property({ type: String }) value: string = '';
+  /** Mark this radio as required for form validation. @defaultValue false */
+  @property({ type: Boolean }) required: boolean = false;
 
-  @state() private _pressed = false;
+  private _circleEl: HTMLElement | null = null;
+
+  /** Returns the focusable circle span element (cached after first render). */
+  get circleEl(): HTMLElement | null {
+    return this._circleEl;
+  }
+
+  override firstUpdated(): void {
+    this._circleEl = this.querySelector<HTMLElement>('[role="radio"]');
+  }
+
+  private _onPointerDown(_e: PointerEvent): void {
+    if (this.disabled) return;
+    const circle = this._circleEl;
+    if (circle) springPressDown(circle, 0.9);
+  }
+
+  private _onPointerUp(_e: PointerEvent): void {
+    const circle = this._circleEl;
+    if (circle) springPressUp(circle);
+  }
 
   private _select(): void {
     if (this.disabled || this.checked) return;
     this.checked = true;
     this.emit('kb-change', { source: 'radio', value: this.value, checked: true });
-  }
-
-  private _onPointerDown(): void {
-    if (!this.disabled) this._pressed = true;
-  }
-
-  private _onPointerUp(): void {
-    this._pressed = false;
   }
 
   private _handleLabelClick(e: MouseEvent): void {
@@ -122,51 +143,92 @@ export class KbRadio extends KbBaseElement<'description'> {
     }
   }
 
+  private _onFocus(): void {
+    this.emit('kb-focus');
+  }
+
+  private _onBlur(): void {
+    this.emit('kb-blur');
+  }
+
+  private _computeBorderColor(): string {
+    if (this.invalid && !this.checked) return FORM_INVALID_BORDER;
+    if (this.checked) return '';
+    return FORM_UNCHECKED_BORDER;
+  }
+
+  private _renderDot(s: (typeof SIZE_MAP)[ComponentSize], dotColor: string): TemplateResult | typeof nothing {
+    if (!this.checked) return nothing;
+    return html`<svg class="w-full h-full animate-kb-radio-pop" viewBox="0 0 24 24"><circle cx="12" cy="12" ${s.inner} class="${dotColor}"/></svg>`;
+  }
+
+  private _renderLabelContent(s: (typeof SIZE_MAP)[ComponentSize]): TemplateResult | Node[] {
+    const labelClass: string = this.disabled ? FORM_DISABLED_LABEL : '';
+    const descriptionEl = this.slotted('description');
+    if (descriptionEl) {
+      const descClass = this.invalid ? FORM_INVALID_TEXT : kbClasses.textSecondary;
+      return html`<span class="${FORM_DESCRIPTION_WRAPPER}">
+        <span class="${labelClass}">${this.defaultSlotContent}</span>
+        <span class="${s.description} ${descClass}">${descriptionEl}</span>
+      </span>`;
+    }
+    if (labelClass) {
+      return html`<span class="${labelClass}">${this.defaultSlotContent}</span>`;
+    }
+    return this.defaultSlotContent;
+  }
+
+  private _renderCircleSpan(
+    s: (typeof SIZE_MAP)[ComponentSize],
+    circleClasses: string,
+    dotColor: string,
+  ): TemplateResult {
+    const inner = html`<span
+      class=${circleClasses}
+      tabindex=${this.disabled ? '-1' : '0'}
+      role="radio"
+      aria-checked=${this.checked ? 'true' : 'false'}
+      aria-required=${this.required ? 'true' : nothing}
+      aria-invalid=${this.invalid ? 'true' : nothing}
+      @keydown=${this._handleCircleKeydown}
+      @focus=${this._onFocus}
+      @blur=${this._onBlur}
+    >
+      ${this._renderDot(s, dotColor)}
+    </span>`;
+    if (s.tapWrap) {
+      return html`<span class=${s.tapWrap}>${inner}</span>`;
+    }
+    return inner;
+  }
+
   override render(): TemplateResult {
     const s = SIZE_MAP[this.size];
     const cs = this.colorScheme;
 
-    const checkedBorder = this.checked ? (lookupScheme(COLOR_SCHEME_CHECKED, cs) ?? DEFAULT_CHECKED) : '';
-
+    const checkedFill = this.checked
+      ? (lookupScheme(COLOR_SCHEME_CHECKED, cs) ?? DEFAULT_CHECKED)
+      : 'bg-white dark:bg-transparent';
     const dotColor = this.checked ? (lookupScheme(COLOR_SCHEME_DOT, cs) ?? DEFAULT_DOT) : '';
-
     const hoverBorder = this.checked || this.disabled ? '' : (lookupScheme(COLOR_SCHEME_HOVER, cs) ?? DEFAULT_HOVER);
-
-    let borderColor: string;
-    if (this.invalid && !this.checked) borderColor = FORM_INVALID_BORDER;
-    else if (this.checked) borderColor = '';
-    else borderColor = FORM_UNCHECKED_BORDER;
 
     const circleClasses = cx(
       s.outer,
       'rounded-full border flex items-center justify-center shrink-0',
-      kbClasses.transition,
-      checkedBorder,
-      borderColor,
+      kbClasses.transitionColors,
+      checkedFill,
+      this._computeBorderColor(),
       hoverBorder,
-      this._pressed ? 'scale-90' : '',
       kbClasses.focus,
+      this.disabled ? FORM_DISABLED_CONTROL : '',
     );
 
     const wrapperClasses = this.buildClasses(
       'group/radio inline-flex items-start font-sans select-none',
       kbClasses.textPrimary,
       s.label,
-      this.disabled ? kbClasses.disabled : 'cursor-pointer',
+      this.disabled ? FORM_DISABLED_WRAPPER : 'cursor-pointer',
     );
-
-    const descriptionEl = this.slotted('description');
-
-    const dotEl = this.checked
-      ? html`<svg class="w-full h-full animate-kb-radio-pop" viewBox="0 0 24 24"><circle cx="12" cy="12" ${s.inner} class="${dotColor}"/></svg>`
-      : nothing;
-
-    const labelContent = descriptionEl
-      ? html`<span class="${FORM_DESCRIPTION_WRAPPER}">
-          <span>${this.defaultSlotContent}</span>
-          <span class="${s.description} ${this.invalid ? FORM_INVALID_TEXT : kbClasses.textSecondary}">${descriptionEl}</span>
-        </span>`
-      : this.defaultSlotContent;
 
     return html`
       <label
@@ -181,22 +243,14 @@ export class KbRadio extends KbBaseElement<'description'> {
           class="sr-only"
           .checked=${this.checked}
           ?disabled=${this.disabled}
+          ?required=${this.required}
           name=${this.name ?? ''}
           value=${this.value}
           tabindex="-1"
           aria-hidden="true"
         />
-        <span
-          class=${circleClasses}
-          tabindex=${this.disabled ? '-1' : '0'}
-          role="radio"
-          aria-checked=${this.checked ? 'true' : 'false'}
-          aria-invalid=${this.invalid ? 'true' : nothing}
-          @keydown=${this._handleCircleKeydown}
-        >
-          ${dotEl}
-        </span>
-        ${labelContent}
+        ${this._renderCircleSpan(s, circleClasses, dotColor)}
+        ${this._renderLabelContent(s)}
       </label>
     `;
   }

@@ -3,14 +3,16 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/feedback/kb-spinner.js';
 
+type Args = { size?: string; variant?: string; track?: boolean };
+
 export default {
   title: 'Feedback/Spinner',
   component: 'kb-spinner',
   render: (args) => html`<kb-spinner ${spreadAttrs(args)}></kb-spinner>`,
   args: { size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

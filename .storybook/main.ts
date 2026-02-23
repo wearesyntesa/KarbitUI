@@ -5,10 +5,21 @@ export default defineMain({
   stories: ['../stories/**/*.stories.ts'],
   async viteFinal(config) {
     const { mergeConfig } = await import('vite');
+    const tailwindcss = (await import('tailwindcss')).default;
+    const autoprefixer = (await import('autoprefixer')).default;
+    const karbitPreset = (await import('../tailwind.config.ts')).default;
     return mergeConfig(config, {
       css: {
         postcss: {
-          plugins: [(await import('tailwindcss')).default, (await import('autoprefixer')).default],
+          plugins: [
+            tailwindcss({
+              config: {
+                presets: [karbitPreset],
+                content: ['./src/**/*.ts', './stories/**/*.ts'],
+              },
+            }),
+            autoprefixer,
+          ],
         },
       },
     });

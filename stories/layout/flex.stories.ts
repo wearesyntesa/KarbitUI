@@ -10,14 +10,16 @@ const boxes = html`
   <kb-box p="4" bg="green-100">Three</kb-box>
 `;
 
+type Args = { gap?: string; direction?: string; align?: string; justify?: string; h?: string };
+
 export default {
   title: 'Layout/Flex',
   component: 'kb-flex',
   render: (args) => html`<kb-flex ${spreadAttrs(args)}>${boxes}</kb-flex>`,
   args: { gap: '4' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Row: S = {};
 

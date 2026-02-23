@@ -3,14 +3,16 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/layout/kb-box.js';
 
+type Args = { p?: string; bg?: string; color?: string; border?: string; rounded?: string; shadow?: string };
+
 export default {
   title: 'Layout/Box',
   component: 'kb-box',
   render: (args) => html`<kb-box ${spreadAttrs(args)}>Box content</kb-box>`,
   args: { p: '4', bg: 'white' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

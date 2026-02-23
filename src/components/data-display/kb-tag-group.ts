@@ -1,7 +1,7 @@
 import { html, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
-import type { StyleProps } from '../../core/style-map.js';
+import type { KbDragDetail } from '../../core/events.js';
 import type { KbTag } from './kb-tag.js';
 
 export type TagGroupGap = 'sm' | 'md' | 'lg';
@@ -23,6 +23,8 @@ const INDICATOR_CLASSES =
  * After a drop, fires `kb-reorder` with the new value order.
  *
  * @fires kb-reorder - Fired after drag reorder completes. `detail.order` is an array of tag `value` strings.
+ * @fires kb-drag-start - Fired when a tag drag begins. `detail.value` is the dragged tag value.
+ * @fires kb-drag-end - Fired when a tag drag ends. `detail.value` is the dragged tag value.
  *
  * @example
  * ```html
@@ -42,16 +44,20 @@ export class KbTagGroup extends KbBaseElement {
   /** Spacing between tags. @defaultValue 'md' */
   @property({ type: String }) gap: TagGroupGap = 'md';
 
-  /** Exclude `gap` from style-props system — this component owns the `gap` property directly. */
-  protected override collectStyleProps(): Partial<StyleProps> {
-    const props = super.collectStyleProps();
-    delete props.gap;
-    return props;
-  }
+  /** Exclude `gap` from style-props system - this component owns the `gap` property directly. */
+  protected override _excludedStyleProps: ReadonlySet<string> = new Set(['gap']);
 
   private _indicator: HTMLElement | null = null;
   private _dragOverTag: Element | null = null;
   private _insertBefore: boolean = true;
+  private _dragRects: Map<Element, DOMRect> = new Map();
+  private _containerEl: HTMLElement | null = null;
+  /** R-3: RAF handle for throttling dragover. */
+  private _rafId: number = 0;
+
+  override firstUpdated(): void {
+    this._containerEl = this.querySelector('[data-kb-tag-group]');
+  }
 
   private _getTagChildren(): KbTag[] {
     const container = this._getContainer();
@@ -59,10 +65,13 @@ export class KbTagGroup extends KbBaseElement {
     return Array.from(container.querySelectorAll(':scope > kb-tag')) as KbTag[];
   }
 
+  /** D-1: Lazy getter — falls back to querySelector if firstUpdated hasn't run yet. */
   private _getContainer(): HTMLElement | null {
-    return this.renderRoot.querySelector('[data-kb-tag-group]');
+    if (!this._containerEl) {
+      this._containerEl = this.querySelector('[data-kb-tag-group]');
+    }
+    return this._containerEl;
   }
-
   private _ensureIndicator(): HTMLElement {
     if (!this._indicator) {
       this._indicator = document.createElement('div');
@@ -73,12 +82,45 @@ export class KbTagGroup extends KbBaseElement {
     return this._indicator;
   }
 
+  /** U-1: Emit kb-drag-start with the dragged tag value. */
+  private _handleDragStart = (e: DragEvent): void => {
+    this._dragRects.clear();
+    for (const tag of this._getTagChildren()) {
+      this._dragRects.set(tag, tag.getBoundingClientRect());
+    }
+
+    const value = e.dataTransfer?.getData('application/kb-tag') ?? '';
+    if (value) {
+      this.emit('kb-drag-start', { value } satisfies KbDragDetail);
+    }
+  };
+
+  /** U-1: Emit kb-drag-end with the dragged tag value. */
+  private _handleDragEnd = (e: DragEvent): void => {
+    this._dragRects.clear();
+
+    const value = e.dataTransfer?.getData('application/kb-tag') ?? '';
+    if (value) {
+      this.emit('kb-drag-end', { value } satisfies KbDragDetail);
+    }
+  };
+
+  /** R-3: RAF-throttled dragover handler to avoid per-frame layout thrash. */
   private _handleDragOver = (e: DragEvent): void => {
     if (!this.reorderable) return;
     if (!e.dataTransfer?.types.includes('application/kb-tag')) return;
     e.preventDefault();
     if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
 
+    if (this._rafId) return;
+    const clientX = e.clientX;
+    this._rafId = requestAnimationFrame(() => {
+      this._rafId = 0;
+      this._updateDropPosition(clientX);
+    });
+  };
+
+  private _updateDropPosition(clientX: number): void {
     const container = this._getContainer();
     if (!container) return;
 
@@ -90,13 +132,13 @@ export class KbTagGroup extends KbBaseElement {
     let minDist = Infinity;
 
     for (const tag of tags) {
-      const rect = tag.getBoundingClientRect();
+      const rect = this._dragRects.get(tag) ?? tag.getBoundingClientRect();
       const midX = rect.left + rect.width / 2;
-      const dist = Math.abs(e.clientX - midX);
+      const dist = Math.abs(clientX - midX);
       if (dist < minDist) {
         minDist = dist;
         closestTag = tag;
-        insertBefore = e.clientX < midX;
+        insertBefore = clientX < midX;
       }
     }
 
@@ -108,17 +150,21 @@ export class KbTagGroup extends KbBaseElement {
     const indicator = this._ensureIndicator();
     indicator.style.opacity = '1';
 
-    if (insertBefore) {
-      container.insertBefore(indicator, closestTag);
-    } else {
-      const next = closestTag.nextElementSibling;
-      if (next && next !== indicator) {
-        container.insertBefore(indicator, next);
-      } else if (!next) {
-        container.appendChild(indicator);
-      }
+    this._positionIndicator(container, indicator, closestTag, insertBefore);
+  }
+
+  private _positionIndicator(container: HTMLElement, indicator: HTMLElement, anchor: Element, before: boolean): void {
+    if (before) {
+      container.insertBefore(indicator, anchor);
+      return;
     }
-  };
+    const next = anchor.nextElementSibling;
+    if (next && next !== indicator) {
+      container.insertBefore(indicator, next);
+    } else if (!next) {
+      container.appendChild(indicator);
+    }
+  }
 
   private _handleDragLeave = (e: DragEvent): void => {
     const container = this._getContainer();
@@ -133,7 +179,8 @@ export class KbTagGroup extends KbBaseElement {
     if (!this.reorderable) return;
 
     const tagValue = e.dataTransfer?.getData('application/kb-tag');
-    if (tagValue === undefined) return;
+    /** T-5: getData() returns '' (not undefined) when key absent — use falsy check. */
+    if (!tagValue) return;
 
     const targetTag = this._dragOverTag;
     const insertBefore = this._insertBefore;
@@ -163,17 +210,23 @@ export class KbTagGroup extends KbBaseElement {
   };
 
   private _hideIndicator(): void {
+    if (this._rafId) {
+      cancelAnimationFrame(this._rafId);
+      this._rafId = 0;
+    }
     if (this._indicator) {
       this._indicator.style.opacity = '0';
       this._indicator.remove();
     }
     this._dragOverTag = null;
+    this._dragRects.clear();
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
     this._hideIndicator();
     this._indicator = null;
+    this._containerEl = null;
   }
 
   override render(): TemplateResult {
@@ -184,6 +237,8 @@ export class KbTagGroup extends KbBaseElement {
       <div
         class=${classes}
         data-kb-tag-group
+        @dragstart=${this._handleDragStart}
+        @dragend=${this._handleDragEnd}
         @dragover=${this._handleDragOver}
         @dragleave=${this._handleDragLeave}
         @drop=${this._handleDrop}

@@ -6,7 +6,9 @@ import type { KbFormLabel } from './kb-form-label.js';
 
 type FormChild = HTMLElement & { invalid?: boolean; disabled?: boolean; required?: boolean };
 
-const FORM_CHILD_TAGS = ['KB-INPUT', 'KB-TEXTAREA', 'KB-SELECT'] as const;
+const FORM_CHILD_TAGS = ['KB-INPUT', 'KB-TEXTAREA', 'KB-SELECT', 'KB-CHECKBOX', 'KB-RADIO', 'KB-SWITCH'] as const;
+
+let _fcCounter = 0;
 
 /**
  * Form field wrapper providing context propagation, helper/error text,
@@ -39,64 +41,122 @@ export class KbFormControl extends KbBaseElement<'helper' | 'error' | 'counter'>
   /** Disable the field. Propagated to child input. @defaultValue false */
   @property({ type: Boolean, reflect: true }) disabled: boolean = false;
 
+  private readonly _feedbackId: string = `kb-fc-fb-${++_fcCounter}`;
+  private readonly _labelId: string = `kb-fc-lbl-${++_fcCounter}`;
+  private _labelEl: KbFormLabel | null = null;
+  private _childEl: FormChild | null = null;
+  private _childObserver: MutationObserver | undefined;
+
+  private _refreshCache(): void {
+    this._labelEl = this.querySelector('kb-form-label') as KbFormLabel | null;
+    this._childEl = null;
+    for (const tag of FORM_CHILD_TAGS) {
+      const el = this.querySelector(tag) as FormChild | null;
+      if (el) {
+        this._childEl = el;
+        break;
+      }
+    }
+  }
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._refreshCache();
+    this._childObserver = new MutationObserver(() => {
+      this._refreshCache();
+      this._propagateContext();
+      this._linkAriaDescribedBy();
+    });
+    this._childObserver.observe(this, { childList: true });
+  }
+
+  override disconnectedCallback(): void {
+    this._childObserver?.disconnect();
+    this._childObserver = undefined;
+    super.disconnectedCallback();
+  }
+
   override firstUpdated(): void {
     this._propagateContext();
+    this._linkAriaDescribedBy();
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
     if (changed.has('required') || changed.has('invalid') || changed.has('disabled')) {
       this._propagateContext();
     }
+    if (changed.has('invalid')) {
+      this._linkAriaDescribedBy();
+    }
   }
 
   private _propagateContext(): void {
-    const label = this.querySelector('kb-form-label') as KbFormLabel | null;
-    if (label && this.required && !label.hasAttribute('required')) label.required = true;
+    const label = this._labelEl;
+    if (label) {
+      if (this.required && !label.hasAttribute('required')) label.required = true;
+      if (!label.id) label.id = this._labelId;
+    }
 
-    for (const tag of FORM_CHILD_TAGS) {
-      const child = this.querySelector(tag) as FormChild | null;
-      if (!child) continue;
-      if (this.invalid && !child.hasAttribute('invalid')) child.invalid = true;
-      if (this.disabled && !child.hasAttribute('disabled')) child.disabled = true;
-      if (this.required && !child.hasAttribute('required')) child.required = true;
+    const child = this._childEl;
+    if (child) this._applyContextToChild(child);
+  }
+
+  private _applyContextToChild(child: FormChild): void {
+    if (this.invalid && !child.hasAttribute('invalid')) child.invalid = true;
+    if (!this.invalid && child.invalid) child.invalid = false;
+    if (this.disabled && !child.hasAttribute('disabled')) child.disabled = true;
+    if (this.required && !child.hasAttribute('required')) child.required = true;
+  }
+
+  private _linkAriaDescribedBy(): void {
+    const child = this._childEl as HTMLElement | null;
+    if (!child) return;
+    const existing = child.getAttribute('aria-describedby') ?? '';
+    const id = this._feedbackId;
+    if (!existing.includes(id)) {
+      child.setAttribute('aria-describedby', existing ? `${existing} ${id}` : id);
     }
   }
 
-  override render(): TemplateResult {
-    const helperEl = this.slotted('helper');
-    const errorEl = this.slotted('error');
-    const counterEl = this.slotted('counter');
+  private _renderFeedback(
+    errorEl: Element | null,
+    helperEl: Element | null,
+    counterEl: Element | null,
+  ): ReturnType<typeof html> | typeof nothing {
+    const showError = this.invalid && !!errorEl;
+    const showHelper = !showError && !!helperEl;
+    const showBottom = showError || showHelper || !!counterEl;
 
-    const showError = this.invalid && errorEl;
-    const showHelper = !showError && helperEl;
-    const showBottom = showError || showHelper || counterEl;
+    // In Light DOM, slotted elements remain as direct host children and are
+    // always visible unless explicitly hidden. Hide whichever feedback node is
+    // not currently active so it doesn't render as bare text outside the layout.
+    // The active node gets moved into the render tree (display reset to '').
+    if (helperEl instanceof HTMLElement) helperEl.style.display = showHelper ? '' : 'none';
+    if (errorEl instanceof HTMLElement) errorEl.style.display = showError ? '' : 'none';
 
-    let feedbackEl = nothing as typeof nothing | ReturnType<typeof html>;
-    if (showError) {
-      feedbackEl = html`<span class="text-xs text-red-500 dark:text-red-400 animate-kb-fade-in">${errorEl}</span>`;
-    } else if (showHelper) {
-      feedbackEl = html`<span class="text-xs ${kbClasses.textMuted}">${helperEl}</span>`;
+    if (!showBottom) return nothing;
+
+    let feedbackEl: ReturnType<typeof html> | typeof nothing = nothing;
+    if (showError && errorEl) {
+      feedbackEl = html`<span class="text-xs text-red-500 dark:text-red-400 animate-kb-fade-in select-none">${errorEl}</span>`;
+    } else if (showHelper && helperEl) {
+      feedbackEl = html`<span class="text-xs ${kbClasses.textMuted} select-none">${helperEl}</span>`;
     }
 
+    return html`<div class="flex items-start justify-between gap-4 min-h-[1.25rem]">
+      <span id=${this._feedbackId} class="flex-1" aria-live="polite">
+        ${feedbackEl}
+      </span>
+      ${counterEl ? html`<span class="text-xs ${kbClasses.textMuted} shrink-0 tabular-nums select-none">${counterEl}</span>` : nothing}
+    </div>`;
+  }
+
+  override render(): TemplateResult {
     const classes = this.buildClasses('flex flex-col gap-1.5 font-sans');
-
-    const bottomRow = showBottom
-      ? html`<div class="flex items-start justify-between gap-4 min-h-[1.25rem]">
-          <span class="flex-1">
-            ${feedbackEl}
-          </span>
-          ${
-            counterEl
-              ? html`<span class="text-xs ${kbClasses.textMuted} shrink-0 tabular-nums">${counterEl}</span>`
-              : nothing
-          }
-        </div>`
-      : nothing;
-
     return html`
-      <div class=${classes} role="group">
+      <div class=${classes} role="group" aria-labelledby=${this._labelId}>
         ${this.defaultSlotContent}
-        ${bottomRow}
+        ${this._renderFeedback(this.slotted('error'), this.slotted('helper'), this.slotted('counter'))}
       </div>
     `;
   }

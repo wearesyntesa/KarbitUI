@@ -1,6 +1,6 @@
-import { html, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { KbBaseElement } from '../../core/base-element.js';
+import { html, type PropertyValues, type TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { INTERACTIVE_GHOST, INTERACTIVE_OUTLINE, INTERACTIVE_SOLID, lookupScheme } from '../../core/color-schemes.js';
 import { LOADING_SIZE } from '../../core/icons.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
@@ -9,7 +9,7 @@ import type { ColorScheme, ComponentSize, KnownColorScheme } from '../../core/ty
 
 // biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const iconButtonRecipe = recipe({
-  base: `inline-flex items-center justify-center ${kbClasses.transition} cursor-pointer select-none aspect-square ${kbClasses.focus}`,
+  base: `inline-flex items-center justify-center leading-none ${kbClasses.transitionColors} cursor-pointer select-none aspect-square ${kbClasses.focus}`,
   variants: {
     variant: {
       solid: 'border',
@@ -58,40 +58,52 @@ const COLOR_SCHEME_MAP: Record<IconButtonVariant, Record<KnownColorScheme, strin
  */
 @customElement('kb-icon-button')
 export class KbIconButton extends KbBaseElement {
+  static override hostDisplay = 'inline-flex' as const;
   /** Visual variant controlling border, background, and text styles. @defaultValue 'solid' */
   @property({ type: String }) variant: IconButtonVariant = 'solid';
   /** Button size controlling dimensions and icon scaling. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
   /** Color scheme override. When unset, the variant's default color is used. */
   @property({ type: String, attribute: 'color-scheme' }) colorScheme?: ColorScheme;
-  /** Accessible label for the icon-only button (required for screen readers). */
-  @property({ type: String }) label!: string;
+  /** Accessible label for the icon-only button (required for screen readers). @defaultValue '' */
+  @property({ type: String }) label: string = '';
   /** Disable interaction and apply dimmed styling. @defaultValue false */
   @property({ type: Boolean }) disabled: boolean = false;
   /** Show a spinner and disable interaction. @defaultValue false */
   @property({ type: Boolean }) loading: boolean = false;
 
-  @state() private _pressed = false;
+  private _cachedRecipeClasses = '';
 
-  private _onPointerDown(): void {
-    if (this.disabled || this.loading) return;
-    this._pressed = true;
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (this._cachedRecipeClasses === '' || changed.has('variant') || changed.has('size')) {
+      this._cachedRecipeClasses = iconButtonRecipe({ variant: this.variant, size: this.size });
+    }
+    if (changed.has('loading')) {
+      // Spinner replaces icon when loading. In Light DOM the captured icon node
+      // remains a direct host child — hide it explicitly so it doesn't leak through.
+      this.setDefaultSlotVisible(!this.loading);
+    }
   }
 
-  private _onPointerUp(): void {
-    this._pressed = false;
+  private _onPointerDown(e: PointerEvent): void {
+    if (this.disabled || this.loading) return;
+    const btn = e.currentTarget as HTMLElement;
+    springPressDown(btn, 0.95);
+  }
+
+  private _onPointerUp(e: PointerEvent): void {
+    const btn = e.currentTarget as HTMLElement;
+    springPressUp(btn);
   }
 
   override render(): TemplateResult {
-    const recipeClasses = iconButtonRecipe({ variant: this.variant, size: this.size });
     const disabledClasses = this.disabled || this.loading ? kbClasses.disabled : '';
 
     const colorMap = COLOR_SCHEME_MAP[this.variant];
     const colorClasses = lookupScheme(colorMap, this.colorScheme) ?? VARIANT_DEFAULT_COLOR[this.variant];
 
-    const pressClass = this._pressed && !this.disabled && !this.loading ? 'scale-[0.95]' : '';
-
-    const classes = this.buildClasses(recipeClasses, colorClasses, disabledClasses, pressClass);
+    const classes = this.buildClasses(this._cachedRecipeClasses, colorClasses, disabledClasses);
 
     return html`
       <button

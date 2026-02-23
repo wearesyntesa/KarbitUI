@@ -3,6 +3,8 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/typography/kb-heading.js';
 
+type Args = { level?: string; weight?: string; size?: string; tone?: string; truncate?: boolean };
+
 export default {
   title: 'Typography/Heading',
   component: 'kb-heading',
@@ -18,9 +20,9 @@ export default {
     },
     truncate: { control: 'boolean' },
   },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const H1: S = { args: { level: '1' } };
 

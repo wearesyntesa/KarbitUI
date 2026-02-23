@@ -3,14 +3,16 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/forms/kb-form-label.js';
 
+type Args = { size?: string; required?: boolean; optional?: boolean; for?: string };
+
 export default {
   title: 'Forms/FormLabel',
   component: 'kb-form-label',
   render: (args) => html`<kb-form-label ${spreadAttrs(args)}>Username</kb-form-label>`,
   args: { size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

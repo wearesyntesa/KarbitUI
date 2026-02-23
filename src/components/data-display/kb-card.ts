@@ -7,7 +7,7 @@ import { cx } from '../../utils/cx.js';
 
 // biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const cardRecipe = recipe({
-  base: `font-sans ${kbClasses.transition}`,
+  base: `font-sans ${kbClasses.transitionColors}`,
   variants: {
     variant: {
       outline: `${kbClasses.border} ${kbClasses.surface}`,
@@ -75,7 +75,9 @@ export class KbCard extends KbBaseElement<'header' | 'footer'> {
   @property({ type: String }) size: 'sm' | 'md' | 'lg' = 'md';
   /** When true, the card is focusable and emits `kb-click` on activation. @defaultValue false */
   @property({ type: Boolean }) interactive: boolean = false;
-  /** URL to navigate to — renders the card as an anchor element. @defaultValue '' */
+  /** Accessible label for an interactive card (used as `aria-label` on the `role="button"` element). @defaultValue '' */
+  @property({ type: String }) label: string = '';
+  /** URL to navigate to - renders the card as an anchor element. @defaultValue '' */
   @property({ type: String }) href: string = '';
   /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
@@ -99,7 +101,9 @@ export class KbCard extends KbBaseElement<'header' | 'footer'> {
 
     return html`
       ${
-        headerEl ? html`<div class="${kbClasses.label} mb-3 pb-3 ${kbClasses.borderBottom}">${headerEl}</div>` : nothing
+        headerEl
+          ? html`<div class="${kbClasses.label} select-none mb-3 pb-3 ${kbClasses.borderBottom}">${headerEl}</div>`
+          : nothing
       }
       <div class=${kbClasses.textPrimary}>${this.defaultSlotContent}</div>
       ${
@@ -110,21 +114,23 @@ export class KbCard extends KbBaseElement<'header' | 'footer'> {
     `;
   }
 
-  override render(): TemplateResult {
+  private _buildBaseClasses(): string {
     const isGhost = this.variant === 'ghost';
     let interactiveClasses = '';
     if (this.interactive) {
       interactiveClasses = isGhost ? GHOST_INTERACTIVE_CLASSES : INTERACTIVE_CLASSES;
     }
-
     const passiveHover = this.interactive || isGhost || this.href ? '' : PASSIVE_HOVER_CLASSES;
-
-    const baseClasses = this.buildClasses(
+    return this.buildClasses(
       cardRecipe({ variant: this.variant, size: this.size }),
       interactiveClasses,
       passiveHover,
       this.href ? 'block no-underline text-inherit' : '',
     );
+  }
+
+  override render(): TemplateResult {
+    const baseClasses = this._buildBaseClasses();
 
     if (this.href) {
       return html`
@@ -139,11 +145,14 @@ export class KbCard extends KbBaseElement<'header' | 'footer'> {
       `;
     }
 
+    const ariaLabel = this.interactive && this.label ? this.label : nothing;
+
     return html`
       <div
         class=${baseClasses}
         role=${this.interactive ? 'button' : nothing}
         tabindex=${this.interactive ? '0' : nothing}
+        aria-label=${ariaLabel}
         @click=${this.interactive ? this._handleClick : nothing}
         @keydown=${this.interactive ? this._handleKeyDown : nothing}
       >

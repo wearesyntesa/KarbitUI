@@ -3,14 +3,16 @@ import { html } from 'lit';
 import { spreadAttrs } from '../_define.js';
 import '../../src/components/feedback/kb-progress.js';
 
+type Args = { value?: number; size?: string; 'show-value'?: boolean; indeterminate?: boolean };
+
 export default {
   title: 'Feedback/Progress',
   component: 'kb-progress',
   render: (args) => html`<div style="max-width:400px;"><kb-progress ${spreadAttrs(args)}></kb-progress></div>`,
   args: { value: 60, size: 'md' },
-} satisfies Meta;
+} satisfies Meta<Args>;
 
-type S = StoryObj;
+type S = StoryObj<Args>;
 
 export const Default: S = {};
 

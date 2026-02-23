@@ -32,10 +32,11 @@ export class KbFlex extends KbBaseElement {
 
   override willUpdate(changed: PropertyValues): void {
     super.willUpdate(changed);
-    if (this.direction && !this.flexDir) this.flexDir = this.direction;
-    if (this.align && !this.alignItems) this.alignItems = this.align;
-    if (this.justify && !this.justifyContent) this.justifyContent = this.justify;
-    if (this.wrap && !this.flexWrap) this.flexWrap = this.wrap;
+    const self = this as unknown as Record<string, unknown>;
+    if (changed.has('direction')) self.flexDir = this.direction;
+    if (changed.has('align')) self.alignItems = this.align;
+    if (changed.has('justify')) self.justifyContent = this.justify;
+    if (changed.has('wrap')) self.flexWrap = this.wrap;
   }
 
   override render(): TemplateResult {

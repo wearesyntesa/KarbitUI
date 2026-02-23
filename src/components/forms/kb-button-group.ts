@@ -1,4 +1,4 @@
-import { html, type TemplateResult } from 'lit';
+import { html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
@@ -52,6 +52,8 @@ export class KbButtonGroup extends KbBaseElement {
   @property({ type: String }) direction: ButtonGroupDirection = 'horizontal';
   /** Use spaced mode (gap between buttons) instead of attached mode (shared borders). @defaultValue false */
   @property({ type: Boolean }) spaced: boolean = false;
+  /** Accessible label for the button group (required for screen readers). @defaultValue '' */
+  @property({ type: String }) label: string = '';
 
   override render(): TemplateResult {
     const dirClasses = DIRECTION_CLASSES[this.direction] ?? DIRECTION_CLASSES.horizontal;
@@ -62,7 +64,7 @@ export class KbButtonGroup extends KbBaseElement {
 
     const classes = this.buildClasses(dirClasses, modeClasses);
 
-    return html`<div class=${classes} role="group">${this.defaultSlotContent}</div>`;
+    return html`<div class=${classes} role="group" aria-label=${this.label || nothing}>${this.defaultSlotContent}</div>`;
   }
 }
 

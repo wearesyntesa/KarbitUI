@@ -22,6 +22,384 @@
       "import": "./dist/react/index.js",
       "default": "./dist/react/index.js"
     },
+    "./react/accordion": {
+      "types": "./dist/react/components/kb-accordion.d.ts",
+      "import": "./dist/react/components/kb-accordion.js",
+      "default": "./dist/react/components/kb-accordion.js"
+    },
+    "./react/accordion-group": {
+      "types": "./dist/react/components/kb-accordion-group.d.ts",
+      "import": "./dist/react/components/kb-accordion-group.js",
+      "default": "./dist/react/components/kb-accordion-group.js"
+    },
+    "./react/alert": {
+      "types": "./dist/react/components/kb-alert.d.ts",
+      "import": "./dist/react/components/kb-alert.js",
+      "default": "./dist/react/components/kb-alert.js"
+    },
+    "./react/badge": {
+      "types": "./dist/react/components/kb-badge.d.ts",
+      "import": "./dist/react/components/kb-badge.js",
+      "default": "./dist/react/components/kb-badge.js"
+    },
+    "./react/box": {
+      "types": "./dist/react/components/kb-box.d.ts",
+      "import": "./dist/react/components/kb-box.js",
+      "default": "./dist/react/components/kb-box.js"
+    },
+    "./react/breadcrumb": {
+      "types": "./dist/react/components/kb-breadcrumb.d.ts",
+      "import": "./dist/react/components/kb-breadcrumb.js",
+      "default": "./dist/react/components/kb-breadcrumb.js"
+    },
+    "./react/button": {
+      "types": "./dist/react/components/kb-button.d.ts",
+      "import": "./dist/react/components/kb-button.js",
+      "default": "./dist/react/components/kb-button.js"
+    },
+    "./react/button-group": {
+      "types": "./dist/react/components/kb-button-group.d.ts",
+      "import": "./dist/react/components/kb-button-group.js",
+      "default": "./dist/react/components/kb-button-group.js"
+    },
+    "./react/card": {
+      "types": "./dist/react/components/kb-card.d.ts",
+      "import": "./dist/react/components/kb-card.js",
+      "default": "./dist/react/components/kb-card.js"
+    },
+    "./react/checkbox": {
+      "types": "./dist/react/components/kb-checkbox.d.ts",
+      "import": "./dist/react/components/kb-checkbox.js",
+      "default": "./dist/react/components/kb-checkbox.js"
+    },
+    "./react/checkbox-group": {
+      "types": "./dist/react/components/kb-checkbox-group.d.ts",
+      "import": "./dist/react/components/kb-checkbox-group.js",
+      "default": "./dist/react/components/kb-checkbox-group.js"
+    },
+    "./react/code": {
+      "types": "./dist/react/components/kb-code.d.ts",
+      "import": "./dist/react/components/kb-code.js",
+      "default": "./dist/react/components/kb-code.js"
+    },
+    "./react/container": {
+      "types": "./dist/react/components/kb-container.d.ts",
+      "import": "./dist/react/components/kb-container.js",
+      "default": "./dist/react/components/kb-container.js"
+    },
+    "./react/divider": {
+      "types": "./dist/react/components/kb-divider.d.ts",
+      "import": "./dist/react/components/kb-divider.js",
+      "default": "./dist/react/components/kb-divider.js"
+    },
+    "./react/drawer": {
+      "types": "./dist/react/components/kb-drawer.d.ts",
+      "import": "./dist/react/components/kb-drawer.js",
+      "default": "./dist/react/components/kb-drawer.js"
+    },
+    "./react/flex": {
+      "types": "./dist/react/components/kb-flex.d.ts",
+      "import": "./dist/react/components/kb-flex.js",
+      "default": "./dist/react/components/kb-flex.js"
+    },
+    "./react/form-control": {
+      "types": "./dist/react/components/kb-form-control.d.ts",
+      "import": "./dist/react/components/kb-form-control.js",
+      "default": "./dist/react/components/kb-form-control.js"
+    },
+    "./react/form-label": {
+      "types": "./dist/react/components/kb-form-label.d.ts",
+      "import": "./dist/react/components/kb-form-label.js",
+      "default": "./dist/react/components/kb-form-label.js"
+    },
+    "./react/grid": {
+      "types": "./dist/react/components/kb-grid.d.ts",
+      "import": "./dist/react/components/kb-grid.js",
+      "default": "./dist/react/components/kb-grid.js"
+    },
+    "./react/heading": {
+      "types": "./dist/react/components/kb-heading.d.ts",
+      "import": "./dist/react/components/kb-heading.js",
+      "default": "./dist/react/components/kb-heading.js"
+    },
+    "./react/icon-button": {
+      "types": "./dist/react/components/kb-icon-button.d.ts",
+      "import": "./dist/react/components/kb-icon-button.js",
+      "default": "./dist/react/components/kb-icon-button.js"
+    },
+    "./react/input": {
+      "types": "./dist/react/components/kb-input.d.ts",
+      "import": "./dist/react/components/kb-input.js",
+      "default": "./dist/react/components/kb-input.js"
+    },
+    "./react/link": {
+      "types": "./dist/react/components/kb-link.d.ts",
+      "import": "./dist/react/components/kb-link.js",
+      "default": "./dist/react/components/kb-link.js"
+    },
+    "./react/list": {
+      "types": "./dist/react/components/kb-list.d.ts",
+      "import": "./dist/react/components/kb-list.js",
+      "default": "./dist/react/components/kb-list.js"
+    },
+    "./react/list-item": {
+      "types": "./dist/react/components/kb-list-item.d.ts",
+      "import": "./dist/react/components/kb-list-item.js",
+      "default": "./dist/react/components/kb-list-item.js"
+    },
+    "./react/modal": {
+      "types": "./dist/react/components/kb-modal.d.ts",
+      "import": "./dist/react/components/kb-modal.js",
+      "default": "./dist/react/components/kb-modal.js"
+    },
+    "./react/popover": {
+      "types": "./dist/react/components/kb-popover.d.ts",
+      "import": "./dist/react/components/kb-popover.js",
+      "default": "./dist/react/components/kb-popover.js"
+    },
+    "./react/progress": {
+      "types": "./dist/react/components/kb-progress.d.ts",
+      "import": "./dist/react/components/kb-progress.js",
+      "default": "./dist/react/components/kb-progress.js"
+    },
+    "./react/radio": {
+      "types": "./dist/react/components/kb-radio.d.ts",
+      "import": "./dist/react/components/kb-radio.js",
+      "default": "./dist/react/components/kb-radio.js"
+    },
+    "./react/radio-group": {
+      "types": "./dist/react/components/kb-radio-group.d.ts",
+      "import": "./dist/react/components/kb-radio-group.js",
+      "default": "./dist/react/components/kb-radio-group.js"
+    },
+    "./react/select": {
+      "types": "./dist/react/components/kb-select.d.ts",
+      "import": "./dist/react/components/kb-select.js",
+      "default": "./dist/react/components/kb-select.js"
+    },
+    "./react/spinner": {
+      "types": "./dist/react/components/kb-spinner.d.ts",
+      "import": "./dist/react/components/kb-spinner.js",
+      "default": "./dist/react/components/kb-spinner.js"
+    },
+    "./react/stack": {
+      "types": "./dist/react/components/kb-stack.d.ts",
+      "import": "./dist/react/components/kb-stack.js",
+      "default": "./dist/react/components/kb-stack.js"
+    },
+    "./react/switch": {
+      "types": "./dist/react/components/kb-switch.d.ts",
+      "import": "./dist/react/components/kb-switch.js",
+      "default": "./dist/react/components/kb-switch.js"
+    },
+    "./react/table": {
+      "types": "./dist/react/components/kb-table.d.ts",
+      "import": "./dist/react/components/kb-table.js",
+      "default": "./dist/react/components/kb-table.js"
+    },
+    "./react/tag": {
+      "types": "./dist/react/components/kb-tag.d.ts",
+      "import": "./dist/react/components/kb-tag.js",
+      "default": "./dist/react/components/kb-tag.js"
+    },
+    "./react/tag-group": {
+      "types": "./dist/react/components/kb-tag-group.d.ts",
+      "import": "./dist/react/components/kb-tag-group.js",
+      "default": "./dist/react/components/kb-tag-group.js"
+    },
+    "./react/tabs": {
+      "types": "./dist/react/components/kb-tabs.d.ts",
+      "import": "./dist/react/components/kb-tabs.js",
+      "default": "./dist/react/components/kb-tabs.js"
+    },
+    "./react/text": {
+      "types": "./dist/react/components/kb-text.d.ts",
+      "import": "./dist/react/components/kb-text.js",
+      "default": "./dist/react/components/kb-text.js"
+    },
+    "./react/textarea": {
+      "types": "./dist/react/components/kb-textarea.d.ts",
+      "import": "./dist/react/components/kb-textarea.js",
+      "default": "./dist/react/components/kb-textarea.js"
+    },
+    "./react/toast": {
+      "types": "./dist/react/components/kb-toast.d.ts",
+      "import": "./dist/react/components/kb-toast.js",
+      "default": "./dist/react/components/kb-toast.js"
+    },
+    "./react/tooltip": {
+      "types": "./dist/react/components/kb-tooltip.d.ts",
+      "import": "./dist/react/components/kb-tooltip.js",
+      "default": "./dist/react/components/kb-tooltip.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/data-display/kb-accordion.d.ts",
+      "import": "./dist/components/data-display/kb-accordion.js"
+    },
+    "./accordion-group": {
+      "types": "./dist/components/data-display/kb-accordion-group.d.ts",
+      "import": "./dist/components/data-display/kb-accordion-group.js"
+    },
+    "./alert": {
+      "types": "./dist/components/feedback/kb-alert.d.ts",
+      "import": "./dist/components/feedback/kb-alert.js"
+    },
+    "./badge": {
+      "types": "./dist/components/feedback/kb-badge.d.ts",
+      "import": "./dist/components/feedback/kb-badge.js"
+    },
+    "./box": {
+      "types": "./dist/components/layout/kb-box.d.ts",
+      "import": "./dist/components/layout/kb-box.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/components/navigation/kb-breadcrumb.d.ts",
+      "import": "./dist/components/navigation/kb-breadcrumb.js"
+    },
+    "./button": {
+      "types": "./dist/components/forms/kb-button.d.ts",
+      "import": "./dist/components/forms/kb-button.js"
+    },
+    "./button-group": {
+      "types": "./dist/components/forms/kb-button-group.d.ts",
+      "import": "./dist/components/forms/kb-button-group.js"
+    },
+    "./card": {
+      "types": "./dist/components/data-display/kb-card.d.ts",
+      "import": "./dist/components/data-display/kb-card.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/forms/kb-checkbox.d.ts",
+      "import": "./dist/components/forms/kb-checkbox.js"
+    },
+    "./checkbox-group": {
+      "types": "./dist/components/forms/kb-checkbox-group.d.ts",
+      "import": "./dist/components/forms/kb-checkbox-group.js"
+    },
+    "./code": {
+      "types": "./dist/components/typography/kb-code.d.ts",
+      "import": "./dist/components/typography/kb-code.js"
+    },
+    "./container": {
+      "types": "./dist/components/layout/kb-container.d.ts",
+      "import": "./dist/components/layout/kb-container.js"
+    },
+    "./divider": {
+      "types": "./dist/components/layout/kb-divider.d.ts",
+      "import": "./dist/components/layout/kb-divider.js"
+    },
+    "./drawer": {
+      "types": "./dist/components/overlay/kb-drawer.d.ts",
+      "import": "./dist/components/overlay/kb-drawer.js"
+    },
+    "./flex": {
+      "types": "./dist/components/layout/kb-flex.d.ts",
+      "import": "./dist/components/layout/kb-flex.js"
+    },
+    "./form-control": {
+      "types": "./dist/components/forms/kb-form-control.d.ts",
+      "import": "./dist/components/forms/kb-form-control.js"
+    },
+    "./form-label": {
+      "types": "./dist/components/forms/kb-form-label.d.ts",
+      "import": "./dist/components/forms/kb-form-label.js"
+    },
+    "./grid": {
+      "types": "./dist/components/layout/kb-grid.d.ts",
+      "import": "./dist/components/layout/kb-grid.js"
+    },
+    "./heading": {
+      "types": "./dist/components/typography/kb-heading.d.ts",
+      "import": "./dist/components/typography/kb-heading.js"
+    },
+    "./icon-button": {
+      "types": "./dist/components/forms/kb-icon-button.d.ts",
+      "import": "./dist/components/forms/kb-icon-button.js"
+    },
+    "./input": {
+      "types": "./dist/components/forms/kb-input.d.ts",
+      "import": "./dist/components/forms/kb-input.js"
+    },
+    "./link": {
+      "types": "./dist/components/navigation/kb-link.d.ts",
+      "import": "./dist/components/navigation/kb-link.js"
+    },
+    "./list": {
+      "types": "./dist/components/data-display/kb-list.d.ts",
+      "import": "./dist/components/data-display/kb-list.js"
+    },
+    "./list-item": {
+      "types": "./dist/components/data-display/kb-list-item.d.ts",
+      "import": "./dist/components/data-display/kb-list-item.js"
+    },
+    "./modal": {
+      "types": "./dist/components/overlay/kb-modal.d.ts",
+      "import": "./dist/components/overlay/kb-modal.js"
+    },
+    "./popover": {
+      "types": "./dist/components/overlay/kb-popover.d.ts",
+      "import": "./dist/components/overlay/kb-popover.js"
+    },
+    "./progress": {
+      "types": "./dist/components/feedback/kb-progress.d.ts",
+      "import": "./dist/components/feedback/kb-progress.js"
+    },
+    "./radio": {
+      "types": "./dist/components/forms/kb-radio.d.ts",
+      "import": "./dist/components/forms/kb-radio.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/forms/kb-radio-group.d.ts",
+      "import": "./dist/components/forms/kb-radio-group.js"
+    },
+    "./select": {
+      "types": "./dist/components/forms/kb-select.d.ts",
+      "import": "./dist/components/forms/kb-select.js"
+    },
+    "./spinner": {
+      "types": "./dist/components/feedback/kb-spinner.d.ts",
+      "import": "./dist/components/feedback/kb-spinner.js"
+    },
+    "./stack": {
+      "types": "./dist/components/layout/kb-stack.d.ts",
+      "import": "./dist/components/layout/kb-stack.js"
+    },
+    "./switch": {
+      "types": "./dist/components/forms/kb-switch.d.ts",
+      "import": "./dist/components/forms/kb-switch.js"
+    },
+    "./table": {
+      "types": "./dist/components/data-display/kb-table.d.ts",
+      "import": "./dist/components/data-display/kb-table.js"
+    },
+    "./tag": {
+      "types": "./dist/components/data-display/kb-tag.d.ts",
+      "import": "./dist/components/data-display/kb-tag.js"
+    },
+    "./tag-group": {
+      "types": "./dist/components/data-display/kb-tag-group.d.ts",
+      "import": "./dist/components/data-display/kb-tag-group.js"
+    },
+    "./tabs": {
+      "types": "./dist/components/navigation/kb-tabs.d.ts",
+      "import": "./dist/components/navigation/kb-tabs.js"
+    },
+    "./text": {
+      "types": "./dist/components/typography/kb-text.d.ts",
+      "import": "./dist/components/typography/kb-text.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/forms/kb-textarea.d.ts",
+      "import": "./dist/components/forms/kb-textarea.js"
+    },
+    "./toast": {
+      "types": "./dist/components/feedback/kb-toast.d.ts",
+      "import": "./dist/components/feedback/kb-toast.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/overlay/kb-tooltip.d.ts",
+      "import": "./dist/components/overlay/kb-tooltip.js"
+    },
     "./cx": {
       "types": "./dist/utils/cx.d.ts",
       "import": "./dist/utils/cx.js",
@@ -48,9 +426,156 @@
     },
     "./*": null
   },
+  "typesVersions": {
+    "*": {
+      "theme": [
+        "./dist/core/theme.d.ts"
+      ],
+      "react": [
+        "./dist/react/index.d.ts"
+      ],
+      "cx": [
+        "./dist/utils/cx.d.ts"
+      ],
+      "recipe": [
+        "./dist/core/recipe.d.ts"
+      ],
+      "types": [
+        "./dist/core/types.d.ts"
+      ],
+      "events": [
+        "./dist/core/events.d.ts"
+      ],
+      "accordion": [
+        "./dist/components/data-display/kb-accordion.d.ts"
+      ],
+      "accordion-group": [
+        "./dist/components/data-display/kb-accordion-group.d.ts"
+      ],
+      "alert": [
+        "./dist/components/feedback/kb-alert.d.ts"
+      ],
+      "badge": [
+        "./dist/components/feedback/kb-badge.d.ts"
+      ],
+      "box": [
+        "./dist/components/layout/kb-box.d.ts"
+      ],
+      "breadcrumb": [
+        "./dist/components/navigation/kb-breadcrumb.d.ts"
+      ],
+      "button": [
+        "./dist/components/forms/kb-button.d.ts"
+      ],
+      "button-group": [
+        "./dist/components/forms/kb-button-group.d.ts"
+      ],
+      "card": [
+        "./dist/components/data-display/kb-card.d.ts"
+      ],
+      "checkbox": [
+        "./dist/components/forms/kb-checkbox.d.ts"
+      ],
+      "checkbox-group": [
+        "./dist/components/forms/kb-checkbox-group.d.ts"
+      ],
+      "code": [
+        "./dist/components/typography/kb-code.d.ts"
+      ],
+      "container": [
+        "./dist/components/layout/kb-container.d.ts"
+      ],
+      "divider": [
+        "./dist/components/layout/kb-divider.d.ts"
+      ],
+      "drawer": [
+        "./dist/components/overlay/kb-drawer.d.ts"
+      ],
+      "flex": [
+        "./dist/components/layout/kb-flex.d.ts"
+      ],
+      "form-control": [
+        "./dist/components/forms/kb-form-control.d.ts"
+      ],
+      "form-label": [
+        "./dist/components/forms/kb-form-label.d.ts"
+      ],
+      "grid": [
+        "./dist/components/layout/kb-grid.d.ts"
+      ],
+      "heading": [
+        "./dist/components/typography/kb-heading.d.ts"
+      ],
+      "icon-button": [
+        "./dist/components/forms/kb-icon-button.d.ts"
+      ],
+      "input": [
+        "./dist/components/forms/kb-input.d.ts"
+      ],
+      "link": [
+        "./dist/components/navigation/kb-link.d.ts"
+      ],
+      "list": [
+        "./dist/components/data-display/kb-list.d.ts"
+      ],
+      "list-item": [
+        "./dist/components/data-display/kb-list-item.d.ts"
+      ],
+      "modal": [
+        "./dist/components/overlay/kb-modal.d.ts"
+      ],
+      "popover": [
+        "./dist/components/overlay/kb-popover.d.ts"
+      ],
+      "progress": [
+        "./dist/components/feedback/kb-progress.d.ts"
+      ],
+      "radio": [
+        "./dist/components/forms/kb-radio.d.ts"
+      ],
+      "radio-group": [
+        "./dist/components/forms/kb-radio-group.d.ts"
+      ],
+      "select": [
+        "./dist/components/forms/kb-select.d.ts"
+      ],
+      "spinner": [
+        "./dist/components/feedback/kb-spinner.d.ts"
+      ],
+      "stack": [
+        "./dist/components/layout/kb-stack.d.ts"
+      ],
+      "switch": [
+        "./dist/components/forms/kb-switch.d.ts"
+      ],
+      "table": [
+        "./dist/components/data-display/kb-table.d.ts"
+      ],
+      "tag": [
+        "./dist/components/data-display/kb-tag.d.ts"
+      ],
+      "tag-group": [
+        "./dist/components/data-display/kb-tag-group.d.ts"
+      ],
+      "tabs": [
+        "./dist/components/navigation/kb-tabs.d.ts"
+      ],
+      "text": [
+        "./dist/components/typography/kb-text.d.ts"
+      ],
+      "textarea": [
+        "./dist/components/forms/kb-textarea.d.ts"
+      ],
+      "toast": [
+        "./dist/components/feedback/kb-toast.d.ts"
+      ],
+      "tooltip": [
+        "./dist/components/overlay/kb-tooltip.d.ts"
+      ]
+    }
+  },
   "sideEffects": [
-    "./dist/components/**/*.js",
-    "./dist/react/**/*.js"
+    "./dist/components/**/*.js"
   ],
   "customElements": "custom-elements.json",
   "files": [
@@ -71,7 +596,8 @@
     "format:check": "biome format .",
     "knip": "knip",
     "spellcheck": "cspell \"src/**/*.ts\" \"stories/**/*.ts\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "pnpm build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": [
