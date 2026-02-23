@@ -113,9 +113,17 @@
     }
   },
   "files": {
-    "includes": ["src/**", "stories/**", ".storybook/**", "*.ts", "*.js", "*.json"]
+    "includes": ["src/**", "stories/**", ".storybook/**", "!.storybook/*.css", "*.ts", "*.js", "*.json"]
   },
   "overrides": [
+    {
+      "includes": [".storybook/*.css"],
+      "css": {
+        "parser": {
+          "tailwindDirectives": true
+        }
+      }
+    },
     {
       "includes": ["stories/**", ".storybook/**"],
       "linter": {
