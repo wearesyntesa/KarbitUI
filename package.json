@@ -621,7 +621,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@commitlint/cli": "^20.4.2",
-    "@commitlint/config-conventional": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.2",
     "@cspell/dict-html": "^4.0.14",
     "@cspell/dict-typescript": "^3.2.3",
     "@custom-elements-manifest/analyzer": "^0.11.0",
