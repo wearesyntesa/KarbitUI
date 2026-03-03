@@ -117,12 +117,14 @@ export const WithSelect: S = {
     <div style="max-width:400px;">
       <kb-form-control required>
         <kb-form-label>Country</kb-form-label>
-        <kb-select>
-          <option value="">Select a country...</option>
-          <option value="us">United States</option>
-          <option value="uk">United Kingdom</option>
-          <option value="se">Sweden</option>
-        </kb-select>
+        <kb-select
+          placeholder="Select a country..."
+          .options=${[
+            { value: 'us', label: 'United States' },
+            { value: 'uk', label: 'United Kingdom' },
+            { value: 'se', label: 'Sweden' },
+          ]}
+        ></kb-select>
       </kb-form-control>
     </div>
   `,

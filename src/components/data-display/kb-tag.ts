@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { renderCloseIcon } from '../../core/icons.js';
@@ -75,7 +75,6 @@ const CLOSE_SIZE: Record<TagSize, string> = {
  * <kb-tag draggable value="tag-1">Drag me</kb-tag>
  * ```
  */
-@customElement('kb-tag')
 export class KbTag extends KbBaseElement<'icon'> {
   /** Visual variant controlling fill, border, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: TagVariant = 'subtle';
@@ -161,7 +160,7 @@ export class KbTag extends KbBaseElement<'icon'> {
 
     const iconContent = this.slotted('icon');
     const dotEl = this.dot
-      ? html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current'}"></span>`
+      ? html`<span class="shrink-0 ${DOT_SIZE[this.size]} ${lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current'}" style="border-radius:9999px"></span>`
       : nothing;
 
     const closeEl = this.closable

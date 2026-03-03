@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbSwitch } from '../../components/forms/kb-switch.js';
+import { KbSwitch } from '../../components/forms/kb-switch.define.js';
 import type { KbChangeCheckedDetail } from '../../core/events.js';
 
 export const Switch = createComponent({

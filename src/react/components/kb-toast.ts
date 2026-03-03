@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbToast } from '../../components/feedback/kb-toast.js';
+import { KbToast } from '../../components/feedback/kb-toast.define.js';
 
 export const Toast = createComponent({
   react: React,

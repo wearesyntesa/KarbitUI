@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
@@ -26,7 +26,6 @@ let rgGroupCounter = 0;
  * </kb-radio-group>
  * ```
  */
-@customElement('kb-radio-group')
 export class KbRadioGroup extends KbBaseElement<'label'> {
   static override hostDisplay = 'block' as const;
 
@@ -35,6 +34,7 @@ export class KbRadioGroup extends KbBaseElement<'label'> {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this.addEventListener('kb-change', this._onChildChange as EventListener);
     this.addEventListener('keydown', this._onKeyDown as EventListener);
     this._childObserver = new MutationObserver(() => {
@@ -45,6 +45,7 @@ export class KbRadioGroup extends KbBaseElement<'label'> {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this.removeEventListener('kb-change', this._onChildChange as EventListener);
     this.removeEventListener('keydown', this._onKeyDown as EventListener);
     this._childObserver?.disconnect();
@@ -140,6 +141,7 @@ export class KbRadioGroup extends KbBaseElement<'label'> {
   };
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._propagatePropsToChildren();
     const radios = this._getRadios();
     const checked = radios.find((r) => r.checked);

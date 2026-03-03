@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbAlert } from '../../components/feedback/kb-alert.js';
+import { KbAlert } from '../../components/feedback/kb-alert.define.js';
 import type { KbToggleDetail } from '../../core/events.js';
 
 export const Alert = createComponent({

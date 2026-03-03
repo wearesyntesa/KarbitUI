@@ -131,16 +131,62 @@ export const GroupWithMax: S = {
 };
 
 export const IndeterminateDemo: S = {
-  render: () => html`
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <kb-checkbox indeterminate>Select all (indeterminate)</kb-checkbox>
-      <div style="margin-left:24px;display:flex;flex-direction:column;gap:8px;">
-        <kb-checkbox checked>Item 1</kb-checkbox>
-        <kb-checkbox>Item 2</kb-checkbox>
-        <kb-checkbox checked>Item 3</kb-checkbox>
+  render: () => {
+    const syncSelectAll = (container: Element) => {
+      const selectAll = container.querySelector<HTMLElement>('[data-select-all]');
+      const items = container.querySelectorAll<HTMLElement>('[data-item]');
+      if (!selectAll) return;
+
+      const total = items.length;
+      let checkedCount = 0;
+      for (const item of items) {
+        if (item.hasAttribute('checked')) checkedCount++;
+      }
+
+      if (checkedCount === 0) {
+        selectAll.removeAttribute('checked');
+        selectAll.removeAttribute('indeterminate');
+      } else if (checkedCount === total) {
+        selectAll.setAttribute('checked', '');
+        selectAll.removeAttribute('indeterminate');
+      } else {
+        selectAll.removeAttribute('checked');
+        selectAll.setAttribute('indeterminate', '');
+      }
+    };
+
+    const handleSelectAll = (e: Event) => {
+      const container = (e.target as HTMLElement).closest('[data-indeterminate-demo]');
+      if (!container) return;
+      const selectAll = container.querySelector<HTMLElement>('[data-select-all]');
+      const isChecked = selectAll?.hasAttribute('checked') ?? false;
+      const items = container.querySelectorAll<HTMLElement>('[data-item]');
+      for (const item of items) {
+        if (isChecked) {
+          item.setAttribute('checked', '');
+        } else {
+          item.removeAttribute('checked');
+        }
+      }
+      selectAll?.removeAttribute('indeterminate');
+    };
+
+    const handleItemChange = (e: Event) => {
+      const container = (e.target as HTMLElement).closest('[data-indeterminate-demo]');
+      if (container) syncSelectAll(container);
+    };
+
+    return html`
+      <div data-indeterminate-demo style="display:flex;flex-direction:column;gap:8px;">
+        <kb-checkbox data-select-all indeterminate @kb-change=${handleSelectAll}>Select all</kb-checkbox>
+        <div style="margin-left:24px;display:flex;flex-direction:column;gap:8px;">
+          <kb-checkbox data-item checked @kb-change=${handleItemChange}>Item 1</kb-checkbox>
+          <kb-checkbox data-item @kb-change=${handleItemChange}>Item 2</kb-checkbox>
+          <kb-checkbox data-item checked @kb-change=${handleItemChange}>Item 3</kb-checkbox>
+        </div>
       </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export const KitchenSink: S = {

@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbTable } from '../../components/data-display/kb-table.js';
+import { KbTable } from '../../components/data-display/kb-table.define.js';
 import type { KbRowClickDetail, KbSortDetail } from '../../core/events.js';
 
 export const Table = createComponent({

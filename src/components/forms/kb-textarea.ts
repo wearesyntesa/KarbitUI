@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import {
   CLEAR_SIZE,
@@ -53,7 +53,6 @@ const RESIZE_MAP: Record<ResizeMode, string> = {
  * <kb-textarea placeholder="Write something..." auto-resize clearable max-length="500"></kb-textarea>
  * ```
  */
-@customElement('kb-textarea')
 export class KbTextarea extends KbBaseElement {
   /** Forwarded `id` applied to the native `<textarea>` element. Allows external `<label for="...">` to work. */
   @property({ type: String, attribute: 'input-id' }) inputId?: string;
@@ -147,6 +146,7 @@ export class KbTextarea extends KbBaseElement {
 
   override updated(changedProperties: Map<PropertyKey, unknown>): void {
     super.updated(changedProperties);
+    if (isServer) return;
     if (this.autoResize && (changedProperties.has('value') || changedProperties.has('autoResize'))) {
       const textarea = this.renderRoot.querySelector('textarea');
       if (textarea) {

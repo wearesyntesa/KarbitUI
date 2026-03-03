@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import {
   CLEAR_SIZE,
@@ -57,7 +57,6 @@ export type InputType =
  * </kb-input>
  * ```
  */
-@customElement('kb-input')
 export class KbInput extends KbBaseElement<'addon-left' | 'addon-right' | 'icon-left' | 'icon-right'> {
   /** Forwarded `id` applied to the native `<input>` element. Allows external `<label for="...">` to work. */
   @property({ type: String, attribute: 'input-id' }) inputId?: string;

@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import {
@@ -84,7 +84,6 @@ const DEFAULT_HOVER: string = RADIO_DEFAULT_HOVER;
  * </kb-radio>
  * ```
  */
-@customElement('kb-radio')
 export class KbRadio extends KbBaseElement<'description'> {
   /** Radio button size controlling circle dimensions, label text, and dot size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
@@ -111,6 +110,7 @@ export class KbRadio extends KbBaseElement<'description'> {
   }
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._circleEl = this.querySelector<HTMLElement>('[role="radio"]');
   }
 
@@ -185,6 +185,7 @@ export class KbRadio extends KbBaseElement<'description'> {
   ): TemplateResult {
     const inner = html`<span
       class=${circleClasses}
+      style="border-radius:9999px"
       tabindex=${this.disabled ? '-1' : '0'}
       role="radio"
       aria-checked=${this.checked ? 'true' : 'false'}
@@ -214,7 +215,7 @@ export class KbRadio extends KbBaseElement<'description'> {
 
     const circleClasses = cx(
       s.outer,
-      'rounded-full border flex items-center justify-center shrink-0',
+      'border flex items-center justify-center shrink-0',
       kbClasses.transitionColors,
       checkedFill,
       this._computeBorderColor(),

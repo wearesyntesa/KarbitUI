@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbButton } from '../../components/forms/kb-button.js';
+import { KbButton } from '../../components/forms/kb-button.define.js';
 
 export const Button = createComponent({
   react: React,

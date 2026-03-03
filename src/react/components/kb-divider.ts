@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbDivider } from '../../components/layout/kb-divider.js';
+import { KbDivider } from '../../components/layout/kb-divider.define.js';
 
 export const Divider = createComponent({
   react: React,

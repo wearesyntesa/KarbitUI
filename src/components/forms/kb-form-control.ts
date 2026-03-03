@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { KbFormLabel } from './kb-form-label.js';
@@ -30,7 +30,6 @@ let _fcCounter = 0;
  * </kb-form-control>
  * ```
  */
-@customElement('kb-form-control')
 export class KbFormControl extends KbBaseElement<'helper' | 'error' | 'counter'> {
   static override hostDisplay = 'block' as const;
 
@@ -61,6 +60,7 @@ export class KbFormControl extends KbBaseElement<'helper' | 'error' | 'counter'>
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this._refreshCache();
     this._childObserver = new MutationObserver(() => {
       this._refreshCache();
@@ -74,14 +74,17 @@ export class KbFormControl extends KbBaseElement<'helper' | 'error' | 'counter'>
     this._childObserver?.disconnect();
     this._childObserver = undefined;
     super.disconnectedCallback();
+    if (isServer) return;
   }
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._propagateContext();
     this._linkAriaDescribedBy();
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('required') || changed.has('invalid') || changed.has('disabled')) {
       this._propagateContext();
     }

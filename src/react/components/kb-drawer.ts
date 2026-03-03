@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbDrawer } from '../../components/overlay/kb-drawer.js';
+import { KbDrawer } from '../../components/overlay/kb-drawer.define.js';
 
 export const Drawer = createComponent({
   react: React,

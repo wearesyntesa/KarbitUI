@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbAccordionGroup } from '../../components/data-display/kb-accordion-group.js';
+import { KbAccordionGroup } from '../../components/data-display/kb-accordion-group.define.js';
 
 export const AccordionGroup = createComponent({
   react: React,

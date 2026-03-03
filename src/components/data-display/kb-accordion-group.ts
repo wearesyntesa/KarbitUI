@@ -1,5 +1,5 @@
-import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { KbAccordion } from './kb-accordion.js';
 
@@ -19,7 +19,6 @@ import type { KbAccordion } from './kb-accordion.js';
  * </kb-accordion-group>
  * ```
  */
-@customElement('kb-accordion-group')
 export class KbAccordionGroup extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -31,6 +30,7 @@ export class KbAccordionGroup extends KbBaseElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this._items = Array.from(this.querySelectorAll<KbAccordion>('kb-accordion'));
     this._itemObserver = new MutationObserver(() => {
       this._items = Array.from(this.querySelectorAll<KbAccordion>('kb-accordion'));
@@ -41,6 +41,7 @@ export class KbAccordionGroup extends KbBaseElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._itemObserver?.disconnect();
     this._itemObserver = undefined;
     this.removeEventListener('kb-toggle', this._handleItemToggle as EventListener);

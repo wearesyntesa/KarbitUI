@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
@@ -65,7 +65,6 @@ const PASSIVE_HOVER_CLASSES = 'hover:border-gray-300 dark:hover:border-zinc-600'
  * </kb-card>
  * ```
  */
-@customElement('kb-card')
 export class KbCard extends KbBaseElement<'header' | 'footer'> {
   static override hostDisplay = 'block' as const;
 

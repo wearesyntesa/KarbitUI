@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbRadioGroup } from '../../components/forms/kb-radio-group.js';
+import { KbRadioGroup } from '../../components/forms/kb-radio-group.define.js';
 import type { KbChangeValueDetail } from '../../core/events.js';
 
 export const RadioGroup = createComponent({

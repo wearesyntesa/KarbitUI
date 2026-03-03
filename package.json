@@ -236,169 +236,337 @@
       "types": "./dist/components/data-display/kb-accordion.d.ts",
       "import": "./dist/components/data-display/kb-accordion.js"
     },
+    "./accordion/define": {
+      "types": "./dist/components/data-display/kb-accordion.define.d.ts",
+      "import": "./dist/components/data-display/kb-accordion.define.js"
+    },
     "./accordion-group": {
       "types": "./dist/components/data-display/kb-accordion-group.d.ts",
       "import": "./dist/components/data-display/kb-accordion-group.js"
+    },
+    "./accordion-group/define": {
+      "types": "./dist/components/data-display/kb-accordion-group.define.d.ts",
+      "import": "./dist/components/data-display/kb-accordion-group.define.js"
     },
     "./alert": {
       "types": "./dist/components/feedback/kb-alert.d.ts",
       "import": "./dist/components/feedback/kb-alert.js"
     },
+    "./alert/define": {
+      "types": "./dist/components/feedback/kb-alert.define.d.ts",
+      "import": "./dist/components/feedback/kb-alert.define.js"
+    },
     "./badge": {
       "types": "./dist/components/feedback/kb-badge.d.ts",
       "import": "./dist/components/feedback/kb-badge.js"
+    },
+    "./badge/define": {
+      "types": "./dist/components/feedback/kb-badge.define.d.ts",
+      "import": "./dist/components/feedback/kb-badge.define.js"
     },
     "./box": {
       "types": "./dist/components/layout/kb-box.d.ts",
       "import": "./dist/components/layout/kb-box.js"
     },
+    "./box/define": {
+      "types": "./dist/components/layout/kb-box.define.d.ts",
+      "import": "./dist/components/layout/kb-box.define.js"
+    },
     "./breadcrumb": {
       "types": "./dist/components/navigation/kb-breadcrumb.d.ts",
       "import": "./dist/components/navigation/kb-breadcrumb.js"
+    },
+    "./breadcrumb/define": {
+      "types": "./dist/components/navigation/kb-breadcrumb.define.d.ts",
+      "import": "./dist/components/navigation/kb-breadcrumb.define.js"
     },
     "./button": {
       "types": "./dist/components/forms/kb-button.d.ts",
       "import": "./dist/components/forms/kb-button.js"
     },
+    "./button/define": {
+      "types": "./dist/components/forms/kb-button.define.d.ts",
+      "import": "./dist/components/forms/kb-button.define.js"
+    },
     "./button-group": {
       "types": "./dist/components/forms/kb-button-group.d.ts",
       "import": "./dist/components/forms/kb-button-group.js"
+    },
+    "./button-group/define": {
+      "types": "./dist/components/forms/kb-button-group.define.d.ts",
+      "import": "./dist/components/forms/kb-button-group.define.js"
     },
     "./card": {
       "types": "./dist/components/data-display/kb-card.d.ts",
       "import": "./dist/components/data-display/kb-card.js"
     },
+    "./card/define": {
+      "types": "./dist/components/data-display/kb-card.define.d.ts",
+      "import": "./dist/components/data-display/kb-card.define.js"
+    },
     "./checkbox": {
       "types": "./dist/components/forms/kb-checkbox.d.ts",
       "import": "./dist/components/forms/kb-checkbox.js"
+    },
+    "./checkbox/define": {
+      "types": "./dist/components/forms/kb-checkbox.define.d.ts",
+      "import": "./dist/components/forms/kb-checkbox.define.js"
     },
     "./checkbox-group": {
       "types": "./dist/components/forms/kb-checkbox-group.d.ts",
       "import": "./dist/components/forms/kb-checkbox-group.js"
     },
+    "./checkbox-group/define": {
+      "types": "./dist/components/forms/kb-checkbox-group.define.d.ts",
+      "import": "./dist/components/forms/kb-checkbox-group.define.js"
+    },
     "./code": {
       "types": "./dist/components/typography/kb-code.d.ts",
       "import": "./dist/components/typography/kb-code.js"
+    },
+    "./code/define": {
+      "types": "./dist/components/typography/kb-code.define.d.ts",
+      "import": "./dist/components/typography/kb-code.define.js"
     },
     "./container": {
       "types": "./dist/components/layout/kb-container.d.ts",
       "import": "./dist/components/layout/kb-container.js"
     },
+    "./container/define": {
+      "types": "./dist/components/layout/kb-container.define.d.ts",
+      "import": "./dist/components/layout/kb-container.define.js"
+    },
     "./divider": {
       "types": "./dist/components/layout/kb-divider.d.ts",
       "import": "./dist/components/layout/kb-divider.js"
+    },
+    "./divider/define": {
+      "types": "./dist/components/layout/kb-divider.define.d.ts",
+      "import": "./dist/components/layout/kb-divider.define.js"
     },
     "./drawer": {
       "types": "./dist/components/overlay/kb-drawer.d.ts",
       "import": "./dist/components/overlay/kb-drawer.js"
     },
+    "./drawer/define": {
+      "types": "./dist/components/overlay/kb-drawer.define.d.ts",
+      "import": "./dist/components/overlay/kb-drawer.define.js"
+    },
     "./flex": {
       "types": "./dist/components/layout/kb-flex.d.ts",
       "import": "./dist/components/layout/kb-flex.js"
+    },
+    "./flex/define": {
+      "types": "./dist/components/layout/kb-flex.define.d.ts",
+      "import": "./dist/components/layout/kb-flex.define.js"
     },
     "./form-control": {
       "types": "./dist/components/forms/kb-form-control.d.ts",
       "import": "./dist/components/forms/kb-form-control.js"
     },
+    "./form-control/define": {
+      "types": "./dist/components/forms/kb-form-control.define.d.ts",
+      "import": "./dist/components/forms/kb-form-control.define.js"
+    },
     "./form-label": {
       "types": "./dist/components/forms/kb-form-label.d.ts",
       "import": "./dist/components/forms/kb-form-label.js"
+    },
+    "./form-label/define": {
+      "types": "./dist/components/forms/kb-form-label.define.d.ts",
+      "import": "./dist/components/forms/kb-form-label.define.js"
     },
     "./grid": {
       "types": "./dist/components/layout/kb-grid.d.ts",
       "import": "./dist/components/layout/kb-grid.js"
     },
+    "./grid/define": {
+      "types": "./dist/components/layout/kb-grid.define.d.ts",
+      "import": "./dist/components/layout/kb-grid.define.js"
+    },
     "./heading": {
       "types": "./dist/components/typography/kb-heading.d.ts",
       "import": "./dist/components/typography/kb-heading.js"
+    },
+    "./heading/define": {
+      "types": "./dist/components/typography/kb-heading.define.d.ts",
+      "import": "./dist/components/typography/kb-heading.define.js"
     },
     "./icon-button": {
       "types": "./dist/components/forms/kb-icon-button.d.ts",
       "import": "./dist/components/forms/kb-icon-button.js"
     },
+    "./icon-button/define": {
+      "types": "./dist/components/forms/kb-icon-button.define.d.ts",
+      "import": "./dist/components/forms/kb-icon-button.define.js"
+    },
     "./input": {
       "types": "./dist/components/forms/kb-input.d.ts",
       "import": "./dist/components/forms/kb-input.js"
+    },
+    "./input/define": {
+      "types": "./dist/components/forms/kb-input.define.d.ts",
+      "import": "./dist/components/forms/kb-input.define.js"
     },
     "./link": {
       "types": "./dist/components/navigation/kb-link.d.ts",
       "import": "./dist/components/navigation/kb-link.js"
     },
+    "./link/define": {
+      "types": "./dist/components/navigation/kb-link.define.d.ts",
+      "import": "./dist/components/navigation/kb-link.define.js"
+    },
     "./list": {
       "types": "./dist/components/data-display/kb-list.d.ts",
       "import": "./dist/components/data-display/kb-list.js"
+    },
+    "./list/define": {
+      "types": "./dist/components/data-display/kb-list.define.d.ts",
+      "import": "./dist/components/data-display/kb-list.define.js"
     },
     "./list-item": {
       "types": "./dist/components/data-display/kb-list-item.d.ts",
       "import": "./dist/components/data-display/kb-list-item.js"
     },
+    "./list-item/define": {
+      "types": "./dist/components/data-display/kb-list-item.define.d.ts",
+      "import": "./dist/components/data-display/kb-list-item.define.js"
+    },
     "./modal": {
       "types": "./dist/components/overlay/kb-modal.d.ts",
       "import": "./dist/components/overlay/kb-modal.js"
+    },
+    "./modal/define": {
+      "types": "./dist/components/overlay/kb-modal.define.d.ts",
+      "import": "./dist/components/overlay/kb-modal.define.js"
     },
     "./popover": {
       "types": "./dist/components/overlay/kb-popover.d.ts",
       "import": "./dist/components/overlay/kb-popover.js"
     },
+    "./popover/define": {
+      "types": "./dist/components/overlay/kb-popover.define.d.ts",
+      "import": "./dist/components/overlay/kb-popover.define.js"
+    },
     "./progress": {
       "types": "./dist/components/feedback/kb-progress.d.ts",
       "import": "./dist/components/feedback/kb-progress.js"
+    },
+    "./progress/define": {
+      "types": "./dist/components/feedback/kb-progress.define.d.ts",
+      "import": "./dist/components/feedback/kb-progress.define.js"
     },
     "./radio": {
       "types": "./dist/components/forms/kb-radio.d.ts",
       "import": "./dist/components/forms/kb-radio.js"
     },
+    "./radio/define": {
+      "types": "./dist/components/forms/kb-radio.define.d.ts",
+      "import": "./dist/components/forms/kb-radio.define.js"
+    },
     "./radio-group": {
       "types": "./dist/components/forms/kb-radio-group.d.ts",
       "import": "./dist/components/forms/kb-radio-group.js"
+    },
+    "./radio-group/define": {
+      "types": "./dist/components/forms/kb-radio-group.define.d.ts",
+      "import": "./dist/components/forms/kb-radio-group.define.js"
     },
     "./select": {
       "types": "./dist/components/forms/kb-select.d.ts",
       "import": "./dist/components/forms/kb-select.js"
     },
+    "./select/define": {
+      "types": "./dist/components/forms/kb-select.define.d.ts",
+      "import": "./dist/components/forms/kb-select.define.js"
+    },
     "./spinner": {
       "types": "./dist/components/feedback/kb-spinner.d.ts",
       "import": "./dist/components/feedback/kb-spinner.js"
+    },
+    "./spinner/define": {
+      "types": "./dist/components/feedback/kb-spinner.define.d.ts",
+      "import": "./dist/components/feedback/kb-spinner.define.js"
     },
     "./stack": {
       "types": "./dist/components/layout/kb-stack.d.ts",
       "import": "./dist/components/layout/kb-stack.js"
     },
+    "./stack/define": {
+      "types": "./dist/components/layout/kb-stack.define.d.ts",
+      "import": "./dist/components/layout/kb-stack.define.js"
+    },
     "./switch": {
       "types": "./dist/components/forms/kb-switch.d.ts",
       "import": "./dist/components/forms/kb-switch.js"
+    },
+    "./switch/define": {
+      "types": "./dist/components/forms/kb-switch.define.d.ts",
+      "import": "./dist/components/forms/kb-switch.define.js"
     },
     "./table": {
       "types": "./dist/components/data-display/kb-table.d.ts",
       "import": "./dist/components/data-display/kb-table.js"
     },
+    "./table/define": {
+      "types": "./dist/components/data-display/kb-table.define.d.ts",
+      "import": "./dist/components/data-display/kb-table.define.js"
+    },
     "./tag": {
       "types": "./dist/components/data-display/kb-tag.d.ts",
       "import": "./dist/components/data-display/kb-tag.js"
+    },
+    "./tag/define": {
+      "types": "./dist/components/data-display/kb-tag.define.d.ts",
+      "import": "./dist/components/data-display/kb-tag.define.js"
     },
     "./tag-group": {
       "types": "./dist/components/data-display/kb-tag-group.d.ts",
       "import": "./dist/components/data-display/kb-tag-group.js"
     },
+    "./tag-group/define": {
+      "types": "./dist/components/data-display/kb-tag-group.define.d.ts",
+      "import": "./dist/components/data-display/kb-tag-group.define.js"
+    },
     "./tabs": {
       "types": "./dist/components/navigation/kb-tabs.d.ts",
       "import": "./dist/components/navigation/kb-tabs.js"
+    },
+    "./tabs/define": {
+      "types": "./dist/components/navigation/kb-tabs.define.d.ts",
+      "import": "./dist/components/navigation/kb-tabs.define.js"
     },
     "./text": {
       "types": "./dist/components/typography/kb-text.d.ts",
       "import": "./dist/components/typography/kb-text.js"
     },
+    "./text/define": {
+      "types": "./dist/components/typography/kb-text.define.d.ts",
+      "import": "./dist/components/typography/kb-text.define.js"
+    },
     "./textarea": {
       "types": "./dist/components/forms/kb-textarea.d.ts",
       "import": "./dist/components/forms/kb-textarea.js"
+    },
+    "./textarea/define": {
+      "types": "./dist/components/forms/kb-textarea.define.d.ts",
+      "import": "./dist/components/forms/kb-textarea.define.js"
     },
     "./toast": {
       "types": "./dist/components/feedback/kb-toast.d.ts",
       "import": "./dist/components/feedback/kb-toast.js"
     },
+    "./toast/define": {
+      "types": "./dist/components/feedback/kb-toast.define.d.ts",
+      "import": "./dist/components/feedback/kb-toast.define.js"
+    },
     "./tooltip": {
       "types": "./dist/components/overlay/kb-tooltip.d.ts",
       "import": "./dist/components/overlay/kb-tooltip.js"
+    },
+    "./tooltip/define": {
+      "types": "./dist/components/overlay/kb-tooltip.define.d.ts",
+      "import": "./dist/components/overlay/kb-tooltip.define.js"
     },
     "./cx": {
       "types": "./dist/utils/cx.d.ts",
@@ -423,6 +591,17 @@
     "./tailwind.config": {
       "import": "./tailwind.config.ts",
       "default": "./tailwind.config.ts"
+    },
+    "./theme.css": {
+      "default": "./dist/theme.css"
+    },
+    "./theme.tokens.css": {
+      "default": "./dist/theme.tokens.css"
+    },
+    "./define": {
+      "types": "./dist/define.d.ts",
+      "import": "./dist/define.js",
+      "default": "./dist/define.js"
     },
     "./*": null
   },
@@ -575,7 +754,8 @@
     }
   },
   "sideEffects": [
-    "./dist/components/**/*.js"
+    "./dist/**/*.define.js",
+    "./dist/define.js"
   ],
   "customElements": "custom-elements.json",
   "files": [
@@ -585,7 +765,7 @@
   ],
   "scripts": {
     "dev": "vite build --watch",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && vite build --config vite.config.css.ts",
     "typecheck": "tsc --noEmit",
     "cem": "cem analyze",
     "storybook": "storybook dev -p 6006",
@@ -625,6 +805,7 @@
     "@cspell/dict-html": "^4.0.14",
     "@cspell/dict-typescript": "^3.2.3",
     "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@lit-labs/ssr": "^4.0.0",
     "@lit/react": "^1.0.0",
     "@storybook/web-components": "^10.2.11",
     "@storybook/web-components-vite": "^10.2.11",
@@ -657,5 +838,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "style": "./dist/theme.css"
 }

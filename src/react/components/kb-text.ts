@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbText } from '../../components/typography/kb-text.js';
+import { KbText } from '../../components/typography/kb-text.define.js';
 
 export const Text = createComponent({
   react: React,

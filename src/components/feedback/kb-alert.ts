@@ -1,5 +1,5 @@
-import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing, type PropertyValues, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { renderCloseIcon, STATUS_ICONS } from '../../core/icons.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
@@ -49,18 +49,18 @@ const alertRecipe = recipe({
       class: 'border-yellow-500 text-yellow-700 dark:text-yellow-400 dark:border-yellow-500',
     },
     { status: 'error', variant: 'outline', class: 'border-red-500 text-red-700 dark:text-red-400 dark:border-red-500' },
-    { status: 'info', variant: 'subtle', class: 'bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-300' },
-    { status: 'success', variant: 'subtle', class: 'bg-green-50 text-green-800 dark:bg-green-950 dark:text-green-300' },
+    { status: 'info', variant: 'subtle', class: 'bg-blue-50 text-blue-800 dark:bg-blue-900 dark:text-blue-300' },
+    { status: 'success', variant: 'subtle', class: 'bg-green-50 text-green-800 dark:bg-green-900 dark:text-green-300' },
     {
       status: 'warning',
       variant: 'subtle',
-      class: 'bg-yellow-50 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
+      class: 'bg-yellow-50 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
     },
-    { status: 'error', variant: 'subtle', class: 'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300' },
-    { status: 'info', variant: 'left-accent', class: 'border-l-blue-500 text-blue-800 dark:text-blue-300' },
-    { status: 'success', variant: 'left-accent', class: 'border-l-green-500 text-green-800 dark:text-green-300' },
-    { status: 'warning', variant: 'left-accent', class: 'border-l-yellow-500 text-yellow-800 dark:text-yellow-300' },
-    { status: 'error', variant: 'left-accent', class: 'border-l-red-500 text-red-800 dark:text-red-300' },
+    { status: 'error', variant: 'subtle', class: 'bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-300' },
+    { status: 'info', variant: 'left-accent', class: 'border-l-blue-500 text-blue-800 dark:text-blue-400' },
+    { status: 'success', variant: 'left-accent', class: 'border-l-green-500 text-green-800 dark:text-green-400' },
+    { status: 'warning', variant: 'left-accent', class: 'border-l-yellow-500 text-yellow-800 dark:text-yellow-400' },
+    { status: 'error', variant: 'left-accent', class: 'border-l-red-500 text-red-800 dark:text-red-400' },
   ],
 });
 
@@ -96,16 +96,17 @@ const CLOSE_ICON: ReturnType<typeof renderCloseIcon> = renderCloseIcon('w-4 h-4'
  * <kb-alert status="warning" closable duration="5000">Auto-dismissing warning</kb-alert>
  * ```
  */
-@customElement('kb-alert')
 export class KbAlert extends KbBaseElement<'title' | 'action' | 'detail' | 'icon'> {
   static override hostDisplay = 'block' as const;
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this._startTimer();
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._clearTimer();
   }
 

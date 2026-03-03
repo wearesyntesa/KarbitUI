@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbTooltip } from '../../components/overlay/kb-tooltip.js';
+import { KbTooltip } from '../../components/overlay/kb-tooltip.define.js';
 
 export const Tooltip = createComponent({
   react: React,

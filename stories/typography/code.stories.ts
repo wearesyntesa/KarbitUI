@@ -183,7 +183,7 @@ export const WithFilename: S = {
 // Register all components
 const app = document.getElementById('app');
 if (app) {
-  app.innerHTML = '<kb-button variant="solid">Hello</kb-button>';
+  app.innerHTML = '&lt;kb-button variant="solid"&gt;Hello&lt;/kb-button&gt;';
 }</kb-code>
   `,
 };
@@ -201,9 +201,9 @@ export const MultipleFilenames: S = {
 
 export function App() {
   return (
-    <kb-button variant="solid" color-scheme="blue">
+    &lt;kb-button variant="solid" color-scheme="blue"&gt;
       Get Started
-    </kb-button>
+    &lt;/kb-button&gt;
   );
 }</kb-code>
       <kb-code block filename=".env">VITE_API_URL=https://api.example.com

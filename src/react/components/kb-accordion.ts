@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbAccordion } from '../../components/data-display/kb-accordion.js';
+import { KbAccordion } from '../../components/data-display/kb-accordion.define.js';
 import type { KbToggleDetail } from '../../core/events.js';
 
 export const Accordion = createComponent({

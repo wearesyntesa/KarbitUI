@@ -3,6 +3,7 @@ import { setCustomElementsManifest } from '@storybook/web-components-vite';
 import { html } from 'lit';
 
 import customElements from '../custom-elements.json';
+import '../src/define.js';
 import './storybook.css';
 
 setCustomElementsManifest(customElements);

@@ -5,7 +5,7 @@ import type { ColorScheme, KnownColorScheme } from './types.js';
 export type LabelVariant = 'solid' | 'outline' | 'subtle';
 
 export const LABEL_RECIPE_BASE =
-  'inline-flex items-center font-mono font-semibold uppercase tracking-widest whitespace-nowrap select-none';
+  'inline-flex items-center font-semibold uppercase tracking-widest whitespace-nowrap select-none';
 
 export const LABEL_VARIANT_STRUCTURE: Record<LabelVariant, string> = {
   solid: 'border',

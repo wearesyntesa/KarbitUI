@@ -1,6 +1,6 @@
 import type { PropertyValues } from 'lit';
 import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { FlexAlignValue, FlexDirectionValue, FlexJustifyValue, FlexWrapValue } from '../../core/types.js';
 
@@ -17,7 +17,6 @@ import type { FlexAlignValue, FlexDirectionValue, FlexJustifyValue, FlexWrapValu
  * </kb-flex>
  * ```
  */
-@customElement('kb-flex')
 export class KbFlex extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

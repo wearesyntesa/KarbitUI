@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { SortDirection } from '../../core/types.js';
@@ -10,30 +10,38 @@ export type TableSize = 'sm' | 'md' | 'lg';
 
 const SIZE_MAP: Record<
   TableSize,
-  { cell: string; header: string; text: string; headerText: string; toolbarPx: string }
+  { cellPx: string; cellPy: string; headerPx: string; headerPy: string; text: string; toolbarPx: string }
 > = {
   sm: {
-    cell: 'px-5 py-3.5',
-    header: 'px-5 py-3.5',
-    text: 'text-sm',
-    headerText: 'text-[11px]',
-    toolbarPx: 'px-5 py-3',
+    cellPx: 'px-4',
+    cellPy: 'py-2.5',
+    headerPx: 'px-4',
+    headerPy: 'py-2.5',
+    text: 'text-xs',
+    toolbarPx: 'px-4 py-2.5',
   },
-  md: { cell: 'px-6 py-5', header: 'px-6 py-4', text: 'text-[15px]', headerText: 'text-xs', toolbarPx: 'px-6 py-4' },
-  lg: { cell: 'px-8 py-6', header: 'px-8 py-5', text: 'text-base', headerText: 'text-xs', toolbarPx: 'px-8 py-5' },
+  md: { cellPx: 'px-5', cellPy: 'py-3.5', headerPx: 'px-5', headerPy: 'py-3', text: 'text-sm', toolbarPx: 'px-5 py-3' },
+  lg: {
+    cellPx: 'px-6',
+    cellPy: 'py-4.5',
+    headerPx: 'px-6',
+    headerPy: 'py-4',
+    text: 'text-[15px]',
+    toolbarPx: 'px-6 py-4',
+  },
 } as const satisfies Record<
   TableSize,
-  { cell: string; header: string; text: string; headerText: string; toolbarPx: string }
+  { cellPx: string; cellPy: string; headerPx: string; headerPy: string; text: string; toolbarPx: string }
 >;
 
-const HOVER_CLASSES: string = 'hover:bg-gray-50/80 dark:hover:bg-zinc-800/50';
+const HOVER_CLASSES: string = 'hover:bg-gray-50 dark:hover:bg-zinc-800/60';
 
 const INTERACTIVE_ROW_CLASSES_LIST: string[] = [
   'cursor-pointer',
   'select-none',
   ...HOVER_CLASSES.split(' '),
-  'active:bg-gray-100/60',
-  'dark:active:bg-zinc-800/70',
+  'active:bg-gray-100/80',
+  'dark:active:bg-zinc-800',
   ...kbClasses.focus.split(' '),
   ...kbClasses.transitionColors.split(' '),
 ];
@@ -41,13 +49,37 @@ const INTERACTIVE_ROW_CLASSES_LIST: string[] = [
 const SORT_INDICATOR_ATTR: string = 'data-kb-sort-indicator';
 const RESIZE_HANDLE_ATTR: string = 'data-kb-resize-handle';
 
-const VARIANT_CLASSES: Record<TableVariant, string> = {
-  simple: '',
-  striped:
-    '[&_tbody_tr:nth-child(even):not([hidden])]:bg-gray-50/50 dark:[&_tbody_tr:nth-child(even):not([hidden])]:bg-zinc-800/30',
-  bordered:
-    '[&_th]:border [&_th]:border-gray-200 dark:[&_th]:border-zinc-700 [&_td]:border [&_td]:border-gray-200 dark:[&_td]:border-zinc-700',
-} as const satisfies Record<TableVariant, string>;
+/** Classes applied directly to <th> elements — header styling. */
+const TH_BASE_CLASSES: string[] = [
+  'font-sans',
+  'font-medium',
+  'uppercase',
+  'tracking-wider',
+  'text-xs',
+  'text-slate-500',
+  'dark:text-zinc-400',
+  'bg-gray-100',
+  'dark:bg-zinc-800',
+];
+
+/** Classes applied to <td> elements — cell borders + alignment. */
+const TD_BASE_CLASSES: string[] = ['align-middle', 'border-b', 'border-gray-200', 'dark:border-zinc-700'];
+
+/** Classes applied to <tr> elements — transitions. */
+const TR_BASE_CLASSES: string[] = ['transition-colors', 'duration-150', 'ease-in-out'];
+
+/** Classes applied to <thead tr> — header bottom border. */
+const THEAD_TR_CLASSES: string[] = ['border-b', 'border-gray-200', 'dark:border-zinc-700'];
+
+/** Bordered variant: extra classes for <th> and <td>. */
+const BORDERED_TH_CLASSES: string[] = ['border-r', 'border-gray-200', 'dark:border-zinc-700', 'last:border-r-0'];
+const BORDERED_TD_CLASSES: string[] = ['border-r', 'border-gray-200', 'dark:border-zinc-700', 'last:border-r-0'];
+
+/** Hover classes for non-interactive hoverable rows. */
+const HOVER_ROW_CLASSES: string[] = ['hover:bg-gray-50', 'dark:hover:bg-zinc-800/60'];
+
+/** Striped variant: even-row classes. */
+const STRIPED_EVEN_CLASSES: string[] = ['even:bg-gray-50/50', 'dark:even:bg-zinc-800/30'];
 
 let tableInstanceCounter = 0;
 
@@ -57,6 +89,12 @@ let tableInstanceCounter = 0;
  * Renders inside a thin 1px border container with optional header background,
  * caption bar, search toolbar, and sticky header support.
  *
+ * **Important**: The consumer must provide a `<table>` element as a direct child.
+ * Table sub-elements (`<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`) are only valid
+ * inside `<table>` per the HTML spec. Placing them directly inside a custom element
+ * causes the browser's HTML parser to discard them in template-based frameworks
+ * (e.g. Svelte).
+ *
  * **Sortable**: header cells become clickable to sort rows. Use `data-sort="number"`
  * on a `<th>` for numeric sorting, or `data-no-sort` to exclude a column.
  *
@@ -64,7 +102,7 @@ let tableInstanceCounter = 0;
  *
  * **Resizable**: adds drag handles to column edges for width adjustment.
  *
- * @slot - Table content (`<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`).
+ * @slot - A `<table>` element containing `<thead>` and `<tbody>`.
  *
  * @fires kb-row-click - Interactive body row clicked/activated. `detail: { index: number; row: HTMLTableRowElement }`.
  * @fires kb-sort - Sort state changed. `detail: { column: number; direction: 'asc' | 'desc' }`.
@@ -72,20 +110,21 @@ let tableInstanceCounter = 0;
  * @example
  * ```html
  * <kb-table sortable searchable resizable variant="striped" caption="Services">
- *   <thead>
- *     <tr>
- *       <th>Name</th>
- *       <th data-sort="number">Latency</th>
- *       <th data-no-sort>Actions</th>
- *     </tr>
- *   </thead>
- *   <tbody>
- *     <tr><td>Auth</td><td>12</td><td>...</td></tr>
- *   </tbody>
+ *   <table>
+ *     <thead>
+ *       <tr>
+ *         <th>Name</th>
+ *         <th data-sort="number">Latency</th>
+ *         <th data-no-sort>Actions</th>
+ *       </tr>
+ *     </thead>
+ *     <tbody>
+ *       <tr><td>Auth</td><td>12</td><td>...</td></tr>
+ *     </tbody>
+ *   </table>
  * </kb-table>
  * ```
  */
-@customElement('kb-table')
 export class KbTable extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -123,6 +162,7 @@ export class KbTable extends KbBaseElement {
   private _countSpanRef: WeakRef<HTMLSpanElement> | null = null;
   private _emptyRow: HTMLTableRowElement | null = null;
   private _tbodyEl: HTMLTableSectionElement | null = null;
+  private _tableEl: HTMLTableElement | null = null;
 
   private _boundRowHandlers = new WeakMap<
     HTMLTableRowElement,
@@ -157,13 +197,18 @@ export class KbTable extends KbBaseElement {
   }
 
   override firstUpdated(): void {
+    if (isServer) return;
+    this._tableEl = this.querySelector('table');
     this._tbodyEl = this.querySelector('tbody');
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('interactive') || changed.has('sortable') || changed.has('resizable')) {
       this._invalidateDomCaches();
     }
+    this._syncTableElement();
+    this._applyTableStyles();
     if (changed.has('interactive')) {
       this._applyInteractiveRows();
     }
@@ -176,14 +221,31 @@ export class KbTable extends KbBaseElement {
     if (this._totalCount === 0 || changed.has('interactive')) {
       this._syncRowCounts();
     }
-    if (changed.has('emptyText') && this._emptyRow) {
-      const td = this._emptyRow.querySelector('td');
-      if (td) td.textContent = this.emptyText;
+    this._syncEmptyText(changed);
+    this._syncCountSpanRef();
+  }
+
+  /** Ensure the table element ref is current and apply id/classes. */
+  private _syncTableElement(): void {
+    if (!this._tableEl) this._tableEl = this.querySelector('table');
+    if (this._tableEl) {
+      this._tableEl.id = this._tableId;
+      this._tableEl.className = this._computeTableClasses();
     }
-    if (this.searchable && !this._countSpanRef?.deref()) {
-      const span = this.querySelector<HTMLSpanElement>('[data-kb-count-span]');
-      if (span) this._countSpanRef = new WeakRef(span);
-    }
+  }
+
+  /** Update the empty-row text when the `emptyText` property changes. */
+  private _syncEmptyText(changed: Map<PropertyKey, unknown>): void {
+    if (!(changed.has('emptyText') && this._emptyRow)) return;
+    const td = this._emptyRow.querySelector('td');
+    if (td) td.textContent = this.emptyText;
+  }
+
+  /** Lazily cache a WeakRef to the count <span> used by the search toolbar. */
+  private _syncCountSpanRef(): void {
+    if (!this.searchable || this._countSpanRef?.deref()) return;
+    const span = this.querySelector<HTMLSpanElement>('[data-kb-count-span]');
+    if (span) this._countSpanRef = new WeakRef(span);
   }
 
   override disconnectedCallback(): void {
@@ -194,6 +256,7 @@ export class KbTable extends KbBaseElement {
     this._emptyRow?.remove();
     this._emptyRow = null;
     super.disconnectedCallback();
+    if (isServer) return;
   }
 
   private _applyInteractiveRows(): void {
@@ -358,12 +421,12 @@ export class KbTable extends KbBaseElement {
     if (this._sortCol !== colIndex) {
       if (indicator) {
         indicator.textContent = '';
-        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
+        indicator.className = `ml-2 inline-block text-slate-300 dark:text-zinc-600 text-xs font-sans font-medium select-none ${kbClasses.transitionColors}`;
         indicator.textContent = '↕';
       } else {
         indicator = document.createElement('span');
         indicator.setAttribute(SORT_INDICATOR_ATTR, '');
-        indicator.className = `ml-2 inline-block text-slate-200 dark:text-zinc-700 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
+        indicator.className = `ml-2 inline-block text-slate-300 dark:text-zinc-600 text-xs font-sans font-medium select-none ${kbClasses.transitionColors}`;
         indicator.textContent = '↕';
         th.appendChild(indicator);
       }
@@ -377,7 +440,7 @@ export class KbTable extends KbBaseElement {
       th.appendChild(indicator);
     }
 
-    indicator.className = `ml-2 inline-block text-blue-500 dark:text-blue-400 text-[10px] font-mono select-none ${kbClasses.transitionColors}`;
+    indicator.className = `ml-2 inline-block text-slate-800 dark:text-zinc-200 text-xs font-sans font-medium select-none ${kbClasses.transitionColors}`;
     indicator.textContent = this._sortDir === 'asc' ? '↑' : '↓';
     th.setAttribute('aria-sort', this._sortDir === 'asc' ? 'ascending' : 'descending');
   }
@@ -458,11 +521,10 @@ export class KbTable extends KbBaseElement {
 
     if (!this._emptyRow) {
       const colCount = this._getHeaderCells().length || 1;
-      const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
       const tr = document.createElement('tr');
       const td = document.createElement('td');
       td.colSpan = colCount;
-      td.className = `${sizeConfig.cell} text-center font-sans text-sm select-none ${kbClasses.textMuted}`;
+      td.className = `py-8 text-center font-sans text-sm select-none ${kbClasses.textMuted}`;
       td.setAttribute('data-kb-empty-row', '');
       tr.setAttribute('data-kb-empty-row', '');
       tr.appendChild(td);
@@ -560,42 +622,80 @@ export class KbTable extends KbBaseElement {
     this._resizeInitialized = false;
   }
 
-  override render(): TemplateResult {
+  private _computeTableClasses(): string {
     const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
 
-    const hoverClasses =
-      this.hoverable && !this.interactive
-        ? '[&_tbody_tr:hover]:bg-gray-50/80 dark:[&_tbody_tr:hover]:bg-zinc-800/50'
-        : '';
+    return cx('w-full border-collapse text-left', kbClasses.textPrimary, sizeConfig.text);
+  }
 
-    const stickyClasses = this.stickyHeader
-      ? '[&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10 [&_thead_th]:bg-white dark:[&_thead_th]:bg-zinc-900'
-      : '';
+  /**
+   * Apply styling classes directly to child <th>, <td>, <tr>, <thead> elements.
+   *
+   * Tailwind 4's content scanner cannot extract arbitrary-variant classes like
+   * `[&_td]:px-5` from JS source, so they're never emitted in `dist/theme.css`.
+   * Instead, we apply standard utility classes directly to child elements.
+   */
+  private _applyTableStyles(): void {
+    const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
+    const isBordered = this.variant === 'bordered';
 
-    const cellBorderClasses =
-      this.variant === 'bordered'
-        ? ''
-        : '[&_td]:border-b [&_td]:border-gray-100 dark:[&_td]:border-zinc-800 [&_tbody_tr:last-child_td]:border-b-0';
+    this._styleHeaderCells(sizeConfig, isBordered);
+    this._styleBodyCells(sizeConfig, isBordered);
+    this._styleRows(sizeConfig);
+  }
 
-    const headerBorderClasses =
-      this.variant === 'bordered'
-        ? ''
-        : '[&_thead_tr]:border-b [&_thead_tr]:border-gray-200 dark:[&_thead_tr]:border-zinc-700';
+  /** Apply size and variant classes to <th> elements in <thead>. */
+  private _styleHeaderCells(sizeConfig: (typeof SIZE_MAP)[TableSize], isBordered: boolean): void {
+    const thElements = this.querySelectorAll<HTMLTableCellElement>('thead th');
+    for (const th of thElements) {
+      th.classList.add(sizeConfig.headerPx, sizeConfig.headerPy, ...TH_BASE_CLASSES);
+      if (isBordered) th.classList.add(...BORDERED_TH_CLASSES);
+    }
+  }
 
-    const tableClasses = cx(
-      'w-full border-collapse',
-      kbClasses.textPrimary,
-      sizeConfig.text,
-      VARIANT_CLASSES[this.variant] ?? '',
-      cellBorderClasses,
-      headerBorderClasses,
-      `[&_th]:${sizeConfig.header} [&_th]:text-left [&_th]:font-mono [&_th]:font-medium [&_th]:uppercase [&_th]:tracking-widest [&_th]:${sizeConfig.headerText}`,
-      '[&_th]:text-slate-400 dark:[&_th]:text-zinc-500',
-      `[&_td]:${sizeConfig.cell}`,
-      `[&_tr]:${kbClasses.transitionColors}`,
-      hoverClasses,
-      stickyClasses,
-    );
+  /** Apply size and variant classes to <td> elements and remove last-row border. */
+  private _styleBodyCells(sizeConfig: (typeof SIZE_MAP)[TableSize], isBordered: boolean): void {
+    const tdElements = this.querySelectorAll<HTMLTableCellElement>('tbody td');
+    for (const td of tdElements) {
+      td.classList.add(sizeConfig.cellPx, sizeConfig.cellPy, ...TD_BASE_CLASSES);
+      if (isBordered) td.classList.add(...BORDERED_TD_CLASSES);
+    }
+
+    // Remove bottom border from last visible body row's <td> cells
+    const bodyRows = this._getBodyRows();
+    const lastRow = bodyRows[bodyRows.length - 1];
+    if (lastRow) {
+      for (const td of lastRow.querySelectorAll('td')) {
+        td.classList.remove('border-b');
+      }
+    }
+  }
+
+  /** Apply transition, hover, striped, and sticky classes to row / thead elements. */
+  private _styleRows(_sizeConfig: (typeof SIZE_MAP)[TableSize]): void {
+    const hoverableRows = this.hoverable && !this.interactive;
+    const isStriped = this.variant === 'striped';
+
+    const theadRows = this.querySelectorAll<HTMLTableRowElement>('thead tr');
+    for (const tr of theadRows) {
+      tr.classList.add(...THEAD_TR_CLASSES);
+    }
+
+    const bodyRows = this._getBodyRows();
+    for (const row of bodyRows) {
+      row.classList.add(...TR_BASE_CLASSES);
+      if (hoverableRows) row.classList.add(...HOVER_ROW_CLASSES);
+      if (isStriped) row.classList.add(...STRIPED_EVEN_CLASSES);
+    }
+
+    if (this.stickyHeader) {
+      const thead = this.querySelector('thead');
+      if (thead) thead.classList.add('sticky', 'top-0', 'z-10');
+    }
+  }
+
+  override render(): TemplateResult {
+    const sizeConfig = SIZE_MAP[this.size] ?? SIZE_MAP.md;
 
     const containerClasses = this.buildClasses(
       kbClasses.border,
@@ -604,7 +704,7 @@ export class KbTable extends KbBaseElement {
     );
 
     const captionEl = this.caption
-      ? html`<div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} ${kbClasses.label} select-none">${this.caption}</div>`
+      ? html`<div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} font-sans font-medium text-sm text-slate-700 dark:text-zinc-300 select-none bg-gray-50/50 dark:bg-zinc-900/50">${this.caption}</div>`
       : nothing;
 
     const showCount = this.searchable && this._searchQuery.trim() !== '';
@@ -612,21 +712,19 @@ export class KbTable extends KbBaseElement {
 
     const toolbarEl = this.searchable
       ? html`
-        <div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} flex items-center gap-4">
-          <div class="relative flex-1 max-w-sm">
-            <svg aria-hidden="true" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 dark:text-zinc-600 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-            </svg>
-            <input
-              type="text"
-              placeholder=${this.searchPlaceholder}
-              aria-label="Search table"
-              aria-controls=${this._tableId}
-              class="w-full pl-10 pr-4 py-2 text-sm font-sans ${kbClasses.border} ${kbClasses.surface} ${kbClasses.textPrimary} placeholder:${kbClasses.textMuted} ${kbClasses.focus} ${kbClasses.transitionColors} outline-none"
-              @input=${this._handleSearchInput}
-            />
-          </div>
-          <span data-kb-count-span class="font-mono text-[11px] tracking-widest uppercase select-none ${kbClasses.textMuted} whitespace-nowrap">${countText}</span>
+        <div class="shrink-0 ${sizeConfig.toolbarPx} ${kbClasses.borderBottom} flex items-center gap-3 bg-white dark:bg-zinc-950">
+          <svg aria-hidden="true" class="shrink-0 w-4 h-4 text-slate-400 dark:text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input
+            type="text"
+            placeholder=${this.searchPlaceholder}
+            aria-label="Search table"
+            aria-controls=${this._tableId}
+            class="flex-1 min-w-0 bg-transparent border-none outline-none font-sans text-sm ${kbClasses.textPrimary} placeholder:text-slate-400 dark:placeholder:text-zinc-500"
+            @input=${this._handleSearchInput}
+          />
+          <span data-kb-count-span class="shrink-0 font-sans text-xs font-medium text-slate-500 dark:text-zinc-400 select-none whitespace-nowrap">${countText}</span>
         </div>
       `
       : nothing;
@@ -641,7 +739,7 @@ export class KbTable extends KbBaseElement {
         ${captionEl}
         ${toolbarEl}
         <div class=${innerClasses || nothing}>
-          <table id=${this._tableId} class=${tableClasses}>${this.defaultSlotContent}</table>
+          ${this.defaultSlotContent}
         </div>
       </div>
     `;

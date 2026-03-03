@@ -1,6 +1,6 @@
 import type { PropertyValues } from 'lit';
 import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
 /**
@@ -17,7 +17,6 @@ import { KbBaseElement } from '../../core/base-element.js';
  * </kb-grid>
  * ```
  */
-@customElement('kb-grid')
 export class KbGrid extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

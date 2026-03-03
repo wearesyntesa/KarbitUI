@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbBreadcrumb } from '../../components/navigation/kb-breadcrumb.js';
+import { KbBreadcrumb } from '../../components/navigation/kb-breadcrumb.define.js';
 import type { KbNavigateDetail } from '../../core/events.js';
 
 export const Breadcrumb = createComponent({

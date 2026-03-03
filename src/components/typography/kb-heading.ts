@@ -1,5 +1,5 @@
 import { html, type PropertyValues, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
@@ -9,7 +9,7 @@ export type HeadingTone = 'primary' | 'secondary' | 'muted' | 'accent' | 'succes
 
 // biome-ignore lint/nursery/useExplicitType: type inferred from recipe generic
 const headingRecipe = recipe({
-  base: `font-sans ${kbClasses.textPrimary}`,
+  base: 'font-sans',
   variants: {
     size: {
       xs: 'text-xs',
@@ -66,7 +66,6 @@ const TONE_MAP: Record<HeadingTone, string> = {
  * <kb-heading level="3" truncate>Very long heading text...</kb-heading>
  * ```
  */
-@customElement('kb-heading')
 export class KbHeading extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -92,7 +91,7 @@ export class KbHeading extends KbBaseElement {
   }
 
   override render(): TemplateResult {
-    const toneClasses = this.tone ? (TONE_MAP[this.tone] ?? '') : '';
+    const toneClasses = this.tone ? (TONE_MAP[this.tone] ?? kbClasses.textPrimary) : kbClasses.textPrimary;
 
     const truncateClass = this.truncate ? 'truncate' : '';
 

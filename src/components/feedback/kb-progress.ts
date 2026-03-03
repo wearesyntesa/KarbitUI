@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
@@ -45,7 +45,6 @@ const STRIPE_SIZE = '1rem 1rem';
  * <kb-progress value="3" max="5" segments="5" value-label="3 of 5"></kb-progress>
  * ```
  */
-@customElement('kb-progress')
 export class KbProgress extends KbBaseElement<'label'> {
   static override hostDisplay = 'block' as const;
 

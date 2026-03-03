@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbPopover } from '../../components/overlay/kb-popover.js';
+import { KbPopover } from '../../components/overlay/kb-popover.define.js';
 
 export const Popover = createComponent({
   react: React,

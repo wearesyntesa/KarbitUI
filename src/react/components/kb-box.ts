@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbBox } from '../../components/layout/kb-box.js';
+import { KbBox } from '../../components/layout/kb-box.define.js';
 
 export const Box = createComponent({
   react: React,

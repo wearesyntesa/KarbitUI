@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import {
@@ -84,7 +84,6 @@ const DEFAULT_HOVER: string = CHECKBOX_DEFAULT_HOVER;
  * </kb-checkbox>
  * ```
  */
-@customElement('kb-checkbox')
 export class KbCheckbox extends KbBaseElement<'description'> {
   /** Checkbox size controlling box dimensions, label text, and icon size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
@@ -106,6 +105,7 @@ export class KbCheckbox extends KbBaseElement<'description'> {
   private _boxEl: HTMLElement | null = null;
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._boxEl = this.querySelector<HTMLElement>('[role="checkbox"]');
   }
 

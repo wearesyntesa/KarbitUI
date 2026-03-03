@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbTextarea } from '../../components/forms/kb-textarea.js';
+import { KbTextarea } from '../../components/forms/kb-textarea.define.js';
 import type { KbChangeValueDetailFor, KbInputDetail } from '../../core/events.js';
 
 export const Textarea = createComponent({

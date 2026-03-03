@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbHeading } from '../../components/typography/kb-heading.js';
+import { KbHeading } from '../../components/typography/kb-heading.define.js';
 
 export const Heading = createComponent({
   react: React,

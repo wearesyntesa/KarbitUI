@@ -1,5 +1,5 @@
-import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { KbDragDetail } from '../../core/events.js';
 import type { KbTag } from './kb-tag.js';
@@ -12,8 +12,7 @@ const GAP_MAP: Record<TagGroupGap, string> = {
   lg: 'gap-4',
 } as const satisfies Record<TagGroupGap, string>;
 
-const INDICATOR_CLASSES =
-  'w-0.5 h-5 bg-blue-500 rounded-full shrink-0 transition-opacity duration-100 pointer-events-none';
+const INDICATOR_CLASSES = 'w-0.5 h-5 bg-blue-500 shrink-0 transition-opacity duration-100 pointer-events-none';
 
 /**
  * Flex-wrap container for `kb-tag` elements with optional drag-and-drop reordering.
@@ -35,7 +34,6 @@ const INDICATOR_CLASSES =
  * </kb-tag-group>
  * ```
  */
-@customElement('kb-tag-group')
 export class KbTagGroup extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -56,6 +54,7 @@ export class KbTagGroup extends KbBaseElement {
   private _rafId: number = 0;
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._containerEl = this.querySelector('[data-kb-tag-group]');
   }
 
@@ -224,6 +223,7 @@ export class KbTagGroup extends KbBaseElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._hideIndicator();
     this._indicator = null;
     this._containerEl = null;

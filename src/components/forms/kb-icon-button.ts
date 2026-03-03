@@ -1,5 +1,5 @@
 import { html, type PropertyValues, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { INTERACTIVE_GHOST, INTERACTIVE_OUTLINE, INTERACTIVE_SOLID, lookupScheme } from '../../core/color-schemes.js';
 import { LOADING_SIZE } from '../../core/icons.js';
@@ -56,7 +56,6 @@ const COLOR_SCHEME_MAP: Record<IconButtonVariant, Record<KnownColorScheme, strin
  * <kb-icon-button variant="outline" label="Close" color-scheme="red">&times;</kb-icon-button>
  * ```
  */
-@customElement('kb-icon-button')
 export class KbIconButton extends KbBaseElement {
   static override hostDisplay = 'inline-flex' as const;
   /** Visual variant controlling border, background, and text styles. @defaultValue 'solid' */
@@ -118,7 +117,7 @@ export class KbIconButton extends KbBaseElement {
       >
         ${
           this.loading
-            ? html`<span class="inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size]}"></span>`
+            ? html`<span class="inline-block border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size]}" style="border-radius:9999px"></span>`
             : this.defaultSlotContent
         }
       </button>

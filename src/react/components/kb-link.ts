@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbLink } from '../../components/navigation/kb-link.js';
+import { KbLink } from '../../components/navigation/kb-link.define.js';
 import type { KbClickLinkDetail } from '../../core/events.js';
 
 export const Link = createComponent({

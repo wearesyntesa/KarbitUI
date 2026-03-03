@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbTabs } from '../../components/navigation/kb-tabs.js';
+import { KbTabs } from '../../components/navigation/kb-tabs.define.js';
 import type { KbTabChangeDetail } from '../../core/events.js';
 
 export const Tabs = createComponent({

@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbProgress } from '../../components/feedback/kb-progress.js';
+import { KbProgress } from '../../components/feedback/kb-progress.define.js';
 
 export const Progress = createComponent({
   react: React,

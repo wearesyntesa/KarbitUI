@@ -1,6 +1,6 @@
 import type { TemplateResult } from 'lit';
-import { html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import {
@@ -75,7 +75,6 @@ let instanceCounter = 0;
  * </kb-select>
  * ```
  */
-@customElement('kb-select')
 export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
   /** Form select visual variant. @defaultValue 'outline' */
   @property({ type: String }) variant: FormVariant = 'outline';
@@ -137,6 +136,7 @@ export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._detachDocListeners();
     this._clearTypeAhead();
     if (this._rafMouseMove !== null) {
@@ -172,6 +172,7 @@ export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (!changed.has('_open')) return;
 
     if (this._open && !this._animatedIn) {

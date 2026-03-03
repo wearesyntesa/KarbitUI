@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorValue, Orientation } from '../../core/types.js';
@@ -41,7 +41,6 @@ const THICKNESS_V: Record<DividerThickness, string> = {
  * <kb-divider orientation="vertical" animated />
  * ```
  */
-@customElement('kb-divider')
 export class KbDivider extends KbBaseElement {
   static override hostDisplay = 'block' as const;
   /** Divider axis. `'horizontal'` draws a top border, `'vertical'` a left border. @defaultValue 'horizontal' */
@@ -61,6 +60,7 @@ export class KbDivider extends KbBaseElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     if (this.animated) {
       requestAnimationFrame(() => {
         this._mounted = true;
@@ -121,7 +121,7 @@ export class KbDivider extends KbBaseElement {
     const containerClasses = this.buildClasses(containerDir, 'gap-3', animationClasses);
 
     const labelClasses = cx(
-      'font-mono text-xs shrink-0 select-none',
+      'text-xs shrink-0 select-none',
       kbClasses.textSecondary,
       isHorizontal ? '' : '[writing-mode:vertical-rl]',
     );

@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbContainer } from '../../components/layout/kb-container.js';
+import { KbContainer } from '../../components/layout/kb-container.define.js';
 
 export const Container = createComponent({
   react: React,

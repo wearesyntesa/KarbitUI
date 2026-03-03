@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
 export type ButtonGroupDirection = 'horizontal' | 'vertical';
@@ -46,7 +46,6 @@ const SPACED_GAP: Record<ButtonGroupDirection, string> = {
  * </kb-button-group>
  * ```
  */
-@customElement('kb-button-group')
 export class KbButtonGroup extends KbBaseElement {
   /** Layout direction of the grouped buttons. @defaultValue 'horizontal' */
   @property({ type: String }) direction: ButtonGroupDirection = 'horizontal';

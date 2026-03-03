@@ -1,5 +1,5 @@
 import { html, nothing, svg, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
@@ -26,7 +26,6 @@ const chevronIcon: TemplateResult = svg`<path d="M6 9l6 6 6-6" stroke="currentCo
  * </kb-accordion>
  * ```
  */
-@customElement('kb-accordion')
 export class KbAccordion extends KbBaseElement<'trigger'> {
   static override hostDisplay = 'block' as const;
 

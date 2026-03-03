@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbListItem } from '../../components/data-display/kb-list-item.js';
+import { KbListItem } from '../../components/data-display/kb-list-item.define.js';
 
 export const ListItem = createComponent({
   react: React,

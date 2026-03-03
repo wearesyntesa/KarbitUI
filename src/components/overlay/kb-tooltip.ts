@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import { cx } from '../../utils/cx.js';
@@ -91,7 +91,6 @@ let tooltipIdCounter: number = 0;
  * </kb-tooltip>
  * ```
  */
-@customElement('kb-tooltip')
 export class KbTooltip extends KbBaseElement {
   /** Text content shown inside the tooltip. No tooltip renders when empty. @defaultValue '' */
   @property({ type: String }) label: string = '';
@@ -126,6 +125,7 @@ export class KbTooltip extends KbBaseElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     if (this.open) {
       this._show();
     }
@@ -133,6 +133,7 @@ export class KbTooltip extends KbBaseElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._clearTimers();
   }
 
@@ -144,6 +145,7 @@ export class KbTooltip extends KbBaseElement {
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('open')) {
       if (this.open) {
         this._show();
@@ -295,7 +297,7 @@ export class KbTooltip extends KbBaseElement {
     const offsetClass = OFFSET_CLASSES[p]?.[offsetVal] ?? '';
 
     const tipClasses = cx(
-      'absolute z-50 pointer-events-none border font-mono',
+      'absolute z-50 pointer-events-none border',
       PLACEMENT_CLASSES[p],
       offsetClass,
       SIZE_TEXT[s],

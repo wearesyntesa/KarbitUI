@@ -1,5 +1,5 @@
 import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { BG_COLOR, BG_COLOR_PING, lookupScheme } from '../../core/color-schemes.js';
 import { renderCloseIcon } from '../../core/icons.js';
@@ -84,7 +84,6 @@ const PING_DOT_SIZE: Record<BadgeSize, string> = {
  * <kb-badge ping color-scheme="red">3</kb-badge>
  * ```
  */
-@customElement('kb-badge')
 export class KbBadge extends KbBaseElement<'icon'> {
   /** Visual variant controlling border, background, and text styles. @defaultValue 'subtle' */
   @property({ type: String }) variant: BadgeVariant = 'subtle';
@@ -158,10 +157,10 @@ export class KbBadge extends KbBaseElement<'icon'> {
     if (this.dot) {
       dotEl = this.pulse
         ? html`<span class="relative inline-flex shrink-0 ${DOT_SIZE[this.size]}">
-            <span class="absolute inset-0 rounded-full ${dotColor} animate-ping opacity-75"></span>
-            <span class="relative rounded-full ${dotColor} ${DOT_SIZE[this.size]}"></span>
+            <span class="absolute inset-0 ${dotColor} animate-ping opacity-75" style="border-radius:9999px"></span>
+            <span class="relative ${dotColor} ${DOT_SIZE[this.size]}" style="border-radius:9999px"></span>
           </span>`
-        : html`<span class="rounded-full shrink-0 ${DOT_SIZE[this.size]} ${dotColor}"></span>`;
+        : html`<span class="shrink-0 ${DOT_SIZE[this.size]} ${dotColor}" style="border-radius:9999px"></span>`;
     }
 
     const closeEl = this.closable
@@ -176,8 +175,8 @@ export class KbBadge extends KbBaseElement<'icon'> {
     const pingDotColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-current';
     const pingEl = this.ping
       ? html`<span class="absolute ${PING_SIZE[this.size]} flex">
-          <span class="animate-ping absolute inset-0 rounded-full ${pingColor}"></span>
-          <span class="relative rounded-full ${PING_DOT_SIZE[this.size]} ${pingDotColor}"></span>
+          <span class="animate-ping absolute inset-0 ${pingColor}" style="border-radius:9999px"></span>
+          <span class="relative ${PING_DOT_SIZE[this.size]} ${pingDotColor}" style="border-radius:9999px"></span>
         </span>`
       : nothing;
 

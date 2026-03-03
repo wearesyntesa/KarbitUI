@@ -1,5 +1,4 @@
 import { html, type TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 
 /**
@@ -14,7 +13,6 @@ import { KbBaseElement } from '../../core/base-element.js';
  * </kb-box>
  * ```
  */
-@customElement('kb-box')
 export class KbBox extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

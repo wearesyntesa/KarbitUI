@@ -1,4 +1,4 @@
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { cx } from '../utils/cx.js';
 import { KbBaseElement } from './base-element.js';
@@ -17,6 +17,7 @@ export const FOCUSABLE_SELECTORS =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function handleTabTrap(container: HTMLElement, e: KeyboardEvent): void {
+  if (isServer) return;
   const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
   if (focusable.length === 0) return;
 
@@ -139,7 +140,9 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    document.removeEventListener('keydown', this._boundKeyHandler);
+    if (!isServer) {
+      document.removeEventListener('keydown', this._boundKeyHandler);
+    }
     this._restoreScroll();
     if (this._dismissTimeout !== null) {
       clearTimeout(this._dismissTimeout);
@@ -181,18 +184,24 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
     this._visible = true;
     this._assignedZIndex = Z_BASE + ++_zIndexCounter;
 
-    document.addEventListener('keydown', this._boundKeyHandler);
-    this._previouslyFocused = document.activeElement as HTMLElement | null;
+    if (!isServer) {
+      document.addEventListener('keydown', this._boundKeyHandler);
+      this._previouslyFocused = document.activeElement as HTMLElement | null;
+    }
 
     this._applyInert();
 
-    requestAnimationFrame(() => {
-      this._lockBodyScroll();
-      if (this.autoFocus) {
-        this._focusFirst();
-      }
+    if (isServer) {
       this.emit('kb-open');
-    });
+    } else {
+      requestAnimationFrame(() => {
+        this._lockBodyScroll();
+        if (this.autoFocus) {
+          this._focusFirst();
+        }
+        this.emit('kb-open');
+      });
+    }
   }
 
   protected _close(): void {
@@ -203,7 +212,7 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   }
 
   private _lockBodyScroll(): void {
-    if (!this.lockScroll) return;
+    if (isServer || !this.lockScroll) return;
     if (++KbOverlayBase._scrollLockCount === 1) {
       KbOverlayBase._scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
@@ -214,7 +223,7 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
   }
 
   protected _restoreScroll(): void {
-    if (!this.lockScroll) return;
+    if (isServer || !this.lockScroll) return;
     if (KbOverlayBase._scrollLockCount > 0 && --KbOverlayBase._scrollLockCount === 0) {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -279,6 +288,7 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
 
   /** Awaits the CSS transition on `panel` (with a `durationMs + 50 ms` fallback timeout), then resets overlay state and emits `kb-close`. Subclasses call this after starting their exit transition. */
   protected _finishDismiss(panel: HTMLElement | null, durationMs: number): void {
+    if (isServer) return;
     this._dismissFinished = false;
     const onFinish = (): void => {
       if (this._dismissFinished) return;
@@ -330,7 +340,7 @@ export abstract class KbOverlayBase<S extends string = string> extends KbBaseEle
     if (!(headerEl || this.closable)) return nothing;
     return html`
       <div class=${cx('flex items-center justify-between flex-shrink-0', HEADER_PX[s], kbClasses.borderBottom)}>
-        ${headerEl ? html`<div id=${this._titleId} class="${kbClasses.label} select-none">${headerEl}</div>` : html`<div></div>`}
+        ${headerEl ? html`<div id=${this._titleId} class="text-sm font-semibold uppercase tracking-widest ${kbClasses.textPrimary} select-none">${headerEl}</div>` : html`<div></div>`}
         ${this._renderCloseButton()}
       </div>`;
   }

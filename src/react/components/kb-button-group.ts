@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbButtonGroup } from '../../components/forms/kb-button-group.js';
+import { KbButtonGroup } from '../../components/forms/kb-button-group.define.js';
 
 export const ButtonGroup = createComponent({
   react: React,

@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbSpinner } from '../../components/feedback/kb-spinner.js';
+import { KbSpinner } from '../../components/feedback/kb-spinner.define.js';
 
 export const Spinner = createComponent({
   react: React,

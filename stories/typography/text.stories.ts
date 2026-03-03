@@ -91,13 +91,13 @@ export const Overline: S = {
 export const Tones: S = {
   render: () => html`
     <div class="flex flex-col gap-3">
-      <kb-text tone="primary">Primary — default text color</kb-text>
-      <kb-text tone="secondary">Secondary — subdued text</kb-text>
-      <kb-text tone="muted">Muted — least prominent</kb-text>
-      <kb-text tone="accent">Accent — blue highlight</kb-text>
-      <kb-text tone="success">Success — green status</kb-text>
-      <kb-text tone="warning">Warning — yellow caution</kb-text>
-      <kb-text tone="error">Error — red alert</kb-text>
+      <kb-text tone="primary">Default (primary)</kb-text>
+      <kb-text tone="secondary">Secondary tone</kb-text>
+      <kb-text tone="muted">Muted tone</kb-text>
+      <kb-text tone="accent">Accent tone</kb-text>
+      <kb-text tone="success">Success tone</kb-text>
+      <kb-text tone="warning">Warning tone</kb-text>
+      <kb-text tone="error">Error tone</kb-text>
     </div>
   `,
 };

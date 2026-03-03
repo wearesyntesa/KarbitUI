@@ -1,5 +1,5 @@
-import { type ComplexAttributeConverter, html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { type ComplexAttributeConverter, html, isServer, nothing, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { ICON_SIZE } from '../../core/component-tokens.js';
@@ -168,7 +168,6 @@ interface IndicatorPosition {
  * </kb-tabs>
  * ```
  */
-@customElement('kb-tabs')
 export class KbTabs extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -244,6 +243,7 @@ export class KbTabs extends KbBaseElement {
   override connectedCallback(): void {
     this._recaptureSlotChildren();
     super.connectedCallback();
+    if (isServer) return;
     this._resizeObserver = new ResizeObserver(() => {
       this._measureIndicator();
     });
@@ -255,6 +255,7 @@ export class KbTabs extends KbBaseElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._resizeObserver?.disconnect();
     this._resizeObserver = null;
     this._childListObserver?.disconnect();
@@ -289,6 +290,7 @@ export class KbTabs extends KbBaseElement {
   }
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._tabListEl = this.querySelector<HTMLElement>('[role="tablist"]');
     this._syncResizeObserver();
     // Initial class memoization and indicator measurement (D-2).
@@ -302,6 +304,7 @@ export class KbTabs extends KbBaseElement {
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('active')) {
       const prev = changed.get('active') as number;
       this._animatePanelExit(prev);
@@ -437,7 +440,7 @@ export class KbTabs extends KbBaseElement {
   private _getTabBaseClasses(): string {
     const s = this.size;
     return cx(
-      'relative inline-flex items-center font-mono uppercase tracking-widest cursor-pointer select-none',
+      'relative inline-flex items-center uppercase tracking-widest cursor-pointer select-none',
       kbClasses.transitionColors,
       SIZE_TEXT[s],
       SIZE_PX[s],

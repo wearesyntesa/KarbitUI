@@ -1,5 +1,5 @@
 import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { Orientation, SpacingValue } from '../../core/types.js';
 import './kb-divider.js';
@@ -23,7 +23,6 @@ import './kb-divider.js';
  * </kb-stack>
  * ```
  */
-@customElement('kb-stack')
 export class KbStack extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbCard } from '../../components/data-display/kb-card.js';
+import { KbCard } from '../../components/data-display/kb-card.define.js';
 
 export const Card = createComponent({
   react: React,

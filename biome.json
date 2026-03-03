@@ -116,7 +116,7 @@
   },
   "overrides": [
     {
-      "includes": [".storybook/*.css"],
+      "includes": [".storybook/*.css", "src/theme.css"],
       "css": {
         "parser": {
           "tailwindDirectives": true
@@ -159,5 +159,10 @@
         }
       }
     }
-  ]
+  ],
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  }
 }

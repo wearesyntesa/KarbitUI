@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { dismissWithAnimation, KbBaseElement } from '../../core/base-element.js';
 import { renderCloseIcon, STATUS_ICONS } from '../../core/icons.js';
 import { kbClasses } from '../../core/theme.js';
@@ -68,7 +68,6 @@ const isTopPosition = (pos: ToastPosition): boolean => pos === 'top' || pos === 
  * </kb-toast>
  * ```
  */
-@customElement('kb-toast')
 export class KbToast extends KbBaseElement<'title' | 'action'> {
   static override hostDisplay = 'block' as const;
 
@@ -95,12 +94,14 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this._remaining = this.duration;
     this._startTimer();
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this._clearTimer();
   }
 

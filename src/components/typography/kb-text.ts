@@ -1,6 +1,6 @@
 import type { PropertyValues } from 'lit';
 import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { type InferVariant, recipe } from '../../core/recipe.js';
 import { kbClasses } from '../../core/theme.js';
@@ -11,10 +11,10 @@ const textRecipe = recipe({
   base: '',
   variants: {
     variant: {
-      body: `font-sans ${kbClasses.textPrimary}`,
-      label: 'font-mono text-xs uppercase tracking-widest',
+      body: 'font-sans',
+      label: 'text-xs uppercase tracking-widest',
       caption: 'font-sans text-xs',
-      overline: 'font-mono text-[10px] font-semibold uppercase tracking-widest',
+      overline: 'text-[10px] font-semibold uppercase tracking-widest',
     },
     size: {
       xs: 'text-xs',
@@ -72,7 +72,6 @@ const CLAMP_MAP: Record<number, string> = {
  * <kb-text clamp="2">Long text that clamps to two lines...</kb-text>
  * ```
  */
-@customElement('kb-text')
 export class KbText extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

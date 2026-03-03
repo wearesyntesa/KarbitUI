@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ColorScheme, ComponentSize, Orientation } from '../../core/types.js';
@@ -27,7 +27,6 @@ let cbGroupCounter = 0;
  * </kb-checkbox-group>
  * ```
  */
-@customElement('kb-checkbox-group')
 export class KbCheckboxGroup extends KbBaseElement<'label'> {
   static override hostDisplay = 'block' as const;
 
@@ -36,6 +35,7 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this.addEventListener('kb-change', this._onChildChange as EventListener);
     this._childObserver = new MutationObserver(() => {
       this._propagatePropsToChildren();
@@ -45,6 +45,7 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     this.removeEventListener('kb-change', this._onChildChange as EventListener);
     this._childObserver?.disconnect();
     this._childObserver = undefined;
@@ -101,6 +102,7 @@ export class KbCheckboxGroup extends KbBaseElement<'label'> {
   };
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._propagatePropsToChildren();
     this._syncValues(this._getCheckboxes());
   }

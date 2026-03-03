@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbIconButton } from '../../components/forms/kb-icon-button.js';
+import { KbIconButton } from '../../components/forms/kb-icon-button.define.js';
 
 export const IconButton = createComponent({
   react: React,

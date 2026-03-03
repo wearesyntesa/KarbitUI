@@ -1,5 +1,5 @@
 import type { PropertyDeclaration } from 'lit';
-import { LitElement } from 'lit';
+import { isServer, LitElement } from 'lit';
 import { type ClassInput, cx } from '../utils/cx.js';
 import type { KbEventDetailMap } from './events.js';
 import { STYLE_PROP_DEFS, STYLE_PROP_KEYS, type StyleProps } from './style-map.js';
@@ -46,6 +46,7 @@ export class KbBaseElement<S extends string = string> extends LitElement {
   }
 
   override createRenderRoot(): this {
+    if (isServer) return this;
     const anchor = document.createComment('');
     this.prepend(anchor);
     this.renderOptions.renderBefore = anchor;
@@ -68,12 +69,25 @@ export class KbBaseElement<S extends string = string> extends LitElement {
   }
 
   private _defaultSlotNodes: Node[] | undefined;
+  private _captureScheduled: boolean = false;
   private _slotCache: Map<string, Element | null> = new Map();
   private _slotObserver: MutationObserver | undefined;
   private _cachedStyleClasses: string = '';
 
   protected captureDefaultSlotContent(): void {
-    if (this._defaultSlotNodes !== undefined) return;
+    if (isServer) return;
+    if (this._defaultSlotNodes !== undefined || this._captureScheduled) return;
+    this._captureScheduled = true;
+    // Defer past React's useLayoutEffect so children are present before capture.
+    Promise.resolve().then(() => {
+      this._captureScheduled = false;
+      if (!this.isConnected) return;
+      this._doCapture();
+      this.requestUpdate();
+    });
+  }
+
+  private _doCapture(): void {
     this._defaultSlotNodes = Array.from(this.childNodes).filter(
       (n) =>
         !(n instanceof Element && n.hasAttribute('slot')) &&
@@ -97,26 +111,29 @@ export class KbBaseElement<S extends string = string> extends LitElement {
    * have no `style` property of their own.
    */
   protected setDefaultSlotVisible(visible: boolean): void {
+    if (isServer) return;
     for (const node of this._defaultSlotNodes ?? EMPTY_NODES) {
       if (node instanceof HTMLElement) {
         node.style.display = visible ? '' : 'none';
       } else if (node.nodeType === Node.TEXT_NODE) {
         // Lazily wrap text nodes so we can toggle display on them
-        if (!this._defaultSlotTextWrapper) {
-          const wrapper = document.createElement('span');
+        let wrapper = this._defaultSlotTextWrappers.get(node);
+        if (!wrapper) {
+          wrapper = document.createElement('span');
           wrapper.dataset.kbSlot = '';
           node.parentNode?.insertBefore(wrapper, node);
           wrapper.appendChild(node);
-          this._defaultSlotTextWrapper = wrapper;
+          this._defaultSlotTextWrappers.set(node, wrapper);
         }
-        this._defaultSlotTextWrapper.style.display = visible ? '' : 'none';
+        wrapper.style.display = visible ? '' : 'none';
       }
     }
   }
 
-  private _defaultSlotTextWrapper: HTMLSpanElement | undefined;
+  private _defaultSlotTextWrappers = new WeakMap<Node, HTMLSpanElement>();
 
   protected slotted(name: S): Element | null {
+    if (isServer) return null;
     if (this._slotCache.has(name)) {
       return this._slotCache.get(name) ?? null;
     }
@@ -197,6 +214,7 @@ export interface KbBaseElement<S extends string = string> extends StyleProps {}
  * Falls back to a timeout if `transitionend` never fires.
  */
 export function dismissWithAnimation(host: HTMLElement, selector: string, fallbackMs: number): void {
+  if (isServer) return;
   const el = host.querySelector(selector) as HTMLElement | null;
   if (el) {
     const timerId: ReturnType<typeof setTimeout> = setTimeout(() => host.remove(), fallbackMs);
@@ -231,6 +249,7 @@ const SPRING_EASING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
 /** Imperative scale-down on pointer press. Cancels any running animation on the element. No-ops under reduced motion. */
 export function springPressDown(el: HTMLElement, scale: number): Animation {
+  if (isServer) return undefined as unknown as Animation;
   for (const a of el.getAnimations()) a.cancel();
   const anim = el.animate([{ transform: `scale(${scale})` }], {
     duration: prefersReducedMotion() ? 0 : 100,
@@ -251,6 +270,7 @@ export function springPressDown(el: HTMLElement, scale: number): Animation {
 
 /** Imperative spring-back to scale(1) on pointer release. Uses overshoot easing for tactile feel. Instant under reduced motion. */
 export function springPressUp(el: HTMLElement): Animation {
+  if (isServer) return undefined as unknown as Animation;
   for (const a of el.getAnimations()) a.cancel();
   const anim = el.animate([{ transform: 'scale(1)' }], {
     duration: prefersReducedMotion() ? 0 : 200,

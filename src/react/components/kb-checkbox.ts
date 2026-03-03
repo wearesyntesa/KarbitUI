@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbCheckbox } from '../../components/forms/kb-checkbox.js';
+import { KbCheckbox } from '../../components/forms/kb-checkbox.define.js';
 import type { KbChangeCheckboxDetail } from '../../core/events.js';
 
 export const Checkbox = createComponent({

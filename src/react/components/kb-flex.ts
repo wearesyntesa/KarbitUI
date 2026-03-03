@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbFlex } from '../../components/layout/kb-flex.js';
+import { KbFlex } from '../../components/layout/kb-flex.define.js';
 
 export const Flex = createComponent({
   react: React,

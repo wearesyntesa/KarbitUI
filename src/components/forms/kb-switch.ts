@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import {
@@ -129,7 +129,6 @@ const DEFAULT_ICON: string = 'text-blue-500 dark:text-blue-500';
  * </kb-switch>
  * ```
  */
-@customElement('kb-switch')
 export class KbSwitch extends KbBaseElement<'description'> {
   /** Switch size controlling track, thumb, and label dimensions. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
@@ -153,6 +152,7 @@ export class KbSwitch extends KbBaseElement<'description'> {
   private _trackEl: HTMLElement | null = null;
 
   override firstUpdated(): void {
+    if (isServer) return;
     this._trackEl = this.querySelector<HTMLElement>('[role="switch"]');
   }
 
@@ -210,7 +210,7 @@ export class KbSwitch extends KbBaseElement<'description'> {
 
   private _renderThumbContent(s: (typeof SIZE_MAP)[ComponentSize]): TemplateResult | typeof nothing {
     if (this.loading) {
-      return html`<span class="${s.spinner} rounded-full border-current border-t-transparent animate-spin" style="border-style:solid"></span>`;
+      return html`<span class="${s.spinner} border-current border-t-transparent animate-spin" style="border-radius:9999px;border-style:solid"></span>`;
     }
     if (!this.showIcons) return nothing;
 

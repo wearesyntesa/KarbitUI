@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -61,7 +61,6 @@ function isSeparatorType(value: string): value is SeparatorType {
  * ]}></kb-breadcrumb>
  * ```
  */
-@customElement('kb-breadcrumb')
 export class KbBreadcrumb extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -196,7 +195,7 @@ export class KbBreadcrumb extends KbBaseElement {
                 ? html`<li class="flex items-center ${SIZE_GAP[this.size]}">
               ${totalBefore > 0 ? this._renderSeparator() : nothing}
               <button
-                class="cursor-pointer bg-transparent border ${kbClasses.borderColor} ${SIZE_ELLIPSIS_PY[this.size]} ${SIZE_TEXT[this.size]} ${kbClasses.textMuted} hover:text-slate-700 dark:hover:text-zinc-200 hover:border-gray-400 dark:hover:border-zinc-500 ${kbClasses.transitionColors} font-mono leading-none select-none"
+                class="cursor-pointer bg-transparent border ${kbClasses.borderColor} ${SIZE_ELLIPSIS_PY[this.size]} ${SIZE_TEXT[this.size]} ${kbClasses.textMuted} hover:text-slate-700 dark:hover:text-zinc-200 hover:border-gray-400 dark:hover:border-zinc-500 ${kbClasses.transitionColors} leading-none select-none"
                 type="button"
                 aria-label="Show ${totalCollapsed} more breadcrumb items"
                 @click=${this._handleExpand}

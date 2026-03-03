@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { KbList } from './kb-list.js';
@@ -26,7 +26,6 @@ import type { KbList } from './kb-list.js';
  * </kb-list-item>
  * ```
  */
-@customElement('kb-list-item')
 export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'> {
   static override hostDisplay = 'block' as const;
 
@@ -41,31 +40,20 @@ export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'>
   /** Link target attribute, e.g. `'_blank'`. Only used when `href` is set. @defaultValue '' */
   @property({ type: String }) target: string = '';
 
-  private _cachedParent: KbList | null = null;
-  /** 1-based order index pushed by the parent kb-list; 0 when not in an ordered list. */
-  private _parentIndex: number = 0;
-  /** Whether a successor sibling exists; controls bottom-border divider rendering. */
   private _hasNextSibling: boolean = false;
+  private _index: number = 0;
+  private _ordered: boolean = false;
 
-  /** Receives O(1) per-item metadata from parent kb-list on every child-list mutation. */
-  _fromParent(index: number, hasNext: boolean): void {
-    this._parentIndex = index;
+  /** Receives per-item metadata from parent kb-list on every child-list mutation and property change. */
+  _fromParent(index: number, hasNext: boolean, ordered: boolean): void {
+    this._index = index;
     this._hasNextSibling = hasNext;
+    this._ordered = ordered;
     this.requestUpdate();
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    this._cachedParent = this.closest('kb-list') as KbList | null;
-  }
-
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this._cachedParent = null;
-  }
-
   private get _parentList(): KbList | null {
-    return this._cachedParent;
+    return this.closest('kb-list') as KbList | null;
   }
 
   private get _isInteractive(): boolean {
@@ -80,9 +68,8 @@ export class KbListItem extends KbBaseElement<'icon' | 'secondary' | 'trailing'>
   }
 
   private get _orderIndex(): string | null {
-    const parent = this._parentList;
-    if (!parent || parent.variant !== 'ordered') return null;
-    return this._parentIndex.toString().padStart(2, '0');
+    if (!this._ordered || this._index === 0) return null;
+    return this._index.toString().padStart(2, '0');
   }
 
   private _handleClick(): void {

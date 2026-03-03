@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbCode } from '../../components/typography/kb-code.js';
+import { KbCode } from '../../components/typography/kb-code.define.js';
 
 export const Code = createComponent({
   react: React,

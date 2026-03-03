@@ -4,116 +4,122 @@ import { spreadAttrs } from '../_define.js';
 import '../../src/components/data-display/kb-table.js';
 
 const basicContent = html`
-  <thead>
-    <tr><th>Endpoint</th><th>Method</th><th>Status</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>/api/auth/token</td><td>POST</td><td>Operational</td></tr>
-    <tr><td>/api/users</td><td>GET</td><td>Degraded</td></tr>
-    <tr><td>/api/events</td><td>GET</td><td>Operational</td></tr>
-  </tbody>
+  <table>
+    <thead>
+      <tr><th>Endpoint</th><th>Method</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>/api/auth/token</td><td>POST</td><td>Operational</td></tr>
+      <tr><td>/api/users</td><td>GET</td><td>Degraded</td></tr>
+      <tr><td>/api/events</td><td>GET</td><td>Operational</td></tr>
+    </tbody>
+  </table>
 `;
 
 const richContent = html`
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Service</th>
-      <th>Region</th>
-      <th data-sort="number">Latency</th>
-      <th data-sort="number">Uptime</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0041</span></td>
-      <td>Auth Gateway</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
-      <td><span class="font-mono tabular-nums">12ms</span></td>
-      <td><span class="font-mono tabular-nums">99.98%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0042</span></td>
-      <td>User Service</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
-      <td><span class="font-mono tabular-nums">45ms</span></td>
-      <td><span class="font-mono tabular-nums">99.91%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0043</span></td>
-      <td>Payment Processor</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">eu-west-1</span></td>
-      <td><span class="font-mono tabular-nums">89ms</span></td>
-      <td><span class="font-mono tabular-nums">98.44%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>Degraded</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0044</span></td>
-      <td>Notification Hub</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">ap-south-1</span></td>
-      <td><span class="font-mono tabular-nums">23ms</span></td>
-      <td><span class="font-mono tabular-nums">99.99%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0045</span></td>
-      <td>Search Index</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">us-west-2</span></td>
-      <td><span class="font-mono tabular-nums text-red-500">156ms</span></td>
-      <td><span class="font-mono tabular-nums text-red-500">97.12%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span><span class="text-red-600 dark:text-red-400">Critical</span></span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0046</span></td>
-      <td>CDN Edge</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">global</span></td>
-      <td><span class="font-mono tabular-nums">8ms</span></td>
-      <td><span class="font-mono tabular-nums">99.99%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0047</span></td>
-      <td>Log Aggregator</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
-      <td><span class="font-mono tabular-nums">34ms</span></td>
-      <td><span class="font-mono tabular-nums">99.87%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
-    </tr>
-    <tr>
-      <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0048</span></td>
-      <td>Queue Worker</td>
-      <td><span class="text-slate-500 dark:text-zinc-400">eu-west-1</span></td>
-      <td><span class="font-mono tabular-nums">67ms</span></td>
-      <td><span class="font-mono tabular-nums">99.52%</span></td>
-      <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>Degraded</span></td>
-    </tr>
-  </tbody>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Service</th>
+        <th>Region</th>
+        <th data-sort="number">Latency</th>
+        <th data-sort="number">Uptime</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0041</span></td>
+        <td>Auth Gateway</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
+        <td><span class="font-mono tabular-nums">12ms</span></td>
+        <td><span class="font-mono tabular-nums">99.98%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0042</span></td>
+        <td>User Service</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
+        <td><span class="font-mono tabular-nums">45ms</span></td>
+        <td><span class="font-mono tabular-nums">99.91%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0043</span></td>
+        <td>Payment Processor</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">eu-west-1</span></td>
+        <td><span class="font-mono tabular-nums">89ms</span></td>
+        <td><span class="font-mono tabular-nums">98.44%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>Degraded</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0044</span></td>
+        <td>Notification Hub</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">ap-south-1</span></td>
+        <td><span class="font-mono tabular-nums">23ms</span></td>
+        <td><span class="font-mono tabular-nums">99.99%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0045</span></td>
+        <td>Search Index</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">us-west-2</span></td>
+        <td><span class="font-mono tabular-nums text-red-500">156ms</span></td>
+        <td><span class="font-mono tabular-nums text-red-500">97.12%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span><span class="text-red-600 dark:text-red-400">Critical</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0046</span></td>
+        <td>CDN Edge</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">global</span></td>
+        <td><span class="font-mono tabular-nums">8ms</span></td>
+        <td><span class="font-mono tabular-nums">99.99%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0047</span></td>
+        <td>Log Aggregator</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">us-east-1</span></td>
+        <td><span class="font-mono tabular-nums">34ms</span></td>
+        <td><span class="font-mono tabular-nums">99.87%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Healthy</span></td>
+      </tr>
+      <tr>
+        <td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">SVC-0048</span></td>
+        <td>Queue Worker</td>
+        <td><span class="text-slate-500 dark:text-zinc-400">eu-west-1</span></td>
+        <td><span class="font-mono tabular-nums">67ms</span></td>
+        <td><span class="font-mono tabular-nums">99.52%</span></td>
+        <td><span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>Degraded</span></td>
+      </tr>
+    </tbody>
+  </table>
 `;
 
 const scrollableContent = html`
-  <thead>
-    <tr><th>Timestamp</th><th>Level</th><th>Source</th><th>Message</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:12</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>User login successful</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:14</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>cache</td><td>Cache hit for key user:4821</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:15</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>payment</td><td>Retry attempt 2/3 for txn:91023</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:18</span></td><td><span class="font-mono text-xs text-red-600 dark:text-red-400">ERROR</span></td><td>search</td><td>Index timeout after 5000ms</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:20</span></td><td><span class="font-mono text-xs">INFO</span></td><td>api</td><td>GET /api/users 200 12ms</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:22</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>db</td><td>Query executed in 3ms</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:25</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>Token refreshed for session:8812</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:27</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>queue</td><td>Queue depth exceeding threshold: 1247</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:30</span></td><td><span class="font-mono text-xs">INFO</span></td><td>cdn</td><td>Asset purge completed for zone:us-east</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:32</span></td><td><span class="font-mono text-xs text-red-600 dark:text-red-400">ERROR</span></td><td>payment</td><td>Transaction failed: insufficient funds</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:35</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>cache</td><td>Cache miss for key product:7712</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:37</span></td><td><span class="font-mono text-xs">INFO</span></td><td>notification</td><td>Email dispatched to user:4821</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:40</span></td><td><span class="font-mono text-xs">INFO</span></td><td>api</td><td>POST /api/events 201 45ms</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:42</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>search</td><td>Slow query detected: 890ms</td></tr>
-    <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:45</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>New session created for user:6102</td></tr>
-  </tbody>
+  <table>
+    <thead>
+      <tr><th>Timestamp</th><th>Level</th><th>Source</th><th>Message</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:12</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>User login successful</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:14</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>cache</td><td>Cache hit for key user:4821</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:15</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>payment</td><td>Retry attempt 2/3 for txn:91023</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:18</span></td><td><span class="font-mono text-xs text-red-600 dark:text-red-400">ERROR</span></td><td>search</td><td>Index timeout after 5000ms</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:20</span></td><td><span class="font-mono text-xs">INFO</span></td><td>api</td><td>GET /api/users 200 12ms</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:22</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>db</td><td>Query executed in 3ms</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:25</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>Token refreshed for session:8812</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:27</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>queue</td><td>Queue depth exceeding threshold: 1247</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:30</span></td><td><span class="font-mono text-xs">INFO</span></td><td>cdn</td><td>Asset purge completed for zone:us-east</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:32</span></td><td><span class="font-mono text-xs text-red-600 dark:text-red-400">ERROR</span></td><td>payment</td><td>Transaction failed: insufficient funds</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:35</span></td><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500">DEBUG</span></td><td>cache</td><td>Cache miss for key product:7712</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:37</span></td><td><span class="font-mono text-xs">INFO</span></td><td>notification</td><td>Email dispatched to user:4821</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:40</span></td><td><span class="font-mono text-xs">INFO</span></td><td>api</td><td>POST /api/events 201 45ms</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:42</span></td><td><span class="font-mono text-xs text-yellow-600 dark:text-yellow-400">WARN</span></td><td>search</td><td>Slow query detected: 890ms</td></tr>
+      <tr><td><span class="font-mono text-xs text-slate-400 dark:text-zinc-500 whitespace-nowrap">2026-02-10 08:01:45</span></td><td><span class="font-mono text-xs">INFO</span></td><td>auth</td><td>New session created for user:6102</td></tr>
+    </tbody>
+  </table>
 `;
 
 type Args = {

@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -68,7 +68,6 @@ export type CodeHighlighter = (code: string, language: string) => string;
  * };
  * ```
  */
-@customElement('kb-code')
 export class KbCode extends KbBaseElement {
   /**
    * Pluggable syntax highlighter. Set once to enable highlighting for all `kb-code` instances with a `language` prop.
@@ -81,18 +80,20 @@ export class KbCode extends KbBaseElement {
   static highlighter: CodeHighlighter | null = null;
 
   override connectedCallback(): void {
+    // Extract raw text BEFORE super.connectedCallback() — DOM children are
+    // available synchronously, but defaultSlotContent is populated via a
+    // microtask so it would be empty if we read it after super.
+    if (!isServer) {
+      this._rawText = this.textContent ?? '';
+    }
     super.connectedCallback();
+    if (isServer) return;
     this._syncHostDisplay();
-    this._rawText = this._extractRawText();
-    this._cleanupSlotForHighlighting();
   }
 
   override disconnectedCallback(): void {
     clearTimeout(this._copyTimeout);
-    for (const node of this.defaultSlotContent) {
-      (node as HTMLElement).hidden = false;
-      (node as HTMLElement).removeAttribute('aria-hidden');
-    }
+    this.setDefaultSlotVisible(true);
     super.disconnectedCallback();
   }
 
@@ -108,13 +109,22 @@ export class KbCode extends KbBaseElement {
 
   override updated(changed: Map<PropertyKey, unknown>): void {
     super.updated(changed);
+    if (isServer) return;
     if (changed.has('block')) {
       this._syncHostDisplay();
     }
-    if (changed.has('language')) {
-      this._rawText = this._extractRawText();
-      this._cleanupSlotForHighlighting();
-      this.requestUpdate();
+    // Re-extract raw text from captured slot nodes (now populated) and
+    // toggle visibility: hide originals when highlighting replaces them,
+    // show them when they ARE the rendered content.
+    const highlighting = !!(this.language && KbCode.highlighter);
+    const rawFromSlot = this._extractRawText();
+    if (rawFromSlot) {
+      this._rawText = rawFromSlot;
+    }
+    if (highlighting) {
+      this.setDefaultSlotVisible(false);
+    } else {
+      this.setDefaultSlotVisible(true);
     }
   }
 
@@ -124,15 +134,6 @@ export class KbCode extends KbBaseElement {
 
   private _extractRawText(): string {
     return this.defaultSlotContent.map((n) => n.textContent ?? '').join('');
-  }
-
-  // When highlighting is active, hide original slot nodes so they don't appear alongside Lit's rendered output in Light DOM.
-  private _cleanupSlotForHighlighting(): void {
-    if (!(this.language && KbCode.highlighter)) return;
-    for (const node of this.defaultSlotContent) {
-      (node as HTMLElement).hidden = true;
-      (node as HTMLElement).setAttribute('aria-hidden', 'true');
-    }
   }
 
   /**

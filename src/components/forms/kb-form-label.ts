@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { ComponentSize } from '../../core/types.js';
@@ -26,7 +26,6 @@ const SIZE_MAP: Record<ComponentSize, string> = {
  * </kb-form-label>
  * ```
  */
-@customElement('kb-form-label')
 export class KbFormLabel extends KbBaseElement<'info'> {
   /** `for` attribute linking the label to a form element by ID. */
   @property({ type: String }) for?: string;
@@ -42,7 +41,7 @@ export class KbFormLabel extends KbBaseElement<'info'> {
     const infoEl = this.slotted('info');
 
     const classes = this.buildClasses(
-      'inline-flex items-center gap-1.5 font-mono uppercase tracking-widest select-none',
+      'inline-flex items-center gap-1.5 uppercase tracking-widest select-none',
       sizeClass,
       kbClasses.textSecondary,
     );

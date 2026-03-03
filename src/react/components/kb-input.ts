@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbInput } from '../../components/forms/kb-input.js';
+import { KbInput } from '../../components/forms/kb-input.define.js';
 import type { KbChangeValueDetailFor, KbInputDetail } from '../../core/events.js';
 
 export const Input = createComponent({

@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
 import { prefersReducedMotion } from '../../core/base-element.js';
 import { BACKDROP_CLASSES, KbOverlayBase, type OverlaySize } from '../../core/overlay-base.js';
 import { kbClasses } from '../../core/theme.js';
@@ -48,7 +48,6 @@ const EXIT_EASING = 'cubic-bezier(0.4, 0, 1, 1)';
  * </kb-modal>
  * ```
  */
-@customElement('kb-modal')
 export class KbModal extends KbOverlayBase<'header' | 'footer'> {
   /** Vertical positioning of the dialog within the viewport. @defaultValue 'center' */
   @property({ type: String }) placement: ModalPlacement = 'center';
@@ -73,6 +72,7 @@ export class KbModal extends KbOverlayBase<'header' | 'footer'> {
 
   override updated(changed: Map<PropertyKey, unknown>): void {
     super.updated(changed);
+    if (isServer) return;
     if (this._visible && !this._dismissing && !this._animatedIn) {
       this._animatedIn = true;
       this._animateEnter();
@@ -129,6 +129,7 @@ export class KbModal extends KbOverlayBase<'header' | 'footer'> {
     for (const anim of this._enterAnimations) anim.cancel();
     this._enterAnimations = [];
     super.disconnectedCallback();
+    if (isServer) return;
   }
 
   protected override _animateDismiss(): void {

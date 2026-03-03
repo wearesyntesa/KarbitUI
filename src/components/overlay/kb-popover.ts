@@ -1,5 +1,5 @@
-import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { FOCUSABLE_SELECTORS, handleTabTrap } from '../../core/overlay-base.js';
@@ -94,10 +94,10 @@ const ENTER_ANIMATION: Record<PopoverPlacement, string> = {
 } as const satisfies Record<PopoverPlacement, string>;
 
 const EXIT_TRANSLATE: Record<PopoverPlacement, string> = {
-  top: '0 6px',
-  bottom: '0 -6px',
-  left: '6px 0',
-  right: '-6px 0',
+  top: 'translateY(4px)',
+  bottom: 'translateY(-4px)',
+  left: 'translateX(4px)',
+  right: 'translateX(-4px)',
 } as const satisfies Record<PopoverPlacement, string>;
 
 /**
@@ -122,7 +122,6 @@ const EXIT_TRANSLATE: Record<PopoverPlacement, string> = {
  * </kb-popover>
  * ```
  */
-@customElement('kb-popover')
 export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
   /** Position of the popover relative to the trigger element. @defaultValue 'bottom' */
   @property({ type: String }) placement: PopoverPlacement = 'bottom';
@@ -172,6 +171,7 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     if (this.open) {
       this._show();
     }
@@ -179,12 +179,14 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (isServer) return;
     document.removeEventListener('keydown', this._boundKeyHandler);
     document.removeEventListener('click', this._boundOutsideClick, true);
     this._clearTimers();
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('open')) {
       if (this.open) {
         this._show();
@@ -262,8 +264,8 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
       const exitTranslate = EXIT_TRANSLATE[this.placement] ?? EXIT_TRANSLATE.bottom;
       const anim = panel.animate(
         [
-          { translate: '0 0', opacity: 1 },
-          { translate: exitTranslate, opacity: 0 },
+          { transform: 'translateX(0) translateY(0)', opacity: 1 },
+          { transform: exitTranslate, opacity: 0 },
         ],
         {
           duration: prefersReducedMotion() ? 0 : DISMISS_DURATION,

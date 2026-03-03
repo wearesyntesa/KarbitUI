@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbModal } from '../../components/overlay/kb-modal.js';
+import { KbModal } from '../../components/overlay/kb-modal.define.js';
 
 export const Modal = createComponent({
   react: React,

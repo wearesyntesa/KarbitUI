@@ -1,6 +1,6 @@
 import { createComponent } from '@lit/react';
 import React from 'react';
-import { KbStack } from '../../components/layout/kb-stack.js';
+import { KbStack } from '../../components/layout/kb-stack.define.js';
 
 export const Stack = createComponent({
   react: React,

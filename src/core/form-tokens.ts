@@ -97,7 +97,7 @@ export const FORM_READONLY_CONTROL = 'border-dotted cursor-default';
 /** Renders an inline loading spinner for form fields. */
 export function renderFormSpinner(sizeClass: string, extraClasses?: string): TemplateResult {
   const outer = extraClasses ? `shrink-0 flex items-center ${extraClasses}` : 'shrink-0 flex items-center';
-  return html`<span class="${outer}"><span class="${sizeClass} rounded-full border-current border-t-transparent animate-spin" style="border-style:solid"></span></span>`;
+  return html`<span class="${outer}"><span class="${sizeClass} rounded-full border-current border-t-transparent animate-spin" style="border-radius:9999px;border-style:solid"></span></span>`;
 }
 
 /** Checked/active fill (bg + border) per color scheme. Shared by checkbox and switch. */

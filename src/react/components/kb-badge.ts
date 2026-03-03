@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbBadge } from '../../components/feedback/kb-badge.js';
+import { KbBadge } from '../../components/feedback/kb-badge.define.js';
 
 export const Badge = createComponent({
   react: React,

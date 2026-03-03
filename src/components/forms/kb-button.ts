@@ -1,5 +1,5 @@
 import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, springPressDown, springPressUp } from '../../core/base-element.js';
 import {
   INTERACTIVE_GHOST,
@@ -76,7 +76,6 @@ const COLOR_SCHEME_MAP: Record<ButtonVariant, Record<KnownColorScheme, string>> 
  * <kb-button full-width>FULL WIDTH</kb-button>
  * ```
  */
-@customElement('kb-button')
 export class KbButton extends KbBaseElement<'icon-left' | 'icon-right'> {
   /** Visual variant controlling border, background, and text styles. @defaultValue 'solid' */
   @property({ type: String }) variant: ButtonVariant = 'solid';
@@ -124,8 +123,8 @@ export class KbButton extends KbBaseElement<'icon-left' | 'icon-right'> {
 
   private _renderLeftContent(): TemplateResult | typeof nothing {
     if (this.loading) {
-      const spinnerClasses = `inline-block rounded-full border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size] ?? LOADING_SIZE.md}`;
-      return html`<span class=${spinnerClasses}></span>`;
+      const spinnerClasses = `inline-block border-current border-t-transparent animate-spin ${LOADING_SIZE[this.size] ?? LOADING_SIZE.md}`;
+      return html`<span class=${spinnerClasses} style="border-radius:9999px"></span>`;
     }
     const iconLeft = this.slotted('icon-left');
     if (iconLeft) {

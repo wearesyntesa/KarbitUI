@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
@@ -127,7 +127,6 @@ const SIZE_HIGHLIGHT_PX: Record<ComponentSize, string> = {
  * <kb-link href="https://example.com" external>External Link</kb-link>
  * ```
  */
-@customElement('kb-link')
 export class KbLink extends KbBaseElement<'icon-left' | 'icon-right'> {
   /** URL the link navigates to. @defaultValue '#' */
   @property({ type: String }) href: string = '#';

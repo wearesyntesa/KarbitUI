@@ -1,6 +1,7 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbSelect, type SelectOptionOrGroup } from '../../components/forms/kb-select.js';
+import { KbSelect } from '../../components/forms/kb-select.define.js';
+import type { SelectOptionOrGroup } from '../../components/forms/kb-select.js';
 import type { KbChangeValueDetail } from '../../core/events.js';
 
 /** Narrowed change detail that preserves the generic value type `V` while remaining structurally coherent with `KbChangeValueDetail`. */

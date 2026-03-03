@@ -1,0 +1,406 @@
+/**
+ * KarbitUI — Tailwind v4 theme layer
+ *
+ * Import this file in your app's CSS entrypoint:
+ *   @import "@wearesyntesa/karbit-ui/theme.css";
+ *
+ * It provides:
+ *   - The full @theme token block (colors, radius, fonts, animations)
+ *   - @keyframes for all component animations
+ *   - @source directives so Tailwind scans KarbitUI component classes
+ *   - Reduced-motion accessibility overrides
+ */
+
+@import "tailwindcss";
+
+/* Dark mode: class-based — only activates when a `.dark` ancestor is present */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Scan component JS so Tailwind emits all static class strings used in recipes */
+@source "./dist/**/*.js";
+
+/*
+ * Dynamic style-prop safelist — covers every class that mapPropToClass()
+ * can construct at runtime (prefix-value combinations from src/core/types.ts).
+ * These are passed as inline strings so Tailwind treats them as static sources.
+ */
+
+/* Spacing: p, px, py, pt, pr, pb, pl, m, mx, my, mt, mr, mb, ml, gap, gap-x, gap-y, top, right, bottom, left, inset */
+@source inline("p-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("px-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("py-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("pt-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("pr-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("pb-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("pl-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("m-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("mx-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("my-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("mt-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("mr-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("mb-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("ml-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("gap-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("gap-x-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("gap-y-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("top-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("right-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("bottom-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("left-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+@source inline("inset-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto}");
+
+/* Display */
+@source inline("{block,inline-block,inline,flex,inline-flex,grid,inline-grid,hidden,contents,flow-root}");
+
+/* Position */
+@source inline("{static,relative,absolute,fixed,sticky}");
+
+/* Dimension: w, h, min-w, max-w, min-h, max-h */
+@source inline("w-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,svw,lvw,dvw,min,max,fit,1/2,1/3,2/3,1/4,3/4,1/5,2/5,3/5,4/5,1/6,5/6,1/12,5/12,7/12,11/12}");
+@source inline("h-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,svh,lvh,dvh,min,max,fit,1/2,1/3,2/3,1/4,3/4,1/5,2/5,3/5,4/5,1/6,5/6,1/12,5/12,7/12,11/12}");
+@source inline("min-w-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,min,max,fit}");
+@source inline("max-w-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,min,max,fit}");
+@source inline("min-h-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,min,max,fit}");
+@source inline("max-h-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96,px,auto,full,screen,min,max,fit}");
+
+/* Border width */
+@source inline("border-{0,1,2,3,4,8}");
+@source inline("border-t-{0,1,2,3,4,8}");
+@source inline("border-r-{0,1,2,3,4,8}");
+@source inline("border-b-{0,1,2,3,4,8}");
+@source inline("border-l-{0,1,2,3,4,8}");
+
+/* Border style */
+@source inline("border-{solid,dashed,dotted,double,none}");
+
+/* Z-index */
+@source inline("z-{0,10,20,30,40,50,auto}");
+
+/* Opacity */
+@source inline("opacity-{0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100}");
+
+/* Flex */
+@source inline("flex-{1,auto,initial,none,row,row-reverse,col,col-reverse,wrap,wrap-reverse,nowrap}");
+@source inline("grow-{0,1}");
+@source inline("shrink-{0,1}");
+@source inline("items-{start,end,center,baseline,stretch}");
+@source inline("justify-{start,end,center,between,around,evenly}");
+@source inline("self-{auto,start,end,center,baseline,stretch}");
+@source inline("justify-self-{auto,start,end,center,stretch}");
+
+/* Grid */
+@source inline("grid-cols-{1,2,3,4,5,6,7,8,9,10,11,12,none,subgrid}");
+@source inline("grid-rows-{1,2,3,4,5,6,7,8,9,10,11,12,none,subgrid}");
+@source inline("col-span-{1,2,3,4,5,6,7,8,9,10,11,12,auto,full}");
+@source inline("row-span-{1,2,3,4,5,6,7,8,9,10,11,12,auto,full}");
+
+/* Typography */
+@source inline("text-{xs,sm,base,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,8xl,9xl,left,center,right,justify,start,end}");
+@source inline("font-{thin,extralight,light,normal,medium,semibold,bold,extrabold,black,sans,serif,mono}");
+@source inline("leading-{3,4,5,6,7,8,9,10,none,tight,snug,normal,relaxed,loose}");
+@source inline("tracking-{tighter,tight,normal,wide,wider,widest}");
+@source inline("{underline,overline,line-through,no-underline}");
+@source inline("{uppercase,lowercase,capitalize,normal-case}");
+
+/* Color (bg + text + border-color) */
+@source inline("bg-{black,white,transparent,current}");
+@source inline("text-{black,white,transparent,current}");
+@source inline("border-{black,white,transparent,current}");
+@source inline("bg-{red,blue,green,yellow,gray,slate,zinc,neutral,stone,orange,amber,lime,emerald,teal,cyan,sky,indigo,violet,purple,fuchsia,pink,rose}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("text-{red,blue,green,yellow,gray,slate,zinc,neutral,stone,orange,amber,lime,emerald,teal,cyan,sky,indigo,violet,purple,fuchsia,pink,rose}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("border-{red,blue,green,yellow,gray,slate,zinc,neutral,stone,orange,amber,lime,emerald,teal,cyan,sky,indigo,violet,purple,fuchsia,pink,rose}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+/* Overflow */
+@source inline("overflow-{auto,hidden,visible,scroll}");
+@source inline("overflow-x-{auto,hidden,visible,scroll}");
+@source inline("overflow-y-{auto,hidden,visible,scroll}");
+
+/* Cursor */
+@source inline("cursor-{auto,default,pointer,wait,text,move,help,not-allowed,none,grab,grabbing,crosshair,col-resize,row-resize}");
+
+/* Pointer events / user select */
+@source inline("pointer-events-{none,auto}");
+@source inline("select-{none,text,all,auto}");
+
+/* Transition */
+@source inline("transition-{none,all,colors,opacity,shadow,transform}");
+
+/* Misc */
+@source inline("rounded-{none,sm,md,lg,xl,2xl,3xl,full}");
+@source inline("shadow-{none,sm,md,lg,xl,2xl,inner}");
+@source inline("aspect-{auto,square,video}");
+@source inline("object-{contain,cover,fill,none,scale-down}");
+@source inline("{visible,invisible,collapse}");
+@source inline("whitespace-{normal,nowrap,pre,pre-line,pre-wrap,break-spaces}");
+@source inline("order-{1,2,3,4,5,6,7,8,9,10,11,12,first,last,none}");
+
+@theme {
+  /* Border radius — always 0 (Structured Minimal Brutalism) */
+  --radius: 0px;
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
+
+  /* Border width */
+  --border-width: 1px;
+
+  /* Fonts */
+  --font-sans: "Plus Jakarta Sans", Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", "Fira Code", monospace;
+
+  /* Colors */
+  --color-kb-accent: #3b82f6;
+  --color-kb-accent-light: #60a5fa;
+  --color-kb-accent-dark: #2563eb;
+
+  --color-kb-surface-light: #ffffff;
+  --color-kb-surface-muted: #f8f9fa;
+  --color-kb-surface-dark: #18181b;
+  --color-kb-surface-dark-muted: #27272a;
+
+  --color-kb-border-light: #e5e7eb;
+  --color-kb-border-dark: #3f3f46;
+
+  --color-kb-text-primary: #0f172a;
+  --color-kb-text-secondary: #64748b;
+  --color-kb-text-muted: #94a3b8;
+  --color-kb-text-ghost: #e2e8f0;
+  --color-kb-text-dark-primary: #fafafa;
+  --color-kb-text-dark-secondary: #a1a1aa;
+  --color-kb-text-dark-muted: #71717a;
+  --color-kb-text-dark-ghost: #27272a;
+
+  /* Animation tokens */
+  --animate-kb-fade-in: kb-fade-in 150ms ease-out;
+  --animate-kb-fade-in-fast: kb-fade-in 100ms ease-out;
+  --animate-kb-slide-in-right: kb-slide-in-right 200ms cubic-bezier(0.2, 0, 0, 1);
+  --animate-kb-slide-in-left: kb-slide-in-left 200ms cubic-bezier(0.2, 0, 0, 1);
+  --animate-kb-slide-in-down: kb-slide-in-down 200ms cubic-bezier(0.2, 0, 0, 1);
+  --animate-kb-slide-in-up: kb-slide-in-up 200ms cubic-bezier(0.2, 0, 0, 1);
+  --animate-kb-progress-indeterminate: kb-progress-indeterminate 1.5s ease-in-out infinite;
+  --animate-kb-progress-fill: kb-progress-fill 500ms ease-out forwards;
+  --animate-kb-progress-stripes: kb-progress-stripes 0.6s linear infinite;
+  --animate-kb-spinner-bounce: kb-spinner-bounce 1.4s ease-in-out infinite;
+  --animate-kb-spinner-bar: kb-spinner-bar 1.2s ease-in-out infinite;
+  --animate-kb-spinner-pulse: kb-spinner-pulse 1.5s ease-in-out infinite;
+  --animate-kb-check-draw: kb-check-draw 200ms ease-out forwards;
+  --animate-kb-radio-pop: kb-radio-pop 200ms ease-out forwards;
+  --animate-kb-pop-bottom: kb-pop-bottom 100ms ease-out;
+  --animate-kb-pop-top: kb-pop-top 100ms ease-out;
+  --animate-kb-pop-left: kb-pop-left 100ms ease-out;
+  --animate-kb-pop-right: kb-pop-right 100ms ease-out;
+
+  @keyframes kb-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes kb-slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes kb-slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes kb-slide-in-down {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes kb-slide-in-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes kb-progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+
+  @keyframes kb-progress-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(var(--kb-progress-scale, 1));
+    }
+  }
+
+  @keyframes kb-progress-stripes {
+    from {
+      background-position: 1rem 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes kb-spinner-bounce {
+    0%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes kb-spinner-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes kb-spinner-pulse {
+    0%,
+    100% {
+      transform: scale(0.85);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes kb-toast-countdown {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes kb-check-draw {
+    from {
+      stroke-dashoffset: 24;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes kb-radio-pop {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes kb-pop-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes kb-pop-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes kb-pop-left {
+    from {
+      opacity: 0;
+      transform: translateX(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes kb-pop-right {
+    from {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-kb-fade-in,
+    .animate-kb-fade-in-fast,
+    .animate-kb-slide-in-right,
+    .animate-kb-slide-in-left,
+    .animate-kb-slide-in-down,
+    .animate-kb-slide-in-up,
+    .animate-kb-progress-fill,
+    .animate-kb-check-draw,
+    .animate-kb-radio-pop,
+    .animate-kb-pop-bottom,
+    .animate-kb-pop-top,
+    .animate-kb-pop-left,
+    .animate-kb-pop-right {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+    }
+    .animate-kb-progress-indeterminate,
+    .animate-kb-progress-stripes,
+    .animate-kb-spinner-bounce,
+    .animate-kb-spinner-bar,
+    .animate-kb-spinner-pulse,
+    .animate-kb-toast-countdown {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+    }
+  }
+}

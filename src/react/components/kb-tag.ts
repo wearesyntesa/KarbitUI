@@ -1,6 +1,6 @@
 import { createComponent, type EventName } from '@lit/react';
 import React from 'react';
-import { KbTag } from '../../components/data-display/kb-tag.js';
+import { KbTag } from '../../components/data-display/kb-tag.define.js';
 
 export const Tag = createComponent({
   react: React,

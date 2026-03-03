@@ -1,5 +1,5 @@
 import { html, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import type { DimensionValue } from '../../core/types.js';
 
@@ -32,7 +32,6 @@ const SIZE_MAP: Record<ContainerSize, string> = {
  * </kb-container>
  * ```
  */
-@customElement('kb-container')
 export class KbContainer extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 

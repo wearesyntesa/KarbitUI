@@ -1,5 +1,5 @@
 import { html, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { KbBaseElement, prefersReducedMotion } from '../../core/base-element.js';
 import { BG_COLOR, BORDER_COLOR, lookupScheme } from '../../core/color-schemes.js';
 import { kbClasses } from '../../core/theme.js';
@@ -52,9 +52,9 @@ const LABEL_SIZE: Record<ComponentSize, string> = {
 } as const satisfies Record<ComponentSize, string>;
 
 const SPEED_DURATION: Record<SpinnerSpeed, string> = {
-  slow: '1.5s',
-  normal: '0.75s',
-  fast: '0.45s',
+  slow: '2s',
+  normal: '1.2s',
+  fast: '0.7s',
 } as const satisfies Record<SpinnerSpeed, string>;
 
 const DOT_DELAYS: string[] = ['0s', '0.16s', '0.32s'];
@@ -75,7 +75,6 @@ const BAR_DELAYS: string[] = ['0s', '0.15s', '0.3s', '0.45s'];
  * <kb-spinner track show-label label="Loading data..."></kb-spinner>
  * ```
  */
-@customElement('kb-spinner')
 export class KbSpinner extends KbBaseElement {
   /** Spinner animation style. @defaultValue 'border' */
   @property({ type: String }) variant: SpinnerVariant = 'border';
@@ -101,10 +100,10 @@ export class KbSpinner extends KbBaseElement {
     const borderColor = lookupScheme(BORDER_COLOR, this.colorScheme) ?? 'border-blue-500 dark:border-blue-400';
 
     const duration = prefersReducedMotion() ? '0.01ms' : (SPEED_DURATION[this.speed] ?? SPEED_DURATION.normal);
-    const spinStyle = `animation:spin ${duration} linear infinite`;
+    const spinStyle = `border-radius:9999px;animation:spin ${duration} linear infinite`;
 
     const spinnerEl = html`<span
-      class="inline-block rounded-full border-t-transparent ${sizeClasses} ${borderColor}"
+      class="inline-block border-t-transparent ${sizeClasses} ${borderColor}"
       style=${spinStyle}
     ></span>`;
 
@@ -112,7 +111,7 @@ export class KbSpinner extends KbBaseElement {
 
     const trackSizeClasses = BORDER_SIZE[this.size] ?? BORDER_SIZE.md;
     return html`<span class="relative inline-flex items-center justify-center">
-      <span class="absolute rounded-full ${trackSizeClasses} ${TRACK_COLOR}"></span>
+      <span class="absolute ${trackSizeClasses} ${TRACK_COLOR}" style="border-radius:9999px"></span>
       ${spinnerEl}
     </span>`;
   }
@@ -124,11 +123,18 @@ export class KbSpinner extends KbBaseElement {
     return html`<span class="inline-flex items-center ${cfg.gap}">
       ${DOT_DELAYS.map(
         (delay) => html`<span
-          class="rounded-full ${cfg.dot} ${bgColor} animate-kb-spinner-bounce"
-          style="animation-delay:${delay}"
+          class="${cfg.dot} ${bgColor} animate-kb-spinner-bounce"
+          style="border-radius:9999px;animation-delay:${delay}"
         ></span>`,
       )}
     </span>`;
+  }
+
+  private _renderPulse(): TemplateResult {
+    const sizeClasses = PULSE_SIZE[this.size] ?? PULSE_SIZE.md;
+    const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
+
+    return html`<span class="inline-block ${sizeClasses} ${bgColor} animate-kb-spinner-pulse" style="border-radius:9999px"></span>`;
   }
 
   private _renderBars(): TemplateResult {
@@ -143,13 +149,6 @@ export class KbSpinner extends KbBaseElement {
         ></span>`,
       )}
     </span>`;
-  }
-
-  private _renderPulse(): TemplateResult {
-    const sizeClasses = PULSE_SIZE[this.size] ?? PULSE_SIZE.md;
-    const bgColor = lookupScheme(BG_COLOR, this.colorScheme) ?? 'bg-blue-500 dark:bg-blue-400';
-
-    return html`<span class="inline-block rounded-full ${sizeClasses} ${bgColor} animate-kb-spinner-pulse"></span>`;
   }
 
   override render(): TemplateResult {
@@ -169,7 +168,7 @@ export class KbSpinner extends KbBaseElement {
     }
 
     const labelEl = this.showLabel
-      ? html`<span class="font-mono ${LABEL_SIZE[this.size] ?? 'text-xs'} ${kbClasses.textSecondary} select-none">${this.label}</span>`
+      ? html`<span class="${LABEL_SIZE[this.size] ?? 'text-xs'} ${kbClasses.textSecondary} select-none">${this.label}</span>`
       : nothing;
 
     const layoutClass =

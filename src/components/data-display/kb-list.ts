@@ -1,5 +1,5 @@
-import { html, type TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, isServer, type TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
 import type { KbListItem } from './kb-list-item.js';
@@ -31,7 +31,6 @@ const SPACING_MAP: Record<ListSpacing, string> = {
  * </kb-list>
  * ```
  */
-@customElement('kb-list')
 export class KbList extends KbBaseElement {
   static override hostDisplay = 'block' as const;
 
@@ -52,31 +51,45 @@ export class KbList extends KbBaseElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
+    if (isServer) return;
     this._isEmpty = this.children.length === 0;
     this._itemObserver = new MutationObserver(() => {
       this._isEmpty = this.children.length === 0;
       this._pushIndices();
     });
     this._itemObserver.observe(this, { childList: true });
+    // React sets properties via useLayoutEffect (after DOM commit). Schedule
+    // a push after all microtasks so we see the final property values.
+    Promise.resolve().then(() => this._pushIndices());
   }
 
   override disconnectedCallback(): void {
     this._itemObserver?.disconnect();
     this._itemObserver = undefined;
     super.disconnectedCallback();
+    if (isServer) return;
+  }
+
+  override firstUpdated(): void {
+    if (isServer) return;
+    this._pushIndices();
   }
 
   override updated(changed: Map<PropertyKey, unknown>): void {
+    if (isServer) return;
     if (changed.has('variant') || changed.has('spacing') || changed.has('dividers') || changed.has('interactive')) {
       this._pushIndices();
     }
   }
 
   _pushIndices(): void {
-    const items = Array.from(this.querySelectorAll<KbListItem>(':scope > kb-list-item'));
+    const items = Array.from(this.querySelectorAll<KbListItem>('kb-list-item')).filter(
+      (item) => item.closest('kb-list') === this,
+    );
     const last = items.length - 1;
+    const ordered = this.variant === 'ordered';
     items.forEach((item, i) => {
-      item._fromParent(i + 1, i < last);
+      item._fromParent(i + 1, i < last, ordered);
     });
   }
 
