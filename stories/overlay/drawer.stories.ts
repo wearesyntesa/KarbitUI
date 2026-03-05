@@ -581,7 +581,7 @@ export const FullWidth: S = {
     <kb-drawer open placement="right" size="full">
       <span slot="header">ANALYTICS — LAST 30 DAYS</span>
       <div class="space-y-5">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           ${[
             { label: 'Total Requests', value: '4.2M', change: '+12.3%' },
             { label: 'Unique Visitors', value: '284K', change: '+8.7%' },
@@ -597,7 +597,7 @@ export const FullWidth: S = {
           `,
           )}
         </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="border border-gray-200 dark:border-zinc-700 p-4">
             <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Top endpoints</div>
             <div class="space-y-2">

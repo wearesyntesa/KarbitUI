@@ -89,7 +89,7 @@ export const Sizes: S = {
 export const CardGrid: S = {
   name: 'Card Grid',
   render: () => html`
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
       <kb-card interactive @kb-click=${() => alert('Requests')}>
         <span slot="header">Requests</span>
         <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">12,847</div>
@@ -140,7 +140,7 @@ export const RichContent: S = {
 export const VariantComparison: S = {
   name: 'Variant Comparison',
   render: () => html`
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
       <kb-card variant="outline">
         <span slot="header">Outline</span>
         Thin border with surface background. The default structural card

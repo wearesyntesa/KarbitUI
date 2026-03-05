@@ -471,7 +471,7 @@ export class KbPopover extends KbBaseElement<'trigger' | 'header' | 'footer'> {
     const arrowClasses = ARROW_CLASSES[p] ?? ARROW_CLASSES.bottom;
 
     const panelClasses = cx(
-      'absolute z-50',
+      'absolute z-50 max-w-[calc(100vw-2rem)]',
       basePlacement,
       offsetClass,
       SIZE_MIN_W[s],

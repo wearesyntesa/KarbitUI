@@ -36,8 +36,20 @@ const SIZE_MAP: Record<
     label: 'text-xs gap-1.5',
     description: 'text-[10px]',
   },
-  sm: { outer: 'w-4 h-4', tapWrap: '', inner: 'r="4.5"', label: 'text-sm gap-2', description: 'text-xs' },
-  md: { outer: 'w-5 h-5', tapWrap: '', inner: 'r="5"', label: 'text-sm gap-2.5', description: 'text-xs' },
+  sm: {
+    outer: 'w-4 h-4',
+    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
+    inner: 'r="4.5"',
+    label: 'text-sm gap-2',
+    description: 'text-xs',
+  },
+  md: {
+    outer: 'w-5 h-5',
+    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
+    inner: 'r="5"',
+    label: 'text-sm gap-2.5',
+    description: 'text-xs',
+  },
   lg: { outer: 'w-6 h-6', tapWrap: '', inner: 'r="5.5"', label: 'text-base gap-3', description: 'text-sm' },
   xl: { outer: 'w-7 h-7', tapWrap: '', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
 } as const satisfies Record<

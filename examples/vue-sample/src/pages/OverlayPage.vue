@@ -4,6 +4,8 @@ import { ref } from 'vue'
 const modalOpen = ref(false)
 const drawerOpen = ref(false)
 const drawerPlacement = ref<'left' | 'right' | 'top' | 'bottom'>('right')
+const alertOpen = ref(false)
+const deleteAlertOpen = ref(false)
 
 const PLACEMENTS = ['left', 'right', 'top', 'bottom'] as const
 const TOOLTIP_PLACEMENTS = ['top', 'right', 'bottom', 'left'] as const
@@ -99,6 +101,102 @@ function openDrawer(p: 'left' | 'right' | 'top' | 'bottom') {
         >
           <kb-button variant="outline">{{ p }}</kb-button>
         </kb-tooltip>
+      </div>
+    </section>
+
+    <!-- Dropdown Menu -->
+    <section class="space-y-3">
+      <h2 class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Dropdown Menu</h2>
+      <div class="flex flex-wrap gap-4">
+        <kb-dropdown-menu placement="bottom">
+          <kb-button variant="outline" slot="trigger">Actions</kb-button>
+          <kb-menu-item value="edit">Edit</kb-menu-item>
+          <kb-menu-item value="duplicate">Duplicate</kb-menu-item>
+          <kb-menu-item value="archive">Archive</kb-menu-item>
+          <kb-menu-item value="delete" destructive>Delete</kb-menu-item>
+        </kb-dropdown-menu>
+        <kb-dropdown-menu placement="bottom" size="sm">
+          <kb-button variant="outline" slot="trigger" size="sm">Small menu</kb-button>
+          <kb-menu-item value="copy">Copy</kb-menu-item>
+          <kb-menu-item value="paste">Paste</kb-menu-item>
+          <kb-menu-item value="cut" disabled>Cut (disabled)</kb-menu-item>
+        </kb-dropdown-menu>
+      </div>
+    </section>
+
+    <!-- Alert Dialog -->
+    <section class="space-y-3">
+      <h2 class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Alert Dialog</h2>
+      <div class="flex gap-2">
+        <kb-button variant="outline" @click="alertOpen = true">Confirm action</kb-button>
+        <kb-button variant="outline" color-scheme="red" @click="deleteAlertOpen = true">Delete item</kb-button>
+      </div>
+      <kb-alert-dialog
+        :open="alertOpen"
+        @kb-confirm="alertOpen = false"
+        @kb-cancel="alertOpen = false"
+      >
+        <span slot="header">Confirm Changes</span>
+        <p class="text-sm text-slate-600 dark:text-zinc-300">
+          Are you sure you want to save these changes? This will update the production configuration.
+        </p>
+        <span slot="footer">
+          <div class="flex gap-2 justify-end">
+            <kb-button variant="outline" data-action="cancel">Cancel</kb-button>
+            <kb-button variant="solid" data-action="confirm">Save Changes</kb-button>
+          </div>
+        </span>
+      </kb-alert-dialog>
+      <kb-alert-dialog
+        :open="deleteAlertOpen"
+        @kb-confirm="deleteAlertOpen = false"
+        @kb-cancel="deleteAlertOpen = false"
+      >
+        <span slot="header">Delete Item</span>
+        <p class="text-sm text-slate-600 dark:text-zinc-300">
+          This action cannot be undone. The item and all associated data will be permanently removed.
+        </p>
+        <span slot="footer">
+          <div class="flex gap-2 justify-end">
+            <kb-button variant="outline" data-action="cancel">Cancel</kb-button>
+            <kb-button variant="solid" color-scheme="red" data-action="confirm">Delete</kb-button>
+          </div>
+        </span>
+      </kb-alert-dialog>
+    </section>
+
+    <!-- Context Menu -->
+    <section class="space-y-3">
+      <h2 class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Context Menu</h2>
+      <kb-context-menu>
+        <div slot="trigger" class="border border-dashed border-gray-300 dark:border-zinc-600 p-8 text-center text-sm text-slate-400 dark:text-zinc-500 select-none">
+          Right-click this area
+        </div>
+        <kb-menu-item value="cut">Cut</kb-menu-item>
+        <kb-menu-item value="copy">Copy</kb-menu-item>
+        <kb-menu-item value="paste">Paste</kb-menu-item>
+        <kb-menu-item value="delete" destructive>Delete</kb-menu-item>
+      </kb-context-menu>
+    </section>
+
+    <!-- Hover Card -->
+    <section class="space-y-3">
+      <h2 class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Hover Card</h2>
+      <div class="flex flex-wrap gap-6 items-center">
+        <kb-hover-card placement="bottom">
+          <kb-button variant="outline">Hover me (bottom)</kb-button>
+          <div slot="content" class="space-y-2">
+            <p class="font-semibold text-sm">Project Info</p>
+            <p class="text-xs text-slate-500 dark:text-zinc-400">KarbitUI — a brutalist design system built with Lit and Tailwind CSS.</p>
+            <p class="text-xs text-slate-400 dark:text-zinc-500">v0.1.0 · MIT License</p>
+          </div>
+        </kb-hover-card>
+        <kb-hover-card placement="top" size="sm">
+          <kb-button variant="outline">Hover me (top)</kb-button>
+          <div slot="content">
+            <p class="text-xs text-slate-500 dark:text-zinc-400">A small hover card above the trigger.</p>
+          </div>
+        </kb-hover-card>
       </div>
     </section>
   </div>

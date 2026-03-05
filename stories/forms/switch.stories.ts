@@ -148,7 +148,7 @@ export const Loading: S = {
 
 export const AllColorSizeCombos: S = {
   render: () => html`
-    <div style="display:grid;grid-template-columns:repeat(5,auto);gap:12px;align-items:center">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(48px,auto));gap:12px;align-items:center">
       ${(['blue', 'red', 'green', 'yellow', 'black'] as const).map((color) =>
         (['xs', 'sm', 'md', 'lg', 'xl'] as const).map(
           (size) => html`

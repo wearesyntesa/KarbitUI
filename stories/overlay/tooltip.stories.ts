@@ -16,7 +16,7 @@ type S = StoryObj<Args>;
 
 export const Default: S = {
   render: () => html`
-    <div class="flex items-center justify-center p-20">
+    <div class="flex items-center justify-center p-8 md:p-20">
       <kb-tooltip label="This is a tooltip">
         <kb-button>Hover me</kb-button>
       </kb-tooltip>
@@ -26,7 +26,7 @@ export const Default: S = {
 
 export const Placements: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Top placement" placement="top">
         <kb-button variant="outline">Top</kb-button>
       </kb-tooltip>
@@ -45,7 +45,7 @@ export const Placements: S = {
 
 export const Sizes: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Extra small" size="xs">
         <kb-button size="xs">XS tooltip</kb-button>
       </kb-tooltip>
@@ -61,7 +61,7 @@ export const Sizes: S = {
 
 export const WithArrow: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Arrow on top" placement="top" show-arrow>
         <kb-button variant="outline">Top</kb-button>
       </kb-tooltip>
@@ -80,7 +80,7 @@ export const WithArrow: S = {
 
 export const NoArrow: S = {
   render: () => html`
-    <div class="flex items-center justify-center p-20">
+    <div class="flex items-center justify-center p-8 md:p-20">
       <kb-tooltip label="No arrow tooltip" .showArrow=${false}>
         <kb-button>No arrow</kb-button>
       </kb-tooltip>
@@ -90,7 +90,7 @@ export const NoArrow: S = {
 
 export const DarkVariant: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Dark tooltip (default)" variant="dark" placement="top" show-arrow>
         <kb-button variant="outline">Dark</kb-button>
       </kb-tooltip>
@@ -103,7 +103,7 @@ export const DarkVariant: S = {
 
 export const LightVariant: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Light tooltip" variant="light" placement="top" show-arrow>
         <kb-button>Light</kb-button>
       </kb-tooltip>
@@ -122,7 +122,7 @@ export const LightVariant: S = {
 
 export const Offsets: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Offset 0" offset="0">
         <kb-button variant="outline" size="xs">Offset 0</kb-button>
       </kb-tooltip>
@@ -144,7 +144,7 @@ export const Offsets: S = {
 
 export const OpenDelay: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="No delay" open-delay="0">
         <kb-button variant="outline">0ms delay</kb-button>
       </kb-tooltip>
@@ -160,7 +160,7 @@ export const OpenDelay: S = {
 
 export const CloseDelay: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="Instant close" close-delay="0">
         <kb-button variant="outline">0ms close</kb-button>
       </kb-tooltip>
@@ -173,7 +173,7 @@ export const CloseDelay: S = {
 
 export const Disabled: S = {
   render: () => html`
-    <div class="flex items-center justify-center p-20">
+    <div class="flex items-center justify-center p-8 md:p-20">
       <kb-tooltip label="You won't see this" disabled>
         <kb-button>Tooltip disabled</kb-button>
       </kb-tooltip>
@@ -183,7 +183,7 @@ export const Disabled: S = {
 
 export const MultilineText: S = {
   render: () => html`
-    <div class="flex flex-wrap items-center justify-center gap-8 p-20">
+    <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
       <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width" size="sm">
         <kb-button>Multiline SM</kb-button>
       </kb-tooltip>
@@ -196,7 +196,7 @@ export const MultilineText: S = {
 
 export const ProgrammaticOpen: S = {
   render: () => html`
-    <div class="flex items-center justify-center p-20">
+    <div class="flex items-center justify-center p-8 md:p-20">
       <kb-tooltip label="Programmatically opened" open show-arrow>
         <kb-button variant="solid">Always visible</kb-button>
       </kb-tooltip>
@@ -206,7 +206,7 @@ export const ProgrammaticOpen: S = {
 
 export const FocusAccessible: S = {
   render: () => html`
-    <div class="flex items-center justify-center gap-4 p-20">
+    <div class="flex items-center justify-center gap-4 p-8 md:p-20">
       <p class="text-sm text-slate-500 dark:text-zinc-400">Tab to focus each button:</p>
       <kb-tooltip label="First action" show-arrow>
         <kb-button variant="outline">Action 1</kb-button>
@@ -223,7 +223,7 @@ export const FocusAccessible: S = {
 
 export const OnIconButton: S = {
   render: () => html`
-    <div class="flex items-center justify-center gap-4 p-20">
+    <div class="flex items-center justify-center gap-4 p-8 md:p-20">
       <kb-tooltip label="Edit" show-arrow>
         <kb-icon-button aria-label="Edit" variant="outline">
           <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -252,7 +252,7 @@ export const OnIconButton: S = {
 
 export const AllVariantsAndPlacements: S = {
   render: () => html`
-    <div class="grid grid-cols-4 gap-8 p-20 place-items-center">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-20 place-items-center">
       <kb-tooltip label="Dark / Top" variant="dark" placement="top" show-arrow>
         <kb-button variant="outline" size="xs">Dark Top</kb-button>
       </kb-tooltip>

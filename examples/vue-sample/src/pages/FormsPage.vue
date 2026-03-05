@@ -11,6 +11,20 @@ const PRIORITY_OPTIONS = ['low', 'medium', 'high'] as const
 
 const BUTTON_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
+const SEGMENT_OPTIONS = [
+  { value: 'weekly', label: 'Weekly' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' },
+]
+
+const FRAMEWORK_OPTIONS = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'solid', label: 'Solid' },
+]
+
 const username = ref('')
 const role = ref('')
 const priority = ref('')
@@ -18,6 +32,17 @@ const notes = ref('')
 const termsAccepted = ref(false)
 const notifications = ref(false)
 const loading = ref(false)
+const quantity = ref(5)
+const sliderVal = ref(50)
+const pin = ref('')
+const rating = ref(0)
+const interval = ref('monthly')
+const tags = ref(['vue', 'typescript'])
+const time = ref('')
+const framework = ref('')
+const date = ref('')
+const color = ref('#3b82f6ff')
+const editableText = ref('Click me to edit')
 
 function handleSubmit(e: Event) {
   e.preventDefault()
@@ -56,7 +81,7 @@ function handleSubmit(e: Event) {
 
       <kb-form-control>
         <kb-form-label>Priority</kb-form-label>
-        <div class="flex gap-6">
+        <div class="flex flex-wrap gap-6">
           <kb-radio
             v-for="val in PRIORITY_OPTIONS"
             :key="val"
@@ -98,6 +123,126 @@ function handleSubmit(e: Event) {
         </kb-switch>
       </kb-form-control>
 
+      <kb-form-control>
+        <kb-form-label>Quantity</kb-form-label>
+        <kb-number-input
+          :value="quantity"
+          :min="0"
+          :max="100"
+          :step="1"
+          @kb-change="quantity = Number(($event as CustomEvent).detail.value)"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Volume ({{ sliderVal }}%)</kb-form-label>
+        <kb-slider
+          :value="sliderVal"
+          :min="0"
+          :max="100"
+          :step="10"
+          show-value
+          show-ticks
+          show-range
+          @kb-change="sliderVal = Number(($event as CustomEvent).detail.value)"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Verification code</kb-form-label>
+        <kb-pin-input
+          :length="6"
+          type="numeric"
+          @kb-complete="pin = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Rating ({{ rating }}/5)</kb-form-label>
+        <kb-rating
+          :value="rating"
+          :max="5"
+          allow-half
+          @kb-change="rating = Number(($event as CustomEvent).detail.value)"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Billing interval</kb-form-label>
+        <kb-segment
+          :options.prop="SEGMENT_OPTIONS"
+          :value="interval"
+          @kb-change="interval = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Tags</kb-form-label>
+        <kb-tags-input
+          :values.prop="tags"
+          placeholder="Add a tag..."
+          @kb-change="tags = [...($event as CustomEvent).detail.values]"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Appointment time</kb-form-label>
+        <kb-time-picker
+          :value="time"
+          placeholder="Pick a time"
+          clearable
+          @kb-change="time = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Framework</kb-form-label>
+        <kb-combobox
+          :options.prop="FRAMEWORK_OPTIONS"
+          :value="framework"
+          placeholder="Search frameworks..."
+          clearable
+          @kb-change="framework = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Date</kb-form-label>
+        <kb-date-picker
+          :value="date"
+          placeholder="Pick a date"
+          clearable
+          @kb-change="date = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Color</kb-form-label>
+        <kb-color-picker
+          :value="color"
+          show-alpha
+          @kb-change="color = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Editable text</kb-form-label>
+        <kb-editable
+          :value="editableText"
+          placeholder="Click to edit"
+          @kb-edit-submit="editableText = ($event as CustomEvent).detail.value"
+        />
+      </kb-form-control>
+
+      <kb-form-control>
+        <kb-form-label>Attachments</kb-form-label>
+        <kb-file-upload
+          accept="image/*,.pdf"
+          multiple
+          :max-size="5000000"
+        />
+      </kb-form-control>
+
       <div class="space-y-3">
         <p class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Button variants</p>
         <div class="flex flex-wrap gap-2">
@@ -134,7 +279,7 @@ function handleSubmit(e: Event) {
 
       <div class="space-y-3">
         <p class="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Icon buttons</p>
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <kb-icon-button variant="solid" aria-label="Add">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 5v14M5 12h14"/></svg>
           </kb-icon-button>
@@ -153,6 +298,17 @@ function handleSubmit(e: Event) {
         <div>priority: {{ priority || '—' }}</div>
         <div>terms: {{ String(termsAccepted) }}</div>
         <div>notifications: {{ String(notifications) }}</div>
+        <div>quantity: {{ quantity }}</div>
+        <div>slider: {{ sliderVal }}%</div>
+        <div>pin: {{ pin || '—' }}</div>
+        <div>rating: {{ rating }}</div>
+        <div>interval: {{ interval }}</div>
+        <div>tags: {{ tags.join(', ') || '—' }}</div>
+        <div>time: {{ time || '—' }}</div>
+        <div>framework: {{ framework || '—' }}</div>
+        <div>date: {{ date || '—' }}</div>
+        <div>color: {{ color }}</div>
+        <div>editable: {{ editableText }}</div>
       </div>
 
     </form>

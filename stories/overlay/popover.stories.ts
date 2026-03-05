@@ -25,7 +25,7 @@ export const Default: S = {
 
 export const WithArrow: S = {
   render: () => html`
-    <div style="display: flex; gap: 48px; align-items: center; justify-content: center; padding: 120px 80px">
+    <div style="display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 16px" class="md:!p-20">>
       <kb-popover placement="bottom" trigger="click" size="sm" show-arrow open>
         <kb-button slot="trigger" size="sm">BOTTOM</kb-button>
         <p>Arrow pointing up toward trigger.</p>
@@ -191,7 +191,7 @@ export const NoHeaderNoFooter: S = {
 
 export const CustomOffset: S = {
   render: () => html`
-    <div style="display: flex; gap: 32px; padding: 80px">
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; padding: 32px 16px" class="md:!p-20">>
       <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="0">
         <kb-button slot="trigger" size="sm">OFFSET 0</kb-button>
         <p>No gap.</p>

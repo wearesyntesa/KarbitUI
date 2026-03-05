@@ -12,6 +12,9 @@
     { href: '/feedback', label: 'Feedback' },
     { href: '/overlay', label: 'Overlay' },
     { href: '/data-display', label: 'Data Display' },
+    { href: '/navigation', label: 'Navigation' },
+    { href: '/layout', label: 'Layout' },
+    { href: '/typography', label: 'Typography' },
   ]
 
   function isActive(href: string): boolean {
@@ -26,18 +29,18 @@
 <div class={dark ? 'dark' : ''}>
   <div class="min-h-screen bg-white text-slate-900 dark:bg-zinc-950 dark:text-zinc-100">
     <header class="border-b border-gray-200 dark:border-zinc-800">
-      <div class="px-6 flex items-center">
+      <div class="px-6 flex items-center gap-4">
         <!-- Brand -->
-        <span class="font-sans font-bold text-sm uppercase tracking-widest text-slate-900 dark:text-zinc-100 pr-6 mr-6 border-r border-gray-200 dark:border-zinc-800 py-4">
+        <span class="font-sans font-bold text-sm uppercase tracking-widest text-slate-900 dark:text-zinc-100 pr-6 border-r border-gray-200 dark:border-zinc-800 py-4 shrink-0">
           Karbit<span class="font-normal text-red-500">UI</span>
         </span>
 
         <!-- Navigation -->
-        <nav class="flex items-center -mb-px">
+        <nav class="flex items-center -mb-px overflow-x-auto min-w-0">
           {#each NAV as n}
             <a
               href={n.href}
-              class="relative font-sans text-xs font-medium uppercase tracking-widest px-4 py-2 transition-colors {isActive(n.href)
+              class="relative font-sans text-xs font-medium uppercase tracking-widest px-4 py-2 transition-colors shrink-0 {isActive(n.href)
                 ? 'text-blue-600 dark:text-blue-400'
                 : 'text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-300'}"
             >
@@ -52,7 +55,7 @@
         <!-- Dark mode toggle -->
         <button
           type="button"
-          class="ml-auto flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-300 py-4 transition-colors"
+          class="ml-auto flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-300 py-4 transition-colors shrink-0"
           aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
           onclick={toggleDark}
         >

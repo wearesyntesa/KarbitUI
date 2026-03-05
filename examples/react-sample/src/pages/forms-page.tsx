@@ -10,6 +10,18 @@ import { FormControl } from '@wearesyntesa/karbit-ui/react/form-control'
 import { FormLabel } from '@wearesyntesa/karbit-ui/react/form-label'
 import { Switch } from '@wearesyntesa/karbit-ui/react/switch'
 import { IconButton } from '@wearesyntesa/karbit-ui/react/icon-button'
+import { NumberInput } from '@wearesyntesa/karbit-ui/react/number-input'
+import { Slider } from '@wearesyntesa/karbit-ui/react/slider'
+import { PinInput } from '@wearesyntesa/karbit-ui/react/pin-input'
+import { Rating } from '@wearesyntesa/karbit-ui/react/rating'
+import { Segment } from '@wearesyntesa/karbit-ui/react/segment'
+import { TagsInput } from '@wearesyntesa/karbit-ui/react/tags-input'
+import { FileUpload } from '@wearesyntesa/karbit-ui/react/file-upload'
+import { TimePicker } from '@wearesyntesa/karbit-ui/react/time-picker'
+import { Combobox } from '@wearesyntesa/karbit-ui/react/combobox'
+import { DatePicker } from '@wearesyntesa/karbit-ui/react/date-picker'
+import { ColorPicker } from '@wearesyntesa/karbit-ui/react/color-picker'
+import { Editable } from '@wearesyntesa/karbit-ui/react/editable'
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: 'Admin' },
@@ -21,6 +33,22 @@ type Role = (typeof ROLE_OPTIONS)[number]['value']
 const PRIORITY_OPTIONS = ['low', 'medium', 'high'] as const
 type Priority = (typeof PRIORITY_OPTIONS)[number]
 
+const SEGMENT_OPTIONS = [
+  { value: 'weekly', label: 'Weekly' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' },
+] as const
+type Interval = (typeof SEGMENT_OPTIONS)[number]['value']
+
+const FRAMEWORK_OPTIONS = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'solid', label: 'Solid' },
+] as const
+type Framework = (typeof FRAMEWORK_OPTIONS)[number]['value']
+
 export function FormsPage() {
   const [username, setUsername] = useState('')
   const [role, setRole] = useState<Role | ''>('')
@@ -28,7 +56,18 @@ export function FormsPage() {
   const [notes, setNotes] = useState('')
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [notifications, setNotifications] = useState(false)
+  const [quantity, setQuantity] = useState(5)
+  const [sliderVal, setSliderVal] = useState(50)
+  const [pin, setPin] = useState('')
   const [loading, setLoading] = useState(false)
+  const [rating, setRating] = useState(0)
+  const [interval, setInterval] = useState<Interval>('monthly')
+  const [tags, setTags] = useState<readonly string[]>(['react', 'typescript'])
+  const [time, setTime] = useState('')
+  const [framework, setFramework] = useState<Framework | ''>('')
+  const [date, setDate] = useState('')
+  const [color, setColor] = useState('#3b82f6ff')
+  const [editableText, setEditableText] = useState('Click me to edit')
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -66,7 +105,7 @@ export function FormsPage() {
 
         <FormControl>
           <FormLabel>Priority</FormLabel>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             {PRIORITY_OPTIONS.map((val) => (
               <Radio
                 key={val}
@@ -109,6 +148,126 @@ export function FormsPage() {
           </Switch>
         </FormControl>
 
+        <FormControl>
+          <FormLabel>Quantity</FormLabel>
+          <NumberInput
+            value={quantity}
+            min={0}
+            max={100}
+            step={1}
+            onKbChange={(e) => setQuantity(Number(e.detail.value))}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Volume ({sliderVal}%)</FormLabel>
+          <Slider
+            value={sliderVal}
+            min={0}
+            max={100}
+            step={10}
+            showValue
+            showTicks
+            showRange
+            onKbChange={(e) => setSliderVal(Number(e.detail.value))}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Verification code</FormLabel>
+          <PinInput
+            length={6}
+            type="numeric"
+            onKbComplete={(e) => setPin(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Rating ({rating}/5)</FormLabel>
+          <Rating
+            value={rating}
+            max={5}
+            allowHalf
+            onKbChange={(e) => setRating(Number(e.detail.value))}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Billing interval</FormLabel>
+          <Segment
+            options={SEGMENT_OPTIONS}
+            value={interval}
+            onKbChange={(e) => setInterval(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Tags</FormLabel>
+          <TagsInput
+            values={tags}
+            placeholder="Add a tag..."
+            onKbChange={(e) => setTags(e.detail.values)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Appointment time</FormLabel>
+          <TimePicker
+            value={time}
+            placeholder="Pick a time"
+            clearable
+            onKbChange={(e) => setTime(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Framework</FormLabel>
+          <Combobox
+            options={FRAMEWORK_OPTIONS}
+            value={framework}
+            placeholder="Search frameworks..."
+            clearable
+            onKbChange={(e) => setFramework(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Date</FormLabel>
+          <DatePicker
+            value={date}
+            placeholder="Pick a date"
+            clearable
+            onKbChange={(e) => setDate(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Color</FormLabel>
+          <ColorPicker
+            value={color}
+            showAlpha
+            onKbChange={(e) => setColor(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Editable text</FormLabel>
+          <Editable
+            value={editableText}
+            placeholder="Click to edit"
+            onKbEditSubmit={(e) => setEditableText(e.detail.value)}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Attachments</FormLabel>
+          <FileUpload
+            accept="image/*,.pdf"
+            multiple
+            maxSize={5_000_000}
+          />
+        </FormControl>
+
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Button variants</p>
           <div className="flex flex-wrap gap-2">
@@ -140,7 +299,7 @@ export function FormsPage() {
 
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-300">Icon buttons</p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <IconButton variant="solid" aria-label="Add">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square"><path d="M12 5v14M5 12h14"/></svg>
             </IconButton>
@@ -159,6 +318,17 @@ export function FormsPage() {
           <div>priority: {priority || '—'}</div>
           <div>terms: {String(termsAccepted)}</div>
           <div>notifications: {String(notifications)}</div>
+          <div>quantity: {quantity}</div>
+          <div>slider: {sliderVal}%</div>
+          <div>pin: {pin || '—'}</div>
+          <div>rating: {rating}</div>
+          <div>interval: {interval}</div>
+          <div>tags: {tags.join(', ') || '—'}</div>
+          <div>time: {time || '—'}</div>
+          <div>framework: {framework || '—'}</div>
+          <div>date: {date || '—'}</div>
+          <div>color: {color}</div>
+          <div>editable: {editableText}</div>
         </div>
 
       </form>

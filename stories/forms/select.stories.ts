@@ -218,7 +218,7 @@ export const OptionGroupsWithIcon: S = {
 
 export const KitchenSink: S = {
   render: () => html`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
       <kb-select variant="outline" placeholder="Outline" .options=${frameworkOptions}>
         <span slot="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="m21 21-4.35-4.35"/><circle cx="11" cy="11" r="8"/></svg></span>
       </kb-select>

@@ -8,8 +8,22 @@ import { cx } from '../../utils/cx.js';
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
 
 const SIZE_MAP: Record<DrawerPlacement, Record<OverlaySize, string>> = {
-  left: { xs: 'w-60', sm: 'w-72', md: 'w-96', lg: 'w-[32rem]', xl: 'w-[40rem]', full: 'w-full' },
-  right: { xs: 'w-60', sm: 'w-72', md: 'w-96', lg: 'w-[32rem]', xl: 'w-[40rem]', full: 'w-full' },
+  left: {
+    xs: 'w-60 max-w-full',
+    sm: 'w-72 max-w-full',
+    md: 'w-96 max-w-full',
+    lg: 'w-[32rem] max-w-full',
+    xl: 'w-[40rem] max-w-full',
+    full: 'w-full',
+  },
+  right: {
+    xs: 'w-60 max-w-full',
+    sm: 'w-72 max-w-full',
+    md: 'w-96 max-w-full',
+    lg: 'w-[32rem] max-w-full',
+    xl: 'w-[40rem] max-w-full',
+    full: 'w-full',
+  },
   top: { xs: 'h-40', sm: 'h-52', md: 'h-72', lg: 'h-96', xl: 'h-[32rem]', full: 'h-full' },
   bottom: { xs: 'h-40', sm: 'h-52', md: 'h-72', lg: 'h-96', xl: 'h-[32rem]', full: 'h-full' },
 } as const satisfies Record<DrawerPlacement, Record<OverlaySize, string>>;

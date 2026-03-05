@@ -146,7 +146,7 @@ export const ExtraLarge: S = {
     <kb-modal open size="xl">
       <span slot="header">USAGE OVERVIEW — JANUARY 2026</span>
       <div class="space-y-4">
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           ${[
             { label: 'API Calls', value: '1,247,893', pct: 62, limit: '2,000,000' },
             { label: 'Storage', value: '18.4 GB', pct: 37, limit: '50 GB' },
@@ -164,7 +164,7 @@ export const ExtraLarge: S = {
         </div>
         <kb-divider></kb-divider>
         <div class="border border-gray-200 dark:border-zinc-700">
-          <div class="grid grid-cols-4 gap-0 border-b border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800">
+          <div class="grid grid-cols-4 gap-0 border-b border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 hidden sm:grid">
             ${['Endpoint', 'Calls', 'Avg Latency', 'Errors'].map(
               (h) =>
                 html`<div class="px-3 py-2 font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">${h}</div>`,
@@ -177,7 +177,7 @@ export const ExtraLarge: S = {
             { ep: '/api/v2/webhooks', calls: '174,662', lat: '67ms', err: '0.08%' },
           ].map(
             (r) => html`
-            <div class="grid grid-cols-4 gap-0 border-b border-gray-200 dark:border-zinc-700 last:border-b-0">
+            <div class="grid sm:grid-cols-4 gap-0 border-b border-gray-200 dark:border-zinc-700 last:border-b-0">
               <div class="px-3 py-2 font-mono text-sm text-blue-500">${r.ep}</div>
               <div class="px-3 py-2 font-mono text-sm text-slate-900 dark:text-zinc-50">${r.calls}</div>
               <div class="px-3 py-2 font-mono text-sm text-slate-900 dark:text-zinc-50">${r.lat}</div>
@@ -200,7 +200,7 @@ export const FullWidth: S = {
   render: () => html`
     <kb-modal open size="full">
       <span slot="header">DIFF — SCHEMA MIGRATION v2.14.0</span>
-      <div class="grid grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700">
         <div class="border-r border-gray-200 dark:border-zinc-700">
           <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.13.sql</div>
           <pre class="p-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-zinc-300 overflow-x-auto"><code>CREATE TABLE users (
@@ -268,7 +268,7 @@ export const BackdropBlur: S = {
   render: () => html`
     <div class="space-y-3 p-6">
       <div class="font-sans text-lg font-semibold text-slate-900 dark:text-zinc-50">Project Dashboard</div>
-      <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         ${[1, 2, 3].map(() => html`<div class="border border-gray-200 dark:border-zinc-700 p-4 h-24"></div>`)}
       </div>
     </div>

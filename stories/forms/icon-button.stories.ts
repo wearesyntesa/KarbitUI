@@ -36,7 +36,7 @@ export const LoadingOutline: S = { args: { variant: 'outline', loading: true } }
 
 export const ColorSchemes: S = {
   render: () => html`
-    <div style="display:flex;gap:12px;align-items:center;">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <kb-icon-button label="Default" variant="solid">${starIcon}</kb-icon-button>
       <kb-icon-button label="Black" variant="solid" color-scheme="black">${starIcon}</kb-icon-button>
       <kb-icon-button label="Red" variant="solid" color-scheme="red">${closeIcon}</kb-icon-button>
@@ -48,7 +48,7 @@ export const ColorSchemes: S = {
 
 export const ColorSchemesOutline: S = {
   render: () => html`
-    <div style="display:flex;gap:12px;align-items:center;">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <kb-icon-button label="Default" variant="outline">${starIcon}</kb-icon-button>
       <kb-icon-button label="Black" variant="outline" color-scheme="black">${starIcon}</kb-icon-button>
       <kb-icon-button label="Red" variant="outline" color-scheme="red">${closeIcon}</kb-icon-button>
@@ -60,7 +60,7 @@ export const ColorSchemesOutline: S = {
 
 export const ColorSchemesGhost: S = {
   render: () => html`
-    <div style="display:flex;gap:12px;align-items:center;">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <kb-icon-button label="Default" variant="ghost">${starIcon}</kb-icon-button>
       <kb-icon-button label="Black" variant="ghost" color-scheme="black">${starIcon}</kb-icon-button>
       <kb-icon-button label="Red" variant="ghost" color-scheme="red">${closeIcon}</kb-icon-button>
@@ -72,7 +72,7 @@ export const ColorSchemesGhost: S = {
 
 export const AllSizes: S = {
   render: () => html`
-    <div style="display:flex;gap:12px;align-items:center;">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <kb-icon-button label="XS" size="xs">${starIcon}</kb-icon-button>
       <kb-icon-button label="SM" size="sm">${starIcon}</kb-icon-button>
       <kb-icon-button label="MD" size="md">${starIcon}</kb-icon-button>
@@ -84,7 +84,7 @@ export const AllSizes: S = {
 
 export const LoadingSizes: S = {
   render: () => html`
-    <div style="display:flex;gap:12px;align-items:center;">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <kb-icon-button label="XS" size="xs" loading>${starIcon}</kb-icon-button>
       <kb-icon-button label="SM" size="sm" loading>${starIcon}</kb-icon-button>
       <kb-icon-button label="MD" size="md" loading>${starIcon}</kb-icon-button>

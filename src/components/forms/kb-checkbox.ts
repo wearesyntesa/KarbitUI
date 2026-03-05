@@ -36,8 +36,20 @@ const SIZE_MAP: Record<
     icon: 'w-2.5 h-2.5',
     description: 'text-[10px]',
   },
-  sm: { box: 'w-4 h-4', tapWrap: '', label: 'text-sm gap-2', icon: 'w-3 h-3', description: 'text-xs' },
-  md: { box: 'w-5 h-5', tapWrap: '', label: 'text-sm gap-2.5', icon: 'w-3.5 h-3.5', description: 'text-xs' },
+  sm: {
+    box: 'w-4 h-4',
+    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
+    label: 'text-sm gap-2',
+    icon: 'w-3 h-3',
+    description: 'text-xs',
+  },
+  md: {
+    box: 'w-5 h-5',
+    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
+    label: 'text-sm gap-2.5',
+    icon: 'w-3.5 h-3.5',
+    description: 'text-xs',
+  },
   lg: { box: 'w-6 h-6', tapWrap: '', label: 'text-base gap-3', icon: 'w-4 h-4', description: 'text-sm' },
   xl: { box: 'w-7 h-7', tapWrap: '', label: 'text-lg gap-3.5', icon: 'w-5 h-5', description: 'text-sm' },
 } as const satisfies Record<

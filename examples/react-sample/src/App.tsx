@@ -4,12 +4,18 @@ import { FormsPage } from './pages/forms-page'
 import { FeedbackPage } from './pages/feedback-page'
 import { OverlayPage } from './pages/overlay-page'
 import { DataDisplayPage } from './pages/data-display-page'
+import { NavigationPage } from './pages/navigation-page'
+import { LayoutPage } from './pages/layout-page'
+import { TypographyPage } from './pages/typography-page'
 
 const NAV = [
   { to: '/', label: 'Forms' },
   { to: '/feedback', label: 'Feedback' },
   { to: '/overlay', label: 'Overlay' },
   { to: '/data-display', label: 'Data Display' },
+  { to: '/navigation', label: 'Navigation' },
+  { to: '/layout', label: 'Layout' },
+  { to: '/typography', label: 'Typography' },
 ]
 
 const SunIcon = () => (
@@ -59,14 +65,14 @@ export default function App() {
     <div className={dark ? 'dark' : ''}>
       <div className="min-h-screen bg-white text-slate-900 dark:bg-zinc-950 dark:text-zinc-100">
         <header className="border-b border-gray-200 dark:border-zinc-800">
-          <div className="px-6 flex items-center">
+           <div className="px-6 flex items-center gap-4">
             {/* Brand */}
-            <span className="font-sans font-bold text-sm uppercase tracking-widest text-slate-900 dark:text-zinc-100 pr-6 mr-6 border-r border-gray-200 dark:border-zinc-800 py-4">
+            <span className="font-sans font-bold text-sm uppercase tracking-widest text-slate-900 dark:text-zinc-100 pr-6 border-r border-gray-200 dark:border-zinc-800 py-4 shrink-0">
               Karbit<span className="font-normal text-red-500">UI</span>
             </span>
 
             {/* Navigation */}
-            <nav className="flex items-center -mb-px">
+            <nav className="flex items-center -mb-px overflow-x-auto min-w-0">
               {NAV.map((n) => (
                 <NavLink key={n.to} to={n.to} label={n.label} />
               ))}
@@ -76,7 +82,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setDark(!dark)}
-              className="ml-auto flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-300 py-4 transition-colors"
+              className="ml-auto flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-400 hover:text-slate-700 dark:hover:text-zinc-300 py-4 transition-colors shrink-0"
               aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {dark ? <SunIcon /> : <MoonIcon />}
@@ -90,6 +96,9 @@ export default function App() {
             <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/overlay" element={<OverlayPage />} />
             <Route path="/data-display" element={<DataDisplayPage />} />
+            <Route path="/navigation" element={<NavigationPage />} />
+            <Route path="/layout" element={<LayoutPage />} />
+            <Route path="/typography" element={<TypographyPage />} />
           </Routes>
         </main>
       </div>

@@ -279,18 +279,20 @@ export class KbSwitch extends KbBaseElement<'description'> {
           ?disabled=${isDisabled}
           name=${this.name ?? ''}
         />
-        <span
-          class=${this._computeTrackClasses(s)}
-          role="switch"
-          tabindex=${isDisabled ? '-1' : '0'}
-          aria-checked=${this.checked ? 'true' : 'false'}
-          @click=${this._handleToggle}
-          @keydown=${this._handleKeydown}
-          @focus=${this._onFocus}
-          @blur=${this._onBlur}
-        >
-          <span class=${thumbClasses} style="transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)">
-            ${this._renderThumbContent(s)}
+        <span class="inline-flex items-center justify-center min-w-[44px] min-h-[44px]">
+          <span
+            class=${this._computeTrackClasses(s)}
+            role="switch"
+            tabindex=${isDisabled ? '-1' : '0'}
+            aria-checked=${this.checked ? 'true' : 'false'}
+            @click=${this._handleToggle}
+            @keydown=${this._handleKeydown}
+            @focus=${this._onFocus}
+            @blur=${this._onBlur}
+          >
+            <span class=${thumbClasses} style="transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)">
+              ${this._renderThumbContent(s)}
+            </span>
           </span>
         </span>
         ${this._renderLabelBlock(s)}

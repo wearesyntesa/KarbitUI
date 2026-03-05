@@ -137,7 +137,7 @@ export const MaxLengthNearLimit: S = {
 
 export const ResizeModes: S = {
   render: () => html`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
       <kb-textarea resize="vertical" placeholder="resize: vertical (default)" rows="3"></kb-textarea>
       <kb-textarea resize="horizontal" placeholder="resize: horizontal" rows="3"></kb-textarea>
       <kb-textarea resize="both" placeholder="resize: both" rows="3"></kb-textarea>
@@ -160,7 +160,7 @@ export const AutoResizeWithMaxLength: S = {
 
 export const KitchenSink: S = {
   render: () => html`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:700px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:700px">
       <kb-textarea variant="outline" placeholder="Outline"></kb-textarea>
       <kb-textarea variant="filled" placeholder="Filled"></kb-textarea>
       <kb-textarea variant="flushed" placeholder="Flushed"></kb-textarea>
