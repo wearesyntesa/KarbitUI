@@ -11,5 +11,5 @@
   ],
   "project": ["src/**/*.ts"],
   "ignore": ["custom-elements-manifest.config.mjs", "tailwind.config.ts"],
-  "ignoreDependencies": ["@storybook/*", "@cspell/dict-*"]
+  "ignoreDependencies": ["@cspell/dict-*"]
 }

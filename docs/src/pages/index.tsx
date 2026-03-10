@@ -66,7 +66,6 @@ const features = [
 
 function HeroSection(): React.ReactElement {
   const { siteConfig } = useDocusaurusContext()
-  const version = siteConfig.customFields?.pkgVersion as string
 
   return (
     <section className="relative overflow-hidden">
@@ -81,12 +80,6 @@ function HeroSection(): React.ReactElement {
       />
 
       <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
-          <span className="w-1.5 h-1.5 bg-neutral-900 dark:bg-neutral-100" />
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            v{version} Now Available
-          </span>
-        </div>
 
         <h1 className="font-sans text-5xl md:text-7xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-6 max-w-4xl">
           Karbit<span className="text-red-600">UI</span>

@@ -112,30 +112,14 @@
     }
   },
   "files": {
-    "includes": ["src/**", "stories/**", ".storybook/**", "!.storybook/*.css", "*.ts", "*.js", "*.json"]
+    "includes": ["src/**", "*.ts", "*.js", "*.json"]
   },
   "overrides": [
     {
-      "includes": [".storybook/*.css", "src/theme.css"],
+      "includes": ["src/theme.css"],
       "css": {
         "parser": {
           "tailwindDirectives": true
-        }
-      }
-    },
-    {
-      "includes": ["stories/**", ".storybook/**"],
-      "linter": {
-        "rules": {
-          "suspicious": {
-            "noConsole": "off"
-          },
-          "correctness": {
-            "noUndeclaredDependencies": "off"
-          },
-          "nursery": {
-            "useExplicitType": "off"
-          }
         }
       }
     },
