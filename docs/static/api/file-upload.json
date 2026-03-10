@@ -1,0 +1,107 @@
+{
+  "name": "File Upload",
+  "tag": "kb-file-upload",
+  "category": "forms",
+  "description": "A drag-and-drop file upload area with file list preview.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-file-upload.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "FileUpload"
+  },
+  "props": [
+    {
+      "name": "accept",
+      "attribute": "accept",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Accepted file types (MIME types or extensions)."
+    },
+    {
+      "name": "multiple",
+      "attribute": "multiple",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Allow multiple file selection."
+    },
+    {
+      "name": "maxSize",
+      "attribute": "max-size",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Maximum file size in bytes. 0 = unlimited."
+    },
+    {
+      "name": "maxFiles",
+      "attribute": "max-files",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Maximum number of files. 0 = unlimited."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error styling."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-file-select",
+      "detail": "`{ files: readonly File[] }`",
+      "description": "Fires when files are selected. Detail: `{ files: File[] }`."
+    },
+    {
+      "name": "kb-file-remove",
+      "detail": "`{ name: string, index: number }`",
+      "description": "Fires when a file is removed. Detail: `{ name: string, index: number }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "button"
+    ],
+    "ariaAttributes": [
+      "aria-disabled",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "button"
+  ]
+}

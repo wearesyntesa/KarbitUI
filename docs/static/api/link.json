@@ -1,0 +1,110 @@
+{
+  "name": "Link",
+  "tag": "kb-link",
+  "category": "navigation",
+  "description": "A styled anchor element for navigation.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-link.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Link"
+  },
+  "props": [
+    {
+      "name": "href",
+      "attribute": "href",
+      "type": "string",
+      "default": "'#'",
+      "reflect": false,
+      "description": "URL the link navigates to."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "LinkVariant",
+      "default": "'underline'",
+      "reflect": false,
+      "description": "Visual variant controlling underline and hover behavior."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Text and icon size."
+    },
+    {
+      "name": "external",
+      "attribute": "external",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Open link in a new tab with `rel=\"noopener noreferrer\"` and show an external icon."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disables the link, preventing navigation and applying reduced opacity."
+    },
+    {
+      "name": "truncate",
+      "attribute": "truncate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Truncate link text with ellipsis when it overflows."
+    },
+    {
+      "name": "showVisited",
+      "attribute": "show-visited",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply visited-link color styling."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for text, decoration, and hover effects. Overrides the default blue."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon-left",
+      "description": "Leading icon (SVG auto-sized per `size`)."
+    },
+    {
+      "name": "icon-right",
+      "description": "Trailing icon (SVG auto-sized per `size`)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-link-click",
+      "detail": "`{ href: string }`",
+      "description": "Link clicked. Detail: `{ href: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-disabled"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "breadcrumb",
+    "button"
+  ]
+}

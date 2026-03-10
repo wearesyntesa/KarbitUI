@@ -1,0 +1,53 @@
+{
+  "name": "Highlight",
+  "tag": "kb-highlight",
+  "category": "typography",
+  "description": "Highlights matching text within a string for search results.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/typography/kb-highlight.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Highlight"
+  },
+  "props": [
+    {
+      "name": "text",
+      "attribute": "text",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Full text to render when using `query` mode."
+    },
+    {
+      "name": "query",
+      "attribute": "query",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Substring to highlight within `text`. Case-insensitive."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Background color scheme."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "text"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "List",
+  "tag": "kb-list",
+  "category": "data-display",
+  "description": "A styled list container with consistent spacing between items.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-list.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "List"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "ListVariant",
+      "default": "'plain'",
+      "reflect": false,
+      "description": "List variant - `'plain'` (unordered) or `'ordered'` (monospace-numbered items)."
+    },
+    {
+      "name": "spacing",
+      "attribute": "spacing",
+      "type": "ListSpacing",
+      "default": "'normal'",
+      "reflect": false,
+      "description": "Vertical spacing between items."
+    },
+    {
+      "name": "dividers",
+      "attribute": "dividers",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show border separators between items."
+    },
+    {
+      "name": "interactive",
+      "attribute": "interactive",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make all child items hoverable, focusable, and clickable."
+    },
+    {
+      "name": "emptyText",
+      "attribute": "empty-text",
+      "type": "string",
+      "default": "'No results'",
+      "reflect": false,
+      "description": "Text shown when the list has no items."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "list"
+    ],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "list-item"
+  ]
+}

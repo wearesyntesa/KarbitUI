@@ -1,0 +1,666 @@
+---
+title: "Date Picker"
+description: "A date selection input with a calendar dropdown."
+sidebar_label: "Date Picker"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-date-picker placeholder="Select a date"></kb-date-picker>`;
+export const reactCode = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<DatePicker placeholder="Select a date" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-date-picker placeholder="Select a date" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-date-picker placeholder="Select a date" />`;
+export const exDefault = `<kb-date-picker placeholder="Pick a date...">
+</kb-date-picker>`;
+export const exDefaultReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<DatePicker placeholder="Pick a date...">
+</DatePicker>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-date-picker placeholder="Pick a date...">
+  </kb-date-picker>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-date-picker placeholder="Pick a date...">
+</kb-date-picker>`;
+export const exWithValue = `<kb-date-picker value="2025-06-15" clearable>
+</kb-date-picker>`;
+export const exWithValueReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<DatePicker value="2025-06-15" clearable>
+</DatePicker>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-date-picker value="2025-06-15" clearable>
+  </kb-date-picker>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-date-picker value="2025-06-15" clearable>
+</kb-date-picker>`;
+export const exMinMax = `<kb-date-picker placeholder="2025 only..." min="2025-01-01" max="2025-12-31" clearable>
+</kb-date-picker>`;
+export const exMinMaxReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<DatePicker placeholder="2025 only..." min="2025-01-01" max="2025-12-31" clearable>
+</DatePicker>`;
+export const exMinMaxVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-date-picker placeholder="2025 only..." min="2025-01-01" max="2025-12-31" clearable>
+  </kb-date-picker>
+</template>`;
+export const exMinMaxSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-date-picker placeholder="2025 only..." min="2025-01-01" max="2025-12-31" clearable>
+</kb-date-picker>`;
+export const exVariants = `<div class="flex flex-col gap-6">
+  <kb-date-picker variant="outline" placeholder="Outline...">
+  </kb-date-picker>
+  <kb-date-picker variant="filled" placeholder="Filled...">
+  </kb-date-picker>
+  <kb-date-picker variant="flushed" placeholder="Flushed...">
+  </kb-date-picker>
+</div>`;
+export const exVariantsReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <DatePicker variant="outline" placeholder="Outline...">
+  </DatePicker>
+  <DatePicker variant="filled" placeholder="Filled...">
+  </DatePicker>
+  <DatePicker variant="flushed" placeholder="Flushed...">
+  </DatePicker>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-date-picker variant="outline" placeholder="Outline...">
+    </kb-date-picker>
+    <kb-date-picker variant="filled" placeholder="Filled...">
+    </kb-date-picker>
+    <kb-date-picker variant="flushed" placeholder="Flushed...">
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-date-picker variant="outline" placeholder="Outline...">
+  </kb-date-picker>
+  <kb-date-picker variant="filled" placeholder="Filled...">
+  </kb-date-picker>
+  <kb-date-picker variant="flushed" placeholder="Flushed...">
+  </kb-date-picker>
+</div>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-date-picker size="xs" placeholder="XS" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="sm" placeholder="SM" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="md" placeholder="MD" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="lg" placeholder="LG" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="xl" placeholder="XL" clearable>
+  </kb-date-picker>
+</div>`;
+export const exSizesReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <DatePicker size="xs" placeholder="XS" clearable>
+  </DatePicker>
+  <DatePicker size="sm" placeholder="SM" clearable>
+  </DatePicker>
+  <DatePicker size="md" placeholder="MD" clearable>
+  </DatePicker>
+  <DatePicker size="lg" placeholder="LG" clearable>
+  </DatePicker>
+  <DatePicker size="xl" placeholder="XL" clearable>
+  </DatePicker>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-date-picker size="xs" placeholder="XS" clearable>
+    </kb-date-picker>
+    <kb-date-picker size="sm" placeholder="SM" clearable>
+    </kb-date-picker>
+    <kb-date-picker size="md" placeholder="MD" clearable>
+    </kb-date-picker>
+    <kb-date-picker size="lg" placeholder="LG" clearable>
+    </kb-date-picker>
+    <kb-date-picker size="xl" placeholder="XL" clearable>
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-date-picker size="xs" placeholder="XS" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="sm" placeholder="SM" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="md" placeholder="MD" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="lg" placeholder="LG" clearable>
+  </kb-date-picker>
+  <kb-date-picker size="xl" placeholder="XL" clearable>
+  </kb-date-picker>
+</div>`;
+export const exMonthYearNavigation = `<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Click the month/year header to switch between days → months → years views.
+  </p>
+  <kb-date-picker value="2025-06-15" clearable>
+  </kb-date-picker>
+</div>`;
+export const exMonthYearNavigationReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Click the month/year header to switch between days → months → years views.
+  </p>
+  <DatePicker value="2025-06-15" clearable>
+  </DatePicker>
+</div>`;
+export const exMonthYearNavigationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="max-w-xs">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+      Click the month/year header to switch between days → months → years views.
+    </p>
+    <kb-date-picker value="2025-06-15" clearable>
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exMonthYearNavigationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Click the month/year header to switch between days → months → years views.
+  </p>
+  <kb-date-picker value="2025-06-15" clearable>
+  </kb-date-picker>
+</div>`;
+export const exTodayButton = `<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open the calendar to see the "Today" shortcut at the bottom.
+  </p>
+  <kb-date-picker placeholder="Select a date..." clearable>
+  </kb-date-picker>
+</div>`;
+export const exTodayButtonReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open the calendar to see the "Today" shortcut at the bottom.
+  </p>
+  <DatePicker placeholder="Select a date..." clearable>
+  </DatePicker>
+</div>`;
+export const exTodayButtonVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="max-w-xs">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+      Open the calendar to see the "Today" shortcut at the bottom.
+    </p>
+    <kb-date-picker placeholder="Select a date..." clearable>
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exTodayButtonSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open the calendar to see the "Today" shortcut at the bottom.
+  </p>
+  <kb-date-picker placeholder="Select a date..." clearable>
+  </kb-date-picker>
+</div>`;
+export const exKeyboardNavigation = `<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Use arrow keys to move between days. Enter to select, Escape to close.
+  </p>
+  <kb-date-picker placeholder="Try keyboard..." clearable>
+  </kb-date-picker>
+</div>`;
+export const exKeyboardNavigationReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Use arrow keys to move between days. Enter to select, Escape to close.
+  </p>
+  <DatePicker placeholder="Try keyboard..." clearable>
+  </DatePicker>
+</div>`;
+export const exKeyboardNavigationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="max-w-xs">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+      Open with Enter/Space/ArrowDown. Use arrow keys to move between days. Enter to select, Escape to close.
+    </p>
+    <kb-date-picker placeholder="Try keyboard..." clearable>
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exKeyboardNavigationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Use arrow keys to move between days. Enter to select, Escape to close.
+  </p>
+  <kb-date-picker placeholder="Try keyboard..." clearable>
+  </kb-date-picker>
+</div>`;
+export const exClearable = `<div class="flex flex-col gap-6">
+  <kb-date-picker value="2025-01-15" clearable placeholder="Clearable">
+  </kb-date-picker>
+  <kb-date-picker value="2025-06-20" placeholder="Not clearable">
+  </kb-date-picker>
+</div>`;
+export const exClearableReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <DatePicker value="2025-01-15" clearable placeholder="Clearable">
+  </DatePicker>
+  <DatePicker value="2025-06-20" placeholder="Not clearable">
+  </DatePicker>
+</div>`;
+export const exClearableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-date-picker value="2025-01-15" clearable placeholder="Clearable">
+    </kb-date-picker>
+    <kb-date-picker value="2025-06-20" placeholder="Not clearable">
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exClearableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-date-picker value="2025-01-15" clearable placeholder="Clearable">
+  </kb-date-picker>
+  <kb-date-picker value="2025-06-20" placeholder="Not clearable">
+  </kb-date-picker>
+</div>`;
+export const exDisabled = `<kb-date-picker value="2025-03-01" disabled>
+</kb-date-picker>`;
+export const exDisabledReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<DatePicker value="2025-03-01" disabled>
+</DatePicker>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-date-picker value="2025-03-01" disabled>
+  </kb-date-picker>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-date-picker value="2025-03-01" disabled>
+</kb-date-picker>`;
+export const exInvalid = `<div class="flex flex-col gap-6">
+  <kb-date-picker value="2025-03-01" invalid variant="outline">
+  </kb-date-picker>
+  <kb-date-picker value="2025-03-01" invalid variant="filled">
+  </kb-date-picker>
+  <kb-date-picker value="2025-03-01" invalid variant="flushed">
+  </kb-date-picker>
+</div>`;
+export const exInvalidReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <DatePicker value="2025-03-01" invalid variant="outline">
+  </DatePicker>
+  <DatePicker value="2025-03-01" invalid variant="filled">
+  </DatePicker>
+  <DatePicker value="2025-03-01" invalid variant="flushed">
+  </DatePicker>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-date-picker value="2025-03-01" invalid variant="outline">
+    </kb-date-picker>
+    <kb-date-picker value="2025-03-01" invalid variant="filled">
+    </kb-date-picker>
+    <kb-date-picker value="2025-03-01" invalid variant="flushed">
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-date-picker value="2025-03-01" invalid variant="outline">
+  </kb-date-picker>
+  <kb-date-picker value="2025-03-01" invalid variant="filled">
+  </kb-date-picker>
+  <kb-date-picker value="2025-03-01" invalid variant="flushed">
+  </kb-date-picker>
+</div>`;
+export const exAllFeatures = `<div class="max-w-sm flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400">
+    Full-featured date picker with clearable, min/max range, all navigation modes, and keyboard support.
+  </p>
+  <kb-date-picker value="2025-06-15" min="2025-01-01" max="2025-12-31" clearable placeholder="Pick a date in 2025...">
+  </kb-date-picker>
+</div>`;
+export const exAllFeaturesReact = `import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="max-w-sm flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400">
+    Full-featured date picker with clearable, min/max range, all navigation modes, and keyboard support.
+  </p>
+  <DatePicker value="2025-06-15" min="2025-01-01" max="2025-12-31" clearable placeholder="Pick a date in 2025...">
+  </DatePicker>
+</div>`;
+export const exAllFeaturesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="max-w-sm flex flex-col gap-6">
+    <p class="text-sm text-gray-500 dark:text-zinc-400">
+      Full-featured date picker with clearable, min/max range, all navigation modes, and keyboard support.
+    </p>
+    <kb-date-picker value="2025-06-15" min="2025-01-01" max="2025-12-31" clearable placeholder="Pick a date in 2025...">
+    </kb-date-picker>
+  </div>
+</template>`;
+export const exAllFeaturesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="max-w-sm flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400">
+    Full-featured date picker with clearable, min/max range, all navigation modes, and keyboard support.
+  </p>
+  <kb-date-picker value="2025-06-15" min="2025-01-01" max="2025-12-31" clearable placeholder="Pick a date in 2025...">
+  </kb-date-picker>
+</div>`;
+
+# Date Picker
+
+A date selection input with a calendar dropdown.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { DatePicker } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `""` | Current value in YYYY-MM-DD format. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text. |
+| `min` | `min` | `string` | — | Earliest selectable date (YYYY-MM-DD). |
+| `max` | `max` | `string` | — | Latest selectable date (YYYY-MM-DD). |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `clearable` | `clearable` | `boolean` | `false` | Show clear button. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ source: 'date-picker', value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Focused. |
+| `kb-blur` | `{ source?: string }` or none | Blurred. |
+| `kb-clear` | `{ source?: string }` or none | Cleared. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `combobox`, `grid`, `gridcell`
+
+**Attributes:** `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-haspopup`, `aria-invalid`, `aria-label`, `aria-selected`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Min Max" codes={{ html: exMinMax, react: exMinMaxReact, vue: exMinMaxVue, svelte: exMinMaxSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMinMax }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Month Year Navigation" codes={{ html: exMonthYearNavigation, react: exMonthYearNavigationReact, vue: exMonthYearNavigationVue, svelte: exMonthYearNavigationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMonthYearNavigation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Today Button" codes={{ html: exTodayButton, react: exTodayButtonReact, vue: exTodayButtonVue, svelte: exTodayButtonSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTodayButton }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Keyboard Navigation" codes={{ html: exKeyboardNavigation, react: exKeyboardNavigationReact, vue: exKeyboardNavigationVue, svelte: exKeyboardNavigationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exKeyboardNavigation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Clearable" codes={{ html: exClearable, react: exClearableReact, vue: exClearableVue, svelte: exClearableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClearable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Features" codes={{ html: exAllFeatures, react: exAllFeaturesReact, vue: exAllFeaturesVue, svelte: exAllFeaturesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllFeatures }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Time Picker](./time-picker)
+- [Input](./input)

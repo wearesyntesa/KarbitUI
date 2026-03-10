@@ -1,0 +1,66 @@
+{
+  "name": "Modal",
+  "tag": "kb-modal",
+  "category": "overlay",
+  "description": "A dialog overlay for focused content or actions.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-modal.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Modal"
+  },
+  "props": [
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "ModalPlacement",
+      "default": "'center'",
+      "reflect": false,
+      "description": "Vertical positioning of the dialog within the viewport."
+    }
+  ],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Modal header with title."
+    },
+    {
+      "name": "footer",
+      "description": "Modal footer with actions (only renders when provided)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when modal finishes opening."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when modal is dismissed (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "dialog"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-modal"
+    ],
+    "keyboardKeys": [
+      "Escape",
+      "Tab"
+    ],
+    "isOverlay": true
+  },
+  "relatedComponents": [
+    "alert-dialog",
+    "drawer"
+  ]
+}

@@ -13,11 +13,11 @@ const VARIANT_ANIMATION: Record<SkeletonVariant, string> = {
 } as const satisfies Record<SkeletonVariant, string>;
 
 const SIZE_MAP: Record<ComponentSize, string> = {
-  xs: 'h-3',
-  sm: 'h-4',
-  md: 'h-5',
-  lg: 'h-6',
-  xl: 'h-8',
+  xs: '0.75rem',
+  sm: '1rem',
+  md: '1.25rem',
+  lg: '1.5rem',
+  xl: '2rem',
 } as const satisfies Record<ComponentSize, string>;
 
 /**

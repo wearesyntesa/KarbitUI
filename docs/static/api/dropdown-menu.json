@@ -1,0 +1,88 @@
+{
+  "name": "Dropdown Menu",
+  "tag": "kb-dropdown-menu",
+  "category": "overlay",
+  "description": "A button-triggered dropdown menu with selectable items.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-dropdown-menu.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "DropdownMenu"
+  },
+  "props": [
+    {
+      "name": "open",
+      "attribute": "open",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the menu panel is visible."
+    },
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "MenuPlacement",
+      "default": "'bottom'",
+      "reflect": false,
+      "description": "Menu position relative to the trigger."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Menu sizing preset."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "Element that toggles the menu."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-select",
+      "detail": "`{ value: string }`",
+      "description": "Dispatched when a menu item is selected (bubbles from child)."
+    },
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the menu opens."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the menu closes (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "menu"
+    ],
+    "ariaAttributes": [
+      "aria-expanded",
+      "aria-haspopup"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowUp",
+      "End",
+      "Enter",
+      "Escape",
+      "Home",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "context-menu",
+    "menu-item",
+    "popover"
+  ]
+}

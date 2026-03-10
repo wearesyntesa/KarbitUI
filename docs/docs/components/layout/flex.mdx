@@ -1,0 +1,167 @@
+---
+title: "Flex"
+description: "A flexbox layout container with shorthand direction and alignment props."
+sidebar_label: "Flex"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-flex direction="row" align="center" gap="4">
+  <div>Left</div>
+  <div>Right</div>
+</kb-flex>`;
+export const reactCode = `import { Flex } from '@wearesyntesa/karbit-ui/react';
+
+<Flex direction="row" align="center" gap="4">
+  <div>Left</div>
+  <div>Right</div>
+</Flex>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-flex direction="row" align="center" gap="4">
+    <div>Left</div>
+    <div>Right</div>
+  </kb-flex>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-flex direction="row" align="center" gap="4">
+  <div>Left</div>
+  <div>Right</div>
+</kb-flex>`;
+export const exToolbar = `<kb-flex justify="between" align="center" p="3" bg="gray-50" class="border border-gray-200 dark:border-zinc-700">
+  <span class="font-mono text-xs uppercase tracking-widest text-slate-500">TOOLBAR</span>
+  <kb-flex gap="2">
+    <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action A</kb-box>
+    <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action B</kb-box>
+  </kb-flex>
+</kb-flex>`;
+export const exToolbarReact = `import { Box, Flex } from '@wearesyntesa/karbit-ui/react';
+
+<Flex justify="between" align="center" p="3" bg="gray-50" class="border border-gray-200 dark:border-zinc-700">
+  <span class="font-mono text-xs uppercase tracking-widest text-slate-500">TOOLBAR</span>
+  <Flex gap="2">
+    <Box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action A</Box>
+    <Box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action B</Box>
+  </Flex>
+</Flex>`;
+export const exToolbarVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-flex justify="between" align="center" p="3" bg="gray-50" class="border border-gray-200 dark:border-zinc-700">
+    <span class="font-mono text-xs uppercase tracking-widest text-slate-500">TOOLBAR</span>
+    <kb-flex gap="2">
+      <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action A</kb-box>
+      <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action B</kb-box>
+    </kb-flex>
+  </kb-flex>
+</template>`;
+export const exToolbarSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-flex justify="between" align="center" p="3" bg="gray-50" class="border border-gray-200 dark:border-zinc-700">
+  <span class="font-mono text-xs uppercase tracking-widest text-slate-500">TOOLBAR</span>
+  <kb-flex gap="2">
+    <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action A</kb-box>
+    <kb-box px="3" py="1" bg="white" class="border border-gray-200 text-xs">Action B</kb-box>
+  </kb-flex>
+</kb-flex>`;
+
+# Flex
+
+A flexbox layout container with shorthand direction and alignment props.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Flex } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `FlexDirectionValue` | — | Flex direction. Maps to the `flexDir` style prop. |
+| `align` | `align` | `FlexAlignValue` | — | Cross-axis alignment. Maps to the `alignItems` style prop. |
+| `justify` | `justify` | `FlexJustifyValue` | — | Main-axis alignment. Maps to the `justifyContent` style prop. |
+| `wrap` | `wrap` | `FlexWrapValue` | — | Flex wrapping behavior. Maps to the `flexWrap` style prop. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Toolbar" codes={{ html: exToolbar, react: exToolbarReact, vue: exToolbarVue, svelte: exToolbarSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exToolbar }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Box](./box)
+- [Stack](./stack)
+- [Grid](./grid)

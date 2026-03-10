@@ -1,4 +1,4 @@
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, isServer, nothing, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import {
@@ -22,8 +22,8 @@ import '../data-display/kb-tag.define.js';
 const TAG_SIZE_MAP: Record<ComponentSize, TagSize> = {
   xs: 'sm',
   sm: 'sm',
-  md: 'md',
-  lg: 'lg',
+  md: 'sm',
+  lg: 'md',
   xl: 'lg',
 } as const satisfies Record<ComponentSize, TagSize>;
 
@@ -62,6 +62,16 @@ export class KbTagsInput extends KbBaseElement {
   @property({ type: Boolean, attribute: 'allow-duplicates' }) allowDuplicates: boolean = false;
   /** Form field name. */
   @property({ type: String }) name?: string;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    if (!isServer) {
+      // Ensure the host respects parent container width when used inside
+      // flex/grid layouts (prevents tags from overflowing instead of wrapping).
+      this.style.minWidth = '0';
+      this.style.maxWidth = '100%';
+    }
+  }
 
   private _addTag(value: string): void {
     const trimmed = value.trim();

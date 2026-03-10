@@ -1,0 +1,585 @@
+---
+title: "Avatar"
+description: "A circular image or initials representing a user or entity."
+sidebar_label: "Avatar"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-avatar name="John Doe" src="https://i.pravatar.cc/150?u=john"></kb-avatar>`;
+export const reactCode = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<Avatar name="John Doe" src="https://i.pravatar.cc/150?u=john" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar name="John Doe" src="https://i.pravatar.cc/150?u=john" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar name="John Doe" src="https://i.pravatar.cc/150?u=john" />`;
+export const exWithName = `<kb-avatar name="Jane Doe" size="md">
+</kb-avatar>`;
+export const exWithNameReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<Avatar name="Jane Doe" size="md">
+</Avatar>`;
+export const exWithNameVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar name="Jane Doe" size="md">
+  </kb-avatar>
+</template>`;
+export const exWithNameSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar name="Jane Doe" size="md">
+</kb-avatar>`;
+export const exWithImage = `<kb-avatar name="Alex Rivera" size="md" src="https://i.pravatar.cc/150?u=avatar-story">
+</kb-avatar>`;
+export const exWithImageReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<Avatar name="Alex Rivera" size="md" src="https://i.pravatar.cc/150?u=avatar-story">
+</Avatar>`;
+export const exWithImageVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar name="Alex Rivera" size="md" src="https://i.pravatar.cc/150?u=avatar-story">
+  </kb-avatar>
+</template>`;
+export const exWithImageSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar name="Alex Rivera" size="md" src="https://i.pravatar.cc/150?u=avatar-story">
+</kb-avatar>`;
+export const exFallbackIcon = `<kb-avatar name="undefined" size="md">
+</kb-avatar>`;
+export const exFallbackIconReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<Avatar name="undefined" size="md">
+</Avatar>`;
+export const exFallbackIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar name="undefined" size="md">
+  </kb-avatar>
+</template>`;
+export const exFallbackIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar name="undefined" size="md">
+</kb-avatar>`;
+export const exSizes = `<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="XS" size="xs">
+  </kb-avatar>
+  <kb-avatar name="SM" size="sm">
+  </kb-avatar>
+  <kb-avatar name="MD" size="md">
+  </kb-avatar>
+  <kb-avatar name="LG" size="lg">
+  </kb-avatar>
+  <kb-avatar name="XL" size="xl">
+  </kb-avatar>
+</div>`;
+export const exSizesReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <Avatar name="XS" size="xs">
+  </Avatar>
+  <Avatar name="SM" size="sm">
+  </Avatar>
+  <Avatar name="MD" size="md">
+  </Avatar>
+  <Avatar name="LG" size="lg">
+  </Avatar>
+  <Avatar name="XL" size="xl">
+  </Avatar>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+    <kb-avatar name="XS" size="xs">
+    </kb-avatar>
+    <kb-avatar name="SM" size="sm">
+    </kb-avatar>
+    <kb-avatar name="MD" size="md">
+    </kb-avatar>
+    <kb-avatar name="LG" size="lg">
+    </kb-avatar>
+    <kb-avatar name="XL" size="xl">
+    </kb-avatar>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="XS" size="xs">
+  </kb-avatar>
+  <kb-avatar name="SM" size="sm">
+  </kb-avatar>
+  <kb-avatar name="MD" size="md">
+  </kb-avatar>
+  <kb-avatar name="LG" size="lg">
+  </kb-avatar>
+  <kb-avatar name="XL" size="xl">
+  </kb-avatar>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="Red User" color-scheme="red">
+  </kb-avatar>
+  <kb-avatar name="Blue User" color-scheme="blue">
+  </kb-avatar>
+  <kb-avatar name="Green User" color-scheme="green">
+  </kb-avatar>
+  <kb-avatar name="Yellow User" color-scheme="yellow">
+  </kb-avatar>
+  <kb-avatar name="Black User" color-scheme="black">
+  </kb-avatar>
+</div>`;
+export const exColorSchemesReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <Avatar name="Red User" color-scheme="red">
+  </Avatar>
+  <Avatar name="Blue User" color-scheme="blue">
+  </Avatar>
+  <Avatar name="Green User" color-scheme="green">
+  </Avatar>
+  <Avatar name="Yellow User" color-scheme="yellow">
+  </Avatar>
+  <Avatar name="Black User" color-scheme="black">
+  </Avatar>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+    <kb-avatar name="Red User" color-scheme="red">
+    </kb-avatar>
+    <kb-avatar name="Blue User" color-scheme="blue">
+    </kb-avatar>
+    <kb-avatar name="Green User" color-scheme="green">
+    </kb-avatar>
+    <kb-avatar name="Yellow User" color-scheme="yellow">
+    </kb-avatar>
+    <kb-avatar name="Black User" color-scheme="black">
+    </kb-avatar>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="Red User" color-scheme="red">
+  </kb-avatar>
+  <kb-avatar name="Blue User" color-scheme="blue">
+  </kb-avatar>
+  <kb-avatar name="Green User" color-scheme="green">
+  </kb-avatar>
+  <kb-avatar name="Yellow User" color-scheme="yellow">
+  </kb-avatar>
+  <kb-avatar name="Black User" color-scheme="black">
+  </kb-avatar>
+</div>`;
+export const exWithBadge = `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="Online" badge="green" size="lg">
+  </kb-avatar>
+  <kb-avatar name="Away" badge="yellow" size="lg">
+  </kb-avatar>
+  <kb-avatar name="Busy" badge="red" size="lg">
+  </kb-avatar>
+</div>`;
+export const exWithBadgeReact = `import { Avatar } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+  <Avatar name="Online" badge="green" size="lg">
+  </Avatar>
+  <Avatar name="Away" badge="yellow" size="lg">
+  </Avatar>
+  <Avatar name="Busy" badge="red" size="lg">
+  </Avatar>
+</div>`;
+export const exWithBadgeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+    <kb-avatar name="Online" badge="green" size="lg">
+    </kb-avatar>
+    <kb-avatar name="Away" badge="yellow" size="lg">
+    </kb-avatar>
+    <kb-avatar name="Busy" badge="red" size="lg">
+    </kb-avatar>
+  </div>
+</template>`;
+export const exWithBadgeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+  <kb-avatar name="Online" badge="green" size="lg">
+  </kb-avatar>
+  <kb-avatar name="Away" badge="yellow" size="lg">
+  </kb-avatar>
+  <kb-avatar name="Busy" badge="red" size="lg">
+  </kb-avatar>
+</div>`;
+export const exGroup = `<kb-avatar-group max="3" size="md">
+  <kb-avatar name="Alice Anderson">
+  </kb-avatar>
+  <kb-avatar name="Bob Brown">
+  </kb-avatar>
+  <kb-avatar name="Carol Chen">
+  </kb-avatar>
+  <kb-avatar name="Dave Davis">
+  </kb-avatar>
+  <kb-avatar name="Eve Evans">
+  </kb-avatar>
+</kb-avatar-group>`;
+export const exGroupReact = `import { Avatar, AvatarGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AvatarGroup max="3" size="md">
+  <Avatar name="Alice Anderson">
+  </Avatar>
+  <Avatar name="Bob Brown">
+  </Avatar>
+  <Avatar name="Carol Chen">
+  </Avatar>
+  <Avatar name="Dave Davis">
+  </Avatar>
+  <Avatar name="Eve Evans">
+  </Avatar>
+</AvatarGroup>`;
+export const exGroupVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar-group max="3" size="md">
+    <kb-avatar name="Alice Anderson">
+    </kb-avatar>
+    <kb-avatar name="Bob Brown">
+    </kb-avatar>
+    <kb-avatar name="Carol Chen">
+    </kb-avatar>
+    <kb-avatar name="Dave Davis">
+    </kb-avatar>
+    <kb-avatar name="Eve Evans">
+    </kb-avatar>
+  </kb-avatar-group>
+</template>`;
+export const exGroupSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar-group max="3" size="md">
+  <kb-avatar name="Alice Anderson">
+  </kb-avatar>
+  <kb-avatar name="Bob Brown">
+  </kb-avatar>
+  <kb-avatar name="Carol Chen">
+  </kb-avatar>
+  <kb-avatar name="Dave Davis">
+  </kb-avatar>
+  <kb-avatar name="Eve Evans">
+  </kb-avatar>
+</kb-avatar-group>`;
+export const exGroupSizes = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-avatar-group max="4" size="sm" spacing="sm">
+    <kb-avatar name="AA">
+    </kb-avatar>
+    <kb-avatar name="BB">
+    </kb-avatar>
+    <kb-avatar name="CC">
+    </kb-avatar>
+    <kb-avatar name="DD">
+    </kb-avatar>
+    <kb-avatar name="EE">
+    </kb-avatar>
+  </kb-avatar-group>
+  <kb-avatar-group max="4" size="lg" spacing="lg">
+    <kb-avatar name="AA">
+    </kb-avatar>
+    <kb-avatar name="BB">
+    </kb-avatar>
+    <kb-avatar name="CC">
+    </kb-avatar>
+    <kb-avatar name="DD">
+    </kb-avatar>
+    <kb-avatar name="EE">
+    </kb-avatar>
+  </kb-avatar-group>
+</div>`;
+export const exGroupSizesReact = `import { Avatar, AvatarGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <AvatarGroup max="4" size="sm" spacing="sm">
+    <Avatar name="AA">
+    </Avatar>
+    <Avatar name="BB">
+    </Avatar>
+    <Avatar name="CC">
+    </Avatar>
+    <Avatar name="DD">
+    </Avatar>
+    <Avatar name="EE">
+    </Avatar>
+  </AvatarGroup>
+  <AvatarGroup max="4" size="lg" spacing="lg">
+    <Avatar name="AA">
+    </Avatar>
+    <Avatar name="BB">
+    </Avatar>
+    <Avatar name="CC">
+    </Avatar>
+    <Avatar name="DD">
+    </Avatar>
+    <Avatar name="EE">
+    </Avatar>
+  </AvatarGroup>
+</div>`;
+export const exGroupSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <kb-avatar-group max="4" size="sm" spacing="sm">
+      <kb-avatar name="AA">
+      </kb-avatar>
+      <kb-avatar name="BB">
+      </kb-avatar>
+      <kb-avatar name="CC">
+      </kb-avatar>
+      <kb-avatar name="DD">
+      </kb-avatar>
+      <kb-avatar name="EE">
+      </kb-avatar>
+    </kb-avatar-group>
+    <kb-avatar-group max="4" size="lg" spacing="lg">
+      <kb-avatar name="AA">
+      </kb-avatar>
+      <kb-avatar name="BB">
+      </kb-avatar>
+      <kb-avatar name="CC">
+      </kb-avatar>
+      <kb-avatar name="DD">
+      </kb-avatar>
+      <kb-avatar name="EE">
+      </kb-avatar>
+    </kb-avatar-group>
+  </div>
+</template>`;
+export const exGroupSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-avatar-group max="4" size="sm" spacing="sm">
+    <kb-avatar name="AA">
+    </kb-avatar>
+    <kb-avatar name="BB">
+    </kb-avatar>
+    <kb-avatar name="CC">
+    </kb-avatar>
+    <kb-avatar name="DD">
+    </kb-avatar>
+    <kb-avatar name="EE">
+    </kb-avatar>
+  </kb-avatar-group>
+  <kb-avatar-group max="4" size="lg" spacing="lg">
+    <kb-avatar name="AA">
+    </kb-avatar>
+    <kb-avatar name="BB">
+    </kb-avatar>
+    <kb-avatar name="CC">
+    </kb-avatar>
+    <kb-avatar name="DD">
+    </kb-avatar>
+    <kb-avatar name="EE">
+    </kb-avatar>
+  </kb-avatar-group>
+</div>`;
+
+# Avatar
+
+A circular image or initials representing a user or entity.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Avatar } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `src` | `src` | `string` | — | Image URL. Falls back to initials or icon when unset or broken. |
+| `name` | `name` | `string` | — | Full name used to derive initials when no image is available. |
+| `size` | `size` | `AvatarSize` | `'md'` | Avatar dimensions. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Background color scheme. When unset, a neutral gray is used. |
+| `badge` | `badge` | `ColorScheme` | — | Show a small status badge in the top-right corner with the given color scheme. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `icon` | Custom fallback icon rendered when no image or name is available. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `img`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="With Name" codes={{ html: exWithName, react: exWithNameReact, vue: exWithNameVue, svelte: exWithNameSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithName }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Image" codes={{ html: exWithImage, react: exWithImageReact, vue: exWithImageVue, svelte: exWithImageSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithImage }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Fallback Icon" codes={{ html: exFallbackIcon, react: exFallbackIconReact, vue: exFallbackIconVue, svelte: exFallbackIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFallbackIcon }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Badge" codes={{ html: exWithBadge, react: exWithBadgeReact, vue: exWithBadgeVue, svelte: exWithBadgeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithBadge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group" codes={{ html: exGroup, react: exGroupReact, vue: exGroupVue, svelte: exGroupSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroup }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group Sizes" codes={{ html: exGroupSizes, react: exGroupSizesReact, vue: exGroupSizesVue, svelte: exGroupSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Avatar Group](./avatar-group)

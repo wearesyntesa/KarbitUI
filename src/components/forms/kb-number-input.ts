@@ -171,14 +171,16 @@ export class KbNumberInput extends KbBaseElement {
         </button>
         <input
           class=${inputClasses}
-          type="number"
+          type="text"
+          inputmode="numeric"
           .value=${String(this.value)}
           ?disabled=${this.disabled}
           aria-invalid=${this.invalid ? 'true' : 'false'}
+          aria-valuemin=${this.min ?? nothing}
+          aria-valuemax=${this.max ?? nothing}
+          aria-valuenow=${this.value}
+          role="spinbutton"
           name=${this.name ?? nothing}
-          min=${this.min ?? nothing}
-          max=${this.max ?? nothing}
-          step=${this.step}
           @input=${this._handleInput}
           @change=${this._handleChange}
           @keydown=${this._handleKeyDown}

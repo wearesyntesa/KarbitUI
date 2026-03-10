@@ -1,0 +1,163 @@
+---
+title: "Tree View"
+description: "A hierarchical tree display with expandable/collapsible nodes."
+sidebar_label: "Tree View"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Nodes are set via JavaScript property -->
+<kb-tree-view show-lines show-icons></kb-tree-view>
+
+<script>
+  document.querySelector('kb-tree-view').nodes = [
+    { id: '1', label: 'src', children: [
+      { id: '2', label: 'index.ts' },
+      { id: '3', label: 'utils.ts' },
+    ]},
+  ];
+</script>`;
+export const reactCode = `import { TreeView } from '@wearesyntesa/karbit-ui/react';
+
+<TreeView show-lines show-icons
+  nodes={
+  [
+      { id: '1', label: 'src', children: [
+        { id: '2', label: 'index.ts' },
+        { id: '3', label: 'utils.ts' },
+      ]},
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const nodes = [
+    { id: '1', label: 'src', children: [
+      { id: '2', label: 'index.ts' },
+      { id: '3', label: 'utils.ts' },
+    ]},
+  ];
+</script>
+
+<template>
+  <kb-tree-view show-lines show-icons :nodes="nodes" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const nodes = [
+    { id: '1', label: 'src', children: [
+      { id: '2', label: 'index.ts' },
+      { id: '3', label: 'utils.ts' },
+    ]},
+  ];
+</script>
+
+<kb-tree-view show-lines show-icons nodes={nodes} />`;
+export const demoHtml = `<kb-tree-view show-lines show-icons></kb-tree-view>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-tree-view').nodes = [
+      { id: '1', label: 'src', children: [
+        { id: '2', label: 'index.ts' },
+        { id: '3', label: 'utils.ts' },
+      ]},
+    ];
+};
+
+# Tree View
+
+A hierarchical tree display with expandable/collapsible nodes.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { TreeView } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `nodes` | `nodes` | `readonly TreeNode[]` | `[]` | Array of tree node data to render. |
+| `size` | `size` | `ComponentSize` | `'md'` | Controls text and padding sizing. |
+| `selectable` | `selectable` | `boolean` | `true` | Allow node selection. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-node-toggle` | `{ id: string, expanded: boolean }` | When a node is expanded or collapsed. |
+| `kb-node-select` | `{ id: string, label: string }` | When a node is selected. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `tree`, `treeitem`
+
+**Attributes:** `aria-disabled`, `aria-expanded`, `aria-selected`
+
+## See Also
+
+- [Accordion](./accordion)
+- [List](./list)

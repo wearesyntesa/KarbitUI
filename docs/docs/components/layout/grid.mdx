@@ -1,0 +1,216 @@
+---
+title: "Grid"
+description: "A CSS grid layout container."
+sidebar_label: "Grid"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-grid columns="3" gap="4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</kb-grid>`;
+export const reactCode = `import { Grid } from '@wearesyntesa/karbit-ui/react';
+
+<Grid columns="3" gap="4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</Grid>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-grid columns="3" gap="4">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </kb-grid>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-grid columns="3" gap="4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</kb-grid>`;
+export const exDashboardLayout = `<kb-grid columns="3" gap="4">
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700 col-span-2">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">MAIN CONTENT</p>
+    <p class="text-sm">Spans two columns.</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">SIDEBAR</p>
+    <p class="text-sm">Single column.</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET A</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET B</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET C</p>
+  </kb-box>
+</kb-grid>`;
+export const exDashboardLayoutReact = `import { Box, Grid } from '@wearesyntesa/karbit-ui/react';
+
+<Grid columns="3" gap="4">
+  <Box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700 col-span-2">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">MAIN CONTENT</p>
+    <p class="text-sm">Spans two columns.</p>
+  </Box>
+  <Box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">SIDEBAR</p>
+    <p class="text-sm">Single column.</p>
+  </Box>
+  <Box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET A</p>
+  </Box>
+  <Box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET B</p>
+  </Box>
+  <Box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET C</p>
+  </Box>
+</Grid>`;
+export const exDashboardLayoutVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-grid columns="3" gap="4">
+    <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700 col-span-2">
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">MAIN CONTENT</p>
+      <p class="text-sm">Spans two columns.</p>
+    </kb-box>
+    <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">SIDEBAR</p>
+      <p class="text-sm">Single column.</p>
+    </kb-box>
+    <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET A</p>
+    </kb-box>
+    <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET B</p>
+    </kb-box>
+    <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET C</p>
+    </kb-box>
+  </kb-grid>
+</template>`;
+export const exDashboardLayoutSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-grid columns="3" gap="4">
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700 col-span-2">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">MAIN CONTENT</p>
+    <p class="text-sm">Spans two columns.</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">SIDEBAR</p>
+    <p class="text-sm">Single column.</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET A</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET B</p>
+  </kb-box>
+  <kb-box p="4" bg="white" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">WIDGET C</p>
+  </kb-box>
+</kb-grid>`;
+
+# Grid
+
+A CSS grid layout container.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Grid } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `columns` | `columns` | `string` | — | Number of grid columns (e.g. `'3'`, `'none'`). Maps to the `gridCols` style prop. |
+| `rows` | `rows` | `string` | — | Number of grid rows. Maps to the `gridRows` style prop. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Dashboard Layout" codes={{ html: exDashboardLayout, react: exDashboardLayoutReact, vue: exDashboardLayoutVue, svelte: exDashboardLayoutSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDashboardLayout }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Flex](./flex)
+- [Box](./box)

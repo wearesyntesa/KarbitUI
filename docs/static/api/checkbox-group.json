@@ -1,0 +1,92 @@
+{
+  "name": "Checkbox Group",
+  "tag": "kb-checkbox-group",
+  "category": "forms",
+  "description": "Groups multiple checkboxes with shared state management.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-checkbox-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "CheckboxGroup"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "Orientation",
+      "default": "'vertical'",
+      "reflect": false,
+      "description": "Layout direction of the grouped checkboxes."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Size propagated to child checkboxes that don't set their own size."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme propagated to child checkboxes that don't set their own."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Minimum number of checkboxes that must remain checked."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Maximum number of checkboxes that can be checked simultaneously."
+    },
+    {
+      "name": "values",
+      "attribute": "values",
+      "type": "string[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Currently checked values. Reflects child checkbox states. Can be set programmatically."
+    }
+  ],
+  "slots": [
+    {
+      "name": "label",
+      "description": "Group label rendered above the checkboxes."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Selection changed. Detail: `{ values: string[] }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "group"
+    ],
+    "ariaAttributes": [
+      "aria-labelledby"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "checkbox",
+    "radio-group"
+  ]
+}

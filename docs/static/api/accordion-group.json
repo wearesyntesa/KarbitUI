@@ -1,0 +1,37 @@
+{
+  "name": "Accordion Group",
+  "tag": "kb-accordion-group",
+  "category": "data-display",
+  "description": "Groups multiple accordions with optional exclusive (single-open) behavior.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-accordion-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "AccordionGroup"
+  },
+  "props": [
+    {
+      "name": "allowMultiple",
+      "attribute": "allow-multiple",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "When false (default), opening one item closes all others."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "accordion"
+  ]
+}

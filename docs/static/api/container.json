@@ -1,0 +1,53 @@
+{
+  "name": "Container",
+  "tag": "kb-container",
+  "category": "layout",
+  "description": "A max-width centered container for page content.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-container.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Container"
+  },
+  "props": [
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ContainerSize",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Named max-width preset. Takes precedence over `max` when set."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "DimensionValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Custom Tailwind max-width value (e.g. `'4xl'`, `'prose'`). Ignored if `size` is set."
+    },
+    {
+      "name": "center",
+      "attribute": "center",
+      "type": "boolean",
+      "default": "true",
+      "reflect": true,
+      "description": "Horizontally center the container with `mx-auto`."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "box"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "Circular Progress",
+  "tag": "kb-circular-progress",
+  "category": "feedback",
+  "description": "A circular progress indicator showing completion percentage.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-circular-progress.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "CircularProgress"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Current progress value between `min` and `max`."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "100",
+      "reflect": false,
+      "description": "Maximum progress value."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Minimum progress value."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Size preset."
+    },
+    {
+      "name": "indeterminate",
+      "attribute": "indeterminate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show animated indeterminate spinner."
+    },
+    {
+      "name": "showValue",
+      "attribute": "show-value",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show percentage label inside the ring."
+    },
+    {
+      "name": "valueLabel",
+      "attribute": "value-label",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Custom label text instead of computed percentage."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the progress arc."
+    },
+    {
+      "name": "thickness",
+      "attribute": "thickness",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Ring thickness multiplier."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "progressbar"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "progress",
+    "spinner"
+  ]
+}

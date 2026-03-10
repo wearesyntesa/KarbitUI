@@ -1,0 +1,75 @@
+{
+  "name": "Divider",
+  "tag": "kb-divider",
+  "category": "layout",
+  "description": "A horizontal or vertical line separator.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-divider.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Divider"
+  },
+  "props": [
+    {
+      "name": "orientation",
+      "attribute": "orientation",
+      "type": "Orientation",
+      "default": "'horizontal'",
+      "reflect": false,
+      "description": "Divider axis. `'horizontal'` draws a top border, `'vertical'` a left border."
+    },
+    {
+      "name": "dividerColor",
+      "attribute": "divider-color",
+      "type": "ColorValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Custom border color as a Tailwind color value (e.g. `'blue-500'`). Falls back to theme border."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "DividerVariant",
+      "default": "'solid'",
+      "reflect": false,
+      "description": "Border style variant."
+    },
+    {
+      "name": "thickness",
+      "attribute": "thickness",
+      "type": "DividerThickness",
+      "default": "'thin'",
+      "reflect": false,
+      "description": "Border thickness level."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Optional inline label text (e.g. `'OR'`). When set, the divider renders as two lines flanking the label."
+    },
+    {
+      "name": "animated",
+      "attribute": "animated",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Animate in with a scale/opacity transition on mount."
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "separator"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-orientation"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": []
+}

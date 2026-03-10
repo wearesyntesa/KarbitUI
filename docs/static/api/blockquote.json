@@ -1,0 +1,49 @@
+{
+  "name": "Blockquote",
+  "tag": "kb-blockquote",
+  "category": "typography",
+  "description": "A styled quotation block for highlighting cited content.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/typography/kb-blockquote.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Blockquote"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "BlockquoteVariant",
+      "default": "'default'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Accent color for the left border."
+    }
+  ],
+  "slots": [
+    {
+      "name": "cite",
+      "description": "Citation text displayed below the body."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "text"
+  ]
+}

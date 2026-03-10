@@ -1,0 +1,98 @@
+{
+  "name": "Clipboard",
+  "tag": "kb-clipboard",
+  "category": "feedback",
+  "description": "A copy-to-clipboard button with visual feedback.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-clipboard.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Clipboard"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "The text value to copy to the clipboard."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Optional label shown next to the icon (button mode) or above the value (inline mode)."
+    },
+    {
+      "name": "copiedLabel",
+      "attribute": "copied-label",
+      "type": "string",
+      "default": "'Copied'",
+      "reflect": false,
+      "description": "Label shown after a successful copy."
+    },
+    {
+      "name": "showValue",
+      "attribute": "show-value",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Display the value text inline with an integrated copy trigger."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Component size."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "ClipboardVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disables interaction."
+    },
+    {
+      "name": "timeout",
+      "attribute": "timeout",
+      "type": "number",
+      "default": "1500",
+      "reflect": false,
+      "description": "Duration in ms to show the copied state."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-copy",
+      "detail": "`{ value: string, success: boolean }`",
+      "description": "Dispatched after a copy attempt with `{ value, success }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "group"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-live",
+      "aria-pressed"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": []
+}

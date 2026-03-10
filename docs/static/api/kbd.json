@@ -1,0 +1,35 @@
+{
+  "name": "Kbd",
+  "tag": "kb-kbd",
+  "category": "data-display",
+  "description": "A keyboard key indicator styled as a physical key.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-kbd.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Kbd"
+  },
+  "props": [
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "KbdSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Key cap size."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": []
+}

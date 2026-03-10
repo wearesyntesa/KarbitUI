@@ -1,0 +1,119 @@
+{
+  "name": "Number Input",
+  "tag": "kb-number-input",
+  "category": "forms",
+  "description": "A numeric input with increment and decrement controls.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-number-input.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "NumberInput"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Current numeric value."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Minimum allowed value."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Maximum allowed value."
+    },
+    {
+      "name": "step",
+      "attribute": "step",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Step increment for stepper buttons and arrow keys."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Input size controlling padding and font size."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Form input visual variant."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error border styling."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value committed. Detail: `{ source: 'number-input', value: string }`."
+    },
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Value changed during input. Detail: `{ value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "spinbutton"
+    ],
+    "ariaAttributes": [
+      "aria-invalid",
+      "aria-label",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowUp"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "input",
+    "slider"
+  ]
+}

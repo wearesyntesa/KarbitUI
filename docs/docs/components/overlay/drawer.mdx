@@ -1,0 +1,662 @@
+---
+title: "Drawer"
+description: "A sliding panel that overlays from the edge of the viewport."
+sidebar_label: "Drawer"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-drawer open placement="right">
+  <div slot="header">Drawer Title</div>
+  Drawer content goes here.
+  <div slot="footer">
+    <kb-button>Close</kb-button>
+  </div>
+</kb-drawer>`;
+export const reactCode = `import { Button, Drawer } from '@wearesyntesa/karbit-ui/react';
+
+<Drawer open placement="right">
+  <div slot="header">Drawer Title</div>
+  Drawer content goes here.
+  <div slot="footer">
+    <Button>Close</Button>
+  </div>
+</Drawer>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-drawer open placement="right">
+    <div slot="header">Drawer Title</div>
+    Drawer content goes here.
+    <div slot="footer">
+      <kb-button>Close</kb-button>
+    </div>
+  </kb-drawer>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-drawer open placement="right">
+  <div slot="header">Drawer Title</div>
+  Drawer content goes here.
+  <div slot="footer">
+    <kb-button>Close</kb-button>
+  </div>
+</kb-drawer>`;
+export const exBackdropBlur = `<kb-drawer open placement="right" backdrop="blur">
+  <span slot="header">QUICK NOTE</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Title</label>
+      <kb-input placeholder="Note title..." variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Content
+      </label>
+      <kb-textarea placeholder="Write your note..." size="sm" rows="6">
+      </kb-textarea>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Tags</label>
+      <div class="flex gap-2">
+        <kb-tag size="sm" closable>bug</kb-tag>
+        <kb-tag size="sm" closable>frontend</kb-tag>
+        <kb-tag size="sm" closable>urgent</kb-tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="ghost">DISCARD</kb-button>
+    <kb-button size="sm">SAVE NOTE</kb-button>
+  </span>
+</kb-drawer>`;
+export const exBackdropBlurReact = `import { Button, Drawer, Input, Tag, Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Drawer open placement="right" backdrop="blur">
+  <span slot="header">QUICK NOTE</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Title</label>
+      <Input placeholder="Note title..." variant="outline" size="sm">
+      </Input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Content
+      </label>
+      <Textarea placeholder="Write your note..." size="sm" rows="6">
+      </Textarea>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Tags</label>
+      <div class="flex gap-2">
+        <Tag size="sm" closable>bug</Tag>
+        <Tag size="sm" closable>frontend</Tag>
+        <Tag size="sm" closable>urgent</Tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button size="sm" variant="ghost">DISCARD</Button>
+    <Button size="sm">SAVE NOTE</Button>
+  </span>
+</Drawer>`;
+export const exBackdropBlurVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-drawer open placement="right" backdrop="blur">
+    <span slot="header">QUICK NOTE</span>
+    <div class="space-y-4">
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Title</label>
+        <kb-input placeholder="Note title..." variant="outline" size="sm">
+        </kb-input>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Content
+        </label>
+        <kb-textarea placeholder="Write your note..." size="sm" rows="6">
+        </kb-textarea>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Tags</label>
+        <div class="flex gap-2">
+          <kb-tag size="sm" closable>bug</kb-tag>
+          <kb-tag size="sm" closable>frontend</kb-tag>
+          <kb-tag size="sm" closable>urgent</kb-tag>
+        </div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button size="sm" variant="ghost">DISCARD</kb-button>
+      <kb-button size="sm">SAVE NOTE</kb-button>
+    </span>
+  </kb-drawer>
+</template>`;
+export const exBackdropBlurSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-drawer open placement="right" backdrop="blur">
+  <span slot="header">QUICK NOTE</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Title</label>
+      <kb-input placeholder="Note title..." variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Content
+      </label>
+      <kb-textarea placeholder="Write your note..." size="sm" rows="6">
+      </kb-textarea>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">Tags</label>
+      <div class="flex gap-2">
+        <kb-tag size="sm" closable>bug</kb-tag>
+        <kb-tag size="sm" closable>frontend</kb-tag>
+        <kb-tag size="sm" closable>urgent</kb-tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="ghost">DISCARD</kb-button>
+    <kb-button size="sm">SAVE NOTE</kb-button>
+  </span>
+</kb-drawer>`;
+export const exWithForm = `<kb-drawer open placement="right" size="lg">
+  <span slot="header">NEW PROJECT</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Project name
+      </label>
+      <kb-input placeholder="my-project" variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Framework
+      </label>
+      <kb-select placeholder="Select framework..." size="sm">
+      </kb-select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Repository
+      </label>
+      <kb-input placeholder="https://github.com/..." variant="outline" size="sm" type="url">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <kb-textarea placeholder="What does this project do?" size="sm" rows="3">
+      </kb-textarea>
+    </div>
+    <kb-divider>
+    </kb-divider>
+    <div class="space-y-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Build settings</div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Auto-deploy</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Deploy on push to main branch</div>
+        </div>
+        <kb-switch size="sm" checked>
+        </kb-switch>
+      </div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Preview deploys</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Create preview for every pull request</div>
+        </div>
+        <kb-switch size="sm" checked>
+        </kb-switch>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="ghost">CANCEL</kb-button>
+    <kb-button size="sm">CREATE PROJECT</kb-button>
+  </span>
+</kb-drawer>`;
+export const exWithFormReact = `import { Button, Divider, Drawer, Input, Select, Switch, Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Drawer open placement="right" size="lg">
+  <span slot="header">NEW PROJECT</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Project name
+      </label>
+      <Input placeholder="my-project" variant="outline" size="sm">
+      </Input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Framework
+      </label>
+      <Select placeholder="Select framework..." size="sm">
+      </Select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Repository
+      </label>
+      <Input placeholder="https://github.com/..." variant="outline" size="sm" type="url">
+      </Input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <Textarea placeholder="What does this project do?" size="sm" rows="3">
+      </Textarea>
+    </div>
+    <Divider>
+    </Divider>
+    <div class="space-y-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Build settings</div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Auto-deploy</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Deploy on push to main branch</div>
+        </div>
+        <Switch size="sm" checked>
+        </Switch>
+      </div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Preview deploys</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Create preview for every pull request</div>
+        </div>
+        <Switch size="sm" checked>
+        </Switch>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button size="sm" variant="ghost">CANCEL</Button>
+    <Button size="sm">CREATE PROJECT</Button>
+  </span>
+</Drawer>`;
+export const exWithFormVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-drawer open placement="right" size="lg">
+    <span slot="header">NEW PROJECT</span>
+    <div class="space-y-4">
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Project name
+        </label>
+        <kb-input placeholder="my-project" variant="outline" size="sm">
+        </kb-input>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Framework
+        </label>
+        <kb-select placeholder="Select framework..." size="sm">
+        </kb-select>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Repository
+        </label>
+        <kb-input placeholder="https://github.com/..." variant="outline" size="sm" type="url">
+        </kb-input>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Description
+        </label>
+        <kb-textarea placeholder="What does this project do?" size="sm" rows="3">
+        </kb-textarea>
+      </div>
+      <kb-divider>
+      </kb-divider>
+      <div class="space-y-3">
+        <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Build settings</div>
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm text-slate-900 dark:text-zinc-50">Auto-deploy</div>
+            <div class="text-xs text-slate-400 dark:text-zinc-500">Deploy on push to main branch</div>
+          </div>
+          <kb-switch size="sm" checked>
+          </kb-switch>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm text-slate-900 dark:text-zinc-50">Preview deploys</div>
+            <div class="text-xs text-slate-400 dark:text-zinc-500">Create preview for every pull request</div>
+          </div>
+          <kb-switch size="sm" checked>
+          </kb-switch>
+        </div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button size="sm" variant="ghost">CANCEL</kb-button>
+      <kb-button size="sm">CREATE PROJECT</kb-button>
+    </span>
+  </kb-drawer>
+</template>`;
+export const exWithFormSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-drawer open placement="right" size="lg">
+  <span slot="header">NEW PROJECT</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Project name
+      </label>
+      <kb-input placeholder="my-project" variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Framework
+      </label>
+      <kb-select placeholder="Select framework..." size="sm">
+      </kb-select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Repository
+      </label>
+      <kb-input placeholder="https://github.com/..." variant="outline" size="sm" type="url">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <kb-textarea placeholder="What does this project do?" size="sm" rows="3">
+      </kb-textarea>
+    </div>
+    <kb-divider>
+    </kb-divider>
+    <div class="space-y-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Build settings</div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Auto-deploy</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Deploy on push to main branch</div>
+        </div>
+        <kb-switch size="sm" checked>
+        </kb-switch>
+      </div>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Preview deploys</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Create preview for every pull request</div>
+        </div>
+        <kb-switch size="sm" checked>
+        </kb-switch>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="ghost">CANCEL</kb-button>
+    <kb-button size="sm">CREATE PROJECT</kb-button>
+  </span>
+</kb-drawer>`;
+export const exWithFormSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+            { label: 'Next.js', value: 'nextjs' },
+            { label: 'Remix', value: 'remix' },
+            { label: 'Astro', value: 'astro' },
+            { label: 'Vite + React', value: 'vite-react' },
+            { label: 'SvelteKit', value: 'sveltekit' },
+          ]; });
+};
+export const exToggleDemo = `<kb-button>OPEN DRAWER</kb-button>
+<kb-drawer placement="right" size="md" backdrop="blur">
+  <span slot="header">TOGGLE DEMO</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This drawer was opened via button click. Close it with the X button, Escape key, or overlay click to see the animated dismiss transition.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-1.5">Dismiss methods</div>
+      <div class="space-y-1 text-sm text-slate-600 dark:text-zinc-300">
+        <div>Close button (X)</div>
+        <div>Escape key</div>
+        <div>Click backdrop overlay</div>
+        <div>Footer close button</div>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="outline">CLOSE</kb-button>
+  </span>
+</kb-drawer>`;
+export const exToggleDemoReact = `import { Button, Drawer } from '@wearesyntesa/karbit-ui/react';
+
+<Button>OPEN DRAWER</Button>
+<Drawer placement="right" size="md" backdrop="blur">
+  <span slot="header">TOGGLE DEMO</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This drawer was opened via button click. Close it with the X button, Escape key, or overlay click to see the animated dismiss transition.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-1.5">Dismiss methods</div>
+      <div class="space-y-1 text-sm text-slate-600 dark:text-zinc-300">
+        <div>Close button (X)</div>
+        <div>Escape key</div>
+        <div>Click backdrop overlay</div>
+        <div>Footer close button</div>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button size="sm" variant="outline">CLOSE</Button>
+  </span>
+</Drawer>`;
+export const exToggleDemoVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button>OPEN DRAWER</kb-button>
+  <kb-drawer placement="right" size="md" backdrop="blur">
+    <span slot="header">TOGGLE DEMO</span>
+    <div class="space-y-3">
+      <p class="text-sm text-slate-500 dark:text-zinc-400">
+        This drawer was opened via button click. Close it with the X button, Escape key, or overlay click to see the animated dismiss transition.
+      </p>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-1.5">Dismiss methods</div>
+        <div class="space-y-1 text-sm text-slate-600 dark:text-zinc-300">
+          <div>Close button (X)</div>
+          <div>Escape key</div>
+          <div>Click backdrop overlay</div>
+          <div>Footer close button</div>
+        </div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button size="sm" variant="outline">CLOSE</kb-button>
+    </span>
+  </kb-drawer>
+</template>`;
+export const exToggleDemoSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button>OPEN DRAWER</kb-button>
+<kb-drawer placement="right" size="md" backdrop="blur">
+  <span slot="header">TOGGLE DEMO</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This drawer was opened via button click. Close it with the X button, Escape key, or overlay click to see the animated dismiss transition.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-1.5">Dismiss methods</div>
+      <div class="space-y-1 text-sm text-slate-600 dark:text-zinc-300">
+        <div>Close button (X)</div>
+        <div>Escape key</div>
+        <div>Click backdrop overlay</div>
+        <div>Footer close button</div>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="sm" variant="outline">CLOSE</kb-button>
+  </span>
+</kb-drawer>`;
+
+# Drawer
+
+A sliding panel that overlays from the edge of the viewport.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Drawer } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={usageCode} overlayTag="kb-drawer" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `placement` | `placement` | `DrawerPlacement` | `'right'` | Edge of the viewport from which the drawer slides in. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `header` | Drawer header content. |
+| `footer` | Drawer footer content (only renders when provided). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-open` | `{ source?: string }` or none | Dispatched when drawer finishes opening. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when drawer is dismissed (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Escape` | Close the overlay and restore focus |
+| `Tab` | Cycle focus within the overlay (focus trap) |
+
+### ARIA
+
+**Roles:** `dialog`
+
+**Attributes:** `aria-label`, `aria-labelledby`, `aria-modal`
+
+### Focus Management
+
+This component extends `KbOverlayBase` and provides:
+- Focus trapping within the overlay when open
+- Focus restoration to the trigger element on close
+- `Escape` key dismissal
+- Sibling elements marked as `inert` while open
+- Body scroll locking
+
+## Examples
+
+<Demo title="Backdrop Blur" codes={{ html: exBackdropBlur, react: exBackdropBlurReact, vue: exBackdropBlurVue, svelte: exBackdropBlurSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exBackdropBlur} overlayTag="kb-drawer" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Form" codes={{ html: exWithForm, react: exWithFormReact, vue: exWithFormVue, svelte: exWithFormSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithForm} setup={exWithFormSetup} overlayTag="kb-drawer" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Toggle Demo" codes={{ html: exToggleDemo, react: exToggleDemoReact, vue: exToggleDemoVue, svelte: exToggleDemoSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exToggleDemo} overlayTag="kb-drawer" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Modal](./modal)

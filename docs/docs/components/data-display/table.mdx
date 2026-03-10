@@ -1,0 +1,157 @@
+---
+title: "Table"
+description: "A data table with sorting, striping, and hover states."
+sidebar_label: "Table"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-table>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Alice</td><td>Engineer</td></tr>
+      <tr><td>Bob</td><td>Designer</td></tr>
+    </tbody>
+  </table>
+</kb-table>`;
+export const reactCode = `import { Table } from '@wearesyntesa/karbit-ui/react';
+
+<Table>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Alice</td><td>Engineer</td></tr>
+      <tr><td>Bob</td><td>Designer</td></tr>
+    </tbody>
+  </table>
+</Table>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-table>
+    <table>
+      <thead><tr><th>Name</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Alice</td><td>Engineer</td></tr>
+        <tr><td>Bob</td><td>Designer</td></tr>
+      </tbody>
+    </table>
+  </kb-table>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-table>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Alice</td><td>Engineer</td></tr>
+      <tr><td>Bob</td><td>Designer</td></tr>
+    </tbody>
+  </table>
+</kb-table>`;
+
+# Table
+
+A data table with sorting, striping, and hover states.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Table } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `TableVariant` | `'simple'` | Visual variant - `'simple'` (default lines), `'striped'` (alternating row bg), or `'bordered'` (cell borders). |
+| `size` | `size` | `TableSize` | `'md'` | Cell and header padding size. |
+| `hoverable` | `hoverable` | `boolean` | `true` | Highlight rows on hover. |
+| `interactive` | `interactive` | `boolean` | `false` | Make body rows clickable/focusable and emit `kb-row-click` events. |
+| `stickyHeader` | `sticky-header` | `boolean` | `false` | Stick the `<thead>` to the top of the scroll container. |
+| `caption` | `caption` | `string` | `""` | Caption text shown in a labeled bar above the table. |
+| `sortable` | `sortable` | `boolean` | `false` | Enable click-to-sort on header cells (use `data-no-sort` on a `<th>` to opt out). |
+| `searchable` | `searchable` | `boolean` | `false` | Show a search toolbar that filters rows by text content. |
+| `resizable` | `resizable` | `boolean` | `false` | Enable column-edge drag handles for width adjustment. |
+| `searchPlaceholder` | `search-placeholder` | `string` | `'Search...'` | Placeholder text shown in the search input. |
+| `emptyText` | `empty-text` | `string` | `'No results'` | Text shown when no rows match the search query (or the table has no rows). |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-row-click` | `{ index: number, row: HTMLTableRowElement }` | Interactive body row clicked/activated. `detail: { index: number; row: HTMLTableRowElement }`. |
+| `kb-sort` | `{ column: number, direction: SortDirection }` | Sort state changed. `detail: { column: number; direction: 'asc' \| 'desc' }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Attributes:** `aria-controls`, `aria-label`

@@ -1,0 +1,398 @@
+---
+title: "Container"
+description: "A max-width centered container for page content."
+sidebar_label: "Container"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-container size="lg">Centered content</kb-container>`;
+export const reactCode = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container size="lg">Centered content</Container>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container size="lg">Centered content</kb-container>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container size="lg">Centered content</kb-container>`;
+export const exDefault = `<kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>`;
+export const exDefaultReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6">Contained content with max-width constraint.</Container>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>`;
+export const exNarrow = `<kb-container bg="gray-100" p="6" max="sm">Contained content with max-width constraint.</kb-container>`;
+export const exNarrowReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" max="sm">Contained content with max-width constraint.</Container>`;
+export const exNarrowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" max="sm">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exNarrowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" max="sm">Contained content with max-width constraint.</kb-container>`;
+export const exWide = `<kb-container bg="gray-100" p="6" max="5xl">Contained content with max-width constraint.</kb-container>`;
+export const exWideReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" max="5xl">Contained content with max-width constraint.</Container>`;
+export const exWideVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" max="5xl">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exWideSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" max="5xl">Contained content with max-width constraint.</kb-container>`;
+export const exNotCentered = `<kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>`;
+export const exNotCenteredReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6">Contained content with max-width constraint.</Container>`;
+export const exNotCenteredVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exNotCenteredSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6">Contained content with max-width constraint.</kb-container>`;
+export const exSizeSmall = `<kb-container bg="gray-100" p="6" size="sm">Contained content with max-width constraint.</kb-container>`;
+export const exSizeSmallReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="sm">Contained content with max-width constraint.</Container>`;
+export const exSizeSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="sm">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSizeSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="sm">Contained content with max-width constraint.</kb-container>`;
+export const exSizeMedium = `<kb-container bg="gray-100" p="6" size="md">Contained content with max-width constraint.</kb-container>`;
+export const exSizeMediumReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="md">Contained content with max-width constraint.</Container>`;
+export const exSizeMediumVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="md">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSizeMediumSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="md">Contained content with max-width constraint.</kb-container>`;
+export const exSizeLarge = `<kb-container bg="gray-100" p="6" size="lg">Contained content with max-width constraint.</kb-container>`;
+export const exSizeLargeReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="lg">Contained content with max-width constraint.</Container>`;
+export const exSizeLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="lg">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSizeLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="lg">Contained content with max-width constraint.</kb-container>`;
+export const exSizeXL = `<kb-container bg="gray-100" p="6" size="xl">Contained content with max-width constraint.</kb-container>`;
+export const exSizeXLReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="xl">Contained content with max-width constraint.</Container>`;
+export const exSizeXLVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="xl">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSizeXLSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="xl">Contained content with max-width constraint.</kb-container>`;
+export const exSize2XL = `<kb-container bg="gray-100" p="6" size="2xl">Contained content with max-width constraint.</kb-container>`;
+export const exSize2XLReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="2xl">Contained content with max-width constraint.</Container>`;
+export const exSize2XLVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="2xl">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSize2XLSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="2xl">Contained content with max-width constraint.</kb-container>`;
+export const exSizeFull = `<kb-container bg="gray-100" p="6" size="full">Contained content with max-width constraint.</kb-container>`;
+export const exSizeFullReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container bg="gray-100" p="6" size="full">Contained content with max-width constraint.</Container>`;
+export const exSizeFullVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container bg="gray-100" p="6" size="full">Contained content with max-width constraint.</kb-container>
+</template>`;
+export const exSizeFullSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container bg="gray-100" p="6" size="full">Contained content with max-width constraint.</kb-container>`;
+export const exNested = `<kb-container size="xl" bg="gray-100" p="6">
+  <p class="text-xs font-mono text-slate-500 mb-4">OUTER: size="xl"</p>
+  <kb-container size="md" bg="gray-200" p="4">
+    <p class="text-xs font-mono text-slate-500">INNER: size="md"</p>
+  </kb-container>
+</kb-container>`;
+export const exNestedReact = `import { Container } from '@wearesyntesa/karbit-ui/react';
+
+<Container size="xl" bg="gray-100" p="6">
+  <p class="text-xs font-mono text-slate-500 mb-4">OUTER: size="xl"</p>
+  <Container size="md" bg="gray-200" p="4">
+    <p class="text-xs font-mono text-slate-500">INNER: size="md"</p>
+  </Container>
+</Container>`;
+export const exNestedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-container size="xl" bg="gray-100" p="6">
+    <p class="text-xs font-mono text-slate-500 mb-4">OUTER: size="xl"</p>
+    <kb-container size="md" bg="gray-200" p="4">
+      <p class="text-xs font-mono text-slate-500">INNER: size="md"</p>
+    </kb-container>
+  </kb-container>
+</template>`;
+export const exNestedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-container size="xl" bg="gray-100" p="6">
+  <p class="text-xs font-mono text-slate-500 mb-4">OUTER: size="xl"</p>
+  <kb-container size="md" bg="gray-200" p="4">
+    <p class="text-xs font-mono text-slate-500">INNER: size="md"</p>
+  </kb-container>
+</kb-container>`;
+
+# Container
+
+A max-width centered container for page content.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Container } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `ContainerSize` | — | Named max-width preset. Takes precedence over `max` when set. |
+| `max` | `max` | `DimensionValue` | — | Custom Tailwind max-width value (e.g. `'4xl'`, `'prose'`). Ignored if `size` is set. |
+| `center` | `center` | `boolean` | `true` | Horizontally center the container with `mx-auto`. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Narrow" codes={{ html: exNarrow, react: exNarrowReact, vue: exNarrowVue, svelte: exNarrowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNarrow }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Wide" codes={{ html: exWide, react: exWideReact, vue: exWideVue, svelte: exWideSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWide }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Not Centered" codes={{ html: exNotCentered, react: exNotCenteredReact, vue: exNotCenteredVue, svelte: exNotCenteredSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNotCentered }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Small" codes={{ html: exSizeSmall, react: exSizeSmallReact, vue: exSizeSmallVue, svelte: exSizeSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Medium" codes={{ html: exSizeMedium, react: exSizeMediumReact, vue: exSizeMediumVue, svelte: exSizeMediumSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeMedium }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Large" codes={{ html: exSizeLarge, react: exSizeLargeReact, vue: exSizeLargeVue, svelte: exSizeLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size X L" codes={{ html: exSizeXL, react: exSizeXLReact, vue: exSizeXLVue, svelte: exSizeXLSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeXL }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size2 X L" codes={{ html: exSize2XL, react: exSize2XLReact, vue: exSize2XLVue, svelte: exSize2XLSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSize2XL }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Full" codes={{ html: exSizeFull, react: exSizeFullReact, vue: exSizeFullVue, svelte: exSizeFullSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeFull }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Nested" codes={{ html: exNested, react: exNestedReact, vue: exNestedVue, svelte: exNestedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNested }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Box](./box)

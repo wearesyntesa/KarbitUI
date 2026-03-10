@@ -1,0 +1,171 @@
+{
+  "name": "Select",
+  "tag": "kb-select",
+  "category": "forms",
+  "description": "A dropdown select menu for choosing from a list of options.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-select.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Select"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Form select visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Select size controlling padding, font size, and icon sizing."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text shown when no value is selected."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "V | ''",
+      "default": "''",
+      "reflect": false,
+      "description": "Currently selected value."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name, used in form submissions."
+    },
+    {
+      "name": "options",
+      "attribute": "options",
+      "type": "readonly SelectOptionOrGroup<V>[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of options or option groups to render in the dropdown."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the select as invalid with error border styling."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the select as required for form validation."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a clear button when a value is selected."
+    },
+    {
+      "name": "loading",
+      "attribute": "loading",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a loading spinner in place of the chevron."
+    },
+    {
+      "name": "emptyText",
+      "attribute": "empty-text",
+      "type": "string",
+      "default": "'No results'",
+      "reflect": false,
+      "description": "Text shown in the dropdown panel when there are no options."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Leading icon element inside the select wrapper."
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Select focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Select blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Clear button clicked (when clearable)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "combobox",
+      "listbox",
+      "option",
+      "presentation",
+      "status"
+    ],
+    "ariaAttributes": [
+      "aria-activedescendant",
+      "aria-controls",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-label",
+      "aria-required",
+      "aria-selected"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowUp",
+      "End",
+      "Enter",
+      "Escape",
+      "Home",
+      "Space",
+      "Tab"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "combobox"
+  ]
+}

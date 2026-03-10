@@ -1,0 +1,91 @@
+---
+sidebar_position: 4
+title: Svelte
+---
+
+# Svelte Setup
+
+Svelte supports custom elements out of the box. KarbitUI components work directly in Svelte templates.
+
+## Installation
+
+```bash
+pnpm add @wearesyntesa/karbit-ui
+```
+
+## Register custom elements
+
+```ts title="src/main.ts"
+import "@wearesyntesa/karbit-ui/define";
+
+import App from "./App.svelte";
+import { mount } from "svelte";
+
+const app = mount(App, { target: document.getElementById("app")! });
+export default app;
+```
+
+## Usage example
+
+```svelte title="src/App.svelte"
+<script lang="ts">
+  function handleChange(e: CustomEvent) {
+    console.log("Value:", e.detail.value);
+  }
+</script>
+
+<kb-card p="6">
+  <kb-input
+    placeholder="Enter your name"
+    on:kb-change={handleChange}
+  />
+  <kb-button variant="solid" color-scheme="blue" mt="4">
+    Submit
+  </kb-button>
+</kb-card>
+```
+
+## Event handling
+
+KarbitUI events are standard `CustomEvent`s. Listen with Svelte's `on:` directive:
+
+```svelte
+<kb-select on:kb-change={onSelect} />
+<kb-checkbox on:kb-change={onToggle} />
+<kb-accordion on:kb-toggle={onToggle} />
+```
+
+## Property binding
+
+For complex data (arrays, objects), bind to the DOM property directly:
+
+```svelte
+<script lang="ts">
+  const columns = [
+    { key: "name", label: "Name" },
+    { key: "email", label: "Email" },
+  ];
+  const rows = [
+    { name: "Alice", email: "alice@example.com" },
+  ];
+</script>
+
+<!-- Svelte binds to properties when using the prop: prefix -->
+<kb-table columns={columns} rows={rows} />
+<kb-tree-view items={treeItems} />
+```
+
+## TypeScript
+
+Svelte doesn't use the React wrappers. You can import types directly:
+
+```ts
+import type { KbChangeDetail } from "@wearesyntesa/karbit-ui/events";
+import type { ComponentSize, ColorScheme } from "@wearesyntesa/karbit-ui/types";
+```
+
+## CSS setup
+
+```css title="src/app.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```

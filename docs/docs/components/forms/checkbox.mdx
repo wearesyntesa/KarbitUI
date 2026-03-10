@@ -1,0 +1,662 @@
+---
+title: "Checkbox"
+description: "A toggle control that allows selecting one or more options."
+sidebar_label: "Checkbox"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-checkbox>Accept terms</kb-checkbox>`;
+export const reactCode = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox>Accept terms</Checkbox>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox>Accept terms</kb-checkbox>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox>Accept terms</kb-checkbox>`;
+export const exDefault = `<kb-checkbox size="md">Accept terms</kb-checkbox>`;
+export const exDefaultReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox size="md">Accept terms</Checkbox>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox size="md">Accept terms</kb-checkbox>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox size="md">Accept terms</kb-checkbox>`;
+export const exChecked = `<kb-checkbox size="md" checked>Accept terms</kb-checkbox>`;
+export const exCheckedReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox size="md" checked>Accept terms</Checkbox>`;
+export const exCheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox size="md" checked>Accept terms</kb-checkbox>
+</template>`;
+export const exCheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox size="md" checked>Accept terms</kb-checkbox>`;
+export const exIndeterminate = `<kb-checkbox size="md" indeterminate>Accept terms</kb-checkbox>`;
+export const exIndeterminateReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox size="md" indeterminate>Accept terms</Checkbox>`;
+export const exIndeterminateVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox size="md" indeterminate>Accept terms</kb-checkbox>
+</template>`;
+export const exIndeterminateSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox size="md" indeterminate>Accept terms</kb-checkbox>`;
+export const exDisabled = `<kb-checkbox size="md" disabled>Accept terms</kb-checkbox>`;
+export const exDisabledReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox size="md" disabled>Accept terms</Checkbox>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox size="md" disabled>Accept terms</kb-checkbox>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox size="md" disabled>Accept terms</kb-checkbox>`;
+export const exDisabledChecked = `<kb-checkbox size="md" disabled checked>Accept terms</kb-checkbox>`;
+export const exDisabledCheckedReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<Checkbox size="md" disabled checked>Accept terms</Checkbox>`;
+export const exDisabledCheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox size="md" disabled checked>Accept terms</kb-checkbox>
+</template>`;
+export const exDisabledCheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox size="md" disabled checked>Accept terms</kb-checkbox>`;
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox invalid>Unchecked invalid</kb-checkbox>
+  <kb-checkbox invalid checked>Checked invalid (shows checked color)</kb-checkbox>
+</div>`;
+export const exInvalidReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Checkbox invalid>Unchecked invalid</Checkbox>
+  <Checkbox invalid checked>Checked invalid (shows checked color)</Checkbox>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-checkbox invalid>Unchecked invalid</kb-checkbox>
+    <kb-checkbox invalid checked>Checked invalid (shows checked color)</kb-checkbox>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox invalid>Unchecked invalid</kb-checkbox>
+  <kb-checkbox invalid checked>Checked invalid (shows checked color)</kb-checkbox>
+</div>`;
+export const exWithDescription = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox>
+    Accept terms
+    <span slot="description">You must accept the terms to continue.</span>
+  </kb-checkbox>
+  <kb-checkbox checked color-scheme="green">
+    Email notifications
+    <span slot="description">Receive updates about your account.</span>
+  </kb-checkbox>
+  <kb-checkbox invalid>
+    Required field
+    <span slot="description">This field is required.</span>
+  </kb-checkbox>
+</div>`;
+export const exWithDescriptionReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Checkbox>
+    Accept terms
+    <span slot="description">You must accept the terms to continue.</span>
+  </Checkbox>
+  <Checkbox checked color-scheme="green">
+    Email notifications
+    <span slot="description">Receive updates about your account.</span>
+  </Checkbox>
+  <Checkbox invalid>
+    Required field
+    <span slot="description">This field is required.</span>
+  </Checkbox>
+</div>`;
+export const exWithDescriptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-checkbox>
+      Accept terms
+      <span slot="description">You must accept the terms to continue.</span>
+    </kb-checkbox>
+    <kb-checkbox checked color-scheme="green">
+      Email notifications
+      <span slot="description">Receive updates about your account.</span>
+    </kb-checkbox>
+    <kb-checkbox invalid>
+      Required field
+      <span slot="description">This field is required.</span>
+    </kb-checkbox>
+  </div>
+</template>`;
+export const exWithDescriptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox>
+    Accept terms
+    <span slot="description">You must accept the terms to continue.</span>
+  </kb-checkbox>
+  <kb-checkbox checked color-scheme="green">
+    Email notifications
+    <span slot="description">Receive updates about your account.</span>
+  </kb-checkbox>
+  <kb-checkbox invalid>
+    Required field
+    <span slot="description">This field is required.</span>
+  </kb-checkbox>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox size="xs" checked>Extra Small</kb-checkbox>
+  <kb-checkbox size="sm" checked>Small</kb-checkbox>
+  <kb-checkbox size="md" checked>Medium</kb-checkbox>
+  <kb-checkbox size="lg" checked>Large</kb-checkbox>
+  <kb-checkbox size="xl" checked>Extra Large</kb-checkbox>
+</div>`;
+export const exAllSizesReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Checkbox size="xs" checked>Extra Small</Checkbox>
+  <Checkbox size="sm" checked>Small</Checkbox>
+  <Checkbox size="md" checked>Medium</Checkbox>
+  <Checkbox size="lg" checked>Large</Checkbox>
+  <Checkbox size="xl" checked>Extra Large</Checkbox>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-checkbox size="xs" checked>Extra Small</kb-checkbox>
+    <kb-checkbox size="sm" checked>Small</kb-checkbox>
+    <kb-checkbox size="md" checked>Medium</kb-checkbox>
+    <kb-checkbox size="lg" checked>Large</kb-checkbox>
+    <kb-checkbox size="xl" checked>Extra Large</kb-checkbox>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox size="xs" checked>Extra Small</kb-checkbox>
+  <kb-checkbox size="sm" checked>Small</kb-checkbox>
+  <kb-checkbox size="md" checked>Medium</kb-checkbox>
+  <kb-checkbox size="lg" checked>Large</kb-checkbox>
+  <kb-checkbox size="xl" checked>Extra Large</kb-checkbox>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox checked color-scheme="blue">Blue (default)</kb-checkbox>
+  <kb-checkbox checked color-scheme="red">Red</kb-checkbox>
+  <kb-checkbox checked color-scheme="green">Green</kb-checkbox>
+  <kb-checkbox checked color-scheme="yellow">Yellow</kb-checkbox>
+  <kb-checkbox checked color-scheme="black">Black</kb-checkbox>
+</div>`;
+export const exColorSchemesReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Checkbox checked color-scheme="blue">Blue (default)</Checkbox>
+  <Checkbox checked color-scheme="red">Red</Checkbox>
+  <Checkbox checked color-scheme="green">Green</Checkbox>
+  <Checkbox checked color-scheme="yellow">Yellow</Checkbox>
+  <Checkbox checked color-scheme="black">Black</Checkbox>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-checkbox checked color-scheme="blue">Blue (default)</kb-checkbox>
+    <kb-checkbox checked color-scheme="red">Red</kb-checkbox>
+    <kb-checkbox checked color-scheme="green">Green</kb-checkbox>
+    <kb-checkbox checked color-scheme="yellow">Yellow</kb-checkbox>
+    <kb-checkbox checked color-scheme="black">Black</kb-checkbox>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox checked color-scheme="blue">Blue (default)</kb-checkbox>
+  <kb-checkbox checked color-scheme="red">Red</kb-checkbox>
+  <kb-checkbox checked color-scheme="green">Green</kb-checkbox>
+  <kb-checkbox checked color-scheme="yellow">Yellow</kb-checkbox>
+  <kb-checkbox checked color-scheme="black">Black</kb-checkbox>
+</div>`;
+export const exColorSchemesUnchecked = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox color-scheme="blue">Blue hover</kb-checkbox>
+  <kb-checkbox color-scheme="red">Red hover</kb-checkbox>
+  <kb-checkbox color-scheme="green">Green hover</kb-checkbox>
+  <kb-checkbox color-scheme="yellow">Yellow hover</kb-checkbox>
+  <kb-checkbox color-scheme="black">Black hover</kb-checkbox>
+</div>`;
+export const exColorSchemesUncheckedReact = `import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Checkbox color-scheme="blue">Blue hover</Checkbox>
+  <Checkbox color-scheme="red">Red hover</Checkbox>
+  <Checkbox color-scheme="green">Green hover</Checkbox>
+  <Checkbox color-scheme="yellow">Yellow hover</Checkbox>
+  <Checkbox color-scheme="black">Black hover</Checkbox>
+</div>`;
+export const exColorSchemesUncheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-checkbox color-scheme="blue">Blue hover</kb-checkbox>
+    <kb-checkbox color-scheme="red">Red hover</kb-checkbox>
+    <kb-checkbox color-scheme="green">Green hover</kb-checkbox>
+    <kb-checkbox color-scheme="yellow">Yellow hover</kb-checkbox>
+    <kb-checkbox color-scheme="black">Black hover</kb-checkbox>
+  </div>
+</template>`;
+export const exColorSchemesUncheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-checkbox color-scheme="blue">Blue hover</kb-checkbox>
+  <kb-checkbox color-scheme="red">Red hover</kb-checkbox>
+  <kb-checkbox color-scheme="green">Green hover</kb-checkbox>
+  <kb-checkbox color-scheme="yellow">Yellow hover</kb-checkbox>
+  <kb-checkbox color-scheme="black">Black hover</kb-checkbox>
+</div>`;
+export const exGroupVertical = `<kb-checkbox-group direction="vertical">
+  <span slot="label">Choose toppings</span>
+  <kb-checkbox value="cheese" checked>Cheese</kb-checkbox>
+  <kb-checkbox value="onion">Onion</kb-checkbox>
+  <kb-checkbox value="pepper">Pepper</kb-checkbox>
+  <kb-checkbox value="mushroom">Mushroom</kb-checkbox>
+</kb-checkbox-group>`;
+export const exGroupVerticalReact = `import { Checkbox, CheckboxGroup } from '@wearesyntesa/karbit-ui/react';
+
+<CheckboxGroup direction="vertical">
+  <span slot="label">Choose toppings</span>
+  <Checkbox value="cheese" checked>Cheese</Checkbox>
+  <Checkbox value="onion">Onion</Checkbox>
+  <Checkbox value="pepper">Pepper</Checkbox>
+  <Checkbox value="mushroom">Mushroom</Checkbox>
+</CheckboxGroup>`;
+export const exGroupVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox-group direction="vertical">
+    <span slot="label">Choose toppings</span>
+    <kb-checkbox value="cheese" checked>Cheese</kb-checkbox>
+    <kb-checkbox value="onion">Onion</kb-checkbox>
+    <kb-checkbox value="pepper">Pepper</kb-checkbox>
+    <kb-checkbox value="mushroom">Mushroom</kb-checkbox>
+  </kb-checkbox-group>
+</template>`;
+export const exGroupVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox-group direction="vertical">
+  <span slot="label">Choose toppings</span>
+  <kb-checkbox value="cheese" checked>Cheese</kb-checkbox>
+  <kb-checkbox value="onion">Onion</kb-checkbox>
+  <kb-checkbox value="pepper">Pepper</kb-checkbox>
+  <kb-checkbox value="mushroom">Mushroom</kb-checkbox>
+</kb-checkbox-group>`;
+export const exGroupHorizontal = `<kb-checkbox-group direction="horizontal" color-scheme="green">
+  <span slot="label">Select features</span>
+  <kb-checkbox value="dark-mode" checked>Dark Mode</kb-checkbox>
+  <kb-checkbox value="notifications">Notifications</kb-checkbox>
+  <kb-checkbox value="analytics">Analytics</kb-checkbox>
+</kb-checkbox-group>`;
+export const exGroupHorizontalReact = `import { Checkbox, CheckboxGroup } from '@wearesyntesa/karbit-ui/react';
+
+<CheckboxGroup direction="horizontal" color-scheme="green">
+  <span slot="label">Select features</span>
+  <Checkbox value="dark-mode" checked>Dark Mode</Checkbox>
+  <Checkbox value="notifications">Notifications</Checkbox>
+  <Checkbox value="analytics">Analytics</Checkbox>
+</CheckboxGroup>`;
+export const exGroupHorizontalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox-group direction="horizontal" color-scheme="green">
+    <span slot="label">Select features</span>
+    <kb-checkbox value="dark-mode" checked>Dark Mode</kb-checkbox>
+    <kb-checkbox value="notifications">Notifications</kb-checkbox>
+    <kb-checkbox value="analytics">Analytics</kb-checkbox>
+  </kb-checkbox-group>
+</template>`;
+export const exGroupHorizontalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox-group direction="horizontal" color-scheme="green">
+  <span slot="label">Select features</span>
+  <kb-checkbox value="dark-mode" checked>Dark Mode</kb-checkbox>
+  <kb-checkbox value="notifications">Notifications</kb-checkbox>
+  <kb-checkbox value="analytics">Analytics</kb-checkbox>
+</kb-checkbox-group>`;
+export const exGroupWithMax = `<kb-checkbox-group direction="vertical" max="2">
+  <span slot="label">Pick up to 2</span>
+  <kb-checkbox value="a" checked>Option A</kb-checkbox>
+  <kb-checkbox value="b" checked>Option B</kb-checkbox>
+  <kb-checkbox value="c">Option C (blocked — max 2)</kb-checkbox>
+  <kb-checkbox value="d">Option D (blocked — max 2)</kb-checkbox>
+</kb-checkbox-group>`;
+export const exGroupWithMaxReact = `import { Checkbox, CheckboxGroup } from '@wearesyntesa/karbit-ui/react';
+
+<CheckboxGroup direction="vertical" max="2">
+  <span slot="label">Pick up to 2</span>
+  <Checkbox value="a" checked>Option A</Checkbox>
+  <Checkbox value="b" checked>Option B</Checkbox>
+  <Checkbox value="c">Option C (blocked — max 2)</Checkbox>
+  <Checkbox value="d">Option D (blocked — max 2)</Checkbox>
+</CheckboxGroup>`;
+export const exGroupWithMaxVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox-group direction="vertical" max="2">
+    <span slot="label">Pick up to 2</span>
+    <kb-checkbox value="a" checked>Option A</kb-checkbox>
+    <kb-checkbox value="b" checked>Option B</kb-checkbox>
+    <kb-checkbox value="c">Option C (blocked — max 2)</kb-checkbox>
+    <kb-checkbox value="d">Option D (blocked — max 2)</kb-checkbox>
+  </kb-checkbox-group>
+</template>`;
+export const exGroupWithMaxSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox-group direction="vertical" max="2">
+  <span slot="label">Pick up to 2</span>
+  <kb-checkbox value="a" checked>Option A</kb-checkbox>
+  <kb-checkbox value="b" checked>Option B</kb-checkbox>
+  <kb-checkbox value="c">Option C (blocked — max 2)</kb-checkbox>
+  <kb-checkbox value="d">Option D (blocked — max 2)</kb-checkbox>
+</kb-checkbox-group>`;
+
+# Checkbox
+
+A toggle control that allows selecting one or more options.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Checkbox } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `ComponentSize` | `'md'` | Checkbox size controlling box dimensions, label text, and icon size. |
+| `checked` | `checked` | `boolean` | `false` | Whether the checkbox is checked. Reflects to the `checked` attribute. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `indeterminate` | `indeterminate` | `boolean` | `false` | Show a horizontal dash icon instead of a checkmark (third state). |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error border styling when unchecked. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the checked/indeterminate state background and icon. |
+| `name` | `name` | `string` | — | Form field name, used in form submissions. |
+| `value` | `value` | `string` | — | Value included in `kb-change` event detail and form submissions. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `description` | Helper text rendered below the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Checked state changed. Detail: `{ checked: boolean, value?: string }`. |
+| `kb-focus` | `{ source?: string }` or none | — |
+| `kb-blur` | `{ source?: string }` or none | — |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `checkbox`
+
+**Attributes:** `aria-checked`, `aria-invalid`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Checked" codes={{ html: exChecked, react: exCheckedReact, vue: exCheckedVue, svelte: exCheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exChecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Indeterminate" codes={{ html: exIndeterminate, react: exIndeterminateReact, vue: exIndeterminateVue, svelte: exIndeterminateSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exIndeterminate }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled Checked" codes={{ html: exDisabledChecked, react: exDisabledCheckedReact, vue: exDisabledCheckedVue, svelte: exDisabledCheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabledChecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Description" codes={{ html: exWithDescription, react: exWithDescriptionReact, vue: exWithDescriptionVue, svelte: exWithDescriptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDescription }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Unchecked" codes={{ html: exColorSchemesUnchecked, react: exColorSchemesUncheckedReact, vue: exColorSchemesUncheckedVue, svelte: exColorSchemesUncheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesUnchecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group Vertical" codes={{ html: exGroupVertical, react: exGroupVerticalReact, vue: exGroupVerticalVue, svelte: exGroupVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupVertical }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group Horizontal" codes={{ html: exGroupHorizontal, react: exGroupHorizontalReact, vue: exGroupHorizontalVue, svelte: exGroupHorizontalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupHorizontal }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group With Max" codes={{ html: exGroupWithMax, react: exGroupWithMaxReact, vue: exGroupWithMaxVue, svelte: exGroupWithMaxSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupWithMax }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Checkbox Group](./checkbox-group)
+- [Switch](./switch)
+- [Radio](./radio)

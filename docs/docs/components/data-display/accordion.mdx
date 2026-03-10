@@ -1,0 +1,717 @@
+---
+title: "Accordion"
+description: "A collapsible content panel for showing and hiding sections of content."
+sidebar_label: "Accordion"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-accordion>
+  <span slot="trigger">Click to expand</span>
+  This is the accordion content.
+</kb-accordion>`;
+export const reactCode = `import { Accordion } from '@wearesyntesa/karbit-ui/react';
+
+<Accordion>
+  <span slot="trigger">Click to expand</span>
+  This is the accordion content.
+</Accordion>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion>
+    <span slot="trigger">Click to expand</span>
+    This is the accordion content.
+  </kb-accordion>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion>
+  <span slot="trigger">Click to expand</span>
+  This is the accordion content.
+</kb-accordion>`;
+export const exDefault = `<kb-accordion>
+  <span slot="trigger">Authentication requirements</span>
+  All API requests must include a valid bearer token in the Authorization header. Tokens expire after 24 hours and must be refreshed via the /auth/refresh endpoint.
+</kb-accordion>`;
+export const exDefaultReact = `import { Accordion } from '@wearesyntesa/karbit-ui/react';
+
+<Accordion>
+  <span slot="trigger">Authentication requirements</span>
+  All API requests must include a valid bearer token in the Authorization header. Tokens expire after 24 hours and must be refreshed via the /auth/refresh endpoint.
+</Accordion>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion>
+    <span slot="trigger">Authentication requirements</span>
+    All API requests must include a valid bearer token in the Authorization header. Tokens expire after 24 hours and must be refreshed via the /auth/refresh endpoint.
+  </kb-accordion>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion>
+  <span slot="trigger">Authentication requirements</span>
+  All API requests must include a valid bearer token in the Authorization header. Tokens expire after 24 hours and must be refreshed via the /auth/refresh endpoint.
+</kb-accordion>`;
+export const exOpen = `<kb-accordion open>
+  <span slot="trigger">Rate limiting policy</span>
+  Requests are limited to 1000 per minute per API key. Exceeding this threshold returns a 429 status code with a Retry-After header indicating when the next request can be made.
+</kb-accordion>`;
+export const exOpenReact = `import { Accordion } from '@wearesyntesa/karbit-ui/react';
+
+<Accordion open>
+  <span slot="trigger">Rate limiting policy</span>
+  Requests are limited to 1000 per minute per API key. Exceeding this threshold returns a 429 status code with a Retry-After header indicating when the next request can be made.
+</Accordion>`;
+export const exOpenVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion open>
+    <span slot="trigger">Rate limiting policy</span>
+    Requests are limited to 1000 per minute per API key. Exceeding this threshold returns a 429 status code with a Retry-After header indicating when the next request can be made.
+  </kb-accordion>
+</template>`;
+export const exOpenSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion open>
+  <span slot="trigger">Rate limiting policy</span>
+  Requests are limited to 1000 per minute per API key. Exceeding this threshold returns a 429 status code with a Retry-After header indicating when the next request can be made.
+</kb-accordion>`;
+export const exDisabled = `<kb-accordion disabled>
+  <span slot="trigger">Deprecated endpoints (locked)</span>
+  This section is locked and cannot be toggled.
+</kb-accordion>`;
+export const exDisabledReact = `import { Accordion } from '@wearesyntesa/karbit-ui/react';
+
+<Accordion disabled>
+  <span slot="trigger">Deprecated endpoints (locked)</span>
+  This section is locked and cannot be toggled.
+</Accordion>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion disabled>
+    <span slot="trigger">Deprecated endpoints (locked)</span>
+    This section is locked and cannot be toggled.
+  </kb-accordion>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion disabled>
+  <span slot="trigger">Deprecated endpoints (locked)</span>
+  This section is locked and cannot be toggled.
+</kb-accordion>`;
+export const exExclusiveGroup = `<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Getting started</span>
+    Install the client library with npm or yarn and configure your API credentials in a .env file to begin making authenticated requests.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Error handling</span>
+    All error responses follow a consistent JSON structure with code, message, and details fields. Use the code field for programmatic error handling.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Rate limits</span>
+    Standard tier accounts are limited to 1,000 requests per minute. Enterprise accounts can request higher limits through the dashboard.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Changelog</span>
+    Version 2.4 introduces streaming responses and batch request support for all collection endpoints. Breaking changes are documented in the migration guide.
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exExclusiveGroupReact = `import { Accordion, AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AccordionGroup>
+  <Accordion open>
+    <span slot="trigger">Getting started</span>
+    Install the client library with npm or yarn and configure your API credentials in a .env file to begin making authenticated requests.
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Error handling</span>
+    All error responses follow a consistent JSON structure with code, message, and details fields. Use the code field for programmatic error handling.
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Rate limits</span>
+    Standard tier accounts are limited to 1,000 requests per minute. Enterprise accounts can request higher limits through the dashboard.
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Changelog</span>
+    Version 2.4 introduces streaming responses and batch request support for all collection endpoints. Breaking changes are documented in the migration guide.
+  </Accordion>
+</AccordionGroup>`;
+export const exExclusiveGroupVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion-group>
+    <kb-accordion open>
+      <span slot="trigger">Getting started</span>
+      Install the client library with npm or yarn and configure your API credentials in a .env file to begin making authenticated requests.
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Error handling</span>
+      All error responses follow a consistent JSON structure with code, message, and details fields. Use the code field for programmatic error handling.
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Rate limits</span>
+      Standard tier accounts are limited to 1,000 requests per minute. Enterprise accounts can request higher limits through the dashboard.
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Changelog</span>
+      Version 2.4 introduces streaming responses and batch request support for all collection endpoints. Breaking changes are documented in the migration guide.
+    </kb-accordion>
+  </kb-accordion-group>
+</template>`;
+export const exExclusiveGroupSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Getting started</span>
+    Install the client library with npm or yarn and configure your API credentials in a .env file to begin making authenticated requests.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Error handling</span>
+    All error responses follow a consistent JSON structure with code, message, and details fields. Use the code field for programmatic error handling.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Rate limits</span>
+    Standard tier accounts are limited to 1,000 requests per minute. Enterprise accounts can request higher limits through the dashboard.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Changelog</span>
+    Version 2.4 introduces streaming responses and batch request support for all collection endpoints. Breaking changes are documented in the migration guide.
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exMultipleGroup = `<kb-accordion-group allow-multiple>
+  <kb-accordion open>
+    <span slot="trigger">System requirements</span>
+    Node.js 18 or later is required. The SDK supports both CommonJS and ESM module formats out of the box.
+  </kb-accordion>
+  <kb-accordion open>
+    <span slot="trigger">Installation</span>
+    Run npm install @example/sdk to add the package to your project. TypeScript types are included — no separate @types package needed.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Configuration</span>
+    Create a config file at the project root or pass options directly to the client constructor. Environment variables take precedence.
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exMultipleGroupReact = `import { Accordion, AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AccordionGroup allow-multiple>
+  <Accordion open>
+    <span slot="trigger">System requirements</span>
+    Node.js 18 or later is required. The SDK supports both CommonJS and ESM module formats out of the box.
+  </Accordion>
+  <Accordion open>
+    <span slot="trigger">Installation</span>
+    Run npm install @example/sdk to add the package to your project. TypeScript types are included — no separate @types package needed.
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Configuration</span>
+    Create a config file at the project root or pass options directly to the client constructor. Environment variables take precedence.
+  </Accordion>
+</AccordionGroup>`;
+export const exMultipleGroupVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion-group allow-multiple>
+    <kb-accordion open>
+      <span slot="trigger">System requirements</span>
+      Node.js 18 or later is required. The SDK supports both CommonJS and ESM module formats out of the box.
+    </kb-accordion>
+    <kb-accordion open>
+      <span slot="trigger">Installation</span>
+      Run npm install @example/sdk to add the package to your project. TypeScript types are included — no separate @types package needed.
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Configuration</span>
+      Create a config file at the project root or pass options directly to the client constructor. Environment variables take precedence.
+    </kb-accordion>
+  </kb-accordion-group>
+</template>`;
+export const exMultipleGroupSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion-group allow-multiple>
+  <kb-accordion open>
+    <span slot="trigger">System requirements</span>
+    Node.js 18 or later is required. The SDK supports both CommonJS and ESM module formats out of the box.
+  </kb-accordion>
+  <kb-accordion open>
+    <span slot="trigger">Installation</span>
+    Run npm install @example/sdk to add the package to your project. TypeScript types are included — no separate @types package needed.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Configuration</span>
+    Create a config file at the project root or pass options directly to the client constructor. Environment variables take precedence.
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exRichContent = `<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Endpoint reference</span>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <p>The API exposes the following primary endpoints for resource management:</p>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Method
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Path
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">GET</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">List all resources</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">POST</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">Create a resource</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">DELETE</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources/:id</td>
+            <td style="padding:6px 8px;font-size:13px;">Delete a resource</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Authentication flow</span>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <p>The OAuth 2.0 authorization code flow is recommended for server-side applications:</p>
+      <ol style="padding-left:20px;display:flex;flex-direction:column;gap:4px;">
+        <li>Redirect the user to the authorization endpoint</li>
+        <li>User grants permission and is redirected back with a code</li>
+        <li>Exchange the code for an access token via POST /oauth/token</li>
+        <li>Use the access token in the Authorization header for all API calls</li>
+      </ol>
+    </div>
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exRichContentReact = `import { Accordion, AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AccordionGroup>
+  <Accordion open>
+    <span slot="trigger">Endpoint reference</span>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <p>The API exposes the following primary endpoints for resource management:</p>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Method
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Path
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">GET</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">List all resources</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">POST</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">Create a resource</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">DELETE</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources/:id</td>
+            <td style="padding:6px 8px;font-size:13px;">Delete a resource</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Authentication flow</span>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <p>The OAuth 2.0 authorization code flow is recommended for server-side applications:</p>
+      <ol style="padding-left:20px;display:flex;flex-direction:column;gap:4px;">
+        <li>Redirect the user to the authorization endpoint</li>
+        <li>User grants permission and is redirected back with a code</li>
+        <li>Exchange the code for an access token via POST /oauth/token</li>
+        <li>Use the access token in the Authorization header for all API calls</li>
+      </ol>
+    </div>
+  </Accordion>
+</AccordionGroup>`;
+export const exRichContentVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion-group>
+    <kb-accordion open>
+      <span slot="trigger">Endpoint reference</span>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <p>The API exposes the following primary endpoints for resource management:</p>
+        <table style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+              <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+                Method
+              </th>
+              <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+                Path
+              </th>
+              <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">GET</td>
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+              <td style="padding:6px 8px;font-size:13px;">List all resources</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">POST</td>
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+              <td style="padding:6px 8px;font-size:13px;">Create a resource</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">DELETE</td>
+              <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources/:id</td>
+              <td style="padding:6px 8px;font-size:13px;">Delete a resource</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Authentication flow</span>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <p>The OAuth 2.0 authorization code flow is recommended for server-side applications:</p>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:4px;">
+          <li>Redirect the user to the authorization endpoint</li>
+          <li>User grants permission and is redirected back with a code</li>
+          <li>Exchange the code for an access token via POST /oauth/token</li>
+          <li>Use the access token in the Authorization header for all API calls</li>
+        </ol>
+      </div>
+    </kb-accordion>
+  </kb-accordion-group>
+</template>`;
+export const exRichContentSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Endpoint reference</span>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <p>The API exposes the following primary endpoints for resource management:</p>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Method
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Path
+            </th>
+            <th style="text-align:left;padding:6px 8px;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">GET</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">List all resources</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--kb-border, #e5e7eb);">
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">POST</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources</td>
+            <td style="padding:6px 8px;font-size:13px;">Create a resource</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">DELETE</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:13px;">/v2/resources/:id</td>
+            <td style="padding:6px 8px;font-size:13px;">Delete a resource</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Authentication flow</span>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <p>The OAuth 2.0 authorization code flow is recommended for server-side applications:</p>
+      <ol style="padding-left:20px;display:flex;flex-direction:column;gap:4px;">
+        <li>Redirect the user to the authorization endpoint</li>
+        <li>User grants permission and is redirected back with a code</li>
+        <li>Exchange the code for an access token via POST /oauth/token</li>
+        <li>Use the access token in the Authorization header for all API calls</li>
+      </ol>
+    </div>
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exMixedStates = `<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Active section</span>
+    This section is currently expanded and can be toggled freely.
+  </kb-accordion>
+  <kb-accordion disabled>
+    <span slot="trigger">Locked section</span>
+    This section is disabled and cannot be toggled.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Collapsed section</span>
+    This section starts collapsed but can be opened by clicking.
+  </kb-accordion>
+</kb-accordion-group>`;
+export const exMixedStatesReact = `import { Accordion, AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AccordionGroup>
+  <Accordion open>
+    <span slot="trigger">Active section</span>
+    This section is currently expanded and can be toggled freely.
+  </Accordion>
+  <Accordion disabled>
+    <span slot="trigger">Locked section</span>
+    This section is disabled and cannot be toggled.
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Collapsed section</span>
+    This section starts collapsed but can be opened by clicking.
+  </Accordion>
+</AccordionGroup>`;
+export const exMixedStatesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion-group>
+    <kb-accordion open>
+      <span slot="trigger">Active section</span>
+      This section is currently expanded and can be toggled freely.
+    </kb-accordion>
+    <kb-accordion disabled>
+      <span slot="trigger">Locked section</span>
+      This section is disabled and cannot be toggled.
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Collapsed section</span>
+      This section starts collapsed but can be opened by clicking.
+    </kb-accordion>
+  </kb-accordion-group>
+</template>`;
+export const exMixedStatesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion-group>
+  <kb-accordion open>
+    <span slot="trigger">Active section</span>
+    This section is currently expanded and can be toggled freely.
+  </kb-accordion>
+  <kb-accordion disabled>
+    <span slot="trigger">Locked section</span>
+    This section is disabled and cannot be toggled.
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Collapsed section</span>
+    This section starts collapsed but can be opened by clicking.
+  </kb-accordion>
+</kb-accordion-group>`;
+
+# Accordion
+
+A collapsible content panel for showing and hiding sections of content.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Accordion } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `open` | `open` | `boolean` | `false` | Whether the panel is expanded. Reflected to attribute for CSS targeting. |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents toggling and applies disabled styles to the trigger button. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `trigger` | Clickable header that toggles the panel. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-toggle` | `{ open: boolean }` | Dispatched when open state changes, with `detail.open`. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `region`
+
+**Attributes:** `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-labelledby`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Open" codes={{ html: exOpen, react: exOpenReact, vue: exOpenVue, svelte: exOpenSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOpen }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Exclusive Group" codes={{ html: exExclusiveGroup, react: exExclusiveGroupReact, vue: exExclusiveGroupVue, svelte: exExclusiveGroupSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exExclusiveGroup }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multiple Group" codes={{ html: exMultipleGroup, react: exMultipleGroupReact, vue: exMultipleGroupVue, svelte: exMultipleGroupSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultipleGroup }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Rich Content" codes={{ html: exRichContent, react: exRichContentReact, vue: exRichContentVue, svelte: exRichContentSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exRichContent }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Mixed States" codes={{ html: exMixedStates, react: exMixedStatesReact, vue: exMixedStatesVue, svelte: exMixedStatesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMixedStates }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Accordion Group](./accordion-group)
+- [Collapsible](./collapsible)

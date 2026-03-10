@@ -1,0 +1,65 @@
+{
+  "name": "Form Label",
+  "tag": "kb-form-label",
+  "category": "forms",
+  "description": "A label element for form controls, with optional required indicator.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-form-label.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "FormLabel"
+  },
+  "props": [
+    {
+      "name": "for",
+      "attribute": "for",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "`for` attribute linking the label to a form element by ID."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Label size controlling font size."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a red asterisk after the label text."
+    },
+    {
+      "name": "optional",
+      "attribute": "optional",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show \"(optional)\" after the label text. Hidden when `required` is true."
+    }
+  ],
+  "slots": [
+    {
+      "name": "info",
+      "description": "Inline help icon or text rendered after the label."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "form-control"
+  ]
+}

@@ -1,0 +1,8 @@
+# Docusaurus build output
+build/
+
+# Docusaurus cache
+.docusaurus/
+
+# Dependencies (also in root .gitignore)
+node_modules/

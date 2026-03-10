@@ -1,0 +1,146 @@
+---
+title: "Tabs"
+description: "A tabbed interface for switching between views."
+sidebar_label: "Tabs"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-tabs>
+  <span slot="tab-0">Tab 1</span>
+  <span slot="tab-1">Tab 2</span>
+  <div slot="panel-0">Panel 1 content</div>
+  <div slot="panel-1">Panel 2 content</div>
+</kb-tabs>`;
+export const reactCode = `import { Tabs } from '@wearesyntesa/karbit-ui/react';
+
+<Tabs>
+  <span slot="tab-0">Tab 1</span>
+  <span slot="tab-1">Tab 2</span>
+  <div slot="panel-0">Panel 1 content</div>
+  <div slot="panel-1">Panel 2 content</div>
+</Tabs>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tabs>
+    <span slot="tab-0">Tab 1</span>
+    <span slot="tab-1">Tab 2</span>
+    <div slot="panel-0">Panel 1 content</div>
+    <div slot="panel-1">Panel 2 content</div>
+  </kb-tabs>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tabs>
+  <span slot="tab-0">Tab 1</span>
+  <span slot="tab-1">Tab 2</span>
+  <div slot="panel-0">Panel 1 content</div>
+  <div slot="panel-1">Panel 2 content</div>
+</kb-tabs>`;
+
+# Tabs
+
+A tabbed interface for switching between views.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Tabs } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `active` | `active` | `number` | `0` | Zero-based index of the currently active tab. |
+| `variant` | `variant` | `TabsVariant` | `'line'` | Visual variant controlling tab styling - `'line'` (indicator bar), `'enclosed'` (bordered tabs), `'solid'` (filled background), or `'unstyled'`. |
+| `size` | `size` | `TabsSize` | `'md'` | Tab text and padding size. |
+| `colorScheme` | `color-scheme` | `KnownColorScheme` | `'blue'` | Accent color scheme for active tab indicator and text. |
+| `fitted` | `fitted` | `boolean` | `false` | Stretch tabs to fill the available width equally. |
+| `orientation` | `orientation` | `TabsOrientation` | `'horizontal'` | Tab list layout direction. |
+| `align` | `align` | `TabsAlign` | `'start'` | Horizontal/vertical alignment of tabs within the tab list. |
+| `disabledTabs` | `disabled-tabs` | `number[]` | `[]` | Array of zero-based tab indices that should be disabled. Attribute accepts comma-separated numbers. |
+| `label` | `label` | `string` | `""` | Accessible label for the tab list (required when no visible heading labels the group). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-tab-change` | `{ index: number, previousIndex: number }` | Dispatched when active tab changes, with `detail.index` and `detail.previousIndex`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Home` | Move focus to the first item |
+
+### ARIA
+
+**Roles:** `tab`, `tablist`, `tabpanel`
+
+**Attributes:** `aria-controls`, `aria-disabled`, `aria-label`, `aria-labelledby`, `aria-orientation`, `aria-selected`
+
+## See Also
+
+- [Segment](../forms/segment)

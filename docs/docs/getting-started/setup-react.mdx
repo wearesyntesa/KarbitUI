@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+title: React
+---
+
+# React Setup
+
+KarbitUI provides first-class React wrappers via [`@lit/react`](https://www.npmjs.com/package/@lit/react). These wrappers give you proper React props, event handling, and TypeScript types.
+
+## Installation
+
+```bash
+pnpm add @wearesyntesa/karbit-ui @lit/react react react-dom
+```
+
+## Import components
+
+### Barrel import (all React wrappers)
+
+```tsx
+import { Button, Input, Card, Alert } from "@wearesyntesa/karbit-ui/react";
+```
+
+### Individual imports (better tree-shaking)
+
+```tsx
+import { Button } from "@wearesyntesa/karbit-ui/react/button";
+import { Input } from "@wearesyntesa/karbit-ui/react/input";
+```
+
+:::tip
+Individual imports produce smaller bundles since your bundler only includes the components you use.
+:::
+
+## Register custom elements
+
+React wrappers create the React component interface, but the underlying custom element still needs registration:
+
+```tsx title="src/main.tsx"
+// Register all custom elements (do this once at app entry)
+import "@wearesyntesa/karbit-ui/define";
+
+import { createRoot } from "react-dom/client";
+import App from "./App";
+
+createRoot(document.getElementById("root")!).render(<App />);
+```
+
+## Usage example
+
+```tsx title="src/App.tsx"
+import { Button, Input, Card } from "@wearesyntesa/karbit-ui/react";
+import type { KbChangeDetail } from "@wearesyntesa/karbit-ui/react";
+
+function App() {
+  const handleChange = (e: CustomEvent<KbChangeDetail<string>>) => {
+    console.log("Value:", e.detail.value);
+  };
+
+  return (
+    <Card p="6">
+      <Input
+        placeholder="Enter your name"
+        onKbChange={handleChange}
+      />
+      <Button variant="solid" color-scheme="blue" mt="4">
+        Submit
+      </Button>
+    </Card>
+  );
+}
+```
+
+## TypeScript support
+
+All React wrappers export their props type:
+
+```tsx
+import { Button } from "@wearesyntesa/karbit-ui/react/button";
+import type { ButtonProps } from "@wearesyntesa/karbit-ui/react/button";
+```
+
+Event detail types are available from the main barrel:
+
+```tsx
+import type {
+  KbChangeDetail,
+  KbClickDetail,
+  KbSelectDetail,
+} from "@wearesyntesa/karbit-ui/react";
+```
+
+## CSS setup
+
+Add the KarbitUI theme to your CSS entry file:
+
+```css title="src/index.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```
+
+Or if you have an existing Tailwind setup:
+
+```css title="src/index.css"
+@import "tailwindcss";
+@source "../node_modules/@wearesyntesa/karbit-ui/dist/**/*.js";
+```

@@ -1,0 +1,742 @@
+---
+title: "Radio"
+description: "A single radio option, typically used within a radio group."
+sidebar_label: "Radio"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-radio name="color" value="red">Red</kb-radio>`;
+export const reactCode = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<Radio name="color" value="red">Red</Radio>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio name="color" value="red">Red</kb-radio>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio name="color" value="red">Red</kb-radio>`;
+export const exDefault = `<kb-radio name="demo" value="a" size="md">Option A</kb-radio>`;
+export const exDefaultReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<Radio name="demo" value="a" size="md">Option A</Radio>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio name="demo" value="a" size="md">Option A</kb-radio>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio name="demo" value="a" size="md">Option A</kb-radio>`;
+export const exChecked = `<kb-radio name="demo" value="a" size="md" checked>Option A</kb-radio>`;
+export const exCheckedReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<Radio name="demo" value="a" size="md" checked>Option A</Radio>`;
+export const exCheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio name="demo" value="a" size="md" checked>Option A</kb-radio>
+</template>`;
+export const exCheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio name="demo" value="a" size="md" checked>Option A</kb-radio>`;
+export const exDisabled = `<kb-radio name="demo" value="a" size="md" disabled>Option A</kb-radio>`;
+export const exDisabledReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<Radio name="demo" value="a" size="md" disabled>Option A</Radio>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio name="demo" value="a" size="md" disabled>Option A</kb-radio>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio name="demo" value="a" size="md" disabled>Option A</kb-radio>`;
+export const exDisabledChecked = `<kb-radio name="demo" value="a" size="md" disabled checked>Option A</kb-radio>`;
+export const exDisabledCheckedReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<Radio name="demo" value="a" size="md" disabled checked>Option A</Radio>`;
+export const exDisabledCheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio name="demo" value="a" size="md" disabled checked>Option A</kb-radio>
+</template>`;
+export const exDisabledCheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio name="demo" value="a" size="md" disabled checked>Option A</kb-radio>`;
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="inv" value="a" invalid>Unchecked invalid</kb-radio>
+  <kb-radio name="inv" value="b" invalid checked>Checked invalid (shows checked color)</kb-radio>
+</div>`;
+export const exInvalidReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Radio name="inv" value="a" invalid>Unchecked invalid</Radio>
+  <Radio name="inv" value="b" invalid checked>Checked invalid (shows checked color)</Radio>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-radio name="inv" value="a" invalid>Unchecked invalid</kb-radio>
+    <kb-radio name="inv" value="b" invalid checked>Checked invalid (shows checked color)</kb-radio>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="inv" value="a" invalid>Unchecked invalid</kb-radio>
+  <kb-radio name="inv" value="b" invalid checked>Checked invalid (shows checked color)</kb-radio>
+</div>`;
+export const exWithDescription = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="desc" value="free" checked>
+    Free Plan
+    <span slot="description">Basic features for personal use.</span>
+  </kb-radio>
+  <kb-radio name="desc" value="pro" color-scheme="green">
+    Pro Plan
+    <span slot="description">Advanced features for professionals.</span>
+  </kb-radio>
+  <kb-radio name="desc" value="ent" invalid>
+    Enterprise
+    <span slot="description">This option is currently unavailable.</span>
+  </kb-radio>
+</div>`;
+export const exWithDescriptionReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Radio name="desc" value="free" checked>
+    Free Plan
+    <span slot="description">Basic features for personal use.</span>
+  </Radio>
+  <Radio name="desc" value="pro" color-scheme="green">
+    Pro Plan
+    <span slot="description">Advanced features for professionals.</span>
+  </Radio>
+  <Radio name="desc" value="ent" invalid>
+    Enterprise
+    <span slot="description">This option is currently unavailable.</span>
+  </Radio>
+</div>`;
+export const exWithDescriptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-radio name="desc" value="free" checked>
+      Free Plan
+      <span slot="description">Basic features for personal use.</span>
+    </kb-radio>
+    <kb-radio name="desc" value="pro" color-scheme="green">
+      Pro Plan
+      <span slot="description">Advanced features for professionals.</span>
+    </kb-radio>
+    <kb-radio name="desc" value="ent" invalid>
+      Enterprise
+      <span slot="description">This option is currently unavailable.</span>
+    </kb-radio>
+  </div>
+</template>`;
+export const exWithDescriptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="desc" value="free" checked>
+    Free Plan
+    <span slot="description">Basic features for personal use.</span>
+  </kb-radio>
+  <kb-radio name="desc" value="pro" color-scheme="green">
+    Pro Plan
+    <span slot="description">Advanced features for professionals.</span>
+  </kb-radio>
+  <kb-radio name="desc" value="ent" invalid>
+    Enterprise
+    <span slot="description">This option is currently unavailable.</span>
+  </kb-radio>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="sz" value="xs" size="xs" checked>Extra Small</kb-radio>
+  <kb-radio name="sz" value="sm" size="sm" checked>Small</kb-radio>
+  <kb-radio name="sz" value="md" size="md" checked>Medium</kb-radio>
+  <kb-radio name="sz" value="lg" size="lg" checked>Large</kb-radio>
+  <kb-radio name="sz" value="xl" size="xl" checked>Extra Large</kb-radio>
+</div>`;
+export const exAllSizesReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Radio name="sz" value="xs" size="xs" checked>Extra Small</Radio>
+  <Radio name="sz" value="sm" size="sm" checked>Small</Radio>
+  <Radio name="sz" value="md" size="md" checked>Medium</Radio>
+  <Radio name="sz" value="lg" size="lg" checked>Large</Radio>
+  <Radio name="sz" value="xl" size="xl" checked>Extra Large</Radio>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-radio name="sz" value="xs" size="xs" checked>Extra Small</kb-radio>
+    <kb-radio name="sz" value="sm" size="sm" checked>Small</kb-radio>
+    <kb-radio name="sz" value="md" size="md" checked>Medium</kb-radio>
+    <kb-radio name="sz" value="lg" size="lg" checked>Large</kb-radio>
+    <kb-radio name="sz" value="xl" size="xl" checked>Extra Large</kb-radio>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="sz" value="xs" size="xs" checked>Extra Small</kb-radio>
+  <kb-radio name="sz" value="sm" size="sm" checked>Small</kb-radio>
+  <kb-radio name="sz" value="md" size="md" checked>Medium</kb-radio>
+  <kb-radio name="sz" value="lg" size="lg" checked>Large</kb-radio>
+  <kb-radio name="sz" value="xl" size="xl" checked>Extra Large</kb-radio>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="cs" value="blue" checked color-scheme="blue">Blue (default)</kb-radio>
+  <kb-radio name="cs" value="red" checked color-scheme="red">Red</kb-radio>
+  <kb-radio name="cs" value="green" checked color-scheme="green">Green</kb-radio>
+  <kb-radio name="cs" value="yellow" checked color-scheme="yellow">Yellow</kb-radio>
+  <kb-radio name="cs" value="black" checked color-scheme="black">Black</kb-radio>
+</div>`;
+export const exColorSchemesReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Radio name="cs" value="blue" checked color-scheme="blue">Blue (default)</Radio>
+  <Radio name="cs" value="red" checked color-scheme="red">Red</Radio>
+  <Radio name="cs" value="green" checked color-scheme="green">Green</Radio>
+  <Radio name="cs" value="yellow" checked color-scheme="yellow">Yellow</Radio>
+  <Radio name="cs" value="black" checked color-scheme="black">Black</Radio>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-radio name="cs" value="blue" checked color-scheme="blue">Blue (default)</kb-radio>
+    <kb-radio name="cs" value="red" checked color-scheme="red">Red</kb-radio>
+    <kb-radio name="cs" value="green" checked color-scheme="green">Green</kb-radio>
+    <kb-radio name="cs" value="yellow" checked color-scheme="yellow">Yellow</kb-radio>
+    <kb-radio name="cs" value="black" checked color-scheme="black">Black</kb-radio>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="cs" value="blue" checked color-scheme="blue">Blue (default)</kb-radio>
+  <kb-radio name="cs" value="red" checked color-scheme="red">Red</kb-radio>
+  <kb-radio name="cs" value="green" checked color-scheme="green">Green</kb-radio>
+  <kb-radio name="cs" value="yellow" checked color-scheme="yellow">Yellow</kb-radio>
+  <kb-radio name="cs" value="black" checked color-scheme="black">Black</kb-radio>
+</div>`;
+export const exColorSchemesUnchecked = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="csu" value="blue" color-scheme="blue">Blue hover</kb-radio>
+  <kb-radio name="csu" value="red" color-scheme="red">Red hover</kb-radio>
+  <kb-radio name="csu" value="green" color-scheme="green">Green hover</kb-radio>
+  <kb-radio name="csu" value="yellow" color-scheme="yellow">Yellow hover</kb-radio>
+  <kb-radio name="csu" value="black" color-scheme="black">Black hover</kb-radio>
+</div>`;
+export const exColorSchemesUncheckedReact = `import { Radio } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Radio name="csu" value="blue" color-scheme="blue">Blue hover</Radio>
+  <Radio name="csu" value="red" color-scheme="red">Red hover</Radio>
+  <Radio name="csu" value="green" color-scheme="green">Green hover</Radio>
+  <Radio name="csu" value="yellow" color-scheme="yellow">Yellow hover</Radio>
+  <Radio name="csu" value="black" color-scheme="black">Black hover</Radio>
+</div>`;
+export const exColorSchemesUncheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-radio name="csu" value="blue" color-scheme="blue">Blue hover</kb-radio>
+    <kb-radio name="csu" value="red" color-scheme="red">Red hover</kb-radio>
+    <kb-radio name="csu" value="green" color-scheme="green">Green hover</kb-radio>
+    <kb-radio name="csu" value="yellow" color-scheme="yellow">Yellow hover</kb-radio>
+    <kb-radio name="csu" value="black" color-scheme="black">Black hover</kb-radio>
+  </div>
+</template>`;
+export const exColorSchemesUncheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-radio name="csu" value="blue" color-scheme="blue">Blue hover</kb-radio>
+  <kb-radio name="csu" value="red" color-scheme="red">Red hover</kb-radio>
+  <kb-radio name="csu" value="green" color-scheme="green">Green hover</kb-radio>
+  <kb-radio name="csu" value="yellow" color-scheme="yellow">Yellow hover</kb-radio>
+  <kb-radio name="csu" value="black" color-scheme="black">Black hover</kb-radio>
+</div>`;
+export const exGroupVertical = `<kb-radio-group name="framework" direction="vertical">
+  <span slot="label">Favorite framework</span>
+  <kb-radio value="react">React</kb-radio>
+  <kb-radio value="vue">Vue</kb-radio>
+  <kb-radio value="svelte">Svelte</kb-radio>
+  <kb-radio value="lit" checked>Lit</kb-radio>
+</kb-radio-group>`;
+export const exGroupVerticalReact = `import { Radio, RadioGroup } from '@wearesyntesa/karbit-ui/react';
+
+<RadioGroup name="framework" direction="vertical">
+  <span slot="label">Favorite framework</span>
+  <Radio value="react">React</Radio>
+  <Radio value="vue">Vue</Radio>
+  <Radio value="svelte">Svelte</Radio>
+  <Radio value="lit" checked>Lit</Radio>
+</RadioGroup>`;
+export const exGroupVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio-group name="framework" direction="vertical">
+    <span slot="label">Favorite framework</span>
+    <kb-radio value="react">React</kb-radio>
+    <kb-radio value="vue">Vue</kb-radio>
+    <kb-radio value="svelte">Svelte</kb-radio>
+    <kb-radio value="lit" checked>Lit</kb-radio>
+  </kb-radio-group>
+</template>`;
+export const exGroupVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio-group name="framework" direction="vertical">
+  <span slot="label">Favorite framework</span>
+  <kb-radio value="react">React</kb-radio>
+  <kb-radio value="vue">Vue</kb-radio>
+  <kb-radio value="svelte">Svelte</kb-radio>
+  <kb-radio value="lit" checked>Lit</kb-radio>
+</kb-radio-group>`;
+export const exGroupHorizontal = `<kb-radio-group name="size" direction="horizontal" color-scheme="green">
+  <span slot="label">Select size</span>
+  <kb-radio value="s">Small</kb-radio>
+  <kb-radio value="m" checked>Medium</kb-radio>
+  <kb-radio value="l">Large</kb-radio>
+  <kb-radio value="xl">X-Large</kb-radio>
+</kb-radio-group>`;
+export const exGroupHorizontalReact = `import { Radio, RadioGroup } from '@wearesyntesa/karbit-ui/react';
+
+<RadioGroup name="size" direction="horizontal" color-scheme="green">
+  <span slot="label">Select size</span>
+  <Radio value="s">Small</Radio>
+  <Radio value="m" checked>Medium</Radio>
+  <Radio value="l">Large</Radio>
+  <Radio value="xl">X-Large</Radio>
+</RadioGroup>`;
+export const exGroupHorizontalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio-group name="size" direction="horizontal" color-scheme="green">
+    <span slot="label">Select size</span>
+    <kb-radio value="s">Small</kb-radio>
+    <kb-radio value="m" checked>Medium</kb-radio>
+    <kb-radio value="l">Large</kb-radio>
+    <kb-radio value="xl">X-Large</kb-radio>
+  </kb-radio-group>
+</template>`;
+export const exGroupHorizontalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio-group name="size" direction="horizontal" color-scheme="green">
+  <span slot="label">Select size</span>
+  <kb-radio value="s">Small</kb-radio>
+  <kb-radio value="m" checked>Medium</kb-radio>
+  <kb-radio value="l">Large</kb-radio>
+  <kb-radio value="xl">X-Large</kb-radio>
+</kb-radio-group>`;
+export const exGroupWithColorScheme = `<div style="display:flex;flex-direction:column;gap:24px;">
+  <kb-radio-group name="plan-blue" direction="vertical" color-scheme="blue">
+    <span slot="label">Blue scheme</span>
+    <kb-radio value="a" checked>Option A</kb-radio>
+    <kb-radio value="b">Option B</kb-radio>
+  </kb-radio-group>
+  <kb-radio-group name="plan-red" direction="vertical" color-scheme="red">
+    <span slot="label">Red scheme</span>
+    <kb-radio value="a">Option A</kb-radio>
+    <kb-radio value="b" checked>Option B</kb-radio>
+  </kb-radio-group>
+</div>`;
+export const exGroupWithColorSchemeReact = `import { Radio, RadioGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <RadioGroup name="plan-blue" direction="vertical" color-scheme="blue">
+    <span slot="label">Blue scheme</span>
+    <Radio value="a" checked>Option A</Radio>
+    <Radio value="b">Option B</Radio>
+  </RadioGroup>
+  <RadioGroup name="plan-red" direction="vertical" color-scheme="red">
+    <span slot="label">Red scheme</span>
+    <Radio value="a">Option A</Radio>
+    <Radio value="b" checked>Option B</Radio>
+  </RadioGroup>
+</div>`;
+export const exGroupWithColorSchemeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:24px;">
+    <kb-radio-group name="plan-blue" direction="vertical" color-scheme="blue">
+      <span slot="label">Blue scheme</span>
+      <kb-radio value="a" checked>Option A</kb-radio>
+      <kb-radio value="b">Option B</kb-radio>
+    </kb-radio-group>
+    <kb-radio-group name="plan-red" direction="vertical" color-scheme="red">
+      <span slot="label">Red scheme</span>
+      <kb-radio value="a">Option A</kb-radio>
+      <kb-radio value="b" checked>Option B</kb-radio>
+    </kb-radio-group>
+  </div>
+</template>`;
+export const exGroupWithColorSchemeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <kb-radio-group name="plan-blue" direction="vertical" color-scheme="blue">
+    <span slot="label">Blue scheme</span>
+    <kb-radio value="a" checked>Option A</kb-radio>
+    <kb-radio value="b">Option B</kb-radio>
+  </kb-radio-group>
+  <kb-radio-group name="plan-red" direction="vertical" color-scheme="red">
+    <span slot="label">Red scheme</span>
+    <kb-radio value="a">Option A</kb-radio>
+    <kb-radio value="b" checked>Option B</kb-radio>
+  </kb-radio-group>
+</div>`;
+export const exGroupWithDescriptions = `<kb-radio-group name="pricing" direction="vertical" color-scheme="green">
+  <span slot="label">Choose a plan</span>
+  <kb-radio value="free">
+    Free
+    <span slot="description">Up to 3 projects, basic analytics.</span>
+  </kb-radio>
+  <kb-radio value="pro" checked>
+    Pro
+    <span slot="description">Unlimited projects, advanced analytics, priority support.</span>
+  </kb-radio>
+  <kb-radio value="enterprise">
+    Enterprise
+    <span slot="description">Custom solutions, dedicated account manager, SLA.</span>
+  </kb-radio>
+</kb-radio-group>`;
+export const exGroupWithDescriptionsReact = `import { Radio, RadioGroup } from '@wearesyntesa/karbit-ui/react';
+
+<RadioGroup name="pricing" direction="vertical" color-scheme="green">
+  <span slot="label">Choose a plan</span>
+  <Radio value="free">
+    Free
+    <span slot="description">Up to 3 projects, basic analytics.</span>
+  </Radio>
+  <Radio value="pro" checked>
+    Pro
+    <span slot="description">Unlimited projects, advanced analytics, priority support.</span>
+  </Radio>
+  <Radio value="enterprise">
+    Enterprise
+    <span slot="description">Custom solutions, dedicated account manager, SLA.</span>
+  </Radio>
+</RadioGroup>`;
+export const exGroupWithDescriptionsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio-group name="pricing" direction="vertical" color-scheme="green">
+    <span slot="label">Choose a plan</span>
+    <kb-radio value="free">
+      Free
+      <span slot="description">Up to 3 projects, basic analytics.</span>
+    </kb-radio>
+    <kb-radio value="pro" checked>
+      Pro
+      <span slot="description">Unlimited projects, advanced analytics, priority support.</span>
+    </kb-radio>
+    <kb-radio value="enterprise">
+      Enterprise
+      <span slot="description">Custom solutions, dedicated account manager, SLA.</span>
+    </kb-radio>
+  </kb-radio-group>
+</template>`;
+export const exGroupWithDescriptionsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio-group name="pricing" direction="vertical" color-scheme="green">
+  <span slot="label">Choose a plan</span>
+  <kb-radio value="free">
+    Free
+    <span slot="description">Up to 3 projects, basic analytics.</span>
+  </kb-radio>
+  <kb-radio value="pro" checked>
+    Pro
+    <span slot="description">Unlimited projects, advanced analytics, priority support.</span>
+  </kb-radio>
+  <kb-radio value="enterprise">
+    Enterprise
+    <span slot="description">Custom solutions, dedicated account manager, SLA.</span>
+  </kb-radio>
+</kb-radio-group>`;
+
+# Radio
+
+A single radio option, typically used within a radio group.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Radio } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `ComponentSize` | `'md'` | Radio button size controlling circle dimensions, label text, and dot size. |
+| `checked` | `checked` | `boolean` | `false` | Whether this radio is selected. Reflects to the `checked` attribute. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error border styling when unchecked. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the selected state border and dot fill. |
+| `name` | `name` | `string` | — | Form field name. Should match across radios in the same group. |
+| `value` | `value` | `string` | `""` | Value emitted in `kb-change` event detail when this radio is selected. |
+| `required` | `required` | `boolean` | `false` | Mark this radio as required for form validation. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `description` | Helper text rendered below the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Checked state changed. Detail: `{ checked: boolean, value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | — |
+| `kb-blur` | `{ source?: string }` or none | — |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `radio`
+
+**Attributes:** `aria-checked`, `aria-invalid`, `aria-required`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Checked" codes={{ html: exChecked, react: exCheckedReact, vue: exCheckedVue, svelte: exCheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exChecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled Checked" codes={{ html: exDisabledChecked, react: exDisabledCheckedReact, vue: exDisabledCheckedVue, svelte: exDisabledCheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabledChecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Description" codes={{ html: exWithDescription, react: exWithDescriptionReact, vue: exWithDescriptionVue, svelte: exWithDescriptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDescription }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Unchecked" codes={{ html: exColorSchemesUnchecked, react: exColorSchemesUncheckedReact, vue: exColorSchemesUncheckedVue, svelte: exColorSchemesUncheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesUnchecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group Vertical" codes={{ html: exGroupVertical, react: exGroupVerticalReact, vue: exGroupVerticalVue, svelte: exGroupVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupVertical }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group Horizontal" codes={{ html: exGroupHorizontal, react: exGroupHorizontalReact, vue: exGroupHorizontalVue, svelte: exGroupHorizontalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupHorizontal }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group With Color Scheme" codes={{ html: exGroupWithColorScheme, react: exGroupWithColorSchemeReact, vue: exGroupWithColorSchemeVue, svelte: exGroupWithColorSchemeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupWithColorScheme }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Group With Descriptions" codes={{ html: exGroupWithDescriptions, react: exGroupWithDescriptionsReact, vue: exGroupWithDescriptionsVue, svelte: exGroupWithDescriptionsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGroupWithDescriptions }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Radio Group](./radio-group)
+- [Checkbox](./checkbox)
+- [Segment](./segment)

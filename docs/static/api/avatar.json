@@ -1,0 +1,73 @@
+{
+  "name": "Avatar",
+  "tag": "kb-avatar",
+  "category": "data-display",
+  "description": "A circular image or initials representing a user or entity.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-avatar.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Avatar"
+  },
+  "props": [
+    {
+      "name": "src",
+      "attribute": "src",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Image URL. Falls back to initials or icon when unset or broken."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Full name used to derive initials when no image is available."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "AvatarSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Avatar dimensions."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Background color scheme. When unset, a neutral gray is used."
+    },
+    {
+      "name": "badge",
+      "attribute": "badge",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Show a small status badge in the top-right corner with the given color scheme."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Custom fallback icon rendered when no image or name is available."
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "img"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "avatar-group"
+  ]
+}

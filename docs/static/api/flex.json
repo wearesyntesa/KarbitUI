@@ -1,0 +1,63 @@
+{
+  "name": "Flex",
+  "tag": "kb-flex",
+  "category": "layout",
+  "description": "A flexbox layout container with shorthand direction and alignment props.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-flex.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Flex"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "FlexDirectionValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Flex direction. Maps to the `flexDir` style prop."
+    },
+    {
+      "name": "align",
+      "attribute": "align",
+      "type": "FlexAlignValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Cross-axis alignment. Maps to the `alignItems` style prop."
+    },
+    {
+      "name": "justify",
+      "attribute": "justify",
+      "type": "FlexJustifyValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Main-axis alignment. Maps to the `justifyContent` style prop."
+    },
+    {
+      "name": "wrap",
+      "attribute": "wrap",
+      "type": "FlexWrapValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Flex wrapping behavior. Maps to the `flexWrap` style prop."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "box",
+    "stack",
+    "grid"
+  ]
+}

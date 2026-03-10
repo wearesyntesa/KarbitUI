@@ -1,0 +1,76 @@
+{
+  "name": "Skeleton",
+  "tag": "kb-skeleton",
+  "category": "feedback",
+  "description": "A placeholder loading animation that mimics content layout.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-skeleton.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Skeleton"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "SkeletonVariant",
+      "default": "'pulse'",
+      "reflect": false,
+      "description": "Animation variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Predefined height via size token. Overridden by explicit `height` prop."
+    },
+    {
+      "name": "width",
+      "attribute": "width",
+      "type": "string",
+      "default": "'100%'",
+      "reflect": false,
+      "description": "Explicit width (CSS value)."
+    },
+    {
+      "name": "height",
+      "attribute": "height",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Explicit height (CSS value). Overrides `size` when set."
+    },
+    {
+      "name": "circle",
+      "attribute": "circle",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Render as a circle (equal width and height)."
+    },
+    {
+      "name": "lines",
+      "attribute": "lines",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Number of text-like lines to render. When > 1, ignores width/height and renders stacked bars."
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "status"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "spinner"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "name": "Spinner",
+  "tag": "kb-spinner",
+  "category": "feedback",
+  "description": "An animated loading indicator.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-spinner.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Spinner"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "SpinnerVariant",
+      "default": "'border'",
+      "reflect": false,
+      "description": "Spinner animation style."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Spinner dimensions."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the spinner stroke/fill. When unset, defaults to blue."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "'Loading...'",
+      "reflect": false,
+      "description": "Accessible label text, also used as visible text when `showLabel` is true."
+    },
+    {
+      "name": "showLabel",
+      "attribute": "show-label",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Display the label text below or beside the spinner."
+    },
+    {
+      "name": "speed",
+      "attribute": "speed",
+      "type": "SpinnerSpeed",
+      "default": "'normal'",
+      "reflect": false,
+      "description": "Animation speed."
+    },
+    {
+      "name": "track",
+      "attribute": "track",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a grey track ring behind the spinning border. Only applies to `'border'` variant."
+    },
+    {
+      "name": "labelPosition",
+      "attribute": "label-position",
+      "type": "'bottom' | 'right'",
+      "default": "'bottom'",
+      "reflect": false,
+      "description": "Label position relative to the spinner."
+    },
+    {
+      "name": "overlay",
+      "attribute": "overlay",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Wrap slot content with a semi-transparent overlay and center the spinner above it."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "status"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "skeleton",
+    "progress"
+  ]
+}

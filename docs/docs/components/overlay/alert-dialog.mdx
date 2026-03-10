@@ -1,0 +1,631 @@
+---
+title: "Alert Dialog"
+description: "A confirmation dialog requiring user acknowledgment before proceeding."
+sidebar_label: "Alert Dialog"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-alert-dialog open>
+  <div slot="header">Confirm Delete</div>
+  Are you sure you want to delete this item?
+  <div slot="footer">
+    <kb-button variant="ghost">Cancel</kb-button>
+    <kb-button variant="solid" color-scheme="red">Delete</kb-button>
+  </div>
+</kb-alert-dialog>`;
+export const reactCode = `import { AlertDialog, Button } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open>
+  <div slot="header">Confirm Delete</div>
+  Are you sure you want to delete this item?
+  <div slot="footer">
+    <Button variant="ghost">Cancel</Button>
+    <Button variant="solid" color-scheme="red">Delete</Button>
+  </div>
+</AlertDialog>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open>
+    <div slot="header">Confirm Delete</div>
+    Are you sure you want to delete this item?
+    <div slot="footer">
+      <kb-button variant="ghost">Cancel</kb-button>
+      <kb-button variant="solid" color-scheme="red">Delete</kb-button>
+    </div>
+  </kb-alert-dialog>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open>
+  <div slot="header">Confirm Delete</div>
+  Are you sure you want to delete this item?
+  <div slot="footer">
+    <kb-button variant="ghost">Cancel</kb-button>
+    <kb-button variant="solid" color-scheme="red">Delete</kb-button>
+  </div>
+</kb-alert-dialog>`;
+export const exDefault = `<kb-alert-dialog open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    This action cannot be undone. All data associated with
+    <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+    will be permanently removed.
+  </p>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm" data-action="cancel">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">DELETE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exDefaultReact = `import { AlertDialog, Button } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    This action cannot be undone. All data associated with
+    <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+    will be permanently removed.
+  </p>
+  <span slot="footer">
+    <Button variant="outline" size="sm" data-action="cancel">CANCEL</Button>
+    <Button size="sm" color-scheme="red" data-action="confirm">DELETE</Button>
+  </span>
+</AlertDialog>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open size="sm">
+    <span slot="header">DELETE PROJECT</span>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This action cannot be undone. All data associated with
+      <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+      will be permanently removed.
+    </p>
+    <span slot="footer">
+      <kb-button variant="outline" size="sm" data-action="cancel">CANCEL</kb-button>
+      <kb-button size="sm" color-scheme="red" data-action="confirm">DELETE</kb-button>
+    </span>
+  </kb-alert-dialog>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    This action cannot be undone. All data associated with
+    <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+    will be permanently removed.
+  </p>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm" data-action="cancel">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">DELETE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exDangerousAction = `<kb-alert-dialog open size="md">
+  <span slot="header">REVOKE ALL API KEYS</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <kb-badge color-scheme="red" variant="solid" size="xs">DESTRUCTIVE</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Affects 14 active integrations</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      Revoking all API keys will immediately disconnect every active integration. Services depending on these keys will stop functioning until new keys are issued.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Active keys</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">14</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Connected services</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">8</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Last rotation</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">47 days ago</span>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm" data-action="cancel">KEEP KEYS</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">REVOKE ALL</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exDangerousActionReact = `import { AlertDialog, Badge, Button } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open size="md">
+  <span slot="header">REVOKE ALL API KEYS</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <Badge color-scheme="red" variant="solid" size="xs">DESTRUCTIVE</Badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Affects 14 active integrations</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      Revoking all API keys will immediately disconnect every active integration. Services depending on these keys will stop functioning until new keys are issued.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Active keys</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">14</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Connected services</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">8</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Last rotation</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">47 days ago</span>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="ghost" size="sm" data-action="cancel">KEEP KEYS</Button>
+    <Button size="sm" color-scheme="red" data-action="confirm">REVOKE ALL</Button>
+  </span>
+</AlertDialog>`;
+export const exDangerousActionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open size="md">
+    <span slot="header">REVOKE ALL API KEYS</span>
+    <div class="space-y-3">
+      <div class="flex items-center gap-2">
+        <kb-badge color-scheme="red" variant="solid" size="xs">DESTRUCTIVE</kb-badge>
+        <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Affects 14 active integrations</span>
+      </div>
+      <p class="text-sm text-slate-700 dark:text-zinc-300">
+        Revoking all API keys will immediately disconnect every active integration. Services depending on these keys will stop functioning until new keys are issued.
+      </p>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Active keys</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">14</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Connected services</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">8</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Last rotation</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">47 days ago</span>
+        </div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="ghost" size="sm" data-action="cancel">KEEP KEYS</kb-button>
+      <kb-button size="sm" color-scheme="red" data-action="confirm">REVOKE ALL</kb-button>
+    </span>
+  </kb-alert-dialog>
+</template>`;
+export const exDangerousActionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open size="md">
+  <span slot="header">REVOKE ALL API KEYS</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <kb-badge color-scheme="red" variant="solid" size="xs">DESTRUCTIVE</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Affects 14 active integrations</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      Revoking all API keys will immediately disconnect every active integration. Services depending on these keys will stop functioning until new keys are issued.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Active keys</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">14</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Connected services</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">8</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Last rotation</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">47 days ago</span>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm" data-action="cancel">KEEP KEYS</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">REVOKE ALL</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exConfirmOnly = `<kb-alert-dialog open size="xs">
+  <span slot="header">TERMS UPDATED</span>
+  <p class="text-sm text-slate-600 dark:text-zinc-300">
+    Our Terms of Service have been updated effective March 1, 2026. Continued use constitutes acceptance.
+  </p>
+  <span slot="footer">
+    <kb-button size="sm" data-action="confirm">I AGREE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exConfirmOnlyReact = `import { AlertDialog, Button } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open size="xs">
+  <span slot="header">TERMS UPDATED</span>
+  <p class="text-sm text-slate-600 dark:text-zinc-300">
+    Our Terms of Service have been updated effective March 1, 2026. Continued use constitutes acceptance.
+  </p>
+  <span slot="footer">
+    <Button size="sm" data-action="confirm">I AGREE</Button>
+  </span>
+</AlertDialog>`;
+export const exConfirmOnlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open size="xs">
+    <span slot="header">TERMS UPDATED</span>
+    <p class="text-sm text-slate-600 dark:text-zinc-300">
+      Our Terms of Service have been updated effective March 1, 2026. Continued use constitutes acceptance.
+    </p>
+    <span slot="footer">
+      <kb-button size="sm" data-action="confirm">I AGREE</kb-button>
+    </span>
+  </kb-alert-dialog>
+</template>`;
+export const exConfirmOnlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open size="xs">
+  <span slot="header">TERMS UPDATED</span>
+  <p class="text-sm text-slate-600 dark:text-zinc-300">
+    Our Terms of Service have been updated effective March 1, 2026. Continued use constitutes acceptance.
+  </p>
+  <span slot="footer">
+    <kb-button size="sm" data-action="confirm">I AGREE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exWithInputConfirmation = `<kb-alert-dialog open size="sm">
+  <span slot="header">DROP DATABASE</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete the
+      <strong class="text-slate-900 dark:text-zinc-50">production</strong>
+      database and all 2.4M records. This cannot be undone.
+    </p>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "drop production" to confirm
+      </label>
+      <kb-input placeholder="drop production" variant="outline" size="sm">
+      </kb-input>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm" data-action="cancel">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">DROP DATABASE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exWithInputConfirmationReact = `import { AlertDialog, Button, Input } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open size="sm">
+  <span slot="header">DROP DATABASE</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete the
+      <strong class="text-slate-900 dark:text-zinc-50">production</strong>
+      database and all 2.4M records. This cannot be undone.
+    </p>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "drop production" to confirm
+      </label>
+      <Input placeholder="drop production" variant="outline" size="sm">
+      </Input>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="ghost" size="sm" data-action="cancel">CANCEL</Button>
+    <Button size="sm" color-scheme="red" data-action="confirm">DROP DATABASE</Button>
+  </span>
+</AlertDialog>`;
+export const exWithInputConfirmationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open size="sm">
+    <span slot="header">DROP DATABASE</span>
+    <div class="space-y-3">
+      <p class="text-sm text-slate-700 dark:text-zinc-300">
+        This will permanently delete the
+        <strong class="text-slate-900 dark:text-zinc-50">production</strong>
+        database and all 2.4M records. This cannot be undone.
+      </p>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Type "drop production" to confirm
+        </label>
+        <kb-input placeholder="drop production" variant="outline" size="sm">
+        </kb-input>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="ghost" size="sm" data-action="cancel">CANCEL</kb-button>
+      <kb-button size="sm" color-scheme="red" data-action="confirm">DROP DATABASE</kb-button>
+    </span>
+  </kb-alert-dialog>
+</template>`;
+export const exWithInputConfirmationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open size="sm">
+  <span slot="header">DROP DATABASE</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete the
+      <strong class="text-slate-900 dark:text-zinc-50">production</strong>
+      database and all 2.4M records. This cannot be undone.
+    </p>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "drop production" to confirm
+      </label>
+      <kb-input placeholder="drop production" variant="outline" size="sm">
+      </kb-input>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm" data-action="cancel">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red" data-action="confirm">DROP DATABASE</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exLargeSize = `<kb-alert-dialog open size="lg">
+  <span slot="header">CONFIRM MIGRATION</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      The following schema changes will be applied to the production database. Please review carefully before confirming.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 font-mono text-xs space-y-1">
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE users ADD COLUMN avatar_url TEXT;</div>
+      <div class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_avatar ON users(avatar_url);</div>
+      <div class="text-red-500">- DROP INDEX idx_users_legacy_email;</div>
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE sessions ADD COLUMN device_id UUID;</div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm" data-action="cancel">ABORT</kb-button>
+    <kb-button size="sm" data-action="confirm">RUN MIGRATION</kb-button>
+  </span>
+</kb-alert-dialog>`;
+export const exLargeSizeReact = `import { AlertDialog, Button } from '@wearesyntesa/karbit-ui/react';
+
+<AlertDialog open size="lg">
+  <span slot="header">CONFIRM MIGRATION</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      The following schema changes will be applied to the production database. Please review carefully before confirming.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 font-mono text-xs space-y-1">
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE users ADD COLUMN avatar_url TEXT;</div>
+      <div class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_avatar ON users(avatar_url);</div>
+      <div class="text-red-500">- DROP INDEX idx_users_legacy_email;</div>
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE sessions ADD COLUMN device_id UUID;</div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="outline" size="sm" data-action="cancel">ABORT</Button>
+    <Button size="sm" data-action="confirm">RUN MIGRATION</Button>
+  </span>
+</AlertDialog>`;
+export const exLargeSizeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert-dialog open size="lg">
+    <span slot="header">CONFIRM MIGRATION</span>
+    <div class="space-y-3">
+      <p class="text-sm text-slate-700 dark:text-zinc-300">
+        The following schema changes will be applied to the production database. Please review carefully before confirming.
+      </p>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3 font-mono text-xs space-y-1">
+        <div class="text-green-600 dark:text-green-400">+ ALTER TABLE users ADD COLUMN avatar_url TEXT;</div>
+        <div class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_avatar ON users(avatar_url);</div>
+        <div class="text-red-500">- DROP INDEX idx_users_legacy_email;</div>
+        <div class="text-green-600 dark:text-green-400">+ ALTER TABLE sessions ADD COLUMN device_id UUID;</div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="outline" size="sm" data-action="cancel">ABORT</kb-button>
+      <kb-button size="sm" data-action="confirm">RUN MIGRATION</kb-button>
+    </span>
+  </kb-alert-dialog>
+</template>`;
+export const exLargeSizeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert-dialog open size="lg">
+  <span slot="header">CONFIRM MIGRATION</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      The following schema changes will be applied to the production database. Please review carefully before confirming.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 font-mono text-xs space-y-1">
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE users ADD COLUMN avatar_url TEXT;</div>
+      <div class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_avatar ON users(avatar_url);</div>
+      <div class="text-red-500">- DROP INDEX idx_users_legacy_email;</div>
+      <div class="text-green-600 dark:text-green-400">+ ALTER TABLE sessions ADD COLUMN device_id UUID;</div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm" data-action="cancel">ABORT</kb-button>
+    <kb-button size="sm" data-action="confirm">RUN MIGRATION</kb-button>
+  </span>
+</kb-alert-dialog>`;
+
+# Alert Dialog
+
+A confirmation dialog requiring user acknowledgment before proceeding.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { AlertDialog } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={usageCode} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `closeOnOverlay` | `close-on-overlay` | `boolean` | `false` | Disable overlay click dismiss (default for alert dialogs). |
+| `closeOnEscape` | `close-on-escape` | `boolean` | `false` | Disable Escape key dismiss (default for alert dialogs). |
+| `closable` | `closable` | `boolean` | `false` | Hide the close button by default for alert dialogs. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `header` | Dialog title. |
+| `footer` | Confirm/cancel buttons. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-confirm` | `{ source: "alert-dialog" }` | Dispatched when the confirm action is triggered. |
+| `kb-cancel` | `{ source: "alert-dialog" }` | Dispatched when the cancel action is triggered. |
+| `kb-open` | `{ source?: string }` or none | Dispatched when dialog opens. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when dialog closes (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Escape` | Close the overlay and restore focus |
+| `Tab` | Cycle focus within the overlay (focus trap) |
+
+### ARIA
+
+**Roles:** `alertdialog`
+
+**Attributes:** `aria-label`, `aria-labelledby`, `aria-modal`
+
+### Focus Management
+
+This component extends `KbOverlayBase` and provides:
+- Focus trapping within the overlay when open
+- Focus restoration to the trigger element on close
+- `Escape` key dismissal
+- Sibling elements marked as `inert` while open
+- Body scroll locking
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dangerous Action" codes={{ html: exDangerousAction, react: exDangerousActionReact, vue: exDangerousActionVue, svelte: exDangerousActionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDangerousAction} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Confirm Only" codes={{ html: exConfirmOnly, react: exConfirmOnlyReact, vue: exConfirmOnlyVue, svelte: exConfirmOnlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exConfirmOnly} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Input Confirmation" codes={{ html: exWithInputConfirmation, react: exWithInputConfirmationReact, vue: exWithInputConfirmationVue, svelte: exWithInputConfirmationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithInputConfirmation} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Large Size" codes={{ html: exLargeSize, react: exLargeSizeReact, vue: exLargeSizeVue, svelte: exLargeSizeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exLargeSize} overlayTag="kb-alert-dialog" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Modal](./modal)

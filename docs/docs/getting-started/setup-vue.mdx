@@ -1,0 +1,102 @@
+---
+sidebar_position: 3
+title: Vue
+---
+
+# Vue Setup
+
+Vue 3 has built-in support for custom elements. KarbitUI components work natively in Vue templates.
+
+## Installation
+
+```bash
+pnpm add @wearesyntesa/karbit-ui
+```
+
+## Configure Vue
+
+Tell Vue to treat `kb-*` tags as custom elements so it doesn't try to resolve them as Vue components:
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith("kb-"),
+        },
+      },
+    }),
+  ],
+});
+```
+
+## Register custom elements
+
+```ts title="src/main.ts"
+import "@wearesyntesa/karbit-ui/define";
+
+import { createApp } from "vue";
+import App from "./App.vue";
+
+createApp(App).mount("#app");
+```
+
+## Usage example
+
+```vue title="src/App.vue"
+<script setup lang="ts">
+function handleChange(e: CustomEvent) {
+  console.log("Value:", e.detail.value);
+}
+</script>
+
+<template>
+  <kb-card p="6">
+    <kb-input
+      placeholder="Enter your name"
+      @kb-change="handleChange"
+    />
+    <kb-button variant="solid" color-scheme="blue" mt="4">
+      Submit
+    </kb-button>
+  </kb-card>
+</template>
+```
+
+## Event handling
+
+KarbitUI components emit `CustomEvent`s. In Vue, listen with `@event-name`:
+
+```vue
+<template>
+  <!-- Kebab-case event names -->
+  <kb-select @kb-change="onSelect" />
+  <kb-checkbox @kb-change="onToggle" />
+  <kb-tabs @kb-change="onTabChange" />
+</template>
+```
+
+## Attribute vs. property binding
+
+Vue binds attributes by default. For complex data (arrays, objects), use `.prop` modifier or `v-bind`:
+
+```vue
+<template>
+  <!-- String/boolean attributes work directly -->
+  <kb-button variant="solid" disabled>Disabled</kb-button>
+
+  <!-- Complex data needs property binding -->
+  <kb-table :columns.prop="columns" :rows.prop="rows" />
+  <kb-tree-view :items.prop="treeItems" />
+</template>
+```
+
+## CSS setup
+
+```css title="src/style.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```

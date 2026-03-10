@@ -1,0 +1,128 @@
+{
+  "name": "Tooltip",
+  "tag": "kb-tooltip",
+  "category": "overlay",
+  "description": "A small floating label that appears on hover or focus.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-tooltip.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Tooltip"
+  },
+  "props": [
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Text content shown inside the tooltip. No tooltip renders when empty."
+    },
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "TooltipPlacement",
+      "default": "'top'",
+      "reflect": false,
+      "description": "Position of the tooltip relative to the trigger element."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "TooltipSize",
+      "default": "'sm'",
+      "reflect": false,
+      "description": "Tooltip text and padding size."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TooltipVariant",
+      "default": "'dark'",
+      "reflect": false,
+      "description": "Color variant - `'dark'` (inverted) or `'light'` (surface-colored)."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Prevents the tooltip from showing."
+    },
+    {
+      "name": "open",
+      "attribute": "open",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Programmatically control visibility. Reflected to attribute."
+    },
+    {
+      "name": "showArrow",
+      "attribute": "show-arrow",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Render a small arrow pointing toward the trigger element."
+    },
+    {
+      "name": "offset",
+      "attribute": "offset",
+      "type": "number",
+      "default": "2",
+      "reflect": false,
+      "description": "Distance between the tooltip and the trigger (0–4 Tailwind spacing units)."
+    },
+    {
+      "name": "openDelay",
+      "attribute": "open-delay",
+      "type": "number",
+      "default": "200",
+      "reflect": false,
+      "description": "Delay in ms before showing the tooltip on hover."
+    },
+    {
+      "name": "closeDelay",
+      "attribute": "close-delay",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Delay in ms before hiding the tooltip after mouse leaves."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when tooltip becomes visible."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when tooltip is hidden (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "tooltip"
+    ],
+    "ariaAttributes": [
+      "aria-describedby",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Escape"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "popover",
+    "hover-card"
+  ]
+}

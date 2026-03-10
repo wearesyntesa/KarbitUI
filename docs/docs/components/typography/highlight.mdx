@@ -1,0 +1,279 @@
+---
+title: "Highlight"
+description: "Highlights matching text within a string for search results."
+sidebar_label: "Highlight"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-highlight query="world">Hello world</kb-highlight>`;
+export const reactCode = `import { Highlight } from '@wearesyntesa/karbit-ui/react';
+
+<Highlight query="world">Hello world</Highlight>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-highlight query="world">Hello world</kb-highlight>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-highlight query="world">Hello world</kb-highlight>`;
+export const exDefault = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+  This sentence contains
+  <kb-highlight>important text</kb-highlight>
+  that stands out.
+</p>`;
+export const exDefaultReact = `import { Highlight } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  This sentence contains
+  <Highlight>important text</Highlight>
+  that stands out.
+</p>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    This sentence contains
+    <kb-highlight>important text</kb-highlight>
+    that stands out.
+  </p>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  This sentence contains
+  <kb-highlight>important text</kb-highlight>
+  that stands out.
+</p>`;
+export const exQueryMode = `<div class="space-y-3">
+  <div class="font-mono text-xs text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Search: "deploy"</div>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    <kb-highlight text="Deploy your application to production using the deploy command. Each deploy creates a new revision." query="deploy">
+    </kb-highlight>
+  </p>
+</div>`;
+export const exQueryModeReact = `import { Highlight } from '@wearesyntesa/karbit-ui/react';
+
+<div class="space-y-3">
+  <div class="font-mono text-xs text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Search: "deploy"</div>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    <Highlight text="Deploy your application to production using the deploy command. Each deploy creates a new revision." query="deploy">
+    </Highlight>
+  </p>
+</div>`;
+export const exQueryModeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="space-y-3">
+    <div class="font-mono text-xs text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Search: "deploy"</div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      <kb-highlight text="Deploy your application to production using the deploy command. Each deploy creates a new revision." query="deploy">
+      </kb-highlight>
+    </p>
+  </div>
+</template>`;
+export const exQueryModeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="space-y-3">
+  <div class="font-mono text-xs text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Search: "deploy"</div>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    <kb-highlight text="Deploy your application to production using the deploy command. Each deploy creates a new revision." query="deploy">
+    </kb-highlight>
+  </p>
+</div>`;
+export const exInlineUsage = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+  Press
+  <kb-highlight color-scheme="blue">Ctrl+K</kb-highlight>
+  to open the command palette, or
+  <kb-highlight color-scheme="green">Ctrl+S</kb-highlight>
+  to save your changes.
+</p>`;
+export const exInlineUsageReact = `import { Highlight } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  Press
+  <Highlight color-scheme="blue">Ctrl+K</Highlight>
+  to open the command palette, or
+  <Highlight color-scheme="green">Ctrl+S</Highlight>
+  to save your changes.
+</p>`;
+export const exInlineUsageVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    Press
+    <kb-highlight color-scheme="blue">Ctrl+K</kb-highlight>
+    to open the command palette, or
+    <kb-highlight color-scheme="green">Ctrl+S</kb-highlight>
+    to save your changes.
+  </p>
+</template>`;
+export const exInlineUsageSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  Press
+  <kb-highlight color-scheme="blue">Ctrl+K</kb-highlight>
+  to open the command palette, or
+  <kb-highlight color-scheme="green">Ctrl+S</kb-highlight>
+  to save your changes.
+</p>`;
+export const exMultipleMatches = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+  <kb-highlight text="The server processes the request, validates the server configuration, and sends the response back to the server pool." query="server" color-scheme="orange">
+  </kb-highlight>
+</p>`;
+export const exMultipleMatchesReact = `import { Highlight } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  <Highlight text="The server processes the request, validates the server configuration, and sends the response back to the server pool." query="server" color-scheme="orange">
+  </Highlight>
+</p>`;
+export const exMultipleMatchesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">
+    <kb-highlight text="The server processes the request, validates the server configuration, and sends the response back to the server pool." query="server" color-scheme="orange">
+    </kb-highlight>
+  </p>
+</template>`;
+export const exMultipleMatchesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-slate-700 dark:text-zinc-300">
+  <kb-highlight text="The server processes the request, validates the server configuration, and sends the response back to the server pool." query="server" color-scheme="orange">
+  </kb-highlight>
+</p>`;
+
+# Highlight
+
+Highlights matching text within a string for search results.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Highlight } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `text` | `text` | `string` | `""` | Full text to render when using `query` mode. |
+| `query` | `query` | `string` | `""` | Substring to highlight within `text`. Case-insensitive. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Background color scheme. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Query Mode" codes={{ html: exQueryMode, react: exQueryModeReact, vue: exQueryModeVue, svelte: exQueryModeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exQueryMode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Usage" codes={{ html: exInlineUsage, react: exInlineUsageReact, vue: exInlineUsageVue, svelte: exInlineUsageSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineUsage }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multiple Matches" codes={{ html: exMultipleMatches, react: exMultipleMatchesReact, vue: exMultipleMatchesVue, svelte: exMultipleMatchesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultipleMatches }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Text](./text)

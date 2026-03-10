@@ -1,0 +1,841 @@
+---
+title: "Clipboard"
+description: "A copy-to-clipboard button with visual feedback."
+sidebar_label: "Clipboard"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-clipboard value="npm install @wearesyntesa/karbit-ui"></kb-clipboard>`;
+export const reactCode = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<Clipboard value="npm install @wearesyntesa/karbit-ui" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-clipboard value="npm install @wearesyntesa/karbit-ui" />`;
+export const exDefault = `<kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="outline" size="md">
+</kb-clipboard>`;
+export const exDefaultReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<Clipboard value="npm install @wearesyntesa/karbit-ui" variant="outline" size="md">
+</Clipboard>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="outline" size="md">
+  </kb-clipboard>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="outline" size="md">
+</kb-clipboard>`;
+export const exButtonWithLabel = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy">
+  </kb-clipboard>
+  <kb-clipboard value="npx create-karbit" label="Copy Command" copied-label="Done!">
+  </kb-clipboard>
+  <kb-clipboard value="ABC-123-XYZ" label="Copy ID" variant="subtle">
+  </kb-clipboard>
+</div>`;
+export const exButtonWithLabelReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <Clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy">
+  </Clipboard>
+  <Clipboard value="npx create-karbit" label="Copy Command" copied-label="Done!">
+  </Clipboard>
+  <Clipboard value="ABC-123-XYZ" label="Copy ID" variant="subtle">
+  </Clipboard>
+</div>`;
+export const exButtonWithLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy">
+    </kb-clipboard>
+    <kb-clipboard value="npx create-karbit" label="Copy Command" copied-label="Done!">
+    </kb-clipboard>
+    <kb-clipboard value="ABC-123-XYZ" label="Copy ID" variant="subtle">
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exButtonWithLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy">
+  </kb-clipboard>
+  <kb-clipboard value="npx create-karbit" label="Copy Command" copied-label="Done!">
+  </kb-clipboard>
+  <kb-clipboard value="ABC-123-XYZ" label="Copy ID" variant="subtle">
+  </kb-clipboard>
+</div>`;
+export const exButtonVariants = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="outline" label="Outline" variant="outline">
+  </kb-clipboard>
+  <kb-clipboard value="subtle" label="Subtle" variant="subtle">
+  </kb-clipboard>
+  <kb-clipboard value="ghost" label="Ghost" variant="ghost">
+  </kb-clipboard>
+</div>`;
+export const exButtonVariantsReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <Clipboard value="outline" label="Outline" variant="outline">
+  </Clipboard>
+  <Clipboard value="subtle" label="Subtle" variant="subtle">
+  </Clipboard>
+  <Clipboard value="ghost" label="Ghost" variant="ghost">
+  </Clipboard>
+</div>`;
+export const exButtonVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+    <kb-clipboard value="outline" label="Outline" variant="outline">
+    </kb-clipboard>
+    <kb-clipboard value="subtle" label="Subtle" variant="subtle">
+    </kb-clipboard>
+    <kb-clipboard value="ghost" label="Ghost" variant="ghost">
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exButtonVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="outline" label="Outline" variant="outline">
+  </kb-clipboard>
+  <kb-clipboard value="subtle" label="Subtle" variant="subtle">
+  </kb-clipboard>
+  <kb-clipboard value="ghost" label="Ghost" variant="ghost">
+  </kb-clipboard>
+</div>`;
+export const exButtonSizes = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="xs" label="XS" size="xs"></kb-clipboard> <kb-clipboard value="sm" label="SM" size="sm"></kb-clipboard> <kb-clipboard value="md" label="MD" size="md"></kb-clipboard> <kb-clipboard value="lg" label="LG" size="lg"></kb-clipboard> <kb-clipboard value="xl" label="XL" size="xl"></kb-clipboard>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;"> <kb-clipboard value="xs" size="xs"></kb-clipboard> <kb-clipboard value="sm" size="sm"></kb-clipboard> <kb-clipboard value="md" size="md"></kb-clipboard> <kb-clipboard value="lg" size="lg"></kb-clipboard> <kb-clipboard value="xl" size="xl"></kb-clipboard>
+</div>`;
+export const exButtonSizesReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <Clipboard value="xs" label="XS" size="xs" /> <Clipboard value="sm" label="SM" size="sm" /> <Clipboard value="md" label="MD" size="md" /> <Clipboard value="lg" label="LG" size="lg" /> <Clipboard value="xl" label="XL" size="xl" />
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;"> <Clipboard value="xs" size="xs" /> <Clipboard value="sm" size="sm" /> <Clipboard value="md" size="md" /> <Clipboard value="lg" size="lg" /> <Clipboard value="xl" size="xl" />
+</div>`;
+export const exButtonSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="xs" label="XS" size="xs" /> <kb-clipboard value="sm" label="SM" size="sm" /> <kb-clipboard value="md" label="MD" size="md" /> <kb-clipboard value="lg" label="LG" size="lg" /> <kb-clipboard value="xl" label="XL" size="xl" />
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;"> <kb-clipboard value="xs" size="xs" /> <kb-clipboard value="sm" size="sm" /> <kb-clipboard value="md" size="md" /> <kb-clipboard value="lg" size="lg" /> <kb-clipboard value="xl" size="xl" />
+  </div>
+</template>`;
+export const exButtonSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="xs" label="XS" size="xs" /> <kb-clipboard value="sm" label="SM" size="sm" /> <kb-clipboard value="md" label="MD" size="md" /> <kb-clipboard value="lg" label="LG" size="lg" /> <kb-clipboard value="xl" label="XL" size="xl" />
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px;"> <kb-clipboard value="xs" size="xs" /> <kb-clipboard value="sm" size="sm" /> <kb-clipboard value="md" size="md" /> <kb-clipboard value="lg" size="lg" /> <kb-clipboard value="xl" size="xl" />
+</div>`;
+export const exInlineDefault = `<div style="max-width:400px;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value>
+  </kb-clipboard>
+</div>`;
+export const exInlineDefaultReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Clipboard value="npm install @wearesyntesa/karbit-ui" show-value>
+  </Clipboard>
+</div>`;
+export const exInlineDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value>
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exInlineDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value>
+  </kb-clipboard>
+</div>`;
+export const exInlineWithLabel = `<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install Command">
+  </kb-clipboard>
+  <kb-clipboard value="https://karbit.dev" show-value label="Documentation URL">
+  </kb-clipboard>
+  <kb-clipboard value="sk-1234-abcd-5678-efgh" show-value label="API Key">
+  </kb-clipboard>
+</div>`;
+export const exInlineWithLabelReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+  <Clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install Command">
+  </Clipboard>
+  <Clipboard value="https://karbit.dev" show-value label="Documentation URL">
+  </Clipboard>
+  <Clipboard value="sk-1234-abcd-5678-efgh" show-value label="API Key">
+  </Clipboard>
+</div>`;
+export const exInlineWithLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install Command">
+    </kb-clipboard>
+    <kb-clipboard value="https://karbit.dev" show-value label="Documentation URL">
+    </kb-clipboard>
+    <kb-clipboard value="sk-1234-abcd-5678-efgh" show-value label="API Key">
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exInlineWithLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install Command">
+  </kb-clipboard>
+  <kb-clipboard value="https://karbit.dev" show-value label="Documentation URL">
+  </kb-clipboard>
+  <kb-clipboard value="sk-1234-abcd-5678-efgh" show-value label="API Key">
+  </kb-clipboard>
+</div>`;
+export const exInlineSizes = `<div style="display:grid;gap:12px;max-width:420px;">
+  <kb-clipboard value="xs — extra small" show-value size="xs">
+  </kb-clipboard>
+  <kb-clipboard value="sm — small size" show-value size="sm">
+  </kb-clipboard>
+  <kb-clipboard value="md — medium (default)" show-value size="md">
+  </kb-clipboard>
+  <kb-clipboard value="lg — large size" show-value size="lg">
+  </kb-clipboard>
+  <kb-clipboard value="xl — extra large" show-value size="xl">
+  </kb-clipboard>
+</div>`;
+export const exInlineSizesReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;gap:12px;max-width:420px;">
+  <Clipboard value="xs — extra small" show-value size="xs">
+  </Clipboard>
+  <Clipboard value="sm — small size" show-value size="sm">
+  </Clipboard>
+  <Clipboard value="md — medium (default)" show-value size="md">
+  </Clipboard>
+  <Clipboard value="lg — large size" show-value size="lg">
+  </Clipboard>
+  <Clipboard value="xl — extra large" show-value size="xl">
+  </Clipboard>
+</div>`;
+export const exInlineSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;gap:12px;max-width:420px;">
+    <kb-clipboard value="xs — extra small" show-value size="xs">
+    </kb-clipboard>
+    <kb-clipboard value="sm — small size" show-value size="sm">
+    </kb-clipboard>
+    <kb-clipboard value="md — medium (default)" show-value size="md">
+    </kb-clipboard>
+    <kb-clipboard value="lg — large size" show-value size="lg">
+    </kb-clipboard>
+    <kb-clipboard value="xl — extra large" show-value size="xl">
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exInlineSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;gap:12px;max-width:420px;">
+  <kb-clipboard value="xs — extra small" show-value size="xs">
+  </kb-clipboard>
+  <kb-clipboard value="sm — small size" show-value size="sm">
+  </kb-clipboard>
+  <kb-clipboard value="md — medium (default)" show-value size="md">
+  </kb-clipboard>
+  <kb-clipboard value="lg — large size" show-value size="lg">
+  </kb-clipboard>
+  <kb-clipboard value="xl — extra large" show-value size="xl">
+  </kb-clipboard>
+</div>`;
+export const exInlineLongValue = `<div style="max-width:360px;"> <kb-clipboard value="https://registry.npmjs.org/@wearesyntesa/karbit-ui/-/karbit-ui-0.1.3.tgz" show-value label="Package URL"></kb-clipboard>
+</div>
+<div style="max-width:240px;margin-top:16px;"> <kb-clipboard value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmJpdCJ9" show-value label="JWT Token"></kb-clipboard>
+</div>`;
+export const exInlineLongValueReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:360px;"> <Clipboard value="https://registry.npmjs.org/@wearesyntesa/karbit-ui/-/karbit-ui-0.1.3.tgz" show-value label="Package URL" />
+</div>
+<div style="max-width:240px;margin-top:16px;"> <Clipboard value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmJpdCJ9" show-value label="JWT Token" />
+</div>`;
+export const exInlineLongValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:360px;"> <kb-clipboard value="https://registry.npmjs.org/@wearesyntesa/karbit-ui/-/karbit-ui-0.1.3.tgz" show-value label="Package URL" />
+  </div>
+  <div style="max-width:240px;margin-top:16px;"> <kb-clipboard value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmJpdCJ9" show-value label="JWT Token" />
+  </div>
+</template>`;
+export const exInlineLongValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:360px;"> <kb-clipboard value="https://registry.npmjs.org/@wearesyntesa/karbit-ui/-/karbit-ui-0.1.3.tgz" show-value label="Package URL" />
+</div>
+<div style="max-width:240px;margin-top:16px;"> <kb-clipboard value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkthcmJpdCJ9" show-value label="JWT Token" />
+</div>`;
+export const exDisabled = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="disabled" label="Disabled" disabled></kb-clipboard> <kb-clipboard value="disabled" label="Disabled Subtle" variant="subtle" disabled></kb-clipboard> <kb-clipboard value="disabled" label="Disabled Ghost" variant="ghost" disabled></kb-clipboard>
+</div>
+<div style="max-width:360px;margin-top:16px;"> <kb-clipboard value="Cannot copy this" show-value label="Disabled Inline" disabled></kb-clipboard>
+</div>`;
+export const exDisabledReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <Clipboard value="disabled" label="Disabled" disabled /> <Clipboard value="disabled" label="Disabled Subtle" variant="subtle" disabled /> <Clipboard value="disabled" label="Disabled Ghost" variant="ghost" disabled />
+</div>
+<div style="max-width:360px;margin-top:16px;"> <Clipboard value="Cannot copy this" show-value label="Disabled Inline" disabled />
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="disabled" label="Disabled" disabled /> <kb-clipboard value="disabled" label="Disabled Subtle" variant="subtle" disabled /> <kb-clipboard value="disabled" label="Disabled Ghost" variant="ghost" disabled />
+  </div>
+  <div style="max-width:360px;margin-top:16px;"> <kb-clipboard value="Cannot copy this" show-value label="Disabled Inline" disabled />
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;"> <kb-clipboard value="disabled" label="Disabled" disabled /> <kb-clipboard value="disabled" label="Disabled Subtle" variant="subtle" disabled /> <kb-clipboard value="disabled" label="Disabled Ghost" variant="ghost" disabled />
+</div>
+<div style="max-width:360px;margin-top:16px;"> <kb-clipboard value="Cannot copy this" show-value label="Disabled Inline" disabled />
+</div>`;
+export const exCustomTimeout = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="fast" label="500ms" timeout="500">
+  </kb-clipboard>
+  <kb-clipboard value="default" label="1500ms (default)">
+  </kb-clipboard>
+  <kb-clipboard value="slow" label="3000ms" timeout="3000">
+  </kb-clipboard>
+</div>`;
+export const exCustomTimeoutReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <Clipboard value="fast" label="500ms" timeout="500">
+  </Clipboard>
+  <Clipboard value="default" label="1500ms (default)">
+  </Clipboard>
+  <Clipboard value="slow" label="3000ms" timeout="3000">
+  </Clipboard>
+</div>`;
+export const exCustomTimeoutVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+    <kb-clipboard value="fast" label="500ms" timeout="500">
+    </kb-clipboard>
+    <kb-clipboard value="default" label="1500ms (default)">
+    </kb-clipboard>
+    <kb-clipboard value="slow" label="3000ms" timeout="3000">
+    </kb-clipboard>
+  </div>
+</template>`;
+export const exCustomTimeoutSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+  <kb-clipboard value="fast" label="500ms" timeout="500">
+  </kb-clipboard>
+  <kb-clipboard value="default" label="1500ms (default)">
+  </kb-clipboard>
+  <kb-clipboard value="slow" label="3000ms" timeout="3000">
+  </kb-clipboard>
+</div>`;
+export const exCodeBlock = `<div style="position:relative;max-width:480px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>npm install @wearesyntesa/karbit-ui</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="sm">
+    </kb-clipboard>
+  </div>
+</div>
+<div style="position:relative;max-width:480px;margin-top:16px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'],
+});</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <kb-clipboard value="const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'] });" variant="ghost" size="sm">
+    </kb-clipboard>
+  </div>
+</div>`;
+export const exCodeBlockReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div style="position:relative;max-width:480px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>npm install @wearesyntesa/karbit-ui</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <Clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="sm">
+    </Clipboard>
+  </div>
+</div>
+<div style="position:relative;max-width:480px;margin-top:16px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'],
+});</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <Clipboard value="const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'] });" variant="ghost" size="sm">
+    </Clipboard>
+  </div>
+</div>`;
+export const exCodeBlockVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="position:relative;max-width:480px;">
+    <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+      <code>npm install @wearesyntesa/karbit-ui</code>
+    </pre>
+    <div style="position:absolute;top:8px;right:8px;">
+      <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="sm">
+      </kb-clipboard>
+    </div>
+  </div>
+  <div style="position:relative;max-width:480px;margin-top:16px;">
+    <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+      <code>const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'],
+  });</code>
+    </pre>
+    <div style="position:absolute;top:8px;right:8px;">
+      <kb-clipboard value="const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'] });" variant="ghost" size="sm">
+      </kb-clipboard>
+    </div>
+  </div>
+</template>`;
+export const exCodeBlockSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="position:relative;max-width:480px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>npm install @wearesyntesa/karbit-ui</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="sm">
+    </kb-clipboard>
+  </div>
+</div>
+<div style="position:relative;max-width:480px;margin-top:16px;">
+  <pre class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-4 pr-12 font-mono text-sm text-slate-900 dark:text-zinc-50 overflow-x-auto">
+    <code>const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'],
+});</code>
+  </pre>
+  <div style="position:absolute;top:8px;right:8px;">
+    <kb-clipboard value="const app = createApp({ theme: 'dark', components: ['clipboard', 'badge'] });" variant="ghost" size="sm">
+    </kb-clipboard>
+  </div>
+</div>`;
+export const exInlineCollection = `<div class="border border-gray-200 dark:border-zinc-700 divide-y divide-gray-200 dark:divide-zinc-700" style="max-width:480px;">
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="192.168.1.100" show-value label="IP Address" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="5432" show-value label="Port" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="postgres://admin:pass@192.168.1.100:5432/mydb" show-value label="Connection String" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="sk-proj-abc123def456ghi789" show-value label="API Key" size="sm">
+    </kb-clipboard>
+  </div>
+</div>`;
+export const exInlineCollectionReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<div class="border border-gray-200 dark:border-zinc-700 divide-y divide-gray-200 dark:divide-zinc-700" style="max-width:480px;">
+  <div class="p-4 space-y-1.5">
+    <Clipboard value="192.168.1.100" show-value label="IP Address" size="sm">
+    </Clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <Clipboard value="5432" show-value label="Port" size="sm">
+    </Clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <Clipboard value="postgres://admin:pass@192.168.1.100:5432/mydb" show-value label="Connection String" size="sm">
+    </Clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <Clipboard value="sk-proj-abc123def456ghi789" show-value label="API Key" size="sm">
+    </Clipboard>
+  </div>
+</div>`;
+export const exInlineCollectionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="border border-gray-200 dark:border-zinc-700 divide-y divide-gray-200 dark:divide-zinc-700" style="max-width:480px;">
+    <div class="p-4 space-y-1.5">
+      <kb-clipboard value="192.168.1.100" show-value label="IP Address" size="sm">
+      </kb-clipboard>
+    </div>
+    <div class="p-4 space-y-1.5">
+      <kb-clipboard value="5432" show-value label="Port" size="sm">
+      </kb-clipboard>
+    </div>
+    <div class="p-4 space-y-1.5">
+      <kb-clipboard value="postgres://admin:pass@192.168.1.100:5432/mydb" show-value label="Connection String" size="sm">
+      </kb-clipboard>
+    </div>
+    <div class="p-4 space-y-1.5">
+      <kb-clipboard value="sk-proj-abc123def456ghi789" show-value label="API Key" size="sm">
+      </kb-clipboard>
+    </div>
+  </div>
+</template>`;
+export const exInlineCollectionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="border border-gray-200 dark:border-zinc-700 divide-y divide-gray-200 dark:divide-zinc-700" style="max-width:480px;">
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="192.168.1.100" show-value label="IP Address" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="5432" show-value label="Port" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="postgres://admin:pass@192.168.1.100:5432/mydb" show-value label="Connection String" size="sm">
+    </kb-clipboard>
+  </div>
+  <div class="p-4 space-y-1.5">
+    <kb-clipboard value="sk-proj-abc123def456ghi789" show-value label="API Key" size="sm">
+    </kb-clipboard>
+  </div>
+</div>`;
+export const exInlineWithButton = `<p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">
+  Inline and button modes side by side — both share the same size scale.
+</p>
+<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:end;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install" size="md">
+  </kb-clipboard>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" size="md">
+    </kb-clipboard>
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" variant="subtle" size="md">
+    </kb-clipboard>
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="md">
+    </kb-clipboard>
+  </div>
+</div>`;
+export const exInlineWithButtonReact = `import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">
+  Inline and button modes side by side — both share the same size scale.
+</p>
+<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:end;">
+  <Clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install" size="md">
+  </Clipboard>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <Clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" size="md">
+    </Clipboard>
+    <Clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" variant="subtle" size="md">
+    </Clipboard>
+    <Clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="md">
+    </Clipboard>
+  </div>
+</div>`;
+export const exInlineWithButtonVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">
+    Inline and button modes side by side — both share the same size scale.
+  </p>
+  <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:end;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install" size="md">
+    </kb-clipboard>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" size="md">
+      </kb-clipboard>
+      <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" variant="subtle" size="md">
+      </kb-clipboard>
+      <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="md">
+      </kb-clipboard>
+    </div>
+  </div>
+</template>`;
+export const exInlineWithButtonSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">
+  Inline and button modes side by side — both share the same size scale.
+</p>
+<div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:end;">
+  <kb-clipboard value="npm install @wearesyntesa/karbit-ui" show-value label="Install" size="md">
+  </kb-clipboard>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" size="md">
+    </kb-clipboard>
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" label="Copy" variant="subtle" size="md">
+    </kb-clipboard>
+    <kb-clipboard value="npm install @wearesyntesa/karbit-ui" variant="ghost" size="md">
+    </kb-clipboard>
+  </div>
+</div>`;
+
+# Clipboard
+
+A copy-to-clipboard button with visual feedback.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Clipboard } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `""` | The text value to copy to the clipboard. |
+| `label` | `label` | `string` | `""` | Optional label shown next to the icon (button mode) or above the value (inline mode). |
+| `copiedLabel` | `copied-label` | `string` | `'Copied'` | Label shown after a successful copy. |
+| `showValue` | `show-value` | `boolean` | `false` | Display the value text inline with an integrated copy trigger. |
+| `size` | `size` | `ComponentSize` | `'md'` | Component size. |
+| `variant` | `variant` | `ClipboardVariant` | `'outline'` | Visual variant. |
+| `disabled` | `disabled` | `boolean` | `false` | Disables interaction. |
+| `timeout` | `timeout` | `number` | `1500` | Duration in ms to show the copied state. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-copy` | `{ value: string, success: boolean }` | Dispatched after a copy attempt with `{ value, success }`. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `group`
+
+**Attributes:** `aria-label`, `aria-live`, `aria-pressed`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button With Label" codes={{ html: exButtonWithLabel, react: exButtonWithLabelReact, vue: exButtonWithLabelVue, svelte: exButtonWithLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonWithLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button Variants" codes={{ html: exButtonVariants, react: exButtonVariantsReact, vue: exButtonVariantsVue, svelte: exButtonVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button Sizes" codes={{ html: exButtonSizes, react: exButtonSizesReact, vue: exButtonSizesVue, svelte: exButtonSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Default" codes={{ html: exInlineDefault, react: exInlineDefaultReact, vue: exInlineDefaultVue, svelte: exInlineDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline With Label" codes={{ html: exInlineWithLabel, react: exInlineWithLabelReact, vue: exInlineWithLabelVue, svelte: exInlineWithLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineWithLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Sizes" codes={{ html: exInlineSizes, react: exInlineSizesReact, vue: exInlineSizesVue, svelte: exInlineSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Long Value" codes={{ html: exInlineLongValue, react: exInlineLongValueReact, vue: exInlineLongValueVue, svelte: exInlineLongValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineLongValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Timeout" codes={{ html: exCustomTimeout, react: exCustomTimeoutReact, vue: exCustomTimeoutVue, svelte: exCustomTimeoutSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomTimeout }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Code Block" codes={{ html: exCodeBlock, react: exCodeBlockReact, vue: exCodeBlockVue, svelte: exCodeBlockSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCodeBlock }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Collection" codes={{ html: exInlineCollection, react: exInlineCollectionReact, vue: exInlineCollectionVue, svelte: exInlineCollectionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineCollection }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline With Button" codes={{ html: exInlineWithButton, react: exInlineWithButtonReact, vue: exInlineWithButtonVue, svelte: exInlineWithButtonSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineWithButton }} />;
+    }}
+  </BrowserOnly>
+</Demo>

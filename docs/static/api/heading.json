@@ -1,0 +1,69 @@
+{
+  "name": "Heading",
+  "tag": "kb-heading",
+  "category": "typography",
+  "description": "A heading element (h1-h6) with size and weight variants.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/typography/kb-heading.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Heading"
+  },
+  "props": [
+    {
+      "name": "level",
+      "attribute": "level",
+      "type": "HeadingLevel",
+      "default": "'2'",
+      "reflect": false,
+      "description": "Semantic heading level (`'1'`–`'6'`). Determines the rendered `<h1>`–`<h6>` element and default size."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "HeadingSize",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Explicit size override. When unset, derived from `level` (e.g. level `'1'` → `'4xl'`)."
+    },
+    {
+      "name": "weight",
+      "attribute": "weight",
+      "type": "HeadingWeight",
+      "default": "'bold'",
+      "reflect": false,
+      "description": "Font weight."
+    },
+    {
+      "name": "tone",
+      "attribute": "tone",
+      "type": "HeadingTone",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Semantic color tone. When unset, uses the recipe's default primary tone."
+    },
+    {
+      "name": "truncate",
+      "attribute": "truncate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Truncate overflowing text with an ellipsis on a single line."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "text"
+  ]
+}

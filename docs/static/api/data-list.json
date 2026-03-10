@@ -1,0 +1,62 @@
+{
+  "name": "Data List",
+  "tag": "kb-data-list",
+  "category": "data-display",
+  "description": "A label-value pair list for displaying structured data.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-data-list.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "DataList"
+  },
+  "props": [
+    {
+      "name": "items",
+      "attribute": "items",
+      "type": "readonly DataListItem[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of key-value pairs to render."
+    },
+    {
+      "name": "orientation",
+      "attribute": "orientation",
+      "type": "DataListOrientation",
+      "default": "'horizontal'",
+      "reflect": false,
+      "description": "Layout direction for each item pair."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Sizing preset."
+    },
+    {
+      "name": "divider",
+      "attribute": "divider",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a divider between items."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "list",
+    "stat"
+  ]
+}

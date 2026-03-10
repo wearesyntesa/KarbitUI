@@ -1,0 +1,383 @@
+---
+title: "Skeleton"
+description: "A placeholder loading animation that mimics content layout."
+sidebar_label: "Skeleton"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-skeleton variant="text" width="200px"></kb-skeleton>`;
+export const reactCode = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="text" width="200px" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="text" width="200px" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="text" width="200px" />`;
+export const exDefault = `<kb-skeleton variant="pulse" size="md">
+</kb-skeleton>`;
+export const exDefaultReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="pulse" size="md">
+</Skeleton>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="pulse" size="md">
+  </kb-skeleton>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="pulse" size="md">
+</kb-skeleton>`;
+export const exCustomSize = `<kb-skeleton variant="pulse" size="md" width="200px" height="24px">
+</kb-skeleton>`;
+export const exCustomSizeReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="pulse" size="md" width="200px" height="24px">
+</Skeleton>`;
+export const exCustomSizeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="pulse" size="md" width="200px" height="24px">
+  </kb-skeleton>
+</template>`;
+export const exCustomSizeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="pulse" size="md" width="200px" height="24px">
+</kb-skeleton>`;
+export const exCircle = `<kb-skeleton variant="pulse" size="md" circle height="48px">
+</kb-skeleton>`;
+export const exCircleReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="pulse" size="md" circle height="48px">
+</Skeleton>`;
+export const exCircleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="pulse" size="md" circle height="48px">
+  </kb-skeleton>
+</template>`;
+export const exCircleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="pulse" size="md" circle height="48px">
+</kb-skeleton>`;
+export const exMultiLine = `<kb-skeleton variant="pulse" size="md" lines="3">
+</kb-skeleton>`;
+export const exMultiLineReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="pulse" size="md" lines="3">
+</Skeleton>`;
+export const exMultiLineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="pulse" size="md" lines="3">
+  </kb-skeleton>
+</template>`;
+export const exMultiLineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="pulse" size="md" lines="3">
+</kb-skeleton>`;
+export const exNoAnimation = `<kb-skeleton variant="none" size="md">
+</kb-skeleton>`;
+export const exNoAnimationReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<Skeleton variant="none" size="md">
+</Skeleton>`;
+export const exNoAnimationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-skeleton variant="none" size="md">
+  </kb-skeleton>
+</template>`;
+export const exNoAnimationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-skeleton variant="none" size="md">
+</kb-skeleton>`;
+export const exSizes = `<div style="display:flex;flex-direction:column;gap:8px;max-width:400px;">
+  <kb-skeleton size="xs">
+  </kb-skeleton>
+  <kb-skeleton size="sm">
+  </kb-skeleton>
+  <kb-skeleton size="md">
+  </kb-skeleton>
+  <kb-skeleton size="lg">
+  </kb-skeleton>
+  <kb-skeleton size="xl">
+  </kb-skeleton>
+</div>`;
+export const exSizesReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:8px;max-width:400px;">
+  <Skeleton size="xs">
+  </Skeleton>
+  <Skeleton size="sm">
+  </Skeleton>
+  <Skeleton size="md">
+  </Skeleton>
+  <Skeleton size="lg">
+  </Skeleton>
+  <Skeleton size="xl">
+  </Skeleton>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:8px;max-width:400px;">
+    <kb-skeleton size="xs">
+    </kb-skeleton>
+    <kb-skeleton size="sm">
+    </kb-skeleton>
+    <kb-skeleton size="md">
+    </kb-skeleton>
+    <kb-skeleton size="lg">
+    </kb-skeleton>
+    <kb-skeleton size="xl">
+    </kb-skeleton>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:8px;max-width:400px;">
+  <kb-skeleton size="xs">
+  </kb-skeleton>
+  <kb-skeleton size="sm">
+  </kb-skeleton>
+  <kb-skeleton size="md">
+  </kb-skeleton>
+  <kb-skeleton size="lg">
+  </kb-skeleton>
+  <kb-skeleton size="xl">
+  </kb-skeleton>
+</div>`;
+export const exContentPlaceholder = `<div style="display:flex;gap:12px;align-items:flex-start;max-width:400px;">
+  <kb-skeleton circle height="48px">
+  </kb-skeleton>
+  <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+    <kb-skeleton width="60%" height="16px">
+    </kb-skeleton>
+    <kb-skeleton lines="2" size="sm">
+    </kb-skeleton>
+  </div>
+</div>`;
+export const exContentPlaceholderReact = `import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;align-items:flex-start;max-width:400px;">
+  <Skeleton circle height="48px">
+  </Skeleton>
+  <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+    <Skeleton width="60%" height="16px">
+    </Skeleton>
+    <Skeleton lines="2" size="sm">
+    </Skeleton>
+  </div>
+</div>`;
+export const exContentPlaceholderVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;align-items:flex-start;max-width:400px;">
+    <kb-skeleton circle height="48px">
+    </kb-skeleton>
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <kb-skeleton width="60%" height="16px">
+      </kb-skeleton>
+      <kb-skeleton lines="2" size="sm">
+      </kb-skeleton>
+    </div>
+  </div>
+</template>`;
+export const exContentPlaceholderSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;align-items:flex-start;max-width:400px;">
+  <kb-skeleton circle height="48px">
+  </kb-skeleton>
+  <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+    <kb-skeleton width="60%" height="16px">
+    </kb-skeleton>
+    <kb-skeleton lines="2" size="sm">
+    </kb-skeleton>
+  </div>
+</div>`;
+
+# Skeleton
+
+A placeholder loading animation that mimics content layout.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Skeleton } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `SkeletonVariant` | `'pulse'` | Animation variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Predefined height via size token. Overridden by explicit `height` prop. |
+| `width` | `width` | `string` | `'100%'` | Explicit width (CSS value). |
+| `height` | `height` | `string` | — | Explicit height (CSS value). Overrides `size` when set. |
+| `circle` | `circle` | `boolean` | `false` | Render as a circle (equal width and height). |
+| `lines` | `lines` | `number` | `1` | Number of text-like lines to render. When > 1, ignores width/height and renders stacked bars. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `status`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Size" codes={{ html: exCustomSize, react: exCustomSizeReact, vue: exCustomSizeVue, svelte: exCustomSizeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomSize }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Circle" codes={{ html: exCircle, react: exCircleReact, vue: exCircleVue, svelte: exCircleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCircle }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multi Line" codes={{ html: exMultiLine, react: exMultiLineReact, vue: exMultiLineVue, svelte: exMultiLineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultiLine }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Animation" codes={{ html: exNoAnimation, react: exNoAnimationReact, vue: exNoAnimationVue, svelte: exNoAnimationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoAnimation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Content Placeholder" codes={{ html: exContentPlaceholder, react: exContentPlaceholderReact, vue: exContentPlaceholderVue, svelte: exContentPlaceholderSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exContentPlaceholder }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Spinner](./spinner)

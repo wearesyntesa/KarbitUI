@@ -1,0 +1,85 @@
+{
+  "name": "Text",
+  "tag": "kb-text",
+  "category": "typography",
+  "description": "A general-purpose text element with size, weight, and tone variants.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/typography/kb-text.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Text"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TextVariant",
+      "default": "'body'",
+      "reflect": false,
+      "description": "Typography preset controlling font family, case, and tracking."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "FontSizeValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Font size override. When variant is `'body'`, defaults to `'base'`; other variants use their recipe size."
+    },
+    {
+      "name": "tone",
+      "attribute": "tone",
+      "type": "TextTone",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Semantic color tone. Falls back to the variant's default tone when unset."
+    },
+    {
+      "name": "clamp",
+      "attribute": "clamp",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Maximum visible lines before truncation with an ellipsis (1–6)."
+    },
+    {
+      "name": "noWrap",
+      "attribute": "no-wrap",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Prevent text wrapping with `whitespace-nowrap`."
+    },
+    {
+      "name": "truncate",
+      "attribute": "truncate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Truncate overflowing text with an ellipsis on a single line."
+    },
+    {
+      "name": "as",
+      "attribute": "as",
+      "type": "TextAs",
+      "default": "'p'",
+      "reflect": false,
+      "description": "HTML element to render."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "heading"
+  ]
+}

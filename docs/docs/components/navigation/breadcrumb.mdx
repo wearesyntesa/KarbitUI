@@ -1,0 +1,815 @@
+---
+title: "Breadcrumb"
+description: "A navigation trail showing the current page location within a hierarchy."
+sidebar_label: "Breadcrumb"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Items are set via JavaScript property -->
+<kb-breadcrumb></kb-breadcrumb>
+
+<script>
+  document.querySelector('kb-breadcrumb').items = [
+    { label: 'Home', href: '/' },
+    { label: 'Components', href: '/components' },
+    { label: 'Breadcrumb' },
+  ];
+</script>`;
+export const reactCode = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb
+  items={
+  [
+      { label: 'Home', href: '/' },
+      { label: 'Components', href: '/components' },
+      { label: 'Breadcrumb' },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const items = [
+    { label: 'Home', href: '/' },
+    { label: 'Components', href: '/components' },
+    { label: 'Breadcrumb' },
+  ];
+</script>
+
+<template>
+  <kb-breadcrumb :items="items" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const items = [
+    { label: 'Home', href: '/' },
+    { label: 'Components', href: '/components' },
+    { label: 'Breadcrumb' },
+  ];
+</script>
+
+<kb-breadcrumb items={items} />`;
+export const demoHtml = `<kb-breadcrumb></kb-breadcrumb>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-breadcrumb').items = [
+      { label: 'Home', href: '/' },
+      { label: 'Components', href: '/components' },
+      { label: 'Breadcrumb' },
+    ];
+};
+export const exDefault = `<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exDefaultReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb>
+</Breadcrumb>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb>
+  </kb-breadcrumb>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exDefaultSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exChevronSeparator = `<kb-breadcrumb separator="chevron">
+</kb-breadcrumb>`;
+export const exChevronSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="chevron">
+</Breadcrumb>`;
+export const exChevronSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="chevron">
+  </kb-breadcrumb>
+</template>`;
+export const exChevronSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="chevron">
+</kb-breadcrumb>`;
+export const exChevronSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exSlashSeparator = `<kb-breadcrumb separator="slash">
+</kb-breadcrumb>`;
+export const exSlashSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="slash">
+</Breadcrumb>`;
+export const exSlashSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="slash">
+  </kb-breadcrumb>
+</template>`;
+export const exSlashSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="slash">
+</kb-breadcrumb>`;
+export const exSlashSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exArrowSeparator = `<kb-breadcrumb separator="arrow">
+</kb-breadcrumb>`;
+export const exArrowSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="arrow">
+</Breadcrumb>`;
+export const exArrowSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="arrow">
+  </kb-breadcrumb>
+</template>`;
+export const exArrowSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="arrow">
+</kb-breadcrumb>`;
+export const exArrowSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exDotSeparator = `<kb-breadcrumb separator="dot">
+</kb-breadcrumb>`;
+export const exDotSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="dot">
+</Breadcrumb>`;
+export const exDotSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="dot">
+  </kb-breadcrumb>
+</template>`;
+export const exDotSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="dot">
+</kb-breadcrumb>`;
+export const exDotSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exPipeSeparator = `<kb-breadcrumb separator="pipe">
+</kb-breadcrumb>`;
+export const exPipeSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="pipe">
+</Breadcrumb>`;
+export const exPipeSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="pipe">
+  </kb-breadcrumb>
+</template>`;
+export const exPipeSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="pipe">
+</kb-breadcrumb>`;
+export const exPipeSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exAllSeparators = `<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb separator="chevron">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="slash">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="arrow">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="dot">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="pipe">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="—">
+  </kb-breadcrumb>
+</div>`;
+export const exAllSeparatorsReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <Breadcrumb separator="chevron">
+  </Breadcrumb>
+  <Breadcrumb separator="slash">
+  </Breadcrumb>
+  <Breadcrumb separator="arrow">
+  </Breadcrumb>
+  <Breadcrumb separator="dot">
+  </Breadcrumb>
+  <Breadcrumb separator="pipe">
+  </Breadcrumb>
+  <Breadcrumb separator="—">
+  </Breadcrumb>
+</div>`;
+export const exAllSeparatorsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <kb-breadcrumb separator="chevron">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="slash">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="arrow">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="dot">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="pipe">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="—">
+    </kb-breadcrumb>
+  </div>
+</template>`;
+export const exAllSeparatorsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb separator="chevron">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="slash">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="arrow">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="dot">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="pipe">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="—">
+  </kb-breadcrumb>
+</div>`;
+export const exAllSeparatorsSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb size="xs">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="sm">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="md">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="lg">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="xl">
+  </kb-breadcrumb>
+</div>`;
+export const exAllSizesReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <Breadcrumb size="xs">
+  </Breadcrumb>
+  <Breadcrumb size="sm">
+  </Breadcrumb>
+  <Breadcrumb size="md">
+  </Breadcrumb>
+  <Breadcrumb size="lg">
+  </Breadcrumb>
+  <Breadcrumb size="xl">
+  </Breadcrumb>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <kb-breadcrumb size="xs">
+    </kb-breadcrumb>
+    <kb-breadcrumb size="sm">
+    </kb-breadcrumb>
+    <kb-breadcrumb size="md">
+    </kb-breadcrumb>
+    <kb-breadcrumb size="lg">
+    </kb-breadcrumb>
+    <kb-breadcrumb size="xl">
+    </kb-breadcrumb>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb size="xs">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="sm">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="md">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="lg">
+  </kb-breadcrumb>
+  <kb-breadcrumb size="xl">
+  </kb-breadcrumb>
+</div>`;
+export const exAllSizesSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+export const exTwoItems = `<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exTwoItemsReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb>
+</Breadcrumb>`;
+export const exTwoItemsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb>
+  </kb-breadcrumb>
+</template>`;
+export const exTwoItemsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exTwoItemsSetup = (container) => {
+  const shortItems = [{ label: 'Home', href: '#' }, { label: 'Current Page' }];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = shortItems; });
+};
+export const exManyItems = `<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exManyItemsReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb>
+</Breadcrumb>`;
+export const exManyItemsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb>
+  </kb-breadcrumb>
+</template>`;
+export const exManyItemsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exManyItemsSetup = (container) => {
+  const longItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Organization', href: '#' },
+  { label: 'Department', href: '#' },
+  { label: 'Team', href: '#' },
+  { label: 'Projects', href: '#' },
+  { label: 'Repository', href: '#' },
+  { label: 'Branch', href: '#' },
+  { label: 'File' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = longItems; });
+};
+export const exCollapsedMaxItems = `<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb max-items="3">
+  </kb-breadcrumb>
+  <kb-breadcrumb max-items="4">
+  </kb-breadcrumb>
+  <kb-breadcrumb max-items="1">
+  </kb-breadcrumb>
+</div>`;
+export const exCollapsedMaxItemsReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <Breadcrumb max-items="3">
+  </Breadcrumb>
+  <Breadcrumb max-items="4">
+  </Breadcrumb>
+  <Breadcrumb max-items="1">
+  </Breadcrumb>
+</div>`;
+export const exCollapsedMaxItemsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <kb-breadcrumb max-items="3">
+    </kb-breadcrumb>
+    <kb-breadcrumb max-items="4">
+    </kb-breadcrumb>
+    <kb-breadcrumb max-items="1">
+    </kb-breadcrumb>
+  </div>
+</template>`;
+export const exCollapsedMaxItemsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb max-items="3">
+  </kb-breadcrumb>
+  <kb-breadcrumb max-items="4">
+  </kb-breadcrumb>
+  <kb-breadcrumb max-items="1">
+  </kb-breadcrumb>
+</div>`;
+export const exCollapsedMaxItemsSetup = (container) => {
+  const longItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Organization', href: '#' },
+  { label: 'Department', href: '#' },
+  { label: 'Team', href: '#' },
+  { label: 'Projects', href: '#' },
+  { label: 'Repository', href: '#' },
+  { label: 'Branch', href: '#' },
+  { label: 'File' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = longItems; });
+};
+export const exCollapsedWithArrow = `<kb-breadcrumb separator="arrow" max-items="3">
+</kb-breadcrumb>`;
+export const exCollapsedWithArrowReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb separator="arrow" max-items="3">
+</Breadcrumb>`;
+export const exCollapsedWithArrowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb separator="arrow" max-items="3">
+  </kb-breadcrumb>
+</template>`;
+export const exCollapsedWithArrowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb separator="arrow" max-items="3">
+</kb-breadcrumb>`;
+export const exCollapsedWithArrowSetup = (container) => {
+  const longItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Organization', href: '#' },
+  { label: 'Department', href: '#' },
+  { label: 'Team', href: '#' },
+  { label: 'Projects', href: '#' },
+  { label: 'Repository', href: '#' },
+  { label: 'Branch', href: '#' },
+  { label: 'File' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = longItems; });
+};
+export const exNoHref = `<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exNoHrefReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<Breadcrumb>
+</Breadcrumb>`;
+export const exNoHrefVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-breadcrumb>
+  </kb-breadcrumb>
+</template>`;
+export const exNoHrefSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-breadcrumb>
+</kb-breadcrumb>`;
+export const exNoHrefSetup = (container) => {
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = [{ label: 'Dashboard' }, { label: 'Settings' }, { label: 'Profile' }]; });
+};
+export const exCustomSeparator = `<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb separator="::">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="~">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="•">
+  </kb-breadcrumb>
+</div>`;
+export const exCustomSeparatorReact = `import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <Breadcrumb separator="::">
+  </Breadcrumb>
+  <Breadcrumb separator="~">
+  </Breadcrumb>
+  <Breadcrumb separator="•">
+  </Breadcrumb>
+</div>`;
+export const exCustomSeparatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <kb-breadcrumb separator="::">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="~">
+    </kb-breadcrumb>
+    <kb-breadcrumb separator="•">
+    </kb-breadcrumb>
+  </div>
+</template>`;
+export const exCustomSeparatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-breadcrumb separator="::">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="~">
+  </kb-breadcrumb>
+  <kb-breadcrumb separator="•">
+  </kb-breadcrumb>
+</div>`;
+export const exCustomSeparatorSetup = (container) => {
+  const basicItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Products', href: '#' },
+  { label: 'Categories', href: '#' },
+  { label: 'Electronics' },
+];
+  container.querySelectorAll('kb-breadcrumb').forEach(el => { el.items = basicItems; });
+};
+
+# Breadcrumb
+
+A navigation trail showing the current page location within a hierarchy.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Breadcrumb } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `BreadcrumbItem[]` | `[]` | Array of breadcrumb items. The last item is treated as the current page. |
+| `separator` | `separator` | `string` | `'chevron'` | Separator between items - a preset name (`'chevron'`, `'slash'`, `'arrow'`, `'dot'`, `'pipe'`) or any custom string. |
+| `size` | `size` | `ComponentSize` | `'md'` | Text and gap size. |
+| `maxItems` | `max-items` | `number` | `0` | Maximum visible items before collapsing middle items behind an ellipsis button. `0` disables collapsing. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-navigate` | `{ index: number, item: BreadcrumbItem }` | Breadcrumb item clicked. Detail: `{ index: number; item: BreadcrumbItem }`. |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-current`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Chevron Separator" codes={{ html: exChevronSeparator, react: exChevronSeparatorReact, vue: exChevronSeparatorVue, svelte: exChevronSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exChevronSeparator} setup={exChevronSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Slash Separator" codes={{ html: exSlashSeparator, react: exSlashSeparatorReact, vue: exSlashSeparatorVue, svelte: exSlashSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSlashSeparator} setup={exSlashSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Arrow Separator" codes={{ html: exArrowSeparator, react: exArrowSeparatorReact, vue: exArrowSeparatorVue, svelte: exArrowSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exArrowSeparator} setup={exArrowSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dot Separator" codes={{ html: exDotSeparator, react: exDotSeparatorReact, vue: exDotSeparatorVue, svelte: exDotSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDotSeparator} setup={exDotSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Pipe Separator" codes={{ html: exPipeSeparator, react: exPipeSeparatorReact, vue: exPipeSeparatorVue, svelte: exPipeSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exPipeSeparator} setup={exPipeSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Separators" codes={{ html: exAllSeparators, react: exAllSeparatorsReact, vue: exAllSeparatorsVue, svelte: exAllSeparatorsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exAllSeparators} setup={exAllSeparatorsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exAllSizes} setup={exAllSizesSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Two Items" codes={{ html: exTwoItems, react: exTwoItemsReact, vue: exTwoItemsVue, svelte: exTwoItemsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exTwoItems} setup={exTwoItemsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Many Items" codes={{ html: exManyItems, react: exManyItemsReact, vue: exManyItemsVue, svelte: exManyItemsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exManyItems} setup={exManyItemsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Collapsed Max Items" codes={{ html: exCollapsedMaxItems, react: exCollapsedMaxItemsReact, vue: exCollapsedMaxItemsVue, svelte: exCollapsedMaxItemsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exCollapsedMaxItems} setup={exCollapsedMaxItemsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Collapsed With Arrow" codes={{ html: exCollapsedWithArrow, react: exCollapsedWithArrowReact, vue: exCollapsedWithArrowVue, svelte: exCollapsedWithArrowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exCollapsedWithArrow} setup={exCollapsedWithArrowSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Href" codes={{ html: exNoHref, react: exNoHrefReact, vue: exNoHrefVue, svelte: exNoHrefSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exNoHref} setup={exNoHrefSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Separator" codes={{ html: exCustomSeparator, react: exCustomSeparatorReact, vue: exCustomSeparatorVue, svelte: exCustomSeparatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exCustomSeparator} setup={exCustomSeparatorSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Link](./link)

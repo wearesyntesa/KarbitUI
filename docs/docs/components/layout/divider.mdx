@@ -1,0 +1,736 @@
+---
+title: "Divider"
+description: "A horizontal or vertical line separator."
+sidebar_label: "Divider"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-divider></kb-divider>`;
+export const reactCode = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider></Divider>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider></kb-divider>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider></kb-divider>`;
+export const exHorizontal = `<kb-divider>
+</kb-divider>`;
+export const exHorizontalReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider>
+</Divider>`;
+export const exHorizontalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider>
+  </kb-divider>
+</template>`;
+export const exHorizontalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider>
+</kb-divider>`;
+export const exVertical = `<div style="display:flex;height:80px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <kb-divider orientation="vertical">
+  </kb-divider>
+  <span>Right</span>
+</div>`;
+export const exVerticalReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;height:80px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <Divider orientation="vertical">
+  </Divider>
+  <span>Right</span>
+</div>`;
+export const exVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;height:80px;align-items:stretch;gap:16px;">
+    <span>Left</span>
+    <kb-divider orientation="vertical">
+    </kb-divider>
+    <span>Right</span>
+  </div>
+</template>`;
+export const exVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;height:80px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <kb-divider orientation="vertical">
+  </kb-divider>
+  <span>Right</span>
+</div>`;
+export const exColored = `<kb-divider divider-color="red-500">
+</kb-divider>`;
+export const exColoredReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider divider-color="red-500">
+</Divider>`;
+export const exColoredVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider divider-color="red-500">
+  </kb-divider>
+</template>`;
+export const exColoredSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider divider-color="red-500">
+</kb-divider>`;
+export const exDashed = `<kb-divider variant="dashed">
+</kb-divider>`;
+export const exDashedReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider variant="dashed">
+</Divider>`;
+export const exDashedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider variant="dashed">
+  </kb-divider>
+</template>`;
+export const exDashedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider variant="dashed">
+</kb-divider>`;
+export const exDotted = `<kb-divider variant="dotted">
+</kb-divider>`;
+export const exDottedReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider variant="dotted">
+</Divider>`;
+export const exDottedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider variant="dotted">
+  </kb-divider>
+</template>`;
+export const exDottedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider variant="dotted">
+</kb-divider>`;
+export const exThicknessThin = `<kb-divider thickness="thin">
+</kb-divider>`;
+export const exThicknessThinReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider thickness="thin">
+</Divider>`;
+export const exThicknessThinVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider thickness="thin">
+  </kb-divider>
+</template>`;
+export const exThicknessThinSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider thickness="thin">
+</kb-divider>`;
+export const exThicknessMedium = `<kb-divider thickness="medium">
+</kb-divider>`;
+export const exThicknessMediumReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider thickness="medium">
+</Divider>`;
+export const exThicknessMediumVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider thickness="medium">
+  </kb-divider>
+</template>`;
+export const exThicknessMediumSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider thickness="medium">
+</kb-divider>`;
+export const exThicknessThick = `<kb-divider thickness="thick">
+</kb-divider>`;
+export const exThicknessThickReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider thickness="thick">
+</Divider>`;
+export const exThicknessThickVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider thickness="thick">
+  </kb-divider>
+</template>`;
+export const exThicknessThickSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider thickness="thick">
+</kb-divider>`;
+export const exLabel = `<kb-divider label="OR">
+</kb-divider>`;
+export const exLabelReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider label="OR">
+</Divider>`;
+export const exLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider label="OR">
+  </kb-divider>
+</template>`;
+export const exLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider label="OR">
+</kb-divider>`;
+export const exLabelWithVariant = `<kb-divider label="CONTINUE" variant="dashed">
+</kb-divider>`;
+export const exLabelWithVariantReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider label="CONTINUE" variant="dashed">
+</Divider>`;
+export const exLabelWithVariantVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider label="CONTINUE" variant="dashed">
+  </kb-divider>
+</template>`;
+export const exLabelWithVariantSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider label="CONTINUE" variant="dashed">
+</kb-divider>`;
+export const exVerticalLabel = `<div style="display:flex;height:120px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <kb-divider orientation="vertical" label="OR">
+  </kb-divider>
+  <span>Right</span>
+</div>`;
+export const exVerticalLabelReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;height:120px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <Divider orientation="vertical" label="OR">
+  </Divider>
+  <span>Right</span>
+</div>`;
+export const exVerticalLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;height:120px;align-items:stretch;gap:16px;">
+    <span>Left</span>
+    <kb-divider orientation="vertical" label="OR">
+    </kb-divider>
+    <span>Right</span>
+  </div>
+</template>`;
+export const exVerticalLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;height:120px;align-items:stretch;gap:16px;">
+  <span>Left</span>
+  <kb-divider orientation="vertical" label="OR">
+  </kb-divider>
+  <span>Right</span>
+</div>`;
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">SOLID (default)</p>
+    <kb-divider>
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DASHED</p>
+    <kb-divider variant="dashed">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DOTTED</p>
+    <kb-divider variant="dotted">
+    </kb-divider>
+  </div>
+</div>`;
+export const exAllVariantsReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">SOLID (default)</p>
+    <Divider>
+    </Divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DASHED</p>
+    <Divider variant="dashed">
+    </Divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DOTTED</p>
+    <Divider variant="dotted">
+    </Divider>
+  </div>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:24px;">
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">SOLID (default)</p>
+      <kb-divider>
+      </kb-divider>
+    </div>
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">DASHED</p>
+      <kb-divider variant="dashed">
+      </kb-divider>
+    </div>
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">DOTTED</p>
+      <kb-divider variant="dotted">
+      </kb-divider>
+    </div>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">SOLID (default)</p>
+    <kb-divider>
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DASHED</p>
+    <kb-divider variant="dashed">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">DOTTED</p>
+    <kb-divider variant="dotted">
+    </kb-divider>
+  </div>
+</div>`;
+export const exAllThicknesses = `<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THIN (default)</p>
+    <kb-divider thickness="thin">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">MEDIUM</p>
+    <kb-divider thickness="medium">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THICK</p>
+    <kb-divider thickness="thick">
+    </kb-divider>
+  </div>
+</div>`;
+export const exAllThicknessesReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THIN (default)</p>
+    <Divider thickness="thin">
+    </Divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">MEDIUM</p>
+    <Divider thickness="medium">
+    </Divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THICK</p>
+    <Divider thickness="thick">
+    </Divider>
+  </div>
+</div>`;
+export const exAllThicknessesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:24px;">
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">THIN (default)</p>
+      <kb-divider thickness="thin">
+      </kb-divider>
+    </div>
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">MEDIUM</p>
+      <kb-divider thickness="medium">
+      </kb-divider>
+    </div>
+    <div>
+      <p class="text-xs font-mono text-slate-500 mb-2">THICK</p>
+      <kb-divider thickness="thick">
+      </kb-divider>
+    </div>
+  </div>
+</template>`;
+export const exAllThicknessesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:24px;">
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THIN (default)</p>
+    <kb-divider thickness="thin">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">MEDIUM</p>
+    <kb-divider thickness="medium">
+    </kb-divider>
+  </div>
+  <div>
+    <p class="text-xs font-mono text-slate-500 mb-2">THICK</p>
+    <kb-divider thickness="thick">
+    </kb-divider>
+  </div>
+</div>`;
+export const exAnimated = `<kb-divider animated>
+</kb-divider>`;
+export const exAnimatedReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider animated>
+</Divider>`;
+export const exAnimatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider animated>
+  </kb-divider>
+</template>`;
+export const exAnimatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider animated>
+</kb-divider>`;
+export const exAnimatedLabeled = `<kb-divider animated label="NEW SECTION">
+</kb-divider>`;
+export const exAnimatedLabeledReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<Divider animated label="NEW SECTION">
+</Divider>`;
+export const exAnimatedLabeledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-divider animated label="NEW SECTION">
+  </kb-divider>
+</template>`;
+export const exAnimatedLabeledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-divider animated label="NEW SECTION">
+</kb-divider>`;
+export const exComposedExample = `<div style="max-width:400px;display:flex;flex-direction:column;gap:16px;">
+  <p class="text-sm">Sign in with your email and password.</p>
+  <kb-divider label="OR" variant="dashed">
+  </kb-divider>
+  <p class="text-sm">Continue with a social provider.</p>
+</div>`;
+export const exComposedExampleReact = `import { Divider } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;display:flex;flex-direction:column;gap:16px;">
+  <p class="text-sm">Sign in with your email and password.</p>
+  <Divider label="OR" variant="dashed">
+  </Divider>
+  <p class="text-sm">Continue with a social provider.</p>
+</div>`;
+export const exComposedExampleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;display:flex;flex-direction:column;gap:16px;">
+    <p class="text-sm">Sign in with your email and password.</p>
+    <kb-divider label="OR" variant="dashed">
+    </kb-divider>
+    <p class="text-sm">Continue with a social provider.</p>
+  </div>
+</template>`;
+export const exComposedExampleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;display:flex;flex-direction:column;gap:16px;">
+  <p class="text-sm">Sign in with your email and password.</p>
+  <kb-divider label="OR" variant="dashed">
+  </kb-divider>
+  <p class="text-sm">Continue with a social provider.</p>
+</div>`;
+
+# Divider
+
+A horizontal or vertical line separator.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Divider } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `orientation` | `orientation` | `Orientation` | `'horizontal'` | Divider axis. `'horizontal'` draws a top border, `'vertical'` a left border. |
+| `dividerColor` | `divider-color` | `ColorValue` | — | Custom border color as a Tailwind color value (e.g. `'blue-500'`). Falls back to theme border. |
+| `variant` | `variant` | `DividerVariant` | `'solid'` | Border style variant. |
+| `thickness` | `thickness` | `DividerThickness` | `'thin'` | Border thickness level. |
+| `label` | `label` | `string` | `""` | Optional inline label text (e.g. `'OR'`). When set, the divider renders as two lines flanking the label. |
+| `animated` | `animated` | `boolean` | `false` | Animate in with a scale/opacity transition on mount. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `separator`
+
+**Attributes:** `aria-label`, `aria-orientation`
+
+## Examples
+
+<Demo title="Horizontal" codes={{ html: exHorizontal, react: exHorizontalReact, vue: exHorizontalVue, svelte: exHorizontalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHorizontal }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Vertical" codes={{ html: exVertical, react: exVerticalReact, vue: exVerticalVue, svelte: exVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVertical }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Colored" codes={{ html: exColored, react: exColoredReact, vue: exColoredVue, svelte: exColoredSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColored }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dashed" codes={{ html: exDashed, react: exDashedReact, vue: exDashedVue, svelte: exDashedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDashed }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dotted" codes={{ html: exDotted, react: exDottedReact, vue: exDottedVue, svelte: exDottedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDotted }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Thickness Thin" codes={{ html: exThicknessThin, react: exThicknessThinReact, vue: exThicknessThinVue, svelte: exThicknessThinSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exThicknessThin }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Thickness Medium" codes={{ html: exThicknessMedium, react: exThicknessMediumReact, vue: exThicknessMediumVue, svelte: exThicknessMediumSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exThicknessMedium }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Thickness Thick" codes={{ html: exThicknessThick, react: exThicknessThickReact, vue: exThicknessThickVue, svelte: exThicknessThickSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exThicknessThick }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Label" codes={{ html: exLabel, react: exLabelReact, vue: exLabelVue, svelte: exLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Label With Variant" codes={{ html: exLabelWithVariant, react: exLabelWithVariantReact, vue: exLabelWithVariantVue, svelte: exLabelWithVariantSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLabelWithVariant }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Vertical Label" codes={{ html: exVerticalLabel, react: exVerticalLabelReact, vue: exVerticalLabelVue, svelte: exVerticalLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVerticalLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Thicknesses" codes={{ html: exAllThicknesses, react: exAllThicknessesReact, vue: exAllThicknessesVue, svelte: exAllThicknessesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllThicknesses }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Animated" codes={{ html: exAnimated, react: exAnimatedReact, vue: exAnimatedVue, svelte: exAnimatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAnimated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Animated Labeled" codes={{ html: exAnimatedLabeled, react: exAnimatedLabeledReact, vue: exAnimatedLabeledVue, svelte: exAnimatedLabeledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAnimatedLabeled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Composed Example" codes={{ html: exComposedExample, react: exComposedExampleReact, vue: exComposedExampleVue, svelte: exComposedExampleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exComposedExample }} />;
+    }}
+  </BrowserOnly>
+</Demo>

@@ -1,0 +1,157 @@
+{
+  "name": "Slider",
+  "tag": "kb-slider",
+  "category": "forms",
+  "description": "A range slider for selecting numeric values within a range.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-slider.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Slider"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "number",
+      "default": "50",
+      "reflect": false,
+      "description": "Current slider value."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Minimum value."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "100",
+      "reflect": false,
+      "description": "Maximum value."
+    },
+    {
+      "name": "step",
+      "attribute": "step",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Step increment."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Slider size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "readonly",
+      "attribute": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Prevent value changes but allow focus."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the filled track and thumb."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    },
+    {
+      "name": "showValue",
+      "attribute": "show-value",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show value tooltip on hover and drag."
+    },
+    {
+      "name": "showTicks",
+      "attribute": "show-ticks",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show tick marks at step intervals (max 20 ticks)."
+    },
+    {
+      "name": "showRange",
+      "attribute": "show-range",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show min/max labels below the track."
+    },
+    {
+      "name": "formatValue",
+      "attribute": null,
+      "type": "(value: number)",
+      "default": "> string",
+      "reflect": false,
+      "description": "Custom value formatter for tooltip display."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ source: 'slider', value: string }`."
+    },
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Value changing during drag. Detail: `{ value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "slider"
+    ],
+    "ariaAttributes": [
+      "aria-disabled",
+      "aria-readonly",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow",
+      "aria-valuetext"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "End",
+      "Home",
+      "PageDown",
+      "PageUp"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "number-input"
+  ]
+}

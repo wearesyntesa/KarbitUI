@@ -1,0 +1,865 @@
+---
+title: "List"
+description: "A styled list container with consistent spacing between items."
+sidebar_label: "List"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-list>
+  <kb-list-item>Item 1</kb-list-item>
+  <kb-list-item>Item 2</kb-list-item>
+  <kb-list-item>Item 3</kb-list-item>
+</kb-list>`;
+export const reactCode = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List>
+  <ListItem>Item 1</ListItem>
+  <ListItem>Item 2</ListItem>
+  <ListItem>Item 3</ListItem>
+</List>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list>
+    <kb-list-item>Item 1</kb-list-item>
+    <kb-list-item>Item 2</kb-list-item>
+    <kb-list-item>Item 3</kb-list-item>
+  </kb-list>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list>
+  <kb-list-item>Item 1</kb-list-item>
+  <kb-list-item>Item 2</kb-list-item>
+  <kb-list-item>Item 3</kb-list-item>
+</kb-list>`;
+export const exDefault = `<kb-list>
+  <kb-list-item>Configure environment variables</kb-list-item>
+  <kb-list-item>Initialize database connection</kb-list-item>
+  <kb-list-item>Start application server</kb-list-item>
+</kb-list>`;
+export const exDefaultReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List>
+  <ListItem>Configure environment variables</ListItem>
+  <ListItem>Initialize database connection</ListItem>
+  <ListItem>Start application server</ListItem>
+</List>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list>
+    <kb-list-item>Configure environment variables</kb-list-item>
+    <kb-list-item>Initialize database connection</kb-list-item>
+    <kb-list-item>Start application server</kb-list-item>
+  </kb-list>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list>
+  <kb-list-item>Configure environment variables</kb-list-item>
+  <kb-list-item>Initialize database connection</kb-list-item>
+  <kb-list-item>Start application server</kb-list-item>
+</kb-list>`;
+export const exWithDividers = `<kb-list dividers>
+  <kb-list-item>Configure environment variables</kb-list-item>
+  <kb-list-item>Initialize database connection</kb-list-item>
+  <kb-list-item>Start application server</kb-list-item>
+  <kb-list-item>Run health check</kb-list-item>
+</kb-list>`;
+export const exWithDividersReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem>Configure environment variables</ListItem>
+  <ListItem>Initialize database connection</ListItem>
+  <ListItem>Start application server</ListItem>
+  <ListItem>Run health check</ListItem>
+</List>`;
+export const exWithDividersVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item>Configure environment variables</kb-list-item>
+    <kb-list-item>Initialize database connection</kb-list-item>
+    <kb-list-item>Start application server</kb-list-item>
+    <kb-list-item>Run health check</kb-list-item>
+  </kb-list>
+</template>`;
+export const exWithDividersSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item>Configure environment variables</kb-list-item>
+  <kb-list-item>Initialize database connection</kb-list-item>
+  <kb-list-item>Start application server</kb-list-item>
+  <kb-list-item>Run health check</kb-list-item>
+</kb-list>`;
+export const exOrdered = `<kb-list variant="ordered" dividers>
+  <kb-list-item>Clone the repository</kb-list-item>
+  <kb-list-item>Install dependencies with npm install</kb-list-item>
+  <kb-list-item>Copy .env.example to .env and configure</kb-list-item>
+  <kb-list-item>Run database migrations</kb-list-item>
+  <kb-list-item>Start the development server</kb-list-item>
+</kb-list>`;
+export const exOrderedReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List variant="ordered" dividers>
+  <ListItem>Clone the repository</ListItem>
+  <ListItem>Install dependencies with npm install</ListItem>
+  <ListItem>Copy .env.example to .env and configure</ListItem>
+  <ListItem>Run database migrations</ListItem>
+  <ListItem>Start the development server</ListItem>
+</List>`;
+export const exOrderedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list variant="ordered" dividers>
+    <kb-list-item>Clone the repository</kb-list-item>
+    <kb-list-item>Install dependencies with npm install</kb-list-item>
+    <kb-list-item>Copy .env.example to .env and configure</kb-list-item>
+    <kb-list-item>Run database migrations</kb-list-item>
+    <kb-list-item>Start the development server</kb-list-item>
+  </kb-list>
+</template>`;
+export const exOrderedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list variant="ordered" dividers>
+  <kb-list-item>Clone the repository</kb-list-item>
+  <kb-list-item>Install dependencies with npm install</kb-list-item>
+  <kb-list-item>Copy .env.example to .env and configure</kb-list-item>
+  <kb-list-item>Run database migrations</kb-list-item>
+  <kb-list-item>Start the development server</kb-list-item>
+</kb-list>`;
+export const exInteractive = `<kb-list interactive dividers>
+  <kb-list-item>Dashboard</kb-list-item>
+  <kb-list-item>Analytics</kb-list-item>
+  <kb-list-item>Settings</kb-list-item>
+  <kb-list-item>Deployment logs</kb-list-item>
+</kb-list>`;
+export const exInteractiveReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List interactive dividers>
+  <ListItem>Dashboard</ListItem>
+  <ListItem>Analytics</ListItem>
+  <ListItem>Settings</ListItem>
+  <ListItem>Deployment logs</ListItem>
+</List>`;
+export const exInteractiveVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list interactive dividers>
+    <kb-list-item>Dashboard</kb-list-item>
+    <kb-list-item>Analytics</kb-list-item>
+    <kb-list-item>Settings</kb-list-item>
+    <kb-list-item>Deployment logs</kb-list-item>
+  </kb-list>
+</template>`;
+export const exInteractiveSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list interactive dividers>
+  <kb-list-item>Dashboard</kb-list-item>
+  <kb-list-item>Analytics</kb-list-item>
+  <kb-list-item>Settings</kb-list-item>
+  <kb-list-item>Deployment logs</kb-list-item>
+</kb-list>`;
+export const exLinkedItems = `<kb-list dividers>
+  <kb-list-item href="https://example.com/docs">Documentation</kb-list-item>
+  <kb-list-item href="https://example.com/api">API reference</kb-list-item>
+  <kb-list-item href="https://example.com/changelog">Changelog</kb-list-item>
+</kb-list>`;
+export const exLinkedItemsReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem href="https://example.com/docs">Documentation</ListItem>
+  <ListItem href="https://example.com/api">API reference</ListItem>
+  <ListItem href="https://example.com/changelog">Changelog</ListItem>
+</List>`;
+export const exLinkedItemsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item href="https://example.com/docs">Documentation</kb-list-item>
+    <kb-list-item href="https://example.com/api">API reference</kb-list-item>
+    <kb-list-item href="https://example.com/changelog">Changelog</kb-list-item>
+  </kb-list>
+</template>`;
+export const exLinkedItemsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item href="https://example.com/docs">Documentation</kb-list-item>
+  <kb-list-item href="https://example.com/api">API reference</kb-list-item>
+  <kb-list-item href="https://example.com/changelog">Changelog</kb-list-item>
+</kb-list>`;
+export const exWithIcons = `<kb-list dividers>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    API Gateway
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    Database cluster
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    Background workers
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#f59e0b;">DEGRADED</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    CDN
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+</kb-list>`;
+export const exWithIconsReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem>
+    <span slot="icon">&#9632;</span>
+    API Gateway
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </ListItem>
+  <ListItem>
+    <span slot="icon">&#9632;</span>
+    Database cluster
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </ListItem>
+  <ListItem>
+    <span slot="icon">&#9632;</span>
+    Background workers
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#f59e0b;">DEGRADED</span>
+  </ListItem>
+  <ListItem>
+    <span slot="icon">&#9632;</span>
+    CDN
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </ListItem>
+</List>`;
+export const exWithIconsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item>
+      <span slot="icon">&#9632;</span>
+      API Gateway
+      <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9632;</span>
+      Database cluster
+      <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9632;</span>
+      Background workers
+      <span slot="trailing" style="font-family:monospace;font-size:11px;color:#f59e0b;">DEGRADED</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9632;</span>
+      CDN
+      <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+    </kb-list-item>
+  </kb-list>
+</template>`;
+export const exWithIconsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    API Gateway
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    Database cluster
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    Background workers
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#f59e0b;">DEGRADED</span>
+  </kb-list-item>
+  <kb-list-item>
+    <span slot="icon">&#9632;</span>
+    CDN
+    <span slot="trailing" style="font-family:monospace;font-size:11px;color:#22c55e;">OPERATIONAL</span>
+  </kb-list-item>
+</kb-list>`;
+export const exWithSecondaryText = `<kb-list dividers>
+  <kb-list-item>
+    Production deployment
+    <span slot="secondary">Deployed 2 hours ago by ci/cd pipeline</span>
+  </kb-list-item>
+  <kb-list-item>
+    Staging deployment
+    <span slot="secondary">Deployed 45 minutes ago by dev-team</span>
+  </kb-list-item>
+  <kb-list-item>
+    Preview deployment
+    <span slot="secondary">Deployed 10 minutes ago from feature/auth branch</span>
+  </kb-list-item>
+</kb-list>`;
+export const exWithSecondaryTextReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem>
+    Production deployment
+    <span slot="secondary">Deployed 2 hours ago by ci/cd pipeline</span>
+  </ListItem>
+  <ListItem>
+    Staging deployment
+    <span slot="secondary">Deployed 45 minutes ago by dev-team</span>
+  </ListItem>
+  <ListItem>
+    Preview deployment
+    <span slot="secondary">Deployed 10 minutes ago from feature/auth branch</span>
+  </ListItem>
+</List>`;
+export const exWithSecondaryTextVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item>
+      Production deployment
+      <span slot="secondary">Deployed 2 hours ago by ci/cd pipeline</span>
+    </kb-list-item>
+    <kb-list-item>
+      Staging deployment
+      <span slot="secondary">Deployed 45 minutes ago by dev-team</span>
+    </kb-list-item>
+    <kb-list-item>
+      Preview deployment
+      <span slot="secondary">Deployed 10 minutes ago from feature/auth branch</span>
+    </kb-list-item>
+  </kb-list>
+</template>`;
+export const exWithSecondaryTextSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item>
+    Production deployment
+    <span slot="secondary">Deployed 2 hours ago by ci/cd pipeline</span>
+  </kb-list-item>
+  <kb-list-item>
+    Staging deployment
+    <span slot="secondary">Deployed 45 minutes ago by dev-team</span>
+  </kb-list-item>
+  <kb-list-item>
+    Preview deployment
+    <span slot="secondary">Deployed 10 minutes ago from feature/auth branch</span>
+  </kb-list-item>
+</kb-list>`;
+export const exNavigationMenu = `<div style="max-width:280px;">
+  <kb-list interactive>
+    <kb-list-item>
+      <span slot="icon">&#8962;</span>
+      Dashboard
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9634;</span>
+      Projects
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9673;</span>
+      Team members
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9881;</span>
+      Settings
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item disabled>
+      <span slot="icon">&#128274;</span>
+      Admin panel
+      <span slot="secondary">Requires elevated permissions</span>
+    </kb-list-item>
+  </kb-list>
+</div>`;
+export const exNavigationMenuReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:280px;">
+  <List interactive>
+    <ListItem>
+      <span slot="icon">&#8962;</span>
+      Dashboard
+      <span slot="trailing">&#8250;</span>
+    </ListItem>
+    <ListItem>
+      <span slot="icon">&#9634;</span>
+      Projects
+      <span slot="trailing">&#8250;</span>
+    </ListItem>
+    <ListItem>
+      <span slot="icon">&#9673;</span>
+      Team members
+      <span slot="trailing">&#8250;</span>
+    </ListItem>
+    <ListItem>
+      <span slot="icon">&#9881;</span>
+      Settings
+      <span slot="trailing">&#8250;</span>
+    </ListItem>
+    <ListItem disabled>
+      <span slot="icon">&#128274;</span>
+      Admin panel
+      <span slot="secondary">Requires elevated permissions</span>
+    </ListItem>
+  </List>
+</div>`;
+export const exNavigationMenuVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:280px;">
+    <kb-list interactive>
+      <kb-list-item>
+        <span slot="icon">&#8962;</span>
+        Dashboard
+        <span slot="trailing">&#8250;</span>
+      </kb-list-item>
+      <kb-list-item>
+        <span slot="icon">&#9634;</span>
+        Projects
+        <span slot="trailing">&#8250;</span>
+      </kb-list-item>
+      <kb-list-item>
+        <span slot="icon">&#9673;</span>
+        Team members
+        <span slot="trailing">&#8250;</span>
+      </kb-list-item>
+      <kb-list-item>
+        <span slot="icon">&#9881;</span>
+        Settings
+        <span slot="trailing">&#8250;</span>
+      </kb-list-item>
+      <kb-list-item disabled>
+        <span slot="icon">&#128274;</span>
+        Admin panel
+        <span slot="secondary">Requires elevated permissions</span>
+      </kb-list-item>
+    </kb-list>
+  </div>
+</template>`;
+export const exNavigationMenuSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:280px;">
+  <kb-list interactive>
+    <kb-list-item>
+      <span slot="icon">&#8962;</span>
+      Dashboard
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9634;</span>
+      Projects
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9673;</span>
+      Team members
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item>
+      <span slot="icon">&#9881;</span>
+      Settings
+      <span slot="trailing">&#8250;</span>
+    </kb-list-item>
+    <kb-list-item disabled>
+      <span slot="icon">&#128274;</span>
+      Admin panel
+      <span slot="secondary">Requires elevated permissions</span>
+    </kb-list-item>
+  </kb-list>
+</div>`;
+export const exSpacing = `<div style="display:flex;gap:32px;">
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Compact
+    </div>
+    <kb-list spacing="compact" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Normal
+    </div>
+    <kb-list spacing="normal" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Loose
+    </div>
+    <kb-list spacing="loose" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+</div>`;
+export const exSpacingReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:32px;">
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Compact
+    </div>
+    <List spacing="compact" dividers>
+      <ListItem>Item one</ListItem>
+      <ListItem>Item two</ListItem>
+      <ListItem>Item three</ListItem>
+    </List>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Normal
+    </div>
+    <List spacing="normal" dividers>
+      <ListItem>Item one</ListItem>
+      <ListItem>Item two</ListItem>
+      <ListItem>Item three</ListItem>
+    </List>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Loose
+    </div>
+    <List spacing="loose" dividers>
+      <ListItem>Item one</ListItem>
+      <ListItem>Item two</ListItem>
+      <ListItem>Item three</ListItem>
+    </List>
+  </div>
+</div>`;
+export const exSpacingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:32px;">
+    <div style="flex:1;">
+      <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+        Compact
+      </div>
+      <kb-list spacing="compact" dividers>
+        <kb-list-item>Item one</kb-list-item>
+        <kb-list-item>Item two</kb-list-item>
+        <kb-list-item>Item three</kb-list-item>
+      </kb-list>
+    </div>
+    <div style="flex:1;">
+      <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+        Normal
+      </div>
+      <kb-list spacing="normal" dividers>
+        <kb-list-item>Item one</kb-list-item>
+        <kb-list-item>Item two</kb-list-item>
+        <kb-list-item>Item three</kb-list-item>
+      </kb-list>
+    </div>
+    <div style="flex:1;">
+      <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+        Loose
+      </div>
+      <kb-list spacing="loose" dividers>
+        <kb-list-item>Item one</kb-list-item>
+        <kb-list-item>Item two</kb-list-item>
+        <kb-list-item>Item three</kb-list-item>
+      </kb-list>
+    </div>
+  </div>
+</template>`;
+export const exSpacingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:32px;">
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Compact
+    </div>
+    <kb-list spacing="compact" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Normal
+    </div>
+    <kb-list spacing="normal" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+  <div style="flex:1;">
+    <div style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;opacity:0.5;">
+      Loose
+    </div>
+    <kb-list spacing="loose" dividers>
+      <kb-list-item>Item one</kb-list-item>
+      <kb-list-item>Item two</kb-list-item>
+      <kb-list-item>Item three</kb-list-item>
+    </kb-list>
+  </div>
+</div>`;
+export const exMixedStates = `<kb-list dividers>
+  <kb-list-item interactive>Active item (interactive)</kb-list-item>
+  <kb-list-item disabled>Disabled item (cannot interact)</kb-list-item>
+  <kb-list-item href="https://example.com">Linked item (navigates on click)</kb-list-item>
+  <kb-list-item>Static item (no interaction)</kb-list-item>
+</kb-list>`;
+export const exMixedStatesReact = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem interactive>Active item (interactive)</ListItem>
+  <ListItem disabled>Disabled item (cannot interact)</ListItem>
+  <ListItem href="https://example.com">Linked item (navigates on click)</ListItem>
+  <ListItem>Static item (no interaction)</ListItem>
+</List>`;
+export const exMixedStatesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item interactive>Active item (interactive)</kb-list-item>
+    <kb-list-item disabled>Disabled item (cannot interact)</kb-list-item>
+    <kb-list-item href="https://example.com">Linked item (navigates on click)</kb-list-item>
+    <kb-list-item>Static item (no interaction)</kb-list-item>
+  </kb-list>
+</template>`;
+export const exMixedStatesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item interactive>Active item (interactive)</kb-list-item>
+  <kb-list-item disabled>Disabled item (cannot interact)</kb-list-item>
+  <kb-list-item href="https://example.com">Linked item (navigates on click)</kb-list-item>
+  <kb-list-item>Static item (no interaction)</kb-list-item>
+</kb-list>`;
+
+# List
+
+A styled list container with consistent spacing between items.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { List } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `ListVariant` | `'plain'` | List variant - `'plain'` (unordered) or `'ordered'` (monospace-numbered items). |
+| `spacing` | `spacing` | `ListSpacing` | `'normal'` | Vertical spacing between items. |
+| `dividers` | `dividers` | `boolean` | `false` | Show border separators between items. |
+| `interactive` | `interactive` | `boolean` | `false` | Make all child items hoverable, focusable, and clickable. |
+| `emptyText` | `empty-text` | `string` | `'No results'` | Text shown when the list has no items. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `list`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Dividers" codes={{ html: exWithDividers, react: exWithDividersReact, vue: exWithDividersVue, svelte: exWithDividersSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDividers }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Ordered" codes={{ html: exOrdered, react: exOrderedReact, vue: exOrderedVue, svelte: exOrderedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOrdered }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive" codes={{ html: exInteractive, react: exInteractiveReact, vue: exInteractiveVue, svelte: exInteractiveSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractive }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Linked Items" codes={{ html: exLinkedItems, react: exLinkedItemsReact, vue: exLinkedItemsVue, svelte: exLinkedItemsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLinkedItems }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icons" codes={{ html: exWithIcons, react: exWithIconsReact, vue: exWithIconsVue, svelte: exWithIconsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIcons }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Secondary Text" codes={{ html: exWithSecondaryText, react: exWithSecondaryTextReact, vue: exWithSecondaryTextVue, svelte: exWithSecondaryTextSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithSecondaryText }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Navigation Menu" codes={{ html: exNavigationMenu, react: exNavigationMenuReact, vue: exNavigationMenuVue, svelte: exNavigationMenuSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNavigationMenu }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Spacing" codes={{ html: exSpacing, react: exSpacingReact, vue: exSpacingVue, svelte: exSpacingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSpacing }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Mixed States" codes={{ html: exMixedStates, react: exMixedStatesReact, vue: exMixedStatesVue, svelte: exMixedStatesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMixedStates }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [List Item](./list-item)

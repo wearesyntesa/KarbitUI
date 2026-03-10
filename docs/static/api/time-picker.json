@@ -1,0 +1,140 @@
+{
+  "name": "Time Picker",
+  "tag": "kb-time-picker",
+  "category": "forms",
+  "description": "A time selection input with hour and minute controls.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-time-picker.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "TimePicker"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current value in HH:MM format."
+    },
+    {
+      "name": "format",
+      "attribute": "format",
+      "type": "TimeFormat",
+      "default": "'24h'",
+      "reflect": false,
+      "description": "Time format."
+    },
+    {
+      "name": "minuteStep",
+      "attribute": "minute-step",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Minute step interval."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error styling."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show clear button."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ source: 'time-picker', value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Cleared."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "combobox"
+    ],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "Enter",
+      "Escape",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "date-picker",
+    "input"
+  ]
+}

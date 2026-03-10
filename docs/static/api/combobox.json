@@ -1,0 +1,150 @@
+{
+  "name": "Combobox",
+  "tag": "kb-combobox",
+  "category": "forms",
+  "description": "A searchable select with typeahead filtering.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-combobox.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Combobox"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "V | ''",
+      "default": "''",
+      "reflect": false,
+      "description": "Currently selected value."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    },
+    {
+      "name": "options",
+      "attribute": "options",
+      "type": "readonly SelectOption<V>[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of selectable options."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error styling."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show clear button."
+    },
+    {
+      "name": "emptyText",
+      "attribute": "empty-text",
+      "type": "string",
+      "default": "'No results'",
+      "reflect": false,
+      "description": "Text shown when no options match."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ source: 'combobox', value: string }`."
+    },
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Search text changed. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Cleared."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "combobox",
+      "listbox",
+      "option"
+    ],
+    "ariaAttributes": [
+      "aria-activedescendant",
+      "aria-controls",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-label",
+      "aria-selected"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowUp",
+      "Enter",
+      "Escape",
+      "Tab"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "select",
+    "input"
+  ]
+}

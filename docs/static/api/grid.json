@@ -1,0 +1,46 @@
+{
+  "name": "Grid",
+  "tag": "kb-grid",
+  "category": "layout",
+  "description": "A CSS grid layout container.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-grid.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Grid"
+  },
+  "props": [
+    {
+      "name": "columns",
+      "attribute": "columns",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Number of grid columns (e.g. `'3'`, `'none'`). Maps to the `gridCols` style prop."
+    },
+    {
+      "name": "rows",
+      "attribute": "rows",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Number of grid rows. Maps to the `gridRows` style prop."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "flex",
+    "box"
+  ]
+}

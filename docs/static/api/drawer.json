@@ -1,0 +1,65 @@
+{
+  "name": "Drawer",
+  "tag": "kb-drawer",
+  "category": "overlay",
+  "description": "A sliding panel that overlays from the edge of the viewport.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-drawer.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Drawer"
+  },
+  "props": [
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "DrawerPlacement",
+      "default": "'right'",
+      "reflect": false,
+      "description": "Edge of the viewport from which the drawer slides in."
+    }
+  ],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Drawer header content."
+    },
+    {
+      "name": "footer",
+      "description": "Drawer footer content (only renders when provided)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when drawer finishes opening."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when drawer is dismissed (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "dialog"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-modal"
+    ],
+    "keyboardKeys": [
+      "Escape",
+      "Tab"
+    ],
+    "isOverlay": true
+  },
+  "relatedComponents": [
+    "modal"
+  ]
+}

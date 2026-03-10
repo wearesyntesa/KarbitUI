@@ -1,0 +1,300 @@
+---
+title: "Data List"
+description: "A label-value pair list for displaying structured data."
+sidebar_label: "Data List"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Items are set via JavaScript property -->
+<kb-data-list></kb-data-list>
+
+<script>
+  document.querySelector('kb-data-list').items = [
+    { label: 'Name', value: 'John Doe' },
+    { label: 'Email', value: 'john@example.com' },
+  ];
+</script>`;
+export const reactCode = `import { DataList } from '@wearesyntesa/karbit-ui/react';
+
+<DataList
+  items={
+  [
+      { label: 'Name', value: 'John Doe' },
+      { label: 'Email', value: 'john@example.com' },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const items = [
+    { label: 'Name', value: 'John Doe' },
+    { label: 'Email', value: 'john@example.com' },
+  ];
+</script>
+
+<template>
+  <kb-data-list :items="items" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const items = [
+    { label: 'Name', value: 'John Doe' },
+    { label: 'Email', value: 'john@example.com' },
+  ];
+</script>
+
+<kb-data-list items={items} />`;
+export const demoHtml = `<kb-data-list></kb-data-list>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-data-list').items = [
+      { label: 'Name', value: 'John Doe' },
+      { label: 'Email', value: 'john@example.com' },
+    ];
+};
+export const exDefault = `<kb-data-list>
+</kb-data-list>`;
+export const exDefaultReact = `import { DataList } from '@wearesyntesa/karbit-ui/react';
+
+<DataList>
+</DataList>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-data-list>
+  </kb-data-list>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-data-list>
+</kb-data-list>`;
+export const exDefaultSetup = (container) => {
+  container.querySelectorAll('kb-data-list').forEach(el => { el.items = [
+      { label: 'Name', value: 'Project Alpha' },
+      { label: 'Status', value: 'Active' },
+      { label: 'Region', value: 'us-east-1' },
+      { label: 'Created', value: '2026-01-15' },
+    ]; });
+};
+export const exVertical = `<kb-data-list orientation="vertical">
+</kb-data-list>`;
+export const exVerticalReact = `import { DataList } from '@wearesyntesa/karbit-ui/react';
+
+<DataList orientation="vertical">
+</DataList>`;
+export const exVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-data-list orientation="vertical">
+  </kb-data-list>
+</template>`;
+export const exVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-data-list orientation="vertical">
+</kb-data-list>`;
+export const exVerticalSetup = (container) => {
+  container.querySelectorAll('kb-data-list').forEach(el => { el.items = [
+      { label: 'Endpoint', value: '/api/v2/users' },
+      { label: 'Method', value: 'GET' },
+      { label: 'Rate Limit', value: '1,000 req/min' },
+      { label: 'Auth', value: 'Bearer Token' },
+    ]; });
+};
+export const exWithDivider = `<kb-data-list divider>
+</kb-data-list>`;
+export const exWithDividerReact = `import { DataList } from '@wearesyntesa/karbit-ui/react';
+
+<DataList divider>
+</DataList>`;
+export const exWithDividerVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-data-list divider>
+  </kb-data-list>
+</template>`;
+export const exWithDividerSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-data-list divider>
+</kb-data-list>`;
+export const exWithDividerSetup = (container) => {
+  container.querySelectorAll('kb-data-list').forEach(el => { el.items = [
+      { label: 'Plan', value: 'Pro' },
+      { label: 'Billing', value: 'Monthly' },
+      { label: 'Next Invoice', value: 'March 1, 2026' },
+      { label: 'Amount', value: '$29.00' },
+      { label: 'Payment', value: 'Visa ****4242' },
+    ]; });
+};
+export const exServerDetails = `<div class="border border-gray-200 dark:border-zinc-700 p-4">
+  <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">SERVER DETAILS</div>
+  <kb-data-list divider>
+  </kb-data-list>
+</div>`;
+export const exServerDetailsReact = `import { DataList } from '@wearesyntesa/karbit-ui/react';
+
+<div class="border border-gray-200 dark:border-zinc-700 p-4">
+  <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">SERVER DETAILS</div>
+  <DataList divider>
+  </DataList>
+</div>`;
+export const exServerDetailsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="border border-gray-200 dark:border-zinc-700 p-4">
+    <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">SERVER DETAILS</div>
+    <kb-data-list divider>
+    </kb-data-list>
+  </div>
+</template>`;
+export const exServerDetailsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="border border-gray-200 dark:border-zinc-700 p-4">
+  <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">SERVER DETAILS</div>
+  <kb-data-list divider>
+  </kb-data-list>
+</div>`;
+export const exServerDetailsSetup = (container) => {
+  container.querySelectorAll('kb-data-list').forEach(el => { el.items = [
+        { label: 'Hostname', value: 'prod-api-01.syntesa.net' },
+        { label: 'IP Address', value: '10.0.42.7' },
+        { label: 'OS', value: 'Ubuntu 24.04 LTS' },
+        { label: 'CPU', value: '8 vCPU (AMD EPYC)' },
+        { label: 'Memory', value: '16 GB DDR5' },
+        { label: 'Storage', value: '500 GB NVMe' },
+        { label: 'Uptime', value: '47d 12h 33m' },
+      ]; });
+};
+
+# Data List
+
+A label-value pair list for displaying structured data.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { DataList } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `readonly DataListItem[]` | `[]` | Array of key-value pairs to render. |
+| `orientation` | `orientation` | `DataListOrientation` | `'horizontal'` | Layout direction for each item pair. |
+| `size` | `size` | `ComponentSize` | `'md'` | Sizing preset. |
+| `divider` | `divider` | `boolean` | `false` | Show a divider between items. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Vertical" codes={{ html: exVertical, react: exVerticalReact, vue: exVerticalVue, svelte: exVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exVertical} setup={exVerticalSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Divider" codes={{ html: exWithDivider, react: exWithDividerReact, vue: exWithDividerVue, svelte: exWithDividerSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithDivider} setup={exWithDividerSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Server Details" codes={{ html: exServerDetails, react: exServerDetailsReact, vue: exServerDetailsVue, svelte: exServerDetailsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exServerDetails} setup={exServerDetailsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [List](./list)
+- [Stat](./stat)

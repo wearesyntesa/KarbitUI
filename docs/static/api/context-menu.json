@@ -1,0 +1,68 @@
+{
+  "name": "Context Menu",
+  "tag": "kb-context-menu",
+  "category": "overlay",
+  "description": "A right-click context menu with menu items.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-context-menu.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "ContextMenu"
+  },
+  "props": [
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Menu sizing preset."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "Area that listens for `contextmenu` events."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-select",
+      "detail": "`{ value: string }`",
+      "description": "Dispatched when a menu item is selected."
+    },
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the menu opens."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the menu closes (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "menu"
+    ],
+    "ariaAttributes": [],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowUp",
+      "End",
+      "Enter",
+      "Escape",
+      "Home",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "dropdown-menu",
+    "menu-item"
+  ]
+}

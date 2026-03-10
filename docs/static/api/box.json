@@ -1,0 +1,29 @@
+{
+  "name": "Box",
+  "tag": "kb-box",
+  "category": "layout",
+  "description": "A generic container element that accepts all style props.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-box.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Box"
+  },
+  "props": [],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "flex",
+    "grid"
+  ]
+}

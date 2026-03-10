@@ -1,0 +1,341 @@
+---
+title: "Rating"
+description: "A star rating input for collecting user ratings."
+sidebar_label: "Rating"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-rating value="3" max="5"></kb-rating>`;
+export const reactCode = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="3" max="5" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="3" max="5" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="3" max="5" />`;
+export const exDefault = `<kb-rating value="3" max="5">
+</kb-rating>`;
+export const exDefaultReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="3" max="5">
+</Rating>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="3" max="5">
+  </kb-rating>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="3" max="5">
+</kb-rating>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-rating size="xs" value="3">
+  </kb-rating>
+  <kb-rating size="sm" value="3">
+  </kb-rating>
+  <kb-rating size="md" value="3">
+  </kb-rating>
+  <kb-rating size="lg" value="3">
+  </kb-rating>
+  <kb-rating size="xl" value="3">
+  </kb-rating>
+</div>`;
+export const exSizesReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Rating size="xs" value="3">
+  </Rating>
+  <Rating size="sm" value="3">
+  </Rating>
+  <Rating size="md" value="3">
+  </Rating>
+  <Rating size="lg" value="3">
+  </Rating>
+  <Rating size="xl" value="3">
+  </Rating>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-rating size="xs" value="3">
+    </kb-rating>
+    <kb-rating size="sm" value="3">
+    </kb-rating>
+    <kb-rating size="md" value="3">
+    </kb-rating>
+    <kb-rating size="lg" value="3">
+    </kb-rating>
+    <kb-rating size="xl" value="3">
+    </kb-rating>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-rating size="xs" value="3">
+  </kb-rating>
+  <kb-rating size="sm" value="3">
+  </kb-rating>
+  <kb-rating size="md" value="3">
+  </kb-rating>
+  <kb-rating size="lg" value="3">
+  </kb-rating>
+  <kb-rating size="xl" value="3">
+  </kb-rating>
+</div>`;
+export const exHalfStars = `<kb-rating value="2.5" max="5" allow-half>
+</kb-rating>`;
+export const exHalfStarsReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="2.5" max="5" allow-half>
+</Rating>`;
+export const exHalfStarsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="2.5" max="5" allow-half>
+  </kb-rating>
+</template>`;
+export const exHalfStarsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="2.5" max="5" allow-half>
+</kb-rating>`;
+export const exReadOnly = `<kb-rating value="4" max="5" readonly>
+</kb-rating>`;
+export const exReadOnlyReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="4" max="5" readonly>
+</Rating>`;
+export const exReadOnlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="4" max="5" readonly>
+  </kb-rating>
+</template>`;
+export const exReadOnlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="4" max="5" readonly>
+</kb-rating>`;
+export const exDisabled = `<kb-rating value="2" max="5" disabled>
+</kb-rating>`;
+export const exDisabledReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="2" max="5" disabled>
+</Rating>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="2" max="5" disabled>
+  </kb-rating>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="2" max="5" disabled>
+</kb-rating>`;
+export const exTenStars = `<kb-rating value="7" max="10" size="sm">
+</kb-rating>`;
+export const exTenStarsReact = `import { Rating } from '@wearesyntesa/karbit-ui/react';
+
+<Rating value="7" max="10" size="sm">
+</Rating>`;
+export const exTenStarsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-rating value="7" max="10" size="sm">
+  </kb-rating>
+</template>`;
+export const exTenStarsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-rating value="7" max="10" size="sm">
+</kb-rating>`;
+
+# Rating
+
+A star rating input for collecting user ratings.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Rating } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` | `0` | Current rating value. |
+| `max` | `max` | `number` | `5` | Maximum number of stars. |
+| `allowHalf` | `allow-half` | `boolean` | `false` | Allow half-star increments. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `readonly` | `readonly` | `boolean` | `false` | Read-only display (shows value but prevents changes). |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Fires when the rating value changes. Detail: `{ source: 'rating', value: string }`. |
+| `kb-rating-hover` | `{ value: number }` | Fires during hover with the previewed value. Detail: `{ value: number }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Home` | Move focus to the first item |
+
+### ARIA
+
+**Roles:** `slider`
+
+**Attributes:** `aria-disabled`, `aria-label`, `aria-readonly`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Half Stars" codes={{ html: exHalfStars, react: exHalfStarsReact, vue: exHalfStarsVue, svelte: exHalfStarsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHalfStars }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Read Only" codes={{ html: exReadOnly, react: exReadOnlyReact, vue: exReadOnlyVue, svelte: exReadOnlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReadOnly }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Ten Stars" codes={{ html: exTenStars, react: exTenStarsReact, vue: exTenStarsVue, svelte: exTenStarsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTenStars }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Slider](./slider)

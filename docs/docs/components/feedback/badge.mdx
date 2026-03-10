@@ -1,0 +1,824 @@
+---
+title: "Badge"
+description: "A small count or status indicator, typically overlaid on another element."
+sidebar_label: "Badge"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-badge variant="solid" color-scheme="red">3</kb-badge>`;
+export const reactCode = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="solid" color-scheme="red">3</Badge>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="solid" color-scheme="red">3</kb-badge>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="solid" color-scheme="red">3</kb-badge>`;
+export const exSubtle = `<kb-badge variant="subtle" size="sm">Badge</kb-badge>`;
+export const exSubtleReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="subtle" size="sm">Badge</Badge>`;
+export const exSubtleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="subtle" size="sm">Badge</kb-badge>
+</template>`;
+export const exSubtleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="subtle" size="sm">Badge</kb-badge>`;
+export const exSolid = `<kb-badge variant="solid" size="sm">Badge</kb-badge>`;
+export const exSolidReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="solid" size="sm">Badge</Badge>`;
+export const exSolidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="solid" size="sm">Badge</kb-badge>
+</template>`;
+export const exSolidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="solid" size="sm">Badge</kb-badge>`;
+export const exOutline = `<kb-badge variant="outline" size="sm">Badge</kb-badge>`;
+export const exOutlineReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="outline" size="sm">Badge</Badge>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="outline" size="sm">Badge</kb-badge>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="outline" size="sm">Badge</kb-badge>`;
+export const exExtraSmall = `<kb-badge variant="subtle" size="xs">Badge</kb-badge>`;
+export const exExtraSmallReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="subtle" size="xs">Badge</Badge>`;
+export const exExtraSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="subtle" size="xs">Badge</kb-badge>
+</template>`;
+export const exExtraSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="subtle" size="xs">Badge</kb-badge>`;
+export const exMedium = `<kb-badge variant="subtle" size="md">Badge</kb-badge>`;
+export const exMediumReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<Badge variant="subtle" size="md">Badge</Badge>`;
+export const exMediumVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-badge variant="subtle" size="md">Badge</kb-badge>
+</template>`;
+export const exMediumSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-badge variant="subtle" size="md">Badge</kb-badge>`;
+export const exColorSchemes = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="solid" color-scheme="black">Black</kb-badge> <kb-badge variant="solid" color-scheme="red">Red</kb-badge> <kb-badge variant="solid" color-scheme="blue">Blue</kb-badge> <kb-badge variant="solid" color-scheme="green">Green</kb-badge> <kb-badge variant="solid" color-scheme="yellow">Yellow</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" color-scheme="black">Black</kb-badge> <kb-badge variant="outline" color-scheme="red">Red</kb-badge> <kb-badge variant="outline" color-scheme="blue">Blue</kb-badge> <kb-badge variant="outline" color-scheme="green">Green</kb-badge> <kb-badge variant="outline" color-scheme="yellow">Yellow</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="black">Black</kb-badge> <kb-badge variant="subtle" color-scheme="red">Red</kb-badge> <kb-badge variant="subtle" color-scheme="blue">Blue</kb-badge> <kb-badge variant="subtle" color-scheme="green">Green</kb-badge> <kb-badge variant="subtle" color-scheme="yellow">Yellow</kb-badge>
+</div>`;
+export const exColorSchemesReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge variant="solid" color-scheme="black">Black</Badge> <Badge variant="solid" color-scheme="red">Red</Badge> <Badge variant="solid" color-scheme="blue">Blue</Badge> <Badge variant="solid" color-scheme="green">Green</Badge> <Badge variant="solid" color-scheme="yellow">Yellow</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="outline" color-scheme="black">Black</Badge> <Badge variant="outline" color-scheme="red">Red</Badge> <Badge variant="outline" color-scheme="blue">Blue</Badge> <Badge variant="outline" color-scheme="green">Green</Badge> <Badge variant="outline" color-scheme="yellow">Yellow</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="subtle" color-scheme="black">Black</Badge> <Badge variant="subtle" color-scheme="red">Red</Badge> <Badge variant="subtle" color-scheme="blue">Blue</Badge> <Badge variant="subtle" color-scheme="green">Green</Badge> <Badge variant="subtle" color-scheme="yellow">Yellow</Badge>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="solid" color-scheme="black">Black</kb-badge> <kb-badge variant="solid" color-scheme="red">Red</kb-badge> <kb-badge variant="solid" color-scheme="blue">Blue</kb-badge> <kb-badge variant="solid" color-scheme="green">Green</kb-badge> <kb-badge variant="solid" color-scheme="yellow">Yellow</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" color-scheme="black">Black</kb-badge> <kb-badge variant="outline" color-scheme="red">Red</kb-badge> <kb-badge variant="outline" color-scheme="blue">Blue</kb-badge> <kb-badge variant="outline" color-scheme="green">Green</kb-badge> <kb-badge variant="outline" color-scheme="yellow">Yellow</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="black">Black</kb-badge> <kb-badge variant="subtle" color-scheme="red">Red</kb-badge> <kb-badge variant="subtle" color-scheme="blue">Blue</kb-badge> <kb-badge variant="subtle" color-scheme="green">Green</kb-badge> <kb-badge variant="subtle" color-scheme="yellow">Yellow</kb-badge>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="solid" color-scheme="black">Black</kb-badge> <kb-badge variant="solid" color-scheme="red">Red</kb-badge> <kb-badge variant="solid" color-scheme="blue">Blue</kb-badge> <kb-badge variant="solid" color-scheme="green">Green</kb-badge> <kb-badge variant="solid" color-scheme="yellow">Yellow</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" color-scheme="black">Black</kb-badge> <kb-badge variant="outline" color-scheme="red">Red</kb-badge> <kb-badge variant="outline" color-scheme="blue">Blue</kb-badge> <kb-badge variant="outline" color-scheme="green">Green</kb-badge> <kb-badge variant="outline" color-scheme="yellow">Yellow</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="black">Black</kb-badge> <kb-badge variant="subtle" color-scheme="red">Red</kb-badge> <kb-badge variant="subtle" color-scheme="blue">Blue</kb-badge> <kb-badge variant="subtle" color-scheme="green">Green</kb-badge> <kb-badge variant="subtle" color-scheme="yellow">Yellow</kb-badge>
+</div>`;
+export const exDotStatus = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot color-scheme="green">Online</kb-badge> <kb-badge dot color-scheme="yellow">Away</kb-badge> <kb-badge dot color-scheme="red">Busy</kb-badge> <kb-badge dot color-scheme="black">Offline</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot color-scheme="green">Online</kb-badge> <kb-badge variant="outline" dot color-scheme="yellow">Away</kb-badge> <kb-badge variant="outline" dot color-scheme="red">Busy</kb-badge> <kb-badge variant="outline" dot color-scheme="black">Offline</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="solid" dot color-scheme="green">Online</kb-badge> <kb-badge variant="solid" dot color-scheme="red">Busy</kb-badge>
+</div>`;
+export const exDotStatusReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge dot color-scheme="green">Online</Badge> <Badge dot color-scheme="yellow">Away</Badge> <Badge dot color-scheme="red">Busy</Badge> <Badge dot color-scheme="black">Offline</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="outline" dot color-scheme="green">Online</Badge> <Badge variant="outline" dot color-scheme="yellow">Away</Badge> <Badge variant="outline" dot color-scheme="red">Busy</Badge> <Badge variant="outline" dot color-scheme="black">Offline</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="solid" dot color-scheme="green">Online</Badge> <Badge variant="solid" dot color-scheme="red">Busy</Badge>
+</div>`;
+export const exDotStatusVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot color-scheme="green">Online</kb-badge> <kb-badge dot color-scheme="yellow">Away</kb-badge> <kb-badge dot color-scheme="red">Busy</kb-badge> <kb-badge dot color-scheme="black">Offline</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot color-scheme="green">Online</kb-badge> <kb-badge variant="outline" dot color-scheme="yellow">Away</kb-badge> <kb-badge variant="outline" dot color-scheme="red">Busy</kb-badge> <kb-badge variant="outline" dot color-scheme="black">Offline</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="solid" dot color-scheme="green">Online</kb-badge> <kb-badge variant="solid" dot color-scheme="red">Busy</kb-badge>
+  </div>
+</template>`;
+export const exDotStatusSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot color-scheme="green">Online</kb-badge> <kb-badge dot color-scheme="yellow">Away</kb-badge> <kb-badge dot color-scheme="red">Busy</kb-badge> <kb-badge dot color-scheme="black">Offline</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot color-scheme="green">Online</kb-badge> <kb-badge variant="outline" dot color-scheme="yellow">Away</kb-badge> <kb-badge variant="outline" dot color-scheme="red">Busy</kb-badge> <kb-badge variant="outline" dot color-scheme="black">Offline</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="solid" dot color-scheme="green">Online</kb-badge> <kb-badge variant="solid" dot color-scheme="red">Busy</kb-badge>
+</div>`;
+export const exPulseLive = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot pulse color-scheme="green">Live</kb-badge> <kb-badge dot pulse color-scheme="red">Recording</kb-badge> <kb-badge dot pulse color-scheme="blue">Syncing</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot pulse color-scheme="green">Live</kb-badge> <kb-badge variant="solid" dot pulse color-scheme="red">On Air</kb-badge>
+</div>`;
+export const exPulseLiveReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge dot pulse color-scheme="green">Live</Badge> <Badge dot pulse color-scheme="red">Recording</Badge> <Badge dot pulse color-scheme="blue">Syncing</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="outline" dot pulse color-scheme="green">Live</Badge> <Badge variant="solid" dot pulse color-scheme="red">On Air</Badge>
+</div>`;
+export const exPulseLiveVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot pulse color-scheme="green">Live</kb-badge> <kb-badge dot pulse color-scheme="red">Recording</kb-badge> <kb-badge dot pulse color-scheme="blue">Syncing</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot pulse color-scheme="green">Live</kb-badge> <kb-badge variant="solid" dot pulse color-scheme="red">On Air</kb-badge>
+  </div>
+</template>`;
+export const exPulseLiveSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge dot pulse color-scheme="green">Live</kb-badge> <kb-badge dot pulse color-scheme="red">Recording</kb-badge> <kb-badge dot pulse color-scheme="blue">Syncing</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="outline" dot pulse color-scheme="green">Live</kb-badge> <kb-badge variant="solid" dot pulse color-scheme="red">On Air</kb-badge>
+</div>`;
+export const exPingNotification = `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+  <kb-badge ping color-scheme="red">3</kb-badge>
+  <kb-badge ping color-scheme="blue" variant="solid">New</kb-badge>
+  <kb-badge ping color-scheme="green" variant="outline">99+</kb-badge>
+  <kb-badge ping>Updates</kb-badge>
+</div>`;
+export const exPingNotificationReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+  <Badge ping color-scheme="red">3</Badge>
+  <Badge ping color-scheme="blue" variant="solid">New</Badge>
+  <Badge ping color-scheme="green" variant="outline">99+</Badge>
+  <Badge ping>Updates</Badge>
+</div>`;
+export const exPingNotificationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+    <kb-badge ping color-scheme="red">3</kb-badge>
+    <kb-badge ping color-scheme="blue" variant="solid">New</kb-badge>
+    <kb-badge ping color-scheme="green" variant="outline">99+</kb-badge>
+    <kb-badge ping>Updates</kb-badge>
+  </div>
+</template>`;
+export const exPingNotificationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+  <kb-badge ping color-scheme="red">3</kb-badge>
+  <kb-badge ping color-scheme="blue" variant="solid">New</kb-badge>
+  <kb-badge ping color-scheme="green" variant="outline">99+</kb-badge>
+  <kb-badge ping>Updates</kb-badge>
+</div>`;
+export const exWithIcon = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-badge variant="subtle" color-scheme="green">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </span>
+    Verified
+  </kb-badge>
+  <kb-badge variant="subtle" color-scheme="yellow">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 9v4"/>
+        <path d="M12 17h.01"/>
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+      </svg>
+    </span>
+    Beta
+  </kb-badge>
+  <kb-badge variant="subtle" color-scheme="red">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="m15 9-6 6"/>
+        <path d="m9 9 6 6"/>
+      </svg>
+    </span>
+    Deprecated
+  </kb-badge>
+  <kb-badge variant="solid" color-scheme="blue">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 2v4"/>
+        <path d="m16.2 7.8 2.9-2.9"/>
+        <path d="M18 12h4"/>
+        <path d="m16.2 16.2 2.9 2.9"/>
+        <path d="M12 18v4"/>
+        <path d="m4.9 19.1 2.9-2.9"/>
+        <path d="M2 12h4"/>
+        <path d="m4.9 4.9 2.9 2.9"/>
+      </svg>
+    </span>
+    Loading
+  </kb-badge>
+</div>`;
+export const exWithIconReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <Badge variant="subtle" color-scheme="green">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </span>
+    Verified
+  </Badge>
+  <Badge variant="subtle" color-scheme="yellow">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 9v4"/>
+        <path d="M12 17h.01"/>
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+      </svg>
+    </span>
+    Beta
+  </Badge>
+  <Badge variant="subtle" color-scheme="red">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="m15 9-6 6"/>
+        <path d="m9 9 6 6"/>
+      </svg>
+    </span>
+    Deprecated
+  </Badge>
+  <Badge variant="solid" color-scheme="blue">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 2v4"/>
+        <path d="m16.2 7.8 2.9-2.9"/>
+        <path d="M18 12h4"/>
+        <path d="m16.2 16.2 2.9 2.9"/>
+        <path d="M12 18v4"/>
+        <path d="m4.9 19.1 2.9-2.9"/>
+        <path d="M2 12h4"/>
+        <path d="m4.9 4.9 2.9 2.9"/>
+      </svg>
+    </span>
+    Loading
+  </Badge>
+</div>`;
+export const exWithIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <kb-badge variant="subtle" color-scheme="green">
+      <span slot="icon">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </span>
+      Verified
+    </kb-badge>
+    <kb-badge variant="subtle" color-scheme="yellow">
+      <span slot="icon">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <path d="M12 9v4"/>
+          <path d="M12 17h.01"/>
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+        </svg>
+      </span>
+      Beta
+    </kb-badge>
+    <kb-badge variant="subtle" color-scheme="red">
+      <span slot="icon">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m15 9-6 6"/>
+          <path d="m9 9 6 6"/>
+        </svg>
+      </span>
+      Deprecated
+    </kb-badge>
+    <kb-badge variant="solid" color-scheme="blue">
+      <span slot="icon">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+          <path d="M12 2v4"/>
+          <path d="m16.2 7.8 2.9-2.9"/>
+          <path d="M18 12h4"/>
+          <path d="m16.2 16.2 2.9 2.9"/>
+          <path d="M12 18v4"/>
+          <path d="m4.9 19.1 2.9-2.9"/>
+          <path d="M2 12h4"/>
+          <path d="m4.9 4.9 2.9 2.9"/>
+        </svg>
+      </span>
+      Loading
+    </kb-badge>
+  </div>
+</template>`;
+export const exWithIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-badge variant="subtle" color-scheme="green">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </span>
+    Verified
+  </kb-badge>
+  <kb-badge variant="subtle" color-scheme="yellow">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 9v4"/>
+        <path d="M12 17h.01"/>
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+      </svg>
+    </span>
+    Beta
+  </kb-badge>
+  <kb-badge variant="subtle" color-scheme="red">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="m15 9-6 6"/>
+        <path d="m9 9 6 6"/>
+      </svg>
+    </span>
+    Deprecated
+  </kb-badge>
+  <kb-badge variant="solid" color-scheme="blue">
+    <span slot="icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+        <path d="M12 2v4"/>
+        <path d="m16.2 7.8 2.9-2.9"/>
+        <path d="M18 12h4"/>
+        <path d="m16.2 16.2 2.9 2.9"/>
+        <path d="M12 18v4"/>
+        <path d="m4.9 19.1 2.9-2.9"/>
+        <path d="M2 12h4"/>
+        <path d="m4.9 4.9 2.9 2.9"/>
+      </svg>
+    </span>
+    Loading
+  </kb-badge>
+</div>`;
+export const exInteractive = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge interactive color-scheme="blue">Active</kb-badge> <kb-badge interactive color-scheme="green">Published</kb-badge> <kb-badge interactive color-scheme="yellow">Draft</kb-badge> <kb-badge interactive color-scheme="red">Archived</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge interactive variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge interactive variant="solid" color-scheme="blue">Solid</kb-badge> <kb-badge interactive variant="subtle" color-scheme="blue">Subtle</kb-badge>
+</div>`;
+export const exInteractiveReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge interactive color-scheme="blue">Active</Badge> <Badge interactive color-scheme="green">Published</Badge> <Badge interactive color-scheme="yellow">Draft</Badge> <Badge interactive color-scheme="red">Archived</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge interactive variant="outline" color-scheme="blue">Outline</Badge> <Badge interactive variant="solid" color-scheme="blue">Solid</Badge> <Badge interactive variant="subtle" color-scheme="blue">Subtle</Badge>
+</div>`;
+export const exInteractiveVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge interactive color-scheme="blue">Active</kb-badge> <kb-badge interactive color-scheme="green">Published</kb-badge> <kb-badge interactive color-scheme="yellow">Draft</kb-badge> <kb-badge interactive color-scheme="red">Archived</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge interactive variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge interactive variant="solid" color-scheme="blue">Solid</kb-badge> <kb-badge interactive variant="subtle" color-scheme="blue">Subtle</kb-badge>
+  </div>
+</template>`;
+export const exInteractiveSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge interactive color-scheme="blue">Active</kb-badge> <kb-badge interactive color-scheme="green">Published</kb-badge> <kb-badge interactive color-scheme="yellow">Draft</kb-badge> <kb-badge interactive color-scheme="red">Archived</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge interactive variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge interactive variant="solid" color-scheme="blue">Solid</kb-badge> <kb-badge interactive variant="subtle" color-scheme="blue">Subtle</kb-badge>
+</div>`;
+export const exClosable = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge closable color-scheme="blue">Technology</kb-badge> <kb-badge closable color-scheme="green">Design</kb-badge> <kb-badge closable color-scheme="red">Urgent</kb-badge> <kb-badge closable color-scheme="yellow">Pending</kb-badge> <kb-badge closable>Default</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge closable variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge closable variant="solid" color-scheme="red">Solid</kb-badge>
+</div>`;
+export const exClosableReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge closable color-scheme="blue">Technology</Badge> <Badge closable color-scheme="green">Design</Badge> <Badge closable color-scheme="red">Urgent</Badge> <Badge closable color-scheme="yellow">Pending</Badge> <Badge closable>Default</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge closable variant="outline" color-scheme="blue">Outline</Badge> <Badge closable variant="solid" color-scheme="red">Solid</Badge>
+</div>`;
+export const exClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge closable color-scheme="blue">Technology</kb-badge> <kb-badge closable color-scheme="green">Design</kb-badge> <kb-badge closable color-scheme="red">Urgent</kb-badge> <kb-badge closable color-scheme="yellow">Pending</kb-badge> <kb-badge closable>Default</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge closable variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge closable variant="solid" color-scheme="red">Solid</kb-badge>
+  </div>
+</template>`;
+export const exClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge closable color-scheme="blue">Technology</kb-badge> <kb-badge closable color-scheme="green">Design</kb-badge> <kb-badge closable color-scheme="red">Urgent</kb-badge> <kb-badge closable color-scheme="yellow">Pending</kb-badge> <kb-badge closable>Default</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge closable variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge closable variant="solid" color-scheme="red">Solid</kb-badge>
+</div>`;
+export const exSizes = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge size="xs" variant="solid" color-scheme="blue">XS</kb-badge> <kb-badge size="sm" variant="solid" color-scheme="blue">SM</kb-badge> <kb-badge size="md" variant="solid" color-scheme="blue">MD</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" dot color-scheme="green">XS Dot</kb-badge> <kb-badge size="sm" dot color-scheme="green">SM Dot</kb-badge> <kb-badge size="md" dot color-scheme="green">MD Dot</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" closable color-scheme="red">XS Close</kb-badge> <kb-badge size="sm" closable color-scheme="red">SM Close</kb-badge> <kb-badge size="md" closable color-scheme="red">MD Close</kb-badge>
+</div>`;
+export const exSizesReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge size="xs" variant="solid" color-scheme="blue">XS</Badge> <Badge size="sm" variant="solid" color-scheme="blue">SM</Badge> <Badge size="md" variant="solid" color-scheme="blue">MD</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge size="xs" dot color-scheme="green">XS Dot</Badge> <Badge size="sm" dot color-scheme="green">SM Dot</Badge> <Badge size="md" dot color-scheme="green">MD Dot</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge size="xs" closable color-scheme="red">XS Close</Badge> <Badge size="sm" closable color-scheme="red">SM Close</Badge> <Badge size="md" closable color-scheme="red">MD Close</Badge>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge size="xs" variant="solid" color-scheme="blue">XS</kb-badge> <kb-badge size="sm" variant="solid" color-scheme="blue">SM</kb-badge> <kb-badge size="md" variant="solid" color-scheme="blue">MD</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" dot color-scheme="green">XS Dot</kb-badge> <kb-badge size="sm" dot color-scheme="green">SM Dot</kb-badge> <kb-badge size="md" dot color-scheme="green">MD Dot</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" closable color-scheme="red">XS Close</kb-badge> <kb-badge size="sm" closable color-scheme="red">SM Close</kb-badge> <kb-badge size="md" closable color-scheme="red">MD Close</kb-badge>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge size="xs" variant="solid" color-scheme="blue">XS</kb-badge> <kb-badge size="sm" variant="solid" color-scheme="blue">SM</kb-badge> <kb-badge size="md" variant="solid" color-scheme="blue">MD</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" dot color-scheme="green">XS Dot</kb-badge> <kb-badge size="sm" dot color-scheme="green">SM Dot</kb-badge> <kb-badge size="md" dot color-scheme="green">MD Dot</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge size="xs" closable color-scheme="red">XS Close</kb-badge> <kb-badge size="sm" closable color-scheme="red">SM Close</kb-badge> <kb-badge size="md" closable color-scheme="red">MD Close</kb-badge>
+</div>`;
+export const exInteractiveClosable = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-badge interactive closable color-scheme="blue">Filter A</kb-badge>
+  <kb-badge interactive closable color-scheme="green">Filter B</kb-badge>
+  <kb-badge interactive closable color-scheme="red">Filter C</kb-badge>
+</div>`;
+export const exInteractiveClosableReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <Badge interactive closable color-scheme="blue">Filter A</Badge>
+  <Badge interactive closable color-scheme="green">Filter B</Badge>
+  <Badge interactive closable color-scheme="red">Filter C</Badge>
+</div>`;
+export const exInteractiveClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <kb-badge interactive closable color-scheme="blue">Filter A</kb-badge>
+    <kb-badge interactive closable color-scheme="green">Filter B</kb-badge>
+    <kb-badge interactive closable color-scheme="red">Filter C</kb-badge>
+  </div>
+</template>`;
+export const exInteractiveClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-badge interactive closable color-scheme="blue">Filter A</kb-badge>
+  <kb-badge interactive closable color-scheme="green">Filter B</kb-badge>
+  <kb-badge interactive closable color-scheme="red">Filter C</kb-badge>
+</div>`;
+export const exAllVariants = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="subtle">Subtle</kb-badge> <kb-badge variant="outline">Outline</kb-badge> <kb-badge variant="solid">Solid</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="blue">Subtle</kb-badge> <kb-badge variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge variant="solid" color-scheme="blue">Solid</kb-badge>
+</div>`;
+export const exAllVariantsReact = `import { Badge } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <Badge variant="subtle">Subtle</Badge> <Badge variant="outline">Outline</Badge> <Badge variant="solid">Solid</Badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <Badge variant="subtle" color-scheme="blue">Subtle</Badge> <Badge variant="outline" color-scheme="blue">Outline</Badge> <Badge variant="solid" color-scheme="blue">Solid</Badge>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="subtle">Subtle</kb-badge> <kb-badge variant="outline">Outline</kb-badge> <kb-badge variant="solid">Solid</kb-badge>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="blue">Subtle</kb-badge> <kb-badge variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge variant="solid" color-scheme="blue">Solid</kb-badge>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"> <kb-badge variant="subtle">Subtle</kb-badge> <kb-badge variant="outline">Outline</kb-badge> <kb-badge variant="solid">Solid</kb-badge>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;"> <kb-badge variant="subtle" color-scheme="blue">Subtle</kb-badge> <kb-badge variant="outline" color-scheme="blue">Outline</kb-badge> <kb-badge variant="solid" color-scheme="blue">Solid</kb-badge>
+</div>`;
+
+# Badge
+
+A small count or status indicator, typically overlaid on another element.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Badge } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `BadgeVariant` | `'subtle'` | Visual variant controlling border, background, and text styles. |
+| `size` | `size` | `BadgeSize` | `'sm'` | Badge size controlling padding, font size, and dot/close sizing. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme override. When unset, the variant's default color is used. |
+| `dot` | `dot` | `boolean` | `false` | Show a status dot before the badge label. |
+| `pulse` | `pulse` | `boolean` | `false` | Animate the status dot with a ping effect. Requires `dot` to be true. |
+| `ping` | `ping` | `boolean` | `false` | Show a notification ping indicator on the badge corner. |
+| `interactive` | `interactive` | `boolean` | `false` | Make the badge clickable with hover/focus styles and `kb-click` events. |
+| `closable` | `closable` | `boolean` | `false` | Show a close button that dismisses the badge with animation. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon` | Leading icon element rendered before the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-click` | none | Interactive badge clicked/activated. |
+| `kb-close` | `{ source?: string }` or none | Close button clicked; badge animates out and removes itself. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Subtle" codes={{ html: exSubtle, react: exSubtleReact, vue: exSubtleVue, svelte: exSubtleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSubtle }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Solid" codes={{ html: exSolid, react: exSolidReact, vue: exSolidVue, svelte: exSolidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSolid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Extra Small" codes={{ html: exExtraSmall, react: exExtraSmallReact, vue: exExtraSmallVue, svelte: exExtraSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exExtraSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Medium" codes={{ html: exMedium, react: exMediumReact, vue: exMediumVue, svelte: exMediumSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMedium }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dot Status" codes={{ html: exDotStatus, react: exDotStatusReact, vue: exDotStatusVue, svelte: exDotStatusSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDotStatus }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Pulse Live" codes={{ html: exPulseLive, react: exPulseLiveReact, vue: exPulseLiveVue, svelte: exPulseLiveSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPulseLive }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Ping Notification" codes={{ html: exPingNotification, react: exPingNotificationReact, vue: exPingNotificationVue, svelte: exPingNotificationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPingNotification }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icon" codes={{ html: exWithIcon, react: exWithIconReact, vue: exWithIconVue, svelte: exWithIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIcon }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive" codes={{ html: exInteractive, react: exInteractiveReact, vue: exInteractiveVue, svelte: exInteractiveSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractive }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable" codes={{ html: exClosable, react: exClosableReact, vue: exClosableVue, svelte: exClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive Closable" codes={{ html: exInteractiveClosable, react: exInteractiveClosableReact, vue: exInteractiveClosableVue, svelte: exInteractiveClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractiveClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Tag](../data-display/tag)

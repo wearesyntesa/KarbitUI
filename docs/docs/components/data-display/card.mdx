@@ -1,0 +1,694 @@
+---
+title: "Card"
+description: "A container with header, body, and footer sections for grouping related content."
+sidebar_label: "Card"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-card>
+  <div slot="header">Card Title</div>
+  Card body content goes here.
+  <div slot="footer">Card footer</div>
+</kb-card>`;
+export const reactCode = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card>
+  <div slot="header">Card Title</div>
+  Card body content goes here.
+  <div slot="footer">Card footer</div>
+</Card>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card>
+    <div slot="header">Card Title</div>
+    Card body content goes here.
+    <div slot="footer">Card footer</div>
+  </kb-card>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card>
+  <div slot="header">Card Title</div>
+  Card body content goes here.
+  <div slot="footer">Card footer</div>
+</kb-card>`;
+export const exOutline = `<kb-card variant="outline">
+  <span slot="header">System overview</span>
+  Displays a summary of resource usage across all active services in the current deployment environment.
+  <span slot="footer">Last updated 2 min ago</span>
+</kb-card>`;
+export const exOutlineReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card variant="outline">
+  <span slot="header">System overview</span>
+  Displays a summary of resource usage across all active services in the current deployment environment.
+  <span slot="footer">Last updated 2 min ago</span>
+</Card>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card variant="outline">
+    <span slot="header">System overview</span>
+    Displays a summary of resource usage across all active services in the current deployment environment.
+    <span slot="footer">Last updated 2 min ago</span>
+  </kb-card>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card variant="outline">
+  <span slot="header">System overview</span>
+  Displays a summary of resource usage across all active services in the current deployment environment.
+  <span slot="footer">Last updated 2 min ago</span>
+</kb-card>`;
+export const exFilled = `<kb-card variant="filled">
+  <span slot="header">Diagnostics</span>
+  Filled variant provides a muted background to distinguish grouped information from the surrounding layout.
+</kb-card>`;
+export const exFilledReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card variant="filled">
+  <span slot="header">Diagnostics</span>
+  Filled variant provides a muted background to distinguish grouped information from the surrounding layout.
+</Card>`;
+export const exFilledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card variant="filled">
+    <span slot="header">Diagnostics</span>
+    Filled variant provides a muted background to distinguish grouped information from the surrounding layout.
+  </kb-card>
+</template>`;
+export const exFilledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card variant="filled">
+  <span slot="header">Diagnostics</span>
+  Filled variant provides a muted background to distinguish grouped information from the surrounding layout.
+</kb-card>`;
+export const exGhost = `<kb-card variant="ghost">
+  <span slot="header">Notes</span>
+  Ghost variant has no border or background. Content is structured purely through the header and footer separators and padding.
+  <span slot="footer">Draft saved</span>
+</kb-card>`;
+export const exGhostReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card variant="ghost">
+  <span slot="header">Notes</span>
+  Ghost variant has no border or background. Content is structured purely through the header and footer separators and padding.
+  <span slot="footer">Draft saved</span>
+</Card>`;
+export const exGhostVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card variant="ghost">
+    <span slot="header">Notes</span>
+    Ghost variant has no border or background. Content is structured purely through the header and footer separators and padding.
+    <span slot="footer">Draft saved</span>
+  </kb-card>
+</template>`;
+export const exGhostSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card variant="ghost">
+  <span slot="header">Notes</span>
+  Ghost variant has no border or background. Content is structured purely through the header and footer separators and padding.
+  <span slot="footer">Draft saved</span>
+</kb-card>`;
+export const exInteractive = `<kb-card interactive>
+  <span slot="header">View deployment logs</span>
+  Interactive cards are focusable and respond to keyboard activation. Try pressing Tab to focus, then Enter or Space to activate.
+  <span slot="footer">Click or press Enter</span>
+</kb-card>`;
+export const exInteractiveReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card interactive>
+  <span slot="header">View deployment logs</span>
+  Interactive cards are focusable and respond to keyboard activation. Try pressing Tab to focus, then Enter or Space to activate.
+  <span slot="footer">Click or press Enter</span>
+</Card>`;
+export const exInteractiveVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card interactive>
+    <span slot="header">View deployment logs</span>
+    Interactive cards are focusable and respond to keyboard activation. Try pressing Tab to focus, then Enter or Space to activate.
+    <span slot="footer">Click or press Enter</span>
+  </kb-card>
+</template>`;
+export const exInteractiveSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card interactive>
+  <span slot="header">View deployment logs</span>
+  Interactive cards are focusable and respond to keyboard activation. Try pressing Tab to focus, then Enter or Space to activate.
+  <span slot="footer">Click or press Enter</span>
+</kb-card>`;
+export const exLinkedCard = `<kb-card href="https://example.com" target="_blank">
+  <span slot="header">Documentation</span>
+  Cards with an href prop render as anchor elements. This card navigates to an external URL when clicked.
+  <span slot="footer">Opens in new tab</span>
+</kb-card>`;
+export const exLinkedCardReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card href="https://example.com" target="_blank">
+  <span slot="header">Documentation</span>
+  Cards with an href prop render as anchor elements. This card navigates to an external URL when clicked.
+  <span slot="footer">Opens in new tab</span>
+</Card>`;
+export const exLinkedCardVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card href="https://example.com" target="_blank">
+    <span slot="header">Documentation</span>
+    Cards with an href prop render as anchor elements. This card navigates to an external URL when clicked.
+    <span slot="footer">Opens in new tab</span>
+  </kb-card>
+</template>`;
+export const exLinkedCardSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card href="https://example.com" target="_blank">
+  <span slot="header">Documentation</span>
+  Cards with an href prop render as anchor elements. This card navigates to an external URL when clicked.
+  <span slot="footer">Opens in new tab</span>
+</kb-card>`;
+export const exSizes = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-card size="sm">
+    <span slot="header">Small</span>
+    Compact padding for dense layouts.
+  </kb-card>
+  <kb-card size="md">
+    <span slot="header">Medium</span>
+    Default padding for standard content cards.
+  </kb-card>
+  <kb-card size="lg">
+    <span slot="header">Large</span>
+    Generous padding for featured or hero content sections.
+  </kb-card>
+</div>`;
+export const exSizesReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <Card size="sm">
+    <span slot="header">Small</span>
+    Compact padding for dense layouts.
+  </Card>
+  <Card size="md">
+    <span slot="header">Medium</span>
+    Default padding for standard content cards.
+  </Card>
+  <Card size="lg">
+    <span slot="header">Large</span>
+    Generous padding for featured or hero content sections.
+  </Card>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <kb-card size="sm">
+      <span slot="header">Small</span>
+      Compact padding for dense layouts.
+    </kb-card>
+    <kb-card size="md">
+      <span slot="header">Medium</span>
+      Default padding for standard content cards.
+    </kb-card>
+    <kb-card size="lg">
+      <span slot="header">Large</span>
+      Generous padding for featured or hero content sections.
+    </kb-card>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-card size="sm">
+    <span slot="header">Small</span>
+    Compact padding for dense layouts.
+  </kb-card>
+  <kb-card size="md">
+    <span slot="header">Medium</span>
+    Default padding for standard content cards.
+  </kb-card>
+  <kb-card size="lg">
+    <span slot="header">Large</span>
+    Generous padding for featured or hero content sections.
+  </kb-card>
+</div>`;
+export const exCardGrid = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <kb-card interactive>
+    <span slot="header">Requests</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">12,847</div>
+    <span slot="footer">+14% from last week</span>
+  </kb-card>
+  <kb-card interactive>
+    <span slot="header">Avg latency</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">23ms</div>
+    <span slot="footer">p99: 142ms</span>
+  </kb-card>
+  <kb-card interactive>
+    <span slot="header">Error rate</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">0.03%</div>
+    <span slot="footer">2 incidents this week</span>
+  </kb-card>
+</div>`;
+export const exCardGridReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <Card interactive>
+    <span slot="header">Requests</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">12,847</div>
+    <span slot="footer">+14% from last week</span>
+  </Card>
+  <Card interactive>
+    <span slot="header">Avg latency</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">23ms</div>
+    <span slot="footer">p99: 142ms</span>
+  </Card>
+  <Card interactive>
+    <span slot="header">Error rate</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">0.03%</div>
+    <span slot="footer">2 incidents this week</span>
+  </Card>
+</div>`;
+export const exCardGridVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+    <kb-card interactive>
+      <span slot="header">Requests</span>
+      <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">12,847</div>
+      <span slot="footer">+14% from last week</span>
+    </kb-card>
+    <kb-card interactive>
+      <span slot="header">Avg latency</span>
+      <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">23ms</div>
+      <span slot="footer">p99: 142ms</span>
+    </kb-card>
+    <kb-card interactive>
+      <span slot="header">Error rate</span>
+      <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">0.03%</div>
+      <span slot="footer">2 incidents this week</span>
+    </kb-card>
+  </div>
+</template>`;
+export const exCardGridSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <kb-card interactive>
+    <span slot="header">Requests</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">12,847</div>
+    <span slot="footer">+14% from last week</span>
+  </kb-card>
+  <kb-card interactive>
+    <span slot="header">Avg latency</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">23ms</div>
+    <span slot="footer">p99: 142ms</span>
+  </kb-card>
+  <kb-card interactive>
+    <span slot="header">Error rate</span>
+    <div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;">0.03%</div>
+    <span slot="footer">2 incidents this week</span>
+  </kb-card>
+</div>`;
+export const exRichContent = `<kb-card size="lg">
+  <span slot="header">Service health</span>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">API Gateway</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Database cluster</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Background workers</span>
+      <span style="font-family:monospace;font-size:12px;color:#f59e0b;">DEGRADED</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">CDN</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+  </div>
+  <span slot="footer">Last checked 30 seconds ago</span>
+</kb-card>`;
+export const exRichContentReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<Card size="lg">
+  <span slot="header">Service health</span>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">API Gateway</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Database cluster</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Background workers</span>
+      <span style="font-family:monospace;font-size:12px;color:#f59e0b;">DEGRADED</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">CDN</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+  </div>
+  <span slot="footer">Last checked 30 seconds ago</span>
+</Card>`;
+export const exRichContentVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-card size="lg">
+    <span slot="header">Service health</span>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-weight:600;">API Gateway</span>
+        <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-weight:600;">Database cluster</span>
+        <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-weight:600;">Background workers</span>
+        <span style="font-family:monospace;font-size:12px;color:#f59e0b;">DEGRADED</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-weight:600;">CDN</span>
+        <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+      </div>
+    </div>
+    <span slot="footer">Last checked 30 seconds ago</span>
+  </kb-card>
+</template>`;
+export const exRichContentSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-card size="lg">
+  <span slot="header">Service health</span>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">API Gateway</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Database cluster</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">Background workers</span>
+      <span style="font-family:monospace;font-size:12px;color:#f59e0b;">DEGRADED</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="font-weight:600;">CDN</span>
+      <span style="font-family:monospace;font-size:12px;color:#22c55e;">OPERATIONAL</span>
+    </div>
+  </div>
+  <span slot="footer">Last checked 30 seconds ago</span>
+</kb-card>`;
+export const exVariantComparison = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <kb-card variant="outline">
+    <span slot="header">Outline</span>
+    Thin border with surface background. The default structural card for most content.
+  </kb-card>
+  <kb-card variant="filled">
+    <span slot="header">Filled</span>
+    Muted background with border. Use for secondary content areas or grouped information.
+  </kb-card>
+  <kb-card variant="ghost">
+    <span slot="header">Ghost</span>
+    No border or background. Content is structured through spacing and separator lines only.
+  </kb-card>
+</div>`;
+export const exVariantComparisonReact = `import { Card } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <Card variant="outline">
+    <span slot="header">Outline</span>
+    Thin border with surface background. The default structural card for most content.
+  </Card>
+  <Card variant="filled">
+    <span slot="header">Filled</span>
+    Muted background with border. Use for secondary content areas or grouped information.
+  </Card>
+  <Card variant="ghost">
+    <span slot="header">Ghost</span>
+    No border or background. Content is structured through spacing and separator lines only.
+  </Card>
+</div>`;
+export const exVariantComparisonVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+    <kb-card variant="outline">
+      <span slot="header">Outline</span>
+      Thin border with surface background. The default structural card for most content.
+    </kb-card>
+    <kb-card variant="filled">
+      <span slot="header">Filled</span>
+      Muted background with border. Use for secondary content areas or grouped information.
+    </kb-card>
+    <kb-card variant="ghost">
+      <span slot="header">Ghost</span>
+      No border or background. Content is structured through spacing and separator lines only.
+    </kb-card>
+  </div>
+</template>`;
+export const exVariantComparisonSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+  <kb-card variant="outline">
+    <span slot="header">Outline</span>
+    Thin border with surface background. The default structural card for most content.
+  </kb-card>
+  <kb-card variant="filled">
+    <span slot="header">Filled</span>
+    Muted background with border. Use for secondary content areas or grouped information.
+  </kb-card>
+  <kb-card variant="ghost">
+    <span slot="header">Ghost</span>
+    No border or background. Content is structured through spacing and separator lines only.
+  </kb-card>
+</div>`;
+
+# Card
+
+A container with header, body, and footer sections for grouping related content.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Card } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `CardVariant` | `'outline'` | Visual variant controlling border, background, and elevation. |
+| `size` | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Inner padding size. |
+| `interactive` | `interactive` | `boolean` | `false` | When true, the card is focusable and emits `kb-click` on activation. |
+| `label` | `label` | `string` | `""` | Accessible label for an interactive card (used as `aria-label` on the `role="button"` element). |
+| `href` | `href` | `string` | `""` | URL to navigate to - renders the card as an anchor element. |
+| `target` | `target` | `string` | `""` | Link target attribute, e.g. `'_blank'`. Only used when `href` is set. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `header` | Card header content. |
+| `footer` | Card footer content. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-click` | none | Dispatched when an interactive card is clicked or activated via keyboard. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `button`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Filled" codes={{ html: exFilled, react: exFilledReact, vue: exFilledVue, svelte: exFilledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFilled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Ghost" codes={{ html: exGhost, react: exGhostReact, vue: exGhostVue, svelte: exGhostSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGhost }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive" codes={{ html: exInteractive, react: exInteractiveReact, vue: exInteractiveVue, svelte: exInteractiveSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractive }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Linked Card" codes={{ html: exLinkedCard, react: exLinkedCardReact, vue: exLinkedCardVue, svelte: exLinkedCardSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLinkedCard }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Card Grid" codes={{ html: exCardGrid, react: exCardGridReact, vue: exCardGridVue, svelte: exCardGridSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCardGrid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Rich Content" codes={{ html: exRichContent, react: exRichContentReact, vue: exRichContentVue, svelte: exRichContentSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exRichContent }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variant Comparison" codes={{ html: exVariantComparison, react: exVariantComparisonReact, vue: exVariantComparisonVue, svelte: exVariantComparisonSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVariantComparison }} />;
+    }}
+  </BrowserOnly>
+</Demo>

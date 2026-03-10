@@ -1,0 +1,43 @@
+{
+  "name": "Step",
+  "tag": "kb-step",
+  "category": "navigation",
+  "description": "An individual step within a steps component.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-step.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Step"
+  },
+  "props": [
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Step label text."
+    }
+  ],
+  "slots": [
+    {
+      "name": "description",
+      "description": "Optional description text displayed below the label."
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-step-click",
+      "detail": "`{ index: number }`",
+      "description": ""
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "steps"
+  ]
+}

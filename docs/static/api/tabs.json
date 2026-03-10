@@ -1,0 +1,120 @@
+{
+  "name": "Tabs",
+  "tag": "kb-tabs",
+  "category": "navigation",
+  "description": "A tabbed interface for switching between views.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-tabs.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Tabs"
+  },
+  "props": [
+    {
+      "name": "active",
+      "attribute": "active",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Zero-based index of the currently active tab."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TabsVariant",
+      "default": "'line'",
+      "reflect": false,
+      "description": "Visual variant controlling tab styling - `'line'` (indicator bar), `'enclosed'` (bordered tabs), `'solid'` (filled background), or `'unstyled'`."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "TabsSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Tab text and padding size."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "KnownColorScheme",
+      "default": "'blue'",
+      "reflect": false,
+      "description": "Accent color scheme for active tab indicator and text."
+    },
+    {
+      "name": "fitted",
+      "attribute": "fitted",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Stretch tabs to fill the available width equally."
+    },
+    {
+      "name": "orientation",
+      "attribute": "orientation",
+      "type": "TabsOrientation",
+      "default": "'horizontal'",
+      "reflect": false,
+      "description": "Tab list layout direction."
+    },
+    {
+      "name": "align",
+      "attribute": "align",
+      "type": "TabsAlign",
+      "default": "'start'",
+      "reflect": false,
+      "description": "Horizontal/vertical alignment of tabs within the tab list."
+    },
+    {
+      "name": "disabledTabs",
+      "attribute": "disabled-tabs",
+      "type": "number[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of zero-based tab indices that should be disabled. Attribute accepts comma-separated numbers."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Accessible label for the tab list (required when no visible heading labels the group)."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-tab-change",
+      "detail": "`{ index: number, previousIndex: number }`",
+      "description": "Dispatched when active tab changes, with `detail.index` and `detail.previousIndex`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "tab",
+      "tablist",
+      "tabpanel"
+    ],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-disabled",
+      "aria-label",
+      "aria-labelledby",
+      "aria-orientation",
+      "aria-selected"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "End",
+      "Home"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "segment"
+  ]
+}

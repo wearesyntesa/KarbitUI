@@ -1,0 +1,123 @@
+---
+title: "Menu Item"
+description: "An individual item within a dropdown or context menu."
+sidebar_label: "Menu Item"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-menu-item value="edit">Edit</kb-menu-item>`;
+export const reactCode = `import { MenuItem } from '@wearesyntesa/karbit-ui/react';
+
+<MenuItem value="edit">Edit</MenuItem>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-menu-item value="edit">Edit</kb-menu-item>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-menu-item value="edit">Edit</kb-menu-item>`;
+
+# Menu Item
+
+An individual item within a dropdown or context menu.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { MenuItem } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `""` | Value emitted in the `kb-select` event detail. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction on this item. |
+| `destructive` | `destructive` | `boolean` | `false` | Apply destructive/danger styling (red text). |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-select` | `{ value: string }` | Dispatched when the item is activated (click, Enter, or Space). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `menuitem`
+
+**Attributes:** `aria-disabled`
+
+## See Also
+
+- [Dropdown Menu](./dropdown-menu)
+- [Context Menu](./context-menu)

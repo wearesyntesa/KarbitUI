@@ -1,0 +1,105 @@
+{
+  "name": "Button",
+  "tag": "kb-button",
+  "category": "forms",
+  "description": "A clickable button element for triggering actions and submitting forms.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-button.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "ButtonVariant",
+      "default": "'solid'",
+      "reflect": false,
+      "description": "Visual variant controlling border, background, and text styles."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ButtonSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Button size controlling padding, font size, and icon sizing."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme override. When unset, the variant's default color is used."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "loading",
+      "attribute": "loading",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a spinner and disable interaction."
+    },
+    {
+      "name": "loadingText",
+      "attribute": "loading-text",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Text displayed next to the spinner when loading. When omitted, the label is hidden during loading."
+    },
+    {
+      "name": "type",
+      "attribute": "type",
+      "type": "'button' | 'submit' | 'reset'",
+      "default": "'button'",
+      "reflect": false,
+      "description": "HTML button type attribute."
+    },
+    {
+      "name": "fullWidth",
+      "attribute": "full-width",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Stretch the button to fill its container width."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon-left",
+      "description": "Leading icon element (SVG recommended)."
+    },
+    {
+      "name": "icon-right",
+      "description": "Trailing icon element (SVG recommended)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-busy",
+      "aria-disabled"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "button-group",
+    "icon-button"
+  ]
+}

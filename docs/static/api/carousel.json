@@ -1,0 +1,117 @@
+{
+  "name": "Carousel",
+  "tag": "kb-carousel",
+  "category": "data-display",
+  "description": "A slideshow component for cycling through a series of content panels.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-carousel.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Carousel"
+  },
+  "props": [
+    {
+      "name": "active",
+      "attribute": "active",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Zero-based index of the currently visible slide."
+    },
+    {
+      "name": "autoplay",
+      "attribute": "autoplay",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Enable automatic slide advancement."
+    },
+    {
+      "name": "interval",
+      "attribute": "interval",
+      "type": "number",
+      "default": "5000",
+      "reflect": false,
+      "description": "Autoplay interval in milliseconds."
+    },
+    {
+      "name": "loop",
+      "attribute": "loop",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Wrap from last slide to first (and vice versa)."
+    },
+    {
+      "name": "showArrows",
+      "attribute": "show-arrows",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show previous/next arrow buttons in the control bar."
+    },
+    {
+      "name": "showDots",
+      "attribute": "show-dots",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show dot indicators in the control bar."
+    },
+    {
+      "name": "showCounter",
+      "attribute": "show-counter",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show \"1 / N\" slide counter in the control bar."
+    },
+    {
+      "name": "pauseOnHover",
+      "attribute": "pause-on-hover",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Pause autoplay when hovering over the carousel."
+    },
+    {
+      "name": "swipeable",
+      "attribute": "swipeable",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Enable touch/pointer drag to swipe between slides."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-slide-change",
+      "detail": "`{ index: number, previousIndex: number }`",
+      "description": "Dispatched when the active slide changes, with `detail.index` and `detail.previousIndex`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "group",
+      "region",
+      "tablist"
+    ],
+    "ariaAttributes": [
+      "aria-current",
+      "aria-label",
+      "aria-live",
+      "aria-roledescription"
+    ],
+    "keyboardKeys": [
+      "ArrowLeft",
+      "ArrowRight"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": []
+}

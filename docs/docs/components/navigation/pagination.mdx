@@ -1,0 +1,310 @@
+---
+title: "Pagination"
+description: "A page navigation control for paginated data."
+sidebar_label: "Pagination"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-pagination total="100" page="1" per-page="10"></kb-pagination>`;
+export const reactCode = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="100" page="1" per-page="10" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="100" page="1" per-page="10" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="100" page="1" per-page="10" />`;
+export const exDefault = `<kb-pagination total="10" page="5" siblings="1" size="md">
+</kb-pagination>`;
+export const exDefaultReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="10" page="5" siblings="1" size="md">
+</Pagination>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="10" page="5" siblings="1" size="md">
+  </kb-pagination>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="10" page="5" siblings="1" size="md">
+</kb-pagination>`;
+export const exFirstPage = `<kb-pagination total="10" page="1" siblings="1" size="md">
+</kb-pagination>`;
+export const exFirstPageReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="10" page="1" siblings="1" size="md">
+</Pagination>`;
+export const exFirstPageVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="10" page="1" siblings="1" size="md">
+  </kb-pagination>
+</template>`;
+export const exFirstPageSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="10" page="1" siblings="1" size="md">
+</kb-pagination>`;
+export const exLastPage = `<kb-pagination total="10" page="10" siblings="1" size="md">
+</kb-pagination>`;
+export const exLastPageReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="10" page="10" siblings="1" size="md">
+</Pagination>`;
+export const exLastPageVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="10" page="10" siblings="1" size="md">
+  </kb-pagination>
+</template>`;
+export const exLastPageSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="10" page="10" siblings="1" size="md">
+</kb-pagination>`;
+export const exFewPages = `<kb-pagination total="3" page="2" siblings="1" size="md">
+</kb-pagination>`;
+export const exFewPagesReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="3" page="2" siblings="1" size="md">
+</Pagination>`;
+export const exFewPagesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="3" page="2" siblings="1" size="md">
+  </kb-pagination>
+</template>`;
+export const exFewPagesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="3" page="2" siblings="1" size="md">
+</kb-pagination>`;
+export const exManyPages = `<kb-pagination total="50" page="25" siblings="2" size="md">
+</kb-pagination>`;
+export const exManyPagesReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<Pagination total="50" page="25" siblings="2" size="md">
+</Pagination>`;
+export const exManyPagesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pagination total="50" page="25" siblings="2" size="md">
+  </kb-pagination>
+</template>`;
+export const exManyPagesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pagination total="50" page="25" siblings="2" size="md">
+</kb-pagination>`;
+export const exSizes = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-pagination total="10" page="5" size="sm">
+  </kb-pagination>
+  <kb-pagination total="10" page="5" size="md">
+  </kb-pagination>
+  <kb-pagination total="10" page="5" size="lg">
+  </kb-pagination>
+</div>`;
+export const exSizesReact = `import { Pagination } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <Pagination total="10" page="5" size="sm">
+  </Pagination>
+  <Pagination total="10" page="5" size="md">
+  </Pagination>
+  <Pagination total="10" page="5" size="lg">
+  </Pagination>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <kb-pagination total="10" page="5" size="sm">
+    </kb-pagination>
+    <kb-pagination total="10" page="5" size="md">
+    </kb-pagination>
+    <kb-pagination total="10" page="5" size="lg">
+    </kb-pagination>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-pagination total="10" page="5" size="sm">
+  </kb-pagination>
+  <kb-pagination total="10" page="5" size="md">
+  </kb-pagination>
+  <kb-pagination total="10" page="5" size="lg">
+  </kb-pagination>
+</div>`;
+
+# Pagination
+
+A page navigation control for paginated data.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Pagination } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `total` | `total` | `number` | `1` | Total number of pages. |
+| `page` | `page` | `number` | `1` | Current active page (1-based). |
+| `siblings` | `siblings` | `number` | `1` | Number of sibling pages to show around the current page. |
+| `size` | `size` | `PaginationSize` | `'md'` | Component size. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-page-change` | `{ page: number }` | Fired when the active page changes. `detail.page` is the 1-based page number. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `navigation`
+
+**Attributes:** `aria-current`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="First Page" codes={{ html: exFirstPage, react: exFirstPageReact, vue: exFirstPageVue, svelte: exFirstPageSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFirstPage }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Last Page" codes={{ html: exLastPage, react: exLastPageReact, vue: exLastPageVue, svelte: exLastPageSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLastPage }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Few Pages" codes={{ html: exFewPages, react: exFewPagesReact, vue: exFewPagesVue, svelte: exFewPagesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFewPages }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Many Pages" codes={{ html: exManyPages, react: exManyPagesReact, vue: exManyPagesVue, svelte: exManyPagesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exManyPages }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Table](../data-display/table)

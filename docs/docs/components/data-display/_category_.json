@@ -1,0 +1,9 @@
+{
+  "label": "Data Display",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Data Display components in KarbitUI."
+  }
+}

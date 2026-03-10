@@ -505,14 +505,9 @@ export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
     });
   }
 
-  private _computeTriggerClasses(): string {
-    const hasValue = this.value !== '';
-    return cx(
-      'flex-1 min-w-0 text-left truncate select-none',
-      SIZE_TEXT[this.size],
-      hasValue ? kbClasses.textPrimary : 'text-slate-400 dark:text-zinc-500',
-      this.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
-    );
+  /** Shared base classes for both the invisible sizer and visible trigger text. */
+  private _triggerTextBase(): string {
+    return cx('col-start-1 row-start-1 text-left truncate select-none', SIZE_TEXT[this.size]);
   }
 
   private _computeOptionClasses(index: number, disabled: boolean, isSelected: boolean): string {
@@ -660,7 +655,14 @@ export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
   private _renderTriggerText(): TemplateResult {
     const label = this._getSelectedLabel();
     const text = label || this.placeholder || '';
-    return html`<span class=${this._computeTriggerClasses()}>${text}</span>`;
+    const hasValue = this.value !== '';
+    const placeholder = this.placeholder || '';
+
+    const textBase = this._triggerTextBase();
+    const visibleClasses = cx(textBase, hasValue ? kbClasses.textPrimary : 'text-slate-400 dark:text-zinc-500');
+    const wrapperClasses = cx('grid flex-1 min-w-0', this.disabled ? 'cursor-not-allowed' : 'cursor-pointer');
+
+    return html`<span class=${wrapperClasses}><span class="${textBase} invisible" aria-hidden="true">${placeholder}</span><span class=${visibleClasses}>${text}</span></span>`;
   }
 
   override render(): TemplateResult {

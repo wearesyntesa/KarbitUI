@@ -1,0 +1,59 @@
+{
+  "name": "Scroll Area",
+  "tag": "kb-scroll-area",
+  "category": "layout",
+  "description": "A scrollable container with custom styled scrollbars.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-scroll-area.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "ScrollArea"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "ScrollDirection",
+      "default": "'vertical'",
+      "reflect": false,
+      "description": "Scroll direction."
+    },
+    {
+      "name": "scrollbar",
+      "attribute": "scrollbar",
+      "type": "ScrollbarVisibility",
+      "default": "'auto'",
+      "reflect": false,
+      "description": "Scrollbar visibility mode."
+    },
+    {
+      "name": "bordered",
+      "attribute": "bordered",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply a thin border around the scroll container."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-scroll",
+      "detail": "`{ scrollTop: number, scrollLeft: number }`",
+      "description": "Dispatched on scroll with current scroll position."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "box"
+  ]
+}

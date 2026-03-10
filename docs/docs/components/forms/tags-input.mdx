@@ -1,0 +1,396 @@
+---
+title: "Tags Input"
+description: "An input for adding and removing text tags."
+sidebar_label: "Tags Input"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Values are set via JavaScript property -->
+<kb-tags-input placeholder="Add a tag..."></kb-tags-input>
+
+<script>
+  document.querySelector('kb-tags-input').values = ['react', 'vue'];
+</script>`;
+export const reactCode = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<TagsInput placeholder="Add a tag..."
+  values={['react', 'vue']} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const values = ['react', 'vue'];
+</script>
+
+<template>
+  <kb-tags-input placeholder="Add a tag..." :values="values" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const values = ['react', 'vue'];
+</script>
+
+<kb-tags-input placeholder="Add a tag..." values={values} />`;
+export const demoHtml = `<kb-tags-input placeholder="Add a tag..."></kb-tags-input>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-tags-input').values = ['react', 'vue'];
+};
+export const exDefault = `<kb-tags-input placeholder="Add tag...">
+</kb-tags-input>`;
+export const exDefaultReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<TagsInput placeholder="Add tag...">
+</TagsInput>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tags-input placeholder="Add tag...">
+  </kb-tags-input>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tags-input placeholder="Add tag...">
+</kb-tags-input>`;
+export const exDefaultSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['react', 'lit', 'tailwind']; });
+};
+export const exVariants = `<div class="flex flex-col gap-6">
+  <kb-tags-input variant="outline" placeholder="Outline...">
+  </kb-tags-input>
+  <kb-tags-input variant="filled" placeholder="Filled...">
+  </kb-tags-input>
+  <kb-tags-input variant="flushed" placeholder="Flushed...">
+  </kb-tags-input>
+</div>`;
+export const exVariantsReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <TagsInput variant="outline" placeholder="Outline...">
+  </TagsInput>
+  <TagsInput variant="filled" placeholder="Filled...">
+  </TagsInput>
+  <TagsInput variant="flushed" placeholder="Flushed...">
+  </TagsInput>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-tags-input variant="outline" placeholder="Outline...">
+    </kb-tags-input>
+    <kb-tags-input variant="filled" placeholder="Filled...">
+    </kb-tags-input>
+    <kb-tags-input variant="flushed" placeholder="Flushed...">
+    </kb-tags-input>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-tags-input variant="outline" placeholder="Outline...">
+  </kb-tags-input>
+  <kb-tags-input variant="filled" placeholder="Filled...">
+  </kb-tags-input>
+  <kb-tags-input variant="flushed" placeholder="Flushed...">
+  </kb-tags-input>
+</div>`;
+export const exVariantsSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['tag-1']; });
+};
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-tags-input size="xs" placeholder="XS">
+  </kb-tags-input>
+  <kb-tags-input size="sm" placeholder="SM">
+  </kb-tags-input>
+  <kb-tags-input size="md" placeholder="MD">
+  </kb-tags-input>
+  <kb-tags-input size="lg" placeholder="LG">
+  </kb-tags-input>
+  <kb-tags-input size="xl" placeholder="XL">
+  </kb-tags-input>
+</div>`;
+export const exSizesReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <TagsInput size="xs" placeholder="XS">
+  </TagsInput>
+  <TagsInput size="sm" placeholder="SM">
+  </TagsInput>
+  <TagsInput size="md" placeholder="MD">
+  </TagsInput>
+  <TagsInput size="lg" placeholder="LG">
+  </TagsInput>
+  <TagsInput size="xl" placeholder="XL">
+  </TagsInput>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-tags-input size="xs" placeholder="XS">
+    </kb-tags-input>
+    <kb-tags-input size="sm" placeholder="SM">
+    </kb-tags-input>
+    <kb-tags-input size="md" placeholder="MD">
+    </kb-tags-input>
+    <kb-tags-input size="lg" placeholder="LG">
+    </kb-tags-input>
+    <kb-tags-input size="xl" placeholder="XL">
+    </kb-tags-input>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-tags-input size="xs" placeholder="XS">
+  </kb-tags-input>
+  <kb-tags-input size="sm" placeholder="SM">
+  </kb-tags-input>
+  <kb-tags-input size="md" placeholder="MD">
+  </kb-tags-input>
+  <kb-tags-input size="lg" placeholder="LG">
+  </kb-tags-input>
+  <kb-tags-input size="xl" placeholder="XL">
+  </kb-tags-input>
+</div>`;
+export const exSizesSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['extra']; });
+};
+export const exMaxTags = `<kb-tags-input placeholder="Max 3 tags..." max="3">
+</kb-tags-input>`;
+export const exMaxTagsReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<TagsInput placeholder="Max 3 tags..." max="3">
+</TagsInput>`;
+export const exMaxTagsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tags-input placeholder="Max 3 tags..." max="3">
+  </kb-tags-input>
+</template>`;
+export const exMaxTagsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tags-input placeholder="Max 3 tags..." max="3">
+</kb-tags-input>`;
+export const exMaxTagsSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['one', 'two']; });
+};
+export const exDisabled = `<kb-tags-input disabled>
+</kb-tags-input>`;
+export const exDisabledReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<TagsInput disabled>
+</TagsInput>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tags-input disabled>
+  </kb-tags-input>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tags-input disabled>
+</kb-tags-input>`;
+export const exDisabledSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['locked', 'tags']; });
+};
+export const exInvalid = `<kb-tags-input invalid placeholder="Error state...">
+</kb-tags-input>`;
+export const exInvalidReact = `import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+
+<TagsInput invalid placeholder="Error state...">
+</TagsInput>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tags-input invalid placeholder="Error state...">
+  </kb-tags-input>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tags-input invalid placeholder="Error state...">
+</kb-tags-input>`;
+export const exInvalidSetup = (container) => {
+  container.querySelectorAll('kb-tags-input').forEach(el => { el.values = ['bad']; });
+};
+
+# Tags Input
+
+An input for adding and removing text tags.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { TagsInput } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `values` | `values` | `readonly string[]` | `[]` | Current tag values. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text for the input. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `max` | `max` | `number` | `0` | Maximum number of tags allowed. 0 = unlimited. |
+| `allowDuplicates` | `allow-duplicates` | `boolean` | `false` | Allow duplicate tag values. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Fires on any value change. Detail: `{ source: 'tags-input', values: string[] }`. |
+| `kb-tag-add` | `{ value: string }` | Fires when a tag is added. Detail: `{ value: string }`. |
+| `kb-tag-remove` | `{ value: string, index: number }` | Fires when a tag is removed. Detail: `{ value: string, index: number }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Backspace` | Delete the previous character or item |
+| `Enter` | Activate or select the focused item |
+
+### ARIA
+
+**Attributes:** `aria-invalid`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exVariants} setup={exVariantsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSizes} setup={exSizesSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Max Tags" codes={{ html: exMaxTags, react: exMaxTagsReact, vue: exMaxTagsVue, svelte: exMaxTagsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exMaxTags} setup={exMaxTagsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDisabled} setup={exDisabledSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exInvalid} setup={exInvalidSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)
+- [Tag](../data-display/tag)
+- [Tag Group](../data-display/tag-group)

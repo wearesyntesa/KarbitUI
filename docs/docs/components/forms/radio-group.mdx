@@ -1,0 +1,146 @@
+---
+title: "Radio Group"
+description: "Groups radio buttons for mutually exclusive single selection."
+sidebar_label: "Radio Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-radio-group>
+  <kb-radio value="sm">Small</kb-radio>
+  <kb-radio value="md">Medium</kb-radio>
+  <kb-radio value="lg">Large</kb-radio>
+</kb-radio-group>`;
+export const reactCode = `import { Radio, RadioGroup } from '@wearesyntesa/karbit-ui/react';
+
+<RadioGroup>
+  <Radio value="sm">Small</Radio>
+  <Radio value="md">Medium</Radio>
+  <Radio value="lg">Large</Radio>
+</RadioGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-radio-group>
+    <kb-radio value="sm">Small</kb-radio>
+    <kb-radio value="md">Medium</kb-radio>
+    <kb-radio value="lg">Large</kb-radio>
+  </kb-radio-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-radio-group>
+  <kb-radio value="sm">Small</kb-radio>
+  <kb-radio value="md">Medium</kb-radio>
+  <kb-radio value="lg">Large</kb-radio>
+</kb-radio-group>`;
+
+# Radio Group
+
+Groups radio buttons for mutually exclusive single selection.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { RadioGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `Orientation` | `'vertical'` | Layout direction of the grouped radios. |
+| `name` | `name` | `string` | — | Form field name propagated to child radios that don't set their own. |
+| `size` | `size` | `ComponentSize` | — | Size propagated to child radios that don't set their own size. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme propagated to child radios that don't set their own. |
+| `value` | `value` | `string` | — | Currently selected value. Reflects the checked radio's value. Can be set programmatically. |
+| `required` | `required` | `boolean` | `false` | Mark the group as required — propagated to child radios and exposed as `aria-required` on the group. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `label` | Group label rendered above the radios. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Selection changed. Detail: `{ value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+
+### ARIA
+
+**Roles:** `radiogroup`
+
+**Attributes:** `aria-labelledby`, `aria-required`
+
+## See Also
+
+- [Radio](./radio)
+- [Checkbox Group](./checkbox-group)
+- [Segment](./segment)

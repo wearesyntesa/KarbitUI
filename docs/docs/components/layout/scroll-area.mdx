@@ -1,0 +1,115 @@
+---
+title: "Scroll Area"
+description: "A scrollable container with custom styled scrollbars."
+sidebar_label: "Scroll Area"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-scroll-area max-h="200px">
+  <p>Scrollable content...</p>
+</kb-scroll-area>`;
+export const reactCode = `import { ScrollArea } from '@wearesyntesa/karbit-ui/react';
+
+<ScrollArea max-h="200px">
+  <p>Scrollable content...</p>
+</ScrollArea>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-scroll-area max-h="200px">
+    <p>Scrollable content...</p>
+  </kb-scroll-area>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-scroll-area max-h="200px">
+  <p>Scrollable content...</p>
+</kb-scroll-area>`;
+
+# Scroll Area
+
+A scrollable container with custom styled scrollbars.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { ScrollArea } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `ScrollDirection` | `'vertical'` | Scroll direction. |
+| `scrollbar` | `scrollbar` | `ScrollbarVisibility` | `'auto'` | Scrollbar visibility mode. |
+| `bordered` | `bordered` | `boolean` | `false` | Apply a thin border around the scroll container. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-scroll` | `{ scrollTop: number, scrollLeft: number }` | Dispatched on scroll with current scroll position. |
+
+## See Also
+
+- [Box](./box)

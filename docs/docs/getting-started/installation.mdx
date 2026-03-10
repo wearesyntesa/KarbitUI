@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+title: Installation
+---
+
+import { InstallTabs } from "@site/src/components/InstallTabs";
+
+# Installation
+
+KarbitUI is a web component library built on [Lit v3](https://lit.dev/) with [Tailwind CSS](https://tailwindcss.com/) styling. Components work in any framework or vanilla HTML.
+
+## Prerequisites
+
+- **Node.js** 20 or later
+- **Tailwind CSS v4** — components output Tailwind utility classes; your app must provide Tailwind
+
+## Install the package
+
+<InstallTabs />
+
+## Provide Tailwind CSS
+
+KarbitUI components render Tailwind utility classes into the Light DOM. Your application must include Tailwind CSS for components to be styled correctly.
+
+### Option A: Import the bundled theme
+
+The simplest approach — import the KarbitUI theme CSS which includes Tailwind and all design tokens:
+
+```css title="src/index.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```
+
+### Option B: Custom Tailwind setup
+
+If you already have Tailwind CSS configured, add the KarbitUI source to your CSS so Tailwind scans component classes:
+
+```css title="src/app.css"
+@import "tailwindcss";
+@source "../node_modules/@wearesyntesa/karbit-ui/dist/**/*.js";
+```
+
+## Register components
+
+KarbitUI separates component class definitions from custom element registration for tree-shaking.
+
+### Register all components
+
+```ts
+import "@wearesyntesa/karbit-ui/define";
+```
+
+### Register individual components
+
+```ts
+// Only registers <kb-button> in the custom element registry
+import "@wearesyntesa/karbit-ui/button/define";
+```
+
+## Verify installation
+
+After setup, this should render a styled button:
+
+```html
+<kb-button variant="solid" color-scheme="blue">
+  It works!
+</kb-button>
+```
+
+## Next steps
+
+- [React setup](/docs/getting-started/setup-react) — Use typed React wrappers
+- [Vue setup](/docs/getting-started/setup-vue) — Native custom element support
+- [Svelte setup](/docs/getting-started/setup-svelte) — Svelte custom element integration
+- [Vanilla HTML](/docs/getting-started/setup-vanilla) — No framework needed
+- [Dark mode](/docs/getting-started/dark-mode) — Enable dark mode support

@@ -1,0 +1,863 @@
+---
+title: "Progress"
+description: "A horizontal progress bar showing completion percentage."
+sidebar_label: "Progress"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-progress value="60"></kb-progress>`;
+export const reactCode = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<Progress value="60" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-progress value="60" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-progress value="60" />`;
+export const exDefault = `<div style="max-width:400px;">
+  <kb-progress value="60" size="md">
+  </kb-progress>
+</div>`;
+export const exDefaultReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Progress value="60" size="md">
+  </Progress>
+</div>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-progress value="60" size="md">
+    </kb-progress>
+  </div>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-progress value="60" size="md">
+  </kb-progress>
+</div>`;
+export const exShowValue = `<div style="max-width:400px;">
+  <kb-progress value="60" size="md">
+  </kb-progress>
+</div>`;
+export const exShowValueReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Progress value="60" size="md">
+  </Progress>
+</div>`;
+export const exShowValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-progress value="60" size="md">
+    </kb-progress>
+  </div>
+</template>`;
+export const exShowValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-progress value="60" size="md">
+  </kb-progress>
+</div>`;
+export const exIndeterminate = `<div style="max-width:400px;">
+  <kb-progress value="60" size="md" indeterminate>
+  </kb-progress>
+</div>`;
+export const exIndeterminateReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Progress value="60" size="md" indeterminate>
+  </Progress>
+</div>`;
+export const exIndeterminateVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-progress value="60" size="md" indeterminate>
+    </kb-progress>
+  </div>
+</template>`;
+export const exIndeterminateSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-progress value="60" size="md" indeterminate>
+  </kb-progress>
+</div>`;
+export const exFull = `<div style="max-width:400px;">
+  <kb-progress value="100" size="md">
+  </kb-progress>
+</div>`;
+export const exFullReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Progress value="100" size="md">
+  </Progress>
+</div>`;
+export const exFullVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-progress value="100" size="md">
+    </kb-progress>
+  </div>
+</template>`;
+export const exFullSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-progress value="100" size="md">
+  </kb-progress>
+</div>`;
+export const exEmpty = `<div style="max-width:400px;">
+  <kb-progress value="0" size="md">
+  </kb-progress>
+</div>`;
+export const exEmptyReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Progress value="0" size="md">
+  </Progress>
+</div>`;
+export const exEmptyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-progress value="0" size="md">
+    </kb-progress>
+  </div>
+</template>`;
+export const exEmptySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-progress value="0" size="md">
+  </kb-progress>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="40" size="xs">
+  </kb-progress>
+  <kb-progress value="55" size="sm">
+  </kb-progress>
+  <kb-progress value="70" size="md">
+  </kb-progress>
+  <kb-progress value="85" size="lg">
+  </kb-progress>
+</div>`;
+export const exAllSizesReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="40" size="xs">
+  </Progress>
+  <Progress value="55" size="sm">
+  </Progress>
+  <Progress value="70" size="md">
+  </Progress>
+  <Progress value="85" size="lg">
+  </Progress>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="40" size="xs">
+    </kb-progress>
+    <kb-progress value="55" size="sm">
+    </kb-progress>
+    <kb-progress value="70" size="md">
+    </kb-progress>
+    <kb-progress value="85" size="lg">
+    </kb-progress>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="40" size="xs">
+  </kb-progress>
+  <kb-progress value="55" size="sm">
+  </kb-progress>
+  <kb-progress value="70" size="md">
+  </kb-progress>
+  <kb-progress value="85" size="lg">
+  </kb-progress>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="70" color-scheme="blue" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="green" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="red" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="yellow" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="black" show-value>
+  </kb-progress>
+</div>`;
+export const exColorSchemesReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="70" color-scheme="blue" show-value>
+  </Progress>
+  <Progress value="70" color-scheme="green" show-value>
+  </Progress>
+  <Progress value="70" color-scheme="red" show-value>
+  </Progress>
+  <Progress value="70" color-scheme="yellow" show-value>
+  </Progress>
+  <Progress value="70" color-scheme="black" show-value>
+  </Progress>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="70" color-scheme="blue" show-value>
+    </kb-progress>
+    <kb-progress value="70" color-scheme="green" show-value>
+    </kb-progress>
+    <kb-progress value="70" color-scheme="red" show-value>
+    </kb-progress>
+    <kb-progress value="70" color-scheme="yellow" show-value>
+    </kb-progress>
+    <kb-progress value="70" color-scheme="black" show-value>
+    </kb-progress>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="70" color-scheme="blue" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="green" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="red" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="yellow" show-value>
+  </kb-progress>
+  <kb-progress value="70" color-scheme="black" show-value>
+  </kb-progress>
+</div>`;
+export const exStriped = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="65" striped size="md">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="green">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="red">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="yellow">
+  </kb-progress>
+</div>`;
+export const exStripedReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="65" striped size="md">
+  </Progress>
+  <Progress value="65" striped size="lg" color-scheme="green">
+  </Progress>
+  <Progress value="65" striped size="lg" color-scheme="red">
+  </Progress>
+  <Progress value="65" striped size="lg" color-scheme="yellow">
+  </Progress>
+</div>`;
+export const exStripedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="65" striped size="md">
+    </kb-progress>
+    <kb-progress value="65" striped size="lg" color-scheme="green">
+    </kb-progress>
+    <kb-progress value="65" striped size="lg" color-scheme="red">
+    </kb-progress>
+    <kb-progress value="65" striped size="lg" color-scheme="yellow">
+    </kb-progress>
+  </div>
+</template>`;
+export const exStripedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="65" striped size="md">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="green">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="red">
+  </kb-progress>
+  <kb-progress value="65" striped size="lg" color-scheme="yellow">
+  </kb-progress>
+</div>`;
+export const exStripedAnimated = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="45" striped animated size="md" color-scheme="blue">
+  </kb-progress>
+  <kb-progress value="70" striped animated size="lg" color-scheme="green">
+  </kb-progress>
+  <kb-progress value="90" striped animated size="lg" color-scheme="red">
+  </kb-progress>
+</div>`;
+export const exStripedAnimatedReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="45" striped animated size="md" color-scheme="blue">
+  </Progress>
+  <Progress value="70" striped animated size="lg" color-scheme="green">
+  </Progress>
+  <Progress value="90" striped animated size="lg" color-scheme="red">
+  </Progress>
+</div>`;
+export const exStripedAnimatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="45" striped animated size="md" color-scheme="blue">
+    </kb-progress>
+    <kb-progress value="70" striped animated size="lg" color-scheme="green">
+    </kb-progress>
+    <kb-progress value="90" striped animated size="lg" color-scheme="red">
+    </kb-progress>
+  </div>
+</template>`;
+export const exStripedAnimatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="45" striped animated size="md" color-scheme="blue">
+  </kb-progress>
+  <kb-progress value="70" striped animated size="lg" color-scheme="green">
+  </kb-progress>
+  <kb-progress value="90" striped animated size="lg" color-scheme="red">
+  </kb-progress>
+</div>`;
+export const exSegments = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="3" max="5" segments="5" show-value value-label="3 of 5" size="md">
+  </kb-progress>
+  <kb-progress value="60" segments="4" show-value size="lg" color-scheme="blue">
+  </kb-progress>
+  <kb-progress value="7" max="10" segments="10" show-value value-label="Step 7 of 10" size="md" color-scheme="green">
+  </kb-progress>
+</div>`;
+export const exSegmentsReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="3" max="5" segments="5" show-value value-label="3 of 5" size="md">
+  </Progress>
+  <Progress value="60" segments="4" show-value size="lg" color-scheme="blue">
+  </Progress>
+  <Progress value="7" max="10" segments="10" show-value value-label="Step 7 of 10" size="md" color-scheme="green">
+  </Progress>
+</div>`;
+export const exSegmentsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="3" max="5" segments="5" show-value value-label="3 of 5" size="md">
+    </kb-progress>
+    <kb-progress value="60" segments="4" show-value size="lg" color-scheme="blue">
+    </kb-progress>
+    <kb-progress value="7" max="10" segments="10" show-value value-label="Step 7 of 10" size="md" color-scheme="green">
+    </kb-progress>
+  </div>
+</template>`;
+export const exSegmentsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="3" max="5" segments="5" show-value value-label="3 of 5" size="md">
+  </kb-progress>
+  <kb-progress value="60" segments="4" show-value size="lg" color-scheme="blue">
+  </kb-progress>
+  <kb-progress value="7" max="10" segments="10" show-value value-label="Step 7 of 10" size="md" color-scheme="green">
+  </kb-progress>
+</div>`;
+export const exAutoColor = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="30" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="60" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="75" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="90" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="100" auto-color show-value size="md">
+  </kb-progress>
+</div>`;
+export const exAutoColorReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress value="30" auto-color show-value size="md">
+  </Progress>
+  <Progress value="60" auto-color show-value size="md">
+  </Progress>
+  <Progress value="75" auto-color show-value size="md">
+  </Progress>
+  <Progress value="90" auto-color show-value size="md">
+  </Progress>
+  <Progress value="100" auto-color show-value size="md">
+  </Progress>
+</div>`;
+export const exAutoColorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress value="30" auto-color show-value size="md">
+    </kb-progress>
+    <kb-progress value="60" auto-color show-value size="md">
+    </kb-progress>
+    <kb-progress value="75" auto-color show-value size="md">
+    </kb-progress>
+    <kb-progress value="90" auto-color show-value size="md">
+    </kb-progress>
+    <kb-progress value="100" auto-color show-value size="md">
+    </kb-progress>
+  </div>
+</template>`;
+export const exAutoColorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress value="30" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="60" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="75" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="90" auto-color show-value size="md">
+  </kb-progress>
+  <kb-progress value="100" auto-color show-value size="md">
+  </kb-progress>
+</div>`;
+export const exWithLabel = `<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <kb-progress value="42" show-value color-scheme="blue" size="md">
+    <span slot="label">Uploading files</span>
+  </kb-progress>
+  <kb-progress value="78" show-value color-scheme="green" size="md">
+    <span slot="label">Storage used</span>
+  </kb-progress>
+  <kb-progress value="92" show-value auto-color size="md" striped>
+    <span slot="label">CPU Usage</span>
+  </kb-progress>
+</div>`;
+export const exWithLabelReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <Progress value="42" show-value color-scheme="blue" size="md">
+    <span slot="label">Uploading files</span>
+  </Progress>
+  <Progress value="78" show-value color-scheme="green" size="md">
+    <span slot="label">Storage used</span>
+  </Progress>
+  <Progress value="92" show-value auto-color size="md" striped>
+    <span slot="label">CPU Usage</span>
+  </Progress>
+</div>`;
+export const exWithLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+    <kb-progress value="42" show-value color-scheme="blue" size="md">
+      <span slot="label">Uploading files</span>
+    </kb-progress>
+    <kb-progress value="78" show-value color-scheme="green" size="md">
+      <span slot="label">Storage used</span>
+    </kb-progress>
+    <kb-progress value="92" show-value auto-color size="md" striped>
+      <span slot="label">CPU Usage</span>
+    </kb-progress>
+  </div>
+</template>`;
+export const exWithLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <kb-progress value="42" show-value color-scheme="blue" size="md">
+    <span slot="label">Uploading files</span>
+  </kb-progress>
+  <kb-progress value="78" show-value color-scheme="green" size="md">
+    <span slot="label">Storage used</span>
+  </kb-progress>
+  <kb-progress value="92" show-value auto-color size="md" striped>
+    <span slot="label">CPU Usage</span>
+  </kb-progress>
+</div>`;
+export const exCustomValueLabel = `<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <kb-progress value="1200" max="2000" show-value value-label="1.2 GB / 2 GB" color-scheme="blue" size="md">
+    <span slot="label">Storage</span>
+  </kb-progress>
+  <kb-progress value="3" max="5" show-value value-label="3 of 5 complete" color-scheme="green" size="md" segments="5">
+    <span slot="label">Onboarding Steps</span>
+  </kb-progress>
+  <kb-progress value="847" max="1000" show-value value-label="847 / 1,000 requests" auto-color size="md">
+    <span slot="label">API Rate Limit</span>
+  </kb-progress>
+</div>`;
+export const exCustomValueLabelReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <Progress value="1200" max="2000" show-value value-label="1.2 GB / 2 GB" color-scheme="blue" size="md">
+    <span slot="label">Storage</span>
+  </Progress>
+  <Progress value="3" max="5" show-value value-label="3 of 5 complete" color-scheme="green" size="md" segments="5">
+    <span slot="label">Onboarding Steps</span>
+  </Progress>
+  <Progress value="847" max="1000" show-value value-label="847 / 1,000 requests" auto-color size="md">
+    <span slot="label">API Rate Limit</span>
+  </Progress>
+</div>`;
+export const exCustomValueLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+    <kb-progress value="1200" max="2000" show-value value-label="1.2 GB / 2 GB" color-scheme="blue" size="md">
+      <span slot="label">Storage</span>
+    </kb-progress>
+    <kb-progress value="3" max="5" show-value value-label="3 of 5 complete" color-scheme="green" size="md" segments="5">
+      <span slot="label">Onboarding Steps</span>
+    </kb-progress>
+    <kb-progress value="847" max="1000" show-value value-label="847 / 1,000 requests" auto-color size="md">
+      <span slot="label">API Rate Limit</span>
+    </kb-progress>
+  </div>
+</template>`;
+export const exCustomValueLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:400px;">
+  <kb-progress value="1200" max="2000" show-value value-label="1.2 GB / 2 GB" color-scheme="blue" size="md">
+    <span slot="label">Storage</span>
+  </kb-progress>
+  <kb-progress value="3" max="5" show-value value-label="3 of 5 complete" color-scheme="green" size="md" segments="5">
+    <span slot="label">Onboarding Steps</span>
+  </kb-progress>
+  <kb-progress value="847" max="1000" show-value value-label="847 / 1,000 requests" auto-color size="md">
+    <span slot="label">API Rate Limit</span>
+  </kb-progress>
+</div>`;
+export const exIndeterminateVariants = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress indeterminate size="xs">
+  </kb-progress>
+  <kb-progress indeterminate size="sm" color-scheme="blue">
+  </kb-progress>
+  <kb-progress indeterminate size="md" color-scheme="green">
+  </kb-progress>
+  <kb-progress indeterminate size="lg" color-scheme="red" striped>
+  </kb-progress>
+</div>`;
+export const exIndeterminateVariantsReact = `import { Progress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <Progress indeterminate size="xs">
+  </Progress>
+  <Progress indeterminate size="sm" color-scheme="blue">
+  </Progress>
+  <Progress indeterminate size="md" color-scheme="green">
+  </Progress>
+  <Progress indeterminate size="lg" color-scheme="red" striped>
+  </Progress>
+</div>`;
+export const exIndeterminateVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+    <kb-progress indeterminate size="xs">
+    </kb-progress>
+    <kb-progress indeterminate size="sm" color-scheme="blue">
+    </kb-progress>
+    <kb-progress indeterminate size="md" color-scheme="green">
+    </kb-progress>
+    <kb-progress indeterminate size="lg" color-scheme="red" striped>
+    </kb-progress>
+  </div>
+</template>`;
+export const exIndeterminateVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px;">
+  <kb-progress indeterminate size="xs">
+  </kb-progress>
+  <kb-progress indeterminate size="sm" color-scheme="blue">
+  </kb-progress>
+  <kb-progress indeterminate size="md" color-scheme="green">
+  </kb-progress>
+  <kb-progress indeterminate size="lg" color-scheme="red" striped>
+  </kb-progress>
+</div>`;
+
+# Progress
+
+A horizontal progress bar showing completion percentage.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Progress } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` | `0` | Current progress value between `min` and `max`. |
+| `max` | `max` | `number` | `100` | Maximum progress value. |
+| `min` | `min` | `number` | `0` | Minimum progress value. |
+| `size` | `size` | `ProgressSize` | `'md'` | Bar height preset. |
+| `indeterminate` | `indeterminate` | `boolean` | `false` | Show an animated indeterminate (looping) fill instead of a determinate bar. |
+| `showValue` | `show-value` | `boolean` | `false` | Display the percentage or custom `valueLabel` next to the bar. |
+| `valueLabel` | `value-label` | `string` | — | Custom text displayed instead of the computed percentage when `showValue` is true. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the fill bar. When unset, defaults to blue (or auto-color thresholds). |
+| `striped` | `striped` | `boolean` | `false` | Apply a diagonal stripe pattern to the fill bar. |
+| `animated` | `animated` | `boolean` | `false` | Animate the stripe pattern. Requires `striped` to be true. |
+| `segments` | `segments` | `number` | `0` | Number of visual segments dividing the track. `0` disables segmentation. |
+| `autoColor` | `auto-color` | `boolean` | `false` | Automatically change fill color based on value thresholds (blue → yellow → red). |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `label` | Text label rendered above the progress bar. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `progressbar`
+
+**Attributes:** `aria-label`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Value" codes={{ html: exShowValue, react: exShowValueReact, vue: exShowValueVue, svelte: exShowValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Indeterminate" codes={{ html: exIndeterminate, react: exIndeterminateReact, vue: exIndeterminateVue, svelte: exIndeterminateSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exIndeterminate }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Full" codes={{ html: exFull, react: exFullReact, vue: exFullVue, svelte: exFullSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFull }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Empty" codes={{ html: exEmpty, react: exEmptyReact, vue: exEmptyVue, svelte: exEmptySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exEmpty }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Striped" codes={{ html: exStriped, react: exStripedReact, vue: exStripedVue, svelte: exStripedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exStriped }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Striped Animated" codes={{ html: exStripedAnimated, react: exStripedAnimatedReact, vue: exStripedAnimatedVue, svelte: exStripedAnimatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exStripedAnimated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Segments" codes={{ html: exSegments, react: exSegmentsReact, vue: exSegmentsVue, svelte: exSegmentsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSegments }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Auto Color" codes={{ html: exAutoColor, react: exAutoColorReact, vue: exAutoColorVue, svelte: exAutoColorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAutoColor }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Label" codes={{ html: exWithLabel, react: exWithLabelReact, vue: exWithLabelVue, svelte: exWithLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Value Label" codes={{ html: exCustomValueLabel, react: exCustomValueLabelReact, vue: exCustomValueLabelVue, svelte: exCustomValueLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomValueLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Indeterminate Variants" codes={{ html: exIndeterminateVariants, react: exIndeterminateVariantsReact, vue: exIndeterminateVariantsVue, svelte: exIndeterminateVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exIndeterminateVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Circular Progress](./circular-progress)
+- [Spinner](./spinner)

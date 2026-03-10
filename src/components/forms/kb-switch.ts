@@ -130,6 +130,8 @@ const DEFAULT_ICON: string = 'text-blue-500 dark:text-blue-500';
  * ```
  */
 export class KbSwitch extends KbBaseElement<'description'> {
+  static override hostDisplay = 'inline-block' as const;
+
   /** Switch size controlling track, thumb, and label dimensions. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
   /** Whether the switch is on. Reflects to the `checked` attribute. @defaultValue false */
@@ -258,7 +260,7 @@ export class KbSwitch extends KbBaseElement<'description'> {
     );
 
     const wrapperClasses = this.buildClasses(
-      `group/sw inline-flex items-center font-sans ${s.gap} select-none`,
+      `group/sw relative inline-flex items-center font-sans ${s.gap} select-none`,
       isDisabled ? FORM_DISABLED_WRAPPER : 'cursor-pointer',
       this.labelPosition === 'left' ? 'flex-row-reverse' : '',
     );
@@ -272,7 +274,7 @@ export class KbSwitch extends KbBaseElement<'description'> {
       >
         <input
           type="checkbox"
-          class="sr-only"
+          style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border-width:0;-webkit-appearance:none;appearance:none;pointer-events:none"
           tabindex="-1"
           aria-hidden="true"
           .checked=${this.checked}

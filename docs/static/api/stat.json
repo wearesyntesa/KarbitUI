@@ -1,0 +1,69 @@
+{
+  "name": "Stat",
+  "tag": "kb-stat",
+  "category": "data-display",
+  "description": "A statistic display with label, value, and optional change indicator.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-stat.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Stat"
+  },
+  "props": [
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Descriptive label above the value."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "The main statistic value to display."
+    },
+    {
+      "name": "helpText",
+      "attribute": "help-text",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Contextual help text displayed below the value (e.g. percentage change)."
+    },
+    {
+      "name": "indicator",
+      "attribute": "indicator",
+      "type": "StatIndicator",
+      "default": "'none'",
+      "reflect": false,
+      "description": "Change direction indicator arrow."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Stat size."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Optional icon displayed before the value."
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "data-list"
+  ]
+}

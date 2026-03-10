@@ -1,0 +1,113 @@
+{
+  "name": "Badge",
+  "tag": "kb-badge",
+  "category": "feedback",
+  "description": "A small count or status indicator, typically overlaid on another element.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-badge.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Badge"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "BadgeVariant",
+      "default": "'subtle'",
+      "reflect": false,
+      "description": "Visual variant controlling border, background, and text styles."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "BadgeSize",
+      "default": "'sm'",
+      "reflect": false,
+      "description": "Badge size controlling padding, font size, and dot/close sizing."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme override. When unset, the variant's default color is used."
+    },
+    {
+      "name": "dot",
+      "attribute": "dot",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a status dot before the badge label."
+    },
+    {
+      "name": "pulse",
+      "attribute": "pulse",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Animate the status dot with a ping effect. Requires `dot` to be true."
+    },
+    {
+      "name": "ping",
+      "attribute": "ping",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a notification ping indicator on the badge corner."
+    },
+    {
+      "name": "interactive",
+      "attribute": "interactive",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make the badge clickable with hover/focus styles and `kb-click` events."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a close button that dismisses the badge with animation."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Leading icon element rendered before the label."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-click",
+      "detail": "none",
+      "description": "Interactive badge clicked/activated."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Close button clicked; badge animates out and removes itself."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "tag"
+  ]
+}

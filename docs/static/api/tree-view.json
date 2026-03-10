@@ -1,0 +1,74 @@
+{
+  "name": "Tree View",
+  "tag": "kb-tree-view",
+  "category": "data-display",
+  "description": "A hierarchical tree display with expandable/collapsible nodes.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-tree-view.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "TreeView"
+  },
+  "props": [
+    {
+      "name": "nodes",
+      "attribute": "nodes",
+      "type": "readonly TreeNode[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of tree node data to render."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Controls text and padding sizing."
+    },
+    {
+      "name": "selectable",
+      "attribute": "selectable",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Allow node selection."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-node-toggle",
+      "detail": "`{ id: string, expanded: boolean }`",
+      "description": "When a node is expanded or collapsed."
+    },
+    {
+      "name": "kb-node-select",
+      "detail": "`{ id: string, label: string }`",
+      "description": "When a node is selected."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "tree",
+      "treeitem"
+    ],
+    "ariaAttributes": [
+      "aria-disabled",
+      "aria-expanded",
+      "aria-selected"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "accordion",
+    "list"
+  ]
+}

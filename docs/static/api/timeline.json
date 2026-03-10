@@ -1,0 +1,77 @@
+{
+  "name": "Timeline",
+  "tag": "kb-timeline",
+  "category": "data-display",
+  "description": "A vertical timeline for displaying chronological events.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-timeline.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Timeline"
+  },
+  "props": [
+    {
+      "name": "items",
+      "attribute": "items",
+      "type": "TimelineItem[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Timeline items to display."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TimelineVariant",
+      "default": "'left'",
+      "reflect": false,
+      "description": "Layout variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Size of the timeline."
+    },
+    {
+      "name": "lineVariant",
+      "attribute": "line-variant",
+      "type": "TimelineLineVariant",
+      "default": "'solid'",
+      "reflect": false,
+      "description": "Line style variant."
+    },
+    {
+      "name": "showIcons",
+      "attribute": "show-icons",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show status icons inside indicator squares."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-timeline-item-click",
+      "detail": "`{ index: number, id: string }`",
+      "description": "Dispatched when a timeline item is clicked, with `detail.index` and `detail.id`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "button"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "steps"
+  ]
+}

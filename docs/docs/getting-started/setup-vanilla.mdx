@@ -1,0 +1,124 @@
+---
+sidebar_position: 5
+title: Vanilla HTML
+---
+
+# Vanilla HTML Setup
+
+KarbitUI components are standard web components. No framework required — just include the script and CSS.
+
+## Using a bundler
+
+### Install
+
+```bash
+pnpm add @wearesyntesa/karbit-ui
+```
+
+### Import in your entry file
+
+```ts title="src/main.ts"
+// Register all components
+import "@wearesyntesa/karbit-ui/define";
+```
+
+### Add CSS
+
+```css title="src/style.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```
+
+### Use in HTML
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KarbitUI Demo</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <kb-container max-w="screen">
+    <kb-heading level="1" size="2xl" mb="6">
+      Hello KarbitUI
+    </kb-heading>
+
+    <kb-card p="6" mb="4">
+      <kb-text mb="4">A simple card with a button.</kb-text>
+      <kb-button variant="solid" color-scheme="blue">
+        Click me
+      </kb-button>
+    </kb-card>
+
+    <kb-alert status="info">
+      Components are standard HTML custom elements.
+    </kb-alert>
+  </kb-container>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
+```
+
+## Attributes and properties
+
+### String and boolean attributes
+
+Most props can be set as HTML attributes:
+
+```html
+<!-- String attributes -->
+<kb-button variant="solid" color-scheme="blue" size="lg">Large</kb-button>
+<kb-input placeholder="Enter text" type="email" />
+
+<!-- Boolean attributes (presence = true) -->
+<kb-button disabled>Disabled</kb-button>
+<kb-checkbox checked>Checked</kb-checkbox>
+```
+
+### Complex properties
+
+For arrays and objects, set properties via JavaScript:
+
+```html
+<kb-table id="my-table"></kb-table>
+
+<script type="module">
+  const table = document.querySelector("#my-table");
+  table.columns = [
+    { key: "name", label: "Name" },
+    { key: "role", label: "Role" },
+  ];
+  table.rows = [
+    { name: "Alice", role: "Engineer" },
+    { name: "Bob", role: "Designer" },
+  ];
+</script>
+```
+
+## Event handling
+
+KarbitUI components emit standard `CustomEvent`s:
+
+```html
+<kb-input id="name-input" placeholder="Your name"></kb-input>
+
+<script type="module">
+  document.querySelector("#name-input")
+    .addEventListener("kb-change", (e) => {
+      console.log("New value:", e.detail.value);
+    });
+</script>
+```
+
+## Selective registration
+
+Register only the components you need for smaller bundles:
+
+```ts
+// Only registers <kb-button> and <kb-input>
+import "@wearesyntesa/karbit-ui/button/define";
+import "@wearesyntesa/karbit-ui/input/define";
+```

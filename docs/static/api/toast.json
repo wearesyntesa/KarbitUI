@@ -1,0 +1,87 @@
+{
+  "name": "Toast",
+  "tag": "kb-toast",
+  "category": "feedback",
+  "description": "A temporary notification that appears at the edge of the viewport.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-toast.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Toast"
+  },
+  "props": [
+    {
+      "name": "status",
+      "attribute": "status",
+      "type": "ToastStatus",
+      "default": "'info'",
+      "reflect": false,
+      "description": "Semantic status controlling icon, border accent, and progress bar color."
+    },
+    {
+      "name": "position",
+      "attribute": "position",
+      "type": "ToastPosition",
+      "default": "'top-right'",
+      "reflect": false,
+      "description": "Screen position where the toast appears."
+    },
+    {
+      "name": "duration",
+      "attribute": "duration",
+      "type": "number",
+      "default": "5000",
+      "reflect": false,
+      "description": "Auto-dismiss delay in milliseconds. Pauses on hover."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show a close button for manual dismissal."
+    },
+    {
+      "name": "showIcon",
+      "attribute": "show-icon",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show the status icon before the message content."
+    }
+  ],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Optional bold title above the message."
+    },
+    {
+      "name": "action",
+      "description": "Inline action area (buttons, links)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the toast is dismissed."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "alert"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "alert"
+  ]
+}

@@ -763,7 +763,7 @@ export class KbDatePicker extends KbBaseElement {
   private _renderPanel(): TemplateResult | typeof nothing {
     if (!this._open) return nothing;
     const panelClasses: string = cx(
-      'absolute z-50 left-0 top-full mt-1 max-w-[calc(100vw-2rem)]',
+      'absolute z-50 left-0 top-full mt-1 w-max max-w-[calc(100vw-2rem)]',
       kbClasses.surface,
       kbClasses.border,
       PANEL_PADDING[this.size],

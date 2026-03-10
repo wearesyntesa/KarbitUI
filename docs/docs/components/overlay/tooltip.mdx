@@ -1,0 +1,1183 @@
+---
+title: "Tooltip"
+description: "A small floating label that appears on hover or focus."
+sidebar_label: "Tooltip"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-tooltip label="More information">
+  <kb-button>Hover me</kb-button>
+</kb-tooltip>`;
+export const reactCode = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<Tooltip label="More information">
+  <Button>Hover me</Button>
+</Tooltip>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tooltip label="More information">
+    <kb-button>Hover me</kb-button>
+  </kb-tooltip>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tooltip label="More information">
+  <kb-button>Hover me</kb-button>
+</kb-tooltip>`;
+export const exDefault = `<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="This is a tooltip">
+    <kb-button>Hover me</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exDefaultReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <Tooltip label="This is a tooltip">
+    <Button>Hover me</Button>
+  </Tooltip>
+</div>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center justify-center p-8 md:p-20">
+    <kb-tooltip label="This is a tooltip">
+      <kb-button>Hover me</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="This is a tooltip">
+    <kb-button>Hover me</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exPlacements = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Top placement" placement="top">
+    <kb-button variant="outline">Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Bottom placement" placement="bottom">
+    <kb-button variant="outline">Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Left placement" placement="left">
+    <kb-button variant="outline">Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Right placement" placement="right">
+    <kb-button variant="outline">Right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exPlacementsReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Top placement" placement="top">
+    <Button variant="outline">Top</Button>
+  </Tooltip>
+  <Tooltip label="Bottom placement" placement="bottom">
+    <Button variant="outline">Bottom</Button>
+  </Tooltip>
+  <Tooltip label="Left placement" placement="left">
+    <Button variant="outline">Left</Button>
+  </Tooltip>
+  <Tooltip label="Right placement" placement="right">
+    <Button variant="outline">Right</Button>
+  </Tooltip>
+</div>`;
+export const exPlacementsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Top placement" placement="top">
+      <kb-button variant="outline">Top</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Bottom placement" placement="bottom">
+      <kb-button variant="outline">Bottom</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Left placement" placement="left">
+      <kb-button variant="outline">Left</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Right placement" placement="right">
+      <kb-button variant="outline">Right</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exPlacementsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Top placement" placement="top">
+    <kb-button variant="outline">Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Bottom placement" placement="bottom">
+    <kb-button variant="outline">Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Left placement" placement="left">
+    <kb-button variant="outline">Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Right placement" placement="right">
+    <kb-button variant="outline">Right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exSizes = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Extra small" size="xs">
+    <kb-button size="xs">XS tooltip</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Small (default)" size="sm">
+    <kb-button size="sm">SM tooltip</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Medium tooltip" size="md">
+    <kb-button size="md">MD tooltip</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exSizesReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Extra small" size="xs">
+    <Button size="xs">XS tooltip</Button>
+  </Tooltip>
+  <Tooltip label="Small (default)" size="sm">
+    <Button size="sm">SM tooltip</Button>
+  </Tooltip>
+  <Tooltip label="Medium tooltip" size="md">
+    <Button size="md">MD tooltip</Button>
+  </Tooltip>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Extra small" size="xs">
+      <kb-button size="xs">XS tooltip</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Small (default)" size="sm">
+      <kb-button size="sm">SM tooltip</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Medium tooltip" size="md">
+      <kb-button size="md">MD tooltip</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Extra small" size="xs">
+    <kb-button size="xs">XS tooltip</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Small (default)" size="sm">
+    <kb-button size="sm">SM tooltip</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Medium tooltip" size="md">
+    <kb-button size="md">MD tooltip</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exWithArrow = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Arrow on top" placement="top" show-arrow>
+    <kb-button variant="outline">Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on bottom" placement="bottom" show-arrow>
+    <kb-button variant="outline">Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on left" placement="left" show-arrow>
+    <kb-button variant="outline">Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on right" placement="right" show-arrow>
+    <kb-button variant="outline">Right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exWithArrowReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Arrow on top" placement="top" show-arrow>
+    <Button variant="outline">Top</Button>
+  </Tooltip>
+  <Tooltip label="Arrow on bottom" placement="bottom" show-arrow>
+    <Button variant="outline">Bottom</Button>
+  </Tooltip>
+  <Tooltip label="Arrow on left" placement="left" show-arrow>
+    <Button variant="outline">Left</Button>
+  </Tooltip>
+  <Tooltip label="Arrow on right" placement="right" show-arrow>
+    <Button variant="outline">Right</Button>
+  </Tooltip>
+</div>`;
+export const exWithArrowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Arrow on top" placement="top" show-arrow>
+      <kb-button variant="outline">Top</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Arrow on bottom" placement="bottom" show-arrow>
+      <kb-button variant="outline">Bottom</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Arrow on left" placement="left" show-arrow>
+      <kb-button variant="outline">Left</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Arrow on right" placement="right" show-arrow>
+      <kb-button variant="outline">Right</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exWithArrowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Arrow on top" placement="top" show-arrow>
+    <kb-button variant="outline">Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on bottom" placement="bottom" show-arrow>
+    <kb-button variant="outline">Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on left" placement="left" show-arrow>
+    <kb-button variant="outline">Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Arrow on right" placement="right" show-arrow>
+    <kb-button variant="outline">Right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exDarkVariant = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Dark tooltip (default)" variant="dark" placement="top" show-arrow>
+    <kb-button variant="outline">Dark</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark tooltip" variant="dark" placement="bottom" show-arrow>
+    <kb-button variant="outline">Dark bottom</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exDarkVariantReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Dark tooltip (default)" variant="dark" placement="top" show-arrow>
+    <Button variant="outline">Dark</Button>
+  </Tooltip>
+  <Tooltip label="Dark tooltip" variant="dark" placement="bottom" show-arrow>
+    <Button variant="outline">Dark bottom</Button>
+  </Tooltip>
+</div>`;
+export const exDarkVariantVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Dark tooltip (default)" variant="dark" placement="top" show-arrow>
+      <kb-button variant="outline">Dark</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Dark tooltip" variant="dark" placement="bottom" show-arrow>
+      <kb-button variant="outline">Dark bottom</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exDarkVariantSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Dark tooltip (default)" variant="dark" placement="top" show-arrow>
+    <kb-button variant="outline">Dark</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark tooltip" variant="dark" placement="bottom" show-arrow>
+    <kb-button variant="outline">Dark bottom</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exLightVariant = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Light tooltip" variant="light" placement="top" show-arrow>
+    <kb-button>Light</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="bottom" show-arrow>
+    <kb-button>Light bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="left" show-arrow>
+    <kb-button>Light left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="right" show-arrow>
+    <kb-button>Light right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exLightVariantReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Light tooltip" variant="light" placement="top" show-arrow>
+    <Button>Light</Button>
+  </Tooltip>
+  <Tooltip label="Light tooltip" variant="light" placement="bottom" show-arrow>
+    <Button>Light bottom</Button>
+  </Tooltip>
+  <Tooltip label="Light tooltip" variant="light" placement="left" show-arrow>
+    <Button>Light left</Button>
+  </Tooltip>
+  <Tooltip label="Light tooltip" variant="light" placement="right" show-arrow>
+    <Button>Light right</Button>
+  </Tooltip>
+</div>`;
+export const exLightVariantVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Light tooltip" variant="light" placement="top" show-arrow>
+      <kb-button>Light</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light tooltip" variant="light" placement="bottom" show-arrow>
+      <kb-button>Light bottom</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light tooltip" variant="light" placement="left" show-arrow>
+      <kb-button>Light left</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light tooltip" variant="light" placement="right" show-arrow>
+      <kb-button>Light right</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exLightVariantSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Light tooltip" variant="light" placement="top" show-arrow>
+    <kb-button>Light</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="bottom" show-arrow>
+    <kb-button>Light bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="left" show-arrow>
+    <kb-button>Light left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light tooltip" variant="light" placement="right" show-arrow>
+    <kb-button>Light right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exOffsets = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Offset 0" offset="0">
+    <kb-button variant="outline" size="xs">Offset 0</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 1" offset="1">
+    <kb-button variant="outline" size="xs">Offset 1</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 2 (default)" offset="2">
+    <kb-button variant="outline" size="xs">Offset 2</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 3" offset="3">
+    <kb-button variant="outline" size="xs">Offset 3</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 4" offset="4">
+    <kb-button variant="outline" size="xs">Offset 4</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exOffsetsReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Offset 0" offset="0">
+    <Button variant="outline" size="xs">Offset 0</Button>
+  </Tooltip>
+  <Tooltip label="Offset 1" offset="1">
+    <Button variant="outline" size="xs">Offset 1</Button>
+  </Tooltip>
+  <Tooltip label="Offset 2 (default)" offset="2">
+    <Button variant="outline" size="xs">Offset 2</Button>
+  </Tooltip>
+  <Tooltip label="Offset 3" offset="3">
+    <Button variant="outline" size="xs">Offset 3</Button>
+  </Tooltip>
+  <Tooltip label="Offset 4" offset="4">
+    <Button variant="outline" size="xs">Offset 4</Button>
+  </Tooltip>
+</div>`;
+export const exOffsetsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Offset 0" offset="0">
+      <kb-button variant="outline" size="xs">Offset 0</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Offset 1" offset="1">
+      <kb-button variant="outline" size="xs">Offset 1</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Offset 2 (default)" offset="2">
+      <kb-button variant="outline" size="xs">Offset 2</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Offset 3" offset="3">
+      <kb-button variant="outline" size="xs">Offset 3</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Offset 4" offset="4">
+      <kb-button variant="outline" size="xs">Offset 4</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exOffsetsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Offset 0" offset="0">
+    <kb-button variant="outline" size="xs">Offset 0</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 1" offset="1">
+    <kb-button variant="outline" size="xs">Offset 1</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 2 (default)" offset="2">
+    <kb-button variant="outline" size="xs">Offset 2</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 3" offset="3">
+    <kb-button variant="outline" size="xs">Offset 3</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Offset 4" offset="4">
+    <kb-button variant="outline" size="xs">Offset 4</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exOpenDelay = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="No delay" open-delay="0">
+    <kb-button variant="outline">0ms delay</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Default delay" open-delay="200">
+    <kb-button variant="outline">200ms (default)</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Slow delay" open-delay="800">
+    <kb-button variant="outline">800ms delay</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exOpenDelayReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="No delay" open-delay="0">
+    <Button variant="outline">0ms delay</Button>
+  </Tooltip>
+  <Tooltip label="Default delay" open-delay="200">
+    <Button variant="outline">200ms (default)</Button>
+  </Tooltip>
+  <Tooltip label="Slow delay" open-delay="800">
+    <Button variant="outline">800ms delay</Button>
+  </Tooltip>
+</div>`;
+export const exOpenDelayVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="No delay" open-delay="0">
+      <kb-button variant="outline">0ms delay</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Default delay" open-delay="200">
+      <kb-button variant="outline">200ms (default)</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Slow delay" open-delay="800">
+      <kb-button variant="outline">800ms delay</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exOpenDelaySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="No delay" open-delay="0">
+    <kb-button variant="outline">0ms delay</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Default delay" open-delay="200">
+    <kb-button variant="outline">200ms (default)</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Slow delay" open-delay="800">
+    <kb-button variant="outline">800ms delay</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exCloseDelay = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Instant close" close-delay="0">
+    <kb-button variant="outline">0ms close</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Delayed close" close-delay="500">
+    <kb-button variant="outline">500ms close delay</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exCloseDelayReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="Instant close" close-delay="0">
+    <Button variant="outline">0ms close</Button>
+  </Tooltip>
+  <Tooltip label="Delayed close" close-delay="500">
+    <Button variant="outline">500ms close delay</Button>
+  </Tooltip>
+</div>`;
+export const exCloseDelayVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="Instant close" close-delay="0">
+      <kb-button variant="outline">0ms close</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Delayed close" close-delay="500">
+      <kb-button variant="outline">500ms close delay</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exCloseDelaySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="Instant close" close-delay="0">
+    <kb-button variant="outline">0ms close</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Delayed close" close-delay="500">
+    <kb-button variant="outline">500ms close delay</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exDisabled = `<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="You won't see this" disabled>
+    <kb-button>Tooltip disabled</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exDisabledReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <Tooltip label="You won't see this" disabled>
+    <Button>Tooltip disabled</Button>
+  </Tooltip>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center justify-center p-8 md:p-20">
+    <kb-tooltip label="You won't see this" disabled>
+      <kb-button>Tooltip disabled</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="You won't see this" disabled>
+    <kb-button>Tooltip disabled</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exMultilineText = `<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width" size="sm">
+    <kb-button>Multiline SM</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width constraint" size="md">
+    <kb-button>Multiline MD</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exMultilineTextReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <Tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width" size="sm">
+    <Button>Multiline SM</Button>
+  </Tooltip>
+  <Tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width constraint" size="md">
+    <Button>Multiline MD</Button>
+  </Tooltip>
+</div>`;
+export const exMultilineTextVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+    <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width" size="sm">
+      <kb-button>Multiline SM</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width constraint" size="md">
+      <kb-button>Multiline MD</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exMultilineTextSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-wrap items-center justify-center gap-8 p-8 md:p-20">
+  <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width" size="sm">
+    <kb-button>Multiline SM</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="This is a longer tooltip that wraps to multiple lines when it exceeds the max width constraint" size="md">
+    <kb-button>Multiline MD</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exProgrammaticOpen = `<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="Programmatically opened" open show-arrow>
+    <kb-button variant="solid">Always visible</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exProgrammaticOpenReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <Tooltip label="Programmatically opened" open show-arrow>
+    <Button variant="solid">Always visible</Button>
+  </Tooltip>
+</div>`;
+export const exProgrammaticOpenVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center justify-center p-8 md:p-20">
+    <kb-tooltip label="Programmatically opened" open show-arrow>
+      <kb-button variant="solid">Always visible</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exProgrammaticOpenSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center justify-center p-8 md:p-20">
+  <kb-tooltip label="Programmatically opened" open show-arrow>
+    <kb-button variant="solid">Always visible</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exFocusAccessible = `<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <p class="text-sm text-slate-500 dark:text-zinc-400">Tab to focus each button:</p>
+  <kb-tooltip label="First action" show-arrow>
+    <kb-button variant="outline">Action 1</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Second action" show-arrow>
+    <kb-button variant="outline">Action 2</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Third action" show-arrow>
+    <kb-button variant="outline">Action 3</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exFocusAccessibleReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <p class="text-sm text-slate-500 dark:text-zinc-400">Tab to focus each button:</p>
+  <Tooltip label="First action" show-arrow>
+    <Button variant="outline">Action 1</Button>
+  </Tooltip>
+  <Tooltip label="Second action" show-arrow>
+    <Button variant="outline">Action 2</Button>
+  </Tooltip>
+  <Tooltip label="Third action" show-arrow>
+    <Button variant="outline">Action 3</Button>
+  </Tooltip>
+</div>`;
+export const exFocusAccessibleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center justify-center gap-4 p-8 md:p-20">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">Tab to focus each button:</p>
+    <kb-tooltip label="First action" show-arrow>
+      <kb-button variant="outline">Action 1</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Second action" show-arrow>
+      <kb-button variant="outline">Action 2</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Third action" show-arrow>
+      <kb-button variant="outline">Action 3</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exFocusAccessibleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <p class="text-sm text-slate-500 dark:text-zinc-400">Tab to focus each button:</p>
+  <kb-tooltip label="First action" show-arrow>
+    <kb-button variant="outline">Action 1</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Second action" show-arrow>
+    <kb-button variant="outline">Action 2</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Third action" show-arrow>
+    <kb-button variant="outline">Action 3</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exOnIconButton = `<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <kb-tooltip label="Edit" show-arrow>
+    <kb-icon-button aria-label="Edit" variant="outline">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+  <kb-tooltip label="Delete" show-arrow>
+    <kb-icon-button aria-label="Delete" variant="outline" color-scheme="red">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+  <kb-tooltip label="Settings" show-arrow>
+    <kb-icon-button aria-label="Settings" variant="ghost">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+</div>`;
+export const exOnIconButtonReact = `import { IconButton, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <Tooltip label="Edit" show-arrow>
+    <IconButton aria-label="Edit" variant="outline">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+      </svg>
+    </IconButton>
+  </Tooltip>
+  <Tooltip label="Delete" show-arrow>
+    <IconButton aria-label="Delete" variant="outline" color-scheme="red">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+      </svg>
+    </IconButton>
+  </Tooltip>
+  <Tooltip label="Settings" show-arrow>
+    <IconButton aria-label="Settings" variant="ghost">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+    </IconButton>
+  </Tooltip>
+</div>`;
+export const exOnIconButtonVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center justify-center gap-4 p-8 md:p-20">
+    <kb-tooltip label="Edit" show-arrow>
+      <kb-icon-button aria-label="Edit" variant="outline">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+        </svg>
+      </kb-icon-button>
+    </kb-tooltip>
+    <kb-tooltip label="Delete" show-arrow>
+      <kb-icon-button aria-label="Delete" variant="outline" color-scheme="red">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+        </svg>
+      </kb-icon-button>
+    </kb-tooltip>
+    <kb-tooltip label="Settings" show-arrow>
+      <kb-icon-button aria-label="Settings" variant="ghost">
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      </kb-icon-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exOnIconButtonSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center justify-center gap-4 p-8 md:p-20">
+  <kb-tooltip label="Edit" show-arrow>
+    <kb-icon-button aria-label="Edit" variant="outline">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+  <kb-tooltip label="Delete" show-arrow>
+    <kb-icon-button aria-label="Delete" variant="outline" color-scheme="red">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+  <kb-tooltip label="Settings" show-arrow>
+    <kb-icon-button aria-label="Settings" variant="ghost">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+    </kb-icon-button>
+  </kb-tooltip>
+</div>`;
+export const exAllVariantsAndPlacements = `<div class="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-20 place-items-center">
+  <kb-tooltip label="Dark / Top" variant="dark" placement="top" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Bottom" variant="dark" placement="bottom" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Left" variant="dark" placement="left" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Right" variant="dark" placement="right" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Right</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Top" variant="light" placement="top" show-arrow>
+    <kb-button variant="outline" size="xs">Light Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Bottom" variant="light" placement="bottom" show-arrow>
+    <kb-button variant="outline" size="xs">Light Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Left" variant="light" placement="left" show-arrow>
+    <kb-button variant="outline" size="xs">Light Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Right" variant="light" placement="right" show-arrow>
+    <kb-button variant="outline" size="xs">Light Right</kb-button>
+  </kb-tooltip>
+</div>`;
+export const exAllVariantsAndPlacementsReact = `import { Button, Tooltip } from '@wearesyntesa/karbit-ui/react';
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-20 place-items-center">
+  <Tooltip label="Dark / Top" variant="dark" placement="top" show-arrow>
+    <Button variant="outline" size="xs">Dark Top</Button>
+  </Tooltip>
+  <Tooltip label="Dark / Bottom" variant="dark" placement="bottom" show-arrow>
+    <Button variant="outline" size="xs">Dark Bottom</Button>
+  </Tooltip>
+  <Tooltip label="Dark / Left" variant="dark" placement="left" show-arrow>
+    <Button variant="outline" size="xs">Dark Left</Button>
+  </Tooltip>
+  <Tooltip label="Dark / Right" variant="dark" placement="right" show-arrow>
+    <Button variant="outline" size="xs">Dark Right</Button>
+  </Tooltip>
+  <Tooltip label="Light / Top" variant="light" placement="top" show-arrow>
+    <Button variant="outline" size="xs">Light Top</Button>
+  </Tooltip>
+  <Tooltip label="Light / Bottom" variant="light" placement="bottom" show-arrow>
+    <Button variant="outline" size="xs">Light Bottom</Button>
+  </Tooltip>
+  <Tooltip label="Light / Left" variant="light" placement="left" show-arrow>
+    <Button variant="outline" size="xs">Light Left</Button>
+  </Tooltip>
+  <Tooltip label="Light / Right" variant="light" placement="right" show-arrow>
+    <Button variant="outline" size="xs">Light Right</Button>
+  </Tooltip>
+</div>`;
+export const exAllVariantsAndPlacementsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-20 place-items-center">
+    <kb-tooltip label="Dark / Top" variant="dark" placement="top" show-arrow>
+      <kb-button variant="outline" size="xs">Dark Top</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Dark / Bottom" variant="dark" placement="bottom" show-arrow>
+      <kb-button variant="outline" size="xs">Dark Bottom</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Dark / Left" variant="dark" placement="left" show-arrow>
+      <kb-button variant="outline" size="xs">Dark Left</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Dark / Right" variant="dark" placement="right" show-arrow>
+      <kb-button variant="outline" size="xs">Dark Right</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light / Top" variant="light" placement="top" show-arrow>
+      <kb-button variant="outline" size="xs">Light Top</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light / Bottom" variant="light" placement="bottom" show-arrow>
+      <kb-button variant="outline" size="xs">Light Bottom</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light / Left" variant="light" placement="left" show-arrow>
+      <kb-button variant="outline" size="xs">Light Left</kb-button>
+    </kb-tooltip>
+    <kb-tooltip label="Light / Right" variant="light" placement="right" show-arrow>
+      <kb-button variant="outline" size="xs">Light Right</kb-button>
+    </kb-tooltip>
+  </div>
+</template>`;
+export const exAllVariantsAndPlacementsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-20 place-items-center">
+  <kb-tooltip label="Dark / Top" variant="dark" placement="top" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Bottom" variant="dark" placement="bottom" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Left" variant="dark" placement="left" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Dark / Right" variant="dark" placement="right" show-arrow>
+    <kb-button variant="outline" size="xs">Dark Right</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Top" variant="light" placement="top" show-arrow>
+    <kb-button variant="outline" size="xs">Light Top</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Bottom" variant="light" placement="bottom" show-arrow>
+    <kb-button variant="outline" size="xs">Light Bottom</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Left" variant="light" placement="left" show-arrow>
+    <kb-button variant="outline" size="xs">Light Left</kb-button>
+  </kb-tooltip>
+  <kb-tooltip label="Light / Right" variant="light" placement="right" show-arrow>
+    <kb-button variant="outline" size="xs">Light Right</kb-button>
+  </kb-tooltip>
+</div>`;
+
+# Tooltip
+
+A small floating label that appears on hover or focus.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Tooltip } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` | `""` | Text content shown inside the tooltip. No tooltip renders when empty. |
+| `placement` | `placement` | `TooltipPlacement` | `'top'` | Position of the tooltip relative to the trigger element. |
+| `size` | `size` | `TooltipSize` | `'sm'` | Tooltip text and padding size. |
+| `variant` | `variant` | `TooltipVariant` | `'dark'` | Color variant - `'dark'` (inverted) or `'light'` (surface-colored). |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents the tooltip from showing. |
+| `open` | `open` | `boolean` | `false` | Programmatically control visibility. Reflected to attribute. |
+| `showArrow` | `show-arrow` | `boolean` | `true` | Render a small arrow pointing toward the trigger element. |
+| `offset` | `offset` | `number` | `2` | Distance between the tooltip and the trigger (0–4 Tailwind spacing units). |
+| `openDelay` | `open-delay` | `number` | `200` | Delay in ms before showing the tooltip on hover. |
+| `closeDelay` | `close-delay` | `number` | `0` | Delay in ms before hiding the tooltip after mouse leaves. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-open` | `{ source?: string }` or none | Dispatched when tooltip becomes visible. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when tooltip is hidden (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Escape` | Close or cancel the current action |
+
+### ARIA
+
+**Roles:** `tooltip`
+
+**Attributes:** `aria-describedby`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Placements" codes={{ html: exPlacements, react: exPlacementsReact, vue: exPlacementsVue, svelte: exPlacementsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlacements }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Arrow" codes={{ html: exWithArrow, react: exWithArrowReact, vue: exWithArrowVue, svelte: exWithArrowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithArrow }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dark Variant" codes={{ html: exDarkVariant, react: exDarkVariantReact, vue: exDarkVariantVue, svelte: exDarkVariantSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDarkVariant }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Light Variant" codes={{ html: exLightVariant, react: exLightVariantReact, vue: exLightVariantVue, svelte: exLightVariantSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLightVariant }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Offsets" codes={{ html: exOffsets, react: exOffsetsReact, vue: exOffsetsVue, svelte: exOffsetsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOffsets }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Open Delay" codes={{ html: exOpenDelay, react: exOpenDelayReact, vue: exOpenDelayVue, svelte: exOpenDelaySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOpenDelay }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Close Delay" codes={{ html: exCloseDelay, react: exCloseDelayReact, vue: exCloseDelayVue, svelte: exCloseDelaySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCloseDelay }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multiline Text" codes={{ html: exMultilineText, react: exMultilineTextReact, vue: exMultilineTextVue, svelte: exMultilineTextSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultilineText }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Programmatic Open" codes={{ html: exProgrammaticOpen, react: exProgrammaticOpenReact, vue: exProgrammaticOpenVue, svelte: exProgrammaticOpenSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exProgrammaticOpen }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Focus Accessible" codes={{ html: exFocusAccessible, react: exFocusAccessibleReact, vue: exFocusAccessibleVue, svelte: exFocusAccessibleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFocusAccessible }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="On Icon Button" codes={{ html: exOnIconButton, react: exOnIconButtonReact, vue: exOnIconButtonVue, svelte: exOnIconButtonSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOnIconButton }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants And Placements" codes={{ html: exAllVariantsAndPlacements, react: exAllVariantsAndPlacementsReact, vue: exAllVariantsAndPlacementsVue, svelte: exAllVariantsAndPlacementsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariantsAndPlacements }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Popover](./popover)
+- [Hover Card](./hover-card)

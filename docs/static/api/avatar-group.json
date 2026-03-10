@@ -1,0 +1,53 @@
+{
+  "name": "Avatar Group",
+  "tag": "kb-avatar-group",
+  "category": "data-display",
+  "description": "Displays a stack of overlapping avatars with an optional overflow indicator.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-avatar-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "AvatarGroup"
+  },
+  "props": [
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Maximum number of visible avatars before showing \"+N\". 0 = no limit."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Size propagated to child avatars."
+    },
+    {
+      "name": "spacing",
+      "attribute": "spacing",
+      "type": "AvatarGroupSpacing",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Overlap spacing between avatars."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "avatar"
+  ]
+}

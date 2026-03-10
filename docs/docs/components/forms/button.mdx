@@ -1,0 +1,937 @@
+---
+title: "Button"
+description: "A clickable button element for triggering actions and submitting forms."
+sidebar_label: "Button"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-button variant="solid">Click me</kb-button>`;
+export const reactCode = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="solid">Click me</Button>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="solid">Click me</kb-button>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="solid">Click me</kb-button>`;
+export const exSolid = `<kb-button variant="solid" size="md">CLICK ME</kb-button>`;
+export const exSolidReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="solid" size="md">CLICK ME</Button>`;
+export const exSolidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="solid" size="md">CLICK ME</kb-button>
+</template>`;
+export const exSolidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="solid" size="md">CLICK ME</kb-button>`;
+export const exOutline = `<kb-button variant="outline" size="md">CLICK ME</kb-button>`;
+export const exOutlineReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="outline" size="md">CLICK ME</Button>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="outline" size="md">CLICK ME</kb-button>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="outline" size="md">CLICK ME</kb-button>`;
+export const exGhost = `<kb-button variant="ghost" size="md">CLICK ME</kb-button>`;
+export const exGhostReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="ghost" size="md">CLICK ME</Button>`;
+export const exGhostVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="ghost" size="md">CLICK ME</kb-button>
+</template>`;
+export const exGhostSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="ghost" size="md">CLICK ME</kb-button>`;
+export const exLink = `<kb-button variant="link" size="md">CLICK ME</kb-button>`;
+export const exLinkReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="link" size="md">CLICK ME</Button>`;
+export const exLinkVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="link" size="md">CLICK ME</kb-button>
+</template>`;
+export const exLinkSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="link" size="md">CLICK ME</kb-button>`;
+export const exAllSizes = `<div style="display:flex;gap:8px;align-items:center;">
+  <kb-button size="xs">XS</kb-button>
+  <kb-button size="sm">SM</kb-button>
+  <kb-button size="md">MD</kb-button>
+  <kb-button size="lg">LG</kb-button>
+  <kb-button size="xl">XL</kb-button>
+</div>`;
+export const exAllSizesReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;align-items:center;">
+  <Button size="xs">XS</Button>
+  <Button size="sm">SM</Button>
+  <Button size="md">MD</Button>
+  <Button size="lg">LG</Button>
+  <Button size="xl">XL</Button>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <kb-button size="xs">XS</kb-button>
+    <kb-button size="sm">SM</kb-button>
+    <kb-button size="md">MD</kb-button>
+    <kb-button size="lg">LG</kb-button>
+    <kb-button size="xl">XL</kb-button>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;align-items:center;">
+  <kb-button size="xs">XS</kb-button>
+  <kb-button size="sm">SM</kb-button>
+  <kb-button size="md">MD</kb-button>
+  <kb-button size="lg">LG</kb-button>
+  <kb-button size="xl">XL</kb-button>
+</div>`;
+export const exColorSchemesSolid = `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button color-scheme="black">BLACK</kb-button>
+  <kb-button color-scheme="red">RED</kb-button>
+  <kb-button color-scheme="blue">BLUE</kb-button>
+  <kb-button color-scheme="green">GREEN</kb-button>
+  <kb-button color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesSolidReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <Button color-scheme="black">BLACK</Button>
+  <Button color-scheme="red">RED</Button>
+  <Button color-scheme="blue">BLUE</Button>
+  <Button color-scheme="green">GREEN</Button>
+  <Button color-scheme="yellow">YELLOW</Button>
+</div>`;
+export const exColorSchemesSolidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-button color-scheme="black">BLACK</kb-button>
+    <kb-button color-scheme="red">RED</kb-button>
+    <kb-button color-scheme="blue">BLUE</kb-button>
+    <kb-button color-scheme="green">GREEN</kb-button>
+    <kb-button color-scheme="yellow">YELLOW</kb-button>
+  </div>
+</template>`;
+export const exColorSchemesSolidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button color-scheme="black">BLACK</kb-button>
+  <kb-button color-scheme="red">RED</kb-button>
+  <kb-button color-scheme="blue">BLUE</kb-button>
+  <kb-button color-scheme="green">GREEN</kb-button>
+  <kb-button color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesOutline = `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="outline" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="outline" color-scheme="red">RED</kb-button>
+  <kb-button variant="outline" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="outline" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="outline" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesOutlineReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <Button variant="outline" color-scheme="black">BLACK</Button>
+  <Button variant="outline" color-scheme="red">RED</Button>
+  <Button variant="outline" color-scheme="blue">BLUE</Button>
+  <Button variant="outline" color-scheme="green">GREEN</Button>
+  <Button variant="outline" color-scheme="yellow">YELLOW</Button>
+</div>`;
+export const exColorSchemesOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-button variant="outline" color-scheme="black">BLACK</kb-button>
+    <kb-button variant="outline" color-scheme="red">RED</kb-button>
+    <kb-button variant="outline" color-scheme="blue">BLUE</kb-button>
+    <kb-button variant="outline" color-scheme="green">GREEN</kb-button>
+    <kb-button variant="outline" color-scheme="yellow">YELLOW</kb-button>
+  </div>
+</template>`;
+export const exColorSchemesOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="outline" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="outline" color-scheme="red">RED</kb-button>
+  <kb-button variant="outline" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="outline" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="outline" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesGhost = `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="ghost" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="ghost" color-scheme="red">RED</kb-button>
+  <kb-button variant="ghost" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="ghost" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="ghost" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesGhostReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <Button variant="ghost" color-scheme="black">BLACK</Button>
+  <Button variant="ghost" color-scheme="red">RED</Button>
+  <Button variant="ghost" color-scheme="blue">BLUE</Button>
+  <Button variant="ghost" color-scheme="green">GREEN</Button>
+  <Button variant="ghost" color-scheme="yellow">YELLOW</Button>
+</div>`;
+export const exColorSchemesGhostVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-button variant="ghost" color-scheme="black">BLACK</kb-button>
+    <kb-button variant="ghost" color-scheme="red">RED</kb-button>
+    <kb-button variant="ghost" color-scheme="blue">BLUE</kb-button>
+    <kb-button variant="ghost" color-scheme="green">GREEN</kb-button>
+    <kb-button variant="ghost" color-scheme="yellow">YELLOW</kb-button>
+  </div>
+</template>`;
+export const exColorSchemesGhostSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="ghost" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="ghost" color-scheme="red">RED</kb-button>
+  <kb-button variant="ghost" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="ghost" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="ghost" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesLink = `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="link" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="link" color-scheme="red">RED</kb-button>
+  <kb-button variant="link" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="link" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="link" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exColorSchemesLinkReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <Button variant="link" color-scheme="black">BLACK</Button>
+  <Button variant="link" color-scheme="red">RED</Button>
+  <Button variant="link" color-scheme="blue">BLUE</Button>
+  <Button variant="link" color-scheme="green">GREEN</Button>
+  <Button variant="link" color-scheme="yellow">YELLOW</Button>
+</div>`;
+export const exColorSchemesLinkVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-button variant="link" color-scheme="black">BLACK</kb-button>
+    <kb-button variant="link" color-scheme="red">RED</kb-button>
+    <kb-button variant="link" color-scheme="blue">BLUE</kb-button>
+    <kb-button variant="link" color-scheme="green">GREEN</kb-button>
+    <kb-button variant="link" color-scheme="yellow">YELLOW</kb-button>
+  </div>
+</template>`;
+export const exColorSchemesLinkSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button variant="link" color-scheme="black">BLACK</kb-button>
+  <kb-button variant="link" color-scheme="red">RED</kb-button>
+  <kb-button variant="link" color-scheme="blue">BLUE</kb-button>
+  <kb-button variant="link" color-scheme="green">GREEN</kb-button>
+  <kb-button variant="link" color-scheme="yellow">YELLOW</kb-button>
+</div>`;
+export const exWithIcons = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-button>
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M12 5v14"/>
+      <path d="M5 12h14"/>
+    </svg>
+    ADD ITEM
+  </kb-button>
+  <kb-button variant="outline" color-scheme="red">
+    DELETE
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M3 6h18"/>
+      <path d="M8 6V4h8v2"/>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+    </svg>
+  </kb-button>
+  <kb-button variant="ghost">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m21 21-4.35-4.35"/>
+      <circle cx="11" cy="11" r="8"/>
+    </svg>
+    SEARCH
+  </kb-button>
+  <kb-button size="lg" color-scheme="green">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+    CONFIRM
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </kb-button>
+</div>`;
+export const exWithIconsReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <Button>
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M12 5v14"/>
+      <path d="M5 12h14"/>
+    </svg>
+    ADD ITEM
+  </Button>
+  <Button variant="outline" color-scheme="red">
+    DELETE
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M3 6h18"/>
+      <path d="M8 6V4h8v2"/>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+    </svg>
+  </Button>
+  <Button variant="ghost">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m21 21-4.35-4.35"/>
+      <circle cx="11" cy="11" r="8"/>
+    </svg>
+    SEARCH
+  </Button>
+  <Button size="lg" color-scheme="green">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+    CONFIRM
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </Button>
+</div>`;
+export const exWithIconsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <kb-button>
+      <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M12 5v14"/>
+        <path d="M5 12h14"/>
+      </svg>
+      ADD ITEM
+    </kb-button>
+    <kb-button variant="outline" color-scheme="red">
+      DELETE
+      <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M3 6h18"/>
+        <path d="M8 6V4h8v2"/>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+      </svg>
+    </kb-button>
+    <kb-button variant="ghost">
+      <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="m21 21-4.35-4.35"/>
+        <circle cx="11" cy="11" r="8"/>
+      </svg>
+      SEARCH
+    </kb-button>
+    <kb-button size="lg" color-scheme="green">
+      <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+      CONFIRM
+      <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </kb-button>
+  </div>
+</template>`;
+export const exWithIconsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-button>
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M12 5v14"/>
+      <path d="M5 12h14"/>
+    </svg>
+    ADD ITEM
+  </kb-button>
+  <kb-button variant="outline" color-scheme="red">
+    DELETE
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M3 6h18"/>
+      <path d="M8 6V4h8v2"/>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+    </svg>
+  </kb-button>
+  <kb-button variant="ghost">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m21 21-4.35-4.35"/>
+      <circle cx="11" cy="11" r="8"/>
+    </svg>
+    SEARCH
+  </kb-button>
+  <kb-button size="lg" color-scheme="green">
+    <svg slot="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+    CONFIRM
+    <svg slot="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </kb-button>
+</div>`;
+export const exLoading = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-button loading>SAVE</kb-button>
+  <kb-button loading loading-text="Saving...">SAVE</kb-button>
+  <kb-button variant="outline" loading loading-text="Processing...">SUBMIT</kb-button>
+  <kb-button size="lg" color-scheme="green" loading loading-text="Deploying...">DEPLOY</kb-button>
+  <kb-button size="xs" loading>TINY</kb-button>
+</div>`;
+export const exLoadingReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <Button loading>SAVE</Button>
+  <Button loading loading-text="Saving...">SAVE</Button>
+  <Button variant="outline" loading loading-text="Processing...">SUBMIT</Button>
+  <Button size="lg" color-scheme="green" loading loading-text="Deploying...">DEPLOY</Button>
+  <Button size="xs" loading>TINY</Button>
+</div>`;
+export const exLoadingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <kb-button loading>SAVE</kb-button>
+    <kb-button loading loading-text="Saving...">SAVE</kb-button>
+    <kb-button variant="outline" loading loading-text="Processing...">SUBMIT</kb-button>
+    <kb-button size="lg" color-scheme="green" loading loading-text="Deploying...">DEPLOY</kb-button>
+    <kb-button size="xs" loading>TINY</kb-button>
+  </div>
+</template>`;
+export const exLoadingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+  <kb-button loading>SAVE</kb-button>
+  <kb-button loading loading-text="Saving...">SAVE</kb-button>
+  <kb-button variant="outline" loading loading-text="Processing...">SUBMIT</kb-button>
+  <kb-button size="lg" color-scheme="green" loading loading-text="Deploying...">DEPLOY</kb-button>
+  <kb-button size="xs" loading>TINY</kb-button>
+</div>`;
+export const exDisabled = `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button disabled>SOLID</kb-button>
+  <kb-button variant="outline" disabled>OUTLINE</kb-button>
+  <kb-button variant="ghost" disabled>GHOST</kb-button>
+  <kb-button variant="link" disabled>LINK</kb-button>
+</div>`;
+export const exDisabledReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <Button disabled>SOLID</Button>
+  <Button variant="outline" disabled>OUTLINE</Button>
+  <Button variant="ghost" disabled>GHOST</Button>
+  <Button variant="link" disabled>LINK</Button>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <kb-button disabled>SOLID</kb-button>
+    <kb-button variant="outline" disabled>OUTLINE</kb-button>
+    <kb-button variant="ghost" disabled>GHOST</kb-button>
+    <kb-button variant="link" disabled>LINK</kb-button>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <kb-button disabled>SOLID</kb-button>
+  <kb-button variant="outline" disabled>OUTLINE</kb-button>
+  <kb-button variant="ghost" disabled>GHOST</kb-button>
+  <kb-button variant="link" disabled>LINK</kb-button>
+</div>`;
+export const exFullWidth = `<div style="max-width:400px;display:flex;flex-direction:column;gap:8px;">
+  <kb-button full-width>FULL WIDTH SOLID</kb-button>
+  <kb-button full-width variant="outline">FULL WIDTH OUTLINE</kb-button>
+  <kb-button full-width variant="ghost" color-scheme="red">FULL WIDTH GHOST</kb-button>
+</div>`;
+export const exFullWidthReact = `import { Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;display:flex;flex-direction:column;gap:8px;">
+  <Button full-width>FULL WIDTH SOLID</Button>
+  <Button full-width variant="outline">FULL WIDTH OUTLINE</Button>
+  <Button full-width variant="ghost" color-scheme="red">FULL WIDTH GHOST</Button>
+</div>`;
+export const exFullWidthVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;display:flex;flex-direction:column;gap:8px;">
+    <kb-button full-width>FULL WIDTH SOLID</kb-button>
+    <kb-button full-width variant="outline">FULL WIDTH OUTLINE</kb-button>
+    <kb-button full-width variant="ghost" color-scheme="red">FULL WIDTH GHOST</kb-button>
+  </div>
+</template>`;
+export const exFullWidthSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;display:flex;flex-direction:column;gap:8px;">
+  <kb-button full-width>FULL WIDTH SOLID</kb-button>
+  <kb-button full-width variant="outline">FULL WIDTH OUTLINE</kb-button>
+  <kb-button full-width variant="ghost" color-scheme="red">FULL WIDTH GHOST</kb-button>
+</div>`;
+export const exButtonGroupAttached = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-button-group>
+    <kb-button variant="outline">LEFT</kb-button>
+    <kb-button variant="outline">CENTER</kb-button>
+    <kb-button variant="outline">RIGHT</kb-button>
+  </kb-button-group>
+  <kb-button-group>
+    <kb-button>PRIMARY</kb-button>
+    <kb-button variant="outline">SECONDARY</kb-button>
+  </kb-button-group>
+  <kb-button-group>
+    <kb-button variant="outline" color-scheme="blue">EDIT</kb-button>
+    <kb-button variant="outline" color-scheme="green">SAVE</kb-button>
+    <kb-button variant="outline" color-scheme="red">DELETE</kb-button>
+  </kb-button-group>
+</div>`;
+export const exButtonGroupAttachedReact = `import { Button, ButtonGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <ButtonGroup>
+    <Button variant="outline">LEFT</Button>
+    <Button variant="outline">CENTER</Button>
+    <Button variant="outline">RIGHT</Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button>PRIMARY</Button>
+    <Button variant="outline">SECONDARY</Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button variant="outline" color-scheme="blue">EDIT</Button>
+    <Button variant="outline" color-scheme="green">SAVE</Button>
+    <Button variant="outline" color-scheme="red">DELETE</Button>
+  </ButtonGroup>
+</div>`;
+export const exButtonGroupAttachedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <kb-button-group>
+      <kb-button variant="outline">LEFT</kb-button>
+      <kb-button variant="outline">CENTER</kb-button>
+      <kb-button variant="outline">RIGHT</kb-button>
+    </kb-button-group>
+    <kb-button-group>
+      <kb-button>PRIMARY</kb-button>
+      <kb-button variant="outline">SECONDARY</kb-button>
+    </kb-button-group>
+    <kb-button-group>
+      <kb-button variant="outline" color-scheme="blue">EDIT</kb-button>
+      <kb-button variant="outline" color-scheme="green">SAVE</kb-button>
+      <kb-button variant="outline" color-scheme="red">DELETE</kb-button>
+    </kb-button-group>
+  </div>
+</template>`;
+export const exButtonGroupAttachedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-button-group>
+    <kb-button variant="outline">LEFT</kb-button>
+    <kb-button variant="outline">CENTER</kb-button>
+    <kb-button variant="outline">RIGHT</kb-button>
+  </kb-button-group>
+  <kb-button-group>
+    <kb-button>PRIMARY</kb-button>
+    <kb-button variant="outline">SECONDARY</kb-button>
+  </kb-button-group>
+  <kb-button-group>
+    <kb-button variant="outline" color-scheme="blue">EDIT</kb-button>
+    <kb-button variant="outline" color-scheme="green">SAVE</kb-button>
+    <kb-button variant="outline" color-scheme="red">DELETE</kb-button>
+  </kb-button-group>
+</div>`;
+export const exButtonGroupVertical = `<kb-button-group direction="vertical">
+  <kb-button variant="outline">TOP</kb-button>
+  <kb-button variant="outline">MIDDLE</kb-button>
+  <kb-button variant="outline">BOTTOM</kb-button>
+</kb-button-group>`;
+export const exButtonGroupVerticalReact = `import { Button, ButtonGroup } from '@wearesyntesa/karbit-ui/react';
+
+<ButtonGroup direction="vertical">
+  <Button variant="outline">TOP</Button>
+  <Button variant="outline">MIDDLE</Button>
+  <Button variant="outline">BOTTOM</Button>
+</ButtonGroup>`;
+export const exButtonGroupVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button-group direction="vertical">
+    <kb-button variant="outline">TOP</kb-button>
+    <kb-button variant="outline">MIDDLE</kb-button>
+    <kb-button variant="outline">BOTTOM</kb-button>
+  </kb-button-group>
+</template>`;
+export const exButtonGroupVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button-group direction="vertical">
+  <kb-button variant="outline">TOP</kb-button>
+  <kb-button variant="outline">MIDDLE</kb-button>
+  <kb-button variant="outline">BOTTOM</kb-button>
+</kb-button-group>`;
+export const exButtonGroupSpaced = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-button-group spaced>
+    <kb-button>SAVE</kb-button>
+    <kb-button variant="outline">CANCEL</kb-button>
+  </kb-button-group>
+  <kb-button-group spaced>
+    <kb-button color-scheme="red">DELETE</kb-button>
+    <kb-button variant="ghost">CANCEL</kb-button>
+  </kb-button-group>
+</div>`;
+export const exButtonGroupSpacedReact = `import { Button, ButtonGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <ButtonGroup spaced>
+    <Button>SAVE</Button>
+    <Button variant="outline">CANCEL</Button>
+  </ButtonGroup>
+  <ButtonGroup spaced>
+    <Button color-scheme="red">DELETE</Button>
+    <Button variant="ghost">CANCEL</Button>
+  </ButtonGroup>
+</div>`;
+export const exButtonGroupSpacedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <kb-button-group spaced>
+      <kb-button>SAVE</kb-button>
+      <kb-button variant="outline">CANCEL</kb-button>
+    </kb-button-group>
+    <kb-button-group spaced>
+      <kb-button color-scheme="red">DELETE</kb-button>
+      <kb-button variant="ghost">CANCEL</kb-button>
+    </kb-button-group>
+  </div>
+</template>`;
+export const exButtonGroupSpacedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <kb-button-group spaced>
+    <kb-button>SAVE</kb-button>
+    <kb-button variant="outline">CANCEL</kb-button>
+  </kb-button-group>
+  <kb-button-group spaced>
+    <kb-button color-scheme="red">DELETE</kb-button>
+    <kb-button variant="ghost">CANCEL</kb-button>
+  </kb-button-group>
+</div>`;
+
+# Button
+
+A clickable button element for triggering actions and submitting forms.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Button } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `ButtonVariant` | `'solid'` | Visual variant controlling border, background, and text styles. |
+| `size` | `size` | `ButtonSize` | `'md'` | Button size controlling padding, font size, and icon sizing. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme override. When unset, the variant's default color is used. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `loading` | `loading` | `boolean` | `false` | Show a spinner and disable interaction. |
+| `loadingText` | `loading-text` | `string` | — | Text displayed next to the spinner when loading. When omitted, the label is hidden during loading. |
+| `type` | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | HTML button type attribute. |
+| `fullWidth` | `full-width` | `boolean` | `false` | Stretch the button to fill its container width. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon-left` | Leading icon element (SVG recommended). |
+| `icon-right` | Trailing icon element (SVG recommended). |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-busy`, `aria-disabled`
+
+## Examples
+
+<Demo title="Solid" codes={{ html: exSolid, react: exSolidReact, vue: exSolidVue, svelte: exSolidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSolid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Ghost" codes={{ html: exGhost, react: exGhostReact, vue: exGhostVue, svelte: exGhostSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exGhost }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Link" codes={{ html: exLink, react: exLinkReact, vue: exLinkVue, svelte: exLinkSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLink }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Solid" codes={{ html: exColorSchemesSolid, react: exColorSchemesSolidReact, vue: exColorSchemesSolidVue, svelte: exColorSchemesSolidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesSolid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Outline" codes={{ html: exColorSchemesOutline, react: exColorSchemesOutlineReact, vue: exColorSchemesOutlineVue, svelte: exColorSchemesOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Ghost" codes={{ html: exColorSchemesGhost, react: exColorSchemesGhostReact, vue: exColorSchemesGhostVue, svelte: exColorSchemesGhostSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesGhost }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Link" codes={{ html: exColorSchemesLink, react: exColorSchemesLinkReact, vue: exColorSchemesLinkVue, svelte: exColorSchemesLinkSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesLink }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icons" codes={{ html: exWithIcons, react: exWithIconsReact, vue: exWithIconsVue, svelte: exWithIconsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIcons }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Loading" codes={{ html: exLoading, react: exLoadingReact, vue: exLoadingVue, svelte: exLoadingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLoading }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Full Width" codes={{ html: exFullWidth, react: exFullWidthReact, vue: exFullWidthVue, svelte: exFullWidthSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFullWidth }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button Group Attached" codes={{ html: exButtonGroupAttached, react: exButtonGroupAttachedReact, vue: exButtonGroupAttachedVue, svelte: exButtonGroupAttachedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonGroupAttached }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button Group Vertical" codes={{ html: exButtonGroupVertical, react: exButtonGroupVerticalReact, vue: exButtonGroupVerticalVue, svelte: exButtonGroupVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonGroupVertical }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Button Group Spaced" codes={{ html: exButtonGroupSpaced, react: exButtonGroupSpacedReact, vue: exButtonGroupSpacedVue, svelte: exButtonGroupSpacedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exButtonGroupSpaced }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Button Group](./button-group)
+- [Icon Button](./icon-button)

@@ -1,0 +1,298 @@
+---
+title: "Stat"
+description: "A statistic display with label, value, and optional change indicator."
+sidebar_label: "Stat"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-stat label="Revenue" value="\$45,231" help-text="+20% from last month" indicator="up"></kb-stat>`;
+export const reactCode = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<Stat label="Revenue" value="\$45,231" help-text="+20% from last month" indicator="up" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stat label="Revenue" value="\$45,231" help-text="+20% from last month" indicator="up" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stat label="Revenue" value="\$45,231" help-text="+20% from last month" indicator="up" />`;
+export const exIncrease = `<kb-stat label="Revenue" value="\$12,450" indicator="increase">
+</kb-stat>`;
+export const exIncreaseReact = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<Stat label="Revenue" value="\$12,450" indicator="increase">
+</Stat>`;
+export const exIncreaseVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stat label="Revenue" value="\$12,450" indicator="increase">
+  </kb-stat>
+</template>`;
+export const exIncreaseSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stat label="Revenue" value="\$12,450" indicator="increase">
+</kb-stat>`;
+export const exDecrease = `<kb-stat label="Churn" value="3.2%" indicator="decrease">
+</kb-stat>`;
+export const exDecreaseReact = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<Stat label="Churn" value="3.2%" indicator="decrease">
+</Stat>`;
+export const exDecreaseVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stat label="Churn" value="3.2%" indicator="decrease">
+  </kb-stat>
+</template>`;
+export const exDecreaseSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stat label="Churn" value="3.2%" indicator="decrease">
+</kb-stat>`;
+export const exNoIndicator = `<kb-stat label="Total Users" value="1,024" indicator="none">
+</kb-stat>`;
+export const exNoIndicatorReact = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<Stat label="Total Users" value="1,024" indicator="none">
+</Stat>`;
+export const exNoIndicatorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stat label="Total Users" value="1,024" indicator="none">
+  </kb-stat>
+</template>`;
+export const exNoIndicatorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stat label="Total Users" value="1,024" indicator="none">
+</kb-stat>`;
+export const exSizes = `<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <kb-stat size="sm" label="Small" value="128" help-text="+4.2%" indicator="increase">
+  </kb-stat>
+  <kb-stat size="md" label="Medium" value="1,024" help-text="+12.5%" indicator="increase">
+  </kb-stat>
+  <kb-stat size="lg" label="Large" value="\$45,200" help-text="-2.3%" indicator="decrease">
+  </kb-stat>
+</div>`;
+export const exSizesReact = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <Stat size="sm" label="Small" value="128" help-text="+4.2%" indicator="increase">
+  </Stat>
+  <Stat size="md" label="Medium" value="1,024" help-text="+12.5%" indicator="increase">
+  </Stat>
+  <Stat size="lg" label="Large" value="\$45,200" help-text="-2.3%" indicator="decrease">
+  </Stat>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:32px;flex-wrap:wrap;">
+    <kb-stat size="sm" label="Small" value="128" help-text="+4.2%" indicator="increase">
+    </kb-stat>
+    <kb-stat size="md" label="Medium" value="1,024" help-text="+12.5%" indicator="increase">
+    </kb-stat>
+    <kb-stat size="lg" label="Large" value="\$45,200" help-text="-2.3%" indicator="decrease">
+    </kb-stat>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <kb-stat size="sm" label="Small" value="128" help-text="+4.2%" indicator="increase">
+  </kb-stat>
+  <kb-stat size="md" label="Medium" value="1,024" help-text="+12.5%" indicator="increase">
+  </kb-stat>
+  <kb-stat size="lg" label="Large" value="\$45,200" help-text="-2.3%" indicator="decrease">
+  </kb-stat>
+</div>`;
+export const exStatRow = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;max-width:600px;">
+  <kb-stat label="Revenue" value="\$12,450" help-text="+12.5%" indicator="increase">
+  </kb-stat>
+  <kb-stat label="Orders" value="342" help-text="-3.1%" indicator="decrease">
+  </kb-stat>
+  <kb-stat label="Customers" value="1,209" help-text="+8.7%" indicator="increase">
+  </kb-stat>
+</div>`;
+export const exStatRowReact = `import { Stat } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;max-width:600px;">
+  <Stat label="Revenue" value="\$12,450" help-text="+12.5%" indicator="increase">
+  </Stat>
+  <Stat label="Orders" value="342" help-text="-3.1%" indicator="decrease">
+  </Stat>
+  <Stat label="Customers" value="1,209" help-text="+8.7%" indicator="increase">
+  </Stat>
+</div>`;
+export const exStatRowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;max-width:600px;">
+    <kb-stat label="Revenue" value="\$12,450" help-text="+12.5%" indicator="increase">
+    </kb-stat>
+    <kb-stat label="Orders" value="342" help-text="-3.1%" indicator="decrease">
+    </kb-stat>
+    <kb-stat label="Customers" value="1,209" help-text="+8.7%" indicator="increase">
+    </kb-stat>
+  </div>
+</template>`;
+export const exStatRowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;max-width:600px;">
+  <kb-stat label="Revenue" value="\$12,450" help-text="+12.5%" indicator="increase">
+  </kb-stat>
+  <kb-stat label="Orders" value="342" help-text="-3.1%" indicator="decrease">
+  </kb-stat>
+  <kb-stat label="Customers" value="1,209" help-text="+8.7%" indicator="increase">
+  </kb-stat>
+</div>`;
+
+# Stat
+
+A statistic display with label, value, and optional change indicator.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Stat } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` | `""` | Descriptive label above the value. |
+| `value` | `value` | `string` | `""` | The main statistic value to display. |
+| `helpText` | `help-text` | `string` | — | Contextual help text displayed below the value (e.g. percentage change). |
+| `indicator` | `indicator` | `StatIndicator` | `'none'` | Change direction indicator arrow. |
+| `size` | `size` | `ComponentSize` | `'md'` | Stat size. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `icon` | Optional icon displayed before the value. |
+
+## Examples
+
+<Demo title="Increase" codes={{ html: exIncrease, react: exIncreaseReact, vue: exIncreaseVue, svelte: exIncreaseSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exIncrease }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Decrease" codes={{ html: exDecrease, react: exDecreaseReact, vue: exDecreaseVue, svelte: exDecreaseSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDecrease }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Indicator" codes={{ html: exNoIndicator, react: exNoIndicatorReact, vue: exNoIndicatorVue, svelte: exNoIndicatorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoIndicator }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Stat Row" codes={{ html: exStatRow, react: exStatRowReact, vue: exStatRowVue, svelte: exStatRowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exStatRow }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Data List](./data-list)

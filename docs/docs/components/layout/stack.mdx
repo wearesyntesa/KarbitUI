@@ -1,0 +1,364 @@
+---
+title: "Stack"
+description: "A flex column (or row) layout with uniform spacing between children."
+sidebar_label: "Stack"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-stack gap="4">
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</kb-stack>`;
+export const reactCode = `import { Stack } from '@wearesyntesa/karbit-ui/react';
+
+<Stack gap="4">
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</Stack>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stack gap="4">
+    <div>First</div>
+    <div>Second</div>
+    <div>Third</div>
+  </kb-stack>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stack gap="4">
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</kb-stack>`;
+export const exWithDivider = `<kb-stack spacing="4" divider>
+  <kb-box p="4" bg="white">Section One</kb-box>
+  <kb-box p="4" bg="white">Section Two</kb-box>
+  <kb-box p="4" bg="white">Section Three</kb-box>
+</kb-stack>`;
+export const exWithDividerReact = `import { Box, Stack } from '@wearesyntesa/karbit-ui/react';
+
+<Stack spacing="4" divider>
+  <Box p="4" bg="white">Section One</Box>
+  <Box p="4" bg="white">Section Two</Box>
+  <Box p="4" bg="white">Section Three</Box>
+</Stack>`;
+export const exWithDividerVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stack spacing="4" divider>
+    <kb-box p="4" bg="white">Section One</kb-box>
+    <kb-box p="4" bg="white">Section Two</kb-box>
+    <kb-box p="4" bg="white">Section Three</kb-box>
+  </kb-stack>
+</template>`;
+export const exWithDividerSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stack spacing="4" divider>
+  <kb-box p="4" bg="white">Section One</kb-box>
+  <kb-box p="4" bg="white">Section Two</kb-box>
+  <kb-box p="4" bg="white">Section Three</kb-box>
+</kb-stack>`;
+export const exHorizontalWithDivider = `<div style="height:80px;">
+  <kb-stack spacing="4" direction="horizontal" divider>
+    <kb-box p="4" bg="white">Left</kb-box>
+    <kb-box p="4" bg="white">Center</kb-box>
+    <kb-box p="4" bg="white">Right</kb-box>
+  </kb-stack>
+</div>`;
+export const exHorizontalWithDividerReact = `import { Box, Stack } from '@wearesyntesa/karbit-ui/react';
+
+<div style="height:80px;">
+  <Stack spacing="4" direction="horizontal" divider>
+    <Box p="4" bg="white">Left</Box>
+    <Box p="4" bg="white">Center</Box>
+    <Box p="4" bg="white">Right</Box>
+  </Stack>
+</div>`;
+export const exHorizontalWithDividerVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="height:80px;">
+    <kb-stack spacing="4" direction="horizontal" divider>
+      <kb-box p="4" bg="white">Left</kb-box>
+      <kb-box p="4" bg="white">Center</kb-box>
+      <kb-box p="4" bg="white">Right</kb-box>
+    </kb-stack>
+  </div>
+</template>`;
+export const exHorizontalWithDividerSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="height:80px;">
+  <kb-stack spacing="4" direction="horizontal" divider>
+    <kb-box p="4" bg="white">Left</kb-box>
+    <kb-box p="4" bg="white">Center</kb-box>
+    <kb-box p="4" bg="white">Right</kb-box>
+  </kb-stack>
+</div>`;
+export const exNestedStacks = `<kb-stack spacing="6">
+  <kb-box p="4" bg="gray-100">
+    <kb-stack direction="horizontal" spacing="4">
+      <kb-box p="2" bg="white">Nested A</kb-box>
+      <kb-box p="2" bg="white">Nested B</kb-box>
+    </kb-stack>
+  </kb-box>
+  <kb-box p="4" bg="gray-100">
+    <kb-stack direction="horizontal" spacing="4">
+      <kb-box p="2" bg="white">Nested C</kb-box>
+      <kb-box p="2" bg="white">Nested D</kb-box>
+    </kb-stack>
+  </kb-box>
+</kb-stack>`;
+export const exNestedStacksReact = `import { Box, Stack } from '@wearesyntesa/karbit-ui/react';
+
+<Stack spacing="6">
+  <Box p="4" bg="gray-100">
+    <Stack direction="horizontal" spacing="4">
+      <Box p="2" bg="white">Nested A</Box>
+      <Box p="2" bg="white">Nested B</Box>
+    </Stack>
+  </Box>
+  <Box p="4" bg="gray-100">
+    <Stack direction="horizontal" spacing="4">
+      <Box p="2" bg="white">Nested C</Box>
+      <Box p="2" bg="white">Nested D</Box>
+    </Stack>
+  </Box>
+</Stack>`;
+export const exNestedStacksVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stack spacing="6">
+    <kb-box p="4" bg="gray-100">
+      <kb-stack direction="horizontal" spacing="4">
+        <kb-box p="2" bg="white">Nested A</kb-box>
+        <kb-box p="2" bg="white">Nested B</kb-box>
+      </kb-stack>
+    </kb-box>
+    <kb-box p="4" bg="gray-100">
+      <kb-stack direction="horizontal" spacing="4">
+        <kb-box p="2" bg="white">Nested C</kb-box>
+        <kb-box p="2" bg="white">Nested D</kb-box>
+      </kb-stack>
+    </kb-box>
+  </kb-stack>
+</template>`;
+export const exNestedStacksSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stack spacing="6">
+  <kb-box p="4" bg="gray-100">
+    <kb-stack direction="horizontal" spacing="4">
+      <kb-box p="2" bg="white">Nested A</kb-box>
+      <kb-box p="2" bg="white">Nested B</kb-box>
+    </kb-stack>
+  </kb-box>
+  <kb-box p="4" bg="gray-100">
+    <kb-stack direction="horizontal" spacing="4">
+      <kb-box p="2" bg="white">Nested C</kb-box>
+      <kb-box p="2" bg="white">Nested D</kb-box>
+    </kb-stack>
+  </kb-box>
+</kb-stack>`;
+export const exFormLayout = `<kb-stack spacing="4" divider>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">NAME</p>
+    <p class="text-sm">Jane Doe</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">EMAIL</p>
+    <p class="text-sm">jane@example.com</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">ROLE</p>
+    <p class="text-sm">Administrator</p>
+  </div>
+</kb-stack>`;
+export const exFormLayoutReact = `import { Stack } from '@wearesyntesa/karbit-ui/react';
+
+<Stack spacing="4" divider>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">NAME</p>
+    <p class="text-sm">Jane Doe</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">EMAIL</p>
+    <p class="text-sm">jane@example.com</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">ROLE</p>
+    <p class="text-sm">Administrator</p>
+  </div>
+</Stack>`;
+export const exFormLayoutVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-stack spacing="4" divider>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">NAME</p>
+      <p class="text-sm">Jane Doe</p>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">EMAIL</p>
+      <p class="text-sm">jane@example.com</p>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">ROLE</p>
+      <p class="text-sm">Administrator</p>
+    </div>
+  </kb-stack>
+</template>`;
+export const exFormLayoutSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-stack spacing="4" divider>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">NAME</p>
+    <p class="text-sm">Jane Doe</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">EMAIL</p>
+    <p class="text-sm">jane@example.com</p>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-1">ROLE</p>
+    <p class="text-sm">Administrator</p>
+  </div>
+</kb-stack>`;
+
+# Stack
+
+A flex column (or row) layout with uniform spacing between children.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Stack } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `Orientation` | `'vertical'` | Stack direction. `'vertical'` stacks top-to-bottom, `'horizontal'` left-to-right. |
+| `spacing` | `spacing` | `SpacingValue` | — | Gap between children as a Tailwind spacing value (e.g. `'4'`, `'8'`). |
+| `divider` | `divider` | `boolean` | `false` | Insert `<kb-divider>` elements between children automatically. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="With Divider" codes={{ html: exWithDivider, react: exWithDividerReact, vue: exWithDividerVue, svelte: exWithDividerSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDivider }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Horizontal With Divider" codes={{ html: exHorizontalWithDivider, react: exHorizontalWithDividerReact, vue: exHorizontalWithDividerVue, svelte: exHorizontalWithDividerSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHorizontalWithDivider }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Nested Stacks" codes={{ html: exNestedStacks, react: exNestedStacksReact, vue: exNestedStacksVue, svelte: exNestedStacksSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNestedStacks }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Form Layout" codes={{ html: exFormLayout, react: exFormLayoutReact, vue: exFormLayoutVue, svelte: exFormLayoutSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFormLayout }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Flex](./flex)
+- [Box](./box)

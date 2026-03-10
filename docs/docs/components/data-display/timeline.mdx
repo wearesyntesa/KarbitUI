@@ -1,0 +1,154 @@
+---
+title: "Timeline"
+description: "A vertical timeline for displaying chronological events."
+sidebar_label: "Timeline"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Items are set via JavaScript property -->
+<kb-timeline></kb-timeline>
+
+<script>
+  document.querySelector('kb-timeline').items = [
+    { id: '1', title: 'Created', description: 'Issue opened' },
+    { id: '2', title: 'In Progress', description: 'Work started' },
+    { id: '3', title: 'Done', description: 'Completed', active: true },
+  ];
+</script>`;
+export const reactCode = `import { Timeline } from '@wearesyntesa/karbit-ui/react';
+
+<Timeline
+  items={
+  [
+      { id: '1', title: 'Created', description: 'Issue opened' },
+      { id: '2', title: 'In Progress', description: 'Work started' },
+      { id: '3', title: 'Done', description: 'Completed', active: true },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const items = [
+    { id: '1', title: 'Created', description: 'Issue opened' },
+    { id: '2', title: 'In Progress', description: 'Work started' },
+    { id: '3', title: 'Done', description: 'Completed', active: true },
+  ];
+</script>
+
+<template>
+  <kb-timeline :items="items" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const items = [
+    { id: '1', title: 'Created', description: 'Issue opened' },
+    { id: '2', title: 'In Progress', description: 'Work started' },
+    { id: '3', title: 'Done', description: 'Completed', active: true },
+  ];
+</script>
+
+<kb-timeline items={items} />`;
+export const demoHtml = `<kb-timeline></kb-timeline>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-timeline').items = [
+      { id: '1', title: 'Created', description: 'Issue opened' },
+      { id: '2', title: 'In Progress', description: 'Work started' },
+      { id: '3', title: 'Done', description: 'Completed', active: true },
+    ];
+};
+
+# Timeline
+
+A vertical timeline for displaying chronological events.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Timeline } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `items` | `items` | `TimelineItem[]` | `[]` | Timeline items to display. |
+| `variant` | `variant` | `TimelineVariant` | `'left'` | Layout variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Size of the timeline. |
+| `lineVariant` | `line-variant` | `TimelineLineVariant` | `'solid'` | Line style variant. |
+| `showIcons` | `show-icons` | `boolean` | `false` | Show status icons inside indicator squares. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-timeline-item-click` | `{ index: number, id: string }` | Dispatched when a timeline item is clicked, with `detail.index` and `detail.id`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `button`
+
+**Attributes:** `aria-label`
+
+## See Also
+
+- [Steps](../navigation/steps)

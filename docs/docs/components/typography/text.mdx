@@ -1,0 +1,755 @@
+---
+title: "Text"
+description: "A general-purpose text element with size, weight, and tone variants."
+sidebar_label: "Text"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-text size="md" tone="secondary">Body text content</kb-text>`;
+export const reactCode = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text size="md" tone="secondary">Body text content</Text>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text size="md" tone="secondary">Body text content</kb-text>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text size="md" tone="secondary">Body text content</kb-text>`;
+export const exDefault = `<kb-text variant="body" size="base">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exDefaultReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="base">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="base">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="base">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exExtraSmall = `<kb-text variant="body" size="xs">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exExtraSmallReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="xs">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exExtraSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="xs">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exExtraSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="xs">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exSmall = `<kb-text variant="body" size="sm">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exSmallReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="sm">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="sm">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="sm">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exLarge = `<kb-text variant="body" size="lg">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exLargeReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="lg">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="lg">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="lg">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exExtraLarge = `<kb-text variant="body" size="xl">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exExtraLargeReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="xl">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exExtraLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="xl">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exExtraLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="xl">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exDoubleXL = `<kb-text variant="body" size="2xl">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exDoubleXLReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="2xl">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exDoubleXLVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="2xl">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exDoubleXLSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="2xl">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exTruncated = `<kb-text variant="body" size="base" truncate max-w="xs">
+  This is a very long text that will be truncated when it overflows the container.
+</kb-text>`;
+export const exTruncatedReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="body" size="base" truncate max-w="xs">
+  This is a very long text that will be truncated when it overflows the container.
+</Text>`;
+export const exTruncatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="body" size="base" truncate max-w="xs">
+    This is a very long text that will be truncated when it overflows the container.
+  </kb-text>
+</template>`;
+export const exTruncatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="body" size="base" truncate max-w="xs">
+  This is a very long text that will be truncated when it overflows the container.
+</kb-text>`;
+export const exVariants = `<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">body (default)</p>
+    <kb-text variant="body">
+      The quick brown fox jumps over the lazy dog. This is the default body text variant used for paragraphs and general content.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">label</p>
+    <kb-text variant="label">Field label</kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">caption</p>
+    <kb-text variant="caption">Updated 3 minutes ago by admin</kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">overline</p>
+    <kb-text variant="overline">Section category</kb-text>
+  </div>
+</div>`;
+export const exVariantsReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">body (default)</p>
+    <Text variant="body">
+      The quick brown fox jumps over the lazy dog. This is the default body text variant used for paragraphs and general content.
+    </Text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">label</p>
+    <Text variant="label">Field label</Text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">caption</p>
+    <Text variant="caption">Updated 3 minutes ago by admin</Text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">overline</p>
+    <Text variant="overline">Section category</Text>
+  </div>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">body (default)</p>
+      <kb-text variant="body">
+        The quick brown fox jumps over the lazy dog. This is the default body text variant used for paragraphs and general content.
+      </kb-text>
+    </div>
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">label</p>
+      <kb-text variant="label">Field label</kb-text>
+    </div>
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">caption</p>
+      <kb-text variant="caption">Updated 3 minutes ago by admin</kb-text>
+    </div>
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">overline</p>
+      <kb-text variant="overline">Section category</kb-text>
+    </div>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">body (default)</p>
+    <kb-text variant="body">
+      The quick brown fox jumps over the lazy dog. This is the default body text variant used for paragraphs and general content.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">label</p>
+    <kb-text variant="label">Field label</kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">caption</p>
+    <kb-text variant="caption">Updated 3 minutes ago by admin</kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">overline</p>
+    <kb-text variant="overline">Section category</kb-text>
+  </div>
+</div>`;
+export const exLabel = `<kb-text variant="label" size="base">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exLabelReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="label" size="base">The quick brown fox jumps over the lazy dog.</Text>`;
+export const exLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="label" size="base">The quick brown fox jumps over the lazy dog.</kb-text>
+</template>`;
+export const exLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="label" size="base">The quick brown fox jumps over the lazy dog.</kb-text>`;
+export const exCaption = `<kb-text variant="caption" size="base">Last updated 3 minutes ago</kb-text>`;
+export const exCaptionReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="caption" size="base">Last updated 3 minutes ago</Text>`;
+export const exCaptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="caption" size="base">Last updated 3 minutes ago</kb-text>
+</template>`;
+export const exCaptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="caption" size="base">Last updated 3 minutes ago</kb-text>`;
+export const exOverline = `<kb-text variant="overline" size="base">Featured</kb-text>`;
+export const exOverlineReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<Text variant="overline" size="base">Featured</Text>`;
+export const exOverlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-text variant="overline" size="base">Featured</kb-text>
+</template>`;
+export const exOverlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-text variant="overline" size="base">Featured</kb-text>`;
+export const exTones = `<div class="flex flex-col gap-3">
+  <kb-text tone="primary">Default (primary)</kb-text>
+  <kb-text tone="secondary">Secondary tone</kb-text>
+  <kb-text tone="muted">Muted tone</kb-text>
+  <kb-text tone="accent">Accent tone</kb-text>
+  <kb-text tone="success">Success tone</kb-text>
+  <kb-text tone="warning">Warning tone</kb-text>
+  <kb-text tone="error">Error tone</kb-text>
+</div>`;
+export const exTonesReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-3">
+  <Text tone="primary">Default (primary)</Text>
+  <Text tone="secondary">Secondary tone</Text>
+  <Text tone="muted">Muted tone</Text>
+  <Text tone="accent">Accent tone</Text>
+  <Text tone="success">Success tone</Text>
+  <Text tone="warning">Warning tone</Text>
+  <Text tone="error">Error tone</Text>
+</div>`;
+export const exTonesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <kb-text tone="primary">Default (primary)</kb-text>
+    <kb-text tone="secondary">Secondary tone</kb-text>
+    <kb-text tone="muted">Muted tone</kb-text>
+    <kb-text tone="accent">Accent tone</kb-text>
+    <kb-text tone="success">Success tone</kb-text>
+    <kb-text tone="warning">Warning tone</kb-text>
+    <kb-text tone="error">Error tone</kb-text>
+  </div>
+</template>`;
+export const exTonesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-3">
+  <kb-text tone="primary">Default (primary)</kb-text>
+  <kb-text tone="secondary">Secondary tone</kb-text>
+  <kb-text tone="muted">Muted tone</kb-text>
+  <kb-text tone="accent">Accent tone</kb-text>
+  <kb-text tone="success">Success tone</kb-text>
+  <kb-text tone="warning">Warning tone</kb-text>
+  <kb-text tone="error">Error tone</kb-text>
+</div>`;
+export const exLineClamping = `<div class="flex flex-col gap-6" style="max-width:400px;">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=1</p>
+    <kb-text clamp="1">
+      This is a very long paragraph that should be clamped to a single line. It contains enough text to demonstrate the line clamping feature of the kb-text component.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=2</p>
+    <kb-text clamp="2">
+      This is a very long paragraph that should be clamped to two lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=3</p>
+    <kb-text clamp="3">
+      This is a very long paragraph that should be clamped to three lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis. This paragraph has even more text to ensure it exceeds three lines at the given container width.
+    </kb-text>
+  </div>
+</div>`;
+export const exLineClampingReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6" style="max-width:400px;">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=1</p>
+    <Text clamp="1">
+      This is a very long paragraph that should be clamped to a single line. It contains enough text to demonstrate the line clamping feature of the kb-text component.
+    </Text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=2</p>
+    <Text clamp="2">
+      This is a very long paragraph that should be clamped to two lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis.
+    </Text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=3</p>
+    <Text clamp="3">
+      This is a very long paragraph that should be clamped to three lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis. This paragraph has even more text to ensure it exceeds three lines at the given container width.
+    </Text>
+  </div>
+</div>`;
+export const exLineClampingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6" style="max-width:400px;">
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=1</p>
+      <kb-text clamp="1">
+        This is a very long paragraph that should be clamped to a single line. It contains enough text to demonstrate the line clamping feature of the kb-text component.
+      </kb-text>
+    </div>
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=2</p>
+      <kb-text clamp="2">
+        This is a very long paragraph that should be clamped to two lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis.
+      </kb-text>
+    </div>
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=3</p>
+      <kb-text clamp="3">
+        This is a very long paragraph that should be clamped to three lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis. This paragraph has even more text to ensure it exceeds three lines at the given container width.
+      </kb-text>
+    </div>
+  </div>
+</template>`;
+export const exLineClampingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6" style="max-width:400px;">
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=1</p>
+    <kb-text clamp="1">
+      This is a very long paragraph that should be clamped to a single line. It contains enough text to demonstrate the line clamping feature of the kb-text component.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=2</p>
+    <kb-text clamp="2">
+      This is a very long paragraph that should be clamped to two lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis.
+    </kb-text>
+  </div>
+  <div>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500 mb-2">clamp=3</p>
+    <kb-text clamp="3">
+      This is a very long paragraph that should be clamped to three lines. It contains enough text to demonstrate the line clamping feature of the kb-text component. The remaining text will be hidden with an ellipsis. This paragraph has even more text to ensure it exceeds three lines at the given container width.
+    </kb-text>
+  </div>
+</div>`;
+export const exNoWrap = `<div style="max-width:250px;" class="border border-gray-200 dark:border-zinc-700 p-4">
+  <kb-text no-wrap>This text will not wrap to the next line, it will overflow its container instead.</kb-text>
+</div>`;
+export const exNoWrapReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:250px;" class="border border-gray-200 dark:border-zinc-700 p-4">
+  <Text no-wrap>This text will not wrap to the next line, it will overflow its container instead.</Text>
+</div>`;
+export const exNoWrapVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:250px;" class="border border-gray-200 dark:border-zinc-700 p-4">
+    <kb-text no-wrap>This text will not wrap to the next line, it will overflow its container instead.</kb-text>
+  </div>
+</template>`;
+export const exNoWrapSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:250px;" class="border border-gray-200 dark:border-zinc-700 p-4">
+  <kb-text no-wrap>This text will not wrap to the next line, it will overflow its container instead.</kb-text>
+</div>`;
+export const exAsElements = `<div class="flex flex-col gap-3">
+  <kb-text as="p">Rendered as &lt;p&gt; (default)</kb-text>
+  <kb-text as="span">Rendered as &lt;span&gt;</kb-text>
+  <kb-text as="div">Rendered as &lt;div&gt;</kb-text>
+  <kb-text as="label">Rendered as &lt;label&gt;</kb-text>
+</div>`;
+export const exAsElementsReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-3">
+  <Text as="p">Rendered as &lt;p&gt; (default)</Text>
+  <Text as="span">Rendered as &lt;span&gt;</Text>
+  <Text as="div">Rendered as &lt;div&gt;</Text>
+  <Text as="label">Rendered as &lt;label&gt;</Text>
+</div>`;
+export const exAsElementsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <kb-text as="p">Rendered as &lt;p&gt; (default)</kb-text>
+    <kb-text as="span">Rendered as &lt;span&gt;</kb-text>
+    <kb-text as="div">Rendered as &lt;div&gt;</kb-text>
+    <kb-text as="label">Rendered as &lt;label&gt;</kb-text>
+  </div>
+</template>`;
+export const exAsElementsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-3">
+  <kb-text as="p">Rendered as &lt;p&gt; (default)</kb-text>
+  <kb-text as="span">Rendered as &lt;span&gt;</kb-text>
+  <kb-text as="div">Rendered as &lt;div&gt;</kb-text>
+  <kb-text as="label">Rendered as &lt;label&gt;</kb-text>
+</div>`;
+export const exComposedExample = `<div class="flex flex-col gap-1 max-w-sm">
+  <kb-text variant="overline" tone="accent">New Release</kb-text>
+  <kb-text size="lg" font-weight="semibold">KarbitUI v2.0</kb-text>
+  <kb-text variant="caption" tone="muted">Published on February 10, 2026</kb-text>
+  <kb-text class="mt-2" clamp="3">
+    The latest release of KarbitUI brings a complete typography enhancement pass with new variants, tone system, line clamping, and flexible element rendering. Build beautiful, structured interfaces with minimal effort.
+  </kb-text>
+</div>`;
+export const exComposedExampleReact = `import { Text } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-1 max-w-sm">
+  <Text variant="overline" tone="accent">New Release</Text>
+  <Text size="lg" font-weight="semibold">KarbitUI v2.0</Text>
+  <Text variant="caption" tone="muted">Published on February 10, 2026</Text>
+  <Text class="mt-2" clamp="3">
+    The latest release of KarbitUI brings a complete typography enhancement pass with new variants, tone system, line clamping, and flexible element rendering. Build beautiful, structured interfaces with minimal effort.
+  </Text>
+</div>`;
+export const exComposedExampleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-1 max-w-sm">
+    <kb-text variant="overline" tone="accent">New Release</kb-text>
+    <kb-text size="lg" font-weight="semibold">KarbitUI v2.0</kb-text>
+    <kb-text variant="caption" tone="muted">Published on February 10, 2026</kb-text>
+    <kb-text class="mt-2" clamp="3">
+      The latest release of KarbitUI brings a complete typography enhancement pass with new variants, tone system, line clamping, and flexible element rendering. Build beautiful, structured interfaces with minimal effort.
+    </kb-text>
+  </div>
+</template>`;
+export const exComposedExampleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-1 max-w-sm">
+  <kb-text variant="overline" tone="accent">New Release</kb-text>
+  <kb-text size="lg" font-weight="semibold">KarbitUI v2.0</kb-text>
+  <kb-text variant="caption" tone="muted">Published on February 10, 2026</kb-text>
+  <kb-text class="mt-2" clamp="3">
+    The latest release of KarbitUI brings a complete typography enhancement pass with new variants, tone system, line clamping, and flexible element rendering. Build beautiful, structured interfaces with minimal effort.
+  </kb-text>
+</div>`;
+
+# Text
+
+A general-purpose text element with size, weight, and tone variants.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Text } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `TextVariant` | `'body'` | Typography preset controlling font family, case, and tracking. |
+| `size` | `size` | `FontSizeValue` | — | Font size override. When variant is `'body'`, defaults to `'base'`; other variants use their recipe size. |
+| `tone` | `tone` | `TextTone` | — | Semantic color tone. Falls back to the variant's default tone when unset. |
+| `clamp` | `clamp` | `number` | — | Maximum visible lines before truncation with an ellipsis (1–6). |
+| `noWrap` | `no-wrap` | `boolean` | `false` | Prevent text wrapping with `whitespace-nowrap`. |
+| `truncate` | `truncate` | `boolean` | `false` | Truncate overflowing text with an ellipsis on a single line. |
+| `as` | `as` | `TextAs` | `'p'` | HTML element to render. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Extra Small" codes={{ html: exExtraSmall, react: exExtraSmallReact, vue: exExtraSmallVue, svelte: exExtraSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exExtraSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Small" codes={{ html: exSmall, react: exSmallReact, vue: exSmallVue, svelte: exSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Large" codes={{ html: exLarge, react: exLargeReact, vue: exLargeVue, svelte: exLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Extra Large" codes={{ html: exExtraLarge, react: exExtraLargeReact, vue: exExtraLargeVue, svelte: exExtraLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exExtraLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Double X L" codes={{ html: exDoubleXL, react: exDoubleXLReact, vue: exDoubleXLVue, svelte: exDoubleXLSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDoubleXL }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Truncated" codes={{ html: exTruncated, react: exTruncatedReact, vue: exTruncatedVue, svelte: exTruncatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTruncated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Label" codes={{ html: exLabel, react: exLabelReact, vue: exLabelVue, svelte: exLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Caption" codes={{ html: exCaption, react: exCaptionReact, vue: exCaptionVue, svelte: exCaptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCaption }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Overline" codes={{ html: exOverline, react: exOverlineReact, vue: exOverlineVue, svelte: exOverlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOverline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Tones" codes={{ html: exTones, react: exTonesReact, vue: exTonesVue, svelte: exTonesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTones }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Line Clamping" codes={{ html: exLineClamping, react: exLineClampingReact, vue: exLineClampingVue, svelte: exLineClampingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLineClamping }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Wrap" codes={{ html: exNoWrap, react: exNoWrapReact, vue: exNoWrapVue, svelte: exNoWrapSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoWrap }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="As Elements" codes={{ html: exAsElements, react: exAsElementsReact, vue: exAsElementsVue, svelte: exAsElementsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAsElements }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Composed Example" codes={{ html: exComposedExample, react: exComposedExampleReact, vue: exComposedExampleVue, svelte: exComposedExampleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exComposedExample }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Heading](./heading)

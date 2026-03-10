@@ -1,0 +1,498 @@
+---
+title: "Pin Input"
+description: "A sequence of single-character inputs for PIN or verification codes."
+sidebar_label: "Pin Input"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-pin-input length="4"></kb-pin-input>`;
+export const reactCode = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput length="4" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input length="4" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input length="4" />`;
+export const exDefault = `<kb-pin-input>
+</kb-pin-input>`;
+export const exDefaultReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput>
+</PinInput>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input>
+  </kb-pin-input>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input>
+</kb-pin-input>`;
+export const exSixDigit = `<kb-pin-input length="6">
+</kb-pin-input>`;
+export const exSixDigitReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput length="6">
+</PinInput>`;
+export const exSixDigitVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input length="6">
+  </kb-pin-input>
+</template>`;
+export const exSixDigitSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input length="6">
+</kb-pin-input>`;
+export const exAlphanumeric = `<kb-pin-input type="alphanumeric" length="5">
+</kb-pin-input>`;
+export const exAlphanumericReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput type="alphanumeric" length="5">
+</PinInput>`;
+export const exAlphanumericVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input type="alphanumeric" length="5">
+  </kb-pin-input>
+</template>`;
+export const exAlphanumericSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input type="alphanumeric" length="5">
+</kb-pin-input>`;
+export const exMasked = `<kb-pin-input mask>
+</kb-pin-input>`;
+export const exMaskedReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput mask>
+</PinInput>`;
+export const exMaskedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input mask>
+  </kb-pin-input>
+</template>`;
+export const exMaskedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input mask>
+</kb-pin-input>`;
+export const exSizes = `<div style="display:flex;flex-direction:column;gap:16px;">
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xs
+    </strong>
+    <kb-pin-input size="xs">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      sm
+    </strong>
+    <kb-pin-input size="sm">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      md
+    </strong>
+    <kb-pin-input size="md">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      lg
+    </strong>
+    <kb-pin-input size="lg">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xl
+    </strong>
+    <kb-pin-input size="xl">
+    </kb-pin-input>
+  </div>
+</div>`;
+export const exSizesReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xs
+    </strong>
+    <PinInput size="xs">
+    </PinInput>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      sm
+    </strong>
+    <PinInput size="sm">
+    </PinInput>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      md
+    </strong>
+    <PinInput size="md">
+    </PinInput>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      lg
+    </strong>
+    <PinInput size="lg">
+    </PinInput>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xl
+    </strong>
+    <PinInput size="xl">
+    </PinInput>
+  </div>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div>
+      <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+        xs
+      </strong>
+      <kb-pin-input size="xs">
+      </kb-pin-input>
+    </div>
+    <div>
+      <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+        sm
+      </strong>
+      <kb-pin-input size="sm">
+      </kb-pin-input>
+    </div>
+    <div>
+      <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+        md
+      </strong>
+      <kb-pin-input size="md">
+      </kb-pin-input>
+    </div>
+    <div>
+      <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+        lg
+      </strong>
+      <kb-pin-input size="lg">
+      </kb-pin-input>
+    </div>
+    <div>
+      <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+        xl
+      </strong>
+      <kb-pin-input size="xl">
+      </kb-pin-input>
+    </div>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xs
+    </strong>
+    <kb-pin-input size="xs">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      sm
+    </strong>
+    <kb-pin-input size="sm">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      md
+    </strong>
+    <kb-pin-input size="md">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      lg
+    </strong>
+    <kb-pin-input size="lg">
+    </kb-pin-input>
+  </div>
+  <div>
+    <strong style="font-size:12px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;display:block;margin-bottom:4px;">
+      xl
+    </strong>
+    <kb-pin-input size="xl">
+    </kb-pin-input>
+  </div>
+</div>`;
+export const exDisabled = `<kb-pin-input disabled value="12">
+</kb-pin-input>`;
+export const exDisabledReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput disabled value="12">
+</PinInput>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input disabled value="12">
+  </kb-pin-input>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input disabled value="12">
+</kb-pin-input>`;
+export const exInvalid = `<kb-pin-input invalid value="99">
+</kb-pin-input>`;
+export const exInvalidReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput invalid value="99">
+</PinInput>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input invalid value="99">
+  </kb-pin-input>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input invalid value="99">
+</kb-pin-input>`;
+export const exPreFilled = `<kb-pin-input value="1234">
+</kb-pin-input>`;
+export const exPreFilledReact = `import { PinInput } from '@wearesyntesa/karbit-ui/react';
+
+<PinInput value="1234">
+</PinInput>`;
+export const exPreFilledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-pin-input value="1234">
+  </kb-pin-input>
+</template>`;
+export const exPreFilledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-pin-input value="1234">
+</kb-pin-input>`;
+
+# Pin Input
+
+A sequence of single-character inputs for PIN or verification codes.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { PinInput } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `length` | `length` | `number` | `4` | Number of input fields. |
+| `type` | `type` | `PinInputType` | `'numeric'` | Input type constraint. |
+| `mask` | `mask` | `boolean` | `false` | Show dots instead of characters. |
+| `size` | `size` | `ComponentSize` | `'md'` | Input size controlling cell dimensions and font size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error border styling. |
+| `name` | `name` | `string` | — | Form field name. |
+| `value` | `value` | `string` | `""` | Current combined value. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-input` | `{ value: string }` | Fires on every character change. Detail: `{ value: string }`. |
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Fires on value commit. Detail: `{ source: 'pin-input', value: string }`. |
+| `kb-complete` | `{ value: string }` | Fires when all inputs are filled. Detail: `{ value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `Backspace` | Delete the previous character or item |
+
+### ARIA
+
+**Roles:** `group`
+
+**Attributes:** `aria-invalid`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Six Digit" codes={{ html: exSixDigit, react: exSixDigitReact, vue: exSixDigitVue, svelte: exSixDigitSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSixDigit }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Alphanumeric" codes={{ html: exAlphanumeric, react: exAlphanumericReact, vue: exAlphanumericVue, svelte: exAlphanumericSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAlphanumeric }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Masked" codes={{ html: exMasked, react: exMaskedReact, vue: exMaskedVue, svelte: exMaskedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMasked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Pre Filled" codes={{ html: exPreFilled, react: exPreFilledReact, vue: exPreFilledVue, svelte: exPreFilledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPreFilled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)

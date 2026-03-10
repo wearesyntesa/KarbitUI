@@ -1,0 +1,338 @@
+---
+title: "File Upload"
+description: "A drag-and-drop file upload area with file list preview."
+sidebar_label: "File Upload"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-file-upload accept="image/*"></kb-file-upload>`;
+export const reactCode = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload accept="image/*" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload accept="image/*" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload accept="image/*" />`;
+export const exDefault = `<kb-file-upload>
+</kb-file-upload>`;
+export const exDefaultReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload>
+</FileUpload>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload>
+  </kb-file-upload>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload>
+</kb-file-upload>`;
+export const exWithAccept = `<kb-file-upload accept=".pdf,.jpg,.png" multiple>
+</kb-file-upload>`;
+export const exWithAcceptReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload accept=".pdf,.jpg,.png" multiple>
+</FileUpload>`;
+export const exWithAcceptVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload accept=".pdf,.jpg,.png" multiple>
+  </kb-file-upload>
+</template>`;
+export const exWithAcceptSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload accept=".pdf,.jpg,.png" multiple>
+</kb-file-upload>`;
+export const exMaxSize = `<kb-file-upload accept="image/*" multiple max-size="5242880" max-files="3">
+</kb-file-upload>`;
+export const exMaxSizeReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload accept="image/*" multiple max-size="5242880" max-files="3">
+</FileUpload>`;
+export const exMaxSizeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload accept="image/*" multiple max-size="5242880" max-files="3">
+  </kb-file-upload>
+</template>`;
+export const exMaxSizeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload accept="image/*" multiple max-size="5242880" max-files="3">
+</kb-file-upload>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-file-upload size="xs">
+  </kb-file-upload>
+  <kb-file-upload size="sm">
+  </kb-file-upload>
+  <kb-file-upload size="md">
+  </kb-file-upload>
+  <kb-file-upload size="lg">
+  </kb-file-upload>
+  <kb-file-upload size="xl">
+  </kb-file-upload>
+</div>`;
+export const exSizesReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <FileUpload size="xs">
+  </FileUpload>
+  <FileUpload size="sm">
+  </FileUpload>
+  <FileUpload size="md">
+  </FileUpload>
+  <FileUpload size="lg">
+  </FileUpload>
+  <FileUpload size="xl">
+  </FileUpload>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-file-upload size="xs">
+    </kb-file-upload>
+    <kb-file-upload size="sm">
+    </kb-file-upload>
+    <kb-file-upload size="md">
+    </kb-file-upload>
+    <kb-file-upload size="lg">
+    </kb-file-upload>
+    <kb-file-upload size="xl">
+    </kb-file-upload>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-file-upload size="xs">
+  </kb-file-upload>
+  <kb-file-upload size="sm">
+  </kb-file-upload>
+  <kb-file-upload size="md">
+  </kb-file-upload>
+  <kb-file-upload size="lg">
+  </kb-file-upload>
+  <kb-file-upload size="xl">
+  </kb-file-upload>
+</div>`;
+export const exDisabled = `<kb-file-upload disabled>
+</kb-file-upload>`;
+export const exDisabledReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload disabled>
+</FileUpload>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload disabled>
+  </kb-file-upload>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload disabled>
+</kb-file-upload>`;
+export const exInvalid = `<kb-file-upload invalid>
+</kb-file-upload>`;
+export const exInvalidReact = `import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+
+<FileUpload invalid>
+</FileUpload>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-file-upload invalid>
+  </kb-file-upload>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-file-upload invalid>
+</kb-file-upload>`;
+
+# File Upload
+
+A drag-and-drop file upload area with file list preview.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { FileUpload } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `accept` | `accept` | `string` | — | Accepted file types (MIME types or extensions). |
+| `multiple` | `multiple` | `boolean` | `false` | Allow multiple file selection. |
+| `maxSize` | `max-size` | `number` | `0` | Maximum file size in bytes. 0 = unlimited. |
+| `maxFiles` | `max-files` | `number` | `0` | Maximum number of files. 0 = unlimited. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-file-select` | `{ files: readonly File[] }` | Fires when files are selected. Detail: `{ files: File[] }`. |
+| `kb-file-remove` | `{ name: string, index: number }` | Fires when a file is removed. Detail: `{ name: string, index: number }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `button`
+
+**Attributes:** `aria-disabled`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Accept" codes={{ html: exWithAccept, react: exWithAcceptReact, vue: exWithAcceptVue, svelte: exWithAcceptSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithAccept }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Max Size" codes={{ html: exMaxSize, react: exMaxSizeReact, vue: exMaxSizeVue, svelte: exMaxSizeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMaxSize }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Button](./button)

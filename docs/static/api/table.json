@@ -1,0 +1,132 @@
+{
+  "name": "Table",
+  "tag": "kb-table",
+  "category": "data-display",
+  "description": "A data table with sorting, striping, and hover states.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-table.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Table"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TableVariant",
+      "default": "'simple'",
+      "reflect": false,
+      "description": "Visual variant - `'simple'` (default lines), `'striped'` (alternating row bg), or `'bordered'` (cell borders)."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "TableSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Cell and header padding size."
+    },
+    {
+      "name": "hoverable",
+      "attribute": "hoverable",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Highlight rows on hover."
+    },
+    {
+      "name": "interactive",
+      "attribute": "interactive",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make body rows clickable/focusable and emit `kb-row-click` events."
+    },
+    {
+      "name": "stickyHeader",
+      "attribute": "sticky-header",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Stick the `<thead>` to the top of the scroll container."
+    },
+    {
+      "name": "caption",
+      "attribute": "caption",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Caption text shown in a labeled bar above the table."
+    },
+    {
+      "name": "sortable",
+      "attribute": "sortable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Enable click-to-sort on header cells (use `data-no-sort` on a `<th>` to opt out)."
+    },
+    {
+      "name": "searchable",
+      "attribute": "searchable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a search toolbar that filters rows by text content."
+    },
+    {
+      "name": "resizable",
+      "attribute": "resizable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Enable column-edge drag handles for width adjustment."
+    },
+    {
+      "name": "searchPlaceholder",
+      "attribute": "search-placeholder",
+      "type": "string",
+      "default": "'Search...'",
+      "reflect": false,
+      "description": "Placeholder text shown in the search input."
+    },
+    {
+      "name": "emptyText",
+      "attribute": "empty-text",
+      "type": "string",
+      "default": "'No results'",
+      "reflect": false,
+      "description": "Text shown when no rows match the search query (or the table has no rows)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-row-click",
+      "detail": "`{ index: number, row: HTMLTableRowElement }`",
+      "description": "Interactive body row clicked/activated. `detail: { index: number; row: HTMLTableRowElement }`."
+    },
+    {
+      "name": "kb-sort",
+      "detail": "`{ column: number, direction: SortDirection }`",
+      "description": "Sort state changed. `detail: { column: number; direction: 'asc' | 'desc' }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": []
+}

@@ -1,0 +1,697 @@
+---
+title: "Switch"
+description: "A toggle switch for binary on/off selections."
+sidebar_label: "Switch"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-switch>Enable notifications</kb-switch>`;
+export const reactCode = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<Switch>Enable notifications</Switch>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-switch>Enable notifications</kb-switch>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-switch>Enable notifications</kb-switch>`;
+export const exDefault = `<kb-switch>Enable notifications</kb-switch>`;
+export const exDefaultReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<Switch>Enable notifications</Switch>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-switch>Enable notifications</kb-switch>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-switch>Enable notifications</kb-switch>`;
+export const exChecked = `<kb-switch checked>Dark mode</kb-switch>`;
+export const exCheckedReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<Switch checked>Dark mode</Switch>`;
+export const exCheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-switch checked>Dark mode</kb-switch>
+</template>`;
+export const exCheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-switch checked>Dark mode</kb-switch>`;
+export const exDisabled = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch disabled>Disabled unchecked</kb-switch>
+  <kb-switch disabled checked>Disabled checked</kb-switch>
+</div>`;
+export const exDisabledReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch disabled>Disabled unchecked</Switch>
+  <Switch disabled checked>Disabled checked</Switch>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch disabled>Disabled unchecked</kb-switch>
+    <kb-switch disabled checked>Disabled checked</kb-switch>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch disabled>Disabled unchecked</kb-switch>
+  <kb-switch disabled checked>Disabled checked</kb-switch>
+</div>`;
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch invalid>Must accept terms</kb-switch>
+  <kb-switch invalid>
+    Enable feature
+    <span slot="description">This field is required</span>
+  </kb-switch>
+</div>`;
+export const exInvalidReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch invalid>Must accept terms</Switch>
+  <Switch invalid>
+    Enable feature
+    <span slot="description">This field is required</span>
+  </Switch>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch invalid>Must accept terms</kb-switch>
+    <kb-switch invalid>
+      Enable feature
+      <span slot="description">This field is required</span>
+    </kb-switch>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch invalid>Must accept terms</kb-switch>
+  <kb-switch invalid>
+    Enable feature
+    <span slot="description">This field is required</span>
+  </kb-switch>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch size="xs" checked>Extra Small</kb-switch>
+  <kb-switch size="sm" checked>Small</kb-switch>
+  <kb-switch size="md" checked>Medium</kb-switch>
+  <kb-switch size="lg" checked>Large</kb-switch>
+  <kb-switch size="xl" checked>Extra Large</kb-switch>
+</div>`;
+export const exAllSizesReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch size="xs" checked>Extra Small</Switch>
+  <Switch size="sm" checked>Small</Switch>
+  <Switch size="md" checked>Medium</Switch>
+  <Switch size="lg" checked>Large</Switch>
+  <Switch size="xl" checked>Extra Large</Switch>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch size="xs" checked>Extra Small</kb-switch>
+    <kb-switch size="sm" checked>Small</kb-switch>
+    <kb-switch size="md" checked>Medium</kb-switch>
+    <kb-switch size="lg" checked>Large</kb-switch>
+    <kb-switch size="xl" checked>Extra Large</kb-switch>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch size="xs" checked>Extra Small</kb-switch>
+  <kb-switch size="sm" checked>Small</kb-switch>
+  <kb-switch size="md" checked>Medium</kb-switch>
+  <kb-switch size="lg" checked>Large</kb-switch>
+  <kb-switch size="xl" checked>Extra Large</kb-switch>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch checked color-scheme="blue">Blue (default)</kb-switch>
+  <kb-switch checked color-scheme="red">Red</kb-switch>
+  <kb-switch checked color-scheme="green">Green</kb-switch>
+  <kb-switch checked color-scheme="yellow">Yellow</kb-switch>
+  <kb-switch checked color-scheme="black">Black</kb-switch>
+</div>`;
+export const exColorSchemesReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch checked color-scheme="blue">Blue (default)</Switch>
+  <Switch checked color-scheme="red">Red</Switch>
+  <Switch checked color-scheme="green">Green</Switch>
+  <Switch checked color-scheme="yellow">Yellow</Switch>
+  <Switch checked color-scheme="black">Black</Switch>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch checked color-scheme="blue">Blue (default)</kb-switch>
+    <kb-switch checked color-scheme="red">Red</kb-switch>
+    <kb-switch checked color-scheme="green">Green</kb-switch>
+    <kb-switch checked color-scheme="yellow">Yellow</kb-switch>
+    <kb-switch checked color-scheme="black">Black</kb-switch>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch checked color-scheme="blue">Blue (default)</kb-switch>
+  <kb-switch checked color-scheme="red">Red</kb-switch>
+  <kb-switch checked color-scheme="green">Green</kb-switch>
+  <kb-switch checked color-scheme="yellow">Yellow</kb-switch>
+  <kb-switch checked color-scheme="black">Black</kb-switch>
+</div>`;
+export const exColorSchemesUnchecked = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch color-scheme="blue">Blue hover hint</kb-switch>
+  <kb-switch color-scheme="red">Red hover hint</kb-switch>
+  <kb-switch color-scheme="green">Green hover hint</kb-switch>
+  <kb-switch color-scheme="yellow">Yellow hover hint</kb-switch>
+  <kb-switch color-scheme="black">Black hover hint</kb-switch>
+</div>`;
+export const exColorSchemesUncheckedReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch color-scheme="blue">Blue hover hint</Switch>
+  <Switch color-scheme="red">Red hover hint</Switch>
+  <Switch color-scheme="green">Green hover hint</Switch>
+  <Switch color-scheme="yellow">Yellow hover hint</Switch>
+  <Switch color-scheme="black">Black hover hint</Switch>
+</div>`;
+export const exColorSchemesUncheckedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch color-scheme="blue">Blue hover hint</kb-switch>
+    <kb-switch color-scheme="red">Red hover hint</kb-switch>
+    <kb-switch color-scheme="green">Green hover hint</kb-switch>
+    <kb-switch color-scheme="yellow">Yellow hover hint</kb-switch>
+    <kb-switch color-scheme="black">Black hover hint</kb-switch>
+  </div>
+</template>`;
+export const exColorSchemesUncheckedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch color-scheme="blue">Blue hover hint</kb-switch>
+  <kb-switch color-scheme="red">Red hover hint</kb-switch>
+  <kb-switch color-scheme="green">Green hover hint</kb-switch>
+  <kb-switch color-scheme="yellow">Yellow hover hint</kb-switch>
+  <kb-switch color-scheme="black">Black hover hint</kb-switch>
+</div>`;
+export const exWithDescription = `<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-switch checked color-scheme="green">
+    Auto-save
+    <span slot="description">Automatically save changes every 30 seconds</span>
+  </kb-switch>
+  <kb-switch>
+    Email notifications
+    <span slot="description">Receive email updates about account activity</span>
+  </kb-switch>
+  <kb-switch checked color-scheme="blue">
+    Two-factor authentication
+    <span slot="description">Add an extra layer of security to your account</span>
+  </kb-switch>
+</div>`;
+export const exWithDescriptionReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <Switch checked color-scheme="green">
+    Auto-save
+    <span slot="description">Automatically save changes every 30 seconds</span>
+  </Switch>
+  <Switch>
+    Email notifications
+    <span slot="description">Receive email updates about account activity</span>
+  </Switch>
+  <Switch checked color-scheme="blue">
+    Two-factor authentication
+    <span slot="description">Add an extra layer of security to your account</span>
+  </Switch>
+</div>`;
+export const exWithDescriptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <kb-switch checked color-scheme="green">
+      Auto-save
+      <span slot="description">Automatically save changes every 30 seconds</span>
+    </kb-switch>
+    <kb-switch>
+      Email notifications
+      <span slot="description">Receive email updates about account activity</span>
+    </kb-switch>
+    <kb-switch checked color-scheme="blue">
+      Two-factor authentication
+      <span slot="description">Add an extra layer of security to your account</span>
+    </kb-switch>
+  </div>
+</template>`;
+export const exWithDescriptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <kb-switch checked color-scheme="green">
+    Auto-save
+    <span slot="description">Automatically save changes every 30 seconds</span>
+  </kb-switch>
+  <kb-switch>
+    Email notifications
+    <span slot="description">Receive email updates about account activity</span>
+  </kb-switch>
+  <kb-switch checked color-scheme="blue">
+    Two-factor authentication
+    <span slot="description">Add an extra layer of security to your account</span>
+  </kb-switch>
+</div>`;
+export const exShowIcons = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch show-icons size="sm">Small with icons</kb-switch>
+  <kb-switch show-icons checked>Checked with icon</kb-switch>
+  <kb-switch show-icons>Unchecked with icon</kb-switch>
+  <kb-switch show-icons checked color-scheme="green" size="lg">Large green with icon</kb-switch>
+  <kb-switch show-icons checked color-scheme="red" size="xl">Extra large red with icon</kb-switch>
+</div>`;
+export const exShowIconsReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch show-icons size="sm">Small with icons</Switch>
+  <Switch show-icons checked>Checked with icon</Switch>
+  <Switch show-icons>Unchecked with icon</Switch>
+  <Switch show-icons checked color-scheme="green" size="lg">Large green with icon</Switch>
+  <Switch show-icons checked color-scheme="red" size="xl">Extra large red with icon</Switch>
+</div>`;
+export const exShowIconsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch show-icons size="sm">Small with icons</kb-switch>
+    <kb-switch show-icons checked>Checked with icon</kb-switch>
+    <kb-switch show-icons>Unchecked with icon</kb-switch>
+    <kb-switch show-icons checked color-scheme="green" size="lg">Large green with icon</kb-switch>
+    <kb-switch show-icons checked color-scheme="red" size="xl">Extra large red with icon</kb-switch>
+  </div>
+</template>`;
+export const exShowIconsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch show-icons size="sm">Small with icons</kb-switch>
+  <kb-switch show-icons checked>Checked with icon</kb-switch>
+  <kb-switch show-icons>Unchecked with icon</kb-switch>
+  <kb-switch show-icons checked color-scheme="green" size="lg">Large green with icon</kb-switch>
+  <kb-switch show-icons checked color-scheme="red" size="xl">Extra large red with icon</kb-switch>
+</div>`;
+export const exShowIconsAllSizes = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch show-icons checked size="xs">Extra Small</kb-switch>
+  <kb-switch show-icons checked size="sm">Small</kb-switch>
+  <kb-switch show-icons checked size="md">Medium</kb-switch>
+  <kb-switch show-icons checked size="lg">Large</kb-switch>
+  <kb-switch show-icons checked size="xl">Extra Large</kb-switch>
+</div>`;
+export const exShowIconsAllSizesReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch show-icons checked size="xs">Extra Small</Switch>
+  <Switch show-icons checked size="sm">Small</Switch>
+  <Switch show-icons checked size="md">Medium</Switch>
+  <Switch show-icons checked size="lg">Large</Switch>
+  <Switch show-icons checked size="xl">Extra Large</Switch>
+</div>`;
+export const exShowIconsAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch show-icons checked size="xs">Extra Small</kb-switch>
+    <kb-switch show-icons checked size="sm">Small</kb-switch>
+    <kb-switch show-icons checked size="md">Medium</kb-switch>
+    <kb-switch show-icons checked size="lg">Large</kb-switch>
+    <kb-switch show-icons checked size="xl">Extra Large</kb-switch>
+  </div>
+</template>`;
+export const exShowIconsAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch show-icons checked size="xs">Extra Small</kb-switch>
+  <kb-switch show-icons checked size="sm">Small</kb-switch>
+  <kb-switch show-icons checked size="md">Medium</kb-switch>
+  <kb-switch show-icons checked size="lg">Large</kb-switch>
+  <kb-switch show-icons checked size="xl">Extra Large</kb-switch>
+</div>`;
+export const exLabelPositionLeft = `<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+  <kb-switch label-position="left">Label on left</kb-switch>
+  <kb-switch label-position="left" checked color-scheme="green">
+    Dark mode
+    <span slot="description">Switch placed after the label text</span>
+  </kb-switch>
+  <kb-switch label-position="right" checked>Label on right (default)</kb-switch>
+</div>`;
+export const exLabelPositionLeftReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+  <Switch label-position="left">Label on left</Switch>
+  <Switch label-position="left" checked color-scheme="green">
+    Dark mode
+    <span slot="description">Switch placed after the label text</span>
+  </Switch>
+  <Switch label-position="right" checked>Label on right (default)</Switch>
+</div>`;
+export const exLabelPositionLeftVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+    <kb-switch label-position="left">Label on left</kb-switch>
+    <kb-switch label-position="left" checked color-scheme="green">
+      Dark mode
+      <span slot="description">Switch placed after the label text</span>
+    </kb-switch>
+    <kb-switch label-position="right" checked>Label on right (default)</kb-switch>
+  </div>
+</template>`;
+export const exLabelPositionLeftSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+  <kb-switch label-position="left">Label on left</kb-switch>
+  <kb-switch label-position="left" checked color-scheme="green">
+    Dark mode
+    <span slot="description">Switch placed after the label text</span>
+  </kb-switch>
+  <kb-switch label-position="right" checked>Label on right (default)</kb-switch>
+</div>`;
+export const exLoading = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch loading>Saving preference...</kb-switch>
+  <kb-switch loading checked>Syncing...</kb-switch>
+  <kb-switch loading checked color-scheme="green" size="lg">
+    Updating settings
+    <span slot="description">Please wait while we save your changes</span>
+  </kb-switch>
+</div>`;
+export const exLoadingReact = `import { Switch } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Switch loading>Saving preference...</Switch>
+  <Switch loading checked>Syncing...</Switch>
+  <Switch loading checked color-scheme="green" size="lg">
+    Updating settings
+    <span slot="description">Please wait while we save your changes</span>
+  </Switch>
+</div>`;
+export const exLoadingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-switch loading>Saving preference...</kb-switch>
+    <kb-switch loading checked>Syncing...</kb-switch>
+    <kb-switch loading checked color-scheme="green" size="lg">
+      Updating settings
+      <span slot="description">Please wait while we save your changes</span>
+    </kb-switch>
+  </div>
+</template>`;
+export const exLoadingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-switch loading>Saving preference...</kb-switch>
+  <kb-switch loading checked>Syncing...</kb-switch>
+  <kb-switch loading checked color-scheme="green" size="lg">
+    Updating settings
+    <span slot="description">Please wait while we save your changes</span>
+  </kb-switch>
+</div>`;
+
+# Switch
+
+A toggle switch for binary on/off selections.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Switch } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `ComponentSize` | `'md'` | Switch size controlling track, thumb, and label dimensions. |
+| `checked` | `checked` | `boolean` | `false` | Whether the switch is on. Reflects to the `checked` attribute. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error border styling when unchecked. |
+| `loading` | `loading` | `boolean` | `false` | Show a loading spinner inside the thumb and disable interaction. |
+| `showIcons` | `show-icons` | `boolean` | `false` | Show check/cross icons inside the thumb. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the checked state track, icon, and hover border. |
+| `labelPosition` | `label-position` | `SwitchLabelPosition` | `'right'` | Position of the label relative to the switch track. |
+| `name` | `name` | `string` | — | Form field name, used in form submissions. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `description` | Helper text rendered below the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Checked state changed. Detail: `{ checked: boolean }`. |
+| `kb-focus` | `{ source?: string }` or none | — |
+| `kb-blur` | `{ source?: string }` or none | — |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `switch`
+
+**Attributes:** `aria-checked`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Checked" codes={{ html: exChecked, react: exCheckedReact, vue: exCheckedVue, svelte: exCheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exChecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes Unchecked" codes={{ html: exColorSchemesUnchecked, react: exColorSchemesUncheckedReact, vue: exColorSchemesUncheckedVue, svelte: exColorSchemesUncheckedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemesUnchecked }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Description" codes={{ html: exWithDescription, react: exWithDescriptionReact, vue: exWithDescriptionVue, svelte: exWithDescriptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDescription }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Icons" codes={{ html: exShowIcons, react: exShowIconsReact, vue: exShowIconsVue, svelte: exShowIconsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowIcons }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Icons All Sizes" codes={{ html: exShowIconsAllSizes, react: exShowIconsAllSizesReact, vue: exShowIconsAllSizesVue, svelte: exShowIconsAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowIconsAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Label Position Left" codes={{ html: exLabelPositionLeft, react: exLabelPositionLeftReact, vue: exLabelPositionLeftVue, svelte: exLabelPositionLeftSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLabelPositionLeft }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Loading" codes={{ html: exLoading, react: exLoadingReact, vue: exLoadingVue, svelte: exLoadingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLoading }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Checkbox](./checkbox)

@@ -1,0 +1,748 @@
+---
+title: "Editable"
+description: "An inline-editable text field that toggles between display and edit modes."
+sidebar_label: "Editable"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-editable value="Click to edit"></kb-editable>`;
+export const reactCode = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<Editable value="Click to edit" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-editable value="Click to edit" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-editable value="Click to edit" />`;
+export const exDefault = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This is some paragraph text with an
+  <kb-editable value="editable portion">
+  </kb-editable>
+  inline.
+</p>`;
+export const exDefaultReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This is some paragraph text with an
+  <Editable value="editable portion">
+  </Editable>
+  inline.
+</p>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    This is some paragraph text with an
+    <kb-editable value="editable portion">
+    </kb-editable>
+    inline.
+  </p>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This is some paragraph text with an
+  <kb-editable value="editable portion">
+  </kb-editable>
+  inline.
+</p>`;
+export const exWithPlaceholder = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Click the placeholder to add a
+  <kb-editable placeholder="name here...">
+  </kb-editable>
+  value.
+</p>`;
+export const exWithPlaceholderReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Click the placeholder to add a
+  <Editable placeholder="name here...">
+  </Editable>
+  value.
+</p>`;
+export const exWithPlaceholderVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Click the placeholder to add a
+    <kb-editable placeholder="name here...">
+    </kb-editable>
+    value.
+  </p>
+</template>`;
+export const exWithPlaceholderSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Click the placeholder to add a
+  <kb-editable placeholder="name here...">
+  </kb-editable>
+  value.
+</p>`;
+export const exSizes = `<div class="flex flex-col gap-4">
+  <p class="text-xs text-gray-600 dark:text-zinc-400">
+    XS:
+    <kb-editable size="xs" value="Extra Small">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    SM:
+    <kb-editable size="sm" value="Small">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    MD:
+    <kb-editable size="md" value="Medium (default)">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    LG:
+    <kb-editable size="lg" value="Large">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-lg text-gray-600 dark:text-zinc-400">
+    XL:
+    <kb-editable size="xl" value="Extra Large">
+    </kb-editable>
+    text
+  </p>
+</div>`;
+export const exSizesReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="text-xs text-gray-600 dark:text-zinc-400">
+    XS:
+    <Editable size="xs" value="Extra Small">
+    </Editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    SM:
+    <Editable size="sm" value="Small">
+    </Editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    MD:
+    <Editable size="md" value="Medium (default)">
+    </Editable>
+    text
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    LG:
+    <Editable size="lg" value="Large">
+    </Editable>
+    text
+  </p>
+  <p class="text-lg text-gray-600 dark:text-zinc-400">
+    XL:
+    <Editable size="xl" value="Extra Large">
+    </Editable>
+    text
+  </p>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="text-xs text-gray-600 dark:text-zinc-400">
+      XS:
+      <kb-editable size="xs" value="Extra Small">
+      </kb-editable>
+      text
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      SM:
+      <kb-editable size="sm" value="Small">
+      </kb-editable>
+      text
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      MD:
+      <kb-editable size="md" value="Medium (default)">
+      </kb-editable>
+      text
+    </p>
+    <p class="text-base text-gray-600 dark:text-zinc-400">
+      LG:
+      <kb-editable size="lg" value="Large">
+      </kb-editable>
+      text
+    </p>
+    <p class="text-lg text-gray-600 dark:text-zinc-400">
+      XL:
+      <kb-editable size="xl" value="Extra Large">
+      </kb-editable>
+      text
+    </p>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="text-xs text-gray-600 dark:text-zinc-400">
+    XS:
+    <kb-editable size="xs" value="Extra Small">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    SM:
+    <kb-editable size="sm" value="Small">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    MD:
+    <kb-editable size="md" value="Medium (default)">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    LG:
+    <kb-editable size="lg" value="Large">
+    </kb-editable>
+    text
+  </p>
+  <p class="text-lg text-gray-600 dark:text-zinc-400">
+    XL:
+    <kb-editable size="xl" value="Extra Large">
+    </kb-editable>
+    text
+  </p>
+</div>`;
+export const exInvalid = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This field is
+  <kb-editable value="invalid value" invalid>
+  </kb-editable>
+  — shown with a red underline.
+</p>`;
+export const exInvalidReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This field is
+  <Editable value="invalid value" invalid>
+  </Editable>
+  — shown with a red underline.
+</p>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    This field is
+    <kb-editable value="invalid value" invalid>
+    </kb-editable>
+    — shown with a red underline.
+  </p>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This field is
+  <kb-editable value="invalid value" invalid>
+  </kb-editable>
+  — shown with a red underline.
+</p>`;
+export const exDoubleClickActivation = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Double-click to edit:
+  <kb-editable value="Double-click me" activation="dblclick">
+  </kb-editable>
+</p>`;
+export const exDoubleClickActivationReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Double-click to edit:
+  <Editable value="Double-click me" activation="dblclick">
+  </Editable>
+</p>`;
+export const exDoubleClickActivationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Double-click to edit:
+    <kb-editable value="Double-click me" activation="dblclick">
+    </kb-editable>
+  </p>
+</template>`;
+export const exDoubleClickActivationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Double-click to edit:
+  <kb-editable value="Double-click me" activation="dblclick">
+  </kb-editable>
+</p>`;
+export const exDisabled = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This value is locked:
+  <kb-editable value="Cannot edit this" disabled>
+  </kb-editable>
+</p>`;
+export const exDisabledReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This value is locked:
+  <Editable value="Cannot edit this" disabled>
+  </Editable>
+</p>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    This value is locked:
+    <kb-editable value="Cannot edit this" disabled>
+    </kb-editable>
+  </p>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  This value is locked:
+  <kb-editable value="Cannot edit this" disabled>
+  </kb-editable>
+</p>`;
+export const exStartInEditMode = `<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Already editing:
+  <kb-editable value="Already editing" start-with-edit-view>
+  </kb-editable>
+</p>`;
+export const exStartInEditModeReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Already editing:
+  <Editable value="Already editing" start-with-edit-view>
+  </Editable>
+</p>`;
+export const exStartInEditModeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Already editing:
+    <kb-editable value="Already editing" start-with-edit-view>
+    </kb-editable>
+  </p>
+</template>`;
+export const exStartInEditModeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-gray-600 dark:text-zinc-400">
+  Already editing:
+  <kb-editable value="Already editing" start-with-edit-view>
+  </kb-editable>
+</p>`;
+export const exKeyboardNavigation = `<div>
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Focus the text and press Enter/Space to edit. While editing, Enter confirms and Escape cancels.
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Try keyboard controls:
+    <kb-editable value="Focus and press Enter">
+    </kb-editable>
+  </p>
+</div>`;
+export const exKeyboardNavigationReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<div>
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Focus the text and press Enter/Space to edit. While editing, Enter confirms and Escape cancels.
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Try keyboard controls:
+    <Editable value="Focus and press Enter">
+    </Editable>
+  </p>
+</div>`;
+export const exKeyboardNavigationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div>
+    <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+      Focus the text and press Enter/Space to edit. While editing, Enter confirms and Escape cancels.
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Try keyboard controls:
+      <kb-editable value="Focus and press Enter">
+      </kb-editable>
+    </p>
+  </div>
+</template>`;
+export const exKeyboardNavigationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div>
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Focus the text and press Enter/Space to edit. While editing, Enter confirms and Escape cancels.
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Try keyboard controls:
+    <kb-editable value="Focus and press Enter">
+    </kb-editable>
+  </p>
+</div>`;
+export const exAllFeatures = `<div class="flex flex-col gap-4">
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Default:
+    <kb-editable value="Click to edit">
+    </kb-editable>
+    inline
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Placeholder:
+    <kb-editable placeholder="Empty placeholder...">
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Double-click:
+    <kb-editable value="Double-click" activation="dblclick">
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Invalid:
+    <kb-editable value="Invalid state" invalid>
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Disabled:
+    <kb-editable value="Disabled" disabled>
+    </kb-editable>
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    Large:
+    <kb-editable size="lg" value="Large size">
+    </kb-editable>
+  </p>
+</div>`;
+export const exAllFeaturesReact = `import { Editable } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Default:
+    <Editable value="Click to edit">
+    </Editable>
+    inline
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Placeholder:
+    <Editable placeholder="Empty placeholder...">
+    </Editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Double-click:
+    <Editable value="Double-click" activation="dblclick">
+    </Editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Invalid:
+    <Editable value="Invalid state" invalid>
+    </Editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Disabled:
+    <Editable value="Disabled" disabled>
+    </Editable>
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    Large:
+    <Editable size="lg" value="Large size">
+    </Editable>
+  </p>
+</div>`;
+export const exAllFeaturesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Default:
+      <kb-editable value="Click to edit">
+      </kb-editable>
+      inline
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Placeholder:
+      <kb-editable placeholder="Empty placeholder...">
+      </kb-editable>
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Double-click:
+      <kb-editable value="Double-click" activation="dblclick">
+      </kb-editable>
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Invalid:
+      <kb-editable value="Invalid state" invalid>
+      </kb-editable>
+    </p>
+    <p class="text-sm text-gray-600 dark:text-zinc-400">
+      Disabled:
+      <kb-editable value="Disabled" disabled>
+      </kb-editable>
+    </p>
+    <p class="text-base text-gray-600 dark:text-zinc-400">
+      Large:
+      <kb-editable size="lg" value="Large size">
+      </kb-editable>
+    </p>
+  </div>
+</template>`;
+export const exAllFeaturesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Default:
+    <kb-editable value="Click to edit">
+    </kb-editable>
+    inline
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Placeholder:
+    <kb-editable placeholder="Empty placeholder...">
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Double-click:
+    <kb-editable value="Double-click" activation="dblclick">
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Invalid:
+    <kb-editable value="Invalid state" invalid>
+    </kb-editable>
+  </p>
+  <p class="text-sm text-gray-600 dark:text-zinc-400">
+    Disabled:
+    <kb-editable value="Disabled" disabled>
+    </kb-editable>
+  </p>
+  <p class="text-base text-gray-600 dark:text-zinc-400">
+    Large:
+    <kb-editable size="lg" value="Large size">
+    </kb-editable>
+  </p>
+</div>`;
+
+# Editable
+
+An inline-editable text field that toggles between display and edit modes.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Editable } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `""` | Current text value. |
+| `placeholder` | `placeholder` | `string` | `'Click to edit'` | Placeholder shown when value is empty. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Mark as invalid — shows red underline. |
+| `startWithEditView` | `start-with-edit-view` | `boolean` | `false` | Start in edit mode. |
+| `activation` | `activation` | `'click' \| 'dblclick'` | `'click'` | Activation trigger. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `submitOnBlur` | `submit-on-blur` | `boolean` | `true` | Auto-submit when input loses focus. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Fires when the value changes. Detail: `{ source: 'editable', value: string }`. |
+| `kb-edit-submit` | `{ value: string, previousValue: string }` | Fires when editing is confirmed. Detail: `{ value: string, previousValue: string }`. |
+| `kb-edit-cancel` | `{ value: string }` | Fires when editing is cancelled. Detail: `{ value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `button`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Placeholder" codes={{ html: exWithPlaceholder, react: exWithPlaceholderReact, vue: exWithPlaceholderVue, svelte: exWithPlaceholderSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithPlaceholder }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Double Click Activation" codes={{ html: exDoubleClickActivation, react: exDoubleClickActivationReact, vue: exDoubleClickActivationVue, svelte: exDoubleClickActivationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDoubleClickActivation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Start In Edit Mode" codes={{ html: exStartInEditMode, react: exStartInEditModeReact, vue: exStartInEditModeVue, svelte: exStartInEditModeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exStartInEditMode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Keyboard Navigation" codes={{ html: exKeyboardNavigation, react: exKeyboardNavigationReact, vue: exKeyboardNavigationVue, svelte: exKeyboardNavigationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exKeyboardNavigation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Features" codes={{ html: exAllFeatures, react: exAllFeaturesReact, vue: exAllFeaturesVue, svelte: exAllFeaturesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllFeatures }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)

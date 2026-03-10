@@ -1,0 +1,505 @@
+---
+title: "Code"
+description: "An inline or block code display element with optional syntax highlighting."
+sidebar_label: "Code"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-code>const x = 42;</kb-code>`;
+export const reactCode = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<Code>const x = 42;</Code>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-code>const x = 42;</kb-code>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-code>const x = 42;</kb-code>`;
+export const exInline = `<kb-code>const x = 42;</kb-code>`;
+export const exInlineReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<Code>const x = 42;</Code>`;
+export const exInlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-code>const x = 42;</kb-code>
+</template>`;
+export const exInlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-code>const x = 42;</kb-code>`;
+export const exInlineInText = `<p style="font-family:sans-serif;color:#334155;">
+  Use
+  <kb-code>npm install @wearesyntesa/karbit-ui</kb-code>
+  to add the package, then import with
+  <kb-code>import '@wearesyntesa/karbit-ui'</kb-code>
+  .
+</p>`;
+export const exInlineInTextReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<p style="font-family:sans-serif;color:#334155;">
+  Use
+  <Code>npm install @wearesyntesa/karbit-ui</Code>
+  to add the package, then import with
+  <Code>import '@wearesyntesa/karbit-ui'</Code>
+  .
+</p>`;
+export const exInlineInTextVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p style="font-family:sans-serif;color:#334155;">
+    Use
+    <kb-code>npm install @wearesyntesa/karbit-ui</kb-code>
+    to add the package, then import with
+    <kb-code>import '@wearesyntesa/karbit-ui'</kb-code>
+    .
+  </p>
+</template>`;
+export const exInlineInTextSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p style="font-family:sans-serif;color:#334155;">
+  Use
+  <kb-code>npm install @wearesyntesa/karbit-ui</kb-code>
+  to add the package, then import with
+  <kb-code>import '@wearesyntesa/karbit-ui'</kb-code>
+  .
+</p>`;
+export const exBlockWithCopy = `<kb-code block>import { KbButton } from '@wearesyntesa/karbit-ui';
+
+const App = () => {
+  return html\\\`&lt;kb-button variant="solid"&gt;Click me&lt;/kb-button&gt;\\\`;
+};</kb-code>`;
+export const exBlockWithCopyReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<Code block>import { KbButton } from '@wearesyntesa/karbit-ui';
+
+const App = () => {
+  return html\\\`&lt;kb-button variant="solid"&gt;Click me&lt;/kb-button&gt;\\\`;
+};</Code>`;
+export const exBlockWithCopyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-code block>import { KbButton } from '@wearesyntesa/karbit-ui';
+  
+  const App = () => {
+    return html\\\`&lt;kb-button variant="solid"&gt;Click me&lt;/kb-button&gt;\\\`;
+  };</kb-code>
+</template>`;
+export const exBlockWithCopySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-code block>import { KbButton } from '@wearesyntesa/karbit-ui';
+
+const App = () => {
+  return html\\\`&lt;kb-button variant="solid"&gt;Click me&lt;/kb-button&gt;\\\`;
+};</kb-code>`;
+export const exSyntaxHighlighted = `<kb-code block language="typescript">const greeting = "Hello, world!";
+
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Calculate the 10th Fibonacci number
+const result = fibonacci(10);
+console.log(result); // 55</kb-code>`;
+export const exSyntaxHighlightedReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<Code block language="typescript">const greeting = "Hello, world!";
+
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Calculate the 10th Fibonacci number
+const result = fibonacci(10);
+console.log(result); // 55</Code>`;
+export const exSyntaxHighlightedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-code block language="typescript">const greeting = "Hello, world!";
+  
+  function fibonacci(n: number): number {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+  
+  // Calculate the 10th Fibonacci number
+  const result = fibonacci(10);
+  console.log(result); // 55</kb-code>
+</template>`;
+export const exSyntaxHighlightedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-code block language="typescript">const greeting = "Hello, world!";
+
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Calculate the 10th Fibonacci number
+const result = fibonacci(10);
+console.log(result); // 55</kb-code>`;
+export const exSyntaxHighlightedInline = `<p style="font-family:sans-serif;color:#334155;">
+  Declare a variable with
+  <kb-code language="javascript">const x = 42;</kb-code>
+  or use
+  <kb-code language="javascript">let name = "Karbit";</kb-code>
+  for mutable bindings.
+</p>`;
+export const exSyntaxHighlightedInlineReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<p style="font-family:sans-serif;color:#334155;">
+  Declare a variable with
+  <Code language="javascript">const x = 42;</Code>
+  or use
+  <Code language="javascript">let name = "Karbit";</Code>
+  for mutable bindings.
+</p>`;
+export const exSyntaxHighlightedInlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p style="font-family:sans-serif;color:#334155;">
+    Declare a variable with
+    <kb-code language="javascript">const x = 42;</kb-code>
+    or use
+    <kb-code language="javascript">let name = "Karbit";</kb-code>
+    for mutable bindings.
+  </p>
+</template>`;
+export const exSyntaxHighlightedInlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p style="font-family:sans-serif;color:#334155;">
+  Declare a variable with
+  <kb-code language="javascript">const x = 42;</kb-code>
+  or use
+  <kb-code language="javascript">let name = "Karbit";</kb-code>
+  for mutable bindings.
+</p>`;
+export const exBlockMultipleSnippets = `<div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block language="bash">npm install @wearesyntesa/karbit-ui</kb-code> <kb-code block language="typescript">import '@wearesyntesa/karbit-ui';
+import '@wearesyntesa/karbit-ui/react';</kb-code> <kb-code block language="typescript">// Usage
+const el = document.createElement('kb-button');
+el.variant = 'solid';
+el.textContent = 'Hello';</kb-code> </div>`;
+export const exBlockMultipleSnippetsReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;"> <Code block language="bash">npm install @wearesyntesa/karbit-ui</Code> <Code block language="typescript">import '@wearesyntesa/karbit-ui';
+import '@wearesyntesa/karbit-ui/react';</Code> <Code block language="typescript">// Usage
+const el = document.createElement('kb-button');
+el.variant = 'solid';
+el.textContent = 'Hello';</Code> </div>`;
+export const exBlockMultipleSnippetsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block language="bash">npm install @wearesyntesa/karbit-ui</kb-code> <kb-code block language="typescript">import '@wearesyntesa/karbit-ui';
+  import '@wearesyntesa/karbit-ui/react';</kb-code> <kb-code block language="typescript">// Usage
+  const el = document.createElement('kb-button');
+  el.variant = 'solid';
+  el.textContent = 'Hello';</kb-code> </div>
+</template>`;
+export const exBlockMultipleSnippetsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block language="bash">npm install @wearesyntesa/karbit-ui</kb-code> <kb-code block language="typescript">import '@wearesyntesa/karbit-ui';
+import '@wearesyntesa/karbit-ui/react';</kb-code> <kb-code block language="typescript">// Usage
+const el = document.createElement('kb-button');
+el.variant = 'solid';
+el.textContent = 'Hello';</kb-code> </div>`;
+export const exWithFilename = `<kb-code block filename="src/main.ts" language="typescript">import { KbButton, KbCode } from '@wearesyntesa/karbit-ui';
+
+// Register all components
+const app = document.getElementById('app');
+if (app) {
+  app.innerHTML = '&lt;kb-button variant="solid"&gt;Hello&lt;/kb-button&gt;';
+}</kb-code>`;
+export const exWithFilenameReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<Code block filename="src/main.ts" language="typescript">import { KbButton, KbCode } from '@wearesyntesa/karbit-ui';
+
+// Register all components
+const app = document.getElementById('app');
+if (app) {
+  app.innerHTML = '&lt;kb-button variant="solid"&gt;Hello&lt;/kb-button&gt;';
+}</Code>`;
+export const exWithFilenameVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-code block filename="src/main.ts" language="typescript">import { KbButton, KbCode } from '@wearesyntesa/karbit-ui';
+  
+  // Register all components
+  const app = document.getElementById('app');
+  if (app) {
+    app.innerHTML = '&lt;kb-button variant="solid"&gt;Hello&lt;/kb-button&gt;';
+  }</kb-code>
+</template>`;
+export const exWithFilenameSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-code block filename="src/main.ts" language="typescript">import { KbButton, KbCode } from '@wearesyntesa/karbit-ui';
+
+// Register all components
+const app = document.getElementById('app');
+if (app) {
+  app.innerHTML = '&lt;kb-button variant="solid"&gt;Hello&lt;/kb-button&gt;';
+}</kb-code>`;
+export const exMultipleFilenames = `<div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block filename="package.json" language="json">{
+  "name": "my-app",
+  "dependencies": {
+    "@wearesyntesa/karbit-ui": "^2.0.0"
+  }
+}</kb-code> <kb-code block filename="src/App.tsx" language="typescript">import '@wearesyntesa/karbit-ui';
+
+export function App() {
+  return (
+    &lt;kb-button variant="solid" color-scheme="blue"&gt;
+      Get Started
+    &lt;/kb-button&gt;
+  );
+}</kb-code> <kb-code block filename=".env">VITE_API_URL=https://api.example.com
+VITE_APP_NAME=KarbitUI Demo</kb-code> </div>`;
+export const exMultipleFilenamesReact = `import { Code } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;"> <Code block filename="package.json" language="json">{
+  "name": "my-app",
+  "dependencies": {
+    "@wearesyntesa/karbit-ui": "^2.0.0"
+  }
+}</Code> <Code block filename="src/App.tsx" language="typescript">import '@wearesyntesa/karbit-ui';
+
+export function App() {
+  return (
+    &lt;kb-button variant="solid" color-scheme="blue"&gt;
+      Get Started
+    &lt;/kb-button&gt;
+  );
+}</Code> <Code block filename=".env">VITE_API_URL=https://api.example.com
+VITE_APP_NAME=KarbitUI Demo</Code> </div>`;
+export const exMultipleFilenamesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block filename="package.json" language="json">{
+    "name": "my-app",
+    "dependencies": {
+      "@wearesyntesa/karbit-ui": "^2.0.0"
+    }
+  }</kb-code> <kb-code block filename="src/App.tsx" language="typescript">import '@wearesyntesa/karbit-ui';
+  
+  export function App() {
+    return (
+      &lt;kb-button variant="solid" color-scheme="blue"&gt;
+        Get Started
+      &lt;/kb-button&gt;
+    );
+  }</kb-code> <kb-code block filename=".env">VITE_API_URL=https://api.example.com
+  VITE_APP_NAME=KarbitUI Demo</kb-code> </div>
+</template>`;
+export const exMultipleFilenamesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;"> <kb-code block filename="package.json" language="json">{
+  "name": "my-app",
+  "dependencies": {
+    "@wearesyntesa/karbit-ui": "^2.0.0"
+  }
+}</kb-code> <kb-code block filename="src/App.tsx" language="typescript">import '@wearesyntesa/karbit-ui';
+
+export function App() {
+  return (
+    &lt;kb-button variant="solid" color-scheme="blue"&gt;
+      Get Started
+    &lt;/kb-button&gt;
+  );
+}</kb-code> <kb-code block filename=".env">VITE_API_URL=https://api.example.com
+VITE_APP_NAME=KarbitUI Demo</kb-code> </div>`;
+
+# Code
+
+An inline or block code display element with optional syntax highlighting.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Code } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `block` | `block` | `boolean` | `false` | Display as a full-width block with copy button. When `false`, renders as inline `<code>`. |
+| `language` | `language` | `string` | `""` | Language identifier for syntax highlighting (e.g. `'typescript'`, `'html'`). Requires `KbCode.highlighter` to be set. |
+| `filename` | `filename` | `string` | `""` | File name displayed in a header bar above block code. Only visible when `block` is true. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Inline" codes={{ html: exInline, react: exInlineReact, vue: exInlineVue, svelte: exInlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline In Text" codes={{ html: exInlineInText, react: exInlineInTextReact, vue: exInlineInTextVue, svelte: exInlineInTextSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineInText }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Block With Copy" codes={{ html: exBlockWithCopy, react: exBlockWithCopyReact, vue: exBlockWithCopyVue, svelte: exBlockWithCopySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exBlockWithCopy }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Syntax Highlighted" codes={{ html: exSyntaxHighlighted, react: exSyntaxHighlightedReact, vue: exSyntaxHighlightedVue, svelte: exSyntaxHighlightedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSyntaxHighlighted }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Syntax Highlighted Inline" codes={{ html: exSyntaxHighlightedInline, react: exSyntaxHighlightedInlineReact, vue: exSyntaxHighlightedInlineVue, svelte: exSyntaxHighlightedInlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSyntaxHighlightedInline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Block Multiple Snippets" codes={{ html: exBlockMultipleSnippets, react: exBlockMultipleSnippetsReact, vue: exBlockMultipleSnippetsVue, svelte: exBlockMultipleSnippetsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exBlockMultipleSnippets }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Filename" codes={{ html: exWithFilename, react: exWithFilenameReact, vue: exWithFilenameVue, svelte: exWithFilenameSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithFilename }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multiple Filenames" codes={{ html: exMultipleFilenames, react: exMultipleFilenamesReact, vue: exMultipleFilenamesVue, svelte: exMultipleFilenamesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultipleFilenames }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Kbd](../data-display/kbd)

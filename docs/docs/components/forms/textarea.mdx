@@ -1,0 +1,815 @@
+---
+title: "Textarea"
+description: "A multi-line text input for longer form content."
+sidebar_label: "Textarea"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-textarea placeholder="Write a message..." rows="4"></kb-textarea>`;
+export const reactCode = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea placeholder="Write a message..." rows="4" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea placeholder="Write a message..." rows="4" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea placeholder="Write a message..." rows="4" />`;
+export const exOutline = `<kb-textarea variant="outline" placeholder="Outline variant" style="max-width:400px">
+</kb-textarea>`;
+export const exOutlineReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea variant="outline" placeholder="Outline variant" style="max-width:400px">
+</Textarea>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea variant="outline" placeholder="Outline variant" style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea variant="outline" placeholder="Outline variant" style="max-width:400px">
+</kb-textarea>`;
+export const exFilled = `<kb-textarea variant="filled" placeholder="Filled variant" style="max-width:400px">
+</kb-textarea>`;
+export const exFilledReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea variant="filled" placeholder="Filled variant" style="max-width:400px">
+</Textarea>`;
+export const exFilledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea variant="filled" placeholder="Filled variant" style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exFilledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea variant="filled" placeholder="Filled variant" style="max-width:400px">
+</kb-textarea>`;
+export const exFlushed = `<kb-textarea variant="flushed" placeholder="Flushed variant" style="max-width:400px">
+</kb-textarea>`;
+export const exFlushedReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea variant="flushed" placeholder="Flushed variant" style="max-width:400px">
+</Textarea>`;
+export const exFlushedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea variant="flushed" placeholder="Flushed variant" style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exFlushedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea variant="flushed" placeholder="Flushed variant" style="max-width:400px">
+</kb-textarea>`;
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <kb-textarea variant="outline" placeholder="Outline">
+  </kb-textarea>
+  <kb-textarea variant="filled" placeholder="Filled">
+  </kb-textarea>
+  <kb-textarea variant="flushed" placeholder="Flushed">
+  </kb-textarea>
+</div>`;
+export const exAllVariantsReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <Textarea variant="outline" placeholder="Outline">
+  </Textarea>
+  <Textarea variant="filled" placeholder="Filled">
+  </Textarea>
+  <Textarea variant="flushed" placeholder="Flushed">
+  </Textarea>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+    <kb-textarea variant="outline" placeholder="Outline">
+    </kb-textarea>
+    <kb-textarea variant="filled" placeholder="Filled">
+    </kb-textarea>
+    <kb-textarea variant="flushed" placeholder="Flushed">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <kb-textarea variant="outline" placeholder="Outline">
+  </kb-textarea>
+  <kb-textarea variant="filled" placeholder="Filled">
+  </kb-textarea>
+  <kb-textarea variant="flushed" placeholder="Flushed">
+  </kb-textarea>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea size="xs" placeholder="Extra Small (xs)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="sm" placeholder="Small (sm)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="md" placeholder="Medium (md)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="lg" placeholder="Large (lg)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="xl" placeholder="Extra Large (xl)" rows="2">
+  </kb-textarea>
+</div>`;
+export const exAllSizesReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea size="xs" placeholder="Extra Small (xs)" rows="2">
+  </Textarea>
+  <Textarea size="sm" placeholder="Small (sm)" rows="2">
+  </Textarea>
+  <Textarea size="md" placeholder="Medium (md)" rows="2">
+  </Textarea>
+  <Textarea size="lg" placeholder="Large (lg)" rows="2">
+  </Textarea>
+  <Textarea size="xl" placeholder="Extra Large (xl)" rows="2">
+  </Textarea>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea size="xs" placeholder="Extra Small (xs)" rows="2">
+    </kb-textarea>
+    <kb-textarea size="sm" placeholder="Small (sm)" rows="2">
+    </kb-textarea>
+    <kb-textarea size="md" placeholder="Medium (md)" rows="2">
+    </kb-textarea>
+    <kb-textarea size="lg" placeholder="Large (lg)" rows="2">
+    </kb-textarea>
+    <kb-textarea size="xl" placeholder="Extra Large (xl)" rows="2">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea size="xs" placeholder="Extra Small (xs)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="sm" placeholder="Small (sm)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="md" placeholder="Medium (md)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="lg" placeholder="Large (lg)" rows="2">
+  </kb-textarea>
+  <kb-textarea size="xl" placeholder="Extra Large (xl)" rows="2">
+  </kb-textarea>
+</div>`;
+export const exWithValue = `<kb-textarea value=The quick brown fox jumps over the lazy dog. style="max-width:400px">
+</kb-textarea>`;
+export const exWithValueReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea value=The quick brown fox jumps over the lazy dog. style="max-width:400px">
+</Textarea>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea value=The quick brown fox jumps over the lazy dog. style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea value=The quick brown fox jumps over the lazy dog. style="max-width:400px">
+</kb-textarea>`;
+export const exDisabled = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea disabled placeholder="Disabled empty">
+  </kb-textarea>
+  <kb-textarea disabled value=The quick brown fox jumps over the lazy dog.>
+  </kb-textarea>
+</div>`;
+export const exDisabledReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea disabled placeholder="Disabled empty">
+  </Textarea>
+  <Textarea disabled value=The quick brown fox jumps over the lazy dog.>
+  </Textarea>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea disabled placeholder="Disabled empty">
+    </kb-textarea>
+    <kb-textarea disabled value=The quick brown fox jumps over the lazy dog.>
+    </kb-textarea>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea disabled placeholder="Disabled empty">
+  </kb-textarea>
+  <kb-textarea disabled value=The quick brown fox jumps over the lazy dog.>
+  </kb-textarea>
+</div>`;
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea invalid variant="outline" placeholder="Invalid outline">
+  </kb-textarea>
+  <kb-textarea invalid variant="filled" placeholder="Invalid filled">
+  </kb-textarea>
+  <kb-textarea invalid variant="flushed" placeholder="Invalid flushed">
+  </kb-textarea>
+</div>`;
+export const exInvalidReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea invalid variant="outline" placeholder="Invalid outline">
+  </Textarea>
+  <Textarea invalid variant="filled" placeholder="Invalid filled">
+  </Textarea>
+  <Textarea invalid variant="flushed" placeholder="Invalid flushed">
+  </Textarea>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea invalid variant="outline" placeholder="Invalid outline">
+    </kb-textarea>
+    <kb-textarea invalid variant="filled" placeholder="Invalid filled">
+    </kb-textarea>
+    <kb-textarea invalid variant="flushed" placeholder="Invalid flushed">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea invalid variant="outline" placeholder="Invalid outline">
+  </kb-textarea>
+  <kb-textarea invalid variant="filled" placeholder="Invalid filled">
+  </kb-textarea>
+  <kb-textarea invalid variant="flushed" placeholder="Invalid flushed">
+  </kb-textarea>
+</div>`;
+export const exReadonly = `<kb-textarea readonly value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. style="max-width:400px">
+</kb-textarea>`;
+export const exReadonlyReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea readonly value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. style="max-width:400px">
+</Textarea>`;
+export const exReadonlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea readonly value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exReadonlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea readonly value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. style="max-width:400px">
+</kb-textarea>`;
+export const exAutoResize = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea auto-resize placeholder="Start typing — I'll grow as you write..." rows="2">
+  </kb-textarea>
+  <kb-textarea auto-resize variant="filled" placeholder="Auto-resize filled variant" rows="2">
+  </kb-textarea>
+  <kb-textarea auto-resize variant="flushed" placeholder="Auto-resize flushed variant" rows="2">
+  </kb-textarea>
+</div>`;
+export const exAutoResizeReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea auto-resize placeholder="Start typing — I'll grow as you write..." rows="2">
+  </Textarea>
+  <Textarea auto-resize variant="filled" placeholder="Auto-resize filled variant" rows="2">
+  </Textarea>
+  <Textarea auto-resize variant="flushed" placeholder="Auto-resize flushed variant" rows="2">
+  </Textarea>
+</div>`;
+export const exAutoResizeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea auto-resize placeholder="Start typing — I'll grow as you write..." rows="2">
+    </kb-textarea>
+    <kb-textarea auto-resize variant="filled" placeholder="Auto-resize filled variant" rows="2">
+    </kb-textarea>
+    <kb-textarea auto-resize variant="flushed" placeholder="Auto-resize flushed variant" rows="2">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exAutoResizeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea auto-resize placeholder="Start typing — I'll grow as you write..." rows="2">
+  </kb-textarea>
+  <kb-textarea auto-resize variant="filled" placeholder="Auto-resize filled variant" rows="2">
+  </kb-textarea>
+  <kb-textarea auto-resize variant="flushed" placeholder="Auto-resize flushed variant" rows="2">
+  </kb-textarea>
+</div>`;
+export const exClearable = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea clearable value=The quick brown fox jumps over the lazy dog. placeholder="Clearable with value">
+  </kb-textarea>
+  <kb-textarea clearable placeholder="Clearable — type something then clear">
+  </kb-textarea>
+</div>`;
+export const exClearableReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea clearable value=The quick brown fox jumps over the lazy dog. placeholder="Clearable with value">
+  </Textarea>
+  <Textarea clearable placeholder="Clearable — type something then clear">
+  </Textarea>
+</div>`;
+export const exClearableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea clearable value=The quick brown fox jumps over the lazy dog. placeholder="Clearable with value">
+    </kb-textarea>
+    <kb-textarea clearable placeholder="Clearable — type something then clear">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exClearableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea clearable value=The quick brown fox jumps over the lazy dog. placeholder="Clearable with value">
+  </kb-textarea>
+  <kb-textarea clearable placeholder="Clearable — type something then clear">
+  </kb-textarea>
+</div>`;
+export const exLoading = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea loading placeholder="Loading...">
+  </kb-textarea>
+  <kb-textarea loading value=The quick brown fox jumps over the lazy dog.>
+  </kb-textarea>
+</div>`;
+export const exLoadingReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea loading placeholder="Loading...">
+  </Textarea>
+  <Textarea loading value=The quick brown fox jumps over the lazy dog.>
+  </Textarea>
+</div>`;
+export const exLoadingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea loading placeholder="Loading...">
+    </kb-textarea>
+    <kb-textarea loading value=The quick brown fox jumps over the lazy dog.>
+    </kb-textarea>
+  </div>
+</template>`;
+export const exLoadingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea loading placeholder="Loading...">
+  </kb-textarea>
+  <kb-textarea loading value=The quick brown fox jumps over the lazy dog.>
+  </kb-textarea>
+</div>`;
+export const exMaxLength = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea max-length="300" placeholder="Type up to 300 characters...">
+  </kb-textarea>
+  <kb-textarea max-length="100" value=The quick brown fox jumps over the lazy dog. placeholder="100 char limit">
+  </kb-textarea>
+</div>`;
+export const exMaxLengthReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <Textarea max-length="300" placeholder="Type up to 300 characters...">
+  </Textarea>
+  <Textarea max-length="100" value=The quick brown fox jumps over the lazy dog. placeholder="100 char limit">
+  </Textarea>
+</div>`;
+export const exMaxLengthVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+    <kb-textarea max-length="300" placeholder="Type up to 300 characters...">
+    </kb-textarea>
+    <kb-textarea max-length="100" value=The quick brown fox jumps over the lazy dog. placeholder="100 char limit">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exMaxLengthSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px">
+  <kb-textarea max-length="300" placeholder="Type up to 300 characters...">
+  </kb-textarea>
+  <kb-textarea max-length="100" value=The quick brown fox jumps over the lazy dog. placeholder="100 char limit">
+  </kb-textarea>
+</div>`;
+export const exMaxLengthNearLimit = `<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <kb-textarea max-length="300" value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf. placeholder="Near limit (yellow)">
+  </kb-textarea>
+  <kb-textarea max-length="50" value=The quick brown fox jumps over the lazy dog. placeholder="At limit (red)">
+  </kb-textarea>
+</div>`;
+export const exMaxLengthNearLimitReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <Textarea max-length="300" value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf. placeholder="Near limit (yellow)">
+  </Textarea>
+  <Textarea max-length="50" value=The quick brown fox jumps over the lazy dog. placeholder="At limit (red)">
+  </Textarea>
+</div>`;
+export const exMaxLengthNearLimitVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+    <kb-textarea max-length="300" value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf. placeholder="Near limit (yellow)">
+    </kb-textarea>
+    <kb-textarea max-length="50" value=The quick brown fox jumps over the lazy dog. placeholder="At limit (red)">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exMaxLengthNearLimitSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:400px">
+  <kb-textarea max-length="300" value=The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump. The five boxing wizards jump quickly. Sphinx of black quartz, judge my vow. Waltz, nymph, for quick jigs vex Bud. Glib jocks quiz nymph to vex dwarf. placeholder="Near limit (yellow)">
+  </kb-textarea>
+  <kb-textarea max-length="50" value=The quick brown fox jumps over the lazy dog. placeholder="At limit (red)">
+  </kb-textarea>
+</div>`;
+export const exResizeModes = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
+  <kb-textarea resize="vertical" placeholder="resize: vertical (default)" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="horizontal" placeholder="resize: horizontal" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="both" placeholder="resize: both" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="none" placeholder="resize: none" rows="3">
+  </kb-textarea>
+</div>`;
+export const exResizeModesReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
+  <Textarea resize="vertical" placeholder="resize: vertical (default)" rows="3">
+  </Textarea>
+  <Textarea resize="horizontal" placeholder="resize: horizontal" rows="3">
+  </Textarea>
+  <Textarea resize="both" placeholder="resize: both" rows="3">
+  </Textarea>
+  <Textarea resize="none" placeholder="resize: none" rows="3">
+  </Textarea>
+</div>`;
+export const exResizeModesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
+    <kb-textarea resize="vertical" placeholder="resize: vertical (default)" rows="3">
+    </kb-textarea>
+    <kb-textarea resize="horizontal" placeholder="resize: horizontal" rows="3">
+    </kb-textarea>
+    <kb-textarea resize="both" placeholder="resize: both" rows="3">
+    </kb-textarea>
+    <kb-textarea resize="none" placeholder="resize: none" rows="3">
+    </kb-textarea>
+  </div>
+</template>`;
+export const exResizeModesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:640px">
+  <kb-textarea resize="vertical" placeholder="resize: vertical (default)" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="horizontal" placeholder="resize: horizontal" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="both" placeholder="resize: both" rows="3">
+  </kb-textarea>
+  <kb-textarea resize="none" placeholder="resize: none" rows="3">
+  </kb-textarea>
+</div>`;
+export const exAutoResizeWithMaxLength = `<kb-textarea auto-resize max-length="200" placeholder="Auto-resize + character counter — type to see both in action..." rows="2" style="max-width:400px">
+</kb-textarea>`;
+export const exAutoResizeWithMaxLengthReact = `import { Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<Textarea auto-resize max-length="200" placeholder="Auto-resize + character counter — type to see both in action..." rows="2" style="max-width:400px">
+</Textarea>`;
+export const exAutoResizeWithMaxLengthVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-textarea auto-resize max-length="200" placeholder="Auto-resize + character counter — type to see both in action..." rows="2" style="max-width:400px">
+  </kb-textarea>
+</template>`;
+export const exAutoResizeWithMaxLengthSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-textarea auto-resize max-length="200" placeholder="Auto-resize + character counter — type to see both in action..." rows="2" style="max-width:400px">
+</kb-textarea>`;
+
+# Textarea
+
+A multi-line text input for longer form content.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Textarea } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `inputId` | `input-id` | `string` | — | Forwarded `id` applied to the native `<textarea>` element. Allows external `<label for="...">` to work. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Form textarea visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Textarea size controlling padding, font size, and action sizing. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text shown when the textarea is empty. |
+| `value` | `value` | `string` | `""` | Current textarea value. Two-way bindable. |
+| `name` | `name` | `string` | — | Form field name, used in form submissions. |
+| `rows` | `rows` | `number` | `4` | Initial visible row count. |
+| `maxLength` | `max-length` | `number` | — | Maximum character count. Enables the character counter when set. |
+| `resize` | `resize` | `ResizeMode` | `'vertical'` | CSS resize behavior. Overridden to `'none'` when `autoResize` is enabled. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `invalid` | `invalid` | `boolean` | `false` | Mark the textarea as invalid with error border styling. |
+| `readonly` | `readonly` | `boolean` | `false` | Make the textarea read-only (focusable but not editable). |
+| `required` | `required` | `boolean` | `false` | Mark the textarea as required for form validation. |
+| `clearable` | `clearable` | `boolean` | `false` | Show a clear button when the textarea has a value. |
+| `loading` | `loading` | `boolean` | `false` | Show a loading spinner in the action area. |
+| `autoResize` | `auto-resize` | `boolean` | `false` | Automatically grow the textarea height to fit content. Disables manual resizing. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-input` | `{ value: string }` | Value changed on input. Detail: `{ value: string }`. |
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value committed on change. Detail: `{ value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Textarea focused. |
+| `kb-blur` | `{ source?: string }` or none | Textarea blurred. |
+| `kb-clear` | `{ source?: string }` or none | Clear button clicked (when clearable). |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-invalid`, `aria-label`
+
+## Examples
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Filled" codes={{ html: exFilled, react: exFilledReact, vue: exFilledVue, svelte: exFilledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFilled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Flushed" codes={{ html: exFlushed, react: exFlushedReact, vue: exFlushedVue, svelte: exFlushedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFlushed }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Readonly" codes={{ html: exReadonly, react: exReadonlyReact, vue: exReadonlyVue, svelte: exReadonlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReadonly }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Auto Resize" codes={{ html: exAutoResize, react: exAutoResizeReact, vue: exAutoResizeVue, svelte: exAutoResizeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAutoResize }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Clearable" codes={{ html: exClearable, react: exClearableReact, vue: exClearableVue, svelte: exClearableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClearable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Loading" codes={{ html: exLoading, react: exLoadingReact, vue: exLoadingVue, svelte: exLoadingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLoading }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Max Length" codes={{ html: exMaxLength, react: exMaxLengthReact, vue: exMaxLengthVue, svelte: exMaxLengthSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMaxLength }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Max Length Near Limit" codes={{ html: exMaxLengthNearLimit, react: exMaxLengthNearLimitReact, vue: exMaxLengthNearLimitVue, svelte: exMaxLengthNearLimitSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMaxLengthNearLimit }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Resize Modes" codes={{ html: exResizeModes, react: exResizeModesReact, vue: exResizeModesVue, svelte: exResizeModesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exResizeModes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Auto Resize With Max Length" codes={{ html: exAutoResizeWithMaxLength, react: exAutoResizeWithMaxLengthReact, vue: exAutoResizeWithMaxLengthVue, svelte: exAutoResizeWithMaxLengthSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAutoResizeWithMaxLength }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)
+- [Form Control](./form-control)

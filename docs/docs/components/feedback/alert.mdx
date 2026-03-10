@@ -1,0 +1,1080 @@
+---
+title: "Alert"
+description: "A prominent message banner for conveying status, warnings, or information."
+sidebar_label: "Alert"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-alert status="info" variant="subtle">
+  <span slot="title">Information</span>
+  This is an informational alert.
+</kb-alert>`;
+export const reactCode = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle">
+  <span slot="title">Information</span>
+  This is an informational alert.
+</Alert>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle">
+    <span slot="title">Information</span>
+    This is an informational alert.
+  </kb-alert>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle">
+  <span slot="title">Information</span>
+  This is an informational alert.
+</kb-alert>`;
+export const exInfo = `<kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>`;
+export const exInfoReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle">This is an alert message.</Alert>`;
+export const exInfoVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>
+</template>`;
+export const exInfoSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>`;
+export const exSuccess = `<kb-alert status="success" variant="subtle">This is an alert message.</kb-alert>`;
+export const exSuccessReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="success" variant="subtle">This is an alert message.</Alert>`;
+export const exSuccessVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="success" variant="subtle">This is an alert message.</kb-alert>
+</template>`;
+export const exSuccessSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="success" variant="subtle">This is an alert message.</kb-alert>`;
+export const exWarning = `<kb-alert status="warning" variant="subtle">This is an alert message.</kb-alert>`;
+export const exWarningReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="warning" variant="subtle">This is an alert message.</Alert>`;
+export const exWarningVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="warning" variant="subtle">This is an alert message.</kb-alert>
+</template>`;
+export const exWarningSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="warning" variant="subtle">This is an alert message.</kb-alert>`;
+export const exErrorStatus = `<kb-alert status="error" variant="subtle">This is an alert message.</kb-alert>`;
+export const exErrorStatusReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="error" variant="subtle">This is an alert message.</Alert>`;
+export const exErrorStatusVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="error" variant="subtle">This is an alert message.</kb-alert>
+</template>`;
+export const exErrorStatusSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="error" variant="subtle">This is an alert message.</kb-alert>`;
+export const exSolid = `<kb-alert status="info" variant="solid">This is an alert message.</kb-alert>`;
+export const exSolidReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="solid">This is an alert message.</Alert>`;
+export const exSolidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="solid">This is an alert message.</kb-alert>
+</template>`;
+export const exSolidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="solid">This is an alert message.</kb-alert>`;
+export const exOutline = `<kb-alert status="info" variant="outline">This is an alert message.</kb-alert>`;
+export const exOutlineReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="outline">This is an alert message.</Alert>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="outline">This is an alert message.</kb-alert>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="outline">This is an alert message.</kb-alert>`;
+export const exLeftAccent = `<kb-alert status="info" variant="left-accent">This is an alert message.</kb-alert>`;
+export const exLeftAccentReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="left-accent">This is an alert message.</Alert>`;
+export const exLeftAccentVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="left-accent">This is an alert message.</kb-alert>
+</template>`;
+export const exLeftAccentSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="left-accent">This is an alert message.</kb-alert>`;
+export const exClosable = `<kb-alert status="info" variant="subtle" closable>This is an alert message.</kb-alert>`;
+export const exClosableReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle" closable>This is an alert message.</Alert>`;
+export const exClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle" closable>This is an alert message.</kb-alert>
+</template>`;
+export const exClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle" closable>This is an alert message.</kb-alert>`;
+export const exSmall = `<kb-alert status="info" variant="subtle" size="sm">This is an alert message.</kb-alert>`;
+export const exSmallReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle" size="sm">This is an alert message.</Alert>`;
+export const exSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle" size="sm">This is an alert message.</kb-alert>
+</template>`;
+export const exSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle" size="sm">This is an alert message.</kb-alert>`;
+export const exLarge = `<kb-alert status="info" variant="subtle" size="lg">This is an alert message.</kb-alert>`;
+export const exLargeReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle" size="lg">This is an alert message.</Alert>`;
+export const exLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle" size="lg">This is an alert message.</kb-alert>
+</template>`;
+export const exLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle" size="lg">This is an alert message.</kb-alert>`;
+export const exNoIcon = `<kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>`;
+export const exNoIconReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<Alert status="info" variant="subtle">This is an alert message.</Alert>`;
+export const exNoIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>
+</template>`;
+export const exNoIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-alert status="info" variant="subtle">This is an alert message.</kb-alert>`;
+export const exAllStatuses = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info">Info: System update available for your workspace.</kb-alert>
+  <kb-alert status="success">Success: Deployment completed in 2.4 seconds.</kb-alert>
+  <kb-alert status="warning">Warning: API rate limit at 85% capacity.</kb-alert>
+  <kb-alert status="error">Error: Connection to database lost.</kb-alert>
+</div>`;
+export const exAllStatusesReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Alert status="info">Info: System update available for your workspace.</Alert>
+  <Alert status="success">Success: Deployment completed in 2.4 seconds.</Alert>
+  <Alert status="warning">Warning: API rate limit at 85% capacity.</Alert>
+  <Alert status="error">Error: Connection to database lost.</Alert>
+</div>`;
+export const exAllStatusesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-alert status="info">Info: System update available for your workspace.</kb-alert>
+    <kb-alert status="success">Success: Deployment completed in 2.4 seconds.</kb-alert>
+    <kb-alert status="warning">Warning: API rate limit at 85% capacity.</kb-alert>
+    <kb-alert status="error">Error: Connection to database lost.</kb-alert>
+  </div>
+</template>`;
+export const exAllStatusesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info">Info: System update available for your workspace.</kb-alert>
+  <kb-alert status="success">Success: Deployment completed in 2.4 seconds.</kb-alert>
+  <kb-alert status="warning">Warning: API rate limit at 85% capacity.</kb-alert>
+  <kb-alert status="error">Error: Connection to database lost.</kb-alert>
+</div>`;
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info" variant="subtle">Subtle variant</kb-alert>
+  <kb-alert status="info" variant="outline">Outline variant</kb-alert>
+  <kb-alert status="info" variant="solid">Solid variant</kb-alert>
+  <kb-alert status="info" variant="left-accent">Left accent variant</kb-alert>
+</div>`;
+export const exAllVariantsReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Alert status="info" variant="subtle">Subtle variant</Alert>
+  <Alert status="info" variant="outline">Outline variant</Alert>
+  <Alert status="info" variant="solid">Solid variant</Alert>
+  <Alert status="info" variant="left-accent">Left accent variant</Alert>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-alert status="info" variant="subtle">Subtle variant</kb-alert>
+    <kb-alert status="info" variant="outline">Outline variant</kb-alert>
+    <kb-alert status="info" variant="solid">Solid variant</kb-alert>
+    <kb-alert status="info" variant="left-accent">Left accent variant</kb-alert>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info" variant="subtle">Subtle variant</kb-alert>
+  <kb-alert status="info" variant="outline">Outline variant</kb-alert>
+  <kb-alert status="info" variant="solid">Solid variant</kb-alert>
+  <kb-alert status="info" variant="left-accent">Left accent variant</kb-alert>
+</div>`;
+export const exWithTitle = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info" variant="outline">
+    <span slot="title">New Version Available</span>
+    KarbitUI v2.1.0 includes performance improvements and 3 new components.
+  </kb-alert>
+  <kb-alert status="error" variant="left-accent" closable>
+    <span slot="title">Build Failed</span>
+    TypeScript compilation encountered 12 errors across 4 modules.
+  </kb-alert>
+  <kb-alert status="success" variant="subtle">
+    <span slot="title">Pipeline Complete</span>
+    All 47 tests passed. Coverage: 94.2%.
+  </kb-alert>
+  <kb-alert status="warning" variant="solid">
+    <span slot="title">Storage Warning</span>
+    Disk usage at 92%. Consider archiving old deployments.
+  </kb-alert>
+</div>`;
+export const exWithTitleReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Alert status="info" variant="outline">
+    <span slot="title">New Version Available</span>
+    KarbitUI v2.1.0 includes performance improvements and 3 new components.
+  </Alert>
+  <Alert status="error" variant="left-accent" closable>
+    <span slot="title">Build Failed</span>
+    TypeScript compilation encountered 12 errors across 4 modules.
+  </Alert>
+  <Alert status="success" variant="subtle">
+    <span slot="title">Pipeline Complete</span>
+    All 47 tests passed. Coverage: 94.2%.
+  </Alert>
+  <Alert status="warning" variant="solid">
+    <span slot="title">Storage Warning</span>
+    Disk usage at 92%. Consider archiving old deployments.
+  </Alert>
+</div>`;
+export const exWithTitleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-alert status="info" variant="outline">
+      <span slot="title">New Version Available</span>
+      KarbitUI v2.1.0 includes performance improvements and 3 new components.
+    </kb-alert>
+    <kb-alert status="error" variant="left-accent" closable>
+      <span slot="title">Build Failed</span>
+      TypeScript compilation encountered 12 errors across 4 modules.
+    </kb-alert>
+    <kb-alert status="success" variant="subtle">
+      <span slot="title">Pipeline Complete</span>
+      All 47 tests passed. Coverage: 94.2%.
+    </kb-alert>
+    <kb-alert status="warning" variant="solid">
+      <span slot="title">Storage Warning</span>
+      Disk usage at 92%. Consider archiving old deployments.
+    </kb-alert>
+  </div>
+</template>`;
+export const exWithTitleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="info" variant="outline">
+    <span slot="title">New Version Available</span>
+    KarbitUI v2.1.0 includes performance improvements and 3 new components.
+  </kb-alert>
+  <kb-alert status="error" variant="left-accent" closable>
+    <span slot="title">Build Failed</span>
+    TypeScript compilation encountered 12 errors across 4 modules.
+  </kb-alert>
+  <kb-alert status="success" variant="subtle">
+    <span slot="title">Pipeline Complete</span>
+    All 47 tests passed. Coverage: 94.2%.
+  </kb-alert>
+  <kb-alert status="warning" variant="solid">
+    <span slot="title">Storage Warning</span>
+    Disk usage at 92%. Consider archiving old deployments.
+  </kb-alert>
+</div>`;
+export const exWithActions = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="error" variant="outline" closable>
+    <span slot="title">Deployment Failed</span>
+    Pipeline encountered 3 errors during the build phase.
+    <span slot="action">
+      <kb-button variant="outline" size="xs">VIEW LOGS</kb-button>
+      <kb-button variant="ghost" size="xs">RETRY</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="info" variant="subtle">
+    <span slot="title">Update Available</span>
+    A new version of the CLI is available.
+    <span slot="action">
+      <kb-link href="#">Install now</kb-link>
+    </span>
+  </kb-alert>
+  <kb-alert status="warning" variant="left-accent" closable>
+    Your trial expires in 3 days.
+    <span slot="action">
+      <kb-button variant="solid" size="xs" color-scheme="yellow">UPGRADE NOW</kb-button>
+    </span>
+  </kb-alert>
+</div>`;
+export const exWithActionsReact = `import { Alert, Button, Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Alert status="error" variant="outline" closable>
+    <span slot="title">Deployment Failed</span>
+    Pipeline encountered 3 errors during the build phase.
+    <span slot="action">
+      <Button variant="outline" size="xs">VIEW LOGS</Button>
+      <Button variant="ghost" size="xs">RETRY</Button>
+    </span>
+  </Alert>
+  <Alert status="info" variant="subtle">
+    <span slot="title">Update Available</span>
+    A new version of the CLI is available.
+    <span slot="action">
+      <Link href="#">Install now</Link>
+    </span>
+  </Alert>
+  <Alert status="warning" variant="left-accent" closable>
+    Your trial expires in 3 days.
+    <span slot="action">
+      <Button variant="solid" size="xs" color-scheme="yellow">UPGRADE NOW</Button>
+    </span>
+  </Alert>
+</div>`;
+export const exWithActionsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-alert status="error" variant="outline" closable>
+      <span slot="title">Deployment Failed</span>
+      Pipeline encountered 3 errors during the build phase.
+      <span slot="action">
+        <kb-button variant="outline" size="xs">VIEW LOGS</kb-button>
+        <kb-button variant="ghost" size="xs">RETRY</kb-button>
+      </span>
+    </kb-alert>
+    <kb-alert status="info" variant="subtle">
+      <span slot="title">Update Available</span>
+      A new version of the CLI is available.
+      <span slot="action">
+        <kb-link href="#">Install now</kb-link>
+      </span>
+    </kb-alert>
+    <kb-alert status="warning" variant="left-accent" closable>
+      Your trial expires in 3 days.
+      <span slot="action">
+        <kb-button variant="solid" size="xs" color-scheme="yellow">UPGRADE NOW</kb-button>
+      </span>
+    </kb-alert>
+  </div>
+</template>`;
+export const exWithActionsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="error" variant="outline" closable>
+    <span slot="title">Deployment Failed</span>
+    Pipeline encountered 3 errors during the build phase.
+    <span slot="action">
+      <kb-button variant="outline" size="xs">VIEW LOGS</kb-button>
+      <kb-button variant="ghost" size="xs">RETRY</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="info" variant="subtle">
+    <span slot="title">Update Available</span>
+    A new version of the CLI is available.
+    <span slot="action">
+      <kb-link href="#">Install now</kb-link>
+    </span>
+  </kb-alert>
+  <kb-alert status="warning" variant="left-accent" closable>
+    Your trial expires in 3 days.
+    <span slot="action">
+      <kb-button variant="solid" size="xs" color-scheme="yellow">UPGRADE NOW</kb-button>
+    </span>
+  </kb-alert>
+</div>`;
+export const exCollapsibleDetail = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="error" variant="outline" closable>
+    <span slot="title">Build Error</span>
+    TypeScript compilation failed with 3 errors.
+    <span slot="detail">
+      <div style="font-family:monospace;font-size:12px;line-height:1.6;">
+        <div>src/api/handler.ts:42 — TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.</div>
+        <div>src/api/handler.ts:67 — TS2304: Cannot find name 'RequestContext'.</div>
+        <div>src/utils/parse.ts:15 — TS7006: Parameter 'data' implicitly has an 'any' type.</div>
+      </div>
+    </span>
+    <span slot="action">
+      <kb-button variant="outline" size="xs">OPEN IN EDITOR</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="warning" variant="subtle">
+    <span slot="title">Security Audit</span>
+    Found 2 vulnerabilities in dependencies.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <div>
+          <strong>high</strong>
+          — lodash@4.17.20: Prototype pollution in zipObjectDeep
+        </div>
+        <div>
+          <strong>moderate</strong>
+          — axios@0.21.0: Server-Side Request Forgery
+        </div>
+      </div>
+    </span>
+    <span slot="action">
+      <kb-button variant="outline" size="xs">RUN FIX</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="info" variant="left-accent">
+    <span slot="title">Migration Guide</span>
+    Breaking changes in the v3 API require updates to your configuration.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <p>
+          1. Replace
+          <code>config.legacy</code>
+          with
+          <code>config.compat</code>
+        </p>
+        <p>
+          2. Update all
+          <code>createHandler()</code>
+          calls to use the new signature
+        </p>
+        <p>
+          3. Remove deprecated
+          <code>onBeforeRender</code>
+          lifecycle hook
+        </p>
+      </div>
+    </span>
+  </kb-alert>
+</div>`;
+export const exCollapsibleDetailReact = `import { Alert, Button } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <Alert status="error" variant="outline" closable>
+    <span slot="title">Build Error</span>
+    TypeScript compilation failed with 3 errors.
+    <span slot="detail">
+      <div style="font-family:monospace;font-size:12px;line-height:1.6;">
+        <div>src/api/handler.ts:42 — TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.</div>
+        <div>src/api/handler.ts:67 — TS2304: Cannot find name 'RequestContext'.</div>
+        <div>src/utils/parse.ts:15 — TS7006: Parameter 'data' implicitly has an 'any' type.</div>
+      </div>
+    </span>
+    <span slot="action">
+      <Button variant="outline" size="xs">OPEN IN EDITOR</Button>
+    </span>
+  </Alert>
+  <Alert status="warning" variant="subtle">
+    <span slot="title">Security Audit</span>
+    Found 2 vulnerabilities in dependencies.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <div>
+          <strong>high</strong>
+          — lodash@4.17.20: Prototype pollution in zipObjectDeep
+        </div>
+        <div>
+          <strong>moderate</strong>
+          — axios@0.21.0: Server-Side Request Forgery
+        </div>
+      </div>
+    </span>
+    <span slot="action">
+      <Button variant="outline" size="xs">RUN FIX</Button>
+    </span>
+  </Alert>
+  <Alert status="info" variant="left-accent">
+    <span slot="title">Migration Guide</span>
+    Breaking changes in the v3 API require updates to your configuration.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <p>
+          1. Replace
+          <code>config.legacy</code>
+          with
+          <code>config.compat</code>
+        </p>
+        <p>
+          2. Update all
+          <code>createHandler()</code>
+          calls to use the new signature
+        </p>
+        <p>
+          3. Remove deprecated
+          <code>onBeforeRender</code>
+          lifecycle hook
+        </p>
+      </div>
+    </span>
+  </Alert>
+</div>`;
+export const exCollapsibleDetailVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-alert status="error" variant="outline" closable>
+      <span slot="title">Build Error</span>
+      TypeScript compilation failed with 3 errors.
+      <span slot="detail">
+        <div style="font-family:monospace;font-size:12px;line-height:1.6;">
+          <div>src/api/handler.ts:42 — TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.</div>
+          <div>src/api/handler.ts:67 — TS2304: Cannot find name 'RequestContext'.</div>
+          <div>src/utils/parse.ts:15 — TS7006: Parameter 'data' implicitly has an 'any' type.</div>
+        </div>
+      </span>
+      <span slot="action">
+        <kb-button variant="outline" size="xs">OPEN IN EDITOR</kb-button>
+      </span>
+    </kb-alert>
+    <kb-alert status="warning" variant="subtle">
+      <span slot="title">Security Audit</span>
+      Found 2 vulnerabilities in dependencies.
+      <span slot="detail">
+        <div style="font-size:13px;line-height:1.6;">
+          <div>
+            <strong>high</strong>
+            — lodash@4.17.20: Prototype pollution in zipObjectDeep
+          </div>
+          <div>
+            <strong>moderate</strong>
+            — axios@0.21.0: Server-Side Request Forgery
+          </div>
+        </div>
+      </span>
+      <span slot="action">
+        <kb-button variant="outline" size="xs">RUN FIX</kb-button>
+      </span>
+    </kb-alert>
+    <kb-alert status="info" variant="left-accent">
+      <span slot="title">Migration Guide</span>
+      Breaking changes in the v3 API require updates to your configuration.
+      <span slot="detail">
+        <div style="font-size:13px;line-height:1.6;">
+          <p>
+            1. Replace
+            <code>config.legacy</code>
+            with
+            <code>config.compat</code>
+          </p>
+          <p>
+            2. Update all
+            <code>createHandler()</code>
+            calls to use the new signature
+          </p>
+          <p>
+            3. Remove deprecated
+            <code>onBeforeRender</code>
+            lifecycle hook
+          </p>
+        </div>
+      </span>
+    </kb-alert>
+  </div>
+</template>`;
+export const exCollapsibleDetailSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-alert status="error" variant="outline" closable>
+    <span slot="title">Build Error</span>
+    TypeScript compilation failed with 3 errors.
+    <span slot="detail">
+      <div style="font-family:monospace;font-size:12px;line-height:1.6;">
+        <div>src/api/handler.ts:42 — TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.</div>
+        <div>src/api/handler.ts:67 — TS2304: Cannot find name 'RequestContext'.</div>
+        <div>src/utils/parse.ts:15 — TS7006: Parameter 'data' implicitly has an 'any' type.</div>
+      </div>
+    </span>
+    <span slot="action">
+      <kb-button variant="outline" size="xs">OPEN IN EDITOR</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="warning" variant="subtle">
+    <span slot="title">Security Audit</span>
+    Found 2 vulnerabilities in dependencies.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <div>
+          <strong>high</strong>
+          — lodash@4.17.20: Prototype pollution in zipObjectDeep
+        </div>
+        <div>
+          <strong>moderate</strong>
+          — axios@0.21.0: Server-Side Request Forgery
+        </div>
+      </div>
+    </span>
+    <span slot="action">
+      <kb-button variant="outline" size="xs">RUN FIX</kb-button>
+    </span>
+  </kb-alert>
+  <kb-alert status="info" variant="left-accent">
+    <span slot="title">Migration Guide</span>
+    Breaking changes in the v3 API require updates to your configuration.
+    <span slot="detail">
+      <div style="font-size:13px;line-height:1.6;">
+        <p>
+          1. Replace
+          <code>config.legacy</code>
+          with
+          <code>config.compat</code>
+        </p>
+        <p>
+          2. Update all
+          <code>createHandler()</code>
+          calls to use the new signature
+        </p>
+        <p>
+          3. Remove deprecated
+          <code>onBeforeRender</code>
+          lifecycle hook
+        </p>
+      </div>
+    </span>
+  </kb-alert>
+</div>`;
+export const exAutoDismiss = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">These alerts auto-dismiss after 5 seconds:</p>
+  <kb-alert status="success" variant="subtle" duration="5000">
+    <span slot="title">Changes Saved</span>
+    Your configuration has been updated. This alert dismisses in 5s.
+  </kb-alert>
+  <kb-alert status="info" variant="outline" duration="5000" closable>
+    <span slot="title">Sync Complete</span>
+    All files synchronized. Dismiss manually or wait 5s.
+  </kb-alert>
+</div>`;
+export const exAutoDismissReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">These alerts auto-dismiss after 5 seconds:</p>
+  <Alert status="success" variant="subtle" duration="5000">
+    <span slot="title">Changes Saved</span>
+    Your configuration has been updated. This alert dismisses in 5s.
+  </Alert>
+  <Alert status="info" variant="outline" duration="5000" closable>
+    <span slot="title">Sync Complete</span>
+    All files synchronized. Dismiss manually or wait 5s.
+  </Alert>
+</div>`;
+export const exAutoDismissVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <p style="font-family:monospace;font-size:12px;color:#64748b;">These alerts auto-dismiss after 5 seconds:</p>
+    <kb-alert status="success" variant="subtle" duration="5000">
+      <span slot="title">Changes Saved</span>
+      Your configuration has been updated. This alert dismisses in 5s.
+    </kb-alert>
+    <kb-alert status="info" variant="outline" duration="5000" closable>
+      <span slot="title">Sync Complete</span>
+      All files synchronized. Dismiss manually or wait 5s.
+    </kb-alert>
+  </div>
+</template>`;
+export const exAutoDismissSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">These alerts auto-dismiss after 5 seconds:</p>
+  <kb-alert status="success" variant="subtle" duration="5000">
+    <span slot="title">Changes Saved</span>
+    Your configuration has been updated. This alert dismisses in 5s.
+  </kb-alert>
+  <kb-alert status="info" variant="outline" duration="5000" closable>
+    <span slot="title">Sync Complete</span>
+    All files synchronized. Dismiss manually or wait 5s.
+  </kb-alert>
+</div>`;
+export const exClosableAnimated = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">Click the close button to see the animated dismiss:</p>
+  <kb-alert status="info" variant="subtle" closable>Dismissible info alert with smooth animation.</kb-alert>
+  <kb-alert status="success" variant="outline" closable>Dismissible success alert with smooth animation.</kb-alert>
+  <kb-alert status="warning" variant="left-accent" closable>Dismissible warning alert with smooth animation.</kb-alert>
+  <kb-alert status="error" variant="solid" closable>Dismissible error alert with smooth animation.</kb-alert>
+</div>`;
+export const exClosableAnimatedReact = `import { Alert } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">Click the close button to see the animated dismiss:</p>
+  <Alert status="info" variant="subtle" closable>Dismissible info alert with smooth animation.</Alert>
+  <Alert status="success" variant="outline" closable>Dismissible success alert with smooth animation.</Alert>
+  <Alert status="warning" variant="left-accent" closable>Dismissible warning alert with smooth animation.</Alert>
+  <Alert status="error" variant="solid" closable>Dismissible error alert with smooth animation.</Alert>
+</div>`;
+export const exClosableAnimatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <p style="font-family:monospace;font-size:12px;color:#64748b;">Click the close button to see the animated dismiss:</p>
+    <kb-alert status="info" variant="subtle" closable>Dismissible info alert with smooth animation.</kb-alert>
+    <kb-alert status="success" variant="outline" closable>Dismissible success alert with smooth animation.</kb-alert>
+    <kb-alert status="warning" variant="left-accent" closable>Dismissible warning alert with smooth animation.</kb-alert>
+    <kb-alert status="error" variant="solid" closable>Dismissible error alert with smooth animation.</kb-alert>
+  </div>
+</template>`;
+export const exClosableAnimatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <p style="font-family:monospace;font-size:12px;color:#64748b;">Click the close button to see the animated dismiss:</p>
+  <kb-alert status="info" variant="subtle" closable>Dismissible info alert with smooth animation.</kb-alert>
+  <kb-alert status="success" variant="outline" closable>Dismissible success alert with smooth animation.</kb-alert>
+  <kb-alert status="warning" variant="left-accent" closable>Dismissible warning alert with smooth animation.</kb-alert>
+  <kb-alert status="error" variant="solid" closable>Dismissible error alert with smooth animation.</kb-alert>
+</div>`;
+
+# Alert
+
+A prominent message banner for conveying status, warnings, or information.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Alert } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `status` | `status` | `AlertStatus` | `'info'` | Semantic status controlling icon and color scheme. |
+| `variant` | `variant` | `AlertVariant` | `'subtle'` | Visual variant controlling border, background, and text styles. |
+| `size` | `size` | `AlertSize` | `'md'` | Alert size controlling padding and font size. |
+| `closable` | `closable` | `boolean` | `false` | Show a close button that dismisses the alert with animation. |
+| `showIcon` | `show-icon` | `boolean` | `true` | Show the status icon before the message content. |
+| `duration` | `duration` | `number` | `0` | Auto-dismiss delay in milliseconds. `0` disables auto-dismiss. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `title` | Bold heading rendered above the description. |
+| `action` | Inline action area (buttons, links) rendered after content. |
+| `detail` | Expandable detail content toggled via a chevron button. |
+| `icon` | Custom icon override. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-close` | `{ source?: string }` or none | Dispatched when the alert is dismissed (closable or auto-dismiss). |
+| `kb-toggle` | `{ open: boolean }` | Dispatched when collapsible detail is expanded/collapsed. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `alert`
+
+**Attributes:** `aria-expanded`, `aria-label`
+
+## Examples
+
+<Demo title="Info" codes={{ html: exInfo, react: exInfoReact, vue: exInfoVue, svelte: exInfoSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInfo }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Success" codes={{ html: exSuccess, react: exSuccessReact, vue: exSuccessVue, svelte: exSuccessSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSuccess }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Warning" codes={{ html: exWarning, react: exWarningReact, vue: exWarningVue, svelte: exWarningSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWarning }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Error Status" codes={{ html: exErrorStatus, react: exErrorStatusReact, vue: exErrorStatusVue, svelte: exErrorStatusSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exErrorStatus }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Solid" codes={{ html: exSolid, react: exSolidReact, vue: exSolidVue, svelte: exSolidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSolid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Left Accent" codes={{ html: exLeftAccent, react: exLeftAccentReact, vue: exLeftAccentVue, svelte: exLeftAccentSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLeftAccent }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable" codes={{ html: exClosable, react: exClosableReact, vue: exClosableVue, svelte: exClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Small" codes={{ html: exSmall, react: exSmallReact, vue: exSmallVue, svelte: exSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Large" codes={{ html: exLarge, react: exLargeReact, vue: exLargeVue, svelte: exLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Icon" codes={{ html: exNoIcon, react: exNoIconReact, vue: exNoIconVue, svelte: exNoIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoIcon }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Statuses" codes={{ html: exAllStatuses, react: exAllStatusesReact, vue: exAllStatusesVue, svelte: exAllStatusesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllStatuses }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Title" codes={{ html: exWithTitle, react: exWithTitleReact, vue: exWithTitleVue, svelte: exWithTitleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithTitle }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Actions" codes={{ html: exWithActions, react: exWithActionsReact, vue: exWithActionsVue, svelte: exWithActionsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithActions }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Collapsible Detail" codes={{ html: exCollapsibleDetail, react: exCollapsibleDetailReact, vue: exCollapsibleDetailVue, svelte: exCollapsibleDetailSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCollapsibleDetail }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Auto Dismiss" codes={{ html: exAutoDismiss, react: exAutoDismissReact, vue: exAutoDismissVue, svelte: exAutoDismissSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAutoDismiss }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable Animated" codes={{ html: exClosableAnimated, react: exClosableAnimatedReact, vue: exClosableAnimatedVue, svelte: exClosableAnimatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosableAnimated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Toast](./toast)
+- [Empty State](./empty-state)

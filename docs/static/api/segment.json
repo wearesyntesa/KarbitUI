@@ -1,0 +1,85 @@
+{
+  "name": "Segment",
+  "tag": "kb-segment",
+  "category": "forms",
+  "description": "A segmented control for toggling between a set of options.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-segment.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Segment"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "V | ''",
+      "default": "''",
+      "reflect": false,
+      "description": "Currently selected value."
+    },
+    {
+      "name": "options",
+      "attribute": "options",
+      "type": "readonly SegmentOption<V>[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Options to render as segments."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable all segments."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Fires when the selected value changes. Detail: `{ source: 'segment', value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "radio",
+      "radiogroup"
+    ],
+    "ariaAttributes": [
+      "aria-checked",
+      "aria-disabled",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "End",
+      "Home"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "radio-group",
+    "tabs"
+  ]
+}

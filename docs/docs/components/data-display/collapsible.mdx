@@ -1,0 +1,303 @@
+---
+title: "Collapsible"
+description: "An animated collapse/expand container for toggling content visibility."
+sidebar_label: "Collapsible"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-button variant="outline" size="sm" onclick="this.nextElementSibling.open = !this.nextElementSibling.open">Toggle Content</kb-button>
+<kb-collapsible open>
+  <div style="padding: 1rem 0;">This content can be collapsed.</div>
+</kb-collapsible>`;
+export const reactCode = `import { Button, Collapsible } from '@wearesyntesa/karbit-ui/react';
+
+<Button variant="outline" size="sm" onclick="this.nextElementSibling.open = !this.nextElementSibling.open">Toggle Content</Button>
+<Collapsible open>
+  <div style="padding: 1rem 0;">This content can be collapsed.</div>
+</Collapsible>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button variant="outline" size="sm" onclick="this.nextElementSibling.open = !this.nextElementSibling.open">Toggle Content</kb-button>
+  <kb-collapsible open>
+    <div style="padding: 1rem 0;">This content can be collapsed.</div>
+  </kb-collapsible>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button variant="outline" size="sm" onclick="this.nextElementSibling.open = !this.nextElementSibling.open">Toggle Content</kb-button>
+<kb-collapsible open>
+  <div style="padding: 1rem 0;">This content can be collapsed.</div>
+</kb-collapsible>`;
+export const exDefault = `<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle content
+  </button>
+  <kb-collapsible>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This content can be expanded or collapsed by clicking the button above. The collapsible component does not render its own trigger — you control the toggle externally.
+    </div>
+  </kb-collapsible>
+</div>`;
+export const exDefaultReact = `import { Collapsible } from '@wearesyntesa/karbit-ui/react';
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle content
+  </button>
+  <Collapsible>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This content can be expanded or collapsed by clicking the button above. The collapsible component does not render its own trigger — you control the toggle externally.
+    </div>
+  </Collapsible>
+</div>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div>
+    <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+      Toggle content
+    </button>
+    <kb-collapsible>
+      <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+        This content can be expanded or collapsed by clicking the button above. The collapsible component does not render its own trigger — you control the toggle externally.
+      </div>
+    </kb-collapsible>
+  </div>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle content
+  </button>
+  <kb-collapsible>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This content can be expanded or collapsed by clicking the button above. The collapsible component does not render its own trigger — you control the toggle externally.
+    </div>
+  </kb-collapsible>
+</div>`;
+export const exOpen = `<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle section
+  </button>
+  <kb-collapsible open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This panel starts in the open state. Click the button to collapse it.
+    </div>
+  </kb-collapsible>
+</div>`;
+export const exOpenReact = `import { Collapsible } from '@wearesyntesa/karbit-ui/react';
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle section
+  </button>
+  <Collapsible open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This panel starts in the open state. Click the button to collapse it.
+    </div>
+  </Collapsible>
+</div>`;
+export const exOpenVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div>
+    <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+      Toggle section
+    </button>
+    <kb-collapsible open>
+      <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+        This panel starts in the open state. Click the button to collapse it.
+      </div>
+    </kb-collapsible>
+  </div>
+</template>`;
+export const exOpenSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-50 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800">
+    Toggle section
+  </button>
+  <kb-collapsible open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This panel starts in the open state. Click the button to collapse it.
+    </div>
+  </kb-collapsible>
+</div>`;
+export const exDisabled = `<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-400 dark:text-zinc-500 cursor-not-allowed">
+    Disabled toggle
+  </button>
+  <kb-collapsible disabled open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This collapsible is disabled. The toggle method will have no effect.
+    </div>
+  </kb-collapsible>
+</div>`;
+export const exDisabledReact = `import { Collapsible } from '@wearesyntesa/karbit-ui/react';
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-400 dark:text-zinc-500 cursor-not-allowed">
+    Disabled toggle
+  </button>
+  <Collapsible disabled open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This collapsible is disabled. The toggle method will have no effect.
+    </div>
+  </Collapsible>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div>
+    <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-400 dark:text-zinc-500 cursor-not-allowed">
+      Disabled toggle
+    </button>
+    <kb-collapsible disabled open>
+      <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+        This collapsible is disabled. The toggle method will have no effect.
+      </div>
+    </kb-collapsible>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div>
+  <button class="px-4 py-2 text-sm font-mono uppercase tracking-widest border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-400 dark:text-zinc-500 cursor-not-allowed">
+    Disabled toggle
+  </button>
+  <kb-collapsible disabled open>
+    <div class="p-4 border border-gray-200 dark:border-zinc-700 border-t-0 text-sm font-sans text-slate-900 dark:text-zinc-50">
+      This collapsible is disabled. The toggle method will have no effect.
+    </div>
+  </kb-collapsible>
+</div>`;
+
+# Collapsible
+
+An animated collapse/expand container for toggling content visibility.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Collapsible } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `open` | `open` | `boolean` | `false` | Whether the panel is expanded. Reflected to attribute for CSS targeting. |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents toggling and applies disabled styles. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-toggle` | `{ open: boolean }` | Dispatched when open state changes, with `detail.open`. |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Open" codes={{ html: exOpen, react: exOpenReact, vue: exOpenVue, svelte: exOpenSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOpen }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Accordion](./accordion)

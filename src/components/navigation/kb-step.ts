@@ -1,4 +1,4 @@
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import { KbBaseElement } from '../../core/base-element.js';
 import { kbClasses } from '../../core/theme.js';
@@ -73,6 +73,13 @@ export class KbStep extends KbBaseElement<'description'> {
   @property({ type: String }) _size: ComponentSize = 'md';
   @property({ type: String }) _orientation: Orientation = 'horizontal';
   @property({ type: Boolean }) _isLast: boolean = false;
+
+  protected override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (changed.has('_orientation')) {
+      this.style.flex = this._orientation === 'horizontal' ? '1' : '';
+    }
+  }
 
   private _handleClick(): void {
     if (this._status === 'complete') {

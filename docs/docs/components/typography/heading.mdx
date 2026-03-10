@@ -1,0 +1,614 @@
+---
+title: "Heading"
+description: "A heading element (h1-h6) with size and weight variants."
+sidebar_label: "Heading"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-heading level="2" size="xl">Section Title</kb-heading>`;
+export const reactCode = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="2" size="xl">Section Title</Heading>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="2" size="xl">Section Title</kb-heading>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="2" size="xl">Section Title</kb-heading>`;
+export const exH1 = `<kb-heading level="1" weight="bold">Section heading</kb-heading>`;
+export const exH1React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="1" weight="bold">Section heading</Heading>`;
+export const exH1Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="1" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH1Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="1" weight="bold">Section heading</kb-heading>`;
+export const exH2 = `<kb-heading level="2" weight="bold">Section heading</kb-heading>`;
+export const exH2React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="2" weight="bold">Section heading</Heading>`;
+export const exH2Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="2" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH2Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="2" weight="bold">Section heading</kb-heading>`;
+export const exH3 = `<kb-heading level="3" weight="bold">Section heading</kb-heading>`;
+export const exH3React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="3" weight="bold">Section heading</Heading>`;
+export const exH3Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="3" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH3Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="3" weight="bold">Section heading</kb-heading>`;
+export const exH4 = `<kb-heading level="4" weight="bold">Section heading</kb-heading>`;
+export const exH4React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="4" weight="bold">Section heading</Heading>`;
+export const exH4Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="4" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH4Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="4" weight="bold">Section heading</kb-heading>`;
+export const exH5 = `<kb-heading level="5" weight="bold">Section heading</kb-heading>`;
+export const exH5React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="5" weight="bold">Section heading</Heading>`;
+export const exH5Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="5" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH5Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="5" weight="bold">Section heading</kb-heading>`;
+export const exH6 = `<kb-heading level="6" weight="bold">Section heading</kb-heading>`;
+export const exH6React = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="6" weight="bold">Section heading</Heading>`;
+export const exH6Vue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="6" weight="bold">Section heading</kb-heading>
+</template>`;
+export const exH6Svelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="6" weight="bold">Section heading</kb-heading>`;
+export const exCustomSize = `<kb-heading level="2" weight="bold" size="4xl">Section heading</kb-heading>`;
+export const exCustomSizeReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<Heading level="2" weight="bold" size="4xl">Section heading</Heading>`;
+export const exCustomSizeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-heading level="2" weight="bold" size="4xl">Section heading</kb-heading>
+</template>`;
+export const exCustomSizeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-heading level="2" weight="bold" size="4xl">Section heading</kb-heading>`;
+export const exAllLevels = `<div class="flex flex-col gap-4">
+  <kb-heading level="1">Heading Level 1</kb-heading>
+  <kb-heading level="2">Heading Level 2</kb-heading>
+  <kb-heading level="3">Heading Level 3</kb-heading>
+  <kb-heading level="4">Heading Level 4</kb-heading>
+  <kb-heading level="5">Heading Level 5</kb-heading>
+  <kb-heading level="6">Heading Level 6</kb-heading>
+</div>`;
+export const exAllLevelsReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <Heading level="1">Heading Level 1</Heading>
+  <Heading level="2">Heading Level 2</Heading>
+  <Heading level="3">Heading Level 3</Heading>
+  <Heading level="4">Heading Level 4</Heading>
+  <Heading level="5">Heading Level 5</Heading>
+  <Heading level="6">Heading Level 6</Heading>
+</div>`;
+export const exAllLevelsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <kb-heading level="1">Heading Level 1</kb-heading>
+    <kb-heading level="2">Heading Level 2</kb-heading>
+    <kb-heading level="3">Heading Level 3</kb-heading>
+    <kb-heading level="4">Heading Level 4</kb-heading>
+    <kb-heading level="5">Heading Level 5</kb-heading>
+    <kb-heading level="6">Heading Level 6</kb-heading>
+  </div>
+</template>`;
+export const exAllLevelsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <kb-heading level="1">Heading Level 1</kb-heading>
+  <kb-heading level="2">Heading Level 2</kb-heading>
+  <kb-heading level="3">Heading Level 3</kb-heading>
+  <kb-heading level="4">Heading Level 4</kb-heading>
+  <kb-heading level="5">Heading Level 5</kb-heading>
+  <kb-heading level="6">Heading Level 6</kb-heading>
+</div>`;
+export const exWeights = `<div class="flex flex-col gap-4">
+  <kb-heading level="3" weight="medium">Medium weight</kb-heading>
+  <kb-heading level="3" weight="semibold">Semibold weight</kb-heading>
+  <kb-heading level="3" weight="bold">Bold weight (default)</kb-heading>
+  <kb-heading level="3" weight="extrabold">Extrabold weight</kb-heading>
+  <kb-heading level="3" weight="black">Black weight</kb-heading>
+</div>`;
+export const exWeightsReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <Heading level="3" weight="medium">Medium weight</Heading>
+  <Heading level="3" weight="semibold">Semibold weight</Heading>
+  <Heading level="3" weight="bold">Bold weight (default)</Heading>
+  <Heading level="3" weight="extrabold">Extrabold weight</Heading>
+  <Heading level="3" weight="black">Black weight</Heading>
+</div>`;
+export const exWeightsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <kb-heading level="3" weight="medium">Medium weight</kb-heading>
+    <kb-heading level="3" weight="semibold">Semibold weight</kb-heading>
+    <kb-heading level="3" weight="bold">Bold weight (default)</kb-heading>
+    <kb-heading level="3" weight="extrabold">Extrabold weight</kb-heading>
+    <kb-heading level="3" weight="black">Black weight</kb-heading>
+  </div>
+</template>`;
+export const exWeightsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <kb-heading level="3" weight="medium">Medium weight</kb-heading>
+  <kb-heading level="3" weight="semibold">Semibold weight</kb-heading>
+  <kb-heading level="3" weight="bold">Bold weight (default)</kb-heading>
+  <kb-heading level="3" weight="extrabold">Extrabold weight</kb-heading>
+  <kb-heading level="3" weight="black">Black weight</kb-heading>
+</div>`;
+export const exTones = `<div class="flex flex-col gap-3">
+  <kb-heading level="4">Default (primary)</kb-heading>
+  <kb-heading level="4" tone="secondary">Secondary tone</kb-heading>
+  <kb-heading level="4" tone="muted">Muted tone</kb-heading>
+  <kb-heading level="4" tone="accent">Accent tone</kb-heading>
+  <kb-heading level="4" tone="success">Success tone</kb-heading>
+  <kb-heading level="4" tone="warning">Warning tone</kb-heading>
+  <kb-heading level="4" tone="error">Error tone</kb-heading>
+</div>`;
+export const exTonesReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-3">
+  <Heading level="4">Default (primary)</Heading>
+  <Heading level="4" tone="secondary">Secondary tone</Heading>
+  <Heading level="4" tone="muted">Muted tone</Heading>
+  <Heading level="4" tone="accent">Accent tone</Heading>
+  <Heading level="4" tone="success">Success tone</Heading>
+  <Heading level="4" tone="warning">Warning tone</Heading>
+  <Heading level="4" tone="error">Error tone</Heading>
+</div>`;
+export const exTonesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <kb-heading level="4">Default (primary)</kb-heading>
+    <kb-heading level="4" tone="secondary">Secondary tone</kb-heading>
+    <kb-heading level="4" tone="muted">Muted tone</kb-heading>
+    <kb-heading level="4" tone="accent">Accent tone</kb-heading>
+    <kb-heading level="4" tone="success">Success tone</kb-heading>
+    <kb-heading level="4" tone="warning">Warning tone</kb-heading>
+    <kb-heading level="4" tone="error">Error tone</kb-heading>
+  </div>
+</template>`;
+export const exTonesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-3">
+  <kb-heading level="4">Default (primary)</kb-heading>
+  <kb-heading level="4" tone="secondary">Secondary tone</kb-heading>
+  <kb-heading level="4" tone="muted">Muted tone</kb-heading>
+  <kb-heading level="4" tone="accent">Accent tone</kb-heading>
+  <kb-heading level="4" tone="success">Success tone</kb-heading>
+  <kb-heading level="4" tone="warning">Warning tone</kb-heading>
+  <kb-heading level="4" tone="error">Error tone</kb-heading>
+</div>`;
+export const exTruncated = `<div style="max-width:300px;">
+  <kb-heading level="3" truncate>
+    This is a very long heading that should be truncated with an ellipsis when it exceeds the container width
+  </kb-heading>
+</div>`;
+export const exTruncatedReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:300px;">
+  <Heading level="3" truncate>
+    This is a very long heading that should be truncated with an ellipsis when it exceeds the container width
+  </Heading>
+</div>`;
+export const exTruncatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:300px;">
+    <kb-heading level="3" truncate>
+      This is a very long heading that should be truncated with an ellipsis when it exceeds the container width
+    </kb-heading>
+  </div>
+</template>`;
+export const exTruncatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:300px;">
+  <kb-heading level="3" truncate>
+    This is a very long heading that should be truncated with an ellipsis when it exceeds the container width
+  </kb-heading>
+</div>`;
+export const exPageHeader = `<div class="flex flex-col gap-1">
+  <kb-heading level="1" weight="black">Dashboard</kb-heading>
+  <kb-heading level="4" weight="medium" tone="secondary" size="md">
+    Monitor your application metrics and performance
+  </kb-heading>
+</div>`;
+export const exPageHeaderReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-1">
+  <Heading level="1" weight="black">Dashboard</Heading>
+  <Heading level="4" weight="medium" tone="secondary" size="md">
+    Monitor your application metrics and performance
+  </Heading>
+</div>`;
+export const exPageHeaderVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-1">
+    <kb-heading level="1" weight="black">Dashboard</kb-heading>
+    <kb-heading level="4" weight="medium" tone="secondary" size="md">
+      Monitor your application metrics and performance
+    </kb-heading>
+  </div>
+</template>`;
+export const exPageHeaderSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-1">
+  <kb-heading level="1" weight="black">Dashboard</kb-heading>
+  <kb-heading level="4" weight="medium" tone="secondary" size="md">
+    Monitor your application metrics and performance
+  </kb-heading>
+</div>`;
+export const exSectionHeaders = `<div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="accent">Features</kb-heading>
+    <div class="w-12 h-0.5 bg-blue-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="error">Breaking Changes</kb-heading>
+    <div class="w-12 h-0.5 bg-red-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="success">Resolved</kb-heading>
+    <div class="w-12 h-0.5 bg-green-500">
+    </div>
+  </div>
+</div>`;
+export const exSectionHeadersReact = `import { Heading } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-2">
+    <Heading level="2" weight="extrabold" tone="accent">Features</Heading>
+    <div class="w-12 h-0.5 bg-blue-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <Heading level="2" weight="extrabold" tone="error">Breaking Changes</Heading>
+    <div class="w-12 h-0.5 bg-red-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <Heading level="2" weight="extrabold" tone="success">Resolved</Heading>
+    <div class="w-12 h-0.5 bg-green-500">
+    </div>
+  </div>
+</div>`;
+export const exSectionHeadersVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-2">
+      <kb-heading level="2" weight="extrabold" tone="accent">Features</kb-heading>
+      <div class="w-12 h-0.5 bg-blue-500">
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <kb-heading level="2" weight="extrabold" tone="error">Breaking Changes</kb-heading>
+      <div class="w-12 h-0.5 bg-red-500">
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <kb-heading level="2" weight="extrabold" tone="success">Resolved</kb-heading>
+      <div class="w-12 h-0.5 bg-green-500">
+      </div>
+    </div>
+  </div>
+</template>`;
+export const exSectionHeadersSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-8">
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="accent">Features</kb-heading>
+    <div class="w-12 h-0.5 bg-blue-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="error">Breaking Changes</kb-heading>
+    <div class="w-12 h-0.5 bg-red-500">
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <kb-heading level="2" weight="extrabold" tone="success">Resolved</kb-heading>
+    <div class="w-12 h-0.5 bg-green-500">
+    </div>
+  </div>
+</div>`;
+
+# Heading
+
+A heading element (h1-h6) with size and weight variants.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Heading } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `level` | `level` | `HeadingLevel` | `'2'` | Semantic heading level (`'1'`–`'6'`). Determines the rendered `<h1>`–`<h6>` element and default size. |
+| `size` | `size` | `HeadingSize` | — | Explicit size override. When unset, derived from `level` (e.g. level `'1'` → `'4xl'`). |
+| `weight` | `weight` | `HeadingWeight` | `'bold'` | Font weight. |
+| `tone` | `tone` | `HeadingTone` | — | Semantic color tone. When unset, uses the recipe's default primary tone. |
+| `truncate` | `truncate` | `boolean` | `false` | Truncate overflowing text with an ellipsis on a single line. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="H1" codes={{ html: exH1, react: exH1React, vue: exH1Vue, svelte: exH1Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH1 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="H2" codes={{ html: exH2, react: exH2React, vue: exH2Vue, svelte: exH2Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH2 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="H3" codes={{ html: exH3, react: exH3React, vue: exH3Vue, svelte: exH3Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH3 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="H4" codes={{ html: exH4, react: exH4React, vue: exH4Vue, svelte: exH4Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH4 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="H5" codes={{ html: exH5, react: exH5React, vue: exH5Vue, svelte: exH5Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH5 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="H6" codes={{ html: exH6, react: exH6React, vue: exH6Vue, svelte: exH6Svelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exH6 }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Size" codes={{ html: exCustomSize, react: exCustomSizeReact, vue: exCustomSizeVue, svelte: exCustomSizeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomSize }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Levels" codes={{ html: exAllLevels, react: exAllLevelsReact, vue: exAllLevelsVue, svelte: exAllLevelsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllLevels }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Weights" codes={{ html: exWeights, react: exWeightsReact, vue: exWeightsVue, svelte: exWeightsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWeights }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Tones" codes={{ html: exTones, react: exTonesReact, vue: exTonesVue, svelte: exTonesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTones }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Truncated" codes={{ html: exTruncated, react: exTruncatedReact, vue: exTruncatedVue, svelte: exTruncatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTruncated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Page Header" codes={{ html: exPageHeader, react: exPageHeaderReact, vue: exPageHeaderVue, svelte: exPageHeaderSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPageHeader }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Section Headers" codes={{ html: exSectionHeaders, react: exSectionHeadersReact, vue: exSectionHeadersVue, svelte: exSectionHeadersSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSectionHeaders }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Text](./text)

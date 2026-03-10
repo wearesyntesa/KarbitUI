@@ -1,0 +1,110 @@
+{
+  "name": "Alert",
+  "tag": "kb-alert",
+  "category": "feedback",
+  "description": "A prominent message banner for conveying status, warnings, or information.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-alert.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Alert"
+  },
+  "props": [
+    {
+      "name": "status",
+      "attribute": "status",
+      "type": "AlertStatus",
+      "default": "'info'",
+      "reflect": false,
+      "description": "Semantic status controlling icon and color scheme."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "AlertVariant",
+      "default": "'subtle'",
+      "reflect": false,
+      "description": "Visual variant controlling border, background, and text styles."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "AlertSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Alert size controlling padding and font size."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a close button that dismisses the alert with animation."
+    },
+    {
+      "name": "showIcon",
+      "attribute": "show-icon",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show the status icon before the message content."
+    },
+    {
+      "name": "duration",
+      "attribute": "duration",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Auto-dismiss delay in milliseconds. `0` disables auto-dismiss."
+    }
+  ],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Bold heading rendered above the description."
+    },
+    {
+      "name": "action",
+      "description": "Inline action area (buttons, links) rendered after content."
+    },
+    {
+      "name": "detail",
+      "description": "Expandable detail content toggled via a chevron button."
+    },
+    {
+      "name": "icon",
+      "description": "Custom icon override."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when the alert is dismissed (closable or auto-dismiss)."
+    },
+    {
+      "name": "kb-toggle",
+      "detail": "`{ open: boolean }`",
+      "description": "Dispatched when collapsible detail is expanded/collapsed."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "alert"
+    ],
+    "ariaAttributes": [
+      "aria-expanded",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "toast",
+    "empty-state"
+  ]
+}

@@ -1,0 +1,139 @@
+---
+sidebar_position: 2
+title: Theming
+---
+
+# Theming
+
+KarbitUI uses Tailwind CSS v4's CSS-first theming via `@theme` directives. You can customize colors, fonts, and design tokens by overriding CSS custom properties.
+
+## Theme CSS file
+
+The package exports a ready-to-use theme file:
+
+```css title="src/index.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+```
+
+This file includes:
+- Tailwind CSS v4 import
+- Dark mode configuration (class-based via `.dark`)
+- All `@theme` design tokens (colors, fonts, radius, animations)
+- `@source` directives for component class scanning
+- `@keyframes` for all component animations
+- Reduced motion accessibility overrides
+
+## Customizing colors
+
+Override the CSS custom properties defined in the `@theme` block:
+
+```css title="src/custom-theme.css"
+@import "@wearesyntesa/karbit-ui/theme.css";
+
+@theme {
+  /* Change the accent color to purple */
+  --color-kb-accent: #8b5cf6;
+  --color-kb-accent-light: #a78bfa;
+  --color-kb-accent-dark: #7c3aed;
+}
+```
+
+## Available tokens
+
+### Border radius
+
+All radius tokens are `0px` by default (Structured Minimal Brutalism). To add rounding:
+
+```css
+@theme {
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+}
+```
+
+:::warning
+Changing border radius will deviate from the Structured Minimal Brutalism aesthetic. The design system is built around sharp corners.
+:::
+
+### Fonts
+
+```css
+@theme {
+  --font-sans: "Your Font", system-ui, sans-serif;
+  --font-mono: "Your Mono Font", monospace;
+}
+```
+
+### Color tokens
+
+```css
+@theme {
+  /* Surface colors */
+  --color-kb-surface-light: #ffffff;
+  --color-kb-surface-muted: #f8f9fa;
+  --color-kb-surface-dark: #18181b;
+  --color-kb-surface-dark-muted: #27272a;
+
+  /* Border colors */
+  --color-kb-border-light: #e5e7eb;
+  --color-kb-border-dark: #3f3f46;
+
+  /* Text colors */
+  --color-kb-text-primary: #0f172a;
+  --color-kb-text-secondary: #64748b;
+  --color-kb-text-muted: #94a3b8;
+  --color-kb-text-ghost: #e2e8f0;
+
+  /* Dark text colors */
+  --color-kb-text-dark-primary: #fafafa;
+  --color-kb-text-dark-secondary: #a1a1aa;
+  --color-kb-text-dark-muted: #71717a;
+  --color-kb-text-dark-ghost: #27272a;
+}
+```
+
+## Shared class fragments
+
+Components use shared class strings from `kbClasses` in `theme.ts`. These provide consistent styling across all components:
+
+| Fragment | Classes |
+|---|---|
+| `border` | `border border-gray-200 dark:border-zinc-700` |
+| `surface` | `bg-white dark:bg-zinc-900` |
+| `surfaceMuted` | `bg-gray-50 dark:bg-zinc-800` |
+| `textPrimary` | `text-slate-900 dark:text-zinc-50` |
+| `textSecondary` | `text-slate-500 dark:text-zinc-400` |
+| `textMuted` | `text-slate-400 dark:text-zinc-500` |
+| `label` | `font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400` |
+| `focus` | `focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2` |
+| `disabled` | `disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none` |
+
+## Style props
+
+Components accept Tailwind-style props for quick layout adjustments:
+
+```html
+<!-- Spacing -->
+<kb-card p="6" mb="4" mx="auto">
+
+<!-- Dimensions -->
+<kb-box w="full" max-w="md" h="64">
+
+<!-- Colors -->
+<kb-box bg="gray-50" color="slate-900">
+
+<!-- Display & flex -->
+<kb-flex direction="row" gap="4" items="center">
+```
+
+These props map to Tailwind utility classes at runtime and are cached via an LRU cache for performance.
+
+## Class passthrough
+
+All components accept a `class` attribute for direct Tailwind class application:
+
+```html
+<kb-button class="w-full justify-center">Full Width</kb-button>
+<kb-card class="hover:border-blue-500 transition-colors">Hoverable</kb-card>
+```

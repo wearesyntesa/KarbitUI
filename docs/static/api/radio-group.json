@@ -1,0 +1,99 @@
+{
+  "name": "Radio Group",
+  "tag": "kb-radio-group",
+  "category": "forms",
+  "description": "Groups radio buttons for mutually exclusive single selection.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-radio-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "RadioGroup"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "Orientation",
+      "default": "'vertical'",
+      "reflect": false,
+      "description": "Layout direction of the grouped radios."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name propagated to child radios that don't set their own."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Size propagated to child radios that don't set their own size."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme propagated to child radios that don't set their own."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Currently selected value. Reflects the checked radio's value. Can be set programmatically."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the group as required — propagated to child radios and exposed as `aria-required` on the group."
+    }
+  ],
+  "slots": [
+    {
+      "name": "label",
+      "description": "Group label rendered above the radios."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Selection changed. Detail: `{ value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "radiogroup"
+    ],
+    "ariaAttributes": [
+      "aria-labelledby",
+      "aria-required"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "radio",
+    "checkbox-group",
+    "segment"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "name": "Radio",
+  "tag": "kb-radio",
+  "category": "forms",
+  "description": "A single radio option, typically used within a radio group.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-radio.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Radio"
+  },
+  "props": [
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Radio button size controlling circle dimensions, label text, and dot size."
+    },
+    {
+      "name": "checked",
+      "attribute": "checked",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Whether this radio is selected. Reflects to the `checked` attribute."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error border styling when unchecked."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the selected state border and dot fill."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name. Should match across radios in the same group."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Value emitted in `kb-change` event detail when this radio is selected."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark this radio as required for form validation."
+    }
+  ],
+  "slots": [
+    {
+      "name": "description",
+      "description": "Helper text rendered below the label."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Checked state changed. Detail: `{ checked: boolean, value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": ""
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": ""
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "radio"
+    ],
+    "ariaAttributes": [
+      "aria-checked",
+      "aria-invalid",
+      "aria-required"
+    ],
+    "keyboardKeys": [
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "radio-group",
+    "checkbox",
+    "segment"
+  ]
+}

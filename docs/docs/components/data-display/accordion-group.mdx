@@ -1,0 +1,135 @@
+---
+title: "Accordion Group"
+description: "Groups multiple accordions with optional exclusive (single-open) behavior."
+sidebar_label: "Accordion Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-accordion-group exclusive>
+  <kb-accordion>
+    <span slot="trigger">Section 1</span>
+    Content 1
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Section 2</span>
+    Content 2
+  </kb-accordion>
+</kb-accordion-group>`;
+export const reactCode = `import { Accordion, AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AccordionGroup exclusive>
+  <Accordion>
+    <span slot="trigger">Section 1</span>
+    Content 1
+  </Accordion>
+  <Accordion>
+    <span slot="trigger">Section 2</span>
+    Content 2
+  </Accordion>
+</AccordionGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-accordion-group exclusive>
+    <kb-accordion>
+      <span slot="trigger">Section 1</span>
+      Content 1
+    </kb-accordion>
+    <kb-accordion>
+      <span slot="trigger">Section 2</span>
+      Content 2
+    </kb-accordion>
+  </kb-accordion-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-accordion-group exclusive>
+  <kb-accordion>
+    <span slot="trigger">Section 1</span>
+    Content 1
+  </kb-accordion>
+  <kb-accordion>
+    <span slot="trigger">Section 2</span>
+    Content 2
+  </kb-accordion>
+</kb-accordion-group>`;
+
+# Accordion Group
+
+Groups multiple accordions with optional exclusive (single-open) behavior.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { AccordionGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `allowMultiple` | `allow-multiple` | `boolean` | `false` | When false (default), opening one item closes all others. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## See Also
+
+- [Accordion](./accordion)

@@ -1,0 +1,107 @@
+{
+  "name": "Rating",
+  "tag": "kb-rating",
+  "category": "forms",
+  "description": "A star rating input for collecting user ratings.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-rating.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Rating"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Current rating value."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "5",
+      "reflect": false,
+      "description": "Maximum number of stars."
+    },
+    {
+      "name": "allowHalf",
+      "attribute": "allow-half",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Allow half-star increments."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "readonly",
+      "attribute": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Read-only display (shows value but prevents changes)."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Fires when the rating value changes. Detail: `{ source: 'rating', value: string }`."
+    },
+    {
+      "name": "kb-rating-hover",
+      "detail": "`{ value: number }`",
+      "description": "Fires during hover with the previewed value. Detail: `{ value: number }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "slider"
+    ],
+    "ariaAttributes": [
+      "aria-disabled",
+      "aria-label",
+      "aria-readonly",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "End",
+      "Home"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "slider"
+  ]
+}

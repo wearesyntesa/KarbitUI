@@ -1,0 +1,529 @@
+---
+title: "Steps"
+description: "A step indicator for multi-step processes."
+sidebar_label: "Steps"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-steps current="1">
+  <kb-step label="Account"></kb-step>
+  <kb-step label="Profile"></kb-step>
+  <kb-step label="Review"></kb-step>
+</kb-steps>`;
+export const reactCode = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="1">
+  <Step label="Account" />
+  <Step label="Profile" />
+  <Step label="Review" />
+</Steps>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="1">
+    <kb-step label="Account" />
+    <kb-step label="Profile" />
+    <kb-step label="Review" />
+  </kb-steps>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="1">
+  <kb-step label="Account" />
+  <kb-step label="Profile" />
+  <kb-step label="Review" />
+</kb-steps>`;
+export const exDefault = `<kb-steps current="1">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exDefaultReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="1">
+  <Step label="Account">
+  </Step>
+  <Step label="Profile">
+  </Step>
+  <Step label="Review">
+  </Step>
+</Steps>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="1">
+    <kb-step label="Account">
+    </kb-step>
+    <kb-step label="Profile">
+    </kb-step>
+    <kb-step label="Review">
+    </kb-step>
+  </kb-steps>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="1">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exAllComplete = `<kb-steps current="3">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exAllCompleteReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="3">
+  <Step label="Account">
+  </Step>
+  <Step label="Profile">
+  </Step>
+  <Step label="Review">
+  </Step>
+</Steps>`;
+export const exAllCompleteVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="3">
+    <kb-step label="Account">
+    </kb-step>
+    <kb-step label="Profile">
+    </kb-step>
+    <kb-step label="Review">
+    </kb-step>
+  </kb-steps>
+</template>`;
+export const exAllCompleteSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="3">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exFirstStep = `<kb-steps current="0">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exFirstStepReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="0">
+  <Step label="Account">
+  </Step>
+  <Step label="Profile">
+  </Step>
+  <Step label="Review">
+  </Step>
+</Steps>`;
+export const exFirstStepVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="0">
+    <kb-step label="Account">
+    </kb-step>
+    <kb-step label="Profile">
+    </kb-step>
+    <kb-step label="Review">
+    </kb-step>
+  </kb-steps>
+</template>`;
+export const exFirstStepSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="0">
+  <kb-step label="Account">
+  </kb-step>
+  <kb-step label="Profile">
+  </kb-step>
+  <kb-step label="Review">
+  </kb-step>
+</kb-steps>`;
+export const exVertical = `<kb-steps current="1" orientation="vertical">
+  <kb-step label="Create account">
+  </kb-step>
+  <kb-step label="Set up profile">
+  </kb-step>
+  <kb-step label="Configure settings">
+  </kb-step>
+  <kb-step label="Review & submit">
+  </kb-step>
+</kb-steps>`;
+export const exVerticalReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="1" orientation="vertical">
+  <Step label="Create account">
+  </Step>
+  <Step label="Set up profile">
+  </Step>
+  <Step label="Configure settings">
+  </Step>
+  <Step label="Review & submit">
+  </Step>
+</Steps>`;
+export const exVerticalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="1" orientation="vertical">
+    <kb-step label="Create account">
+    </kb-step>
+    <kb-step label="Set up profile">
+    </kb-step>
+    <kb-step label="Configure settings">
+    </kb-step>
+    <kb-step label="Review & submit">
+    </kb-step>
+  </kb-steps>
+</template>`;
+export const exVerticalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="1" orientation="vertical">
+  <kb-step label="Create account">
+  </kb-step>
+  <kb-step label="Set up profile">
+  </kb-step>
+  <kb-step label="Configure settings">
+  </kb-step>
+  <kb-step label="Review & submit">
+  </kb-step>
+</kb-steps>`;
+export const exSizes = `<div style="display:flex;flex-direction:column;gap:32px;">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">md</p>
+    <kb-steps current="1" size="md">
+      <kb-step label="Account">
+      </kb-step>
+      <kb-step label="Profile">
+      </kb-step>
+      <kb-step label="Review">
+      </kb-step>
+    </kb-steps>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">lg</p>
+    <kb-steps current="1" size="lg">
+      <kb-step label="Account">
+      </kb-step>
+      <kb-step label="Profile">
+      </kb-step>
+      <kb-step label="Review">
+      </kb-step>
+    </kb-steps>
+  </div>
+</div>`;
+export const exSizesReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:32px;">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">md</p>
+    <Steps current="1" size="md">
+      <Step label="Account">
+      </Step>
+      <Step label="Profile">
+      </Step>
+      <Step label="Review">
+      </Step>
+    </Steps>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">lg</p>
+    <Steps current="1" size="lg">
+      <Step label="Account">
+      </Step>
+      <Step label="Profile">
+      </Step>
+      <Step label="Review">
+      </Step>
+    </Steps>
+  </div>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:32px;">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">md</p>
+      <kb-steps current="1" size="md">
+        <kb-step label="Account">
+        </kb-step>
+        <kb-step label="Profile">
+        </kb-step>
+        <kb-step label="Review">
+        </kb-step>
+      </kb-steps>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">lg</p>
+      <kb-steps current="1" size="lg">
+        <kb-step label="Account">
+        </kb-step>
+        <kb-step label="Profile">
+        </kb-step>
+        <kb-step label="Review">
+        </kb-step>
+      </kb-steps>
+    </div>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:32px;">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">md</p>
+    <kb-steps current="1" size="md">
+      <kb-step label="Account">
+      </kb-step>
+      <kb-step label="Profile">
+      </kb-step>
+      <kb-step label="Review">
+      </kb-step>
+    </kb-steps>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">lg</p>
+    <kb-steps current="1" size="lg">
+      <kb-step label="Account">
+      </kb-step>
+      <kb-step label="Profile">
+      </kb-step>
+      <kb-step label="Review">
+      </kb-step>
+    </kb-steps>
+  </div>
+</div>`;
+export const exWithDescription = `<kb-steps current="1">
+  <kb-step label="Account">
+    <span slot="description">Create your credentials</span>
+  </kb-step>
+  <kb-step label="Profile">
+    <span slot="description">Tell us about yourself</span>
+  </kb-step>
+  <kb-step label="Review">
+    <span slot="description">Verify your information</span>
+  </kb-step>
+</kb-steps>`;
+export const exWithDescriptionReact = `import { Step, Steps } from '@wearesyntesa/karbit-ui/react';
+
+<Steps current="1">
+  <Step label="Account">
+    <span slot="description">Create your credentials</span>
+  </Step>
+  <Step label="Profile">
+    <span slot="description">Tell us about yourself</span>
+  </Step>
+  <Step label="Review">
+    <span slot="description">Verify your information</span>
+  </Step>
+</Steps>`;
+export const exWithDescriptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-steps current="1">
+    <kb-step label="Account">
+      <span slot="description">Create your credentials</span>
+    </kb-step>
+    <kb-step label="Profile">
+      <span slot="description">Tell us about yourself</span>
+    </kb-step>
+    <kb-step label="Review">
+      <span slot="description">Verify your information</span>
+    </kb-step>
+  </kb-steps>
+</template>`;
+export const exWithDescriptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-steps current="1">
+  <kb-step label="Account">
+    <span slot="description">Create your credentials</span>
+  </kb-step>
+  <kb-step label="Profile">
+    <span slot="description">Tell us about yourself</span>
+  </kb-step>
+  <kb-step label="Review">
+    <span slot="description">Verify your information</span>
+  </kb-step>
+</kb-steps>`;
+
+# Steps
+
+A step indicator for multi-step processes.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Steps } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `current` | `current` | `number` | `0` | Zero-based index of the current step. |
+| `orientation` | `orientation` | `Orientation` | `'horizontal'` | Layout direction. |
+| `size` | `size` | `ComponentSize` | `'md'` | Step indicator size. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-step-click` | `{ index: number }` | Dispatched when a completed step is clicked, with `detail.index`. |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Complete" codes={{ html: exAllComplete, react: exAllCompleteReact, vue: exAllCompleteVue, svelte: exAllCompleteSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllComplete }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="First Step" codes={{ html: exFirstStep, react: exFirstStepReact, vue: exFirstStepVue, svelte: exFirstStepSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFirstStep }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Vertical" codes={{ html: exVertical, react: exVerticalReact, vue: exVerticalVue, svelte: exVerticalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVertical }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Description" codes={{ html: exWithDescription, react: exWithDescriptionReact, vue: exWithDescriptionVue, svelte: exWithDescriptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithDescription }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Step](./step)
+- [Tabs](./tabs)
+- [Timeline](../data-display/timeline)

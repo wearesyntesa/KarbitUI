@@ -1,0 +1,67 @@
+{
+  "name": "Pagination",
+  "tag": "kb-pagination",
+  "category": "navigation",
+  "description": "A page navigation control for paginated data.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-pagination.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Pagination"
+  },
+  "props": [
+    {
+      "name": "total",
+      "attribute": "total",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Total number of pages."
+    },
+    {
+      "name": "page",
+      "attribute": "page",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Current active page (1-based)."
+    },
+    {
+      "name": "siblings",
+      "attribute": "siblings",
+      "type": "number",
+      "default": "1",
+      "reflect": false,
+      "description": "Number of sibling pages to show around the current page."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "PaginationSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Component size."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-page-change",
+      "detail": "`{ page: number }`",
+      "description": "Fired when the active page changes. `detail.page` is the 1-based page number."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "navigation"
+    ],
+    "ariaAttributes": [
+      "aria-current",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "table"
+  ]
+}

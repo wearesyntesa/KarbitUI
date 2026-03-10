@@ -1,0 +1,184 @@
+{
+  "name": "Input",
+  "tag": "kb-input",
+  "category": "forms",
+  "description": "A text input field for capturing single-line user input.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-input.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Input"
+  },
+  "props": [
+    {
+      "name": "inputId",
+      "attribute": "input-id",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Forwarded `id` applied to the native `<input>` element. Allows external `<label for=\"...\">` to work."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Form input visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Input size controlling padding, font size, and icon sizing."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text shown when the input is empty."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current input value. Two-way bindable."
+    },
+    {
+      "name": "type",
+      "attribute": "type",
+      "type": "InputType",
+      "default": "'text'",
+      "reflect": false,
+      "description": "HTML input type attribute (e.g. `'text'`, `'password'`, `'email'`)."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name, used in form submissions."
+    },
+    {
+      "name": "maxLength",
+      "attribute": "max-length",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Maximum character count. When set, enforces length via the native `maxlength` attribute."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the input as invalid with error border styling."
+    },
+    {
+      "name": "readonly",
+      "attribute": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make the input read-only (focusable but not editable)."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the input as required for form validation."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a clear button when the input has a value."
+    },
+    {
+      "name": "loading",
+      "attribute": "loading",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a loading spinner in place of the trailing icon."
+    }
+  ],
+  "slots": [
+    {
+      "name": "addon-left",
+      "description": "Attached text/element flush to the left edge (e.g. \"https://\")."
+    },
+    {
+      "name": "addon-right",
+      "description": "Attached text/element flush to the right edge (e.g. \".com\")."
+    },
+    {
+      "name": "icon-left",
+      "description": "Leading icon element inside the input."
+    },
+    {
+      "name": "icon-right",
+      "description": "Trailing icon element inside the input."
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Value changed on input. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value committed on change. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Input focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Input blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Clear button clicked (when clearable)."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-invalid",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "textarea",
+    "number-input",
+    "form-control"
+  ]
+}

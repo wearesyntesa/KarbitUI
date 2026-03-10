@@ -1,0 +1,61 @@
+{
+  "name": "Steps",
+  "tag": "kb-steps",
+  "category": "navigation",
+  "description": "A step indicator for multi-step processes.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-steps.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Steps"
+  },
+  "props": [
+    {
+      "name": "current",
+      "attribute": "current",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Zero-based index of the current step."
+    },
+    {
+      "name": "orientation",
+      "attribute": "orientation",
+      "type": "Orientation",
+      "default": "'horizontal'",
+      "reflect": false,
+      "description": "Layout direction."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Step indicator size."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-step-click",
+      "detail": "`{ index: number }`",
+      "description": "Dispatched when a completed step is clicked, with `detail.index`."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "step",
+    "tabs",
+    "timeline"
+  ]
+}

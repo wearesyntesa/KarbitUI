@@ -1,0 +1,55 @@
+{
+  "name": "Code",
+  "tag": "kb-code",
+  "category": "typography",
+  "description": "An inline or block code display element with optional syntax highlighting.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/typography/kb-code.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Code"
+  },
+  "props": [
+    {
+      "name": "block",
+      "attribute": "block",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Display as a full-width block with copy button. When `false`, renders as inline `<code>`."
+    },
+    {
+      "name": "language",
+      "attribute": "language",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Language identifier for syntax highlighting (e.g. `'typescript'`, `'html'`). Requires `KbCode.highlighter` to be set."
+    },
+    {
+      "name": "filename",
+      "attribute": "filename",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "File name displayed in a header bar above block code. Only visible when `block` is true."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "kbd"
+  ]
+}

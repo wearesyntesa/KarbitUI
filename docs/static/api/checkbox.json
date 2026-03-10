@@ -1,0 +1,122 @@
+{
+  "name": "Checkbox",
+  "tag": "kb-checkbox",
+  "category": "forms",
+  "description": "A toggle control that allows selecting one or more options.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-checkbox.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Checkbox"
+  },
+  "props": [
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Checkbox size controlling box dimensions, label text, and icon size."
+    },
+    {
+      "name": "checked",
+      "attribute": "checked",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the checkbox is checked. Reflects to the `checked` attribute."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "indeterminate",
+      "attribute": "indeterminate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a horizontal dash icon instead of a checkmark (third state)."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error border styling when unchecked."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the checked/indeterminate state background and icon."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name, used in form submissions."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Value included in `kb-change` event detail and form submissions."
+    }
+  ],
+  "slots": [
+    {
+      "name": "description",
+      "description": "Helper text rendered below the label."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Checked state changed. Detail: `{ checked: boolean, value?: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": ""
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": ""
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "checkbox"
+    ],
+    "ariaAttributes": [
+      "aria-checked",
+      "aria-invalid"
+    ],
+    "keyboardKeys": [
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "checkbox-group",
+    "switch",
+    "radio"
+  ]
+}

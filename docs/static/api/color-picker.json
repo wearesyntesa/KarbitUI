@@ -1,0 +1,144 @@
+{
+  "name": "Color Picker",
+  "tag": "kb-color-picker",
+  "category": "forms",
+  "description": "A color selection input with hue, saturation, and brightness controls.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-color-picker.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "ColorPicker"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "'#000000ff'",
+      "reflect": false,
+      "description": "Current color value as hex (6 or 8 char)."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error styling."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show clear button."
+    },
+    {
+      "name": "presets",
+      "attribute": "presets",
+      "type": "string[]",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Preset colors for quick pick."
+    },
+    {
+      "name": "showAlpha",
+      "attribute": "show-alpha",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Show alpha channel controls."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "'Pick a color'",
+      "reflect": false,
+      "description": "Placeholder text."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Component size."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ source: 'color-picker', value: string }`."
+    },
+    {
+      "name": "kb-color-change",
+      "detail": "`{ hex: string, r: number, g: number, b: number, a: number }`",
+      "description": "Color changed. Detail: `{ hex, r, g, b, a }`."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Cleared."
+    },
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Panel opened."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Panel closed."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "combobox"
+    ],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "Enter",
+      "Escape",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "input"
+  ]
+}

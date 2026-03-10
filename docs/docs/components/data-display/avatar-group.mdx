@@ -1,0 +1,121 @@
+---
+title: "Avatar Group"
+description: "Displays a stack of overlapping avatars with an optional overflow indicator."
+sidebar_label: "Avatar Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-avatar-group max="3">
+  <kb-avatar name="Alice"></kb-avatar>
+  <kb-avatar name="Bob"></kb-avatar>
+  <kb-avatar name="Charlie"></kb-avatar>
+  <kb-avatar name="Diana"></kb-avatar>
+</kb-avatar-group>`;
+export const reactCode = `import { Avatar, AvatarGroup } from '@wearesyntesa/karbit-ui/react';
+
+<AvatarGroup max="3">
+  <Avatar name="Alice" />
+  <Avatar name="Bob" />
+  <Avatar name="Charlie" />
+  <Avatar name="Diana" />
+</AvatarGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-avatar-group max="3">
+    <kb-avatar name="Alice" />
+    <kb-avatar name="Bob" />
+    <kb-avatar name="Charlie" />
+    <kb-avatar name="Diana" />
+  </kb-avatar-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-avatar-group max="3">
+  <kb-avatar name="Alice" />
+  <kb-avatar name="Bob" />
+  <kb-avatar name="Charlie" />
+  <kb-avatar name="Diana" />
+</kb-avatar-group>`;
+
+# Avatar Group
+
+Displays a stack of overlapping avatars with an optional overflow indicator.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { AvatarGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `max` | `max` | `number` | `0` | Maximum number of visible avatars before showing "+N". 0 = no limit. |
+| `size` | `size` | `ComponentSize` | `'md'` | Size propagated to child avatars. |
+| `spacing` | `spacing` | `AvatarGroupSpacing` | `'md'` | Overlap spacing between avatars. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## See Also
+
+- [Avatar](./avatar)

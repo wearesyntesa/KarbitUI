@@ -1,0 +1,126 @@
+---
+title: "Button Group"
+description: "Groups multiple buttons together with consistent spacing and optional attached styling."
+sidebar_label: "Button Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-button-group>
+  <kb-button>One</kb-button>
+  <kb-button>Two</kb-button>
+  <kb-button>Three</kb-button>
+</kb-button-group>`;
+export const reactCode = `import { Button, ButtonGroup } from '@wearesyntesa/karbit-ui/react';
+
+<ButtonGroup>
+  <Button>One</Button>
+  <Button>Two</Button>
+  <Button>Three</Button>
+</ButtonGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-button-group>
+    <kb-button>One</kb-button>
+    <kb-button>Two</kb-button>
+    <kb-button>Three</kb-button>
+  </kb-button-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-button-group>
+  <kb-button>One</kb-button>
+  <kb-button>Two</kb-button>
+  <kb-button>Three</kb-button>
+</kb-button-group>`;
+
+# Button Group
+
+Groups multiple buttons together with consistent spacing and optional attached styling.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { ButtonGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `ButtonGroupDirection` | `'horizontal'` | Layout direction of the grouped buttons. |
+| `spaced` | `spaced` | `boolean` | `false` | Use spaced mode (gap between buttons) instead of attached mode (shared borders). |
+| `label` | `label` | `string` | `""` | Accessible label for the button group (required for screen readers). |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `group`
+
+**Attributes:** `aria-label`
+
+## See Also
+
+- [Button](./button)
+- [Icon Button](./icon-button)

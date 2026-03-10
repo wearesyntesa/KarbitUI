@@ -1,0 +1,387 @@
+---
+title: "Kbd"
+description: "A keyboard key indicator styled as a physical key."
+sidebar_label: "Kbd"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-kbd>Ctrl</kb-kbd> + <kb-kbd>C</kb-kbd>`;
+export const reactCode = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-kbd>Ctrl</kb-kbd> + <kb-kbd>C</kb-kbd>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-kbd>Ctrl</kb-kbd> + <kb-kbd>C</kb-kbd>`;
+export const exDefault = `<kb-kbd size="md">Ctrl</kb-kbd>`;
+export const exDefaultReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<Kbd size="md">Ctrl</Kbd>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-kbd size="md">Ctrl</kb-kbd>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-kbd size="md">Ctrl</kb-kbd>`;
+export const exSmall = `<kb-kbd size="sm">Ctrl</kb-kbd>`;
+export const exSmallReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<Kbd size="sm">Ctrl</Kbd>`;
+export const exSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-kbd size="sm">Ctrl</kb-kbd>
+</template>`;
+export const exSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-kbd size="sm">Ctrl</kb-kbd>`;
+export const exLarge = `<kb-kbd size="lg">Ctrl</kb-kbd>`;
+export const exLargeReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<Kbd size="lg">Ctrl</Kbd>`;
+export const exLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-kbd size="lg">Ctrl</kb-kbd>
+</template>`;
+export const exLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-kbd size="lg">Ctrl</kb-kbd>`;
+export const exSizes = `<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-kbd size="sm">Esc</kb-kbd>
+  <kb-kbd size="md">Esc</kb-kbd>
+  <kb-kbd size="lg">Esc</kb-kbd>
+</div>`;
+export const exSizesReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <Kbd size="sm">Esc</Kbd>
+  <Kbd size="md">Esc</Kbd>
+  <Kbd size="lg">Esc</Kbd>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+    <kb-kbd size="sm">Esc</kb-kbd>
+    <kb-kbd size="md">Esc</kb-kbd>
+    <kb-kbd size="lg">Esc</kb-kbd>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+  <kb-kbd size="sm">Esc</kb-kbd>
+  <kb-kbd size="md">Esc</kb-kbd>
+  <kb-kbd size="lg">Esc</kb-kbd>
+</div>`;
+export const exShortcutCombination = `<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-family:monospace;font-size:14px;color:var(--kb-text,#333);">
+  <kb-kbd>Ctrl</kb-kbd>
+  <span style="color:#888;">+</span>
+  <kb-kbd>Shift</kb-kbd>
+  <span style="color:#888;">+</span>
+  <kb-kbd>P</kb-kbd>
+</div>`;
+export const exShortcutCombinationReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-family:monospace;font-size:14px;color:var(--kb-text,#333);">
+  <Kbd>Ctrl</Kbd>
+  <span style="color:#888;">+</span>
+  <Kbd>Shift</Kbd>
+  <span style="color:#888;">+</span>
+  <Kbd>P</Kbd>
+</div>`;
+export const exShortcutCombinationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-family:monospace;font-size:14px;color:var(--kb-text,#333);">
+    <kb-kbd>Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd>Shift</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd>P</kb-kbd>
+  </div>
+</template>`;
+export const exShortcutCombinationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-family:monospace;font-size:14px;color:var(--kb-text,#333);">
+  <kb-kbd>Ctrl</kb-kbd>
+  <span style="color:#888;">+</span>
+  <kb-kbd>Shift</kb-kbd>
+  <span style="color:#888;">+</span>
+  <kb-kbd>P</kb-kbd>
+</div>`;
+export const exCommonShortcuts = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Save</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">S</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Copy</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">C</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Paste</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">V</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Undo</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">Z</kb-kbd>
+  </div>
+</div>`;
+export const exCommonShortcutsReact = `import { Kbd } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Save</span>
+    <Kbd size="sm">Ctrl</Kbd>
+    <span style="color:#888;">+</span>
+    <Kbd size="sm">S</Kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Copy</span>
+    <Kbd size="sm">Ctrl</Kbd>
+    <span style="color:#888;">+</span>
+    <Kbd size="sm">C</Kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Paste</span>
+    <Kbd size="sm">Ctrl</Kbd>
+    <span style="color:#888;">+</span>
+    <Kbd size="sm">V</Kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Undo</span>
+    <Kbd size="sm">Ctrl</Kbd>
+    <span style="color:#888;">+</span>
+    <Kbd size="sm">Z</Kbd>
+  </div>
+</div>`;
+export const exCommonShortcutsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+      <span style="min-width:80px;">Save</span>
+      <kb-kbd size="sm">Ctrl</kb-kbd>
+      <span style="color:#888;">+</span>
+      <kb-kbd size="sm">S</kb-kbd>
+    </div>
+    <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+      <span style="min-width:80px;">Copy</span>
+      <kb-kbd size="sm">Ctrl</kb-kbd>
+      <span style="color:#888;">+</span>
+      <kb-kbd size="sm">C</kb-kbd>
+    </div>
+    <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+      <span style="min-width:80px;">Paste</span>
+      <kb-kbd size="sm">Ctrl</kb-kbd>
+      <span style="color:#888;">+</span>
+      <kb-kbd size="sm">V</kb-kbd>
+    </div>
+    <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+      <span style="min-width:80px;">Undo</span>
+      <kb-kbd size="sm">Ctrl</kb-kbd>
+      <span style="color:#888;">+</span>
+      <kb-kbd size="sm">Z</kb-kbd>
+    </div>
+  </div>
+</template>`;
+export const exCommonShortcutsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Save</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">S</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Copy</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">C</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Paste</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">V</kb-kbd>
+  </div>
+  <div style="display:flex;gap:4px;align-items:center;font-family:monospace;font-size:13px;color:var(--kb-text,#666);">
+    <span style="min-width:80px;">Undo</span>
+    <kb-kbd size="sm">Ctrl</kb-kbd>
+    <span style="color:#888;">+</span>
+    <kb-kbd size="sm">Z</kb-kbd>
+  </div>
+</div>`;
+
+# Kbd
+
+A keyboard key indicator styled as a physical key.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Kbd } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `KbdSize` | `'md'` | Key cap size. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Small" codes={{ html: exSmall, react: exSmallReact, vue: exSmallVue, svelte: exSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Large" codes={{ html: exLarge, react: exLargeReact, vue: exLargeVue, svelte: exLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Shortcut Combination" codes={{ html: exShortcutCombination, react: exShortcutCombinationReact, vue: exShortcutCombinationVue, svelte: exShortcutCombinationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShortcutCombination }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Common Shortcuts" codes={{ html: exCommonShortcuts, react: exCommonShortcutsReact, vue: exCommonShortcutsVue, svelte: exCommonShortcutsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCommonShortcuts }} />;
+    }}
+  </BrowserOnly>
+</Demo>

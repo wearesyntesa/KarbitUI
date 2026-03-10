@@ -1,0 +1,146 @@
+{
+  "name": "Date Picker",
+  "tag": "kb-date-picker",
+  "category": "forms",
+  "description": "A date selection input with a calendar dropdown.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-date-picker.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "DatePicker"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current value in YYYY-MM-DD format."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Earliest selectable date (YYYY-MM-DD)."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Latest selectable date (YYYY-MM-DD)."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error styling."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show clear button."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value changed. Detail: `{ source: 'date-picker', value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Cleared."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "combobox",
+      "grid",
+      "gridcell"
+    ],
+    "ariaAttributes": [
+      "aria-controls",
+      "aria-disabled",
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-invalid",
+      "aria-label",
+      "aria-selected"
+    ],
+    "keyboardKeys": [
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "Enter",
+      "Escape",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "time-picker",
+    "input"
+  ]
+}

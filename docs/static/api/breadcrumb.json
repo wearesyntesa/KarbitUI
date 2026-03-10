@@ -1,0 +1,65 @@
+{
+  "name": "Breadcrumb",
+  "tag": "kb-breadcrumb",
+  "category": "navigation",
+  "description": "A navigation trail showing the current page location within a hierarchy.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/navigation/kb-breadcrumb.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Breadcrumb"
+  },
+  "props": [
+    {
+      "name": "items",
+      "attribute": "items",
+      "type": "BreadcrumbItem[]",
+      "default": "[]",
+      "reflect": false,
+      "description": "Array of breadcrumb items. The last item is treated as the current page."
+    },
+    {
+      "name": "separator",
+      "attribute": "separator",
+      "type": "string",
+      "default": "'chevron'",
+      "reflect": false,
+      "description": "Separator between items - a preset name (`'chevron'`, `'slash'`, `'arrow'`, `'dot'`, `'pipe'`) or any custom string."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Text and gap size."
+    },
+    {
+      "name": "maxItems",
+      "attribute": "max-items",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Maximum visible items before collapsing middle items behind an ellipsis button. `0` disables collapsing."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-navigate",
+      "detail": "`{ index: number, item: BreadcrumbItem }`",
+      "description": "Breadcrumb item clicked. Detail: `{ index: number; item: BreadcrumbItem }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-current",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "link"
+  ]
+}

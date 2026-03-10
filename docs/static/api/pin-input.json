@@ -1,0 +1,113 @@
+{
+  "name": "Pin Input",
+  "tag": "kb-pin-input",
+  "category": "forms",
+  "description": "A sequence of single-character inputs for PIN or verification codes.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-pin-input.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "PinInput"
+  },
+  "props": [
+    {
+      "name": "length",
+      "attribute": "length",
+      "type": "number",
+      "default": "4",
+      "reflect": false,
+      "description": "Number of input fields."
+    },
+    {
+      "name": "type",
+      "attribute": "type",
+      "type": "PinInputType",
+      "default": "'numeric'",
+      "reflect": false,
+      "description": "Input type constraint."
+    },
+    {
+      "name": "mask",
+      "attribute": "mask",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show dots instead of characters."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Input size controlling cell dimensions and font size."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply error border styling."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current combined value."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Fires on every character change. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Fires on value commit. Detail: `{ source: 'pin-input', value: string }`."
+    },
+    {
+      "name": "kb-complete",
+      "detail": "`{ value: string }`",
+      "description": "Fires when all inputs are filled. Detail: `{ value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "group"
+    ],
+    "ariaAttributes": [
+      "aria-invalid",
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "ArrowLeft",
+      "ArrowRight",
+      "Backspace"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "input"
+  ]
+}

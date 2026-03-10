@@ -1,0 +1,61 @@
+{
+  "name": "Empty State",
+  "tag": "kb-empty-state",
+  "category": "feedback",
+  "description": "A placeholder displayed when a section has no data.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-empty-state.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "EmptyState"
+  },
+  "props": [
+    {
+      "name": "title",
+      "attribute": "title",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Main title text."
+    },
+    {
+      "name": "description",
+      "attribute": "description",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Supporting description text."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Size preset."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Icon or illustration."
+    },
+    {
+      "name": "action",
+      "description": "Primary action button(s)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "alert"
+  ]
+}

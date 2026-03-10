@@ -1,0 +1,92 @@
+{
+  "name": "List Item",
+  "tag": "kb-list-item",
+  "category": "data-display",
+  "description": "An individual item within a list component.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-list-item.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "ListItem"
+  },
+  "props": [
+    {
+      "name": "interactive",
+      "attribute": "interactive",
+      "type": "boolean | undefined",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Override parent list `interactive` setting for this item. Falls back to parent `<kb-list>` value when `undefined`."
+    },
+    {
+      "name": "divider",
+      "attribute": "divider",
+      "type": "boolean | undefined",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Override parent list `dividers` setting for this item. Falls back to parent `<kb-list>` value when `undefined`."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disables the item, preventing interaction and applying reduced opacity."
+    },
+    {
+      "name": "href",
+      "attribute": "href",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "URL to navigate to - renders the item as an anchor element."
+    },
+    {
+      "name": "target",
+      "attribute": "target",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Link target attribute, e.g. `'_blank'`. Only used when `href` is set."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Leading icon or visual element."
+    },
+    {
+      "name": "secondary",
+      "description": "Secondary description text below or beside the primary content."
+    },
+    {
+      "name": "trailing",
+      "description": "Trailing content (badge, arrow, etc.) aligned to the right."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-click",
+      "detail": "none",
+      "description": "Dispatched when an interactive item is clicked or activated via keyboard."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "listitem"
+    ],
+    "ariaAttributes": [],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "list"
+  ]
+}

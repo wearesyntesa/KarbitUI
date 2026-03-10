@@ -1,0 +1,9 @@
+{
+  "label": "Navigation",
+  "position": 6,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Navigation components in KarbitUI."
+  }
+}

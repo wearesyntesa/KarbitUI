@@ -23,7 +23,6 @@ const SIZE_MAP: Record<
   ComponentSize,
   {
     outer: string;
-    tapWrap: string;
     inner: string;
     label: string;
     description: string;
@@ -31,32 +30,28 @@ const SIZE_MAP: Record<
 > = {
   xs: {
     outer: 'w-3.5 h-3.5',
-    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
     inner: 'r="4"',
-    label: 'text-xs gap-1.5',
+    label: 'text-xs gap-1.5 min-h-[44px]',
     description: 'text-[10px]',
   },
   sm: {
     outer: 'w-4 h-4',
-    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
     inner: 'r="4.5"',
-    label: 'text-sm gap-2',
+    label: 'text-sm gap-2 min-h-[44px]',
     description: 'text-xs',
   },
   md: {
     outer: 'w-5 h-5',
-    tapWrap: 'inline-flex items-center justify-center min-w-[44px] min-h-[44px]',
     inner: 'r="5"',
-    label: 'text-sm gap-2.5',
+    label: 'text-sm gap-2.5 min-h-[44px]',
     description: 'text-xs',
   },
-  lg: { outer: 'w-6 h-6', tapWrap: '', inner: 'r="5.5"', label: 'text-base gap-3', description: 'text-sm' },
-  xl: { outer: 'w-7 h-7', tapWrap: '', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
+  lg: { outer: 'w-6 h-6', inner: 'r="5.5"', label: 'text-base gap-3', description: 'text-sm' },
+  xl: { outer: 'w-7 h-7', inner: 'r="6"', label: 'text-lg gap-3.5', description: 'text-sm' },
 } as const satisfies Record<
   ComponentSize,
   {
     outer: string;
-    tapWrap: string;
     inner: string;
     label: string;
     description: string;
@@ -97,6 +92,8 @@ const DEFAULT_HOVER: string = RADIO_DEFAULT_HOVER;
  * ```
  */
 export class KbRadio extends KbBaseElement<'description'> {
+  static override hostDisplay = 'inline-block' as const;
+
   /** Radio button size controlling circle dimensions, label text, and dot size. @defaultValue 'md' */
   @property({ type: String }) size: ComponentSize = 'md';
   /** Whether this radio is selected. Reflects to the `checked` attribute. @defaultValue false */
@@ -195,7 +192,7 @@ export class KbRadio extends KbBaseElement<'description'> {
     circleClasses: string,
     dotColor: string,
   ): TemplateResult {
-    const inner = html`<span
+    return html`<span
       class=${circleClasses}
       style="border-radius:9999px"
       tabindex=${this.disabled ? '-1' : '0'}
@@ -209,10 +206,6 @@ export class KbRadio extends KbBaseElement<'description'> {
     >
       ${this._renderDot(s, dotColor)}
     </span>`;
-    if (s.tapWrap) {
-      return html`<span class=${s.tapWrap}>${inner}</span>`;
-    }
-    return inner;
   }
 
   override render(): TemplateResult {
@@ -237,7 +230,7 @@ export class KbRadio extends KbBaseElement<'description'> {
     );
 
     const wrapperClasses = this.buildClasses(
-      'group/radio inline-flex items-start font-sans select-none',
+      'group/radio relative inline-flex items-center font-sans select-none',
       kbClasses.textPrimary,
       s.label,
       this.disabled ? FORM_DISABLED_WRAPPER : 'cursor-pointer',
@@ -253,7 +246,7 @@ export class KbRadio extends KbBaseElement<'description'> {
       >
         <input
           type="radio"
-          class="sr-only"
+          style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border-width:0;-webkit-appearance:none;appearance:none;pointer-events:none"
           .checked=${this.checked}
           ?disabled=${this.disabled}
           ?required=${this.required}

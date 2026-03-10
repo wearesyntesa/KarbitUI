@@ -1,0 +1,570 @@
+---
+title: "Color Picker"
+description: "A color selection input with hue, saturation, and brightness controls."
+sidebar_label: "Color Picker"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-color-picker value="#3b82f6"></kb-color-picker>`;
+export const reactCode = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<ColorPicker value="#3b82f6" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-color-picker value="#3b82f6" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-color-picker value="#3b82f6" />`;
+export const exDefault = `<kb-color-picker>
+</kb-color-picker>`;
+export const exDefaultReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<ColorPicker>
+</ColorPicker>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-color-picker>
+  </kb-color-picker>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-color-picker>
+</kb-color-picker>`;
+export const exWithPresets = `<kb-color-picker value="#3b82f6ff">
+</kb-color-picker>`;
+export const exWithPresetsReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<ColorPicker value="#3b82f6ff">
+</ColorPicker>`;
+export const exWithPresetsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-color-picker value="#3b82f6ff">
+  </kb-color-picker>
+</template>`;
+export const exWithPresetsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-color-picker value="#3b82f6ff">
+</kb-color-picker>`;
+export const exWithPresetsSetup = (container) => {
+  container.querySelectorAll('kb-color-picker').forEach(el => { el.presets = [
+        '#ef4444ff',
+        '#f97316ff',
+        '#eab308ff',
+        '#22c55eff',
+        '#3b82f6ff',
+        '#8b5cf6ff',
+        '#ec4899ff',
+        '#000000ff',
+        '#ffffffff',
+        '#6b7280ff',
+      ]; });
+};
+export const exVariants = `<div class="flex flex-col gap-6">
+  <kb-color-picker variant="outline" value="#3b82f6ff" placeholder="Outline">
+  </kb-color-picker>
+  <kb-color-picker variant="filled" value="#ef4444ff" placeholder="Filled">
+  </kb-color-picker>
+  <kb-color-picker variant="flushed" value="#22c55eff" placeholder="Flushed">
+  </kb-color-picker>
+</div>`;
+export const exVariantsReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker variant="outline" value="#3b82f6ff" placeholder="Outline">
+  </ColorPicker>
+  <ColorPicker variant="filled" value="#ef4444ff" placeholder="Filled">
+  </ColorPicker>
+  <ColorPicker variant="flushed" value="#22c55eff" placeholder="Flushed">
+  </ColorPicker>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker variant="outline" value="#3b82f6ff" placeholder="Outline">
+    </kb-color-picker>
+    <kb-color-picker variant="filled" value="#ef4444ff" placeholder="Filled">
+    </kb-color-picker>
+    <kb-color-picker variant="flushed" value="#22c55eff" placeholder="Flushed">
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker variant="outline" value="#3b82f6ff" placeholder="Outline">
+  </kb-color-picker>
+  <kb-color-picker variant="filled" value="#ef4444ff" placeholder="Filled">
+  </kb-color-picker>
+  <kb-color-picker variant="flushed" value="#22c55eff" placeholder="Flushed">
+  </kb-color-picker>
+</div>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-color-picker size="xs" value="#ef4444ff">
+  </kb-color-picker>
+  <kb-color-picker size="sm" value="#f97316ff">
+  </kb-color-picker>
+  <kb-color-picker size="md" value="#3b82f6ff">
+  </kb-color-picker>
+  <kb-color-picker size="lg" value="#8b5cf6ff">
+  </kb-color-picker>
+  <kb-color-picker size="xl" value="#22c55eff">
+  </kb-color-picker>
+</div>`;
+export const exSizesReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker size="xs" value="#ef4444ff">
+  </ColorPicker>
+  <ColorPicker size="sm" value="#f97316ff">
+  </ColorPicker>
+  <ColorPicker size="md" value="#3b82f6ff">
+  </ColorPicker>
+  <ColorPicker size="lg" value="#8b5cf6ff">
+  </ColorPicker>
+  <ColorPicker size="xl" value="#22c55eff">
+  </ColorPicker>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker size="xs" value="#ef4444ff">
+    </kb-color-picker>
+    <kb-color-picker size="sm" value="#f97316ff">
+    </kb-color-picker>
+    <kb-color-picker size="md" value="#3b82f6ff">
+    </kb-color-picker>
+    <kb-color-picker size="lg" value="#8b5cf6ff">
+    </kb-color-picker>
+    <kb-color-picker size="xl" value="#22c55eff">
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker size="xs" value="#ef4444ff">
+  </kb-color-picker>
+  <kb-color-picker size="sm" value="#f97316ff">
+  </kb-color-picker>
+  <kb-color-picker size="md" value="#3b82f6ff">
+  </kb-color-picker>
+  <kb-color-picker size="lg" value="#8b5cf6ff">
+  </kb-color-picker>
+  <kb-color-picker size="xl" value="#22c55eff">
+  </kb-color-picker>
+</div>`;
+export const exClearable = `<div class="flex flex-col gap-6">
+  <kb-color-picker value="#3b82f6ff" clearable placeholder="Clearable">
+  </kb-color-picker>
+  <kb-color-picker value="#ef4444ff" placeholder="Not clearable">
+  </kb-color-picker>
+</div>`;
+export const exClearableReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker value="#3b82f6ff" clearable placeholder="Clearable">
+  </ColorPicker>
+  <ColorPicker value="#ef4444ff" placeholder="Not clearable">
+  </ColorPicker>
+</div>`;
+export const exClearableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker value="#3b82f6ff" clearable placeholder="Clearable">
+    </kb-color-picker>
+    <kb-color-picker value="#ef4444ff" placeholder="Not clearable">
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exClearableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker value="#3b82f6ff" clearable placeholder="Clearable">
+  </kb-color-picker>
+  <kb-color-picker value="#ef4444ff" placeholder="Not clearable">
+  </kb-color-picker>
+</div>`;
+export const exInvalid = `<div class="flex flex-col gap-6">
+  <kb-color-picker value="#3b82f6ff" invalid variant="outline">
+  </kb-color-picker>
+  <kb-color-picker value="#3b82f6ff" invalid variant="filled">
+  </kb-color-picker>
+  <kb-color-picker value="#3b82f6ff" invalid variant="flushed">
+  </kb-color-picker>
+</div>`;
+export const exInvalidReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker value="#3b82f6ff" invalid variant="outline">
+  </ColorPicker>
+  <ColorPicker value="#3b82f6ff" invalid variant="filled">
+  </ColorPicker>
+  <ColorPicker value="#3b82f6ff" invalid variant="flushed">
+  </ColorPicker>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker value="#3b82f6ff" invalid variant="outline">
+    </kb-color-picker>
+    <kb-color-picker value="#3b82f6ff" invalid variant="filled">
+    </kb-color-picker>
+    <kb-color-picker value="#3b82f6ff" invalid variant="flushed">
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker value="#3b82f6ff" invalid variant="outline">
+  </kb-color-picker>
+  <kb-color-picker value="#3b82f6ff" invalid variant="filled">
+  </kb-color-picker>
+  <kb-color-picker value="#3b82f6ff" invalid variant="flushed">
+  </kb-color-picker>
+</div>`;
+export const exDisabled = `<div class="flex flex-col gap-6">
+  <kb-color-picker disabled value="#3b82f6ff">
+  </kb-color-picker>
+  <kb-color-picker disabled>
+  </kb-color-picker>
+</div>`;
+export const exDisabledReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker disabled value="#3b82f6ff">
+  </ColorPicker>
+  <ColorPicker disabled>
+  </ColorPicker>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker disabled value="#3b82f6ff">
+    </kb-color-picker>
+    <kb-color-picker disabled>
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker disabled value="#3b82f6ff">
+  </kb-color-picker>
+  <kb-color-picker disabled>
+  </kb-color-picker>
+</div>`;
+export const exCustomValue = `<div class="flex flex-col gap-6">
+  <kb-color-picker value="#ff006680">
+  </kb-color-picker>
+  <kb-color-picker value="#00ff88ff">
+  </kb-color-picker>
+  <kb-color-picker value="#8b5cf6cc">
+  </kb-color-picker>
+</div>`;
+export const exCustomValueReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <ColorPicker value="#ff006680">
+  </ColorPicker>
+  <ColorPicker value="#00ff88ff">
+  </ColorPicker>
+  <ColorPicker value="#8b5cf6cc">
+  </ColorPicker>
+</div>`;
+export const exCustomValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-color-picker value="#ff006680">
+    </kb-color-picker>
+    <kb-color-picker value="#00ff88ff">
+    </kb-color-picker>
+    <kb-color-picker value="#8b5cf6cc">
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exCustomValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-color-picker value="#ff006680">
+  </kb-color-picker>
+  <kb-color-picker value="#00ff88ff">
+  </kb-color-picker>
+  <kb-color-picker value="#8b5cf6cc">
+  </kb-color-picker>
+</div>`;
+export const exKeyboardNavigation = `<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Escape to close. Tab through inputs in the panel.
+  </p>
+  <kb-color-picker value="#3b82f6ff" clearable>
+  </kb-color-picker>
+</div>`;
+export const exKeyboardNavigationReact = `import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Escape to close. Tab through inputs in the panel.
+  </p>
+  <ColorPicker value="#3b82f6ff" clearable>
+  </ColorPicker>
+</div>`;
+export const exKeyboardNavigationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="max-w-xs">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+      Open with Enter/Space/ArrowDown. Escape to close. Tab through inputs in the panel.
+    </p>
+    <kb-color-picker value="#3b82f6ff" clearable>
+    </kb-color-picker>
+  </div>
+</template>`;
+export const exKeyboardNavigationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="max-w-xs">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+    Open with Enter/Space/ArrowDown. Escape to close. Tab through inputs in the panel.
+  </p>
+  <kb-color-picker value="#3b82f6ff" clearable>
+  </kb-color-picker>
+</div>`;
+
+# Color Picker
+
+A color selection input with hue, saturation, and brightness controls.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { ColorPicker } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `'#000000ff'` | Current color value as hex (6 or 8 char). |
+| `name` | `name` | `string` | — | Form field name. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `clearable` | `clearable` | `boolean` | `false` | Show clear button. |
+| `presets` | `presets` | `string[]` | — | Preset colors for quick pick. |
+| `showAlpha` | `show-alpha` | `boolean` | `true` | Show alpha channel controls. |
+| `placeholder` | `placeholder` | `string` | `'Pick a color'` | Placeholder text. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Component size. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ source: 'color-picker', value: string }`. |
+| `kb-color-change` | `{ hex: string, r: number, g: number, b: number, a: number }` | Color changed. Detail: `{ hex, r, g, b, a }`. |
+| `kb-clear` | `{ source?: string }` or none | Cleared. |
+| `kb-open` | `{ source?: string }` or none | Panel opened. |
+| `kb-close` | `{ source?: string }` or none | Panel closed. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `combobox`
+
+**Attributes:** `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-haspopup`, `aria-invalid`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Presets" codes={{ html: exWithPresets, react: exWithPresetsReact, vue: exWithPresetsVue, svelte: exWithPresetsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithPresets} setup={exWithPresetsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Clearable" codes={{ html: exClearable, react: exClearableReact, vue: exClearableVue, svelte: exClearableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClearable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Value" codes={{ html: exCustomValue, react: exCustomValueReact, vue: exCustomValueVue, svelte: exCustomValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Keyboard Navigation" codes={{ html: exKeyboardNavigation, react: exKeyboardNavigationReact, vue: exKeyboardNavigationVue, svelte: exKeyboardNavigationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exKeyboardNavigation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)

@@ -1,0 +1,676 @@
+---
+title: "Link"
+description: "A styled anchor element for navigation."
+sidebar_label: "Link"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-link href="https://example.com">Visit Example</kb-link>`;
+export const reactCode = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="https://example.com">Visit Example</Link>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="https://example.com">Visit Example</kb-link>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="https://example.com">Visit Example</kb-link>`;
+export const exUnderline = `<kb-link href="#" variant="underline">Underline link</kb-link>`;
+export const exUnderlineReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="#" variant="underline">Underline link</Link>`;
+export const exUnderlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="#" variant="underline">Underline link</kb-link>
+</template>`;
+export const exUnderlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="#" variant="underline">Underline link</kb-link>`;
+export const exHoverUnderline = `<kb-link href="#" variant="hover-underline">Hover to reveal underline</kb-link>`;
+export const exHoverUnderlineReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="#" variant="hover-underline">Hover to reveal underline</Link>`;
+export const exHoverUnderlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="#" variant="hover-underline">Hover to reveal underline</kb-link>
+</template>`;
+export const exHoverUnderlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="#" variant="hover-underline">Hover to reveal underline</kb-link>`;
+export const exPlain = `<kb-link href="#" variant="plain">Plain link</kb-link>`;
+export const exPlainReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="#" variant="plain">Plain link</Link>`;
+export const exPlainVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="#" variant="plain">Plain link</kb-link>
+</template>`;
+export const exPlainSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="#" variant="plain">Plain link</kb-link>`;
+export const exSubtle = `<kb-link href="#" variant="subtle">Subtle bottom border</kb-link>`;
+export const exSubtleReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="#" variant="subtle">Subtle bottom border</Link>`;
+export const exSubtleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="#" variant="subtle">Subtle bottom border</kb-link>
+</template>`;
+export const exSubtleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="#" variant="subtle">Subtle bottom border</kb-link>`;
+export const exHighlight = `<kb-link href="#" variant="highlight">Highlight on hover</kb-link>`;
+export const exHighlightReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<Link href="#" variant="highlight">Highlight on hover</Link>`;
+export const exHighlightVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-link href="#" variant="highlight">Highlight on hover</kb-link>
+</template>`;
+export const exHighlightSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-link href="#" variant="highlight">Highlight on hover</kb-link>`;
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" variant="underline">Underline</kb-link>
+  <kb-link href="#" variant="hover-underline">Hover Underline</kb-link>
+  <kb-link href="#" variant="plain">Plain</kb-link>
+  <kb-link href="#" variant="subtle">Subtle</kb-link>
+  <kb-link href="#" variant="highlight">Highlight</kb-link>
+</div>`;
+export const exAllVariantsReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Link href="#" variant="underline">Underline</Link>
+  <Link href="#" variant="hover-underline">Hover Underline</Link>
+  <Link href="#" variant="plain">Plain</Link>
+  <Link href="#" variant="subtle">Subtle</Link>
+  <Link href="#" variant="highlight">Highlight</Link>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-link href="#" variant="underline">Underline</kb-link>
+    <kb-link href="#" variant="hover-underline">Hover Underline</kb-link>
+    <kb-link href="#" variant="plain">Plain</kb-link>
+    <kb-link href="#" variant="subtle">Subtle</kb-link>
+    <kb-link href="#" variant="highlight">Highlight</kb-link>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" variant="underline">Underline</kb-link>
+  <kb-link href="#" variant="hover-underline">Hover Underline</kb-link>
+  <kb-link href="#" variant="plain">Plain</kb-link>
+  <kb-link href="#" variant="subtle">Subtle</kb-link>
+  <kb-link href="#" variant="highlight">Highlight</kb-link>
+</div>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" size="xs">Extra Small (xs)</kb-link>
+  <kb-link href="#" size="sm">Small (sm)</kb-link>
+  <kb-link href="#" size="md">Medium (md)</kb-link>
+  <kb-link href="#" size="lg">Large (lg)</kb-link>
+  <kb-link href="#" size="xl">Extra Large (xl)</kb-link>
+</div>`;
+export const exAllSizesReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Link href="#" size="xs">Extra Small (xs)</Link>
+  <Link href="#" size="sm">Small (sm)</Link>
+  <Link href="#" size="md">Medium (md)</Link>
+  <Link href="#" size="lg">Large (lg)</Link>
+  <Link href="#" size="xl">Extra Large (xl)</Link>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-link href="#" size="xs">Extra Small (xs)</kb-link>
+    <kb-link href="#" size="sm">Small (sm)</kb-link>
+    <kb-link href="#" size="md">Medium (md)</kb-link>
+    <kb-link href="#" size="lg">Large (lg)</kb-link>
+    <kb-link href="#" size="xl">Extra Large (xl)</kb-link>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" size="xs">Extra Small (xs)</kb-link>
+  <kb-link href="#" size="sm">Small (sm)</kb-link>
+  <kb-link href="#" size="md">Medium (md)</kb-link>
+  <kb-link href="#" size="lg">Large (lg)</kb-link>
+  <kb-link href="#" size="xl">Extra Large (xl)</kb-link>
+</div>`;
+export const exColorSchemes = `<div style="display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" color-scheme="red">Red</kb-link>
+    <kb-link href="#" color-scheme="green">Green</kb-link>
+    <kb-link href="#" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" color-scheme="black">Black</kb-link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" variant="hover-underline" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="red">Red</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="green">Green</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="black">Black</kb-link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" variant="highlight" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="red">Red</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="green">Green</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="black">Black</kb-link>
+  </div>
+</div>`;
+export const exColorSchemesReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:16px;align-items:center">
+    <Link href="#" color-scheme="blue">Blue</Link>
+    <Link href="#" color-scheme="red">Red</Link>
+    <Link href="#" color-scheme="green">Green</Link>
+    <Link href="#" color-scheme="yellow">Yellow</Link>
+    <Link href="#" color-scheme="black">Black</Link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <Link href="#" variant="hover-underline" color-scheme="blue">Blue</Link>
+    <Link href="#" variant="hover-underline" color-scheme="red">Red</Link>
+    <Link href="#" variant="hover-underline" color-scheme="green">Green</Link>
+    <Link href="#" variant="hover-underline" color-scheme="yellow">Yellow</Link>
+    <Link href="#" variant="hover-underline" color-scheme="black">Black</Link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <Link href="#" variant="highlight" color-scheme="blue">Blue</Link>
+    <Link href="#" variant="highlight" color-scheme="red">Red</Link>
+    <Link href="#" variant="highlight" color-scheme="green">Green</Link>
+    <Link href="#" variant="highlight" color-scheme="yellow">Yellow</Link>
+    <Link href="#" variant="highlight" color-scheme="black">Black</Link>
+  </div>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;gap:16px;align-items:center">
+      <kb-link href="#" color-scheme="blue">Blue</kb-link>
+      <kb-link href="#" color-scheme="red">Red</kb-link>
+      <kb-link href="#" color-scheme="green">Green</kb-link>
+      <kb-link href="#" color-scheme="yellow">Yellow</kb-link>
+      <kb-link href="#" color-scheme="black">Black</kb-link>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center">
+      <kb-link href="#" variant="hover-underline" color-scheme="blue">Blue</kb-link>
+      <kb-link href="#" variant="hover-underline" color-scheme="red">Red</kb-link>
+      <kb-link href="#" variant="hover-underline" color-scheme="green">Green</kb-link>
+      <kb-link href="#" variant="hover-underline" color-scheme="yellow">Yellow</kb-link>
+      <kb-link href="#" variant="hover-underline" color-scheme="black">Black</kb-link>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center">
+      <kb-link href="#" variant="highlight" color-scheme="blue">Blue</kb-link>
+      <kb-link href="#" variant="highlight" color-scheme="red">Red</kb-link>
+      <kb-link href="#" variant="highlight" color-scheme="green">Green</kb-link>
+      <kb-link href="#" variant="highlight" color-scheme="yellow">Yellow</kb-link>
+      <kb-link href="#" variant="highlight" color-scheme="black">Black</kb-link>
+    </div>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" color-scheme="red">Red</kb-link>
+    <kb-link href="#" color-scheme="green">Green</kb-link>
+    <kb-link href="#" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" color-scheme="black">Black</kb-link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" variant="hover-underline" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="red">Red</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="green">Green</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" variant="hover-underline" color-scheme="black">Black</kb-link>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <kb-link href="#" variant="highlight" color-scheme="blue">Blue</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="red">Red</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="green">Green</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="yellow">Yellow</kb-link>
+    <kb-link href="#" variant="highlight" color-scheme="black">Black</kb-link>
+  </div>
+</div>`;
+export const exExternal = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="https://example.com" external>External link</kb-link>
+  <kb-link href="https://example.com" external variant="hover-underline">External hover-underline</kb-link>
+  <kb-link href="https://example.com" external variant="highlight">External highlight</kb-link>
+  <kb-link href="https://example.com" external size="lg">External large</kb-link>
+</div>`;
+export const exExternalReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Link href="https://example.com" external>External link</Link>
+  <Link href="https://example.com" external variant="hover-underline">External hover-underline</Link>
+  <Link href="https://example.com" external variant="highlight">External highlight</Link>
+  <Link href="https://example.com" external size="lg">External large</Link>
+</div>`;
+export const exExternalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-link href="https://example.com" external>External link</kb-link>
+    <kb-link href="https://example.com" external variant="hover-underline">External hover-underline</kb-link>
+    <kb-link href="https://example.com" external variant="highlight">External highlight</kb-link>
+    <kb-link href="https://example.com" external size="lg">External large</kb-link>
+  </div>
+</template>`;
+export const exExternalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="https://example.com" external>External link</kb-link>
+  <kb-link href="https://example.com" external variant="hover-underline">External hover-underline</kb-link>
+  <kb-link href="https://example.com" external variant="highlight">External highlight</kb-link>
+  <kb-link href="https://example.com" external size="lg">External large</kb-link>
+</div>`;
+export const exDisabled = `<div style="display:flex;gap:16px">
+  <kb-link href="#" disabled>Disabled underline</kb-link>
+  <kb-link href="#" disabled variant="hover-underline">Disabled hover</kb-link>
+  <kb-link href="#" disabled variant="highlight">Disabled highlight</kb-link>
+</div>`;
+export const exDisabledReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:16px">
+  <Link href="#" disabled>Disabled underline</Link>
+  <Link href="#" disabled variant="hover-underline">Disabled hover</Link>
+  <Link href="#" disabled variant="highlight">Disabled highlight</Link>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:16px">
+    <kb-link href="#" disabled>Disabled underline</kb-link>
+    <kb-link href="#" disabled variant="hover-underline">Disabled hover</kb-link>
+    <kb-link href="#" disabled variant="highlight">Disabled highlight</kb-link>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:16px">
+  <kb-link href="#" disabled>Disabled underline</kb-link>
+  <kb-link href="#" disabled variant="hover-underline">Disabled hover</kb-link>
+  <kb-link href="#" disabled variant="highlight">Disabled highlight</kb-link>
+</div>`;
+export const exVisited = `<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" show-visited>This link shows visited color</kb-link>
+  <kb-link href="#" show-visited color-scheme="red">Red visited</kb-link>
+  <kb-link href="#" show-visited color-scheme="green">Green visited</kb-link>
+</div>`;
+export const exVisitedReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <Link href="#" show-visited>This link shows visited color</Link>
+  <Link href="#" show-visited color-scheme="red">Red visited</Link>
+  <Link href="#" show-visited color-scheme="green">Green visited</Link>
+</div>`;
+export const exVisitedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <kb-link href="#" show-visited>This link shows visited color</kb-link>
+    <kb-link href="#" show-visited color-scheme="red">Red visited</kb-link>
+    <kb-link href="#" show-visited color-scheme="green">Green visited</kb-link>
+  </div>
+</template>`;
+export const exVisitedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+  <kb-link href="#" show-visited>This link shows visited color</kb-link>
+  <kb-link href="#" show-visited color-scheme="red">Red visited</kb-link>
+  <kb-link href="#" show-visited color-scheme="green">Green visited</kb-link>
+</div>`;
+export const exTruncated = `<div style="max-width:200px">
+  <kb-link href="#" truncate>This is a very long link text that should be truncated with an ellipsis</kb-link>
+</div>`;
+export const exTruncatedReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:200px">
+  <Link href="#" truncate>This is a very long link text that should be truncated with an ellipsis</Link>
+</div>`;
+export const exTruncatedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:200px">
+    <kb-link href="#" truncate>This is a very long link text that should be truncated with an ellipsis</kb-link>
+  </div>
+</template>`;
+export const exTruncatedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:200px">
+  <kb-link href="#" truncate>This is a very long link text that should be truncated with an ellipsis</kb-link>
+</div>`;
+export const exInlineText = `<p class="text-sm text-slate-600 dark:text-zinc-400 max-w-md" style="line-height:1.8">
+  You can use links inline within text. For example, visit the
+  <kb-link href="#" variant="underline">documentation page</kb-link>
+  for more details, or check out the
+  <kb-link href="#" variant="hover-underline" color-scheme="green">release notes</kb-link>
+  to see what's new. External resources are available at
+  <kb-link href="https://example.com" external>example.com</kb-link>
+  .
+</p>`;
+export const exInlineTextReact = `import { Link } from '@wearesyntesa/karbit-ui/react';
+
+<p class="text-sm text-slate-600 dark:text-zinc-400 max-w-md" style="line-height:1.8">
+  You can use links inline within text. For example, visit the
+  <Link href="#" variant="underline">documentation page</Link>
+  for more details, or check out the
+  <Link href="#" variant="hover-underline" color-scheme="green">release notes</Link>
+  to see what's new. External resources are available at
+  <Link href="https://example.com" external>example.com</Link>
+  .
+</p>`;
+export const exInlineTextVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <p class="text-sm text-slate-600 dark:text-zinc-400 max-w-md" style="line-height:1.8">
+    You can use links inline within text. For example, visit the
+    <kb-link href="#" variant="underline">documentation page</kb-link>
+    for more details, or check out the
+    <kb-link href="#" variant="hover-underline" color-scheme="green">release notes</kb-link>
+    to see what's new. External resources are available at
+    <kb-link href="https://example.com" external>example.com</kb-link>
+    .
+  </p>
+</template>`;
+export const exInlineTextSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<p class="text-sm text-slate-600 dark:text-zinc-400 max-w-md" style="line-height:1.8">
+  You can use links inline within text. For example, visit the
+  <kb-link href="#" variant="underline">documentation page</kb-link>
+  for more details, or check out the
+  <kb-link href="#" variant="hover-underline" color-scheme="green">release notes</kb-link>
+  to see what's new. External resources are available at
+  <kb-link href="https://example.com" external>example.com</kb-link>
+  .
+</p>`;
+
+# Link
+
+A styled anchor element for navigation.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Link } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `href` | `href` | `string` | `'#'` | URL the link navigates to. |
+| `variant` | `variant` | `LinkVariant` | `'underline'` | Visual variant controlling underline and hover behavior. |
+| `size` | `size` | `ComponentSize` | `'md'` | Text and icon size. |
+| `external` | `external` | `boolean` | `false` | Open link in a new tab with `rel="noopener noreferrer"` and show an external icon. |
+| `disabled` | `disabled` | `boolean` | `false` | Disables the link, preventing navigation and applying reduced opacity. |
+| `truncate` | `truncate` | `boolean` | `false` | Truncate link text with ellipsis when it overflows. |
+| `showVisited` | `show-visited` | `boolean` | `false` | Apply visited-link color styling. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for text, decoration, and hover effects. Overrides the default blue. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon-left` | Leading icon (SVG auto-sized per `size`). |
+| `icon-right` | Trailing icon (SVG auto-sized per `size`). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-link-click` | `{ href: string }` | Link clicked. Detail: `{ href: string }`. |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-disabled`
+
+## Examples
+
+<Demo title="Underline" codes={{ html: exUnderline, react: exUnderlineReact, vue: exUnderlineVue, svelte: exUnderlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exUnderline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Hover Underline" codes={{ html: exHoverUnderline, react: exHoverUnderlineReact, vue: exHoverUnderlineVue, svelte: exHoverUnderlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHoverUnderline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Plain" codes={{ html: exPlain, react: exPlainReact, vue: exPlainVue, svelte: exPlainSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlain }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Subtle" codes={{ html: exSubtle, react: exSubtleReact, vue: exSubtleVue, svelte: exSubtleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSubtle }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Highlight" codes={{ html: exHighlight, react: exHighlightReact, vue: exHighlightVue, svelte: exHighlightSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHighlight }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="External" codes={{ html: exExternal, react: exExternalReact, vue: exExternalVue, svelte: exExternalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exExternal }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Visited" codes={{ html: exVisited, react: exVisitedReact, vue: exVisitedVue, svelte: exVisitedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVisited }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Truncated" codes={{ html: exTruncated, react: exTruncatedReact, vue: exTruncatedVue, svelte: exTruncatedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTruncated }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Inline Text" codes={{ html: exInlineText, react: exInlineTextReact, vue: exInlineTextVue, svelte: exInlineTextSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInlineText }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Breadcrumb](./breadcrumb)
+- [Button](../forms/button)

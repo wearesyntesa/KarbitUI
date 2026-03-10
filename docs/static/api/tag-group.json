@@ -1,0 +1,62 @@
+{
+  "name": "Tag Group",
+  "tag": "kb-tag-group",
+  "category": "data-display",
+  "description": "Groups multiple tags with consistent spacing and optional drag-to-reorder.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-tag-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "TagGroup"
+  },
+  "props": [
+    {
+      "name": "reorderable",
+      "attribute": "reorderable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Enable drag-and-drop reordering of child `kb-tag[kb-draggable]` elements."
+    },
+    {
+      "name": "gap",
+      "attribute": "gap",
+      "type": "TagGroupGap",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Spacing between tags."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-reorder",
+      "detail": "`{ order: readonly string[] }`",
+      "description": "Fired after drag reorder completes. `detail.order` is an array of tag `value` strings."
+    },
+    {
+      "name": "kb-drag-start",
+      "detail": "`{ value: string }`",
+      "description": "Fired when a tag drag begins. `detail.value` is the dragged tag value."
+    },
+    {
+      "name": "kb-drag-end",
+      "detail": "`{ value: string }`",
+      "description": "Fired when a tag drag ends. `detail.value` is the dragged tag value."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "tag",
+    "tags-input"
+  ]
+}

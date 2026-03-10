@@ -1,0 +1,990 @@
+---
+title: "Input"
+description: "A text input field for capturing single-line user input."
+sidebar_label: "Input"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-input placeholder="Enter your name"></kb-input>`;
+export const reactCode = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Enter your name" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Enter your name" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Enter your name" />`;
+export const exOutline = `<kb-input placeholder="Type something..." variant="outline" size="md">
+</kb-input>`;
+export const exOutlineReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="outline" size="md">
+</Input>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="outline" size="md">
+  </kb-input>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="outline" size="md">
+</kb-input>`;
+export const exFilled = `<kb-input placeholder="Type something..." variant="filled" size="md">
+</kb-input>`;
+export const exFilledReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="filled" size="md">
+</Input>`;
+export const exFilledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="filled" size="md">
+  </kb-input>
+</template>`;
+export const exFilledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="filled" size="md">
+</kb-input>`;
+export const exFlushed = `<kb-input placeholder="Type something..." variant="flushed" size="md">
+</kb-input>`;
+export const exFlushedReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="flushed" size="md">
+</Input>`;
+export const exFlushedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="flushed" size="md">
+  </kb-input>
+</template>`;
+export const exFlushedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="flushed" size="md">
+</kb-input>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input size="xs" placeholder="Extra Small (xs)">
+  </kb-input>
+  <kb-input size="sm" placeholder="Small (sm)">
+  </kb-input>
+  <kb-input size="md" placeholder="Medium (md)">
+  </kb-input>
+  <kb-input size="lg" placeholder="Large (lg)">
+  </kb-input>
+  <kb-input size="xl" placeholder="Extra Large (xl)">
+  </kb-input>
+</div>`;
+export const exAllSizesReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Input size="xs" placeholder="Extra Small (xs)">
+  </Input>
+  <Input size="sm" placeholder="Small (sm)">
+  </Input>
+  <Input size="md" placeholder="Medium (md)">
+  </Input>
+  <Input size="lg" placeholder="Large (lg)">
+  </Input>
+  <Input size="xl" placeholder="Extra Large (xl)">
+  </Input>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-input size="xs" placeholder="Extra Small (xs)">
+    </kb-input>
+    <kb-input size="sm" placeholder="Small (sm)">
+    </kb-input>
+    <kb-input size="md" placeholder="Medium (md)">
+    </kb-input>
+    <kb-input size="lg" placeholder="Large (lg)">
+    </kb-input>
+    <kb-input size="xl" placeholder="Extra Large (xl)">
+    </kb-input>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input size="xs" placeholder="Extra Small (xs)">
+  </kb-input>
+  <kb-input size="sm" placeholder="Small (sm)">
+  </kb-input>
+  <kb-input size="md" placeholder="Medium (md)">
+  </kb-input>
+  <kb-input size="lg" placeholder="Large (lg)">
+  </kb-input>
+  <kb-input size="xl" placeholder="Extra Large (xl)">
+  </kb-input>
+</div>`;
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input variant="outline" placeholder="Outline variant">
+  </kb-input>
+  <kb-input variant="filled" placeholder="Filled variant">
+  </kb-input>
+  <kb-input variant="flushed" placeholder="Flushed variant">
+  </kb-input>
+</div>`;
+export const exAllVariantsReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Input variant="outline" placeholder="Outline variant">
+  </Input>
+  <Input variant="filled" placeholder="Filled variant">
+  </Input>
+  <Input variant="flushed" placeholder="Flushed variant">
+  </Input>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-input variant="outline" placeholder="Outline variant">
+    </kb-input>
+    <kb-input variant="filled" placeholder="Filled variant">
+    </kb-input>
+    <kb-input variant="flushed" placeholder="Flushed variant">
+    </kb-input>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input variant="outline" placeholder="Outline variant">
+  </kb-input>
+  <kb-input variant="filled" placeholder="Filled variant">
+  </kb-input>
+  <kb-input variant="flushed" placeholder="Flushed variant">
+  </kb-input>
+</div>`;
+export const exWithValue = `<kb-input placeholder="Type something..." variant="outline" size="md" value="Hello World">
+</kb-input>`;
+export const exWithValueReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="outline" size="md" value="Hello World">
+</Input>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="outline" size="md" value="Hello World">
+  </kb-input>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="outline" size="md" value="Hello World">
+</kb-input>`;
+export const exDisabled = `<kb-input placeholder="Type something..." variant="outline" size="md" disabled value="Disabled input">
+</kb-input>`;
+export const exDisabledReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="outline" size="md" disabled value="Disabled input">
+</Input>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="outline" size="md" disabled value="Disabled input">
+  </kb-input>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="outline" size="md" disabled value="Disabled input">
+</kb-input>`;
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input variant="outline" invalid placeholder="Outline invalid">
+  </kb-input>
+  <kb-input variant="filled" invalid placeholder="Filled invalid">
+  </kb-input>
+  <kb-input variant="flushed" invalid placeholder="Flushed invalid">
+  </kb-input>
+</div>`;
+export const exInvalidReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Input variant="outline" invalid placeholder="Outline invalid">
+  </Input>
+  <Input variant="filled" invalid placeholder="Filled invalid">
+  </Input>
+  <Input variant="flushed" invalid placeholder="Flushed invalid">
+  </Input>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-input variant="outline" invalid placeholder="Outline invalid">
+    </kb-input>
+    <kb-input variant="filled" invalid placeholder="Filled invalid">
+    </kb-input>
+    <kb-input variant="flushed" invalid placeholder="Flushed invalid">
+    </kb-input>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input variant="outline" invalid placeholder="Outline invalid">
+  </kb-input>
+  <kb-input variant="filled" invalid placeholder="Filled invalid">
+  </kb-input>
+  <kb-input variant="flushed" invalid placeholder="Flushed invalid">
+  </kb-input>
+</div>`;
+export const exReadonly = `<kb-input placeholder="Type something..." variant="outline" size="md" readonly value="Read only text">
+</kb-input>`;
+export const exReadonlyReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Type something..." variant="outline" size="md" readonly value="Read only text">
+</Input>`;
+export const exReadonlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Type something..." variant="outline" size="md" readonly value="Read only text">
+  </kb-input>
+</template>`;
+export const exReadonlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Type something..." variant="outline" size="md" readonly value="Read only text">
+</kb-input>`;
+export const exPassword = `<kb-input placeholder="Enter password..." variant="outline" size="md" type="password">
+</kb-input>`;
+export const exPasswordReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<Input placeholder="Enter password..." variant="outline" size="md" type="password">
+</Input>`;
+export const exPasswordVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-input placeholder="Enter password..." variant="outline" size="md" type="password">
+  </kb-input>
+</template>`;
+export const exPasswordSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-input placeholder="Enter password..." variant="outline" size="md" type="password">
+</kb-input>`;
+export const exWithIconLeft = `<div style="max-width:400px;">
+  <kb-input placeholder="Search...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithIconLeftReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="Search...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </Input>
+</div>`;
+export const exWithIconLeftVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="Search...">
+      <span slot="icon-left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithIconLeftSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="Search...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithIconRight = `<div style="max-width:400px;">
+  <kb-input placeholder="Enter email...">
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <rect width="20" height="16" x="2" y="4"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithIconRightReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="Enter email...">
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <rect width="20" height="16" x="2" y="4"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+    </span>
+  </Input>
+</div>`;
+export const exWithIconRightVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="Enter email...">
+      <span slot="icon-right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <rect width="20" height="16" x="2" y="4"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+      </span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithIconRightSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="Enter email...">
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <rect width="20" height="16" x="2" y="4"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithBothIcons = `<div style="max-width:400px;">
+  <kb-input placeholder="Search users...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithBothIconsReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="Search users...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </Input>
+</div>`;
+export const exWithBothIconsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="Search users...">
+      <span slot="icon-left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <span slot="icon-right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithBothIconsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="Search users...">
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <span slot="icon-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exWithAddonLeft = `<div style="max-width:400px;">
+  <kb-input placeholder="example.com">
+    <span slot="addon-left">https://</span>
+  </kb-input>
+</div>`;
+export const exWithAddonLeftReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="example.com">
+    <span slot="addon-left">https://</span>
+  </Input>
+</div>`;
+export const exWithAddonLeftVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="example.com">
+      <span slot="addon-left">https://</span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithAddonLeftSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="example.com">
+    <span slot="addon-left">https://</span>
+  </kb-input>
+</div>`;
+export const exWithAddonRight = `<div style="max-width:400px;">
+  <kb-input placeholder="mysite">
+    <span slot="addon-right">.com</span>
+  </kb-input>
+</div>`;
+export const exWithAddonRightReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="mysite">
+    <span slot="addon-right">.com</span>
+  </Input>
+</div>`;
+export const exWithAddonRightVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="mysite">
+      <span slot="addon-right">.com</span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithAddonRightSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="mysite">
+    <span slot="addon-right">.com</span>
+  </kb-input>
+</div>`;
+export const exWithBothAddons = `<div style="max-width:500px;">
+  <kb-input placeholder="yoursite">
+    <span slot="addon-left">https://</span>
+    <span slot="addon-right">.com</span>
+  </kb-input>
+</div>`;
+export const exWithBothAddonsReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:500px;">
+  <Input placeholder="yoursite">
+    <span slot="addon-left">https://</span>
+    <span slot="addon-right">.com</span>
+  </Input>
+</div>`;
+export const exWithBothAddonsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:500px;">
+    <kb-input placeholder="yoursite">
+      <span slot="addon-left">https://</span>
+      <span slot="addon-right">.com</span>
+    </kb-input>
+  </div>
+</template>`;
+export const exWithBothAddonsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:500px;">
+  <kb-input placeholder="yoursite">
+    <span slot="addon-left">https://</span>
+    <span slot="addon-right">.com</span>
+  </kb-input>
+</div>`;
+export const exClearable = `<div style="max-width:400px;">
+  <kb-input placeholder="Type to see clear button..." clearable value="Clear me">
+  </kb-input>
+</div>`;
+export const exClearableReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="Type to see clear button..." clearable value="Clear me">
+  </Input>
+</div>`;
+export const exClearableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="Type to see clear button..." clearable value="Clear me">
+    </kb-input>
+  </div>
+</template>`;
+export const exClearableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="Type to see clear button..." clearable value="Clear me">
+  </kb-input>
+</div>`;
+export const exLoading = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input placeholder="Loading..." loading>
+  </kb-input>
+  <kb-input placeholder="Loading with icon..." loading>
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exLoadingReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Input placeholder="Loading..." loading>
+  </Input>
+  <Input placeholder="Loading with icon..." loading>
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </Input>
+</div>`;
+export const exLoadingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-input placeholder="Loading..." loading>
+    </kb-input>
+    <kb-input placeholder="Loading with icon..." loading>
+      <span slot="icon-left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+    </kb-input>
+  </div>
+</template>`;
+export const exLoadingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-input placeholder="Loading..." loading>
+  </kb-input>
+  <kb-input placeholder="Loading with icon..." loading>
+    <span slot="icon-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+  </kb-input>
+</div>`;
+export const exMaxLength = `<div style="max-width:400px;">
+  <kb-input placeholder="Max 20 characters" max-length="20">
+  </kb-input>
+</div>`;
+export const exMaxLengthReact = `import { Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <Input placeholder="Max 20 characters" max-length="20">
+  </Input>
+</div>`;
+export const exMaxLengthVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-input placeholder="Max 20 characters" max-length="20">
+    </kb-input>
+  </div>
+</template>`;
+export const exMaxLengthSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-input placeholder="Max 20 characters" max-length="20">
+  </kb-input>
+</div>`;
+
+# Input
+
+A text input field for capturing single-line user input.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Input } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `inputId` | `input-id` | `string` | — | Forwarded `id` applied to the native `<input>` element. Allows external `<label for="...">` to work. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Form input visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Input size controlling padding, font size, and icon sizing. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text shown when the input is empty. |
+| `value` | `value` | `string` | `""` | Current input value. Two-way bindable. |
+| `type` | `type` | `InputType` | `'text'` | HTML input type attribute (e.g. `'text'`, `'password'`, `'email'`). |
+| `name` | `name` | `string` | — | Form field name, used in form submissions. |
+| `maxLength` | `max-length` | `number` | — | Maximum character count. When set, enforces length via the native `maxlength` attribute. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `invalid` | `invalid` | `boolean` | `false` | Mark the input as invalid with error border styling. |
+| `readonly` | `readonly` | `boolean` | `false` | Make the input read-only (focusable but not editable). |
+| `required` | `required` | `boolean` | `false` | Mark the input as required for form validation. |
+| `clearable` | `clearable` | `boolean` | `false` | Show a clear button when the input has a value. |
+| `loading` | `loading` | `boolean` | `false` | Show a loading spinner in place of the trailing icon. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `addon-left` | Attached text/element flush to the left edge (e.g. "https://"). |
+| `addon-right` | Attached text/element flush to the right edge (e.g. ".com"). |
+| `icon-left` | Leading icon element inside the input. |
+| `icon-right` | Trailing icon element inside the input. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-input` | `{ value: string }` | Value changed on input. Detail: `{ value: string }`. |
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value committed on change. Detail: `{ value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Input focused. |
+| `kb-blur` | `{ source?: string }` or none | Input blurred. |
+| `kb-clear` | `{ source?: string }` or none | Clear button clicked (when clearable). |
+
+## Accessibility
+
+### ARIA
+
+**Attributes:** `aria-invalid`, `aria-label`
+
+## Examples
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Filled" codes={{ html: exFilled, react: exFilledReact, vue: exFilledVue, svelte: exFilledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFilled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Flushed" codes={{ html: exFlushed, react: exFlushedReact, vue: exFlushedVue, svelte: exFlushedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFlushed }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Readonly" codes={{ html: exReadonly, react: exReadonlyReact, vue: exReadonlyVue, svelte: exReadonlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReadonly }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Password" codes={{ html: exPassword, react: exPasswordReact, vue: exPasswordVue, svelte: exPasswordSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPassword }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icon Left" codes={{ html: exWithIconLeft, react: exWithIconLeftReact, vue: exWithIconLeftVue, svelte: exWithIconLeftSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIconLeft }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icon Right" codes={{ html: exWithIconRight, react: exWithIconRightReact, vue: exWithIconRightVue, svelte: exWithIconRightSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIconRight }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Both Icons" codes={{ html: exWithBothIcons, react: exWithBothIconsReact, vue: exWithBothIconsVue, svelte: exWithBothIconsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithBothIcons }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Addon Left" codes={{ html: exWithAddonLeft, react: exWithAddonLeftReact, vue: exWithAddonLeftVue, svelte: exWithAddonLeftSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithAddonLeft }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Addon Right" codes={{ html: exWithAddonRight, react: exWithAddonRightReact, vue: exWithAddonRightVue, svelte: exWithAddonRightSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithAddonRight }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Both Addons" codes={{ html: exWithBothAddons, react: exWithBothAddonsReact, vue: exWithBothAddonsVue, svelte: exWithBothAddonsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithBothAddons }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Clearable" codes={{ html: exClearable, react: exClearableReact, vue: exClearableVue, svelte: exClearableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClearable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Loading" codes={{ html: exLoading, react: exLoadingReact, vue: exLoadingVue, svelte: exLoadingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLoading }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Max Length" codes={{ html: exMaxLength, react: exMaxLengthReact, vue: exMaxLengthVue, svelte: exMaxLengthSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMaxLength }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Textarea](./textarea)
+- [Number Input](./number-input)
+- [Form Control](./form-control)

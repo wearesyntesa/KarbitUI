@@ -1,0 +1,140 @@
+---
+title: "Carousel"
+description: "A slideshow component for cycling through a series of content panels."
+sidebar_label: "Carousel"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-carousel>
+  <div>Slide 1</div>
+  <div>Slide 2</div>
+  <div>Slide 3</div>
+</kb-carousel>`;
+export const reactCode = `import { Carousel } from '@wearesyntesa/karbit-ui/react';
+
+<Carousel>
+  <div>Slide 1</div>
+  <div>Slide 2</div>
+  <div>Slide 3</div>
+</Carousel>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-carousel>
+    <div>Slide 1</div>
+    <div>Slide 2</div>
+    <div>Slide 3</div>
+  </kb-carousel>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-carousel>
+  <div>Slide 1</div>
+  <div>Slide 2</div>
+  <div>Slide 3</div>
+</kb-carousel>`;
+
+# Carousel
+
+A slideshow component for cycling through a series of content panels.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Carousel } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `active` | `active` | `number` | `0` | Zero-based index of the currently visible slide. |
+| `autoplay` | `autoplay` | `boolean` | `false` | Enable automatic slide advancement. |
+| `interval` | `interval` | `number` | `5000` | Autoplay interval in milliseconds. |
+| `loop` | `loop` | `boolean` | `true` | Wrap from last slide to first (and vice versa). |
+| `showArrows` | `show-arrows` | `boolean` | `true` | Show previous/next arrow buttons in the control bar. |
+| `showDots` | `show-dots` | `boolean` | `true` | Show dot indicators in the control bar. |
+| `showCounter` | `show-counter` | `boolean` | `true` | Show "1 / N" slide counter in the control bar. |
+| `pauseOnHover` | `pause-on-hover` | `boolean` | `true` | Pause autoplay when hovering over the carousel. |
+| `swipeable` | `swipeable` | `boolean` | `true` | Enable touch/pointer drag to swipe between slides. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-slide-change` | `{ index: number, previousIndex: number }` | Dispatched when the active slide changes, with `detail.index` and `detail.previousIndex`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+
+### ARIA
+
+**Roles:** `group`, `region`, `tablist`
+
+**Attributes:** `aria-current`, `aria-label`, `aria-live`, `aria-roledescription`

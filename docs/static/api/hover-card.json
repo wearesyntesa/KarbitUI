@@ -1,0 +1,85 @@
+{
+  "name": "Hover Card",
+  "tag": "kb-hover-card",
+  "category": "overlay",
+  "description": "A card that appears on hover for showing preview content.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-hover-card.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "HoverCard"
+  },
+  "props": [
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "HoverCardPlacement",
+      "default": "'bottom'",
+      "reflect": false,
+      "description": "Position of the card relative to the trigger."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "HoverCardSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Card width preset."
+    },
+    {
+      "name": "openDelay",
+      "attribute": "open-delay",
+      "type": "number",
+      "default": "300",
+      "reflect": false,
+      "description": "Delay in ms before showing the card."
+    },
+    {
+      "name": "closeDelay",
+      "attribute": "close-delay",
+      "type": "number",
+      "default": "200",
+      "reflect": false,
+      "description": "Delay in ms before hiding the card."
+    },
+    {
+      "name": "open",
+      "attribute": "open",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Programmatically control visibility."
+    }
+  ],
+  "slots": [
+    {
+      "name": "content",
+      "description": "Card body content."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when card becomes visible."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when card is hidden."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "tooltip",
+    "popover"
+  ]
+}

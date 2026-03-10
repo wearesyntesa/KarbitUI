@@ -1,0 +1,245 @@
+---
+title: "Circular Progress"
+description: "A circular progress indicator showing completion percentage."
+sidebar_label: "Circular Progress"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-circular-progress value="75"></kb-circular-progress>`;
+export const reactCode = `import { CircularProgress } from '@wearesyntesa/karbit-ui/react';
+
+<CircularProgress value="75" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-circular-progress value="75" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-circular-progress value="75" />`;
+export const exDefault = `<kb-circular-progress value="75" show-value>
+</kb-circular-progress>`;
+export const exDefaultReact = `import { CircularProgress } from '@wearesyntesa/karbit-ui/react';
+
+<CircularProgress value="75" show-value>
+</CircularProgress>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-circular-progress value="75" show-value>
+  </kb-circular-progress>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-circular-progress value="75" show-value>
+</kb-circular-progress>`;
+export const exIndeterminate = `<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <kb-circular-progress indeterminate size="sm">
+  </kb-circular-progress>
+  <kb-circular-progress indeterminate size="md" color-scheme="green">
+  </kb-circular-progress>
+  <kb-circular-progress indeterminate size="lg" color-scheme="purple">
+  </kb-circular-progress>
+</div>`;
+export const exIndeterminateReact = `import { CircularProgress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <CircularProgress indeterminate size="sm">
+  </CircularProgress>
+  <CircularProgress indeterminate size="md" color-scheme="green">
+  </CircularProgress>
+  <CircularProgress indeterminate size="lg" color-scheme="purple">
+  </CircularProgress>
+</div>`;
+export const exIndeterminateVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+    <kb-circular-progress indeterminate size="sm">
+    </kb-circular-progress>
+    <kb-circular-progress indeterminate size="md" color-scheme="green">
+    </kb-circular-progress>
+    <kb-circular-progress indeterminate size="lg" color-scheme="purple">
+    </kb-circular-progress>
+  </div>
+</template>`;
+export const exIndeterminateSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <kb-circular-progress indeterminate size="sm">
+  </kb-circular-progress>
+  <kb-circular-progress indeterminate size="md" color-scheme="green">
+  </kb-circular-progress>
+  <kb-circular-progress indeterminate size="lg" color-scheme="purple">
+  </kb-circular-progress>
+</div>`;
+export const exCustomLabel = `<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <kb-circular-progress value="42" show-value value-label="42/100" size="lg">
+  </kb-circular-progress>
+  <kb-circular-progress value="100" show-value value-label="Done" size="lg" color-scheme="green">
+  </kb-circular-progress>
+</div>`;
+export const exCustomLabelReact = `import { CircularProgress } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <CircularProgress value="42" show-value value-label="42/100" size="lg">
+  </CircularProgress>
+  <CircularProgress value="100" show-value value-label="Done" size="lg" color-scheme="green">
+  </CircularProgress>
+</div>`;
+export const exCustomLabelVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+    <kb-circular-progress value="42" show-value value-label="42/100" size="lg">
+    </kb-circular-progress>
+    <kb-circular-progress value="100" show-value value-label="Done" size="lg" color-scheme="green">
+    </kb-circular-progress>
+  </div>
+</template>`;
+export const exCustomLabelSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap">
+  <kb-circular-progress value="42" show-value value-label="42/100" size="lg">
+  </kb-circular-progress>
+  <kb-circular-progress value="100" show-value value-label="Done" size="lg" color-scheme="green">
+  </kb-circular-progress>
+</div>`;
+
+# Circular Progress
+
+A circular progress indicator showing completion percentage.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { CircularProgress } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` | `0` | Current progress value between `min` and `max`. |
+| `max` | `max` | `number` | `100` | Maximum progress value. |
+| `min` | `min` | `number` | `0` | Minimum progress value. |
+| `size` | `size` | `ComponentSize` | `'md'` | Size preset. |
+| `indeterminate` | `indeterminate` | `boolean` | `false` | Show animated indeterminate spinner. |
+| `showValue` | `show-value` | `boolean` | `false` | Show percentage label inside the ring. |
+| `valueLabel` | `value-label` | `string` | — | Custom label text instead of computed percentage. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the progress arc. |
+| `thickness` | `thickness` | `number` | `1` | Ring thickness multiplier. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `progressbar`
+
+**Attributes:** `aria-label`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Indeterminate" codes={{ html: exIndeterminate, react: exIndeterminateReact, vue: exIndeterminateVue, svelte: exIndeterminateSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exIndeterminate }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Label" codes={{ html: exCustomLabel, react: exCustomLabelReact, vue: exCustomLabelVue, svelte: exCustomLabelSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomLabel }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Progress](./progress)
+- [Spinner](./spinner)

@@ -1,0 +1,182 @@
+{
+  "name": "Textarea",
+  "tag": "kb-textarea",
+  "category": "forms",
+  "description": "A multi-line text input for longer form content.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-textarea.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Textarea"
+  },
+  "props": [
+    {
+      "name": "inputId",
+      "attribute": "input-id",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Forwarded `id` applied to the native `<textarea>` element. Allows external `<label for=\"...\">` to work."
+    },
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "FormVariant",
+      "default": "'outline'",
+      "reflect": false,
+      "description": "Form textarea visual variant."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Textarea size controlling padding, font size, and action sizing."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Placeholder text shown when the textarea is empty."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current textarea value. Two-way bindable."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name, used in form submissions."
+    },
+    {
+      "name": "rows",
+      "attribute": "rows",
+      "type": "number",
+      "default": "4",
+      "reflect": false,
+      "description": "Initial visible row count."
+    },
+    {
+      "name": "maxLength",
+      "attribute": "max-length",
+      "type": "number",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Maximum character count. Enables the character counter when set."
+    },
+    {
+      "name": "resize",
+      "attribute": "resize",
+      "type": "ResizeMode",
+      "default": "'vertical'",
+      "reflect": false,
+      "description": "CSS resize behavior. Overridden to `'none'` when `autoResize` is enabled."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the textarea as invalid with error border styling."
+    },
+    {
+      "name": "readonly",
+      "attribute": "readonly",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make the textarea read-only (focusable but not editable)."
+    },
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark the textarea as required for form validation."
+    },
+    {
+      "name": "clearable",
+      "attribute": "clearable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a clear button when the textarea has a value."
+    },
+    {
+      "name": "loading",
+      "attribute": "loading",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a loading spinner in the action area."
+    },
+    {
+      "name": "autoResize",
+      "attribute": "auto-resize",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Automatically grow the textarea height to fit content. Disables manual resizing."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-input",
+      "detail": "`{ value: string }`",
+      "description": "Value changed on input. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Value committed on change. Detail: `{ value: string }`."
+    },
+    {
+      "name": "kb-focus",
+      "detail": "`{ source?: string }` or none",
+      "description": "Textarea focused."
+    },
+    {
+      "name": "kb-blur",
+      "detail": "`{ source?: string }` or none",
+      "description": "Textarea blurred."
+    },
+    {
+      "name": "kb-clear",
+      "detail": "`{ source?: string }` or none",
+      "description": "Clear button clicked (when clearable)."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-invalid",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "input",
+    "form-control"
+  ]
+}

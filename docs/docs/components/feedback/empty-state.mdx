@@ -1,0 +1,187 @@
+---
+title: "Empty State"
+description: "A placeholder displayed when a section has no data."
+sidebar_label: "Empty State"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-empty-state title="No results" description="Try a different search term."></kb-empty-state>`;
+export const reactCode = `import { EmptyState } from '@wearesyntesa/karbit-ui/react';
+
+<EmptyState title="No results" description="Try a different search term." />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-empty-state title="No results" description="Try a different search term." />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-empty-state title="No results" description="Try a different search term." />`;
+export const exWithBorder = `<div class="border border-gray-200 dark:border-zinc-700">
+  <kb-empty-state title="No deployments" description="Deploy your first build to see it listed here.">
+    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+    </svg>
+    <kb-button slot="action" size="sm">DEPLOY NOW</kb-button>
+  </kb-empty-state>
+</div>`;
+export const exWithBorderReact = `import { Button, EmptyState } from '@wearesyntesa/karbit-ui/react';
+
+<div class="border border-gray-200 dark:border-zinc-700">
+  <EmptyState title="No deployments" description="Deploy your first build to see it listed here.">
+    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+    </svg>
+    <Button slot="action" size="sm">DEPLOY NOW</Button>
+  </EmptyState>
+</div>`;
+export const exWithBorderVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="border border-gray-200 dark:border-zinc-700">
+    <kb-empty-state title="No deployments" description="Deploy your first build to see it listed here.">
+      <svg slot="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+      </svg>
+      <kb-button slot="action" size="sm">DEPLOY NOW</kb-button>
+    </kb-empty-state>
+  </div>
+</template>`;
+export const exWithBorderSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="border border-gray-200 dark:border-zinc-700">
+  <kb-empty-state title="No deployments" description="Deploy your first build to see it listed here.">
+    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+    </svg>
+    <kb-button slot="action" size="sm">DEPLOY NOW</kb-button>
+  </kb-empty-state>
+</div>`;
+export const exTitleOnly = `<kb-empty-state title="Nothing to see here">
+</kb-empty-state>`;
+export const exTitleOnlyReact = `import { EmptyState } from '@wearesyntesa/karbit-ui/react';
+
+<EmptyState title="Nothing to see here">
+</EmptyState>`;
+export const exTitleOnlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-empty-state title="Nothing to see here">
+  </kb-empty-state>
+</template>`;
+export const exTitleOnlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-empty-state title="Nothing to see here">
+</kb-empty-state>`;
+
+# Empty State
+
+A placeholder displayed when a section has no data.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { EmptyState } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `title` | `title` | `string` | `""` | Main title text. |
+| `description` | `description` | `string` | `""` | Supporting description text. |
+| `size` | `size` | `ComponentSize` | `'md'` | Size preset. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon` | Icon or illustration. |
+| `action` | Primary action button(s). |
+
+## Examples
+
+<Demo title="With Border" codes={{ html: exWithBorder, react: exWithBorderReact, vue: exWithBorderVue, svelte: exWithBorderSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithBorder }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Title Only" codes={{ html: exTitleOnly, react: exTitleOnlyReact, vue: exTitleOnlyVue, svelte: exTitleOnlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTitleOnly }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Alert](./alert)

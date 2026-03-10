@@ -1,0 +1,699 @@
+---
+title: "Slider"
+description: "A range slider for selecting numeric values within a range."
+sidebar_label: "Slider"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-slider value="50" min="0" max="100"></kb-slider>`;
+export const reactCode = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<Slider value="50" min="0" max="100" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-slider value="50" min="0" max="100" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-slider value="50" min="0" max="100" />`;
+export const exDefault = `<kb-slider value="50" min="0" max="100">
+</kb-slider>`;
+export const exDefaultReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<Slider value="50" min="0" max="100">
+</Slider>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-slider value="50" min="0" max="100">
+  </kb-slider>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-slider value="50" min="0" max="100">
+</kb-slider>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-slider size="xs" value="20" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="sm" value="35" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="md" value="50" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="lg" value="65" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="xl" value="80" min="0" max="100">
+  </kb-slider>
+</div>`;
+export const exSizesReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Slider size="xs" value="20" min="0" max="100">
+  </Slider>
+  <Slider size="sm" value="35" min="0" max="100">
+  </Slider>
+  <Slider size="md" value="50" min="0" max="100">
+  </Slider>
+  <Slider size="lg" value="65" min="0" max="100">
+  </Slider>
+  <Slider size="xl" value="80" min="0" max="100">
+  </Slider>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-slider size="xs" value="20" min="0" max="100">
+    </kb-slider>
+    <kb-slider size="sm" value="35" min="0" max="100">
+    </kb-slider>
+    <kb-slider size="md" value="50" min="0" max="100">
+    </kb-slider>
+    <kb-slider size="lg" value="65" min="0" max="100">
+    </kb-slider>
+    <kb-slider size="xl" value="80" min="0" max="100">
+    </kb-slider>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-slider size="xs" value="20" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="sm" value="35" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="md" value="50" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="lg" value="65" min="0" max="100">
+  </kb-slider>
+  <kb-slider size="xl" value="80" min="0" max="100">
+  </kb-slider>
+</div>`;
+export const exColorSchemes = `<div class="flex flex-col gap-6">
+  <kb-slider value="60" color-scheme="blue">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="red">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="green">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="yellow">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="black">
+  </kb-slider>
+</div>`;
+export const exColorSchemesReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Slider value="60" color-scheme="blue">
+  </Slider>
+  <Slider value="60" color-scheme="red">
+  </Slider>
+  <Slider value="60" color-scheme="green">
+  </Slider>
+  <Slider value="60" color-scheme="yellow">
+  </Slider>
+  <Slider value="60" color-scheme="black">
+  </Slider>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-slider value="60" color-scheme="blue">
+    </kb-slider>
+    <kb-slider value="60" color-scheme="red">
+    </kb-slider>
+    <kb-slider value="60" color-scheme="green">
+    </kb-slider>
+    <kb-slider value="60" color-scheme="yellow">
+    </kb-slider>
+    <kb-slider value="60" color-scheme="black">
+    </kb-slider>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-slider value="60" color-scheme="blue">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="red">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="green">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="yellow">
+  </kb-slider>
+  <kb-slider value="60" color-scheme="black">
+  </kb-slider>
+</div>`;
+export const exWithStep = `<kb-slider value="50" min="0" max="100" step="10">
+</kb-slider>`;
+export const exWithStepReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<Slider value="50" min="0" max="100" step="10">
+</Slider>`;
+export const exWithStepVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-slider value="50" min="0" max="100" step="10">
+  </kb-slider>
+</template>`;
+export const exWithStepSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-slider value="50" min="0" max="100" step="10">
+</kb-slider>`;
+export const exDisabled = `<kb-slider value="40" disabled>
+</kb-slider>`;
+export const exDisabledReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<Slider value="40" disabled>
+</Slider>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-slider value="40" disabled>
+  </kb-slider>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-slider value="40" disabled>
+</kb-slider>`;
+export const exRange = `<kb-slider value="250" min="100" max="500" step="25" color-scheme="green">
+</kb-slider>`;
+export const exRangeReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<Slider value="250" min="100" max="500" step="25" color-scheme="green">
+</Slider>`;
+export const exRangeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-slider value="250" min="100" max="500" step="25" color-scheme="green">
+  </kb-slider>
+</template>`;
+export const exRangeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-slider value="250" min="100" max="500" step="25" color-scheme="green">
+</kb-slider>`;
+export const exShowValue = `<div class="flex flex-col gap-8">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">
+    Hover or drag to see the value tooltip above the thumb.
+  </p>
+  <kb-slider value="50" show-value>
+  </kb-slider>
+  <kb-slider value="75" show-value color-scheme="red" size="lg">
+  </kb-slider>
+</div>`;
+export const exShowValueReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-8">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">
+    Hover or drag to see the value tooltip above the thumb.
+  </p>
+  <Slider value="50" show-value>
+  </Slider>
+  <Slider value="75" show-value color-scheme="red" size="lg">
+  </Slider>
+</div>`;
+export const exShowValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-8">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">
+      Hover or drag to see the value tooltip above the thumb.
+    </p>
+    <kb-slider value="50" show-value>
+    </kb-slider>
+    <kb-slider value="75" show-value color-scheme="red" size="lg">
+    </kb-slider>
+  </div>
+</template>`;
+export const exShowValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-8">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">
+    Hover or drag to see the value tooltip above the thumb.
+  </p>
+  <kb-slider value="50" show-value>
+  </kb-slider>
+  <kb-slider value="75" show-value color-scheme="red" size="lg">
+  </kb-slider>
+</div>`;
+export const exShowTicks = `<div class="flex flex-col gap-10">
+  <kb-slider value="50" min="0" max="100" step="10" show-ticks>
+  </kb-slider>
+  <kb-slider value="30" min="0" max="100" step="20" show-ticks color-scheme="green">
+  </kb-slider>
+  <kb-slider value="60" min="0" max="100" step="25" show-ticks size="lg">
+  </kb-slider>
+</div>`;
+export const exShowTicksReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-10">
+  <Slider value="50" min="0" max="100" step="10" show-ticks>
+  </Slider>
+  <Slider value="30" min="0" max="100" step="20" show-ticks color-scheme="green">
+  </Slider>
+  <Slider value="60" min="0" max="100" step="25" show-ticks size="lg">
+  </Slider>
+</div>`;
+export const exShowTicksVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-10">
+    <kb-slider value="50" min="0" max="100" step="10" show-ticks>
+    </kb-slider>
+    <kb-slider value="30" min="0" max="100" step="20" show-ticks color-scheme="green">
+    </kb-slider>
+    <kb-slider value="60" min="0" max="100" step="25" show-ticks size="lg">
+    </kb-slider>
+  </div>
+</template>`;
+export const exShowTicksSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-10">
+  <kb-slider value="50" min="0" max="100" step="10" show-ticks>
+  </kb-slider>
+  <kb-slider value="30" min="0" max="100" step="20" show-ticks color-scheme="green">
+  </kb-slider>
+  <kb-slider value="60" min="0" max="100" step="25" show-ticks size="lg">
+  </kb-slider>
+</div>`;
+export const exShowRange = `<div class="flex flex-col gap-8">
+  <kb-slider value="50" min="0" max="100" show-range>
+  </kb-slider>
+  <kb-slider value="250" min="100" max="500" step="25" show-range color-scheme="blue">
+  </kb-slider>
+</div>`;
+export const exShowRangeReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-8">
+  <Slider value="50" min="0" max="100" show-range>
+  </Slider>
+  <Slider value="250" min="100" max="500" step="25" show-range color-scheme="blue">
+  </Slider>
+</div>`;
+export const exShowRangeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-8">
+    <kb-slider value="50" min="0" max="100" show-range>
+    </kb-slider>
+    <kb-slider value="250" min="100" max="500" step="25" show-range color-scheme="blue">
+    </kb-slider>
+  </div>
+</template>`;
+export const exShowRangeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-8">
+  <kb-slider value="50" min="0" max="100" show-range>
+  </kb-slider>
+  <kb-slider value="250" min="100" max="500" step="25" show-range color-scheme="blue">
+  </kb-slider>
+</div>`;
+export const exReadonly = `<div class="flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">Readonly sliders are focusable but cannot be changed.</p>
+  <kb-slider value="65" readonly show-value show-range>
+  </kb-slider>
+</div>`;
+export const exReadonlyReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">Readonly sliders are focusable but cannot be changed.</p>
+  <Slider value="65" readonly show-value show-range>
+  </Slider>
+</div>`;
+export const exReadonlyVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">Readonly sliders are focusable but cannot be changed.</p>
+    <kb-slider value="65" readonly show-value show-range>
+    </kb-slider>
+  </div>
+</template>`;
+export const exReadonlySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <p class="text-sm text-gray-500 dark:text-zinc-400 font-mono">Readonly sliders are focusable but cannot be changed.</p>
+  <kb-slider value="65" readonly show-value show-range>
+  </kb-slider>
+</div>`;
+export const exAllFeatures = `<div class="flex flex-col gap-10">
+  <kb-slider value="50" min="0" max="100" step="10" show-value show-ticks show-range color-scheme="blue">
+  </kb-slider>
+  <kb-slider value="300" min="0" max="1000" step="100" show-value show-ticks show-range color-scheme="green" size="lg">
+  </kb-slider>
+</div>`;
+export const exAllFeaturesReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-10">
+  <Slider value="50" min="0" max="100" step="10" show-value show-ticks show-range color-scheme="blue">
+  </Slider>
+  <Slider value="300" min="0" max="1000" step="100" show-value show-ticks show-range color-scheme="green" size="lg">
+  </Slider>
+</div>`;
+export const exAllFeaturesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-10">
+    <kb-slider value="50" min="0" max="100" step="10" show-value show-ticks show-range color-scheme="blue">
+    </kb-slider>
+    <kb-slider value="300" min="0" max="1000" step="100" show-value show-ticks show-range color-scheme="green" size="lg">
+    </kb-slider>
+  </div>
+</template>`;
+export const exAllFeaturesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-10">
+  <kb-slider value="50" min="0" max="100" step="10" show-value show-ticks show-range color-scheme="blue">
+  </kb-slider>
+  <kb-slider value="300" min="0" max="1000" step="100" show-value show-ticks show-range color-scheme="green" size="lg">
+  </kb-slider>
+</div>`;
+export const exSizesWithFeatures = `<div class="flex flex-col gap-10">
+  <kb-slider size="xs" value="30" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="sm" value="40" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="md" value="50" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="lg" value="60" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="xl" value="70" step="10" show-value show-ticks show-range>
+  </kb-slider>
+</div>`;
+export const exSizesWithFeaturesReact = `import { Slider } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-10">
+  <Slider size="xs" value="30" step="10" show-value show-ticks show-range>
+  </Slider>
+  <Slider size="sm" value="40" step="10" show-value show-ticks show-range>
+  </Slider>
+  <Slider size="md" value="50" step="10" show-value show-ticks show-range>
+  </Slider>
+  <Slider size="lg" value="60" step="10" show-value show-ticks show-range>
+  </Slider>
+  <Slider size="xl" value="70" step="10" show-value show-ticks show-range>
+  </Slider>
+</div>`;
+export const exSizesWithFeaturesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-10">
+    <kb-slider size="xs" value="30" step="10" show-value show-ticks show-range>
+    </kb-slider>
+    <kb-slider size="sm" value="40" step="10" show-value show-ticks show-range>
+    </kb-slider>
+    <kb-slider size="md" value="50" step="10" show-value show-ticks show-range>
+    </kb-slider>
+    <kb-slider size="lg" value="60" step="10" show-value show-ticks show-range>
+    </kb-slider>
+    <kb-slider size="xl" value="70" step="10" show-value show-ticks show-range>
+    </kb-slider>
+  </div>
+</template>`;
+export const exSizesWithFeaturesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-10">
+  <kb-slider size="xs" value="30" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="sm" value="40" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="md" value="50" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="lg" value="60" step="10" show-value show-ticks show-range>
+  </kb-slider>
+  <kb-slider size="xl" value="70" step="10" show-value show-ticks show-range>
+  </kb-slider>
+</div>`;
+
+# Slider
+
+A range slider for selecting numeric values within a range.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Slider } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` | `50` | Current slider value. |
+| `min` | `min` | `number` | `0` | Minimum value. |
+| `max` | `max` | `number` | `100` | Maximum value. |
+| `step` | `step` | `number` | `1` | Step increment. |
+| `size` | `size` | `ComponentSize` | `'md'` | Slider size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `readonly` | `readonly` | `boolean` | `false` | Prevent value changes but allow focus. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the filled track and thumb. |
+| `name` | `name` | `string` | — | Form field name. |
+| `showValue` | `show-value` | `boolean` | `false` | Show value tooltip on hover and drag. |
+| `showTicks` | `show-ticks` | `boolean` | `false` | Show tick marks at step intervals (max 20 ticks). |
+| `showRange` | `show-range` | `boolean` | `false` | Show min/max labels below the track. |
+| `formatValue` | — (JS only) | `(value: number)` | `> string` | Custom value formatter for tooltip display. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ source: 'slider', value: string }`. |
+| `kb-input` | `{ value: string }` | Value changing during drag. Detail: `{ value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Home` | Move focus to the first item |
+| `PageDown` | Decrease by a large step |
+| `PageUp` | Increase by a large step |
+
+### ARIA
+
+**Roles:** `slider`
+
+**Attributes:** `aria-disabled`, `aria-readonly`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`, `aria-valuetext`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Step" codes={{ html: exWithStep, react: exWithStepReact, vue: exWithStepVue, svelte: exWithStepSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithStep }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Range" codes={{ html: exRange, react: exRangeReact, vue: exRangeVue, svelte: exRangeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exRange }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Value" codes={{ html: exShowValue, react: exShowValueReact, vue: exShowValueVue, svelte: exShowValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Ticks" codes={{ html: exShowTicks, react: exShowTicksReact, vue: exShowTicksVue, svelte: exShowTicksSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowTicks }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Show Range" codes={{ html: exShowRange, react: exShowRangeReact, vue: exShowRangeVue, svelte: exShowRangeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShowRange }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Readonly" codes={{ html: exReadonly, react: exReadonlyReact, vue: exReadonlyVue, svelte: exReadonlySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReadonly }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Features" codes={{ html: exAllFeatures, react: exAllFeaturesReact, vue: exAllFeaturesVue, svelte: exAllFeaturesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllFeatures }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes With Features" codes={{ html: exSizesWithFeatures, react: exSizesWithFeaturesReact, vue: exSizesWithFeaturesVue, svelte: exSizesWithFeaturesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizesWithFeatures }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Number Input](./number-input)

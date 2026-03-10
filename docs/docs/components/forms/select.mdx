@@ -1,0 +1,1021 @@
+---
+title: "Select"
+description: "A dropdown select menu for choosing from a list of options."
+sidebar_label: "Select"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Options are set via JavaScript property -->
+<kb-select placeholder="Choose a fruit"></kb-select>
+
+<script>
+  document.querySelector('kb-select').options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+  ];
+</script>`;
+export const reactCode = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select placeholder="Choose a fruit"
+  options={
+  [
+      { value: 'apple', label: 'Apple' },
+      { value: 'banana', label: 'Banana' },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+  ];
+</script>
+
+<template>
+  <kb-select placeholder="Choose a fruit" :options="options" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+  ];
+</script>
+
+<kb-select placeholder="Choose a fruit" options={options} />`;
+export const demoHtml = `<kb-select placeholder="Choose a fruit"></kb-select>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-select').options = [
+      { value: 'apple', label: 'Apple' },
+      { value: 'banana', label: 'Banana' },
+    ];
+};
+export const exDefault = `<kb-select placeholder="Choose a framework" size="md">
+</kb-select>`;
+export const exDefaultReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select placeholder="Choose a framework" size="md">
+</Select>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select placeholder="Choose a framework" size="md">
+  </kb-select>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select placeholder="Choose a framework" size="md">
+</kb-select>`;
+export const exDefaultSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exOutline = `<kb-select variant="outline" placeholder="Outline variant">
+</kb-select>`;
+export const exOutlineReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select variant="outline" placeholder="Outline variant">
+</Select>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select variant="outline" placeholder="Outline variant">
+  </kb-select>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select variant="outline" placeholder="Outline variant">
+</kb-select>`;
+export const exOutlineSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exFilled = `<kb-select variant="filled" placeholder="Filled variant">
+</kb-select>`;
+export const exFilledReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select variant="filled" placeholder="Filled variant">
+</Select>`;
+export const exFilledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select variant="filled" placeholder="Filled variant">
+  </kb-select>
+</template>`;
+export const exFilledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select variant="filled" placeholder="Filled variant">
+</kb-select>`;
+export const exFilledSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exFlushed = `<kb-select variant="flushed" placeholder="Flushed variant">
+</kb-select>`;
+export const exFlushedReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select variant="flushed" placeholder="Flushed variant">
+</Select>`;
+export const exFlushedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select variant="flushed" placeholder="Flushed variant">
+  </kb-select>
+</template>`;
+export const exFlushedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select variant="flushed" placeholder="Flushed variant">
+</kb-select>`;
+export const exFlushedSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exAllVariants = `<div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+  <kb-select variant="outline" placeholder="Outline">
+  </kb-select>
+  <kb-select variant="filled" placeholder="Filled">
+  </kb-select>
+  <kb-select variant="flushed" placeholder="Flushed">
+  </kb-select>
+</div>`;
+export const exAllVariantsReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+  <Select variant="outline" placeholder="Outline">
+  </Select>
+  <Select variant="filled" placeholder="Filled">
+  </Select>
+  <Select variant="flushed" placeholder="Flushed">
+  </Select>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+    <kb-select variant="outline" placeholder="Outline">
+    </kb-select>
+    <kb-select variant="filled" placeholder="Filled">
+    </kb-select>
+    <kb-select variant="flushed" placeholder="Flushed">
+    </kb-select>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+  <kb-select variant="outline" placeholder="Outline">
+  </kb-select>
+  <kb-select variant="filled" placeholder="Filled">
+  </kb-select>
+  <kb-select variant="flushed" placeholder="Flushed">
+  </kb-select>
+</div>`;
+export const exAllVariantsSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select size="xs" placeholder="Extra Small">
+  </kb-select>
+  <kb-select size="sm" placeholder="Small">
+  </kb-select>
+  <kb-select size="md" placeholder="Medium">
+  </kb-select>
+  <kb-select size="lg" placeholder="Large">
+  </kb-select>
+  <kb-select size="xl" placeholder="Extra Large">
+  </kb-select>
+</div>`;
+export const exAllSizesReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select size="xs" placeholder="Extra Small">
+  </Select>
+  <Select size="sm" placeholder="Small">
+  </Select>
+  <Select size="md" placeholder="Medium">
+  </Select>
+  <Select size="lg" placeholder="Large">
+  </Select>
+  <Select size="xl" placeholder="Extra Large">
+  </Select>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select size="xs" placeholder="Extra Small">
+    </kb-select>
+    <kb-select size="sm" placeholder="Small">
+    </kb-select>
+    <kb-select size="md" placeholder="Medium">
+    </kb-select>
+    <kb-select size="lg" placeholder="Large">
+    </kb-select>
+    <kb-select size="xl" placeholder="Extra Large">
+    </kb-select>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select size="xs" placeholder="Extra Small">
+  </kb-select>
+  <kb-select size="sm" placeholder="Small">
+  </kb-select>
+  <kb-select size="md" placeholder="Medium">
+  </kb-select>
+  <kb-select size="lg" placeholder="Large">
+  </kb-select>
+  <kb-select size="xl" placeholder="Extra Large">
+  </kb-select>
+</div>`;
+export const exAllSizesSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exWithValue = `<kb-select placeholder="Choose..." value="vue">
+</kb-select>`;
+export const exWithValueReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select placeholder="Choose..." value="vue">
+</Select>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select placeholder="Choose..." value="vue">
+  </kb-select>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select placeholder="Choose..." value="vue">
+</kb-select>`;
+export const exWithValueSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exDisabled = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select disabled placeholder="Disabled empty">
+  </kb-select>
+  <kb-select disabled value="react">
+  </kb-select>
+</div>`;
+export const exDisabledReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select disabled placeholder="Disabled empty">
+  </Select>
+  <Select disabled value="react">
+  </Select>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select disabled placeholder="Disabled empty">
+    </kb-select>
+    <kb-select disabled value="react">
+    </kb-select>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select disabled placeholder="Disabled empty">
+  </kb-select>
+  <kb-select disabled value="react">
+  </kb-select>
+</div>`;
+export const exDisabledSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exInvalid = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select invalid variant="outline" placeholder="Invalid outline">
+  </kb-select>
+  <kb-select invalid variant="filled" placeholder="Invalid filled">
+  </kb-select>
+  <kb-select invalid variant="flushed" placeholder="Invalid flushed">
+  </kb-select>
+</div>`;
+export const exInvalidReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select invalid variant="outline" placeholder="Invalid outline">
+  </Select>
+  <Select invalid variant="filled" placeholder="Invalid filled">
+  </Select>
+  <Select invalid variant="flushed" placeholder="Invalid flushed">
+  </Select>
+</div>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select invalid variant="outline" placeholder="Invalid outline">
+    </kb-select>
+    <kb-select invalid variant="filled" placeholder="Invalid filled">
+    </kb-select>
+    <kb-select invalid variant="flushed" placeholder="Invalid flushed">
+    </kb-select>
+  </div>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select invalid variant="outline" placeholder="Invalid outline">
+  </kb-select>
+  <kb-select invalid variant="filled" placeholder="Invalid filled">
+  </kb-select>
+  <kb-select invalid variant="flushed" placeholder="Invalid flushed">
+  </kb-select>
+</div>`;
+export const exInvalidSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exWithIcon = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select placeholder="Select language">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10"/>
+      </svg>
+    </span>
+  </kb-select>
+  <kb-select variant="filled" placeholder="Select role">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </kb-select>
+</div>`;
+export const exWithIconReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select placeholder="Select language">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10"/>
+      </svg>
+    </span>
+  </Select>
+  <Select variant="filled" placeholder="Select role">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </Select>
+</div>`;
+export const exWithIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select placeholder="Select language">
+      <span slot="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20"/>
+          <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10"/>
+        </svg>
+      </span>
+    </kb-select>
+    <kb-select variant="filled" placeholder="Select role">
+      <span slot="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+    </kb-select>
+  </div>
+</template>`;
+export const exWithIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select placeholder="Select language">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10"/>
+      </svg>
+    </span>
+  </kb-select>
+  <kb-select variant="filled" placeholder="Select role">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+  </kb-select>
+</div>`;
+export const exWithIconSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+        { value: 'admin', label: 'Administrator' },
+        { value: 'editor', label: 'Editor' },
+        { value: 'viewer', label: 'Viewer' },
+      ]; });
+};
+export const exClearable = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select clearable placeholder="Select and clear..." value="react">
+  </kb-select>
+  <kb-select clearable placeholder="No value yet">
+  </kb-select>
+</div>`;
+export const exClearableReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select clearable placeholder="Select and clear..." value="react">
+  </Select>
+  <Select clearable placeholder="No value yet">
+  </Select>
+</div>`;
+export const exClearableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select clearable placeholder="Select and clear..." value="react">
+    </kb-select>
+    <kb-select clearable placeholder="No value yet">
+    </kb-select>
+  </div>
+</template>`;
+export const exClearableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select clearable placeholder="Select and clear..." value="react">
+  </kb-select>
+  <kb-select clearable placeholder="No value yet">
+  </kb-select>
+</div>`;
+export const exClearableSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exLoading = `<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select loading placeholder="Loading options...">
+  </kb-select>
+  <kb-select loading value="react">
+  </kb-select>
+</div>`;
+export const exLoadingReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <Select loading placeholder="Loading options...">
+  </Select>
+  <Select loading value="react">
+  </Select>
+</div>`;
+export const exLoadingVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+    <kb-select loading placeholder="Loading options...">
+    </kb-select>
+    <kb-select loading value="react">
+    </kb-select>
+  </div>
+</template>`;
+export const exLoadingSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:320px">
+  <kb-select loading placeholder="Loading options...">
+  </kb-select>
+  <kb-select loading value="react">
+  </kb-select>
+</div>`;
+export const exLoadingSetup = (container) => {
+  const frameworkOptions = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'lit', label: 'Lit' },
+  { value: 'angular', label: 'Angular' },
+];
+  container.querySelectorAll('kb-select').forEach(el => { el.options = frameworkOptions; });
+};
+export const exWithDisabledOption = `<kb-select placeholder="Pick a color">
+</kb-select>`;
+export const exWithDisabledOptionReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select placeholder="Pick a color">
+</Select>`;
+export const exWithDisabledOptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select placeholder="Pick a color">
+  </kb-select>
+</template>`;
+export const exWithDisabledOptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select placeholder="Pick a color">
+</kb-select>`;
+export const exWithDisabledOptionSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+      { value: 'red', label: 'Red' },
+      { value: 'blue', label: 'Blue' },
+      { value: 'green', label: 'Green', disabled: true },
+      { value: 'yellow', label: 'Yellow' },
+    ]; });
+};
+export const exOptionGroups = `<kb-select placeholder="Choose a technology">
+</kb-select>`;
+export const exOptionGroupsReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select placeholder="Choose a technology">
+</Select>`;
+export const exOptionGroupsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select placeholder="Choose a technology">
+  </kb-select>
+</template>`;
+export const exOptionGroupsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select placeholder="Choose a technology">
+</kb-select>`;
+export const exOptionGroupsSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+      {
+        group: 'Frontend',
+        options: [
+          { value: 'react', label: 'React' },
+          { value: 'vue', label: 'Vue' },
+          { value: 'svelte', label: 'Svelte' },
+        ],
+      },
+      {
+        group: 'Backend',
+        options: [
+          { value: 'node', label: 'Node.js' },
+          { value: 'deno', label: 'Deno' },
+          { value: 'bun', label: 'Bun' },
+        ],
+      },
+      {
+        group: 'Database',
+        options: [
+          { value: 'postgres', label: 'PostgreSQL' },
+          { value: 'mysql', label: 'MySQL' },
+          { value: 'sqlite', label: 'SQLite', disabled: true },
+        ],
+      },
+    ]; });
+};
+export const exOptionGroupsWithIcon = `<kb-select clearable placeholder="Select stack">
+  <span slot="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m8 6 4-4 4 4"/>
+      <path d="M12 2v10.3"/>
+      <path d="M4 13.5V4a2 2 0 0 1 2-2h2"/>
+      <path d="M20 13.5V4a2 2 0 0 0-2-2h-2"/>
+      <rect x="2" y="14" width="20" height="8" rx="0"/>
+    </svg>
+  </span>
+</kb-select>`;
+export const exOptionGroupsWithIconReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
+
+<Select clearable placeholder="Select stack">
+  <span slot="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m8 6 4-4 4 4"/>
+      <path d="M12 2v10.3"/>
+      <path d="M4 13.5V4a2 2 0 0 1 2-2h2"/>
+      <path d="M20 13.5V4a2 2 0 0 0-2-2h-2"/>
+      <rect x="2" y="14" width="20" height="8" rx="0"/>
+    </svg>
+  </span>
+</Select>`;
+export const exOptionGroupsWithIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-select clearable placeholder="Select stack">
+    <span slot="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="m8 6 4-4 4 4"/>
+        <path d="M12 2v10.3"/>
+        <path d="M4 13.5V4a2 2 0 0 1 2-2h2"/>
+        <path d="M20 13.5V4a2 2 0 0 0-2-2h-2"/>
+        <rect x="2" y="14" width="20" height="8" rx="0"/>
+      </svg>
+    </span>
+  </kb-select>
+</template>`;
+export const exOptionGroupsWithIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-select clearable placeholder="Select stack">
+  <span slot="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+      <path d="m8 6 4-4 4 4"/>
+      <path d="M12 2v10.3"/>
+      <path d="M4 13.5V4a2 2 0 0 1 2-2h2"/>
+      <path d="M20 13.5V4a2 2 0 0 0-2-2h-2"/>
+      <rect x="2" y="14" width="20" height="8" rx="0"/>
+    </svg>
+  </span>
+</kb-select>`;
+export const exOptionGroupsWithIconSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+      {
+        group: 'Languages',
+        options: [
+          { value: 'ts', label: 'TypeScript' },
+          { value: 'rust', label: 'Rust' },
+          { value: 'go', label: 'Go' },
+        ],
+      },
+      {
+        group: 'Runtimes',
+        options: [
+          { value: 'node', label: 'Node.js' },
+          { value: 'deno', label: 'Deno' },
+          { value: 'bun', label: 'Bun' },
+        ],
+      },
+    ]; });
+};
+
+# Select
+
+A dropdown select menu for choosing from a list of options.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Select } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `FormVariant` | `'outline'` | Form select visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Select size controlling padding, font size, and icon sizing. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text shown when no value is selected. |
+| `value` | `value` | `V \| ''` | `""` | Currently selected value. |
+| `name` | `name` | `string` | — | Form field name, used in form submissions. |
+| `options` | `options` | `readonly SelectOptionOrGroup<V>[]` | `[]` | Array of options or option groups to render in the dropdown. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction and apply dimmed styling. |
+| `invalid` | `invalid` | `boolean` | `false` | Mark the select as invalid with error border styling. |
+| `required` | `required` | `boolean` | `false` | Mark the select as required for form validation. |
+| `clearable` | `clearable` | `boolean` | `false` | Show a clear button when a value is selected. |
+| `loading` | `loading` | `boolean` | `false` | Show a loading spinner in place of the chevron. |
+| `emptyText` | `empty-text` | `string` | `'No results'` | Text shown in the dropdown panel when there are no options. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `icon` | Leading icon element inside the select wrapper. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Select focused. |
+| `kb-blur` | `{ source?: string }` or none | Select blurred. |
+| `kb-clear` | `{ source?: string }` or none | Clear button clicked (when clearable). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Home` | Move focus to the first item |
+| `Space` | Activate or select the focused item |
+| `Tab` | Move focus to the next focusable element |
+
+### ARIA
+
+**Roles:** `combobox`, `listbox`, `option`, `presentation`, `status`
+
+**Attributes:** `aria-activedescendant`, `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-haspopup`, `aria-invalid`, `aria-label`, `aria-required`, `aria-selected`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exOutline} setup={exOutlineSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Filled" codes={{ html: exFilled, react: exFilledReact, vue: exFilledVue, svelte: exFilledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exFilled} setup={exFilledSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Flushed" codes={{ html: exFlushed, react: exFlushedReact, vue: exFlushedVue, svelte: exFlushedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exFlushed} setup={exFlushedSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exAllVariants} setup={exAllVariantsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exAllSizes} setup={exAllSizesSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithValue} setup={exWithValueSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDisabled} setup={exDisabledSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exInvalid} setup={exInvalidSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icon" codes={{ html: exWithIcon, react: exWithIconReact, vue: exWithIconVue, svelte: exWithIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithIcon} setup={exWithIconSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Clearable" codes={{ html: exClearable, react: exClearableReact, vue: exClearableVue, svelte: exClearableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exClearable} setup={exClearableSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Loading" codes={{ html: exLoading, react: exLoadingReact, vue: exLoadingVue, svelte: exLoadingSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exLoading} setup={exLoadingSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Disabled Option" codes={{ html: exWithDisabledOption, react: exWithDisabledOptionReact, vue: exWithDisabledOptionVue, svelte: exWithDisabledOptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithDisabledOption} setup={exWithDisabledOptionSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Option Groups" codes={{ html: exOptionGroups, react: exOptionGroupsReact, vue: exOptionGroupsVue, svelte: exOptionGroupsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exOptionGroups} setup={exOptionGroupsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Option Groups With Icon" codes={{ html: exOptionGroupsWithIcon, react: exOptionGroupsWithIconReact, vue: exOptionGroupsWithIconVue, svelte: exOptionGroupsWithIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exOptionGroupsWithIcon} setup={exOptionGroupsWithIconSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Combobox](./combobox)

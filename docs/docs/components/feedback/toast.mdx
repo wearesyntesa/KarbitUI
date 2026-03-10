@@ -1,0 +1,563 @@
+---
+title: "Toast"
+description: "A temporary notification that appears at the edge of the viewport."
+sidebar_label: "Toast"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-toast status="success" open>
+  Changes saved successfully.
+</kb-toast>`;
+export const reactCode = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="success" open>
+  Changes saved successfully.
+</Toast>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="success" open>
+    Changes saved successfully.
+  </kb-toast>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="success" open>
+  Changes saved successfully.
+</kb-toast>`;
+export const exInfo = `<kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exInfoReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="info" duration="0" style="position:static;">This is a toast notification.</Toast>`;
+export const exInfoVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>
+</template>`;
+export const exInfoSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exSuccess = `<kb-toast status="success" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exSuccessReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="success" duration="0" style="position:static;">This is a toast notification.</Toast>`;
+export const exSuccessVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="success" duration="0" style="position:static;">This is a toast notification.</kb-toast>
+</template>`;
+export const exSuccessSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="success" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exWarning = `<kb-toast status="warning" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exWarningReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="warning" duration="0" style="position:static;">This is a toast notification.</Toast>`;
+export const exWarningVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="warning" duration="0" style="position:static;">This is a toast notification.</kb-toast>
+</template>`;
+export const exWarningSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="warning" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exErrorStatus = `<kb-toast status="error" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exErrorStatusReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="error" duration="0" style="position:static;">This is a toast notification.</Toast>`;
+export const exErrorStatusVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="error" duration="0" style="position:static;">This is a toast notification.</kb-toast>
+</template>`;
+export const exErrorStatusSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="error" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exWithTitle = `<kb-toast status="success" duration="0" style="position:static;">
+  <span slot="title">SAVED</span>
+  Your changes have been saved successfully.
+</kb-toast>`;
+export const exWithTitleReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="success" duration="0" style="position:static;">
+  <span slot="title">SAVED</span>
+  Your changes have been saved successfully.
+</Toast>`;
+export const exWithTitleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="success" duration="0" style="position:static;">
+    <span slot="title">SAVED</span>
+    Your changes have been saved successfully.
+  </kb-toast>
+</template>`;
+export const exWithTitleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="success" duration="0" style="position:static;">
+  <span slot="title">SAVED</span>
+  Your changes have been saved successfully.
+</kb-toast>`;
+export const exWithAction = `<kb-toast status="error" duration="0" style="position:static;">
+  <span slot="title">DEPLOYMENT FAILED</span>
+  Pipeline encountered 3 errors during build phase.
+  <span slot="action">
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-red-600 dark:text-red-400 bg-transparent border-none cursor-pointer">
+      RETRY
+    </button>
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-slate-500 dark:text-zinc-400 bg-transparent border-none cursor-pointer">
+      DISMISS
+    </button>
+  </span>
+</kb-toast>`;
+export const exWithActionReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="error" duration="0" style="position:static;">
+  <span slot="title">DEPLOYMENT FAILED</span>
+  Pipeline encountered 3 errors during build phase.
+  <span slot="action">
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-red-600 dark:text-red-400 bg-transparent border-none cursor-pointer">
+      RETRY
+    </button>
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-slate-500 dark:text-zinc-400 bg-transparent border-none cursor-pointer">
+      DISMISS
+    </button>
+  </span>
+</Toast>`;
+export const exWithActionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="error" duration="0" style="position:static;">
+    <span slot="title">DEPLOYMENT FAILED</span>
+    Pipeline encountered 3 errors during build phase.
+    <span slot="action">
+      <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-red-600 dark:text-red-400 bg-transparent border-none cursor-pointer">
+        RETRY
+      </button>
+      <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-slate-500 dark:text-zinc-400 bg-transparent border-none cursor-pointer">
+        DISMISS
+      </button>
+    </span>
+  </kb-toast>
+</template>`;
+export const exWithActionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="error" duration="0" style="position:static;">
+  <span slot="title">DEPLOYMENT FAILED</span>
+  Pipeline encountered 3 errors during build phase.
+  <span slot="action">
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-red-600 dark:text-red-400 bg-transparent border-none cursor-pointer">
+      RETRY
+    </button>
+    <button class="font-mono text-xs uppercase tracking-widest underline underline-offset-4 text-slate-500 dark:text-zinc-400 bg-transparent border-none cursor-pointer">
+      DISMISS
+    </button>
+  </span>
+</kb-toast>`;
+export const exNoIcon = `<kb-toast status="info" show-icon="false" duration="0" style="position:static;">
+  A simple notification without an icon.
+</kb-toast>`;
+export const exNoIconReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="info" show-icon="false" duration="0" style="position:static;">
+  A simple notification without an icon.
+</Toast>`;
+export const exNoIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="info" show-icon="false" duration="0" style="position:static;">
+    A simple notification without an icon.
+  </kb-toast>
+</template>`;
+export const exNoIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="info" show-icon="false" duration="0" style="position:static;">
+  A simple notification without an icon.
+</kb-toast>`;
+export const exNotClosable = `<kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exNotClosableReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<Toast status="info" duration="0" style="position:static;">This is a toast notification.</Toast>`;
+export const exNotClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>
+</template>`;
+export const exNotClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-toast status="info" duration="0" style="position:static;">This is a toast notification.</kb-toast>`;
+export const exWithCountdown = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-toast status="info" duration="8000" style="position:static;">
+    <span slot="title">INFO</span>
+    This toast will dismiss in 8 seconds. Hover to pause.
+  </kb-toast>
+  <kb-toast status="success" duration="6000" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    This toast will dismiss in 6 seconds. Hover to pause.
+  </kb-toast>
+  <kb-toast status="warning" duration="10000" style="position:static;">
+    <span slot="title">WARNING</span>
+    This toast will dismiss in 10 seconds. Hover to pause.
+  </kb-toast>
+</div>`;
+export const exWithCountdownReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Toast status="info" duration="8000" style="position:static;">
+    <span slot="title">INFO</span>
+    This toast will dismiss in 8 seconds. Hover to pause.
+  </Toast>
+  <Toast status="success" duration="6000" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    This toast will dismiss in 6 seconds. Hover to pause.
+  </Toast>
+  <Toast status="warning" duration="10000" style="position:static;">
+    <span slot="title">WARNING</span>
+    This toast will dismiss in 10 seconds. Hover to pause.
+  </Toast>
+</div>`;
+export const exWithCountdownVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-toast status="info" duration="8000" style="position:static;">
+      <span slot="title">INFO</span>
+      This toast will dismiss in 8 seconds. Hover to pause.
+    </kb-toast>
+    <kb-toast status="success" duration="6000" style="position:static;">
+      <span slot="title">SUCCESS</span>
+      This toast will dismiss in 6 seconds. Hover to pause.
+    </kb-toast>
+    <kb-toast status="warning" duration="10000" style="position:static;">
+      <span slot="title">WARNING</span>
+      This toast will dismiss in 10 seconds. Hover to pause.
+    </kb-toast>
+  </div>
+</template>`;
+export const exWithCountdownSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-toast status="info" duration="8000" style="position:static;">
+    <span slot="title">INFO</span>
+    This toast will dismiss in 8 seconds. Hover to pause.
+  </kb-toast>
+  <kb-toast status="success" duration="6000" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    This toast will dismiss in 6 seconds. Hover to pause.
+  </kb-toast>
+  <kb-toast status="warning" duration="10000" style="position:static;">
+    <span slot="title">WARNING</span>
+    This toast will dismiss in 10 seconds. Hover to pause.
+  </kb-toast>
+</div>`;
+export const exAllStatuses = `<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-toast status="info" duration="0" style="position:static;">
+    <span slot="title">INFO</span>
+    System update available. Review the changelog for details.
+  </kb-toast>
+  <kb-toast status="success" duration="0" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    Build completed. 142 tests passed, 0 failures.
+  </kb-toast>
+  <kb-toast status="warning" duration="0" style="position:static;">
+    <span slot="title">WARNING</span>
+    API rate limit at 85%. Reduce request frequency.
+  </kb-toast>
+  <kb-toast status="error" duration="0" style="position:static;">
+    <span slot="title">ERROR</span>
+    Connection to database lost. Retrying in 30s.
+  </kb-toast>
+</div>`;
+export const exAllStatusesReact = `import { Toast } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <Toast status="info" duration="0" style="position:static;">
+    <span slot="title">INFO</span>
+    System update available. Review the changelog for details.
+  </Toast>
+  <Toast status="success" duration="0" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    Build completed. 142 tests passed, 0 failures.
+  </Toast>
+  <Toast status="warning" duration="0" style="position:static;">
+    <span slot="title">WARNING</span>
+    API rate limit at 85%. Reduce request frequency.
+  </Toast>
+  <Toast status="error" duration="0" style="position:static;">
+    <span slot="title">ERROR</span>
+    Connection to database lost. Retrying in 30s.
+  </Toast>
+</div>`;
+export const exAllStatusesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+    <kb-toast status="info" duration="0" style="position:static;">
+      <span slot="title">INFO</span>
+      System update available. Review the changelog for details.
+    </kb-toast>
+    <kb-toast status="success" duration="0" style="position:static;">
+      <span slot="title">SUCCESS</span>
+      Build completed. 142 tests passed, 0 failures.
+    </kb-toast>
+    <kb-toast status="warning" duration="0" style="position:static;">
+      <span slot="title">WARNING</span>
+      API rate limit at 85%. Reduce request frequency.
+    </kb-toast>
+    <kb-toast status="error" duration="0" style="position:static;">
+      <span slot="title">ERROR</span>
+      Connection to database lost. Retrying in 30s.
+    </kb-toast>
+  </div>
+</template>`;
+export const exAllStatusesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+  <kb-toast status="info" duration="0" style="position:static;">
+    <span slot="title">INFO</span>
+    System update available. Review the changelog for details.
+  </kb-toast>
+  <kb-toast status="success" duration="0" style="position:static;">
+    <span slot="title">SUCCESS</span>
+    Build completed. 142 tests passed, 0 failures.
+  </kb-toast>
+  <kb-toast status="warning" duration="0" style="position:static;">
+    <span slot="title">WARNING</span>
+    API rate limit at 85%. Reduce request frequency.
+  </kb-toast>
+  <kb-toast status="error" duration="0" style="position:static;">
+    <span slot="title">ERROR</span>
+    Connection to database lost. Retrying in 30s.
+  </kb-toast>
+</div>`;
+
+# Toast
+
+A temporary notification that appears at the edge of the viewport.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Toast } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={usageCode} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `status` | `status` | `ToastStatus` | `'info'` | Semantic status controlling icon, border accent, and progress bar color. |
+| `position` | `position` | `ToastPosition` | `'top-right'` | Screen position where the toast appears. |
+| `duration` | `duration` | `number` | `5000` | Auto-dismiss delay in milliseconds. Pauses on hover. |
+| `closable` | `closable` | `boolean` | `true` | Show a close button for manual dismissal. |
+| `showIcon` | `show-icon` | `boolean` | `true` | Show the status icon before the message content. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `title` | Optional bold title above the message. |
+| `action` | Inline action area (buttons, links). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-close` | `{ source?: string }` or none | Dispatched when the toast is dismissed. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `alert`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Info" codes={{ html: exInfo, react: exInfoReact, vue: exInfoVue, svelte: exInfoSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exInfo} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Success" codes={{ html: exSuccess, react: exSuccessReact, vue: exSuccessVue, svelte: exSuccessSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSuccess} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Warning" codes={{ html: exWarning, react: exWarningReact, vue: exWarningVue, svelte: exWarningSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWarning} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Error Status" codes={{ html: exErrorStatus, react: exErrorStatusReact, vue: exErrorStatusVue, svelte: exErrorStatusSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exErrorStatus} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Title" codes={{ html: exWithTitle, react: exWithTitleReact, vue: exWithTitleVue, svelte: exWithTitleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithTitle} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Action" codes={{ html: exWithAction, react: exWithActionReact, vue: exWithActionVue, svelte: exWithActionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithAction} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Icon" codes={{ html: exNoIcon, react: exNoIconReact, vue: exNoIconVue, svelte: exNoIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exNoIcon} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Not Closable" codes={{ html: exNotClosable, react: exNotClosableReact, vue: exNotClosableVue, svelte: exNotClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exNotClosable} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Countdown" codes={{ html: exWithCountdown, react: exWithCountdownReact, vue: exWithCountdownVue, svelte: exWithCountdownSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithCountdown} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Statuses" codes={{ html: exAllStatuses, react: exAllStatusesReact, vue: exAllStatusesVue, svelte: exAllStatusesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exAllStatuses} overlayTag="kb-toast" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Alert](./alert)

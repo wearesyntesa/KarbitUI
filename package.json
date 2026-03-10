@@ -849,7 +849,14 @@
     "knip": "knip",
     "spellcheck": "cspell \"src/**/*.ts\" \"stories/**/*.ts\"",
     "prepare": "husky",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "docs": "pnpm --filter @wearesyntesa/karbit-ui-docs start",
+    "docs:build": "pnpm --filter @wearesyntesa/karbit-ui-docs build",
+    "docs:serve": "pnpm --filter @wearesyntesa/karbit-ui-docs serve",
+    "docs:generate": "node docs/scripts/generate-docs.mjs",
+    "example:react": "pnpm --filter @wearesyntesa/karbit-ui-react-sample dev",
+    "example:vue": "pnpm --filter @wearesyntesa/karbit-ui-vue-sample dev",
+    "example:svelte": "pnpm --filter @wearesyntesa/karbit-ui-svelte-sample dev"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": [

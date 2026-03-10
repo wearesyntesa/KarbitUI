@@ -1,0 +1,1046 @@
+---
+title: "Modal"
+description: "A dialog overlay for focused content or actions."
+sidebar_label: "Modal"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-modal open>
+  <div slot="header">Modal Title</div>
+  Modal content goes here.
+  <div slot="footer">
+    <kb-button variant="ghost">Cancel</kb-button>
+    <kb-button variant="solid">Save</kb-button>
+  </div>
+</kb-modal>`;
+export const reactCode = `import { Button, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open>
+  <div slot="header">Modal Title</div>
+  Modal content goes here.
+  <div slot="footer">
+    <Button variant="ghost">Cancel</Button>
+    <Button variant="solid">Save</Button>
+  </div>
+</Modal>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open>
+    <div slot="header">Modal Title</div>
+    Modal content goes here.
+    <div slot="footer">
+      <kb-button variant="ghost">Cancel</kb-button>
+      <kb-button variant="solid">Save</kb-button>
+    </div>
+  </kb-modal>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open>
+  <div slot="header">Modal Title</div>
+  Modal content goes here.
+  <div slot="footer">
+    <kb-button variant="ghost">Cancel</kb-button>
+    <kb-button variant="solid">Save</kb-button>
+  </div>
+</kb-modal>`;
+export const exDefault = `<kb-modal open size="md">
+  <span slot="header">DEPLOY TO PRODUCTION</span>
+  <div class="space-y-4">
+    <div class="flex items-center gap-3">
+      <kb-badge color-scheme="green" dot>PASSING</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Build #1847 — 2m 34s</span>
+    </div>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-2">
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Branch</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">main</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Commit</span>
+        <span class="font-mono text-sm text-blue-500">a3f8c2d</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Environment</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">us-east-1</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Changes</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">14 files, +327 / -89</span>
+      </div>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This will deploy the latest changes to production. All traffic will be routed to the new build within 60 seconds.
+    </p>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">CANCEL</kb-button>
+    <kb-button size="sm">DEPLOY NOW</kb-button>
+  </span>
+</kb-modal>`;
+export const exDefaultReact = `import { Badge, Button, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="md">
+  <span slot="header">DEPLOY TO PRODUCTION</span>
+  <div class="space-y-4">
+    <div class="flex items-center gap-3">
+      <Badge color-scheme="green" dot>PASSING</Badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Build #1847 — 2m 34s</span>
+    </div>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-2">
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Branch</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">main</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Commit</span>
+        <span class="font-mono text-sm text-blue-500">a3f8c2d</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Environment</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">us-east-1</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Changes</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">14 files, +327 / -89</span>
+      </div>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This will deploy the latest changes to production. All traffic will be routed to the new build within 60 seconds.
+    </p>
+  </div>
+  <span slot="footer">
+    <Button variant="outline" size="sm">CANCEL</Button>
+    <Button size="sm">DEPLOY NOW</Button>
+  </span>
+</Modal>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="md">
+    <span slot="header">DEPLOY TO PRODUCTION</span>
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <kb-badge color-scheme="green" dot>PASSING</kb-badge>
+        <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Build #1847 — 2m 34s</span>
+      </div>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-2">
+        <div class="flex justify-between">
+          <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Branch</span>
+          <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">main</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Commit</span>
+          <span class="font-mono text-sm text-blue-500">a3f8c2d</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Environment</span>
+          <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">us-east-1</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Changes</span>
+          <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">14 files, +327 / -89</span>
+        </div>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400">
+        This will deploy the latest changes to production. All traffic will be routed to the new build within 60 seconds.
+      </p>
+    </div>
+    <span slot="footer">
+      <kb-button variant="outline" size="sm">CANCEL</kb-button>
+      <kb-button size="sm">DEPLOY NOW</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="md">
+  <span slot="header">DEPLOY TO PRODUCTION</span>
+  <div class="space-y-4">
+    <div class="flex items-center gap-3">
+      <kb-badge color-scheme="green" dot>PASSING</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">Build #1847 — 2m 34s</span>
+    </div>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-2">
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Branch</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">main</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Commit</span>
+        <span class="font-mono text-sm text-blue-500">a3f8c2d</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Environment</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">us-east-1</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Changes</span>
+        <span class="font-mono text-sm text-slate-900 dark:text-zinc-50">14 files, +327 / -89</span>
+      </div>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      This will deploy the latest changes to production. All traffic will be routed to the new build within 60 seconds.
+    </p>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">CANCEL</kb-button>
+    <kb-button size="sm">DEPLOY NOW</kb-button>
+  </span>
+</kb-modal>`;
+export const exExtraSmall = `<kb-modal open size="xs">
+  <span slot="header">API KEY CREATED</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your new key has been generated. Copy it now — it won't be shown again.
+    </p>
+    <div class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-2.5">
+      <code class="font-mono text-xs text-slate-900 dark:text-zinc-50 break-all select-all">
+        sk_live_7f3a9c2e1b4d8f6a0e5c3b7d9f1a2c4e
+      </code>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="xs">COPY KEY</kb-button>
+  </span>
+</kb-modal>`;
+export const exExtraSmallReact = `import { Button, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="xs">
+  <span slot="header">API KEY CREATED</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your new key has been generated. Copy it now — it won't be shown again.
+    </p>
+    <div class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-2.5">
+      <code class="font-mono text-xs text-slate-900 dark:text-zinc-50 break-all select-all">
+        sk_live_7f3a9c2e1b4d8f6a0e5c3b7d9f1a2c4e
+      </code>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button size="xs">COPY KEY</Button>
+  </span>
+</Modal>`;
+export const exExtraSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="xs">
+    <span slot="header">API KEY CREATED</span>
+    <div class="space-y-3">
+      <p class="text-sm text-slate-500 dark:text-zinc-400">
+        Your new key has been generated. Copy it now — it won't be shown again.
+      </p>
+      <div class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-2.5">
+        <code class="font-mono text-xs text-slate-900 dark:text-zinc-50 break-all select-all">
+          sk_live_7f3a9c2e1b4d8f6a0e5c3b7d9f1a2c4e
+        </code>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button size="xs">COPY KEY</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exExtraSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="xs">
+  <span slot="header">API KEY CREATED</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your new key has been generated. Copy it now — it won't be shown again.
+    </p>
+    <div class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 p-2.5">
+      <code class="font-mono text-xs text-slate-900 dark:text-zinc-50 break-all select-all">
+        sk_live_7f3a9c2e1b4d8f6a0e5c3b7d9f1a2c4e
+      </code>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button size="xs">COPY KEY</kb-button>
+  </span>
+</kb-modal>`;
+export const exSmall = `<kb-modal open size="sm">
+  <span slot="header">SESSION EXPIRING</span>
+  <div class="space-y-3">
+    <div class="flex items-baseline gap-3">
+      <span class="font-sans text-3xl font-bold text-slate-900 dark:text-zinc-50">4:32</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500">remaining</span>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your session is about to expire due to inactivity. Any unsaved changes will be lost.
+    </p>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm">LOG OUT</kb-button>
+    <kb-button size="sm">EXTEND SESSION</kb-button>
+  </span>
+</kb-modal>`;
+export const exSmallReact = `import { Button, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="sm">
+  <span slot="header">SESSION EXPIRING</span>
+  <div class="space-y-3">
+    <div class="flex items-baseline gap-3">
+      <span class="font-sans text-3xl font-bold text-slate-900 dark:text-zinc-50">4:32</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500">remaining</span>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your session is about to expire due to inactivity. Any unsaved changes will be lost.
+    </p>
+  </div>
+  <span slot="footer">
+    <Button variant="ghost" size="sm">LOG OUT</Button>
+    <Button size="sm">EXTEND SESSION</Button>
+  </span>
+</Modal>`;
+export const exSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="sm">
+    <span slot="header">SESSION EXPIRING</span>
+    <div class="space-y-3">
+      <div class="flex items-baseline gap-3">
+        <span class="font-sans text-3xl font-bold text-slate-900 dark:text-zinc-50">4:32</span>
+        <span class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500">remaining</span>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-zinc-400">
+        Your session is about to expire due to inactivity. Any unsaved changes will be lost.
+      </p>
+    </div>
+    <span slot="footer">
+      <kb-button variant="ghost" size="sm">LOG OUT</kb-button>
+      <kb-button size="sm">EXTEND SESSION</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="sm">
+  <span slot="header">SESSION EXPIRING</span>
+  <div class="space-y-3">
+    <div class="flex items-baseline gap-3">
+      <span class="font-sans text-3xl font-bold text-slate-900 dark:text-zinc-50">4:32</span>
+      <span class="font-mono text-xs uppercase tracking-widest text-slate-400 dark:text-zinc-500">remaining</span>
+    </div>
+    <p class="text-sm text-slate-500 dark:text-zinc-400">
+      Your session is about to expire due to inactivity. Any unsaved changes will be lost.
+    </p>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm">LOG OUT</kb-button>
+    <kb-button size="sm">EXTEND SESSION</kb-button>
+  </span>
+</kb-modal>`;
+export const exFullWidth = `<kb-modal open size="full"> <span slot="header">DIFF — SCHEMA MIGRATION v2.14.0</span> <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700"> <div class="border-r border-gray-200 dark:border-zinc-700"> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.13.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-zinc-300 overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email);</code></pre> </div> <div> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.14.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL,
+<span class="text-green-600 dark:text-green-400">+ display_name VARCHAR(128),</span>
+<span class="text-green-600 dark:text-green-400">+ avatar_url TEXT,</span> created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email); <span class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_display_name</span>
+<span class="text-green-600 dark:text-green-400">+ ON users(display_name);</span></code></pre> </div> </div> <span slot="footer"> <kb-button variant="outline" size="sm">CANCEL</kb-button> <kb-button size="sm">RUN MIGRATION</kb-button> </span> </kb-modal>`;
+export const exFullWidthReact = `import { Button, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="full"> <span slot="header">DIFF — SCHEMA MIGRATION v2.14.0</span> <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700"> <div class="border-r border-gray-200 dark:border-zinc-700"> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.13.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-zinc-300 overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email);</code></pre> </div> <div> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.14.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL,
+<span class="text-green-600 dark:text-green-400">+ display_name VARCHAR(128),</span>
+<span class="text-green-600 dark:text-green-400">+ avatar_url TEXT,</span> created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email); <span class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_display_name</span>
+<span class="text-green-600 dark:text-green-400">+ ON users(display_name);</span></code></pre> </div> </div> <span slot="footer"> <Button variant="outline" size="sm">CANCEL</Button> <Button size="sm">RUN MIGRATION</Button> </span> </Modal>`;
+export const exFullWidthVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="full"> <span slot="header">DIFF — SCHEMA MIGRATION v2.14.0</span> <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700"> <div class="border-r border-gray-200 dark:border-zinc-700"> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.13.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-zinc-300 overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW()
+  ); CREATE INDEX idx_users_email ON users(email);</code></pre> </div> <div> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.14.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL,
+  <span class="text-green-600 dark:text-green-400">+ display_name VARCHAR(128),</span>
+  <span class="text-green-600 dark:text-green-400">+ avatar_url TEXT,</span> created_at TIMESTAMPTZ DEFAULT NOW()
+  ); CREATE INDEX idx_users_email ON users(email); <span class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_display_name</span>
+  <span class="text-green-600 dark:text-green-400">+ ON users(display_name);</span></code></pre> </div> </div> <span slot="footer"> <kb-button variant="outline" size="sm">CANCEL</kb-button> <kb-button size="sm">RUN MIGRATION</kb-button> </span> </kb-modal>
+</template>`;
+export const exFullWidthSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="full"> <span slot="header">DIFF — SCHEMA MIGRATION v2.14.0</span> <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gray-200 dark:border-zinc-700"> <div class="border-r border-gray-200 dark:border-zinc-700"> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.13.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-zinc-300 overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email);</code></pre> </div> <div> <div class="px-3 py-2 bg-gray-50 dark:bg-zinc-800 font-mono text-xs text-slate-500 dark:text-zinc-400 border-b border-gray-200 dark:border-zinc-700">schema_v2.14.sql</div> <pre class="p-3 font-mono text-xs leading-relaxed overflow-x-auto"><code>CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) NOT NULL,
+<span class="text-green-600 dark:text-green-400">+ display_name VARCHAR(128),</span>
+<span class="text-green-600 dark:text-green-400">+ avatar_url TEXT,</span> created_at TIMESTAMPTZ DEFAULT NOW()
+); CREATE INDEX idx_users_email ON users(email); <span class="text-green-600 dark:text-green-400">+ CREATE INDEX idx_users_display_name</span>
+<span class="text-green-600 dark:text-green-400">+ ON users(display_name);</span></code></pre> </div> </div> <span slot="footer"> <kb-button variant="outline" size="sm">CANCEL</kb-button> <kb-button size="sm">RUN MIGRATION</kb-button> </span> </kb-modal>`;
+export const exTopPlacement = `<kb-modal open size="md" placement="top">
+  <span slot="header">SCHEDULED MAINTENANCE</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <kb-badge color-scheme="yellow" variant="solid" size="xs">UPCOMING</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">February 22, 2026 — 02:00 UTC</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      We will perform database maintenance on the
+      <strong class="text-slate-900 dark:text-zinc-50">us-east-1</strong>
+      cluster. Expect up to 15 minutes of read-only mode. Write operations will be queued and replayed automatically.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-1.5">
+        Affected services
+      </div>
+      <div class="flex gap-2">
+        <kb-tag size="sm">Database</kb-tag>
+        <kb-tag size="sm">API Gateway</kb-tag>
+        <kb-tag size="sm">Webhooks</kb-tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">REMIND ME LATER</kb-button>
+    <kb-button size="sm">ACKNOWLEDGE</kb-button>
+  </span>
+</kb-modal>`;
+export const exTopPlacementReact = `import { Badge, Button, Modal, Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="md" placement="top">
+  <span slot="header">SCHEDULED MAINTENANCE</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <Badge color-scheme="yellow" variant="solid" size="xs">UPCOMING</Badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">February 22, 2026 — 02:00 UTC</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      We will perform database maintenance on the
+      <strong class="text-slate-900 dark:text-zinc-50">us-east-1</strong>
+      cluster. Expect up to 15 minutes of read-only mode. Write operations will be queued and replayed automatically.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-1.5">
+        Affected services
+      </div>
+      <div class="flex gap-2">
+        <Tag size="sm">Database</Tag>
+        <Tag size="sm">API Gateway</Tag>
+        <Tag size="sm">Webhooks</Tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="outline" size="sm">REMIND ME LATER</Button>
+    <Button size="sm">ACKNOWLEDGE</Button>
+  </span>
+</Modal>`;
+export const exTopPlacementVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="md" placement="top">
+    <span slot="header">SCHEDULED MAINTENANCE</span>
+    <div class="space-y-3">
+      <div class="flex items-center gap-2">
+        <kb-badge color-scheme="yellow" variant="solid" size="xs">UPCOMING</kb-badge>
+        <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">February 22, 2026 — 02:00 UTC</span>
+      </div>
+      <p class="text-sm text-slate-700 dark:text-zinc-300">
+        We will perform database maintenance on the
+        <strong class="text-slate-900 dark:text-zinc-50">us-east-1</strong>
+        cluster. Expect up to 15 minutes of read-only mode. Write operations will be queued and replayed automatically.
+      </p>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3">
+        <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-1.5">
+          Affected services
+        </div>
+        <div class="flex gap-2">
+          <kb-tag size="sm">Database</kb-tag>
+          <kb-tag size="sm">API Gateway</kb-tag>
+          <kb-tag size="sm">Webhooks</kb-tag>
+        </div>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="outline" size="sm">REMIND ME LATER</kb-button>
+      <kb-button size="sm">ACKNOWLEDGE</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exTopPlacementSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="md" placement="top">
+  <span slot="header">SCHEDULED MAINTENANCE</span>
+  <div class="space-y-3">
+    <div class="flex items-center gap-2">
+      <kb-badge color-scheme="yellow" variant="solid" size="xs">UPCOMING</kb-badge>
+      <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">February 22, 2026 — 02:00 UTC</span>
+    </div>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      We will perform database maintenance on the
+      <strong class="text-slate-900 dark:text-zinc-50">us-east-1</strong>
+      cluster. Expect up to 15 minutes of read-only mode. Write operations will be queued and replayed automatically.
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3">
+      <div class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-1.5">
+        Affected services
+      </div>
+      <div class="flex gap-2">
+        <kb-tag size="sm">Database</kb-tag>
+        <kb-tag size="sm">API Gateway</kb-tag>
+        <kb-tag size="sm">Webhooks</kb-tag>
+      </div>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">REMIND ME LATER</kb-button>
+    <kb-button size="sm">ACKNOWLEDGE</kb-button>
+  </span>
+</kb-modal>`;
+export const exFocusTrap = `<kb-modal open size="md" trap-focus auto-focus>
+  <span slot="header">CREATE WEBHOOK</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Endpoint URL
+      </label>
+      <kb-input placeholder="https://your-server.com/webhook" variant="outline" size="sm" type="url">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <kb-input placeholder="e.g. Slack notification on deploy" variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Events
+      </label>
+      <kb-select placeholder="Select events..." size="sm">
+      </kb-select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Secret
+      </label>
+      <kb-input placeholder="whsec_..." variant="outline" size="sm" type="password">
+      </kb-input>
+    </div>
+    <kb-divider>
+    </kb-divider>
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-slate-900 dark:text-zinc-50">Active</div>
+        <div class="text-xs text-slate-400 dark:text-zinc-500">Start delivering events immediately</div>
+      </div>
+      <kb-switch checked size="sm">
+      </kb-switch>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">CANCEL</kb-button>
+    <kb-button size="sm">CREATE WEBHOOK</kb-button>
+  </span>
+</kb-modal>`;
+export const exFocusTrapReact = `import { Button, Divider, Input, Modal, Select, Switch } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="md" trap-focus auto-focus>
+  <span slot="header">CREATE WEBHOOK</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Endpoint URL
+      </label>
+      <Input placeholder="https://your-server.com/webhook" variant="outline" size="sm" type="url">
+      </Input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <Input placeholder="e.g. Slack notification on deploy" variant="outline" size="sm">
+      </Input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Events
+      </label>
+      <Select placeholder="Select events..." size="sm">
+      </Select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Secret
+      </label>
+      <Input placeholder="whsec_..." variant="outline" size="sm" type="password">
+      </Input>
+    </div>
+    <Divider>
+    </Divider>
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-slate-900 dark:text-zinc-50">Active</div>
+        <div class="text-xs text-slate-400 dark:text-zinc-500">Start delivering events immediately</div>
+      </div>
+      <Switch checked size="sm">
+      </Switch>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="outline" size="sm">CANCEL</Button>
+    <Button size="sm">CREATE WEBHOOK</Button>
+  </span>
+</Modal>`;
+export const exFocusTrapVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="md" trap-focus auto-focus>
+    <span slot="header">CREATE WEBHOOK</span>
+    <div class="space-y-4">
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Endpoint URL
+        </label>
+        <kb-input placeholder="https://your-server.com/webhook" variant="outline" size="sm" type="url">
+        </kb-input>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Description
+        </label>
+        <kb-input placeholder="e.g. Slack notification on deploy" variant="outline" size="sm">
+        </kb-input>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Events
+        </label>
+        <kb-select placeholder="Select events..." size="sm">
+        </kb-select>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Secret
+        </label>
+        <kb-input placeholder="whsec_..." variant="outline" size="sm" type="password">
+        </kb-input>
+      </div>
+      <kb-divider>
+      </kb-divider>
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-sm text-slate-900 dark:text-zinc-50">Active</div>
+          <div class="text-xs text-slate-400 dark:text-zinc-500">Start delivering events immediately</div>
+        </div>
+        <kb-switch checked size="sm">
+        </kb-switch>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="outline" size="sm">CANCEL</kb-button>
+      <kb-button size="sm">CREATE WEBHOOK</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exFocusTrapSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="md" trap-focus auto-focus>
+  <span slot="header">CREATE WEBHOOK</span>
+  <div class="space-y-4">
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Endpoint URL
+      </label>
+      <kb-input placeholder="https://your-server.com/webhook" variant="outline" size="sm" type="url">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Description
+      </label>
+      <kb-input placeholder="e.g. Slack notification on deploy" variant="outline" size="sm">
+      </kb-input>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Events
+      </label>
+      <kb-select placeholder="Select events..." size="sm">
+      </kb-select>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Secret
+      </label>
+      <kb-input placeholder="whsec_..." variant="outline" size="sm" type="password">
+      </kb-input>
+    </div>
+    <kb-divider>
+    </kb-divider>
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-slate-900 dark:text-zinc-50">Active</div>
+        <div class="text-xs text-slate-400 dark:text-zinc-500">Start delivering events immediately</div>
+      </div>
+      <kb-switch checked size="sm">
+      </kb-switch>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="outline" size="sm">CANCEL</kb-button>
+    <kb-button size="sm">CREATE WEBHOOK</kb-button>
+  </span>
+</kb-modal>`;
+export const exFocusTrapSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+            { label: 'deployment.created', value: 'deployment.created' },
+            { label: 'deployment.failed', value: 'deployment.failed' },
+            { label: 'build.completed', value: 'build.completed' },
+            { label: 'alert.triggered', value: 'alert.triggered' },
+          ]; });
+};
+export const exConfirmDialog = `<kb-modal open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete
+      <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+      and all associated data:
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Deployments</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">1,847</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Environment variables</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">23</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Team members</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">5</span>
+      </div>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "delete project alpha" to confirm
+      </label>
+      <kb-input placeholder="delete project alpha" variant="outline" size="sm">
+      </kb-input>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red">DELETE PERMANENTLY</kb-button>
+  </span>
+</kb-modal>`;
+export const exConfirmDialogReact = `import { Button, Input, Modal } from '@wearesyntesa/karbit-ui/react';
+
+<Modal open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete
+      <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+      and all associated data:
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Deployments</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">1,847</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Environment variables</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">23</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Team members</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">5</span>
+      </div>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "delete project alpha" to confirm
+      </label>
+      <Input placeholder="delete project alpha" variant="outline" size="sm">
+      </Input>
+    </div>
+  </div>
+  <span slot="footer">
+    <Button variant="ghost" size="sm">CANCEL</Button>
+    <Button size="sm" color-scheme="red">DELETE PERMANENTLY</Button>
+  </span>
+</Modal>`;
+export const exConfirmDialogVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-modal open size="sm">
+    <span slot="header">DELETE PROJECT</span>
+    <div class="space-y-3">
+      <p class="text-sm text-slate-700 dark:text-zinc-300">
+        This will permanently delete
+        <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+        and all associated data:
+      </p>
+      <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Deployments</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">1,847</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Environment variables</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">23</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-500 dark:text-zinc-400">Team members</span>
+          <span class="font-mono text-slate-900 dark:text-zinc-50">5</span>
+        </div>
+      </div>
+      <div>
+        <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+          Type "delete project alpha" to confirm
+        </label>
+        <kb-input placeholder="delete project alpha" variant="outline" size="sm">
+        </kb-input>
+      </div>
+    </div>
+    <span slot="footer">
+      <kb-button variant="ghost" size="sm">CANCEL</kb-button>
+      <kb-button size="sm" color-scheme="red">DELETE PERMANENTLY</kb-button>
+    </span>
+  </kb-modal>
+</template>`;
+export const exConfirmDialogSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-modal open size="sm">
+  <span slot="header">DELETE PROJECT</span>
+  <div class="space-y-3">
+    <p class="text-sm text-slate-700 dark:text-zinc-300">
+      This will permanently delete
+      <strong class="text-slate-900 dark:text-zinc-50">Project Alpha</strong>
+      and all associated data:
+    </p>
+    <div class="border border-gray-200 dark:border-zinc-700 p-3 space-y-1.5">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Deployments</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">1,847</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Environment variables</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">23</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-500 dark:text-zinc-400">Team members</span>
+        <span class="font-mono text-slate-900 dark:text-zinc-50">5</span>
+      </div>
+    </div>
+    <div>
+      <label class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 block mb-1.5">
+        Type "delete project alpha" to confirm
+      </label>
+      <kb-input placeholder="delete project alpha" variant="outline" size="sm">
+      </kb-input>
+    </div>
+  </div>
+  <span slot="footer">
+    <kb-button variant="ghost" size="sm">CANCEL</kb-button>
+    <kb-button size="sm" color-scheme="red">DELETE PERMANENTLY</kb-button>
+  </span>
+</kb-modal>`;
+
+# Modal
+
+A dialog overlay for focused content or actions.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Modal } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={usageCode} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `placement` | `placement` | `ModalPlacement` | `'center'` | Vertical positioning of the dialog within the viewport. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `header` | Modal header with title. |
+| `footer` | Modal footer with actions (only renders when provided). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-open` | `{ source?: string }` or none | Dispatched when modal finishes opening. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when modal is dismissed (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Escape` | Close the overlay and restore focus |
+| `Tab` | Cycle focus within the overlay (focus trap) |
+
+### ARIA
+
+**Roles:** `dialog`
+
+**Attributes:** `aria-label`, `aria-labelledby`, `aria-modal`
+
+### Focus Management
+
+This component extends `KbOverlayBase` and provides:
+- Focus trapping within the overlay when open
+- Focus restoration to the trigger element on close
+- `Escape` key dismissal
+- Sibling elements marked as `inert` while open
+- Body scroll locking
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Extra Small" codes={{ html: exExtraSmall, react: exExtraSmallReact, vue: exExtraSmallVue, svelte: exExtraSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exExtraSmall} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Small" codes={{ html: exSmall, react: exSmallReact, vue: exSmallVue, svelte: exSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSmall} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Full Width" codes={{ html: exFullWidth, react: exFullWidthReact, vue: exFullWidthVue, svelte: exFullWidthSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exFullWidth} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Top Placement" codes={{ html: exTopPlacement, react: exTopPlacementReact, vue: exTopPlacementVue, svelte: exTopPlacementSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exTopPlacement} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Focus Trap" codes={{ html: exFocusTrap, react: exFocusTrapReact, vue: exFocusTrapVue, svelte: exFocusTrapSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exFocusTrap} setup={exFocusTrapSetup} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Confirm Dialog" codes={{ html: exConfirmDialog, react: exConfirmDialogReact, vue: exConfirmDialogVue, svelte: exConfirmDialogSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exConfirmDialog} overlayTag="kb-modal" />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Alert Dialog](./alert-dialog)
+- [Drawer](./drawer)

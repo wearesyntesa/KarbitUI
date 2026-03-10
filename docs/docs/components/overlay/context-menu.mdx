@@ -1,0 +1,147 @@
+---
+title: "Context Menu"
+description: "A right-click context menu with menu items."
+sidebar_label: "Context Menu"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-context-menu>
+  <div slot="trigger">Right-click here</div>
+  <kb-menu-item>Cut</kb-menu-item>
+  <kb-menu-item>Copy</kb-menu-item>
+  <kb-menu-item>Paste</kb-menu-item>
+</kb-context-menu>`;
+export const reactCode = `import { ContextMenu, MenuItem } from '@wearesyntesa/karbit-ui/react';
+
+<ContextMenu>
+  <div slot="trigger">Right-click here</div>
+  <MenuItem>Cut</MenuItem>
+  <MenuItem>Copy</MenuItem>
+  <MenuItem>Paste</MenuItem>
+</ContextMenu>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-context-menu>
+    <div slot="trigger">Right-click here</div>
+    <kb-menu-item>Cut</kb-menu-item>
+    <kb-menu-item>Copy</kb-menu-item>
+    <kb-menu-item>Paste</kb-menu-item>
+  </kb-context-menu>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-context-menu>
+  <div slot="trigger">Right-click here</div>
+  <kb-menu-item>Cut</kb-menu-item>
+  <kb-menu-item>Copy</kb-menu-item>
+  <kb-menu-item>Paste</kb-menu-item>
+</kb-context-menu>`;
+
+# Context Menu
+
+A right-click context menu with menu items.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { ContextMenu } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `size` | `size` | `ComponentSize` | `'md'` | Menu sizing preset. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `trigger` | Area that listens for `contextmenu` events. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-select` | `{ value: string }` | Dispatched when a menu item is selected. |
+| `kb-open` | `{ source?: string }` or none | Dispatched when the menu opens. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when the menu closes (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Home` | Move focus to the first item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `menu`
+
+## See Also
+
+- [Dropdown Menu](./dropdown-menu)
+- [Menu Item](./menu-item)

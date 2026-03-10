@@ -1,0 +1,113 @@
+---
+title: "Step"
+description: "An individual step within a steps component."
+sidebar_label: "Step"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-step label="Account Info">
+  <span slot="description">Enter your details</span>
+</kb-step>`;
+export const reactCode = `import { Step } from '@wearesyntesa/karbit-ui/react';
+
+<Step label="Account Info">
+  <span slot="description">Enter your details</span>
+</Step>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-step label="Account Info">
+    <span slot="description">Enter your details</span>
+  </kb-step>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-step label="Account Info">
+  <span slot="description">Enter your details</span>
+</kb-step>`;
+
+# Step
+
+An individual step within a steps component.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Step } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `label` | `label` | `string` | `""` | Step label text. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| `description` | Optional description text displayed below the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-step-click` | `{ index: number }` | — |
+
+## See Also
+
+- [Steps](./steps)

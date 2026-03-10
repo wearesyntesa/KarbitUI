@@ -1,0 +1,85 @@
+---
+sidebar_position: 1
+title: Overview
+---
+
+# Components
+
+KarbitUI provides **78 web components** organized into 7 categories. All components are built on [Lit v3](https://lit.dev/) with Light DOM rendering and [Tailwind CSS](https://tailwindcss.com/) styling.
+
+## Architecture
+
+### Base element
+
+All components extend `KbBaseElement`, which provides:
+
+- **Light DOM rendering** — `createRenderRoot()` returns `this` (no Shadow DOM)
+- **Style props** — `p`, `m`, `bg`, `color`, `w`, `h`, etc. map to Tailwind classes
+- **Class passthrough** — `class` attribute for direct Tailwind class application
+- **Event emission** — `emit()` helper for typed `CustomEvent` dispatch
+- **Class composition** — `buildClasses()` and `cx()` utilities
+
+### Sizing
+
+Most components support `size` prop with values: `xs`, `sm`, `md` (default), `lg`, `xl`.
+
+### Color schemes
+
+Interactive components support `color-scheme` prop: `blue` (default), `red`, `green`, `yellow`, `gray`, and more.
+
+### Variants
+
+Many components support style variants: `solid`, `outline`, `ghost`, `subtle`, `plain`.
+
+## Categories
+
+| Category | Count | Components |
+|---|---|---|
+| [Data Display](/docs/category/data-display) | 17 | Accordion, Avatar, Card, Carousel, Table, Tag, Timeline, TreeView, and more |
+| [Forms](/docs/category/forms) | 25 | Button, Input, Select, Checkbox, Switch, Slider, DatePicker, and more |
+| [Feedback](/docs/category/feedback) | 9 | Alert, Badge, Progress, Spinner, Toast, and more |
+| [Layout](/docs/category/layout) | 7 | Box, Flex, Grid, Stack, Container, Divider, ScrollArea |
+| [Navigation](/docs/category/navigation) | 6 | Tabs, Breadcrumb, Pagination, Steps, Link |
+| [Overlay](/docs/category/overlay) | 9 | Modal, Drawer, Popover, Tooltip, DropdownMenu, and more |
+| [Typography](/docs/category/typography) | 5 | Heading, Text, Code, Blockquote, Highlight |
+
+## Import patterns
+
+### Web components (any framework)
+
+```ts
+// Register all components
+import "@wearesyntesa/karbit-ui/define";
+
+// Or register individually
+import "@wearesyntesa/karbit-ui/button/define";
+```
+
+### React wrappers
+
+```tsx
+// Barrel import
+import { Button, Input, Card } from "@wearesyntesa/karbit-ui/react";
+
+// Individual imports (better tree-shaking)
+import { Button } from "@wearesyntesa/karbit-ui/react/button";
+```
+
+### Types
+
+```ts
+import type { ComponentSize, ColorScheme } from "@wearesyntesa/karbit-ui/types";
+import type { KbChangeDetail } from "@wearesyntesa/karbit-ui/events";
+```
+
+## Event system
+
+Components emit typed `CustomEvent`s with `kb-` prefix:
+
+| Event | Components | Detail |
+|---|---|---|
+| `kb-change` | Input, Select, Checkbox, etc. | `&#123; value, previousValue &#125;` |
+| `kb-click` | Button, Card, Tag | `&#123; originalEvent &#125;` |
+| `kb-toggle` | Accordion, Collapsible, Switch | `&#123; open &#125;` |
+| `kb-close` | Alert, Modal, Drawer, Toast | `&#123; reason &#125;` |
+| `kb-select` | Tabs, Select, Combobox | `&#123; value, label &#125;` |

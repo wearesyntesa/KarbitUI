@@ -1,0 +1,54 @@
+{
+  "name": "Stack",
+  "tag": "kb-stack",
+  "category": "layout",
+  "description": "A flex column (or row) layout with uniform spacing between children.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/layout/kb-stack.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Stack"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "Orientation",
+      "default": "'vertical'",
+      "reflect": false,
+      "description": "Stack direction. `'vertical'` stacks top-to-bottom, `'horizontal'` left-to-right."
+    },
+    {
+      "name": "spacing",
+      "attribute": "spacing",
+      "type": "SpacingValue",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Gap between children as a Tailwind spacing value (e.g. `'4'`, `'8'`)."
+    },
+    {
+      "name": "divider",
+      "attribute": "divider",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Insert `<kb-divider>` elements between children automatically."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "flex",
+    "box"
+  ]
+}

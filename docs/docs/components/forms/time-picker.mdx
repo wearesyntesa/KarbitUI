@@ -1,0 +1,427 @@
+---
+title: "Time Picker"
+description: "A time selection input with hour and minute controls."
+sidebar_label: "Time Picker"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-time-picker placeholder="Select a time"></kb-time-picker>`;
+export const reactCode = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker placeholder="Select a time" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker placeholder="Select a time" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker placeholder="Select a time" />`;
+export const exDefault = `<kb-time-picker placeholder="Select time...">
+</kb-time-picker>`;
+export const exDefaultReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker placeholder="Select time...">
+</TimePicker>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker placeholder="Select time...">
+  </kb-time-picker>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker placeholder="Select time...">
+</kb-time-picker>`;
+export const exWithValue = `<kb-time-picker value="14:30" clearable>
+</kb-time-picker>`;
+export const exWithValueReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker value="14:30" clearable>
+</TimePicker>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker value="14:30" clearable>
+  </kb-time-picker>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker value="14:30" clearable>
+</kb-time-picker>`;
+export const exTwelveHour = `<kb-time-picker value="14:30" format="12h" clearable>
+</kb-time-picker>`;
+export const exTwelveHourReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker value="14:30" format="12h" clearable>
+</TimePicker>`;
+export const exTwelveHourVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker value="14:30" format="12h" clearable>
+  </kb-time-picker>
+</template>`;
+export const exTwelveHourSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker value="14:30" format="12h" clearable>
+</kb-time-picker>`;
+export const exMinuteStep = `<kb-time-picker placeholder="5 min steps..." minute-step="5">
+</kb-time-picker>`;
+export const exMinuteStepReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker placeholder="5 min steps..." minute-step="5">
+</TimePicker>`;
+export const exMinuteStepVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker placeholder="5 min steps..." minute-step="5">
+  </kb-time-picker>
+</template>`;
+export const exMinuteStepSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker placeholder="5 min steps..." minute-step="5">
+</kb-time-picker>`;
+export const exVariants = `<div class="flex flex-col gap-6">
+  <kb-time-picker variant="outline" placeholder="Outline...">
+  </kb-time-picker>
+  <kb-time-picker variant="filled" placeholder="Filled...">
+  </kb-time-picker>
+  <kb-time-picker variant="flushed" placeholder="Flushed...">
+  </kb-time-picker>
+</div>`;
+export const exVariantsReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <TimePicker variant="outline" placeholder="Outline...">
+  </TimePicker>
+  <TimePicker variant="filled" placeholder="Filled...">
+  </TimePicker>
+  <TimePicker variant="flushed" placeholder="Flushed...">
+  </TimePicker>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-time-picker variant="outline" placeholder="Outline...">
+    </kb-time-picker>
+    <kb-time-picker variant="filled" placeholder="Filled...">
+    </kb-time-picker>
+    <kb-time-picker variant="flushed" placeholder="Flushed...">
+    </kb-time-picker>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-time-picker variant="outline" placeholder="Outline...">
+  </kb-time-picker>
+  <kb-time-picker variant="filled" placeholder="Filled...">
+  </kb-time-picker>
+  <kb-time-picker variant="flushed" placeholder="Flushed...">
+  </kb-time-picker>
+</div>`;
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-time-picker size="xs" placeholder="XS">
+  </kb-time-picker>
+  <kb-time-picker size="sm" placeholder="SM">
+  </kb-time-picker>
+  <kb-time-picker size="md" placeholder="MD">
+  </kb-time-picker>
+  <kb-time-picker size="lg" placeholder="LG">
+  </kb-time-picker>
+  <kb-time-picker size="xl" placeholder="XL">
+  </kb-time-picker>
+</div>`;
+export const exSizesReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <TimePicker size="xs" placeholder="XS">
+  </TimePicker>
+  <TimePicker size="sm" placeholder="SM">
+  </TimePicker>
+  <TimePicker size="md" placeholder="MD">
+  </TimePicker>
+  <TimePicker size="lg" placeholder="LG">
+  </TimePicker>
+  <TimePicker size="xl" placeholder="XL">
+  </TimePicker>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-time-picker size="xs" placeholder="XS">
+    </kb-time-picker>
+    <kb-time-picker size="sm" placeholder="SM">
+    </kb-time-picker>
+    <kb-time-picker size="md" placeholder="MD">
+    </kb-time-picker>
+    <kb-time-picker size="lg" placeholder="LG">
+    </kb-time-picker>
+    <kb-time-picker size="xl" placeholder="XL">
+    </kb-time-picker>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-time-picker size="xs" placeholder="XS">
+  </kb-time-picker>
+  <kb-time-picker size="sm" placeholder="SM">
+  </kb-time-picker>
+  <kb-time-picker size="md" placeholder="MD">
+  </kb-time-picker>
+  <kb-time-picker size="lg" placeholder="LG">
+  </kb-time-picker>
+  <kb-time-picker size="xl" placeholder="XL">
+  </kb-time-picker>
+</div>`;
+export const exDisabled = `<kb-time-picker value="09:00" disabled>
+</kb-time-picker>`;
+export const exDisabledReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker value="09:00" disabled>
+</TimePicker>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker value="09:00" disabled>
+  </kb-time-picker>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker value="09:00" disabled>
+</kb-time-picker>`;
+export const exInvalid = `<kb-time-picker value="09:00" invalid>
+</kb-time-picker>`;
+export const exInvalidReact = `import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+
+<TimePicker value="09:00" invalid>
+</TimePicker>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-time-picker value="09:00" invalid>
+  </kb-time-picker>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-time-picker value="09:00" invalid>
+</kb-time-picker>`;
+
+# Time Picker
+
+A time selection input with hour and minute controls.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { TimePicker } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `string` | `""` | Current value in HH:MM format. |
+| `format` | `format` | `TimeFormat` | `'24h'` | Time format. |
+| `minuteStep` | `minute-step` | `number` | `1` | Minute step interval. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `clearable` | `clearable` | `boolean` | `false` | Show clear button. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ source: 'time-picker', value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Focused. |
+| `kb-blur` | `{ source?: string }` or none | Blurred. |
+| `kb-clear` | `{ source?: string }` or none | Cleared. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `combobox`
+
+**Attributes:** `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-haspopup`, `aria-invalid`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithValue }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Twelve Hour" codes={{ html: exTwelveHour, react: exTwelveHourReact, vue: exTwelveHourVue, svelte: exTwelveHourSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTwelveHour }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Minute Step" codes={{ html: exMinuteStep, react: exMinuteStepReact, vue: exMinuteStepVue, svelte: exMinuteStepSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMinuteStep }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Date Picker](./date-picker)
+- [Input](./input)

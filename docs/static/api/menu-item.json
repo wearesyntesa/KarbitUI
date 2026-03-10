@@ -1,0 +1,67 @@
+{
+  "name": "Menu Item",
+  "tag": "kb-menu-item",
+  "category": "overlay",
+  "description": "An individual item within a dropdown or context menu.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-menu-item.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "MenuItem"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Value emitted in the `kb-select` event detail."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Disable interaction on this item."
+    },
+    {
+      "name": "destructive",
+      "attribute": "destructive",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Apply destructive/danger styling (red text)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-select",
+      "detail": "`{ value: string }`",
+      "description": "Dispatched when the item is activated (click, Enter, or Space)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "menuitem"
+    ],
+    "ariaAttributes": [
+      "aria-disabled"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "dropdown-menu",
+    "context-menu"
+  ]
+}

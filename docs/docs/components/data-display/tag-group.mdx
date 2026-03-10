@@ -1,0 +1,125 @@
+---
+title: "Tag Group"
+description: "Groups multiple tags with consistent spacing and optional drag-to-reorder."
+sidebar_label: "Tag Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-tag-group>
+  <kb-tag>React</kb-tag>
+  <kb-tag>Vue</kb-tag>
+  <kb-tag>Svelte</kb-tag>
+</kb-tag-group>`;
+export const reactCode = `import { Tag, TagGroup } from '@wearesyntesa/karbit-ui/react';
+
+<TagGroup>
+  <Tag>React</Tag>
+  <Tag>Vue</Tag>
+  <Tag>Svelte</Tag>
+</TagGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag-group>
+    <kb-tag>React</kb-tag>
+    <kb-tag>Vue</kb-tag>
+    <kb-tag>Svelte</kb-tag>
+  </kb-tag-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag-group>
+  <kb-tag>React</kb-tag>
+  <kb-tag>Vue</kb-tag>
+  <kb-tag>Svelte</kb-tag>
+</kb-tag-group>`;
+
+# Tag Group
+
+Groups multiple tags with consistent spacing and optional drag-to-reorder.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { TagGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `reorderable` | `reorderable` | `boolean` | `false` | Enable drag-and-drop reordering of child `kb-tag[kb-draggable]` elements. |
+| `gap` | `gap` | `TagGroupGap` | `'md'` | Spacing between tags. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-reorder` | `{ order: readonly string[] }` | Fired after drag reorder completes. `detail.order` is an array of tag `value` strings. |
+| `kb-drag-start` | `{ value: string }` | Fired when a tag drag begins. `detail.value` is the dragged tag value. |
+| `kb-drag-end` | `{ value: string }` | Fired when a tag drag ends. `detail.value` is the dragged tag value. |
+
+## See Also
+
+- [Tag](./tag)
+- [Tags Input](../forms/tags-input)

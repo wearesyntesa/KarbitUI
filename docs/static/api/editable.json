@@ -1,0 +1,120 @@
+{
+  "name": "Editable",
+  "tag": "kb-editable",
+  "category": "forms",
+  "description": "An inline-editable text field that toggles between display and edit modes.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-editable.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Editable"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Current text value."
+    },
+    {
+      "name": "placeholder",
+      "attribute": "placeholder",
+      "type": "string",
+      "default": "'Click to edit'",
+      "reflect": false,
+      "description": "Placeholder shown when value is empty."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Mark as invalid — shows red underline."
+    },
+    {
+      "name": "startWithEditView",
+      "attribute": "start-with-edit-view",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Start in edit mode."
+    },
+    {
+      "name": "activation",
+      "attribute": "activation",
+      "type": "'click' | 'dblclick'",
+      "default": "'click'",
+      "reflect": false,
+      "description": "Activation trigger."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Display size."
+    },
+    {
+      "name": "submitOnBlur",
+      "attribute": "submit-on-blur",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Auto-submit when input loses focus."
+    },
+    {
+      "name": "name",
+      "attribute": "name",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Form field name."
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "kb-change",
+      "detail": "`KbChangeDetail` — discriminated union, narrow via `detail.source`",
+      "description": "Fires when the value changes. Detail: `{ source: 'editable', value: string }`."
+    },
+    {
+      "name": "kb-edit-submit",
+      "detail": "`{ value: string, previousValue: string }`",
+      "description": "Fires when editing is confirmed. Detail: `{ value: string, previousValue: string }`."
+    },
+    {
+      "name": "kb-edit-cancel",
+      "detail": "`{ value: string }`",
+      "description": "Fires when editing is cancelled. Detail: `{ value: string }`."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "button"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Escape",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "input"
+  ]
+}

@@ -1,0 +1,646 @@
+---
+title: "Form Control"
+description: "A wrapper that provides label, helper text, and error messaging for form fields."
+sidebar_label: "Form Control"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-form-control>
+  <kb-form-label>Email</kb-form-label>
+  <kb-input type="email" placeholder="you@example.com"></kb-input>
+</kb-form-control>`;
+export const reactCode = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<FormControl>
+  <FormLabel>Email</FormLabel>
+  <Input type="email" placeholder="you@example.com" />
+</FormControl>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-control>
+    <kb-form-label>Email</kb-form-label>
+    <kb-input type="email" placeholder="you@example.com" />
+  </kb-form-control>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-control>
+  <kb-form-label>Email</kb-form-label>
+  <kb-input type="email" placeholder="you@example.com" />
+</kb-form-control>`;
+export const exDefault = `<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Full Name</kb-form-label>
+    <kb-input placeholder="John Doe">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exDefaultReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl>
+    <FormLabel>Full Name</FormLabel>
+    <Input placeholder="John Doe">
+    </Input>
+  </FormControl>
+</div>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control>
+      <kb-form-label>Full Name</kb-form-label>
+      <kb-input placeholder="John Doe">
+      </kb-input>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Full Name</kb-form-label>
+    <kb-input placeholder="John Doe">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exRequired = `<div style="max-width:400px;">
+  <kb-form-control required>
+    <kb-form-label>Email</kb-form-label>
+    <kb-input type="email" placeholder="you@example.com">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exRequiredReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl required>
+    <FormLabel>Email</FormLabel>
+    <Input type="email" placeholder="you@example.com">
+    </Input>
+  </FormControl>
+</div>`;
+export const exRequiredVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control required>
+      <kb-form-label>Email</kb-form-label>
+      <kb-input type="email" placeholder="you@example.com">
+      </kb-input>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exRequiredSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control required>
+    <kb-form-label>Email</kb-form-label>
+    <kb-input type="email" placeholder="you@example.com">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exWithHelper = `<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Email</kb-form-label>
+    <kb-input type="email" placeholder="you@example.com">
+    </kb-input>
+    <span slot="helper">We'll never share your email.</span>
+  </kb-form-control>
+</div>`;
+export const exWithHelperReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl>
+    <FormLabel>Email</FormLabel>
+    <Input type="email" placeholder="you@example.com">
+    </Input>
+    <span slot="helper">We'll never share your email.</span>
+  </FormControl>
+</div>`;
+export const exWithHelperVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control>
+      <kb-form-label>Email</kb-form-label>
+      <kb-input type="email" placeholder="you@example.com">
+      </kb-input>
+      <span slot="helper">We'll never share your email.</span>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exWithHelperSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Email</kb-form-label>
+    <kb-input type="email" placeholder="you@example.com">
+    </kb-input>
+    <span slot="helper">We'll never share your email.</span>
+  </kb-form-control>
+</div>`;
+export const exInvalidWithError = `<div style="max-width:400px;">
+  <kb-form-control invalid>
+    <kb-form-label>Password</kb-form-label>
+    <kb-input type="password" placeholder="Enter password...">
+    </kb-input>
+    <span slot="helper">Must be at least 8 characters.</span>
+    <span slot="error">Password is too short.</span>
+  </kb-form-control>
+</div>`;
+export const exInvalidWithErrorReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl invalid>
+    <FormLabel>Password</FormLabel>
+    <Input type="password" placeholder="Enter password...">
+    </Input>
+    <span slot="helper">Must be at least 8 characters.</span>
+    <span slot="error">Password is too short.</span>
+  </FormControl>
+</div>`;
+export const exInvalidWithErrorVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control invalid>
+      <kb-form-label>Password</kb-form-label>
+      <kb-input type="password" placeholder="Enter password...">
+      </kb-input>
+      <span slot="helper">Must be at least 8 characters.</span>
+      <span slot="error">Password is too short.</span>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exInvalidWithErrorSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control invalid>
+    <kb-form-label>Password</kb-form-label>
+    <kb-input type="password" placeholder="Enter password...">
+    </kb-input>
+    <span slot="helper">Must be at least 8 characters.</span>
+    <span slot="error">Password is too short.</span>
+  </kb-form-control>
+</div>`;
+export const exWithCounter = `<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Bio</kb-form-label>
+    <kb-textarea placeholder="Tell us about yourself..." rows="3" max-length="200">
+    </kb-textarea>
+    <span slot="helper">Keep it brief.</span>
+  </kb-form-control>
+</div>`;
+export const exWithCounterReact = `import { FormControl, FormLabel, Textarea } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl>
+    <FormLabel>Bio</FormLabel>
+    <Textarea placeholder="Tell us about yourself..." rows="3" max-length="200">
+    </Textarea>
+    <span slot="helper">Keep it brief.</span>
+  </FormControl>
+</div>`;
+export const exWithCounterVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control>
+      <kb-form-label>Bio</kb-form-label>
+      <kb-textarea placeholder="Tell us about yourself..." rows="3" max-length="200">
+      </kb-textarea>
+      <span slot="helper">Keep it brief.</span>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exWithCounterSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control>
+    <kb-form-label>Bio</kb-form-label>
+    <kb-textarea placeholder="Tell us about yourself..." rows="3" max-length="200">
+    </kb-textarea>
+    <span slot="helper">Keep it brief.</span>
+  </kb-form-control>
+</div>`;
+export const exDisabled = `<div style="max-width:400px;">
+  <kb-form-control disabled>
+    <kb-form-label>Locked Field</kb-form-label>
+    <kb-input value="Cannot edit">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exDisabledReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl disabled>
+    <FormLabel>Locked Field</FormLabel>
+    <Input value="Cannot edit">
+    </Input>
+  </FormControl>
+</div>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control disabled>
+      <kb-form-label>Locked Field</kb-form-label>
+      <kb-input value="Cannot edit">
+      </kb-input>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control disabled>
+    <kb-form-label>Locked Field</kb-form-label>
+    <kb-input value="Cannot edit">
+    </kb-input>
+  </kb-form-control>
+</div>`;
+export const exContextPropagation = `<div style="display:flex;flex-direction:column;gap:24px;max-width:400px;">
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Required propagates to label + input
+    </strong>
+    <kb-form-control required>
+      <kb-form-label>Username</kb-form-label>
+      <kb-input placeholder="Required automatically">
+      </kb-input>
+    </kb-form-control>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Invalid propagates to input
+    </strong>
+    <kb-form-control invalid>
+      <kb-form-label>Email</kb-form-label>
+      <kb-input placeholder="Invalid automatically">
+      </kb-input>
+      <span slot="error">This field has an error.</span>
+    </kb-form-control>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Disabled propagates to input
+    </strong>
+    <kb-form-control disabled>
+      <kb-form-label>Code</kb-form-label>
+      <kb-input value="Disabled automatically">
+      </kb-input>
+    </kb-form-control>
+  </div>
+</div>`;
+export const exContextPropagationReact = `import { FormControl, FormLabel, Input } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:24px;max-width:400px;">
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Required propagates to label + input
+    </strong>
+    <FormControl required>
+      <FormLabel>Username</FormLabel>
+      <Input placeholder="Required automatically">
+      </Input>
+    </FormControl>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Invalid propagates to input
+    </strong>
+    <FormControl invalid>
+      <FormLabel>Email</FormLabel>
+      <Input placeholder="Invalid automatically">
+      </Input>
+      <span slot="error">This field has an error.</span>
+    </FormControl>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Disabled propagates to input
+    </strong>
+    <FormControl disabled>
+      <FormLabel>Code</FormLabel>
+      <Input value="Disabled automatically">
+      </Input>
+    </FormControl>
+  </div>
+</div>`;
+export const exContextPropagationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:24px;max-width:400px;">
+    <div>
+      <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Required propagates to label + input
+      </strong>
+      <kb-form-control required>
+        <kb-form-label>Username</kb-form-label>
+        <kb-input placeholder="Required automatically">
+        </kb-input>
+      </kb-form-control>
+    </div>
+    <div>
+      <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Invalid propagates to input
+      </strong>
+      <kb-form-control invalid>
+        <kb-form-label>Email</kb-form-label>
+        <kb-input placeholder="Invalid automatically">
+        </kb-input>
+        <span slot="error">This field has an error.</span>
+      </kb-form-control>
+    </div>
+    <div>
+      <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Disabled propagates to input
+      </strong>
+      <kb-form-control disabled>
+        <kb-form-label>Code</kb-form-label>
+        <kb-input value="Disabled automatically">
+        </kb-input>
+      </kb-form-control>
+    </div>
+  </div>
+</template>`;
+export const exContextPropagationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:24px;max-width:400px;">
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Required propagates to label + input
+    </strong>
+    <kb-form-control required>
+      <kb-form-label>Username</kb-form-label>
+      <kb-input placeholder="Required automatically">
+      </kb-input>
+    </kb-form-control>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Invalid propagates to input
+    </strong>
+    <kb-form-control invalid>
+      <kb-form-label>Email</kb-form-label>
+      <kb-input placeholder="Invalid automatically">
+      </kb-input>
+      <span slot="error">This field has an error.</span>
+    </kb-form-control>
+  </div>
+  <div>
+    <strong style="font-size:14px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Disabled propagates to input
+    </strong>
+    <kb-form-control disabled>
+      <kb-form-label>Code</kb-form-label>
+      <kb-input value="Disabled automatically">
+      </kb-input>
+    </kb-form-control>
+  </div>
+</div>`;
+export const exWithSelect = `<div style="max-width:400px;">
+  <kb-form-control required>
+    <kb-form-label>Country</kb-form-label>
+    <kb-select placeholder="Select a country...">
+    </kb-select>
+  </kb-form-control>
+</div>`;
+export const exWithSelectReact = `import { FormControl, FormLabel, Select } from '@wearesyntesa/karbit-ui/react';
+
+<div style="max-width:400px;">
+  <FormControl required>
+    <FormLabel>Country</FormLabel>
+    <Select placeholder="Select a country...">
+    </Select>
+  </FormControl>
+</div>`;
+export const exWithSelectVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="max-width:400px;">
+    <kb-form-control required>
+      <kb-form-label>Country</kb-form-label>
+      <kb-select placeholder="Select a country...">
+      </kb-select>
+    </kb-form-control>
+  </div>
+</template>`;
+export const exWithSelectSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="max-width:400px;">
+  <kb-form-control required>
+    <kb-form-label>Country</kb-form-label>
+    <kb-select placeholder="Select a country...">
+    </kb-select>
+  </kb-form-control>
+</div>`;
+export const exWithSelectSetup = (container) => {
+  container.querySelectorAll('kb-select').forEach(el => { el.options = [
+            { value: 'us', label: 'United States' },
+            { value: 'uk', label: 'United Kingdom' },
+            { value: 'se', label: 'Sweden' },
+          ]; });
+};
+
+# Form Control
+
+A wrapper that provides label, helper text, and error messaging for form fields.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { FormControl } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `required` | `required` | `boolean` | `false` | Mark the field as required. Propagated to child input and label. |
+| `invalid` | `invalid` | `boolean` | `false` | Mark the field as invalid. Propagated to child input; switches helper → error text. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable the field. Propagated to child input. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `helper` | Muted helper text below the input (hidden when `invalid` with error slot). |
+| `error` | Red error text below the input (shown only when `invalid`). |
+| `counter` | Right-aligned text below the input (e.g. character count "12/100"). |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `group`
+
+**Attributes:** `aria-labelledby`, `aria-live`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Required" codes={{ html: exRequired, react: exRequiredReact, vue: exRequiredVue, svelte: exRequiredSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exRequired }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Helper" codes={{ html: exWithHelper, react: exWithHelperReact, vue: exWithHelperVue, svelte: exWithHelperSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithHelper }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid With Error" codes={{ html: exInvalidWithError, react: exInvalidWithErrorReact, vue: exInvalidWithErrorVue, svelte: exInvalidWithErrorSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalidWithError }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Counter" codes={{ html: exWithCounter, react: exWithCounterReact, vue: exWithCounterVue, svelte: exWithCounterSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithCounter }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Context Propagation" codes={{ html: exContextPropagation, react: exContextPropagationReact, vue: exContextPropagationVue, svelte: exContextPropagationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exContextPropagation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Select" codes={{ html: exWithSelect, react: exWithSelectReact, vue: exWithSelectVue, svelte: exWithSelectSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithSelect} setup={exWithSelectSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Form Label](./form-label)
+- [Input](./input)

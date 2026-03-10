@@ -1,0 +1,324 @@
+---
+title: "Blockquote"
+description: "A styled quotation block for highlighting cited content."
+sidebar_label: "Blockquote"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-blockquote>The best way to predict the future is to invent it.</kb-blockquote>`;
+export const reactCode = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<Blockquote>The best way to predict the future is to invent it.</Blockquote>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-blockquote>The best way to predict the future is to invent it.</kb-blockquote>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-blockquote>The best way to predict the future is to invent it.</kb-blockquote>`;
+export const exDefault = `<kb-blockquote>
+  Design is not just what it looks like and feels like. Design is how it works.
+  <span slot="cite">Steve Jobs</span>
+</kb-blockquote>`;
+export const exDefaultReact = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<Blockquote>
+  Design is not just what it looks like and feels like. Design is how it works.
+  <span slot="cite">Steve Jobs</span>
+</Blockquote>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-blockquote>
+    Design is not just what it looks like and feels like. Design is how it works.
+    <span slot="cite">Steve Jobs</span>
+  </kb-blockquote>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-blockquote>
+  Design is not just what it looks like and feels like. Design is how it works.
+  <span slot="cite">Steve Jobs</span>
+</kb-blockquote>`;
+export const exPlainVariant = `<kb-blockquote variant="plain" color-scheme="blue">
+  Simplicity is the ultimate sophistication.
+  <span slot="cite">Leonardo da Vinci</span>
+</kb-blockquote>`;
+export const exPlainVariantReact = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<Blockquote variant="plain" color-scheme="blue">
+  Simplicity is the ultimate sophistication.
+  <span slot="cite">Leonardo da Vinci</span>
+</Blockquote>`;
+export const exPlainVariantVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-blockquote variant="plain" color-scheme="blue">
+    Simplicity is the ultimate sophistication.
+    <span slot="cite">Leonardo da Vinci</span>
+  </kb-blockquote>
+</template>`;
+export const exPlainVariantSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-blockquote variant="plain" color-scheme="blue">
+  Simplicity is the ultimate sophistication.
+  <span slot="cite">Leonardo da Vinci</span>
+</kb-blockquote>`;
+export const exNoCitation = `<kb-blockquote color-scheme="purple">
+  The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.
+</kb-blockquote>`;
+export const exNoCitationReact = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<Blockquote color-scheme="purple">
+  The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.
+</Blockquote>`;
+export const exNoCitationVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-blockquote color-scheme="purple">
+    The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.
+  </kb-blockquote>
+</template>`;
+export const exNoCitationSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-blockquote color-scheme="purple">
+  The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.
+</kb-blockquote>`;
+export const exLongContent = `<kb-blockquote color-scheme="green">
+  We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one we intend to win.
+  <span slot="cite">John F. Kennedy, 1962</span>
+</kb-blockquote>`;
+export const exLongContentReact = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<Blockquote color-scheme="green">
+  We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one we intend to win.
+  <span slot="cite">John F. Kennedy, 1962</span>
+</Blockquote>`;
+export const exLongContentVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-blockquote color-scheme="green">
+    We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one we intend to win.
+    <span slot="cite">John F. Kennedy, 1962</span>
+  </kb-blockquote>
+</template>`;
+export const exLongContentSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-blockquote color-scheme="green">
+  We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one we intend to win.
+  <span slot="cite">John F. Kennedy, 1962</span>
+</kb-blockquote>`;
+export const exMultiple = `<div class="space-y-6">
+  <kb-blockquote color-scheme="blue">
+    Programs must be written for people to read, and only incidentally for machines to execute.
+    <span slot="cite">Abelson & Sussman</span>
+  </kb-blockquote>
+  <kb-blockquote color-scheme="red">
+    Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+    <span slot="cite">Martin Fowler</span>
+  </kb-blockquote>
+  <kb-blockquote>
+    Premature optimization is the root of all evil.
+    <span slot="cite">Donald Knuth</span>
+  </kb-blockquote>
+</div>`;
+export const exMultipleReact = `import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+
+<div class="space-y-6">
+  <Blockquote color-scheme="blue">
+    Programs must be written for people to read, and only incidentally for machines to execute.
+    <span slot="cite">Abelson & Sussman</span>
+  </Blockquote>
+  <Blockquote color-scheme="red">
+    Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+    <span slot="cite">Martin Fowler</span>
+  </Blockquote>
+  <Blockquote>
+    Premature optimization is the root of all evil.
+    <span slot="cite">Donald Knuth</span>
+  </Blockquote>
+</div>`;
+export const exMultipleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="space-y-6">
+    <kb-blockquote color-scheme="blue">
+      Programs must be written for people to read, and only incidentally for machines to execute.
+      <span slot="cite">Abelson & Sussman</span>
+    </kb-blockquote>
+    <kb-blockquote color-scheme="red">
+      Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+      <span slot="cite">Martin Fowler</span>
+    </kb-blockquote>
+    <kb-blockquote>
+      Premature optimization is the root of all evil.
+      <span slot="cite">Donald Knuth</span>
+    </kb-blockquote>
+  </div>
+</template>`;
+export const exMultipleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="space-y-6">
+  <kb-blockquote color-scheme="blue">
+    Programs must be written for people to read, and only incidentally for machines to execute.
+    <span slot="cite">Abelson & Sussman</span>
+  </kb-blockquote>
+  <kb-blockquote color-scheme="red">
+    Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+    <span slot="cite">Martin Fowler</span>
+  </kb-blockquote>
+  <kb-blockquote>
+    Premature optimization is the root of all evil.
+    <span slot="cite">Donald Knuth</span>
+  </kb-blockquote>
+</div>`;
+
+# Blockquote
+
+A styled quotation block for highlighting cited content.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Blockquote } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `BlockquoteVariant` | `'default'` | Visual variant. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Accent color for the left border. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `cite` | Citation text displayed below the body. |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Plain Variant" codes={{ html: exPlainVariant, react: exPlainVariantReact, vue: exPlainVariantVue, svelte: exPlainVariantSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlainVariant }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Citation" codes={{ html: exNoCitation, react: exNoCitationReact, vue: exNoCitationVue, svelte: exNoCitationSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoCitation }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Long Content" codes={{ html: exLongContent, react: exLongContentReact, vue: exLongContentVue, svelte: exLongContentSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLongContent }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Multiple" codes={{ html: exMultiple, react: exMultipleReact, vue: exMultipleVue, svelte: exMultipleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMultiple }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Text](./text)

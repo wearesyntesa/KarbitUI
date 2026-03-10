@@ -1,0 +1,132 @@
+---
+title: "Checkbox Group"
+description: "Groups multiple checkboxes with shared state management."
+sidebar_label: "Checkbox Group"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-checkbox-group>
+  <kb-checkbox value="a">Option A</kb-checkbox>
+  <kb-checkbox value="b">Option B</kb-checkbox>
+</kb-checkbox-group>`;
+export const reactCode = `import { Checkbox, CheckboxGroup } from '@wearesyntesa/karbit-ui/react';
+
+<CheckboxGroup>
+  <Checkbox value="a">Option A</Checkbox>
+  <Checkbox value="b">Option B</Checkbox>
+</CheckboxGroup>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-checkbox-group>
+    <kb-checkbox value="a">Option A</kb-checkbox>
+    <kb-checkbox value="b">Option B</kb-checkbox>
+  </kb-checkbox-group>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-checkbox-group>
+  <kb-checkbox value="a">Option A</kb-checkbox>
+  <kb-checkbox value="b">Option B</kb-checkbox>
+</kb-checkbox-group>`;
+
+# Checkbox Group
+
+Groups multiple checkboxes with shared state management.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { CheckboxGroup } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `direction` | `direction` | `Orientation` | `'vertical'` | Layout direction of the grouped checkboxes. |
+| `size` | `size` | `ComponentSize` | — | Size propagated to child checkboxes that don't set their own size. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme propagated to child checkboxes that don't set their own. |
+| `min` | `min` | `number` | — | Minimum number of checkboxes that must remain checked. |
+| `max` | `max` | `number` | — | Maximum number of checkboxes that can be checked simultaneously. |
+| `values` | `values` | `string[]` | `[]` | Currently checked values. Reflects child checkbox states. Can be set programmatically. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `label` | Group label rendered above the checkboxes. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Selection changed. Detail: `{ values: string[] }`. |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `group`
+
+**Attributes:** `aria-labelledby`
+
+## See Also
+
+- [Checkbox](./checkbox)
+- [Radio Group](./radio-group)

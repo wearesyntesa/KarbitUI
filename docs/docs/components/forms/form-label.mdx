@@ -1,0 +1,315 @@
+---
+title: "Form Label"
+description: "A label element for form controls, with optional required indicator."
+sidebar_label: "Form Label"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-form-label required>Username</kb-form-label>`;
+export const reactCode = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel required>Username</FormLabel>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label required>Username</kb-form-label>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label required>Username</kb-form-label>`;
+export const exDefault = `<kb-form-label size="md">Username</kb-form-label>`;
+export const exDefaultReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel size="md">Username</FormLabel>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label size="md">Username</kb-form-label>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label size="md">Username</kb-form-label>`;
+export const exRequired = `<kb-form-label size="md" required>Email Address</kb-form-label>`;
+export const exRequiredReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel size="md" required>Email Address</FormLabel>`;
+export const exRequiredVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label size="md" required>Email Address</kb-form-label>
+</template>`;
+export const exRequiredSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label size="md" required>Email Address</kb-form-label>`;
+export const exOptional = `<kb-form-label size="md" optional>Nickname</kb-form-label>`;
+export const exOptionalReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel size="md" optional>Nickname</FormLabel>`;
+export const exOptionalVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label size="md" optional>Nickname</kb-form-label>
+</template>`;
+export const exOptionalSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label size="md" optional>Nickname</kb-form-label>`;
+export const exWithInfoSlot = `<kb-form-label required>
+  Password
+  <span slot="info">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" style="width:14px;height:14px;">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4"/>
+      <path d="M12 8h.01"/>
+    </svg>
+  </span>
+</kb-form-label>`;
+export const exWithInfoSlotReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel required>
+  Password
+  <span slot="info">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" style="width:14px;height:14px;">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4"/>
+      <path d="M12 8h.01"/>
+    </svg>
+  </span>
+</FormLabel>`;
+export const exWithInfoSlotVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label required>
+    Password
+    <span slot="info">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" style="width:14px;height:14px;">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
+      </svg>
+    </span>
+  </kb-form-label>
+</template>`;
+export const exWithInfoSlotSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label required>
+  Password
+  <span slot="info">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" style="width:14px;height:14px;">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4"/>
+      <path d="M12 8h.01"/>
+    </svg>
+  </span>
+</kb-form-label>`;
+export const exAllSizes = `<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-form-label size="xs" required>Extra Small (xs)</kb-form-label>
+  <kb-form-label size="sm" required>Small (sm)</kb-form-label>
+  <kb-form-label size="md" required>Medium (md)</kb-form-label>
+  <kb-form-label size="lg" required>Large (lg)</kb-form-label>
+  <kb-form-label size="xl" required>Extra Large (xl)</kb-form-label>
+</div>`;
+export const exAllSizesReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <FormLabel size="xs" required>Extra Small (xs)</FormLabel>
+  <FormLabel size="sm" required>Small (sm)</FormLabel>
+  <FormLabel size="md" required>Medium (md)</FormLabel>
+  <FormLabel size="lg" required>Large (lg)</FormLabel>
+  <FormLabel size="xl" required>Extra Large (xl)</FormLabel>
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <kb-form-label size="xs" required>Extra Small (xs)</kb-form-label>
+    <kb-form-label size="sm" required>Small (sm)</kb-form-label>
+    <kb-form-label size="md" required>Medium (md)</kb-form-label>
+    <kb-form-label size="lg" required>Large (lg)</kb-form-label>
+    <kb-form-label size="xl" required>Extra Large (xl)</kb-form-label>
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:12px;">
+  <kb-form-label size="xs" required>Extra Small (xs)</kb-form-label>
+  <kb-form-label size="sm" required>Small (sm)</kb-form-label>
+  <kb-form-label size="md" required>Medium (md)</kb-form-label>
+  <kb-form-label size="lg" required>Large (lg)</kb-form-label>
+  <kb-form-label size="xl" required>Extra Large (xl)</kb-form-label>
+</div>`;
+export const exWithFor = `<kb-form-label size="md" for="my-input">Linked Label</kb-form-label>`;
+export const exWithForReact = `import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+
+<FormLabel size="md" for="my-input">Linked Label</FormLabel>`;
+export const exWithForVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-form-label size="md" for="my-input">Linked Label</kb-form-label>
+</template>`;
+export const exWithForSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-form-label size="md" for="my-input">Linked Label</kb-form-label>`;
+
+# Form Label
+
+A label element for form controls, with optional required indicator.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { FormLabel } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `for` | `for` | `string` | — | `for` attribute linking the label to a form element by ID. |
+| `size` | `size` | `ComponentSize` | `'md'` | Label size controlling font size. |
+| `required` | `required` | `boolean` | `false` | Show a red asterisk after the label text. |
+| `optional` | `optional` | `boolean` | `false` | Show "(optional)" after the label text. Hidden when `required` is true. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `info` | Inline help icon or text rendered after the label. |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Required" codes={{ html: exRequired, react: exRequiredReact, vue: exRequiredVue, svelte: exRequiredSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exRequired }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Optional" codes={{ html: exOptional, react: exOptionalReact, vue: exOptionalVue, svelte: exOptionalSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOptional }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Info Slot" codes={{ html: exWithInfoSlot, react: exWithInfoSlotReact, vue: exWithInfoSlotVue, svelte: exWithInfoSlotSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithInfoSlot }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With For" codes={{ html: exWithFor, react: exWithForReact, vue: exWithForVue, svelte: exWithForSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithFor }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Form Control](./form-control)

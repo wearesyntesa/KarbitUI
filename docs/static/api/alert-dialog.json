@@ -1,0 +1,91 @@
+{
+  "name": "Alert Dialog",
+  "tag": "kb-alert-dialog",
+  "category": "overlay",
+  "description": "A confirmation dialog requiring user acknowledgment before proceeding.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-alert-dialog.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "AlertDialog"
+  },
+  "props": [
+    {
+      "name": "closeOnOverlay",
+      "attribute": "close-on-overlay",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable overlay click dismiss (default for alert dialogs)."
+    },
+    {
+      "name": "closeOnEscape",
+      "attribute": "close-on-escape",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable Escape key dismiss (default for alert dialogs)."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Hide the close button by default for alert dialogs."
+    }
+  ],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Dialog title."
+    },
+    {
+      "name": "footer",
+      "description": "Confirm/cancel buttons."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-confirm",
+      "detail": "`{ source: \"alert-dialog\" }`",
+      "description": "Dispatched when the confirm action is triggered."
+    },
+    {
+      "name": "kb-cancel",
+      "detail": "`{ source: \"alert-dialog\" }`",
+      "description": "Dispatched when the cancel action is triggered."
+    },
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when dialog opens."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when dialog closes (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "alertdialog"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-modal"
+    ],
+    "keyboardKeys": [
+      "Escape",
+      "Tab"
+    ],
+    "isOverlay": true
+  },
+  "relatedComponents": [
+    "modal"
+  ]
+}

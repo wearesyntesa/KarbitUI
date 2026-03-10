@@ -1,0 +1,58 @@
+{
+  "name": "Button Group",
+  "tag": "kb-button-group",
+  "category": "forms",
+  "description": "Groups multiple buttons together with consistent spacing and optional attached styling.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-button-group.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "ButtonGroup"
+  },
+  "props": [
+    {
+      "name": "direction",
+      "attribute": "direction",
+      "type": "ButtonGroupDirection",
+      "default": "'horizontal'",
+      "reflect": false,
+      "description": "Layout direction of the grouped buttons."
+    },
+    {
+      "name": "spaced",
+      "attribute": "spaced",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Use spaced mode (gap between buttons) instead of attached mode (shared borders)."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Accessible label for the button group (required for screen readers)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "group"
+    ],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "button",
+    "icon-button"
+  ]
+}

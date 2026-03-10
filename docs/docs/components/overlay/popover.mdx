@@ -1,0 +1,966 @@
+---
+title: "Popover"
+description: "A floating panel anchored to a trigger element."
+sidebar_label: "Popover"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-popover>
+  <kb-button slot="trigger">Open Popover</kb-button>
+  <p>Popover content here.</p>
+</kb-popover>`;
+export const reactCode = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover>
+  <Button slot="trigger">Open Popover</Button>
+  <p>Popover content here.</p>
+</Popover>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover>
+    <kb-button slot="trigger">Open Popover</kb-button>
+    <p>Popover content here.</p>
+  </kb-popover>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover>
+  <kb-button slot="trigger">Open Popover</kb-button>
+  <p>Popover content here.</p>
+</kb-popover>`;
+export const exDefault = `<kb-popover placement="bottom" trigger="click" size="sm">
+  <kb-button slot="trigger">CLICK ME</kb-button>
+  <span slot="header">OPTIONS</span>
+  <p>Popover body content with interactive elements.</p>
+</kb-popover>`;
+export const exDefaultReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="sm">
+  <Button slot="trigger">CLICK ME</Button>
+  <span slot="header">OPTIONS</span>
+  <p>Popover body content with interactive elements.</p>
+</Popover>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="sm">
+    <kb-button slot="trigger">CLICK ME</kb-button>
+    <span slot="header">OPTIONS</span>
+    <p>Popover body content with interactive elements.</p>
+  </kb-popover>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="sm">
+  <kb-button slot="trigger">CLICK ME</kb-button>
+  <span slot="header">OPTIONS</span>
+  <p>Popover body content with interactive elements.</p>
+</kb-popover>`;
+export const exWithArrow = `<div style="display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 16px" class="md:!p-20">
+  >
+  <kb-popover placement="bottom" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">BOTTOM</kb-button>
+    <p>Arrow pointing up toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="top" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">TOP</kb-button>
+    <p>Arrow pointing down toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="right" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">RIGHT</kb-button>
+    <p>Arrow pointing left toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="left" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">LEFT</kb-button>
+    <p>Arrow pointing right toward trigger.</p>
+  </kb-popover>
+</div>`;
+export const exWithArrowReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 16px" class="md:!p-20">
+  >
+  <Popover placement="bottom" trigger="click" size="sm" show-arrow open>
+    <Button slot="trigger" size="sm">BOTTOM</Button>
+    <p>Arrow pointing up toward trigger.</p>
+  </Popover>
+  <Popover placement="top" trigger="click" size="sm" show-arrow open>
+    <Button slot="trigger" size="sm">TOP</Button>
+    <p>Arrow pointing down toward trigger.</p>
+  </Popover>
+  <Popover placement="right" trigger="click" size="sm" show-arrow open>
+    <Button slot="trigger" size="sm">RIGHT</Button>
+    <p>Arrow pointing left toward trigger.</p>
+  </Popover>
+  <Popover placement="left" trigger="click" size="sm" show-arrow open>
+    <Button slot="trigger" size="sm">LEFT</Button>
+    <p>Arrow pointing right toward trigger.</p>
+  </Popover>
+</div>`;
+export const exWithArrowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 16px" class="md:!p-20">
+    >
+    <kb-popover placement="bottom" trigger="click" size="sm" show-arrow open>
+      <kb-button slot="trigger" size="sm">BOTTOM</kb-button>
+      <p>Arrow pointing up toward trigger.</p>
+    </kb-popover>
+    <kb-popover placement="top" trigger="click" size="sm" show-arrow open>
+      <kb-button slot="trigger" size="sm">TOP</kb-button>
+      <p>Arrow pointing down toward trigger.</p>
+    </kb-popover>
+    <kb-popover placement="right" trigger="click" size="sm" show-arrow open>
+      <kb-button slot="trigger" size="sm">RIGHT</kb-button>
+      <p>Arrow pointing left toward trigger.</p>
+    </kb-popover>
+    <kb-popover placement="left" trigger="click" size="sm" show-arrow open>
+      <kb-button slot="trigger" size="sm">LEFT</kb-button>
+      <p>Arrow pointing right toward trigger.</p>
+    </kb-popover>
+  </div>
+</template>`;
+export const exWithArrowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display: flex; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 40px 16px" class="md:!p-20">
+  >
+  <kb-popover placement="bottom" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">BOTTOM</kb-button>
+    <p>Arrow pointing up toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="top" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">TOP</kb-button>
+    <p>Arrow pointing down toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="right" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">RIGHT</kb-button>
+    <p>Arrow pointing left toward trigger.</p>
+  </kb-popover>
+  <kb-popover placement="left" trigger="click" size="sm" show-arrow open>
+    <kb-button slot="trigger" size="sm">LEFT</kb-button>
+    <p>Arrow pointing right toward trigger.</p>
+  </kb-popover>
+</div>`;
+export const exHoverTrigger = `<kb-popover placement="bottom" trigger="hover" size="sm" show-arrow>
+  <kb-button slot="trigger">HOVER ME</kb-button>
+  <p>This popover opens on hover with a 150ms close delay to prevent accidental dismissal.</p>
+</kb-popover>`;
+export const exHoverTriggerReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="hover" size="sm" show-arrow>
+  <Button slot="trigger">HOVER ME</Button>
+  <p>This popover opens on hover with a 150ms close delay to prevent accidental dismissal.</p>
+</Popover>`;
+export const exHoverTriggerVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="hover" size="sm" show-arrow>
+    <kb-button slot="trigger">HOVER ME</kb-button>
+    <p>This popover opens on hover with a 150ms close delay to prevent accidental dismissal.</p>
+  </kb-popover>
+</template>`;
+export const exHoverTriggerSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="hover" size="sm" show-arrow>
+  <kb-button slot="trigger">HOVER ME</kb-button>
+  <p>This popover opens on hover with a 150ms close delay to prevent accidental dismissal.</p>
+</kb-popover>`;
+export const exHoverWithDelay = `<kb-popover placement="bottom" trigger="hover" size="md" show-arrow open-delay="300" close-delay="200">
+  <kb-button slot="trigger">HOVER (300ms DELAY)</kb-button>
+  <span slot="header">DELAYED</span>
+  <p>Opens after 300ms hover, closes 200ms after mouse leaves. Prevents flickering on quick mouse passes.</p>
+</kb-popover>`;
+export const exHoverWithDelayReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="hover" size="md" show-arrow open-delay="300" close-delay="200">
+  <Button slot="trigger">HOVER (300ms DELAY)</Button>
+  <span slot="header">DELAYED</span>
+  <p>Opens after 300ms hover, closes 200ms after mouse leaves. Prevents flickering on quick mouse passes.</p>
+</Popover>`;
+export const exHoverWithDelayVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="hover" size="md" show-arrow open-delay="300" close-delay="200">
+    <kb-button slot="trigger">HOVER (300ms DELAY)</kb-button>
+    <span slot="header">DELAYED</span>
+    <p>Opens after 300ms hover, closes 200ms after mouse leaves. Prevents flickering on quick mouse passes.</p>
+  </kb-popover>
+</template>`;
+export const exHoverWithDelaySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="hover" size="md" show-arrow open-delay="300" close-delay="200">
+  <kb-button slot="trigger">HOVER (300ms DELAY)</kb-button>
+  <span slot="header">DELAYED</span>
+  <p>Opens after 300ms hover, closes 200ms after mouse leaves. Prevents flickering on quick mouse passes.</p>
+</kb-popover>`;
+export const exSizeExtraSmall = `<kb-popover placement="bottom" trigger="click" size="xs" show-arrow>
+  <kb-button slot="trigger" size="sm">XS POPOVER</kb-button>
+  <p>Compact popover for brief info.</p>
+</kb-popover>`;
+export const exSizeExtraSmallReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="xs" show-arrow>
+  <Button slot="trigger" size="sm">XS POPOVER</Button>
+  <p>Compact popover for brief info.</p>
+</Popover>`;
+export const exSizeExtraSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow>
+    <kb-button slot="trigger" size="sm">XS POPOVER</kb-button>
+    <p>Compact popover for brief info.</p>
+  </kb-popover>
+</template>`;
+export const exSizeExtraSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="xs" show-arrow>
+  <kb-button slot="trigger" size="sm">XS POPOVER</kb-button>
+  <p>Compact popover for brief info.</p>
+</kb-popover>`;
+export const exSizeMedium = `<kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+  <kb-button slot="trigger">MD POPOVER</kb-button>
+  <span slot="header">MEDIUM</span>
+  <p>A medium-sized popover with more room for content and interactive elements.</p>
+</kb-popover>`;
+export const exSizeMediumReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="md" show-arrow>
+  <Button slot="trigger">MD POPOVER</Button>
+  <span slot="header">MEDIUM</span>
+  <p>A medium-sized popover with more room for content and interactive elements.</p>
+</Popover>`;
+export const exSizeMediumVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+    <kb-button slot="trigger">MD POPOVER</kb-button>
+    <span slot="header">MEDIUM</span>
+    <p>A medium-sized popover with more room for content and interactive elements.</p>
+  </kb-popover>
+</template>`;
+export const exSizeMediumSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+  <kb-button slot="trigger">MD POPOVER</kb-button>
+  <span slot="header">MEDIUM</span>
+  <p>A medium-sized popover with more room for content and interactive elements.</p>
+</kb-popover>`;
+export const exSizeLarge = `<kb-popover placement="bottom" trigger="click" size="lg" show-arrow>
+  <kb-button slot="trigger">LG POPOVER</kb-button>
+  <span slot="header">DETAILS</span>
+  <p>
+    Large popover suitable for forms, previews, or detailed information panels. Provides generous space for complex content.
+  </p>
+</kb-popover>`;
+export const exSizeLargeReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="lg" show-arrow>
+  <Button slot="trigger">LG POPOVER</Button>
+  <span slot="header">DETAILS</span>
+  <p>
+    Large popover suitable for forms, previews, or detailed information panels. Provides generous space for complex content.
+  </p>
+</Popover>`;
+export const exSizeLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="lg" show-arrow>
+    <kb-button slot="trigger">LG POPOVER</kb-button>
+    <span slot="header">DETAILS</span>
+    <p>
+      Large popover suitable for forms, previews, or detailed information panels. Provides generous space for complex content.
+    </p>
+  </kb-popover>
+</template>`;
+export const exSizeLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="lg" show-arrow>
+  <kb-button slot="trigger">LG POPOVER</kb-button>
+  <span slot="header">DETAILS</span>
+  <p>
+    Large popover suitable for forms, previews, or detailed information panels. Provides generous space for complex content.
+  </p>
+</kb-popover>`;
+export const exWithFooter = `<kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+  <kb-button slot="trigger">WITH FOOTER</kb-button>
+  <span slot="header">SETTINGS</span>
+  <p>Adjust your notification preferences for this project.</p>
+  <span slot="footer">
+    <kb-button variant="ghost" size="xs">RESET</kb-button>
+    <kb-button size="xs">APPLY</kb-button>
+  </span>
+</kb-popover>`;
+export const exWithFooterReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="md" show-arrow>
+  <Button slot="trigger">WITH FOOTER</Button>
+  <span slot="header">SETTINGS</span>
+  <p>Adjust your notification preferences for this project.</p>
+  <span slot="footer">
+    <Button variant="ghost" size="xs">RESET</Button>
+    <Button size="xs">APPLY</Button>
+  </span>
+</Popover>`;
+export const exWithFooterVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+    <kb-button slot="trigger">WITH FOOTER</kb-button>
+    <span slot="header">SETTINGS</span>
+    <p>Adjust your notification preferences for this project.</p>
+    <span slot="footer">
+      <kb-button variant="ghost" size="xs">RESET</kb-button>
+      <kb-button size="xs">APPLY</kb-button>
+    </span>
+  </kb-popover>
+</template>`;
+export const exWithFooterSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="md" show-arrow>
+  <kb-button slot="trigger">WITH FOOTER</kb-button>
+  <span slot="header">SETTINGS</span>
+  <p>Adjust your notification preferences for this project.</p>
+  <span slot="footer">
+    <kb-button variant="ghost" size="xs">RESET</kb-button>
+    <kb-button size="xs">APPLY</kb-button>
+  </span>
+</kb-popover>`;
+export const exClosable = `<kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <kb-button slot="trigger">CLOSABLE</kb-button>
+  <span slot="header">NOTIFICATION</span>
+  <p>This popover has a close button in the header. Click the X to dismiss.</p>
+</kb-popover>`;
+export const exClosableReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <Button slot="trigger">CLOSABLE</Button>
+  <span slot="header">NOTIFICATION</span>
+  <p>This popover has a close button in the header. Click the X to dismiss.</p>
+</Popover>`;
+export const exClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+    <kb-button slot="trigger">CLOSABLE</kb-button>
+    <span slot="header">NOTIFICATION</span>
+    <p>This popover has a close button in the header. Click the X to dismiss.</p>
+  </kb-popover>
+</template>`;
+export const exClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <kb-button slot="trigger">CLOSABLE</kb-button>
+  <span slot="header">NOTIFICATION</span>
+  <p>This popover has a close button in the header. Click the X to dismiss.</p>
+</kb-popover>`;
+export const exClosableWithFooter = `<kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <kb-button slot="trigger">FULL FEATURED</kb-button>
+  <span slot="header">CONFIRM</span>
+  <p>A fully-featured popover with header, close button, body content, and footer actions.</p>
+  <span slot="footer">
+    <kb-button variant="outline" size="xs">CANCEL</kb-button>
+    <kb-button size="xs">SAVE</kb-button>
+  </span>
+</kb-popover>`;
+export const exClosableWithFooterReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <Button slot="trigger">FULL FEATURED</Button>
+  <span slot="header">CONFIRM</span>
+  <p>A fully-featured popover with header, close button, body content, and footer actions.</p>
+  <span slot="footer">
+    <Button variant="outline" size="xs">CANCEL</Button>
+    <Button size="xs">SAVE</Button>
+  </span>
+</Popover>`;
+export const exClosableWithFooterVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+    <kb-button slot="trigger">FULL FEATURED</kb-button>
+    <span slot="header">CONFIRM</span>
+    <p>A fully-featured popover with header, close button, body content, and footer actions.</p>
+    <span slot="footer">
+      <kb-button variant="outline" size="xs">CANCEL</kb-button>
+      <kb-button size="xs">SAVE</kb-button>
+    </span>
+  </kb-popover>
+</template>`;
+export const exClosableWithFooterSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="md" closable show-arrow>
+  <kb-button slot="trigger">FULL FEATURED</kb-button>
+  <span slot="header">CONFIRM</span>
+  <p>A fully-featured popover with header, close button, body content, and footer actions.</p>
+  <span slot="footer">
+    <kb-button variant="outline" size="xs">CANCEL</kb-button>
+    <kb-button size="xs">SAVE</kb-button>
+  </span>
+</kb-popover>`;
+export const exPlacementTop = `<div style="margin-top: 180px">
+  <kb-popover placement="top" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">OPEN TOP</kb-button>
+    <span slot="header">TOP POPOVER</span>
+    <p>Content appears above the trigger element.</p>
+  </kb-popover>
+</div>`;
+export const exPlacementTopReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<div style="margin-top: 180px">
+  <Popover placement="top" trigger="click" size="sm" show-arrow>
+    <Button slot="trigger">OPEN TOP</Button>
+    <span slot="header">TOP POPOVER</span>
+    <p>Content appears above the trigger element.</p>
+  </Popover>
+</div>`;
+export const exPlacementTopVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="margin-top: 180px">
+    <kb-popover placement="top" trigger="click" size="sm" show-arrow>
+      <kb-button slot="trigger">OPEN TOP</kb-button>
+      <span slot="header">TOP POPOVER</span>
+      <p>Content appears above the trigger element.</p>
+    </kb-popover>
+  </div>
+</template>`;
+export const exPlacementTopSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="margin-top: 180px">
+  <kb-popover placement="top" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">OPEN TOP</kb-button>
+    <span slot="header">TOP POPOVER</span>
+    <p>Content appears above the trigger element.</p>
+  </kb-popover>
+</div>`;
+export const exPlacementLeft = `<div style="margin-left: 300px">
+  <kb-popover placement="left" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">OPEN LEFT</kb-button>
+    <p>Content appears to the left of the trigger.</p>
+  </kb-popover>
+</div>`;
+export const exPlacementLeftReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<div style="margin-left: 300px">
+  <Popover placement="left" trigger="click" size="sm" show-arrow>
+    <Button slot="trigger">OPEN LEFT</Button>
+    <p>Content appears to the left of the trigger.</p>
+  </Popover>
+</div>`;
+export const exPlacementLeftVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="margin-left: 300px">
+    <kb-popover placement="left" trigger="click" size="sm" show-arrow>
+      <kb-button slot="trigger">OPEN LEFT</kb-button>
+      <p>Content appears to the left of the trigger.</p>
+    </kb-popover>
+  </div>
+</template>`;
+export const exPlacementLeftSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="margin-left: 300px">
+  <kb-popover placement="left" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">OPEN LEFT</kb-button>
+    <p>Content appears to the left of the trigger.</p>
+  </kb-popover>
+</div>`;
+export const exPlacementRight = `<kb-popover placement="right" trigger="click" size="sm" show-arrow>
+  <kb-button slot="trigger">OPEN RIGHT</kb-button>
+  <p>Content appears to the right of the trigger.</p>
+</kb-popover>`;
+export const exPlacementRightReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="right" trigger="click" size="sm" show-arrow>
+  <Button slot="trigger">OPEN RIGHT</Button>
+  <p>Content appears to the right of the trigger.</p>
+</Popover>`;
+export const exPlacementRightVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="right" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">OPEN RIGHT</kb-button>
+    <p>Content appears to the right of the trigger.</p>
+  </kb-popover>
+</template>`;
+export const exPlacementRightSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="right" trigger="click" size="sm" show-arrow>
+  <kb-button slot="trigger">OPEN RIGHT</kb-button>
+  <p>Content appears to the right of the trigger.</p>
+</kb-popover>`;
+export const exFocusTrap = `<kb-popover placement="bottom" trigger="click" size="md" trap-focus auto-focus show-arrow closable>
+  <kb-button slot="trigger">FORM POPOVER</kb-button>
+  <span slot="header">QUICK EDIT</span>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <input type="text" placeholder="Name" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+    <input type="email" placeholder="Email" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+  </div>
+  <span slot="footer">
+    <kb-button size="xs">SAVE</kb-button>
+  </span>
+</kb-popover>`;
+export const exFocusTrapReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="md" trap-focus auto-focus show-arrow closable>
+  <Button slot="trigger">FORM POPOVER</Button>
+  <span slot="header">QUICK EDIT</span>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <input type="text" placeholder="Name" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+    <input type="email" placeholder="Email" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+  </div>
+  <span slot="footer">
+    <Button size="xs">SAVE</Button>
+  </span>
+</Popover>`;
+export const exFocusTrapVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="md" trap-focus auto-focus show-arrow closable>
+    <kb-button slot="trigger">FORM POPOVER</kb-button>
+    <span slot="header">QUICK EDIT</span>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <input type="text" placeholder="Name" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+      <input type="email" placeholder="Email" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+    </div>
+    <span slot="footer">
+      <kb-button size="xs">SAVE</kb-button>
+    </span>
+  </kb-popover>
+</template>`;
+export const exFocusTrapSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="md" trap-focus auto-focus show-arrow closable>
+  <kb-button slot="trigger">FORM POPOVER</kb-button>
+  <span slot="header">QUICK EDIT</span>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <input type="text" placeholder="Name" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+    <input type="email" placeholder="Email" style="padding: 4px 8px; border: 1px solid #e5e7eb; font-size: 13px" />
+  </div>
+  <span slot="footer">
+    <kb-button size="xs">SAVE</kb-button>
+  </span>
+</kb-popover>`;
+export const exNoHeaderNoFooter = `<kb-popover placement="bottom" trigger="click" size="sm" show-arrow>
+  <kb-button slot="trigger">SIMPLE</kb-button>
+  <p>A simple popover with only body content — no header, no footer, no close button.</p>
+</kb-popover>`;
+export const exNoHeaderNoFooterReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<Popover placement="bottom" trigger="click" size="sm" show-arrow>
+  <Button slot="trigger">SIMPLE</Button>
+  <p>A simple popover with only body content — no header, no footer, no close button.</p>
+</Popover>`;
+export const exNoHeaderNoFooterVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-popover placement="bottom" trigger="click" size="sm" show-arrow>
+    <kb-button slot="trigger">SIMPLE</kb-button>
+    <p>A simple popover with only body content — no header, no footer, no close button.</p>
+  </kb-popover>
+</template>`;
+export const exNoHeaderNoFooterSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-popover placement="bottom" trigger="click" size="sm" show-arrow>
+  <kb-button slot="trigger">SIMPLE</kb-button>
+  <p>A simple popover with only body content — no header, no footer, no close button.</p>
+</kb-popover>`;
+export const exCustomOffset = `<div style="display: flex; gap: 32px; flex-wrap: wrap; padding: 32px 16px" class="md:!p-20">
+  >
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="0">
+    <kb-button slot="trigger" size="sm">OFFSET 0</kb-button>
+    <p>No gap.</p>
+  </kb-popover>
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="2">
+    <kb-button slot="trigger" size="sm">OFFSET 2</kb-button>
+    <p>Default gap.</p>
+  </kb-popover>
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="4">
+    <kb-button slot="trigger" size="sm">OFFSET 4</kb-button>
+    <p>Large gap.</p>
+  </kb-popover>
+</div>`;
+export const exCustomOffsetReact = `import { Button, Popover } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display: flex; gap: 32px; flex-wrap: wrap; padding: 32px 16px" class="md:!p-20">
+  >
+  <Popover placement="bottom" trigger="click" size="xs" show-arrow offset="0">
+    <Button slot="trigger" size="sm">OFFSET 0</Button>
+    <p>No gap.</p>
+  </Popover>
+  <Popover placement="bottom" trigger="click" size="xs" show-arrow offset="2">
+    <Button slot="trigger" size="sm">OFFSET 2</Button>
+    <p>Default gap.</p>
+  </Popover>
+  <Popover placement="bottom" trigger="click" size="xs" show-arrow offset="4">
+    <Button slot="trigger" size="sm">OFFSET 4</Button>
+    <p>Large gap.</p>
+  </Popover>
+</div>`;
+export const exCustomOffsetVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display: flex; gap: 32px; flex-wrap: wrap; padding: 32px 16px" class="md:!p-20">
+    >
+    <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="0">
+      <kb-button slot="trigger" size="sm">OFFSET 0</kb-button>
+      <p>No gap.</p>
+    </kb-popover>
+    <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="2">
+      <kb-button slot="trigger" size="sm">OFFSET 2</kb-button>
+      <p>Default gap.</p>
+    </kb-popover>
+    <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="4">
+      <kb-button slot="trigger" size="sm">OFFSET 4</kb-button>
+      <p>Large gap.</p>
+    </kb-popover>
+  </div>
+</template>`;
+export const exCustomOffsetSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display: flex; gap: 32px; flex-wrap: wrap; padding: 32px 16px" class="md:!p-20">
+  >
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="0">
+    <kb-button slot="trigger" size="sm">OFFSET 0</kb-button>
+    <p>No gap.</p>
+  </kb-popover>
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="2">
+    <kb-button slot="trigger" size="sm">OFFSET 2</kb-button>
+    <p>Default gap.</p>
+  </kb-popover>
+  <kb-popover placement="bottom" trigger="click" size="xs" show-arrow offset="4">
+    <kb-button slot="trigger" size="sm">OFFSET 4</kb-button>
+    <p>Large gap.</p>
+  </kb-popover>
+</div>`;
+
+# Popover
+
+A floating panel anchored to a trigger element.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Popover } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `placement` | `placement` | `PopoverPlacement` | `'bottom'` | Position of the popover relative to the trigger element. |
+| `trigger` | `trigger` | `PopoverTrigger` | `'click'` | How the popover is activated - `'click'` toggles on click, `'hover'` on mouse enter/leave. |
+| `size` | `size` | `PopoverSize` | `'sm'` | Popover panel width and padding size. |
+| `open` | `open` | `boolean` | `false` | Programmatically control visibility. Reflected to attribute. |
+| `closeOnEscape` | `close-on-escape` | `boolean` | `true` | Close the popover when the Escape key is pressed. |
+| `closeOnOutside` | `close-on-outside` | `boolean` | `true` | Close the popover when clicking outside of it. |
+| `closable` | `closable` | `boolean` | `false` | Show a close button in the header area. |
+| `showArrow` | `show-arrow` | `boolean` | `false` | Render a small arrow pointing toward the trigger element. |
+| `offset` | `offset` | `number` | `2` | Distance between the popover and the trigger (0–4 Tailwind spacing units). |
+| `openDelay` | `open-delay` | `number` | `0` | Delay in ms before showing the popover on hover trigger. |
+| `closeDelay` | `close-delay` | `number` | `150` | Delay in ms before hiding the popover after mouse leaves (hover trigger). |
+| `autoFocus` | `auto-focus` | `boolean` | `false` | Automatically focus the first focusable element inside the popover when opened. |
+| `trapFocus` | `trap-focus` | `boolean` | `false` | Trap keyboard focus within the popover while open. |
+| `ariaLabel` | `aria-label` | `string \| null` | `null` | Accessible label for the dialog when no visible header is provided. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `trigger` | Element that opens the popover. |
+| `header` | Optional popover header. |
+| `footer` | Optional popover footer (only renders when provided). |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-open` | `{ source?: string }` or none | Dispatched when popover opens. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when popover closes (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Space` | Activate or select the focused item |
+| `Tab` | Move focus to the next focusable element |
+
+### ARIA
+
+**Roles:** `dialog`
+
+**Attributes:** `aria-expanded`, `aria-haspopup`, `aria-label`, `aria-labelledby`, `aria-modal`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Arrow" codes={{ html: exWithArrow, react: exWithArrowReact, vue: exWithArrowVue, svelte: exWithArrowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithArrow }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Hover Trigger" codes={{ html: exHoverTrigger, react: exHoverTriggerReact, vue: exHoverTriggerVue, svelte: exHoverTriggerSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHoverTrigger }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Hover With Delay" codes={{ html: exHoverWithDelay, react: exHoverWithDelayReact, vue: exHoverWithDelayVue, svelte: exHoverWithDelaySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exHoverWithDelay }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Extra Small" codes={{ html: exSizeExtraSmall, react: exSizeExtraSmallReact, vue: exSizeExtraSmallVue, svelte: exSizeExtraSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeExtraSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Medium" codes={{ html: exSizeMedium, react: exSizeMediumReact, vue: exSizeMediumVue, svelte: exSizeMediumSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeMedium }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Large" codes={{ html: exSizeLarge, react: exSizeLargeReact, vue: exSizeLargeVue, svelte: exSizeLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Footer" codes={{ html: exWithFooter, react: exWithFooterReact, vue: exWithFooterVue, svelte: exWithFooterSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithFooter }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable" codes={{ html: exClosable, react: exClosableReact, vue: exClosableVue, svelte: exClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable With Footer" codes={{ html: exClosableWithFooter, react: exClosableWithFooterReact, vue: exClosableWithFooterVue, svelte: exClosableWithFooterSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosableWithFooter }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Placement Top" codes={{ html: exPlacementTop, react: exPlacementTopReact, vue: exPlacementTopVue, svelte: exPlacementTopSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlacementTop }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Placement Left" codes={{ html: exPlacementLeft, react: exPlacementLeftReact, vue: exPlacementLeftVue, svelte: exPlacementLeftSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlacementLeft }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Placement Right" codes={{ html: exPlacementRight, react: exPlacementRightReact, vue: exPlacementRightVue, svelte: exPlacementRightSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPlacementRight }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Focus Trap" codes={{ html: exFocusTrap, react: exFocusTrapReact, vue: exFocusTrapVue, svelte: exFocusTrapSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFocusTrap }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="No Header No Footer" codes={{ html: exNoHeaderNoFooter, react: exNoHeaderNoFooterReact, vue: exNoHeaderNoFooterVue, svelte: exNoHeaderNoFooterSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exNoHeaderNoFooter }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Custom Offset" codes={{ html: exCustomOffset, react: exCustomOffsetReact, vue: exCustomOffsetVue, svelte: exCustomOffsetSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCustomOffset }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Tooltip](./tooltip)
+- [Dropdown Menu](./dropdown-menu)

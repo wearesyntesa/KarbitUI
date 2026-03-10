@@ -1,0 +1,133 @@
+{
+  "name": "Progress",
+  "tag": "kb-progress",
+  "category": "feedback",
+  "description": "A horizontal progress bar showing completion percentage.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/feedback/kb-progress.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Progress"
+  },
+  "props": [
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Current progress value between `min` and `max`."
+    },
+    {
+      "name": "max",
+      "attribute": "max",
+      "type": "number",
+      "default": "100",
+      "reflect": false,
+      "description": "Maximum progress value."
+    },
+    {
+      "name": "min",
+      "attribute": "min",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Minimum progress value."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ProgressSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Bar height preset."
+    },
+    {
+      "name": "indeterminate",
+      "attribute": "indeterminate",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show an animated indeterminate (looping) fill instead of a determinate bar."
+    },
+    {
+      "name": "showValue",
+      "attribute": "show-value",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Display the percentage or custom `valueLabel` next to the bar."
+    },
+    {
+      "name": "valueLabel",
+      "attribute": "value-label",
+      "type": "string",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Custom text displayed instead of the computed percentage when `showValue` is true."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the fill bar. When unset, defaults to blue (or auto-color thresholds)."
+    },
+    {
+      "name": "striped",
+      "attribute": "striped",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Apply a diagonal stripe pattern to the fill bar."
+    },
+    {
+      "name": "animated",
+      "attribute": "animated",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Animate the stripe pattern. Requires `striped` to be true."
+    },
+    {
+      "name": "segments",
+      "attribute": "segments",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Number of visual segments dividing the track. `0` disables segmentation."
+    },
+    {
+      "name": "autoColor",
+      "attribute": "auto-color",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Automatically change fill color based on value thresholds (blue → yellow → red)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "label",
+      "description": "Text label rendered above the progress bar."
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "progressbar"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-valuemax",
+      "aria-valuemin",
+      "aria-valuenow"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "circular-progress",
+    "spinner"
+  ]
+}

@@ -247,28 +247,30 @@ export function prefersReducedMotion(): boolean {
 
 const SPRING_EASING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
-/** Imperative scale-down on pointer press. Cancels any running animation on the element. No-ops under reduced motion. */
+/**
+ * Imperative scale-down on pointer press. Cancels any running animation on the element. No-ops under reduced motion.
+ *
+ * Uses `fill: 'forwards'` to hold the pressed state until {@link springPressUp}
+ * cancels it. Avoids `commitStyles()` which writes inline `transform` that
+ * causes layout shifts in Safari when the element is inside a flex container.
+ */
 export function springPressDown(el: HTMLElement, scale: number): Animation {
   if (isServer) return undefined as unknown as Animation;
   for (const a of el.getAnimations()) a.cancel();
-  const anim = el.animate([{ transform: `scale(${scale})` }], {
+  return el.animate([{ transform: `scale(${scale})` }], {
     duration: prefersReducedMotion() ? 0 : 100,
     easing: 'ease-out',
     fill: 'forwards',
   });
-  anim.finished.then(
-    () => {
-      anim.commitStyles();
-      anim.cancel();
-    },
-    (_e: unknown) => {
-      /* cancelled - no-op */
-    },
-  );
-  return anim;
 }
 
-/** Imperative spring-back to scale(1) on pointer release. Uses overshoot easing for tactile feel. Instant under reduced motion. */
+/**
+ * Imperative spring-back to scale(1) on pointer release. Uses overshoot easing for tactile feel. Instant under reduced motion.
+ *
+ * Cancels the animation once it reaches scale(1) — no inline style is left
+ * behind. This prevents Safari from creating a stacking context that shifts
+ * elements inside flex containers.
+ */
 export function springPressUp(el: HTMLElement): Animation {
   if (isServer) return undefined as unknown as Animation;
   for (const a of el.getAnimations()) a.cancel();
@@ -279,7 +281,7 @@ export function springPressUp(el: HTMLElement): Animation {
   });
   anim.finished.then(
     () => {
-      anim.commitStyles();
+      // Just cancel — scale(1) is the default state so nothing to persist.
       anim.cancel();
     },
     (_e: unknown) => {

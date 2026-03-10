@@ -1,0 +1,266 @@
+---
+title: "Box"
+description: "A generic container element that accepts all style props."
+sidebar_label: "Box"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-box p="4" bg="neutral.100">Content in a box</kb-box>`;
+export const reactCode = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="4" bg="neutral.100">Content in a box</Box>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="4" bg="neutral.100">Content in a box</kb-box>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="4" bg="neutral.100">Content in a box</kb-box>`;
+export const exDefault = `<kb-box p="4" bg="white">Box content</kb-box>`;
+export const exDefaultReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="4" bg="white">Box content</Box>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="4" bg="white">Box content</kb-box>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="4" bg="white">Box content</kb-box>`;
+export const exPadded = `<kb-box p="6" bg="white">Box with extra padding</kb-box>`;
+export const exPaddedReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="6" bg="white">Box with extra padding</Box>`;
+export const exPaddedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="6" bg="white">Box with extra padding</kb-box>
+</template>`;
+export const exPaddedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="6" bg="white">Box with extra padding</kb-box>`;
+export const exColored = `<kb-box p="6" bg="blue-500" color="white">Colored box</kb-box>`;
+export const exColoredReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="6" bg="blue-500" color="white">Colored box</Box>`;
+export const exColoredVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="6" bg="blue-500" color="white">Colored box</kb-box>
+</template>`;
+export const exColoredSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="6" bg="blue-500" color="white">Colored box</kb-box>`;
+export const exWithBorder = `<kb-box p="6" bg="white" border rounded="none" class="border border-gray-200 dark:border-zinc-700">
+  Bordered box
+</kb-box>`;
+export const exWithBorderReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="6" bg="white" border rounded="none" class="border border-gray-200 dark:border-zinc-700">
+  Bordered box
+</Box>`;
+export const exWithBorderVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="6" bg="white" border rounded="none" class="border border-gray-200 dark:border-zinc-700">
+    Bordered box
+  </kb-box>
+</template>`;
+export const exWithBorderSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="6" bg="white" border rounded="none" class="border border-gray-200 dark:border-zinc-700">
+  Bordered box
+</kb-box>`;
+export const exShadow = `<kb-box p="6" bg="white" shadow="md">Box with shadow</kb-box>`;
+export const exShadowReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="6" bg="white" shadow="md">Box with shadow</Box>`;
+export const exShadowVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="6" bg="white" shadow="md">Box with shadow</kb-box>
+</template>`;
+export const exShadowSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="6" bg="white" shadow="md">Box with shadow</kb-box>`;
+export const exAsCard = `<kb-box p="6" bg="white" shadow="sm" class="border border-gray-200 dark:border-zinc-700">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-2">CARD PATTERN</p>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">A box styled like a card using only style props.</p>
+</kb-box>`;
+export const exAsCardReact = `import { Box } from '@wearesyntesa/karbit-ui/react';
+
+<Box p="6" bg="white" shadow="sm" class="border border-gray-200 dark:border-zinc-700">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-2">CARD PATTERN</p>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">A box styled like a card using only style props.</p>
+</Box>`;
+export const exAsCardVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-box p="6" bg="white" shadow="sm" class="border border-gray-200 dark:border-zinc-700">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-2">CARD PATTERN</p>
+    <p class="text-sm text-slate-700 dark:text-zinc-300">A box styled like a card using only style props.</p>
+  </kb-box>
+</template>`;
+export const exAsCardSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-box p="6" bg="white" shadow="sm" class="border border-gray-200 dark:border-zinc-700">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 mb-2">CARD PATTERN</p>
+  <p class="text-sm text-slate-700 dark:text-zinc-300">A box styled like a card using only style props.</p>
+</kb-box>`;
+
+# Box
+
+A generic container element that accepts all style props.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Box } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Padded" codes={{ html: exPadded, react: exPaddedReact, vue: exPaddedVue, svelte: exPaddedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPadded }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Colored" codes={{ html: exColored, react: exColoredReact, vue: exColoredVue, svelte: exColoredSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColored }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Border" codes={{ html: exWithBorder, react: exWithBorderReact, vue: exWithBorderVue, svelte: exWithBorderSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithBorder }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Shadow" codes={{ html: exShadow, react: exShadowReact, vue: exShadowVue, svelte: exShadowSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exShadow }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="As Card" codes={{ html: exAsCard, react: exAsCardReact, vue: exAsCardVue, svelte: exAsCardSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAsCard }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Flex](./flex)
+- [Grid](./grid)

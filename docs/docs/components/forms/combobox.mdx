@@ -1,0 +1,491 @@
+---
+title: "Combobox"
+description: "A searchable select with typeahead filtering."
+sidebar_label: "Combobox"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Options are set via JavaScript property -->
+<kb-combobox placeholder="Search..."></kb-combobox>
+
+<script>
+  document.querySelector('kb-combobox').options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'svelte', label: 'Svelte' },
+  ];
+</script>`;
+export const reactCode = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<Combobox placeholder="Search..."
+  options={
+  [
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'svelte', label: 'Svelte' },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'svelte', label: 'Svelte' },
+  ];
+</script>
+
+<template>
+  <kb-combobox placeholder="Search..." :options="options" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'svelte', label: 'Svelte' },
+  ];
+</script>
+
+<kb-combobox placeholder="Search..." options={options} />`;
+export const demoHtml = `<kb-combobox placeholder="Search..."></kb-combobox>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-combobox').options = [
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'svelte', label: 'Svelte' },
+    ];
+};
+export const exDefault = `<kb-combobox placeholder="Search country...">
+</kb-combobox>`;
+export const exDefaultReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<Combobox placeholder="Search country...">
+</Combobox>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-combobox placeholder="Search country...">
+  </kb-combobox>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-combobox placeholder="Search country...">
+</kb-combobox>`;
+export const exDefaultSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+export const exWithValue = `<kb-combobox placeholder="Search..." value="de" clearable>
+</kb-combobox>`;
+export const exWithValueReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<Combobox placeholder="Search..." value="de" clearable>
+</Combobox>`;
+export const exWithValueVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-combobox placeholder="Search..." value="de" clearable>
+  </kb-combobox>
+</template>`;
+export const exWithValueSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-combobox placeholder="Search..." value="de" clearable>
+</kb-combobox>`;
+export const exWithValueSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+export const exVariants = `<div class="flex flex-col gap-6">
+  <kb-combobox variant="outline" placeholder="Outline...">
+  </kb-combobox>
+  <kb-combobox variant="filled" placeholder="Filled...">
+  </kb-combobox>
+  <kb-combobox variant="flushed" placeholder="Flushed...">
+  </kb-combobox>
+</div>`;
+export const exVariantsReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Combobox variant="outline" placeholder="Outline...">
+  </Combobox>
+  <Combobox variant="filled" placeholder="Filled...">
+  </Combobox>
+  <Combobox variant="flushed" placeholder="Flushed...">
+  </Combobox>
+</div>`;
+export const exVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-combobox variant="outline" placeholder="Outline...">
+    </kb-combobox>
+    <kb-combobox variant="filled" placeholder="Filled...">
+    </kb-combobox>
+    <kb-combobox variant="flushed" placeholder="Flushed...">
+    </kb-combobox>
+  </div>
+</template>`;
+export const exVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-combobox variant="outline" placeholder="Outline...">
+  </kb-combobox>
+  <kb-combobox variant="filled" placeholder="Filled...">
+  </kb-combobox>
+  <kb-combobox variant="flushed" placeholder="Flushed...">
+  </kb-combobox>
+</div>`;
+export const exVariantsSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-combobox size="xs" placeholder="XS">
+  </kb-combobox>
+  <kb-combobox size="sm" placeholder="SM">
+  </kb-combobox>
+  <kb-combobox size="md" placeholder="MD">
+  </kb-combobox>
+  <kb-combobox size="lg" placeholder="LG">
+  </kb-combobox>
+  <kb-combobox size="xl" placeholder="XL">
+  </kb-combobox>
+</div>`;
+export const exSizesReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Combobox size="xs" placeholder="XS">
+  </Combobox>
+  <Combobox size="sm" placeholder="SM">
+  </Combobox>
+  <Combobox size="md" placeholder="MD">
+  </Combobox>
+  <Combobox size="lg" placeholder="LG">
+  </Combobox>
+  <Combobox size="xl" placeholder="XL">
+  </Combobox>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-combobox size="xs" placeholder="XS">
+    </kb-combobox>
+    <kb-combobox size="sm" placeholder="SM">
+    </kb-combobox>
+    <kb-combobox size="md" placeholder="MD">
+    </kb-combobox>
+    <kb-combobox size="lg" placeholder="LG">
+    </kb-combobox>
+    <kb-combobox size="xl" placeholder="XL">
+    </kb-combobox>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-combobox size="xs" placeholder="XS">
+  </kb-combobox>
+  <kb-combobox size="sm" placeholder="SM">
+  </kb-combobox>
+  <kb-combobox size="md" placeholder="MD">
+  </kb-combobox>
+  <kb-combobox size="lg" placeholder="LG">
+  </kb-combobox>
+  <kb-combobox size="xl" placeholder="XL">
+  </kb-combobox>
+</div>`;
+export const exSizesSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+export const exDisabled = `<kb-combobox disabled value="us">
+</kb-combobox>`;
+export const exDisabledReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<Combobox disabled value="us">
+</Combobox>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-combobox disabled value="us">
+  </kb-combobox>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-combobox disabled value="us">
+</kb-combobox>`;
+export const exDisabledSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+export const exInvalid = `<kb-combobox invalid placeholder="Error state...">
+</kb-combobox>`;
+export const exInvalidReact = `import { Combobox } from '@wearesyntesa/karbit-ui/react';
+
+<Combobox invalid placeholder="Error state...">
+</Combobox>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-combobox invalid placeholder="Error state...">
+  </kb-combobox>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-combobox invalid placeholder="Error state...">
+</kb-combobox>`;
+export const exInvalidSetup = (container) => {
+  const COUNTRIES = [
+  { value: 'us', label: 'United States' },
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'kr', label: 'South Korea' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'no', label: 'Norway' },
+  { value: 'id', label: 'Indonesia' },
+];
+  container.querySelectorAll('kb-combobox').forEach(el => { el.options = COUNTRIES; });
+};
+
+# Combobox
+
+A searchable select with typeahead filtering.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Combobox } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `FormVariant` | `'outline'` | Visual variant. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `placeholder` | `placeholder` | `string` | — | Placeholder text. |
+| `value` | `value` | `V \| ''` | `""` | Currently selected value. |
+| `name` | `name` | `string` | — | Form field name. |
+| `options` | `options` | `readonly SelectOption<V>[]` | `[]` | Array of selectable options. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error styling. |
+| `clearable` | `clearable` | `boolean` | `false` | Show clear button. |
+| `emptyText` | `empty-text` | `string` | `'No results'` | Text shown when no options match. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value changed. Detail: `{ source: 'combobox', value: string }`. |
+| `kb-input` | `{ value: string }` | Search text changed. Detail: `{ value: string }`. |
+| `kb-focus` | `{ source?: string }` or none | Focused. |
+| `kb-blur` | `{ source?: string }` or none | Blurred. |
+| `kb-clear` | `{ source?: string }` or none | Cleared. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowUp` | Move focus to the previous item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Tab` | Move focus to the next focusable element |
+
+### ARIA
+
+**Roles:** `combobox`, `listbox`, `option`
+
+**Attributes:** `aria-activedescendant`, `aria-controls`, `aria-disabled`, `aria-expanded`, `aria-haspopup`, `aria-invalid`, `aria-label`, `aria-selected`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Value" codes={{ html: exWithValue, react: exWithValueReact, vue: exWithValueVue, svelte: exWithValueSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exWithValue} setup={exWithValueSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Variants" codes={{ html: exVariants, react: exVariantsReact, vue: exVariantsVue, svelte: exVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exVariants} setup={exVariantsSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSizes} setup={exSizesSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDisabled} setup={exDisabledSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exInvalid} setup={exInvalidSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Select](./select)
+- [Input](./input)

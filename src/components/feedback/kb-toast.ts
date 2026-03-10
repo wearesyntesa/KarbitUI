@@ -154,7 +154,7 @@ export class KbToast extends KbBaseElement<'title' | 'action'> {
     const dismissClasses = this._dismissing ? `opacity-0 ${exitTranslate}` : `opacity-100 ${enterAnim}`;
 
     const classes = this.buildClasses(
-      `z-50 flex flex-col min-w-[300px] max-w-md ${kbClasses.border} border-l-4 ${kbClasses.surface} font-sans select-none overflow-hidden will-change-transform transition-[opacity,transform] duration-200 ease-in-out`,
+      `z-[9999] flex flex-col min-w-[300px] max-w-md ${kbClasses.border} border-l-4 ${kbClasses.surface} font-sans select-none overflow-hidden will-change-transform transition-[opacity,transform] duration-200 ease-in-out`,
       posClasses,
       statusBorder,
       dismissClasses,

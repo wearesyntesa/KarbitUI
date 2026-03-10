@@ -1,0 +1,189 @@
+---
+title: "List Item"
+description: "An individual item within a list component."
+sidebar_label: "List Item"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-list dividers>
+  <kb-list-item interactive>
+    <span slot="icon">→</span>
+    Dashboard
+    <span slot="secondary">View system metrics</span>
+  </kb-list-item>
+  <kb-list-item interactive>
+    <span slot="icon">→</span>
+    Settings
+    <span slot="secondary">Manage preferences</span>
+  </kb-list-item>
+  <kb-list-item disabled>
+    <span slot="icon">→</span>
+    Archived
+    <span slot="secondary">Read-only access</span>
+  </kb-list-item>
+</kb-list>`;
+export const reactCode = `import { List, ListItem } from '@wearesyntesa/karbit-ui/react';
+
+<List dividers>
+  <ListItem interactive>
+    <span slot="icon">→</span>
+    Dashboard
+    <span slot="secondary">View system metrics</span>
+  </ListItem>
+  <ListItem interactive>
+    <span slot="icon">→</span>
+    Settings
+    <span slot="secondary">Manage preferences</span>
+  </ListItem>
+  <ListItem disabled>
+    <span slot="icon">→</span>
+    Archived
+    <span slot="secondary">Read-only access</span>
+  </ListItem>
+</List>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-list dividers>
+    <kb-list-item interactive>
+      <span slot="icon">→</span>
+      Dashboard
+      <span slot="secondary">View system metrics</span>
+    </kb-list-item>
+    <kb-list-item interactive>
+      <span slot="icon">→</span>
+      Settings
+      <span slot="secondary">Manage preferences</span>
+    </kb-list-item>
+    <kb-list-item disabled>
+      <span slot="icon">→</span>
+      Archived
+      <span slot="secondary">Read-only access</span>
+    </kb-list-item>
+  </kb-list>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-list dividers>
+  <kb-list-item interactive>
+    <span slot="icon">→</span>
+    Dashboard
+    <span slot="secondary">View system metrics</span>
+  </kb-list-item>
+  <kb-list-item interactive>
+    <span slot="icon">→</span>
+    Settings
+    <span slot="secondary">Manage preferences</span>
+  </kb-list-item>
+  <kb-list-item disabled>
+    <span slot="icon">→</span>
+    Archived
+    <span slot="secondary">Read-only access</span>
+  </kb-list-item>
+</kb-list>`;
+
+# List Item
+
+An individual item within a list component.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { ListItem } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `interactive` | `interactive` | `boolean \| undefined` | — | Override parent list `interactive` setting for this item. Falls back to parent `<kb-list>` value when `undefined`. |
+| `divider` | `divider` | `boolean \| undefined` | — | Override parent list `dividers` setting for this item. Falls back to parent `<kb-list>` value when `undefined`. |
+| `disabled` | `disabled` | `boolean` | `false` | Disables the item, preventing interaction and applying reduced opacity. |
+| `href` | `href` | `string` | `""` | URL to navigate to - renders the item as an anchor element. |
+| `target` | `target` | `string` | `""` | Link target attribute, e.g. `'_blank'`. Only used when `href` is set. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon` | Leading icon or visual element. |
+| `secondary` | Secondary description text below or beside the primary content. |
+| `trailing` | Trailing content (badge, arrow, etc.) aligned to the right. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-click` | none | Dispatched when an interactive item is clicked or activated via keyboard. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `listitem`
+
+## See Also
+
+- [List](./list)

@@ -1,0 +1,1333 @@
+---
+title: "Tag"
+description: "A small label for categorizing or marking items."
+sidebar_label: "Tag"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-tag>New</kb-tag>`;
+export const reactCode = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag>New</Tag>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag>New</kb-tag>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag>New</kb-tag>`;
+export const exSubtle = `<kb-tag variant="subtle" size="md">Status</kb-tag>`;
+export const exSubtleReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag variant="subtle" size="md">Status</Tag>`;
+export const exSubtleVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag variant="subtle" size="md">Status</kb-tag>
+</template>`;
+export const exSubtleSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag variant="subtle" size="md">Status</kb-tag>`;
+export const exSolid = `<kb-tag variant="solid" size="md">Status</kb-tag>`;
+export const exSolidReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag variant="solid" size="md">Status</Tag>`;
+export const exSolidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag variant="solid" size="md">Status</kb-tag>
+</template>`;
+export const exSolidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag variant="solid" size="md">Status</kb-tag>`;
+export const exOutline = `<kb-tag variant="outline" size="md">Status</kb-tag>`;
+export const exOutlineReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag variant="outline" size="md">Status</Tag>`;
+export const exOutlineVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag variant="outline" size="md">Status</kb-tag>
+</template>`;
+export const exOutlineSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag variant="outline" size="md">Status</kb-tag>`;
+export const exSmall = `<kb-tag variant="subtle" size="sm">Status</kb-tag>`;
+export const exSmallReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag variant="subtle" size="sm">Status</Tag>`;
+export const exSmallVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag variant="subtle" size="sm">Status</kb-tag>
+</template>`;
+export const exSmallSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag variant="subtle" size="sm">Status</kb-tag>`;
+export const exLarge = `<kb-tag variant="subtle" size="lg">Status</kb-tag>`;
+export const exLargeReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<Tag variant="subtle" size="lg">Status</Tag>`;
+export const exLargeVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-tag variant="subtle" size="lg">Status</kb-tag>
+</template>`;
+export const exLargeSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-tag variant="subtle" size="lg">Status</kb-tag>`;
+export const exClosable = `<div class="flex items-center gap-3">
+  <kb-tag variant="subtle" size="md" closable color-scheme="blue">Filter A</kb-tag>
+  <kb-tag variant="subtle" size="md" closable color-scheme="green">Filter B</kb-tag>
+  <kb-tag variant="subtle" size="md" closable color-scheme="red">Filter C</kb-tag>
+</div>`;
+export const exClosableReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center gap-3">
+  <Tag variant="subtle" size="md" closable color-scheme="blue">Filter A</Tag>
+  <Tag variant="subtle" size="md" closable color-scheme="green">Filter B</Tag>
+  <Tag variant="subtle" size="md" closable color-scheme="red">Filter C</Tag>
+</div>`;
+export const exClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="subtle" size="md" closable color-scheme="blue">Filter A</kb-tag>
+    <kb-tag variant="subtle" size="md" closable color-scheme="green">Filter B</kb-tag>
+    <kb-tag variant="subtle" size="md" closable color-scheme="red">Filter C</kb-tag>
+  </div>
+</template>`;
+export const exClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center gap-3">
+  <kb-tag variant="subtle" size="md" closable color-scheme="blue">Filter A</kb-tag>
+  <kb-tag variant="subtle" size="md" closable color-scheme="green">Filter B</kb-tag>
+  <kb-tag variant="subtle" size="md" closable color-scheme="red">Filter C</kb-tag>
+</div>`;
+export const exInteractive = `<div class="flex items-center gap-3">
+  <kb-tag variant="outline" size="md" interactive>Design</kb-tag>
+  <kb-tag variant="outline" size="md" interactive>Engineering</kb-tag>
+  <kb-tag variant="outline" size="md" interactive>Research</kb-tag>
+</div>
+<p id="tag-click-out" class="mt-4 font-mono text-xs text-slate-500 dark:text-zinc-400 h-5">Click a tag</p>`;
+export const exInteractiveReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center gap-3">
+  <Tag variant="outline" size="md" interactive>Design</Tag>
+  <Tag variant="outline" size="md" interactive>Engineering</Tag>
+  <Tag variant="outline" size="md" interactive>Research</Tag>
+</div>
+<p id="tag-click-out" class="mt-4 font-mono text-xs text-slate-500 dark:text-zinc-400 h-5">Click a tag</p>`;
+export const exInteractiveVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="outline" size="md" interactive>Design</kb-tag>
+    <kb-tag variant="outline" size="md" interactive>Engineering</kb-tag>
+    <kb-tag variant="outline" size="md" interactive>Research</kb-tag>
+  </div>
+  <p id="tag-click-out" class="mt-4 font-mono text-xs text-slate-500 dark:text-zinc-400 h-5">Click a tag</p>
+</template>`;
+export const exInteractiveSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center gap-3">
+  <kb-tag variant="outline" size="md" interactive>Design</kb-tag>
+  <kb-tag variant="outline" size="md" interactive>Engineering</kb-tag>
+  <kb-tag variant="outline" size="md" interactive>Research</kb-tag>
+</div>
+<p id="tag-click-out" class="mt-4 font-mono text-xs text-slate-500 dark:text-zinc-400 h-5">Click a tag</p>`;
+export const exInteractiveClosable = `<div class="flex items-center gap-3">
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="blue">React</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="green">Vue</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="yellow">Svelte</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="red">Angular</kb-tag>
+</div>`;
+export const exInteractiveClosableReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center gap-3">
+  <Tag variant="subtle" size="md" interactive closable color-scheme="blue">React</Tag>
+  <Tag variant="subtle" size="md" interactive closable color-scheme="green">Vue</Tag>
+  <Tag variant="subtle" size="md" interactive closable color-scheme="yellow">Svelte</Tag>
+  <Tag variant="subtle" size="md" interactive closable color-scheme="red">Angular</Tag>
+</div>`;
+export const exInteractiveClosableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="subtle" size="md" interactive closable color-scheme="blue">React</kb-tag>
+    <kb-tag variant="subtle" size="md" interactive closable color-scheme="green">Vue</kb-tag>
+    <kb-tag variant="subtle" size="md" interactive closable color-scheme="yellow">Svelte</kb-tag>
+    <kb-tag variant="subtle" size="md" interactive closable color-scheme="red">Angular</kb-tag>
+  </div>
+</template>`;
+export const exInteractiveClosableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center gap-3">
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="blue">React</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="green">Vue</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="yellow">Svelte</kb-tag>
+  <kb-tag variant="subtle" size="md" interactive closable color-scheme="red">Angular</kb-tag>
+</div>`;
+export const exStatusDots = `<div class="flex flex-col gap-4">
+  <div class="flex items-center gap-3">
+    <kb-tag variant="subtle" dot color-scheme="green">Healthy</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="red">Critical</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="blue">Maintenance</kb-tag>
+  </div>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="outline" dot color-scheme="green">Online</kb-tag>
+    <kb-tag variant="outline" dot color-scheme="red">Offline</kb-tag>
+    <kb-tag variant="outline" dot>Unknown</kb-tag>
+  </div>
+</div>`;
+export const exStatusDotsReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <div class="flex items-center gap-3">
+    <Tag variant="subtle" dot color-scheme="green">Healthy</Tag>
+    <Tag variant="subtle" dot color-scheme="yellow">Degraded</Tag>
+    <Tag variant="subtle" dot color-scheme="red">Critical</Tag>
+    <Tag variant="subtle" dot color-scheme="blue">Maintenance</Tag>
+  </div>
+  <div class="flex items-center gap-3">
+    <Tag variant="outline" dot color-scheme="green">Online</Tag>
+    <Tag variant="outline" dot color-scheme="red">Offline</Tag>
+    <Tag variant="outline" dot>Unknown</Tag>
+  </div>
+</div>`;
+export const exStatusDotsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-3">
+      <kb-tag variant="subtle" dot color-scheme="green">Healthy</kb-tag>
+      <kb-tag variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+      <kb-tag variant="subtle" dot color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="subtle" dot color-scheme="blue">Maintenance</kb-tag>
+    </div>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="outline" dot color-scheme="green">Online</kb-tag>
+      <kb-tag variant="outline" dot color-scheme="red">Offline</kb-tag>
+      <kb-tag variant="outline" dot>Unknown</kb-tag>
+    </div>
+  </div>
+</template>`;
+export const exStatusDotsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <div class="flex items-center gap-3">
+    <kb-tag variant="subtle" dot color-scheme="green">Healthy</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="red">Critical</kb-tag>
+    <kb-tag variant="subtle" dot color-scheme="blue">Maintenance</kb-tag>
+  </div>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="outline" dot color-scheme="green">Online</kb-tag>
+    <kb-tag variant="outline" dot color-scheme="red">Offline</kb-tag>
+    <kb-tag variant="outline" dot>Unknown</kb-tag>
+  </div>
+</div>`;
+export const exWithIcon = `<div class="flex items-center gap-3">
+  <kb-tag variant="outline" color-scheme="blue">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+      <line x1="16" y1="8" x2="2" y2="22"/>
+      <line x1="17.5" y1="15" x2="9" y2="15"/>
+    </svg>
+    Tagged
+  </kb-tag>
+  <kb-tag variant="subtle" color-scheme="green">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    Verified
+  </kb-tag>
+  <kb-tag variant="solid" color-scheme="red">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    Alert
+  </kb-tag>
+</div>`;
+export const exWithIconReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center gap-3">
+  <Tag variant="outline" color-scheme="blue">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+      <line x1="16" y1="8" x2="2" y2="22"/>
+      <line x1="17.5" y1="15" x2="9" y2="15"/>
+    </svg>
+    Tagged
+  </Tag>
+  <Tag variant="subtle" color-scheme="green">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    Verified
+  </Tag>
+  <Tag variant="solid" color-scheme="red">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    Alert
+  </Tag>
+</div>`;
+export const exWithIconVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center gap-3">
+    <kb-tag variant="outline" color-scheme="blue">
+      <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+        <line x1="16" y1="8" x2="2" y2="22"/>
+        <line x1="17.5" y1="15" x2="9" y2="15"/>
+      </svg>
+      Tagged
+    </kb-tag>
+    <kb-tag variant="subtle" color-scheme="green">
+      <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Verified
+    </kb-tag>
+    <kb-tag variant="solid" color-scheme="red">
+      <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      Alert
+    </kb-tag>
+  </div>
+</template>`;
+export const exWithIconSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center gap-3">
+  <kb-tag variant="outline" color-scheme="blue">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+      <line x1="16" y1="8" x2="2" y2="22"/>
+      <line x1="17.5" y1="15" x2="9" y2="15"/>
+    </svg>
+    Tagged
+  </kb-tag>
+  <kb-tag variant="subtle" color-scheme="green">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    Verified
+  </kb-tag>
+  <kb-tag variant="solid" color-scheme="red">
+    <svg slot="icon" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    Alert
+  </kb-tag>
+</div>`;
+export const exColorSchemes = `<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Solid</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="solid" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="solid" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="solid" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="solid" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="solid" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Outline</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="outline" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="outline" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="outline" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="outline" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="outline" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Subtle</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="subtle" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="subtle" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="subtle" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="subtle" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="subtle" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+</div>`;
+export const exColorSchemesReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Solid</p>
+    <div class="flex items-center gap-3">
+      <Tag variant="solid" color-scheme="black">Default</Tag>
+      <Tag variant="solid" color-scheme="red">Critical</Tag>
+      <Tag variant="solid" color-scheme="blue">Info</Tag>
+      <Tag variant="solid" color-scheme="green">Success</Tag>
+      <Tag variant="solid" color-scheme="yellow">Warning</Tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Outline</p>
+    <div class="flex items-center gap-3">
+      <Tag variant="outline" color-scheme="black">Default</Tag>
+      <Tag variant="outline" color-scheme="red">Critical</Tag>
+      <Tag variant="outline" color-scheme="blue">Info</Tag>
+      <Tag variant="outline" color-scheme="green">Success</Tag>
+      <Tag variant="outline" color-scheme="yellow">Warning</Tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Subtle</p>
+    <div class="flex items-center gap-3">
+      <Tag variant="subtle" color-scheme="black">Default</Tag>
+      <Tag variant="subtle" color-scheme="red">Critical</Tag>
+      <Tag variant="subtle" color-scheme="blue">Info</Tag>
+      <Tag variant="subtle" color-scheme="green">Success</Tag>
+      <Tag variant="subtle" color-scheme="yellow">Warning</Tag>
+    </div>
+  </div>
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Solid</p>
+      <div class="flex items-center gap-3">
+        <kb-tag variant="solid" color-scheme="black">Default</kb-tag>
+        <kb-tag variant="solid" color-scheme="red">Critical</kb-tag>
+        <kb-tag variant="solid" color-scheme="blue">Info</kb-tag>
+        <kb-tag variant="solid" color-scheme="green">Success</kb-tag>
+        <kb-tag variant="solid" color-scheme="yellow">Warning</kb-tag>
+      </div>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Outline</p>
+      <div class="flex items-center gap-3">
+        <kb-tag variant="outline" color-scheme="black">Default</kb-tag>
+        <kb-tag variant="outline" color-scheme="red">Critical</kb-tag>
+        <kb-tag variant="outline" color-scheme="blue">Info</kb-tag>
+        <kb-tag variant="outline" color-scheme="green">Success</kb-tag>
+        <kb-tag variant="outline" color-scheme="yellow">Warning</kb-tag>
+      </div>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Subtle</p>
+      <div class="flex items-center gap-3">
+        <kb-tag variant="subtle" color-scheme="black">Default</kb-tag>
+        <kb-tag variant="subtle" color-scheme="red">Critical</kb-tag>
+        <kb-tag variant="subtle" color-scheme="blue">Info</kb-tag>
+        <kb-tag variant="subtle" color-scheme="green">Success</kb-tag>
+        <kb-tag variant="subtle" color-scheme="yellow">Warning</kb-tag>
+      </div>
+    </div>
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Solid</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="solid" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="solid" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="solid" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="solid" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="solid" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Outline</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="outline" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="outline" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="outline" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="outline" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="outline" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Subtle</p>
+    <div class="flex items-center gap-3">
+      <kb-tag variant="subtle" color-scheme="black">Default</kb-tag>
+      <kb-tag variant="subtle" color-scheme="red">Critical</kb-tag>
+      <kb-tag variant="subtle" color-scheme="blue">Info</kb-tag>
+      <kb-tag variant="subtle" color-scheme="green">Success</kb-tag>
+      <kb-tag variant="subtle" color-scheme="yellow">Warning</kb-tag>
+    </div>
+  </div>
+</div>`;
+export const exSizeComparison = `<div class="flex items-center gap-4">
+  <kb-tag size="sm" variant="outline" dot color-scheme="green">Small</kb-tag>
+  <kb-tag size="md" variant="outline" dot color-scheme="green">Medium</kb-tag>
+  <kb-tag size="lg" variant="outline" dot color-scheme="green">Large</kb-tag>
+</div>`;
+export const exSizeComparisonReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex items-center gap-4">
+  <Tag size="sm" variant="outline" dot color-scheme="green">Small</Tag>
+  <Tag size="md" variant="outline" dot color-scheme="green">Medium</Tag>
+  <Tag size="lg" variant="outline" dot color-scheme="green">Large</Tag>
+</div>`;
+export const exSizeComparisonVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex items-center gap-4">
+    <kb-tag size="sm" variant="outline" dot color-scheme="green">Small</kb-tag>
+    <kb-tag size="md" variant="outline" dot color-scheme="green">Medium</kb-tag>
+    <kb-tag size="lg" variant="outline" dot color-scheme="green">Large</kb-tag>
+  </div>
+</template>`;
+export const exSizeComparisonSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex items-center gap-4">
+  <kb-tag size="sm" variant="outline" dot color-scheme="green">Small</kb-tag>
+  <kb-tag size="md" variant="outline" dot color-scheme="green">Medium</kb-tag>
+  <kb-tag size="lg" variant="outline" dot color-scheme="green">Large</kb-tag>
+</div>`;
+export const exFilterBar = `<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Active Filters</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Region: US East</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Status: Active</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Type: API</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="red">Priority: High</kb-tag>
+  </div>
+</div>`;
+export const exFilterBarReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Active Filters</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <Tag interactive closable variant="outline" color-scheme="blue">Region: US East</Tag>
+    <Tag interactive closable variant="outline" color-scheme="blue">Status: Active</Tag>
+    <Tag interactive closable variant="outline" color-scheme="blue">Type: API</Tag>
+    <Tag interactive closable variant="outline" color-scheme="red">Priority: High</Tag>
+  </div>
+</div>`;
+export const exFilterBarVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Active Filters</p>
+    <div class="flex items-center gap-2 flex-wrap">
+      <kb-tag interactive closable variant="outline" color-scheme="blue">Region: US East</kb-tag>
+      <kb-tag interactive closable variant="outline" color-scheme="blue">Status: Active</kb-tag>
+      <kb-tag interactive closable variant="outline" color-scheme="blue">Type: API</kb-tag>
+      <kb-tag interactive closable variant="outline" color-scheme="red">Priority: High</kb-tag>
+    </div>
+  </div>
+</template>`;
+export const exFilterBarSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Active Filters</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Region: US East</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Status: Active</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="blue">Type: API</kb-tag>
+    <kb-tag interactive closable variant="outline" color-scheme="red">Priority: High</kb-tag>
+  </div>
+</div>`;
+export const exServiceStatus = `<div class="flex flex-col gap-3">
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Auth Gateway</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Payment Processor</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Search Index</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="red">Down</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">CDN Edge</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+  </div>
+</div>`;
+export const exServiceStatusReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-3">
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Auth Gateway</span>
+    <Tag size="sm" variant="subtle" dot color-scheme="green">Operational</Tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Payment Processor</span>
+    <Tag size="sm" variant="subtle" dot color-scheme="yellow">Degraded</Tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Search Index</span>
+    <Tag size="sm" variant="subtle" dot color-scheme="red">Down</Tag>
+  </div>
+  <div class="flex items-center justify-between py-3">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">CDN Edge</span>
+    <Tag size="sm" variant="subtle" dot color-scheme="green">Operational</Tag>
+  </div>
+</div>`;
+export const exServiceStatusVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+      <span class="text-sm text-slate-900 dark:text-zinc-50">Auth Gateway</span>
+      <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+    </div>
+    <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+      <span class="text-sm text-slate-900 dark:text-zinc-50">Payment Processor</span>
+      <kb-tag size="sm" variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+    </div>
+    <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+      <span class="text-sm text-slate-900 dark:text-zinc-50">Search Index</span>
+      <kb-tag size="sm" variant="subtle" dot color-scheme="red">Down</kb-tag>
+    </div>
+    <div class="flex items-center justify-between py-3">
+      <span class="text-sm text-slate-900 dark:text-zinc-50">CDN Edge</span>
+      <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+    </div>
+  </div>
+</template>`;
+export const exServiceStatusSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-3">
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Auth Gateway</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Payment Processor</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="yellow">Degraded</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-zinc-700">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">Search Index</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="red">Down</kb-tag>
+  </div>
+  <div class="flex items-center justify-between py-3">
+    <span class="text-sm text-slate-900 dark:text-zinc-50">CDN Edge</span>
+    <kb-tag size="sm" variant="subtle" dot color-scheme="green">Operational</kb-tag>
+  </div>
+</div>`;
+export const exCategoryTags = `<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Categories</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <kb-tag interactive variant="subtle">All</kb-tag>
+    <kb-tag interactive variant="outline">Infrastructure</kb-tag>
+    <kb-tag interactive variant="outline">Security</kb-tag>
+    <kb-tag interactive variant="outline">Performance</kb-tag>
+    <kb-tag interactive variant="outline">Monitoring</kb-tag>
+    <kb-tag interactive variant="outline">Deployment</kb-tag>
+  </div>
+</div>`;
+export const exCategoryTagsReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Categories</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <Tag interactive variant="subtle">All</Tag>
+    <Tag interactive variant="outline">Infrastructure</Tag>
+    <Tag interactive variant="outline">Security</Tag>
+    <Tag interactive variant="outline">Performance</Tag>
+    <Tag interactive variant="outline">Monitoring</Tag>
+    <Tag interactive variant="outline">Deployment</Tag>
+  </div>
+</div>`;
+export const exCategoryTagsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Categories</p>
+    <div class="flex items-center gap-2 flex-wrap">
+      <kb-tag interactive variant="subtle">All</kb-tag>
+      <kb-tag interactive variant="outline">Infrastructure</kb-tag>
+      <kb-tag interactive variant="outline">Security</kb-tag>
+      <kb-tag interactive variant="outline">Performance</kb-tag>
+      <kb-tag interactive variant="outline">Monitoring</kb-tag>
+      <kb-tag interactive variant="outline">Deployment</kb-tag>
+    </div>
+  </div>
+</template>`;
+export const exCategoryTagsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Categories</p>
+  <div class="flex items-center gap-2 flex-wrap">
+    <kb-tag interactive variant="subtle">All</kb-tag>
+    <kb-tag interactive variant="outline">Infrastructure</kb-tag>
+    <kb-tag interactive variant="outline">Security</kb-tag>
+    <kb-tag interactive variant="outline">Performance</kb-tag>
+    <kb-tag interactive variant="outline">Monitoring</kb-tag>
+    <kb-tag interactive variant="outline">Deployment</kb-tag>
+  </div>
+</div>`;
+export const exDraggable = `<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag these tags</p>
+  <div class="flex items-center gap-3">
+    <kb-tag kb-draggable value="react" variant="outline" color-scheme="blue">React</kb-tag>
+    <kb-tag kb-draggable value="vue" variant="outline" color-scheme="green">Vue</kb-tag>
+    <kb-tag kb-draggable value="svelte" variant="outline" color-scheme="yellow">Svelte</kb-tag>
+  </div>
+  <p class="text-xs text-slate-400 dark:text-zinc-500">Tags show grab cursor and fade to 40% opacity while dragging</p>
+</div>`;
+export const exDraggableReact = `import { Tag } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag these tags</p>
+  <div class="flex items-center gap-3">
+    <Tag kb-draggable value="react" variant="outline" color-scheme="blue">React</Tag>
+    <Tag kb-draggable value="vue" variant="outline" color-scheme="green">Vue</Tag>
+    <Tag kb-draggable value="svelte" variant="outline" color-scheme="yellow">Svelte</Tag>
+  </div>
+  <p class="text-xs text-slate-400 dark:text-zinc-500">Tags show grab cursor and fade to 40% opacity while dragging</p>
+</div>`;
+export const exDraggableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag these tags</p>
+    <div class="flex items-center gap-3">
+      <kb-tag kb-draggable value="react" variant="outline" color-scheme="blue">React</kb-tag>
+      <kb-tag kb-draggable value="vue" variant="outline" color-scheme="green">Vue</kb-tag>
+      <kb-tag kb-draggable value="svelte" variant="outline" color-scheme="yellow">Svelte</kb-tag>
+    </div>
+    <p class="text-xs text-slate-400 dark:text-zinc-500">Tags show grab cursor and fade to 40% opacity while dragging</p>
+  </div>
+</template>`;
+export const exDraggableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag these tags</p>
+  <div class="flex items-center gap-3">
+    <kb-tag kb-draggable value="react" variant="outline" color-scheme="blue">React</kb-tag>
+    <kb-tag kb-draggable value="vue" variant="outline" color-scheme="green">Vue</kb-tag>
+    <kb-tag kb-draggable value="svelte" variant="outline" color-scheme="yellow">Svelte</kb-tag>
+  </div>
+  <p class="text-xs text-slate-400 dark:text-zinc-500">Tags show grab cursor and fade to 40% opacity while dragging</p>
+</div>`;
+export const exReorderable = `<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag to reorder</p>
+  <kb-tag-group reorderable>
+    <kb-tag kb-draggable value="alpha" variant="outline">Alpha</kb-tag>
+    <kb-tag kb-draggable value="beta" variant="outline">Beta</kb-tag>
+    <kb-tag kb-draggable value="gamma" variant="outline">Gamma</kb-tag>
+    <kb-tag kb-draggable value="delta" variant="outline">Delta</kb-tag>
+    <kb-tag kb-draggable value="epsilon" variant="outline">Epsilon</kb-tag>
+  </kb-tag-group>
+  <p id="reorder-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">Drag tags to reorder</p>
+</div>`;
+export const exReorderableReact = `import { Tag, TagGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag to reorder</p>
+  <TagGroup reorderable>
+    <Tag kb-draggable value="alpha" variant="outline">Alpha</Tag>
+    <Tag kb-draggable value="beta" variant="outline">Beta</Tag>
+    <Tag kb-draggable value="gamma" variant="outline">Gamma</Tag>
+    <Tag kb-draggable value="delta" variant="outline">Delta</Tag>
+    <Tag kb-draggable value="epsilon" variant="outline">Epsilon</Tag>
+  </TagGroup>
+  <p id="reorder-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">Drag tags to reorder</p>
+</div>`;
+export const exReorderableVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag to reorder</p>
+    <kb-tag-group reorderable>
+      <kb-tag kb-draggable value="alpha" variant="outline">Alpha</kb-tag>
+      <kb-tag kb-draggable value="beta" variant="outline">Beta</kb-tag>
+      <kb-tag kb-draggable value="gamma" variant="outline">Gamma</kb-tag>
+      <kb-tag kb-draggable value="delta" variant="outline">Delta</kb-tag>
+      <kb-tag kb-draggable value="epsilon" variant="outline">Epsilon</kb-tag>
+    </kb-tag-group>
+    <p id="reorder-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">Drag tags to reorder</p>
+  </div>
+</template>`;
+export const exReorderableSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">Drag to reorder</p>
+  <kb-tag-group reorderable>
+    <kb-tag kb-draggable value="alpha" variant="outline">Alpha</kb-tag>
+    <kb-tag kb-draggable value="beta" variant="outline">Beta</kb-tag>
+    <kb-tag kb-draggable value="gamma" variant="outline">Gamma</kb-tag>
+    <kb-tag kb-draggable value="delta" variant="outline">Delta</kb-tag>
+    <kb-tag kb-draggable value="epsilon" variant="outline">Epsilon</kb-tag>
+  </kb-tag-group>
+  <p id="reorder-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">Drag tags to reorder</p>
+</div>`;
+export const exReorderableWithClose = `<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+    Reorderable + Closable Filters
+  </p>
+  <kb-tag-group reorderable>
+    <kb-tag kb-draggable closable value="region" variant="outline" color-scheme="blue">Region: US East</kb-tag>
+    <kb-tag kb-draggable closable value="status" variant="outline" color-scheme="green">Status: Active</kb-tag>
+    <kb-tag kb-draggable closable value="type" variant="outline" color-scheme="blue">Type: API</kb-tag>
+    <kb-tag kb-draggable closable value="priority" variant="outline" color-scheme="red">Priority: High</kb-tag>
+    <kb-tag kb-draggable closable value="team" variant="outline" color-scheme="yellow">Team: Platform</kb-tag>
+  </kb-tag-group>
+  <p id="reorder-close-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">
+    Drag to reorder, click × to dismiss
+  </p>
+</div>`;
+export const exReorderableWithCloseReact = `import { Tag, TagGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+    Reorderable + Closable Filters
+  </p>
+  <TagGroup reorderable>
+    <Tag kb-draggable closable value="region" variant="outline" color-scheme="blue">Region: US East</Tag>
+    <Tag kb-draggable closable value="status" variant="outline" color-scheme="green">Status: Active</Tag>
+    <Tag kb-draggable closable value="type" variant="outline" color-scheme="blue">Type: API</Tag>
+    <Tag kb-draggable closable value="priority" variant="outline" color-scheme="red">Priority: High</Tag>
+    <Tag kb-draggable closable value="team" variant="outline" color-scheme="yellow">Team: Platform</Tag>
+  </TagGroup>
+  <p id="reorder-close-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">
+    Drag to reorder, click × to dismiss
+  </p>
+</div>`;
+export const exReorderableWithCloseVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+      Reorderable + Closable Filters
+    </p>
+    <kb-tag-group reorderable>
+      <kb-tag kb-draggable closable value="region" variant="outline" color-scheme="blue">Region: US East</kb-tag>
+      <kb-tag kb-draggable closable value="status" variant="outline" color-scheme="green">Status: Active</kb-tag>
+      <kb-tag kb-draggable closable value="type" variant="outline" color-scheme="blue">Type: API</kb-tag>
+      <kb-tag kb-draggable closable value="priority" variant="outline" color-scheme="red">Priority: High</kb-tag>
+      <kb-tag kb-draggable closable value="team" variant="outline" color-scheme="yellow">Team: Platform</kb-tag>
+    </kb-tag-group>
+    <p id="reorder-close-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">
+      Drag to reorder, click × to dismiss
+    </p>
+  </div>
+</template>`;
+export const exReorderableWithCloseSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4">
+  <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+    Reorderable + Closable Filters
+  </p>
+  <kb-tag-group reorderable>
+    <kb-tag kb-draggable closable value="region" variant="outline" color-scheme="blue">Region: US East</kb-tag>
+    <kb-tag kb-draggable closable value="status" variant="outline" color-scheme="green">Status: Active</kb-tag>
+    <kb-tag kb-draggable closable value="type" variant="outline" color-scheme="blue">Type: API</kb-tag>
+    <kb-tag kb-draggable closable value="priority" variant="outline" color-scheme="red">Priority: High</kb-tag>
+    <kb-tag kb-draggable closable value="team" variant="outline" color-scheme="yellow">Team: Platform</kb-tag>
+  </kb-tag-group>
+  <p id="reorder-close-output" class="font-mono text-xs text-slate-400 dark:text-zinc-500 h-5">
+    Drag to reorder, click × to dismiss
+  </p>
+</div>`;
+export const exTagGroupGaps = `<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Small gap</p>
+    <kb-tag-group gap="sm">
+      <kb-tag variant="subtle" size="sm">React</kb-tag>
+      <kb-tag variant="subtle" size="sm">Vue</kb-tag>
+      <kb-tag variant="subtle" size="sm">Svelte</kb-tag>
+      <kb-tag variant="subtle" size="sm">Angular</kb-tag>
+      <kb-tag variant="subtle" size="sm">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Medium gap (default)</p>
+    <kb-tag-group gap="md">
+      <kb-tag variant="outline">React</kb-tag>
+      <kb-tag variant="outline">Vue</kb-tag>
+      <kb-tag variant="outline">Svelte</kb-tag>
+      <kb-tag variant="outline">Angular</kb-tag>
+      <kb-tag variant="outline">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Large gap</p>
+    <kb-tag-group gap="lg">
+      <kb-tag variant="solid" size="lg">React</kb-tag>
+      <kb-tag variant="solid" size="lg">Vue</kb-tag>
+      <kb-tag variant="solid" size="lg">Svelte</kb-tag>
+      <kb-tag variant="solid" size="lg">Angular</kb-tag>
+      <kb-tag variant="solid" size="lg">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+</div>`;
+export const exTagGroupGapsReact = `import { Tag, TagGroup } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Small gap</p>
+    <TagGroup gap="sm">
+      <Tag variant="subtle" size="sm">React</Tag>
+      <Tag variant="subtle" size="sm">Vue</Tag>
+      <Tag variant="subtle" size="sm">Svelte</Tag>
+      <Tag variant="subtle" size="sm">Angular</Tag>
+      <Tag variant="subtle" size="sm">Solid</Tag>
+    </TagGroup>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Medium gap (default)</p>
+    <TagGroup gap="md">
+      <Tag variant="outline">React</Tag>
+      <Tag variant="outline">Vue</Tag>
+      <Tag variant="outline">Svelte</Tag>
+      <Tag variant="outline">Angular</Tag>
+      <Tag variant="outline">Solid</Tag>
+    </TagGroup>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Large gap</p>
+    <TagGroup gap="lg">
+      <Tag variant="solid" size="lg">React</Tag>
+      <Tag variant="solid" size="lg">Vue</Tag>
+      <Tag variant="solid" size="lg">Svelte</Tag>
+      <Tag variant="solid" size="lg">Angular</Tag>
+      <Tag variant="solid" size="lg">Solid</Tag>
+    </TagGroup>
+  </div>
+</div>`;
+export const exTagGroupGapsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Small gap</p>
+      <kb-tag-group gap="sm">
+        <kb-tag variant="subtle" size="sm">React</kb-tag>
+        <kb-tag variant="subtle" size="sm">Vue</kb-tag>
+        <kb-tag variant="subtle" size="sm">Svelte</kb-tag>
+        <kb-tag variant="subtle" size="sm">Angular</kb-tag>
+        <kb-tag variant="subtle" size="sm">Solid</kb-tag>
+      </kb-tag-group>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Medium gap (default)</p>
+      <kb-tag-group gap="md">
+        <kb-tag variant="outline">React</kb-tag>
+        <kb-tag variant="outline">Vue</kb-tag>
+        <kb-tag variant="outline">Svelte</kb-tag>
+        <kb-tag variant="outline">Angular</kb-tag>
+        <kb-tag variant="outline">Solid</kb-tag>
+      </kb-tag-group>
+    </div>
+    <div>
+      <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Large gap</p>
+      <kb-tag-group gap="lg">
+        <kb-tag variant="solid" size="lg">React</kb-tag>
+        <kb-tag variant="solid" size="lg">Vue</kb-tag>
+        <kb-tag variant="solid" size="lg">Svelte</kb-tag>
+        <kb-tag variant="solid" size="lg">Angular</kb-tag>
+        <kb-tag variant="solid" size="lg">Solid</kb-tag>
+      </kb-tag-group>
+    </div>
+  </div>
+</template>`;
+export const exTagGroupGapsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Small gap</p>
+    <kb-tag-group gap="sm">
+      <kb-tag variant="subtle" size="sm">React</kb-tag>
+      <kb-tag variant="subtle" size="sm">Vue</kb-tag>
+      <kb-tag variant="subtle" size="sm">Svelte</kb-tag>
+      <kb-tag variant="subtle" size="sm">Angular</kb-tag>
+      <kb-tag variant="subtle" size="sm">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Medium gap (default)</p>
+    <kb-tag-group gap="md">
+      <kb-tag variant="outline">React</kb-tag>
+      <kb-tag variant="outline">Vue</kb-tag>
+      <kb-tag variant="outline">Svelte</kb-tag>
+      <kb-tag variant="outline">Angular</kb-tag>
+      <kb-tag variant="outline">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+  <div>
+    <p class="font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-400 mb-3">Large gap</p>
+    <kb-tag-group gap="lg">
+      <kb-tag variant="solid" size="lg">React</kb-tag>
+      <kb-tag variant="solid" size="lg">Vue</kb-tag>
+      <kb-tag variant="solid" size="lg">Svelte</kb-tag>
+      <kb-tag variant="solid" size="lg">Angular</kb-tag>
+      <kb-tag variant="solid" size="lg">Solid</kb-tag>
+    </kb-tag-group>
+  </div>
+</div>`;
+
+# Tag
+
+A small label for categorizing or marking items.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Tag } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `TagVariant` | `'subtle'` | Visual variant controlling fill, border, and text styles. |
+| `size` | `size` | `TagSize` | `'md'` | Tag size affecting font size and padding. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the tag. Overrides default variant colors. |
+| `closable` | `closable` | `boolean` | `false` | Show a close button that dismisses the tag with animation. |
+| `interactive` | `interactive` | `boolean` | `false` | Make the tag focusable and clickable, emitting `kb-click`. |
+| `dot` | `dot` | `boolean` | `false` | Show a small colored dot indicator before the label. |
+| `kbDraggable` | `kb-draggable` | `boolean` | `false` | Enable HTML5 drag-and-drop on this tag. |
+| `value` | `value` | `string` | `""` | Value identifier used for drag data and reorder events. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `icon` | Leading icon element rendered before the label. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-click` | none | Interactive tag clicked/activated. |
+| `kb-close` | `{ source?: string }` or none | Close button clicked; tag animates out and removes itself. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `Enter` | Activate or select the focused item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Subtle" codes={{ html: exSubtle, react: exSubtleReact, vue: exSubtleVue, svelte: exSubtleSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSubtle }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Solid" codes={{ html: exSolid, react: exSolidReact, vue: exSolidVue, svelte: exSolidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSolid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Outline" codes={{ html: exOutline, react: exOutlineReact, vue: exOutlineVue, svelte: exOutlineSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOutline }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Small" codes={{ html: exSmall, react: exSmallReact, vue: exSmallVue, svelte: exSmallSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSmall }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Large" codes={{ html: exLarge, react: exLargeReact, vue: exLargeVue, svelte: exLargeSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exLarge }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Closable" codes={{ html: exClosable, react: exClosableReact, vue: exClosableVue, svelte: exClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive" codes={{ html: exInteractive, react: exInteractiveReact, vue: exInteractiveVue, svelte: exInteractiveSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractive }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Interactive Closable" codes={{ html: exInteractiveClosable, react: exInteractiveClosableReact, vue: exInteractiveClosableVue, svelte: exInteractiveClosableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInteractiveClosable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Status Dots" codes={{ html: exStatusDots, react: exStatusDotsReact, vue: exStatusDotsVue, svelte: exStatusDotsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exStatusDots }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Icon" codes={{ html: exWithIcon, react: exWithIconReact, vue: exWithIconVue, svelte: exWithIconSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithIcon }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Size Comparison" codes={{ html: exSizeComparison, react: exSizeComparisonReact, vue: exSizeComparisonVue, svelte: exSizeComparisonSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizeComparison }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Filter Bar" codes={{ html: exFilterBar, react: exFilterBarReact, vue: exFilterBarVue, svelte: exFilterBarSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exFilterBar }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Service Status" codes={{ html: exServiceStatus, react: exServiceStatusReact, vue: exServiceStatusVue, svelte: exServiceStatusSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exServiceStatus }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Category Tags" codes={{ html: exCategoryTags, react: exCategoryTagsReact, vue: exCategoryTagsVue, svelte: exCategoryTagsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exCategoryTags }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Draggable" codes={{ html: exDraggable, react: exDraggableReact, vue: exDraggableVue, svelte: exDraggableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDraggable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Reorderable" codes={{ html: exReorderable, react: exReorderableReact, vue: exReorderableVue, svelte: exReorderableSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReorderable }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Reorderable With Close" codes={{ html: exReorderableWithClose, react: exReorderableWithCloseReact, vue: exReorderableWithCloseVue, svelte: exReorderableWithCloseSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exReorderableWithClose }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Tag Group Gaps" codes={{ html: exTagGroupGaps, react: exTagGroupGapsReact, vue: exTagGroupGapsVue, svelte: exTagGroupGapsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exTagGroupGaps }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Tag Group](./tag-group)
+- [Badge](../feedback/badge)

@@ -1,0 +1,148 @@
+---
+title: "Dropdown Menu"
+description: "A button-triggered dropdown menu with selectable items."
+sidebar_label: "Dropdown Menu"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-dropdown-menu>
+  <kb-button slot="trigger">Options</kb-button>
+  <kb-menu-item value="edit">Edit</kb-menu-item>
+  <kb-menu-item value="delete">Delete</kb-menu-item>
+</kb-dropdown-menu>`;
+export const reactCode = `import { Button, DropdownMenu, MenuItem } from '@wearesyntesa/karbit-ui/react';
+
+<DropdownMenu>
+  <Button slot="trigger">Options</Button>
+  <MenuItem value="edit">Edit</MenuItem>
+  <MenuItem value="delete">Delete</MenuItem>
+</DropdownMenu>`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-dropdown-menu>
+    <kb-button slot="trigger">Options</kb-button>
+    <kb-menu-item value="edit">Edit</kb-menu-item>
+    <kb-menu-item value="delete">Delete</kb-menu-item>
+  </kb-dropdown-menu>
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-dropdown-menu>
+  <kb-button slot="trigger">Options</kb-button>
+  <kb-menu-item value="edit">Edit</kb-menu-item>
+  <kb-menu-item value="delete">Delete</kb-menu-item>
+</kb-dropdown-menu>`;
+
+# Dropdown Menu
+
+A button-triggered dropdown menu with selectable items.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { DropdownMenu } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `open` | `open` | `boolean` | `false` | Whether the menu panel is visible. |
+| `placement` | `placement` | `MenuPlacement` | `'bottom'` | Menu position relative to the trigger. |
+| `size` | `size` | `ComponentSize` | `'md'` | Menu sizing preset. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+| `trigger` | Element that toggles the menu. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-select` | `{ value: string }` | Dispatched when a menu item is selected (bubbles from child). |
+| `kb-open` | `{ source?: string }` or none | Dispatched when the menu opens. |
+| `kb-close` | `{ source?: string }` or none | Dispatched when the menu closes (after exit animation). |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Enter` | Activate or select the focused item |
+| `Escape` | Close or cancel the current action |
+| `Home` | Move focus to the first item |
+| `Space` | Activate or select the focused item |
+
+### ARIA
+
+**Roles:** `menu`
+
+**Attributes:** `aria-expanded`, `aria-haspopup`
+
+## See Also
+
+- [Context Menu](./context-menu)
+- [Menu Item](./menu-item)
+- [Popover](./popover)

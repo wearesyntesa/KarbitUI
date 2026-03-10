@@ -1,0 +1,51 @@
+{
+  "name": "Collapsible",
+  "tag": "kb-collapsible",
+  "category": "data-display",
+  "description": "An animated collapse/expand container for toggling content visibility.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-collapsible.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Collapsible"
+  },
+  "props": [
+    {
+      "name": "open",
+      "attribute": "open",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the panel is expanded. Reflected to attribute for CSS targeting."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Prevents toggling and applies disabled styles."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-toggle",
+      "detail": "`{ open: boolean }`",
+      "description": "Dispatched when open state changes, with `detail.open`."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "accordion"
+  ]
+}

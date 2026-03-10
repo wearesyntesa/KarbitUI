@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+title: Overview
+---
+
+# Design System Overview
+
+KarbitUI follows **Structured Minimal Brutalism** — a design language inspired by editorial print layouts, characterized by precise typography, generous whitespace, and thin structural borders.
+
+## Core Principles
+
+### 1. Thin structural borders
+
+All visual separation is achieved through 1px borders. No thick decorative borders, no box shadows.
+
+```
+border: 1px solid gray-200 (light) / zinc-700 (dark)
+```
+
+### 2. Zero border radius
+
+Every element has `border-radius: 0px`. Sharp corners throughout. This is enforced at the Tailwind theme level — even `rounded-full` resolves to `0px`.
+
+### 3. No shadows
+
+No `box-shadow` anywhere. Depth is communicated through borders and background color shifts, never through elevation shadows.
+
+### 4. Generous whitespace
+
+Components use generous padding and margins. Cards use `p-6` to `p-8`. Sections are separated by visible space, not by color blocks.
+
+### 5. Typography hierarchy
+
+Hierarchy is established through font size, weight, and opacity — not through color contrast or decorative elements.
+
+## Typography
+
+### Fonts
+
+| Role | Font | Usage |
+|---|---|---|
+| **Sans** | Plus Jakarta Sans, Inter, system-ui | Body text, headings, buttons, inputs |
+| **Mono** | IBM Plex Mono, JetBrains Mono | Labels, captions, code, badges, table headers |
+
+### Type Scale
+
+Labels and captions use a distinctive mono style:
+
+```
+font-mono text-xs uppercase tracking-widest
+```
+
+Body and headings use the sans stack with size/weight variation.
+
+## Color Palette
+
+### Light Mode
+
+| Token | Hex | Usage |
+|---|---|---|
+| Surface | `#ffffff` | Main background |
+| Surface muted | `#f8f9fa` | Alternate sections, cards |
+| Text primary | `#0f172a` | Headings, body text |
+| Text secondary | `#64748b` | Supporting text |
+| Text muted | `#94a3b8` | Placeholders, disabled |
+| Text ghost | `#e2e8f0` | Watermarks |
+| Border | `#e5e7eb` | All borders (gray-200) |
+| Accent | `#3b82f6` | Interactive elements (blue-500) |
+
+### Dark Mode
+
+| Token | Hex | Usage |
+|---|---|---|
+| Surface | `#18181b` | Main background (zinc-900) |
+| Surface muted | `#27272a` | Alternate sections (zinc-800) |
+| Text primary | `#fafafa` | Headings, body text (zinc-50) |
+| Text secondary | `#a1a1aa` | Supporting text (zinc-400) |
+| Text muted | `#71717a` | Placeholders, disabled (zinc-500) |
+| Border | `#3f3f46` | All borders (zinc-700) |
+| Accent | `#60a5fa` | Interactive elements (blue-400) |
+
+### Status Colors
+
+| Status | Color | Hex |
+|---|---|---|
+| Info | Blue | `#3b82f6` |
+| Success | Green | `#22c55e` |
+| Warning | Amber | `#f59e0b` |
+| Error | Red | `#ef4444` |
+
+## Interactive States
+
+| State | Treatment |
+|---|---|
+| **Hover** | Subtle opacity or color shift. No translate or shadow effects. |
+| **Focus** | `outline: 2px solid blue-500`, `outline-offset: 2px`. Uses `focus-visible` only. |
+| **Disabled** | `opacity: 0.4`, `cursor: not-allowed`, `pointer-events: none` |
+| **Active** | Blue accent border or background fill |
+
+## Component Patterns
+
+### Buttons
+
+- **Solid**: Blue accent fill, white text
+- **Outline**: Thin 1px border, transparent background
+- **Ghost**: No border, transparent background
+- Font: sans-serif, bold, uppercase tracking
+
+### Cards
+
+Thin 1px border containers. No shadow. Generous padding (`p-6` to `p-8`). Optional muted background for alternate sections.
+
+### Inputs
+
+Thin 1px border, sans-serif font. Blue outline on focus. Muted color for placeholder text.
+
+### Tables
+
+Thin borders between cells. Header row uses bold uppercase mono labels. Rows separated by thin bottom borders.
+
+### Alerts and Toasts
+
+Thin border with left accent color bar indicating status. No shadow.
+
+### Overlays (Modal, Drawer, Popover)
+
+Thin border, surface background. Backdrop uses semi-transparent dark overlay.

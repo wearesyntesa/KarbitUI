@@ -1,0 +1,114 @@
+{
+  "name": "Tag",
+  "tag": "kb-tag",
+  "category": "data-display",
+  "description": "A small label for categorizing or marking items.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/data-display/kb-tag.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Tag"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "TagVariant",
+      "default": "'subtle'",
+      "reflect": false,
+      "description": "Visual variant controlling fill, border, and text styles."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "TagSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Tag size affecting font size and padding."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme for the tag. Overrides default variant colors."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a close button that dismisses the tag with animation."
+    },
+    {
+      "name": "interactive",
+      "attribute": "interactive",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Make the tag focusable and clickable, emitting `kb-click`."
+    },
+    {
+      "name": "dot",
+      "attribute": "dot",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a small colored dot indicator before the label."
+    },
+    {
+      "name": "kbDraggable",
+      "attribute": "kb-draggable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Enable HTML5 drag-and-drop on this tag."
+    },
+    {
+      "name": "value",
+      "attribute": "value",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Value identifier used for drag data and reorder events."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Leading icon element rendered before the label."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-click",
+      "detail": "none",
+      "description": "Interactive tag clicked/activated."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Close button clicked; tag animates out and removes itself."
+    }
+  ],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-label"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Space"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "tag-group",
+    "badge"
+  ]
+}

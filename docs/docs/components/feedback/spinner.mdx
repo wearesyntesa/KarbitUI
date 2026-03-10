@@ -1,0 +1,806 @@
+---
+title: "Spinner"
+description: "An animated loading indicator."
+sidebar_label: "Spinner"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-spinner size="md"></kb-spinner>`;
+export const reactCode = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md" />`;
+export const exDefault = `<kb-spinner size="md">
+</kb-spinner>`;
+export const exDefaultReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md">
+</Spinner>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md">
+  </kb-spinner>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md">
+</kb-spinner>`;
+export const exWithTrack = `<kb-spinner size="md" track>
+</kb-spinner>`;
+export const exWithTrackReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md" track>
+</Spinner>`;
+export const exWithTrackVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md" track>
+  </kb-spinner>
+</template>`;
+export const exWithTrackSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md" track>
+</kb-spinner>`;
+export const exDots = `<kb-spinner size="md" variant="dots">
+</kb-spinner>`;
+export const exDotsReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md" variant="dots">
+</Spinner>`;
+export const exDotsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md" variant="dots">
+  </kb-spinner>
+</template>`;
+export const exDotsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md" variant="dots">
+</kb-spinner>`;
+export const exBars = `<kb-spinner size="md" variant="bars">
+</kb-spinner>`;
+export const exBarsReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md" variant="bars">
+</Spinner>`;
+export const exBarsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md" variant="bars">
+  </kb-spinner>
+</template>`;
+export const exBarsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md" variant="bars">
+</kb-spinner>`;
+export const exPulse = `<kb-spinner size="md" variant="pulse">
+</kb-spinner>`;
+export const exPulseReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<Spinner size="md" variant="pulse">
+</Spinner>`;
+export const exPulseVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-spinner size="md" variant="pulse">
+  </kb-spinner>
+</template>`;
+export const exPulseSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-spinner size="md" variant="pulse">
+</kb-spinner>`;
+export const exAllVariants = `<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="border" size="lg" color-scheme="blue" track>
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Border
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="dots" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Dots
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="bars" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Bars
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="pulse" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Pulse
+    </span>
+  </div>
+</div>`;
+export const exAllVariantsReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner variant="border" size="lg" color-scheme="blue" track>
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Border
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner variant="dots" size="lg" color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Dots
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner variant="bars" size="lg" color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Bars
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner variant="pulse" size="lg" color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Pulse
+    </span>
+  </div>
+</div>`;
+export const exAllVariantsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner variant="border" size="lg" color-scheme="blue" track>
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Border
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner variant="dots" size="lg" color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Dots
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner variant="bars" size="lg" color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Bars
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner variant="pulse" size="lg" color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Pulse
+      </span>
+    </div>
+  </div>
+</template>`;
+export const exAllVariantsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="border" size="lg" color-scheme="blue" track>
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Border
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="dots" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Dots
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="bars" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Bars
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner variant="pulse" size="lg" color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Pulse
+    </span>
+  </div>
+</div>`;
+export const exAllSizes = `<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner size="xs"></kb-spinner> <kb-spinner size="sm"></kb-spinner> <kb-spinner size="md"></kb-spinner> <kb-spinner size="lg"></kb-spinner> <kb-spinner size="xl"></kb-spinner>
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="dots" size="xs"></kb-spinner> <kb-spinner variant="dots" size="sm"></kb-spinner> <kb-spinner variant="dots" size="md"></kb-spinner> <kb-spinner variant="dots" size="lg"></kb-spinner> <kb-spinner variant="dots" size="xl"></kb-spinner>
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="bars" size="xs"></kb-spinner> <kb-spinner variant="bars" size="sm"></kb-spinner> <kb-spinner variant="bars" size="md"></kb-spinner> <kb-spinner variant="bars" size="lg"></kb-spinner> <kb-spinner variant="bars" size="xl"></kb-spinner>
+</div>`;
+export const exAllSizesReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <Spinner size="xs" /> <Spinner size="sm" /> <Spinner size="md" /> <Spinner size="lg" /> <Spinner size="xl" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <Spinner variant="dots" size="xs" /> <Spinner variant="dots" size="sm" /> <Spinner variant="dots" size="md" /> <Spinner variant="dots" size="lg" /> <Spinner variant="dots" size="xl" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <Spinner variant="bars" size="xs" /> <Spinner variant="bars" size="sm" /> <Spinner variant="bars" size="md" /> <Spinner variant="bars" size="lg" /> <Spinner variant="bars" size="xl" />
+</div>`;
+export const exAllSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner size="xs" /> <kb-spinner size="sm" /> <kb-spinner size="md" /> <kb-spinner size="lg" /> <kb-spinner size="xl" />
+  </div>
+  <div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="dots" size="xs" /> <kb-spinner variant="dots" size="sm" /> <kb-spinner variant="dots" size="md" /> <kb-spinner variant="dots" size="lg" /> <kb-spinner variant="dots" size="xl" />
+  </div>
+  <div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="bars" size="xs" /> <kb-spinner variant="bars" size="sm" /> <kb-spinner variant="bars" size="md" /> <kb-spinner variant="bars" size="lg" /> <kb-spinner variant="bars" size="xl" />
+  </div>
+</template>`;
+export const exAllSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner size="xs" /> <kb-spinner size="sm" /> <kb-spinner size="md" /> <kb-spinner size="lg" /> <kb-spinner size="xl" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="dots" size="xs" /> <kb-spinner variant="dots" size="sm" /> <kb-spinner variant="dots" size="md" /> <kb-spinner variant="dots" size="lg" /> <kb-spinner variant="dots" size="xl" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;"> <kb-spinner variant="bars" size="xs" /> <kb-spinner variant="bars" size="sm" /> <kb-spinner variant="bars" size="md" /> <kb-spinner variant="bars" size="lg" /> <kb-spinner variant="bars" size="xl" />
+</div>`;
+export const exColorSchemes = `<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner color-scheme="black" track></kb-spinner> <kb-spinner color-scheme="red" track></kb-spinner> <kb-spinner color-scheme="blue" track></kb-spinner> <kb-spinner color-scheme="green" track></kb-spinner> <kb-spinner color-scheme="yellow" track></kb-spinner>
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="dots" color-scheme="black"></kb-spinner> <kb-spinner variant="dots" color-scheme="red"></kb-spinner> <kb-spinner variant="dots" color-scheme="blue"></kb-spinner> <kb-spinner variant="dots" color-scheme="green"></kb-spinner> <kb-spinner variant="dots" color-scheme="yellow"></kb-spinner>
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="bars" color-scheme="black"></kb-spinner> <kb-spinner variant="bars" color-scheme="red"></kb-spinner> <kb-spinner variant="bars" color-scheme="blue"></kb-spinner> <kb-spinner variant="bars" color-scheme="green"></kb-spinner> <kb-spinner variant="bars" color-scheme="yellow"></kb-spinner>
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="pulse" color-scheme="black"></kb-spinner> <kb-spinner variant="pulse" color-scheme="red"></kb-spinner> <kb-spinner variant="pulse" color-scheme="blue"></kb-spinner> <kb-spinner variant="pulse" color-scheme="green"></kb-spinner> <kb-spinner variant="pulse" color-scheme="yellow"></kb-spinner>
+</div>`;
+export const exColorSchemesReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <Spinner color-scheme="black" track /> <Spinner color-scheme="red" track /> <Spinner color-scheme="blue" track /> <Spinner color-scheme="green" track /> <Spinner color-scheme="yellow" track />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <Spinner variant="dots" color-scheme="black" /> <Spinner variant="dots" color-scheme="red" /> <Spinner variant="dots" color-scheme="blue" /> <Spinner variant="dots" color-scheme="green" /> <Spinner variant="dots" color-scheme="yellow" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <Spinner variant="bars" color-scheme="black" /> <Spinner variant="bars" color-scheme="red" /> <Spinner variant="bars" color-scheme="blue" /> <Spinner variant="bars" color-scheme="green" /> <Spinner variant="bars" color-scheme="yellow" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <Spinner variant="pulse" color-scheme="black" /> <Spinner variant="pulse" color-scheme="red" /> <Spinner variant="pulse" color-scheme="blue" /> <Spinner variant="pulse" color-scheme="green" /> <Spinner variant="pulse" color-scheme="yellow" />
+</div>`;
+export const exColorSchemesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner color-scheme="black" track /> <kb-spinner color-scheme="red" track /> <kb-spinner color-scheme="blue" track /> <kb-spinner color-scheme="green" track /> <kb-spinner color-scheme="yellow" track />
+  </div>
+  <div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="dots" color-scheme="black" /> <kb-spinner variant="dots" color-scheme="red" /> <kb-spinner variant="dots" color-scheme="blue" /> <kb-spinner variant="dots" color-scheme="green" /> <kb-spinner variant="dots" color-scheme="yellow" />
+  </div>
+  <div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="bars" color-scheme="black" /> <kb-spinner variant="bars" color-scheme="red" /> <kb-spinner variant="bars" color-scheme="blue" /> <kb-spinner variant="bars" color-scheme="green" /> <kb-spinner variant="bars" color-scheme="yellow" />
+  </div>
+  <div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="pulse" color-scheme="black" /> <kb-spinner variant="pulse" color-scheme="red" /> <kb-spinner variant="pulse" color-scheme="blue" /> <kb-spinner variant="pulse" color-scheme="green" /> <kb-spinner variant="pulse" color-scheme="yellow" />
+  </div>
+</template>`;
+export const exColorSchemesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;"> <kb-spinner color-scheme="black" track /> <kb-spinner color-scheme="red" track /> <kb-spinner color-scheme="blue" track /> <kb-spinner color-scheme="green" track /> <kb-spinner color-scheme="yellow" track />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="dots" color-scheme="black" /> <kb-spinner variant="dots" color-scheme="red" /> <kb-spinner variant="dots" color-scheme="blue" /> <kb-spinner variant="dots" color-scheme="green" /> <kb-spinner variant="dots" color-scheme="yellow" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="bars" color-scheme="black" /> <kb-spinner variant="bars" color-scheme="red" /> <kb-spinner variant="bars" color-scheme="blue" /> <kb-spinner variant="bars" color-scheme="green" /> <kb-spinner variant="bars" color-scheme="yellow" />
+</div>
+<div style="display:flex;gap:24px;align-items:center;margin-top:20px;flex-wrap:wrap;"> <kb-spinner variant="pulse" color-scheme="black" /> <kb-spinner variant="pulse" color-scheme="red" /> <kb-spinner variant="pulse" color-scheme="blue" /> <kb-spinner variant="pulse" color-scheme="green" /> <kb-spinner variant="pulse" color-scheme="yellow" />
+</div>`;
+export const exSpeeds = `<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="slow" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Slow
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="normal" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Normal
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="fast" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Fast
+    </span>
+  </div>
+</div>`;
+export const exSpeedsReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner speed="slow" size="lg" track color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Slow
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner speed="normal" size="lg" track color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Normal
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <Spinner speed="fast" size="lg" track color-scheme="blue">
+    </Spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Fast
+    </span>
+  </div>
+</div>`;
+export const exSpeedsVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner speed="slow" size="lg" track color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Slow
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner speed="normal" size="lg" track color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Normal
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <kb-spinner speed="fast" size="lg" track color-scheme="blue">
+      </kb-spinner>
+      <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+        Fast
+      </span>
+    </div>
+  </div>
+</template>`;
+export const exSpeedsSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="slow" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Slow
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="normal" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Normal
+    </span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <kb-spinner speed="fast" size="lg" track color-scheme="blue">
+    </kb-spinner>
+    <span style="font-family:monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;">
+      Fast
+    </span>
+  </div>
+</div>`;
+export const exWithLabelBottom = `<div style="display:flex;gap:40px;align-items:start;flex-wrap:wrap;">
+  <kb-spinner size="lg" track color-scheme="blue" show-label label="Loading...">
+  </kb-spinner>
+  <kb-spinner variant="dots" size="lg" color-scheme="green" show-label label="Processing...">
+  </kb-spinner>
+  <kb-spinner variant="bars" size="lg" color-scheme="red" show-label label="Uploading...">
+  </kb-spinner>
+  <kb-spinner variant="pulse" size="lg" color-scheme="yellow" show-label label="Syncing...">
+  </kb-spinner>
+</div>`;
+export const exWithLabelBottomReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:40px;align-items:start;flex-wrap:wrap;">
+  <Spinner size="lg" track color-scheme="blue" show-label label="Loading...">
+  </Spinner>
+  <Spinner variant="dots" size="lg" color-scheme="green" show-label label="Processing...">
+  </Spinner>
+  <Spinner variant="bars" size="lg" color-scheme="red" show-label label="Uploading...">
+  </Spinner>
+  <Spinner variant="pulse" size="lg" color-scheme="yellow" show-label label="Syncing...">
+  </Spinner>
+</div>`;
+export const exWithLabelBottomVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:40px;align-items:start;flex-wrap:wrap;">
+    <kb-spinner size="lg" track color-scheme="blue" show-label label="Loading...">
+    </kb-spinner>
+    <kb-spinner variant="dots" size="lg" color-scheme="green" show-label label="Processing...">
+    </kb-spinner>
+    <kb-spinner variant="bars" size="lg" color-scheme="red" show-label label="Uploading...">
+    </kb-spinner>
+    <kb-spinner variant="pulse" size="lg" color-scheme="yellow" show-label label="Syncing...">
+    </kb-spinner>
+  </div>
+</template>`;
+export const exWithLabelBottomSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:40px;align-items:start;flex-wrap:wrap;">
+  <kb-spinner size="lg" track color-scheme="blue" show-label label="Loading...">
+  </kb-spinner>
+  <kb-spinner variant="dots" size="lg" color-scheme="green" show-label label="Processing...">
+  </kb-spinner>
+  <kb-spinner variant="bars" size="lg" color-scheme="red" show-label label="Uploading...">
+  </kb-spinner>
+  <kb-spinner variant="pulse" size="lg" color-scheme="yellow" show-label label="Syncing...">
+  </kb-spinner>
+</div>`;
+export const exWithLabelRight = `<div style="display:flex;flex-direction:column;gap:20px;">
+  <kb-spinner size="md" track color-scheme="blue" show-label label="Loading data..." label-position="right">
+  </kb-spinner>
+  <kb-spinner variant="dots" size="md" color-scheme="green" show-label label="Processing request..." label-position="right">
+  </kb-spinner>
+  <kb-spinner variant="bars" size="md" color-scheme="red" show-label label="Uploading files..." label-position="right">
+  </kb-spinner>
+</div>`;
+export const exWithLabelRightReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;flex-direction:column;gap:20px;">
+  <Spinner size="md" track color-scheme="blue" show-label label="Loading data..." label-position="right">
+  </Spinner>
+  <Spinner variant="dots" size="md" color-scheme="green" show-label label="Processing request..." label-position="right">
+  </Spinner>
+  <Spinner variant="bars" size="md" color-scheme="red" show-label label="Uploading files..." label-position="right">
+  </Spinner>
+</div>`;
+export const exWithLabelRightVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <kb-spinner size="md" track color-scheme="blue" show-label label="Loading data..." label-position="right">
+    </kb-spinner>
+    <kb-spinner variant="dots" size="md" color-scheme="green" show-label label="Processing request..." label-position="right">
+    </kb-spinner>
+    <kb-spinner variant="bars" size="md" color-scheme="red" show-label label="Uploading files..." label-position="right">
+    </kb-spinner>
+  </div>
+</template>`;
+export const exWithLabelRightSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;flex-direction:column;gap:20px;">
+  <kb-spinner size="md" track color-scheme="blue" show-label label="Loading data..." label-position="right">
+  </kb-spinner>
+  <kb-spinner variant="dots" size="md" color-scheme="green" show-label label="Processing request..." label-position="right">
+  </kb-spinner>
+  <kb-spinner variant="bars" size="md" color-scheme="red" show-label label="Uploading files..." label-position="right">
+  </kb-spinner>
+</div>`;
+export const exOverlay = `<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <kb-spinner overlay variant="border" size="lg" track color-scheme="blue" show-label label="Loading...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Card Title</div>
+      <div style="font-size:14px;opacity:0.7;">Some content that is loading and will be revealed when ready.</div>
+    </div>
+  </kb-spinner>
+  <kb-spinner overlay variant="dots" size="md" color-scheme="blue" show-label label="Processing...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Another Card</div>
+      <div style="font-size:14px;opacity:0.7;">This card is being processed with a dots spinner overlay.</div>
+    </div>
+  </kb-spinner>
+</div>`;
+export const exOverlayReact = `import { Spinner } from '@wearesyntesa/karbit-ui/react';
+
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <Spinner overlay variant="border" size="lg" track color-scheme="blue" show-label label="Loading...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Card Title</div>
+      <div style="font-size:14px;opacity:0.7;">Some content that is loading and will be revealed when ready.</div>
+    </div>
+  </Spinner>
+  <Spinner overlay variant="dots" size="md" color-scheme="blue" show-label label="Processing...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Another Card</div>
+      <div style="font-size:14px;opacity:0.7;">This card is being processed with a dots spinner overlay.</div>
+    </div>
+  </Spinner>
+</div>`;
+export const exOverlayVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div style="display:flex;gap:32px;flex-wrap:wrap;">
+    <kb-spinner overlay variant="border" size="lg" track color-scheme="blue" show-label label="Loading...">
+      <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+        <div style="font-weight:600;margin-bottom:8px;">Card Title</div>
+        <div style="font-size:14px;opacity:0.7;">Some content that is loading and will be revealed when ready.</div>
+      </div>
+    </kb-spinner>
+    <kb-spinner overlay variant="dots" size="md" color-scheme="blue" show-label label="Processing...">
+      <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+        <div style="font-weight:600;margin-bottom:8px;">Another Card</div>
+        <div style="font-size:14px;opacity:0.7;">This card is being processed with a dots spinner overlay.</div>
+      </div>
+    </kb-spinner>
+  </div>
+</template>`;
+export const exOverlaySvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+  <kb-spinner overlay variant="border" size="lg" track color-scheme="blue" show-label label="Loading...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Card Title</div>
+      <div style="font-size:14px;opacity:0.7;">Some content that is loading and will be revealed when ready.</div>
+    </div>
+  </kb-spinner>
+  <kb-spinner overlay variant="dots" size="md" color-scheme="blue" show-label label="Processing...">
+    <div style="max-width:200px;width:100%;padding:24px;border:1px solid #e5e7eb;">
+      <div style="font-weight:600;margin-bottom:8px;">Another Card</div>
+      <div style="font-size:14px;opacity:0.7;">This card is being processed with a dots spinner overlay.</div>
+    </div>
+  </kb-spinner>
+</div>`;
+
+# Spinner
+
+An animated loading indicator.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Spinner } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `variant` | `variant` | `SpinnerVariant` | `'border'` | Spinner animation style. |
+| `size` | `size` | `ComponentSize` | `'md'` | Spinner dimensions. |
+| `colorScheme` | `color-scheme` | `ColorScheme` | — | Color scheme for the spinner stroke/fill. When unset, defaults to blue. |
+| `label` | `label` | `string` | `'Loading...'` | Accessible label text, also used as visible text when `showLabel` is true. |
+| `showLabel` | `show-label` | `boolean` | `false` | Display the label text below or beside the spinner. |
+| `speed` | `speed` | `SpinnerSpeed` | `'normal'` | Animation speed. |
+| `track` | `track` | `boolean` | `false` | Show a grey track ring behind the spinning border. Only applies to `'border'` variant. |
+| `labelPosition` | `label-position` | `'bottom' \| 'right'` | `'bottom'` | Label position relative to the spinner. |
+| `overlay` | `overlay` | `boolean` | `false` | Wrap slot content with a semi-transparent overlay and center the spinner above it. |
+
+## Slots
+
+| Name | Description |
+|---|---|
+| (default) | Default content |
+
+## Accessibility
+
+### ARIA
+
+**Roles:** `status`
+
+**Attributes:** `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Track" codes={{ html: exWithTrack, react: exWithTrackReact, vue: exWithTrackVue, svelte: exWithTrackSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithTrack }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Dots" codes={{ html: exDots, react: exDotsReact, vue: exDotsVue, svelte: exDotsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDots }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Bars" codes={{ html: exBars, react: exBarsReact, vue: exBarsVue, svelte: exBarsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exBars }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Pulse" codes={{ html: exPulse, react: exPulseReact, vue: exPulseVue, svelte: exPulseSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exPulse }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Variants" codes={{ html: exAllVariants, react: exAllVariantsReact, vue: exAllVariantsVue, svelte: exAllVariantsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllVariants }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="All Sizes" codes={{ html: exAllSizes, react: exAllSizesReact, vue: exAllSizesVue, svelte: exAllSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exAllSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Color Schemes" codes={{ html: exColorSchemes, react: exColorSchemesReact, vue: exColorSchemesVue, svelte: exColorSchemesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exColorSchemes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Speeds" codes={{ html: exSpeeds, react: exSpeedsReact, vue: exSpeedsVue, svelte: exSpeedsSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSpeeds }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Label Bottom" codes={{ html: exWithLabelBottom, react: exWithLabelBottomReact, vue: exWithLabelBottomVue, svelte: exWithLabelBottomSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithLabelBottom }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Label Right" codes={{ html: exWithLabelRight, react: exWithLabelRightReact, vue: exWithLabelRightVue, svelte: exWithLabelRightSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithLabelRight }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Overlay" codes={{ html: exOverlay, react: exOverlayReact, vue: exOverlayVue, svelte: exOverlaySvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exOverlay }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Skeleton](./skeleton)
+- [Progress](./progress)

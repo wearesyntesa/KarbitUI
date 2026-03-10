@@ -1,0 +1,337 @@
+---
+title: "Segment"
+description: "A segmented control for toggling between a set of options."
+sidebar_label: "Segment"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<!-- Options are set via JavaScript property -->
+<kb-segment></kb-segment>
+
+<script>
+  document.querySelector('kb-segment').options = [
+    { value: 'day', label: 'Day' },
+    { value: 'week', label: 'Week' },
+    { value: 'month', label: 'Month' },
+  ];
+</script>`;
+export const reactCode = `import { Segment } from '@wearesyntesa/karbit-ui/react';
+
+<Segment
+  options={
+  [
+      { value: 'day', label: 'Day' },
+      { value: 'week', label: 'Week' },
+      { value: 'month', label: 'Month' },
+    ]
+} />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+
+const options = [
+    { value: 'day', label: 'Day' },
+    { value: 'week', label: 'Week' },
+    { value: 'month', label: 'Month' },
+  ];
+</script>
+
+<template>
+  <kb-segment :options="options" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+
+  const options = [
+    { value: 'day', label: 'Day' },
+    { value: 'week', label: 'Week' },
+    { value: 'month', label: 'Month' },
+  ];
+</script>
+
+<kb-segment options={options} />`;
+export const demoHtml = `<kb-segment></kb-segment>`;
+export const setupDemo = (container) => {
+  container.querySelector('kb-segment').options = [
+      { value: 'day', label: 'Day' },
+      { value: 'week', label: 'Week' },
+      { value: 'month', label: 'Month' },
+    ];
+};
+export const exDefault = `<kb-segment value="list">
+</kb-segment>`;
+export const exDefaultReact = `import { Segment } from '@wearesyntesa/karbit-ui/react';
+
+<Segment value="list">
+</Segment>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-segment value="list">
+  </kb-segment>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-segment value="list">
+</kb-segment>`;
+export const exDefaultSetup = (container) => {
+  container.querySelectorAll('kb-segment').forEach(el => { el.options = [
+        { value: 'grid', label: 'Grid' },
+        { value: 'list', label: 'List' },
+        { value: 'table', label: 'Table' },
+      ]; });
+};
+export const exSizes = `<div class="flex flex-col gap-6">
+  <kb-segment size="xs" value="a">
+  </kb-segment>
+  <kb-segment size="sm" value="a">
+  </kb-segment>
+  <kb-segment size="md" value="a">
+  </kb-segment>
+  <kb-segment size="lg" value="a">
+  </kb-segment>
+  <kb-segment size="xl" value="a">
+  </kb-segment>
+</div>`;
+export const exSizesReact = `import { Segment } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-6">
+  <Segment size="xs" value="a">
+  </Segment>
+  <Segment size="sm" value="a">
+  </Segment>
+  <Segment size="md" value="a">
+  </Segment>
+  <Segment size="lg" value="a">
+  </Segment>
+  <Segment size="xl" value="a">
+  </Segment>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <kb-segment size="xs" value="a">
+    </kb-segment>
+    <kb-segment size="sm" value="a">
+    </kb-segment>
+    <kb-segment size="md" value="a">
+    </kb-segment>
+    <kb-segment size="lg" value="a">
+    </kb-segment>
+    <kb-segment size="xl" value="a">
+    </kb-segment>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-6">
+  <kb-segment size="xs" value="a">
+  </kb-segment>
+  <kb-segment size="sm" value="a">
+  </kb-segment>
+  <kb-segment size="md" value="a">
+  </kb-segment>
+  <kb-segment size="lg" value="a">
+  </kb-segment>
+  <kb-segment size="xl" value="a">
+  </kb-segment>
+</div>`;
+export const exSizesSetup = (container) => {
+  container.querySelectorAll('kb-segment').forEach(el => { el.options = [{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }, { value: 'c', label: 'C' }]; });
+};
+export const exDisabled = `<kb-segment disabled value="list">
+</kb-segment>`;
+export const exDisabledReact = `import { Segment } from '@wearesyntesa/karbit-ui/react';
+
+<Segment disabled value="list">
+</Segment>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-segment disabled value="list">
+  </kb-segment>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-segment disabled value="list">
+</kb-segment>`;
+export const exDisabledSetup = (container) => {
+  container.querySelectorAll('kb-segment').forEach(el => { el.options = [{ value: 'grid', label: 'Grid' }, { value: 'list', label: 'List' }]; });
+};
+export const exDisabledOption = `<kb-segment value="grid">
+</kb-segment>`;
+export const exDisabledOptionReact = `import { Segment } from '@wearesyntesa/karbit-ui/react';
+
+<Segment value="grid">
+</Segment>`;
+export const exDisabledOptionVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-segment value="grid">
+  </kb-segment>
+</template>`;
+export const exDisabledOptionSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-segment value="grid">
+</kb-segment>`;
+export const exDisabledOptionSetup = (container) => {
+  container.querySelectorAll('kb-segment').forEach(el => { el.options = [
+        { value: 'grid', label: 'Grid' },
+        { value: 'list', label: 'List', disabled: true },
+        { value: 'table', label: 'Table' },
+      ]; });
+};
+
+# Segment
+
+A segmented control for toggling between a set of options.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { Segment } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={demoHtml} setup={setupDemo} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `V \| ''` | `""` | Currently selected value. |
+| `options` | `options` | `readonly SegmentOption<V>[]` | `[]` | Options to render as segments. |
+| `size` | `size` | `ComponentSize` | `'md'` | Display size. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable all segments. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Fires when the selected value changes. Detail: `{ source: 'segment', value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowLeft` | Move focus backward or decrease value |
+| `ArrowRight` | Move focus forward or increase value |
+| `ArrowUp` | Move focus to the previous item |
+| `End` | Move focus to the last item |
+| `Home` | Move focus to the first item |
+
+### ARIA
+
+**Roles:** `radio`, `radiogroup`
+
+**Attributes:** `aria-checked`, `aria-disabled`, `aria-label`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDefault} setup={exDefaultSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exSizes} setup={exSizesSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDisabled} setup={exDisabledSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled Option" codes={{ html: exDisabledOption, react: exDisabledOptionReact, vue: exDisabledOptionVue, svelte: exDisabledOptionSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <ComponentPreview html={exDisabledOption} setup={exDisabledOptionSetup} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Radio Group](./radio-group)
+- [Tabs](../navigation/tabs)

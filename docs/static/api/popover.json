@@ -1,0 +1,178 @@
+{
+  "name": "Popover",
+  "tag": "kb-popover",
+  "category": "overlay",
+  "description": "A floating panel anchored to a trigger element.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/overlay/kb-popover.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "Popover"
+  },
+  "props": [
+    {
+      "name": "placement",
+      "attribute": "placement",
+      "type": "PopoverPlacement",
+      "default": "'bottom'",
+      "reflect": false,
+      "description": "Position of the popover relative to the trigger element."
+    },
+    {
+      "name": "trigger",
+      "attribute": "trigger",
+      "type": "PopoverTrigger",
+      "default": "'click'",
+      "reflect": false,
+      "description": "How the popover is activated - `'click'` toggles on click, `'hover'` on mouse enter/leave."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "PopoverSize",
+      "default": "'sm'",
+      "reflect": false,
+      "description": "Popover panel width and padding size."
+    },
+    {
+      "name": "open",
+      "attribute": "open",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Programmatically control visibility. Reflected to attribute."
+    },
+    {
+      "name": "closeOnEscape",
+      "attribute": "close-on-escape",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Close the popover when the Escape key is pressed."
+    },
+    {
+      "name": "closeOnOutside",
+      "attribute": "close-on-outside",
+      "type": "boolean",
+      "default": "true",
+      "reflect": false,
+      "description": "Close the popover when clicking outside of it."
+    },
+    {
+      "name": "closable",
+      "attribute": "closable",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a close button in the header area."
+    },
+    {
+      "name": "showArrow",
+      "attribute": "show-arrow",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Render a small arrow pointing toward the trigger element."
+    },
+    {
+      "name": "offset",
+      "attribute": "offset",
+      "type": "number",
+      "default": "2",
+      "reflect": false,
+      "description": "Distance between the popover and the trigger (0–4 Tailwind spacing units)."
+    },
+    {
+      "name": "openDelay",
+      "attribute": "open-delay",
+      "type": "number",
+      "default": "0",
+      "reflect": false,
+      "description": "Delay in ms before showing the popover on hover trigger."
+    },
+    {
+      "name": "closeDelay",
+      "attribute": "close-delay",
+      "type": "number",
+      "default": "150",
+      "reflect": false,
+      "description": "Delay in ms before hiding the popover after mouse leaves (hover trigger)."
+    },
+    {
+      "name": "autoFocus",
+      "attribute": "auto-focus",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Automatically focus the first focusable element inside the popover when opened."
+    },
+    {
+      "name": "trapFocus",
+      "attribute": "trap-focus",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Trap keyboard focus within the popover while open."
+    },
+    {
+      "name": "ariaLabel",
+      "attribute": "aria-label",
+      "type": "string | null",
+      "default": "null",
+      "reflect": false,
+      "description": "Accessible label for the dialog when no visible header is provided."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "Element that opens the popover."
+    },
+    {
+      "name": "header",
+      "description": "Optional popover header."
+    },
+    {
+      "name": "footer",
+      "description": "Optional popover footer (only renders when provided)."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [
+    {
+      "name": "kb-open",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when popover opens."
+    },
+    {
+      "name": "kb-close",
+      "detail": "`{ source?: string }` or none",
+      "description": "Dispatched when popover closes (after exit animation)."
+    }
+  ],
+  "accessibility": {
+    "roles": [
+      "dialog"
+    ],
+    "ariaAttributes": [
+      "aria-expanded",
+      "aria-haspopup",
+      "aria-label",
+      "aria-labelledby",
+      "aria-modal"
+    ],
+    "keyboardKeys": [
+      "Enter",
+      "Escape",
+      "Space",
+      "Tab"
+    ],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "tooltip",
+    "dropdown-menu"
+  ]
+}

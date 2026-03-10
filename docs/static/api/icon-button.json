@@ -1,0 +1,82 @@
+{
+  "name": "Icon Button",
+  "tag": "kb-icon-button",
+  "category": "forms",
+  "description": "A button that displays only an icon, with an accessible label.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-icon-button.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "IconButton"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "attribute": "variant",
+      "type": "IconButtonVariant",
+      "default": "'solid'",
+      "reflect": false,
+      "description": "Visual variant controlling border, background, and text styles."
+    },
+    {
+      "name": "size",
+      "attribute": "size",
+      "type": "ComponentSize",
+      "default": "'md'",
+      "reflect": false,
+      "description": "Button size controlling dimensions and icon scaling."
+    },
+    {
+      "name": "colorScheme",
+      "attribute": "color-scheme",
+      "type": "ColorScheme",
+      "default": "undefined",
+      "reflect": false,
+      "description": "Color scheme override. When unset, the variant's default color is used."
+    },
+    {
+      "name": "label",
+      "attribute": "label",
+      "type": "string",
+      "default": "''",
+      "reflect": false,
+      "description": "Accessible label for the icon-only button (required for screen readers)."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Disable interaction and apply dimmed styling."
+    },
+    {
+      "name": "loading",
+      "attribute": "loading",
+      "type": "boolean",
+      "default": "false",
+      "reflect": false,
+      "description": "Show a spinner and disable interaction."
+    }
+  ],
+  "slots": [
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [],
+    "ariaAttributes": [
+      "aria-busy",
+      "aria-disabled",
+      "aria-label"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "button",
+    "button-group"
+  ]
+}

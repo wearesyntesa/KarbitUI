@@ -1,0 +1,71 @@
+{
+  "name": "Form Control",
+  "tag": "kb-form-control",
+  "category": "forms",
+  "description": "A wrapper that provides label, helper text, and error messaging for form fields.",
+  "importPaths": {
+    "webComponent": "@wearesyntesa/karbit-ui/components/forms/kb-form-control.define.js",
+    "react": "@wearesyntesa/karbit-ui/react",
+    "reactExport": "FormControl"
+  },
+  "props": [
+    {
+      "name": "required",
+      "attribute": "required",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Mark the field as required. Propagated to child input and label."
+    },
+    {
+      "name": "invalid",
+      "attribute": "invalid",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Mark the field as invalid. Propagated to child input; switches helper → error text."
+    },
+    {
+      "name": "disabled",
+      "attribute": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "reflect": true,
+      "description": "Disable the field. Propagated to child input."
+    }
+  ],
+  "slots": [
+    {
+      "name": "helper",
+      "description": "Muted helper text below the input (hidden when `invalid` with error slot)."
+    },
+    {
+      "name": "error",
+      "description": "Red error text below the input (shown only when `invalid`)."
+    },
+    {
+      "name": "counter",
+      "description": "Right-aligned text below the input (e.g. character count \"12/100\")."
+    },
+    {
+      "name": "(default)",
+      "description": "Default content"
+    }
+  ],
+  "events": [],
+  "accessibility": {
+    "roles": [
+      "group"
+    ],
+    "ariaAttributes": [
+      "aria-labelledby",
+      "aria-live"
+    ],
+    "keyboardKeys": [],
+    "isOverlay": false
+  },
+  "relatedComponents": [
+    "form-label",
+    "input"
+  ]
+}

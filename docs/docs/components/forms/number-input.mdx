@@ -1,0 +1,340 @@
+---
+title: "Number Input"
+description: "A numeric input with increment and decrement controls."
+sidebar_label: "Number Input"
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { Demo } from '@site/src/components/Demo';
+import { ComponentPreview } from '@site/src/components/ComponentPreview';
+
+export const usageCode = `<kb-number-input value="5" min="0" max="100"></kb-number-input>`;
+export const reactCode = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="5" min="0" max="100" />`;
+export const vueCode = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="5" min="0" max="100" />
+</template>`;
+export const svelteCode = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="5" min="0" max="100" />`;
+export const exDefault = `<kb-number-input value="5" min="0" max="100">
+</kb-number-input>`;
+export const exDefaultReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="5" min="0" max="100">
+</NumberInput>`;
+export const exDefaultVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="5" min="0" max="100">
+  </kb-number-input>
+</template>`;
+export const exDefaultSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="5" min="0" max="100">
+</kb-number-input>`;
+export const exSizes = `<div class="flex flex-col gap-4" style="max-width:200px">
+  <kb-number-input size="xs" value="10" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="sm" value="20" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="md" value="30" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="lg" value="40" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="xl" value="50" min="0" max="99">
+  </kb-number-input>
+</div>`;
+export const exSizesReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<div class="flex flex-col gap-4" style="max-width:200px">
+  <NumberInput size="xs" value="10" min="0" max="99">
+  </NumberInput>
+  <NumberInput size="sm" value="20" min="0" max="99">
+  </NumberInput>
+  <NumberInput size="md" value="30" min="0" max="99">
+  </NumberInput>
+  <NumberInput size="lg" value="40" min="0" max="99">
+  </NumberInput>
+  <NumberInput size="xl" value="50" min="0" max="99">
+  </NumberInput>
+</div>`;
+export const exSizesVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <div class="flex flex-col gap-4" style="max-width:200px">
+    <kb-number-input size="xs" value="10" min="0" max="99">
+    </kb-number-input>
+    <kb-number-input size="sm" value="20" min="0" max="99">
+    </kb-number-input>
+    <kb-number-input size="md" value="30" min="0" max="99">
+    </kb-number-input>
+    <kb-number-input size="lg" value="40" min="0" max="99">
+    </kb-number-input>
+    <kb-number-input size="xl" value="50" min="0" max="99">
+    </kb-number-input>
+  </div>
+</template>`;
+export const exSizesSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<div class="flex flex-col gap-4" style="max-width:200px">
+  <kb-number-input size="xs" value="10" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="sm" value="20" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="md" value="30" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="lg" value="40" min="0" max="99">
+  </kb-number-input>
+  <kb-number-input size="xl" value="50" min="0" max="99">
+  </kb-number-input>
+</div>`;
+export const exWithStep = `<kb-number-input value="0" min="-100" max="100" step="10" style="max-width:200px">
+</kb-number-input>`;
+export const exWithStepReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="0" min="-100" max="100" step="10" style="max-width:200px">
+</NumberInput>`;
+export const exWithStepVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="0" min="-100" max="100" step="10" style="max-width:200px">
+  </kb-number-input>
+</template>`;
+export const exWithStepSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="0" min="-100" max="100" step="10" style="max-width:200px">
+</kb-number-input>`;
+export const exDisabled = `<kb-number-input value="42" disabled style="max-width:200px">
+</kb-number-input>`;
+export const exDisabledReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="42" disabled style="max-width:200px">
+</NumberInput>`;
+export const exDisabledVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="42" disabled style="max-width:200px">
+  </kb-number-input>
+</template>`;
+export const exDisabledSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="42" disabled style="max-width:200px">
+</kb-number-input>`;
+export const exInvalid = `<kb-number-input value="0" invalid style="max-width:200px">
+</kb-number-input>`;
+export const exInvalidReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="0" invalid style="max-width:200px">
+</NumberInput>`;
+export const exInvalidVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="0" invalid style="max-width:200px">
+  </kb-number-input>
+</template>`;
+export const exInvalidSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="0" invalid style="max-width:200px">
+</kb-number-input>`;
+export const exMinMaxClamped = `<kb-number-input value="0" min="0" max="10" step="1" style="max-width:200px">
+</kb-number-input>`;
+export const exMinMaxClampedReact = `import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+
+<NumberInput value="0" min="0" max="10" step="1" style="max-width:200px">
+</NumberInput>`;
+export const exMinMaxClampedVue = `<script setup>
+import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<template>
+  <kb-number-input value="0" min="0" max="10" step="1" style="max-width:200px">
+  </kb-number-input>
+</template>`;
+export const exMinMaxClampedSvelte = `<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+<kb-number-input value="0" min="0" max="10" step="1" style="max-width:200px">
+</kb-number-input>`;
+
+# Number Input
+
+A numeric input with increment and decrement controls.
+
+## Import
+
+<Tabs>
+<TabItem value="html" label="HTML" default>
+
+```html
+<script type="module">
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```tsx
+import { NumberInput } from '@wearesyntesa/karbit-ui/react';
+```
+
+</TabItem>
+<TabItem value="vue" label="Vue">
+
+```html
+<script setup>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+
+```
+
+</TabItem>
+<TabItem value="svelte" label="Svelte">
+
+```html
+<script>
+  import '@wearesyntesa/karbit-ui/define';
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+<Demo codes={{ html: usageCode, react: reactCode, vue: vueCode, svelte: svelteCode }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## Props
+
+| Property | Attribute | Type | Default | Description |
+|---|---|---|---|---|
+| `value` | `value` | `number` | `0` | Current numeric value. |
+| `min` | `min` | `number` | — | Minimum allowed value. |
+| `max` | `max` | `number` | — | Maximum allowed value. |
+| `step` | `step` | `number` | `1` | Step increment for stepper buttons and arrow keys. |
+| `size` | `size` | `ComponentSize` | `'md'` | Input size controlling padding and font size. |
+| `variant` | `variant` | `FormVariant` | `'outline'` | Form input visual variant. |
+| `disabled` | `disabled` | `boolean` | `false` | Disable interaction. |
+| `invalid` | `invalid` | `boolean` | `false` | Apply error border styling. |
+| `name` | `name` | `string` | — | Form field name. |
+
+## Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `kb-change` | `KbChangeDetail` — discriminated union, narrow via `detail.source` | Value committed. Detail: `{ source: 'number-input', value: string }`. |
+| `kb-input` | `{ value: string }` | Value changed during input. Detail: `{ value: string }`. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|---|---|
+| `ArrowDown` | Move focus to the next item |
+| `ArrowUp` | Move focus to the previous item |
+
+### ARIA
+
+**Roles:** `spinbutton`
+
+**Attributes:** `aria-invalid`, `aria-label`, `aria-valuemax`, `aria-valuemin`, `aria-valuenow`
+
+## Examples
+
+<Demo title="Default" codes={{ html: exDefault, react: exDefaultReact, vue: exDefaultVue, svelte: exDefaultSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Sizes" codes={{ html: exSizes, react: exSizesReact, vue: exSizesVue, svelte: exSizesSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exSizes }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="With Step" codes={{ html: exWithStep, react: exWithStepReact, vue: exWithStepVue, svelte: exWithStepSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exWithStep }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Disabled" codes={{ html: exDisabled, react: exDisabledReact, vue: exDisabledVue, svelte: exDisabledSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exDisabled }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Invalid" codes={{ html: exInvalid, react: exInvalidReact, vue: exInvalidVue, svelte: exInvalidSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exInvalid }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+<Demo title="Min Max Clamped" codes={{ html: exMinMaxClamped, react: exMinMaxClampedReact, vue: exMinMaxClampedVue, svelte: exMinMaxClampedSvelte }}>
+  <BrowserOnly>
+    {() => {
+      require('@wearesyntesa/karbit-ui/define');
+      return <div dangerouslySetInnerHTML={{ __html: exMinMaxClamped }} />;
+    }}
+  </BrowserOnly>
+</Demo>
+
+## See Also
+
+- [Input](./input)
+- [Slider](./slider)
