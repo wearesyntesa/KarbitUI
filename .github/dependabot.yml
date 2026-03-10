@@ -10,10 +10,6 @@ updates:
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
     groups:
-      storybook:
-        patterns:
-          - "storybook"
-          - "@storybook/*"
       biome:
         patterns:
           - "@biomejs/*"

@@ -60,7 +60,7 @@ const TREE_DATA: readonly TreeNode[] = [
   { id: 'package', label: 'package.json' },
 ]
 
-const TIMELINE_ITEMS: readonly TimelineItem[] = [
+const TIMELINE_ITEMS: TimelineItem[] = [
   { id: '1', title: 'Project created', description: 'Repository initialized and dependencies installed', timestamp: '2025-01-15', status: 'success' },
   { id: '2', title: 'Alpha release', description: 'First internal release with core components', timestamp: '2025-03-01', status: 'success' },
   { id: '3', title: 'Beta release', description: 'Public beta with documentation site', timestamp: '2025-06-15', status: 'warning', active: true },
