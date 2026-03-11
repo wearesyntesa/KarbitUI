@@ -11,14 +11,18 @@ import { Demo } from '@site/src/components/Demo';
 import { ComponentPreview } from '@site/src/components/ComponentPreview';
 
 export const usageCode = `<kb-hover-card>
-  <kb-link slot="trigger" href="#">Hover over me</kb-link>
-  <p>Preview content displayed on hover.</p>
+  <kb-link href="#">Hover over me</kb-link>
+  <div slot="content">
+    <p>Preview content displayed on hover.</p>
+  </div>
 </kb-hover-card>`;
 export const reactCode = `import { HoverCard, Link } from '@wearesyntesa/karbit-ui/react';
 
 <HoverCard>
-  <Link slot="trigger" href="#">Hover over me</Link>
-  <p>Preview content displayed on hover.</p>
+  <Link href="#">Hover over me</Link>
+  <div slot="content">
+    <p>Preview content displayed on hover.</p>
+  </div>
 </HoverCard>`;
 export const vueCode = `<script setup>
 import '@wearesyntesa/karbit-ui/define';
@@ -26,8 +30,10 @@ import '@wearesyntesa/karbit-ui/define';
 
 <template>
   <kb-hover-card>
-    <kb-link slot="trigger" href="#">Hover over me</kb-link>
-    <p>Preview content displayed on hover.</p>
+    <kb-link href="#">Hover over me</kb-link>
+    <div slot="content">
+      <p>Preview content displayed on hover.</p>
+    </div>
   </kb-hover-card>
 </template>`;
 export const svelteCode = `<script>
@@ -35,10 +41,12 @@ export const svelteCode = `<script>
 </script>
 
 <kb-hover-card>
-  <kb-link slot="trigger" href="#">Hover over me</kb-link>
-  <p>Preview content displayed on hover.</p>
+  <kb-link href="#">Hover over me</kb-link>
+  <div slot="content">
+    <p>Preview content displayed on hover.</p>
+  </div>
 </kb-hover-card>`;
-export const exDefault = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+export const exDefault = `<div class="text-sm text-slate-700 dark:text-zinc-300">
   Deployed by
   <kb-hover-card>
     <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@elena</a>
@@ -62,26 +70,26 @@ export const exDefault = `<p class="text-sm text-slate-700 dark:text-zinc-300">
     </div>
   </kb-hover-card>
   on Feb 21, 2026.
-</p>`;
+</div>`;
 export const exDefaultReact = `import { HoverCard } from '@wearesyntesa/karbit-ui/react';
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div className="text-sm text-slate-700 dark:text-zinc-300">
   Deployed by
   <HoverCard>
-    <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@elena</a>
+    <a href="#" className="text-blue-500 underline underline-offset-2 font-medium">@elena</a>
     <div slot="content">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-gray-200 dark:bg-zinc-700 flex items-center justify-center font-mono text-xs text-slate-600 dark:text-zinc-300">
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-gray-200 dark:bg-zinc-700 flex items-center justify-center font-mono text-xs text-slate-600 dark:text-zinc-300">
             EV
           </div>
           <div>
-            <div class="text-sm font-medium text-slate-900 dark:text-zinc-50">Elena Vasquez</div>
-            <div class="font-mono text-xs text-slate-400 dark:text-zinc-500">@elena</div>
+            <div className="text-sm font-medium text-slate-900 dark:text-zinc-50">Elena Vasquez</div>
+            <div className="font-mono text-xs text-slate-400 dark:text-zinc-500">@elena</div>
           </div>
         </div>
-        <p class="text-xs text-slate-500 dark:text-zinc-400">Senior Engineer · Platform Team</p>
-        <div class="flex gap-4 text-xs text-slate-500 dark:text-zinc-400 font-mono">
+        <p className="text-xs text-slate-500 dark:text-zinc-400">Senior Engineer · Platform Team</p>
+        <div className="flex gap-4 text-xs text-slate-500 dark:text-zinc-400 font-mono">
           <span>12 commits this week</span>
           <span>4 PRs open</span>
         </div>
@@ -89,13 +97,13 @@ export const exDefaultReact = `import { HoverCard } from '@wearesyntesa/karbit-u
     </div>
   </HoverCard>
   on Feb 21, 2026.
-</p>`;
+</div>`;
 export const exDefaultVue = `<script setup>
 import '@wearesyntesa/karbit-ui/define';
 </script>
 
 <template>
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div class="text-sm text-slate-700 dark:text-zinc-300">
     Deployed by
     <kb-hover-card>
       <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@elena</a>
@@ -119,13 +127,13 @@ import '@wearesyntesa/karbit-ui/define';
       </div>
     </kb-hover-card>
     on Feb 21, 2026.
-  </p>
+  </div>
 </template>`;
 export const exDefaultSvelte = `<script>
   import '@wearesyntesa/karbit-ui/define';
 </script>
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div class="text-sm text-slate-700 dark:text-zinc-300">
   Deployed by
   <kb-hover-card>
     <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@elena</a>
@@ -149,9 +157,9 @@ export const exDefaultSvelte = `<script>
     </div>
   </kb-hover-card>
   on Feb 21, 2026.
-</p>`;
+</div>`;
 export const exPlacementTop = `<div style="margin-top: 200px">
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div class="text-sm text-slate-700 dark:text-zinc-300">
     Issue filed by
     <kb-hover-card placement="top">
       <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@marcus</a>
@@ -160,21 +168,21 @@ export const exPlacementTop = `<div style="margin-top: 200px">
         <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">Frontend Lead · 47 contributions this month</p>
       </div>
     </kb-hover-card>
-  </p>
+  </div>
 </div>`;
 export const exPlacementTopReact = `import { HoverCard } from '@wearesyntesa/karbit-ui/react';
 
 <div style="margin-top: 200px">
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div className="text-sm text-slate-700 dark:text-zinc-300">
     Issue filed by
     <HoverCard placement="top">
-      <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@marcus</a>
+      <a href="#" className="text-blue-500 underline underline-offset-2 font-medium">@marcus</a>
       <div slot="content">
-        <div class="text-sm font-medium text-slate-900 dark:text-zinc-50">Marcus Chen</div>
-        <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">Frontend Lead · 47 contributions this month</p>
+        <div className="text-sm font-medium text-slate-900 dark:text-zinc-50">Marcus Chen</div>
+        <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Frontend Lead · 47 contributions this month</p>
       </div>
     </HoverCard>
-  </p>
+  </div>
 </div>`;
 export const exPlacementTopVue = `<script setup>
 import '@wearesyntesa/karbit-ui/define';
@@ -182,7 +190,7 @@ import '@wearesyntesa/karbit-ui/define';
 
 <template>
   <div style="margin-top: 200px">
-    <p class="text-sm text-slate-700 dark:text-zinc-300">
+    <div class="text-sm text-slate-700 dark:text-zinc-300">
       Issue filed by
       <kb-hover-card placement="top">
         <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@marcus</a>
@@ -191,7 +199,7 @@ import '@wearesyntesa/karbit-ui/define';
           <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">Frontend Lead · 47 contributions this month</p>
         </div>
       </kb-hover-card>
-    </p>
+    </div>
   </div>
 </template>`;
 export const exPlacementTopSvelte = `<script>
@@ -199,7 +207,7 @@ export const exPlacementTopSvelte = `<script>
 </script>
 
 <div style="margin-top: 200px">
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div class="text-sm text-slate-700 dark:text-zinc-300">
     Issue filed by
     <kb-hover-card placement="top">
       <a href="#" class="text-blue-500 underline underline-offset-2 font-medium">@marcus</a>
@@ -208,9 +216,9 @@ export const exPlacementTopSvelte = `<script>
         <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">Frontend Lead · 47 contributions this month</p>
       </div>
     </kb-hover-card>
-  </p>
+  </div>
 </div>`;
-export const exSmallSize = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+export const exSmallSize = `<div class="text-sm text-slate-700 dark:text-zinc-300">
   Status:
   <kb-hover-card size="sm">
     <kb-badge color-scheme="green" size="xs">PASSING</kb-badge>
@@ -219,25 +227,25 @@ export const exSmallSize = `<p class="text-sm text-slate-700 dark:text-zinc-300"
       <div class="text-sm text-slate-900 dark:text-zinc-50 mt-1">All 342 tests passed in 2m 34s</div>
     </div>
   </kb-hover-card>
-</p>`;
+</div>`;
 export const exSmallSizeReact = `import { Badge, HoverCard } from '@wearesyntesa/karbit-ui/react';
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div className="text-sm text-slate-700 dark:text-zinc-300">
   Status:
   <HoverCard size="sm">
     <Badge color-scheme="green" size="xs">PASSING</Badge>
     <div slot="content">
-      <div class="font-mono text-xs text-slate-500 dark:text-zinc-400">Build #1847</div>
-      <div class="text-sm text-slate-900 dark:text-zinc-50 mt-1">All 342 tests passed in 2m 34s</div>
+      <div className="font-mono text-xs text-slate-500 dark:text-zinc-400">Build #1847</div>
+      <div className="text-sm text-slate-900 dark:text-zinc-50 mt-1">All 342 tests passed in 2m 34s</div>
     </div>
   </HoverCard>
-</p>`;
+</div>`;
 export const exSmallSizeVue = `<script setup>
 import '@wearesyntesa/karbit-ui/define';
 </script>
 
 <template>
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div class="text-sm text-slate-700 dark:text-zinc-300">
     Status:
     <kb-hover-card size="sm">
       <kb-badge color-scheme="green" size="xs">PASSING</kb-badge>
@@ -246,13 +254,13 @@ import '@wearesyntesa/karbit-ui/define';
         <div class="text-sm text-slate-900 dark:text-zinc-50 mt-1">All 342 tests passed in 2m 34s</div>
       </div>
     </kb-hover-card>
-  </p>
+  </div>
 </template>`;
 export const exSmallSizeSvelte = `<script>
   import '@wearesyntesa/karbit-ui/define';
 </script>
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div class="text-sm text-slate-700 dark:text-zinc-300">
   Status:
   <kb-hover-card size="sm">
     <kb-badge color-scheme="green" size="xs">PASSING</kb-badge>
@@ -261,8 +269,8 @@ export const exSmallSizeSvelte = `<script>
       <div class="text-sm text-slate-900 dark:text-zinc-50 mt-1">All 342 tests passed in 2m 34s</div>
     </div>
   </kb-hover-card>
-</p>`;
-export const exInitiallyOpen = `<p class="text-sm text-slate-700 dark:text-zinc-300">
+</div>`;
+export const exInitiallyOpen = `<div class="text-sm text-slate-700 dark:text-zinc-300">
   Server:
   <kb-hover-card open>
     <span class="font-mono text-blue-500 cursor-help">prod-api-01</span>
@@ -277,31 +285,31 @@ export const exInitiallyOpen = `<p class="text-sm text-slate-700 dark:text-zinc-
       </div>
     </div>
   </kb-hover-card>
-</p>`;
+</div>`;
 export const exInitiallyOpenReact = `import { Badge, HoverCard } from '@wearesyntesa/karbit-ui/react';
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div className="text-sm text-slate-700 dark:text-zinc-300">
   Server:
   <HoverCard open>
-    <span class="font-mono text-blue-500 cursor-help">prod-api-01</span>
+    <span className="font-mono text-blue-500 cursor-help">prod-api-01</span>
     <div slot="content">
-      <div class="space-y-1.5">
-        <div class="text-sm font-medium text-slate-900 dark:text-zinc-50">prod-api-01.syntesa.net</div>
-        <div class="flex gap-2">
+      <div className="space-y-1.5">
+        <div className="text-sm font-medium text-slate-900 dark:text-zinc-50">prod-api-01.syntesa.net</div>
+        <div className="flex gap-2">
           <Badge color-scheme="green" size="xs">HEALTHY</Badge>
-          <span class="font-mono text-xs text-slate-400 dark:text-zinc-500">uptime 99.97%</span>
+          <span className="font-mono text-xs text-slate-400 dark:text-zinc-500">uptime 99.97%</span>
         </div>
-        <div class="font-mono text-xs text-slate-500 dark:text-zinc-400">CPU 23% · Memory 4.2 GB / 8 GB</div>
+        <div className="font-mono text-xs text-slate-500 dark:text-zinc-400">CPU 23% · Memory 4.2 GB / 8 GB</div>
       </div>
     </div>
   </HoverCard>
-</p>`;
+</div>`;
 export const exInitiallyOpenVue = `<script setup>
 import '@wearesyntesa/karbit-ui/define';
 </script>
 
 <template>
-  <p class="text-sm text-slate-700 dark:text-zinc-300">
+  <div class="text-sm text-slate-700 dark:text-zinc-300">
     Server:
     <kb-hover-card open>
       <span class="font-mono text-blue-500 cursor-help">prod-api-01</span>
@@ -316,13 +324,13 @@ import '@wearesyntesa/karbit-ui/define';
         </div>
       </div>
     </kb-hover-card>
-  </p>
+  </div>
 </template>`;
 export const exInitiallyOpenSvelte = `<script>
   import '@wearesyntesa/karbit-ui/define';
 </script>
 
-<p class="text-sm text-slate-700 dark:text-zinc-300">
+<div class="text-sm text-slate-700 dark:text-zinc-300">
   Server:
   <kb-hover-card open>
     <span class="font-mono text-blue-500 cursor-help">prod-api-01</span>
@@ -337,7 +345,7 @@ export const exInitiallyOpenSvelte = `<script>
       </div>
     </div>
   </kb-hover-card>
-</p>`;
+</div>`;
 
 # Hover Card
 
@@ -389,7 +397,7 @@ import { HoverCard } from '@wearesyntesa/karbit-ui/react';
   <BrowserOnly>
     {() => {
       require('@wearesyntesa/karbit-ui/define');
-      return <div dangerouslySetInnerHTML={{ __html: usageCode }} />;
+      return <ComponentPreview html={usageCode} overlayTag="kb-hover-card" />;
     }}
   </BrowserOnly>
 </Demo>
@@ -424,7 +432,7 @@ import { HoverCard } from '@wearesyntesa/karbit-ui/react';
   <BrowserOnly>
     {() => {
       require('@wearesyntesa/karbit-ui/define');
-      return <div dangerouslySetInnerHTML={{ __html: exDefault }} />;
+      return <ComponentPreview html={exDefault} overlayTag="kb-hover-card" />;
     }}
   </BrowserOnly>
 </Demo>
@@ -433,7 +441,7 @@ import { HoverCard } from '@wearesyntesa/karbit-ui/react';
   <BrowserOnly>
     {() => {
       require('@wearesyntesa/karbit-ui/define');
-      return <div dangerouslySetInnerHTML={{ __html: exPlacementTop }} />;
+      return <ComponentPreview html={exPlacementTop} overlayTag="kb-hover-card" />;
     }}
   </BrowserOnly>
 </Demo>
@@ -442,7 +450,7 @@ import { HoverCard } from '@wearesyntesa/karbit-ui/react';
   <BrowserOnly>
     {() => {
       require('@wearesyntesa/karbit-ui/define');
-      return <div dangerouslySetInnerHTML={{ __html: exSmallSize }} />;
+      return <ComponentPreview html={exSmallSize} overlayTag="kb-hover-card" />;
     }}
   </BrowserOnly>
 </Demo>
@@ -451,7 +459,7 @@ import { HoverCard } from '@wearesyntesa/karbit-ui/react';
   <BrowserOnly>
     {() => {
       require('@wearesyntesa/karbit-ui/define');
-      return <div dangerouslySetInnerHTML={{ __html: exInitiallyOpen }} />;
+      return <ComponentPreview html={exInitiallyOpen} overlayTag="kb-hover-card" />;
     }}
   </BrowserOnly>
 </Demo>
