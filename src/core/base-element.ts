@@ -1,5 +1,6 @@
 import type { PropertyDeclaration } from 'lit';
 import { isServer, LitElement } from 'lit';
+import { twMerge } from 'tailwind-merge';
 import { type ClassInput, cx } from '../utils/cx.js';
 import type { KbEventDetailMap } from './events.js';
 import { STYLE_PROP_DEFS, STYLE_PROP_KEYS, type StyleProps } from './style-map.js';
@@ -184,7 +185,7 @@ export class KbBaseElement<S extends string = string> extends LitElement {
   }
 
   protected buildClasses(...additional: ClassInput[]): string {
-    return cx(this.getStyleClasses(), ...additional);
+    return twMerge(cx(...additional), this.getStyleClasses());
   }
 
   /** Type-safe event emitter. Validates event name and detail type against `KbEventDetailMap`. Always dispatches with `bubbles: true, composed: true`. */
