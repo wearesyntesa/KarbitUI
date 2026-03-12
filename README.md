@@ -82,7 +82,6 @@ All components inherit style props from the base element. These map directly to 
 Full component API reference and live examples are available at the documentation site.
 
 ```bash
-pnpm docs:generate   # generate docs pages from source
 pnpm docs:build      # build the documentation site
 pnpm docs:serve      # preview the built site locally
 ```
