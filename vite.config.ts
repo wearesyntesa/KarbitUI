@@ -296,7 +296,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: [/^lit(?:\/|$)/, '@lit/react', 'react'],
+      external: [/^lit(?:\/|$)/, '@lit/react', 'react', 'tailwind-merge'],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',

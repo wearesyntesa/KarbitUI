@@ -853,7 +853,9 @@
     "docs:serve": "pnpm --filter @wearesyntesa/karbit-ui-docs serve",
     "example:react": "pnpm --filter @wearesyntesa/karbit-ui-react-sample dev",
     "example:vue": "pnpm --filter @wearesyntesa/karbit-ui-vue-sample dev",
-    "example:svelte": "pnpm --filter @wearesyntesa/karbit-ui-svelte-sample dev"
+    "example:svelte": "pnpm --filter @wearesyntesa/karbit-ui-svelte-sample dev",
+    "docs:deploy": "pnpm build && pnpm docs:build && wrangler pages deploy docs/build",
+    "docs:deploy:preview": "pnpm build && pnpm docs:build && wrangler pages deploy docs/build --branch preview"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": [
@@ -896,7 +898,8 @@
     "tailwindcss": "^4.2.1",
     "typescript": "^5.7.0",
     "vite": "^7.3.1",
-    "vite-plugin-dts": "^4.3.0"
+    "vite-plugin-dts": "^4.3.0",
+    "wrangler": "^4.72.0"
   },
   "peerDependencies": {
     "@lit/react": "^1.0.0",
