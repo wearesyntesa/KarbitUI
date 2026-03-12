@@ -77,9 +77,6 @@ jobs:
           name: library-dist
           path: dist/
 
-      - name: Generate docs
-        run: pnpm docs:generate
-
       - name: Build docs site
         run: pnpm docs:build
 
