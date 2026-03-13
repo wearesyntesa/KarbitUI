@@ -854,7 +854,7 @@
     "example:react": "pnpm --filter @wearesyntesa/karbit-ui-react-sample dev",
     "example:vue": "pnpm --filter @wearesyntesa/karbit-ui-vue-sample dev",
     "example:svelte": "pnpm --filter @wearesyntesa/karbit-ui-svelte-sample dev",
-    "docs:deploy": "pnpm build && pnpm docs:build && wrangler pages deploy docs/build",
+    "docs:deploy": "pnpm build && pnpm docs:build && wrangler pages deploy docs/build --project-name karbitui-docs --branch main",
     "docs:deploy:preview": "pnpm build && pnpm docs:build && wrangler pages deploy docs/build --branch preview"
   },
   "lint-staged": {
