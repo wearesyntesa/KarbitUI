@@ -1,6 +1,6 @@
 {
   "name": "@wearesyntesa/karbit-ui",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Brutalist design system built on Lit with Chakra UI-like API and Tailwind CSS",
   "type": "module",
   "main": "./dist/index.js",
