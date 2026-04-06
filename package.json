@@ -885,7 +885,7 @@
   ],
   "scripts": {
     "dev": "vite build --watch",
-    "build": "tsc --noEmit && vite build && vite build --config vite.config.css.ts && node verify-define-entry.mjs",
+    "build": "tsc --noEmit && vite build && vite build --config vite.config.css.ts && node --input-type=module -e \"import { readFile } from 'node:fs/promises'; const defineEntry = await readFile(new URL('./dist/define.js', import.meta.url), 'utf8'); if (!defineEntry.includes('define(\\\"kb-input\\\"') || !defineEntry.includes('karbitElementsDefined')) { throw new Error('dist/define.js does not contain the expected Karbit custom-element registrations.'); }\"",
     "typecheck": "tsc --noEmit",
     "cem": "cem analyze",
     "lint": "biome check .",
