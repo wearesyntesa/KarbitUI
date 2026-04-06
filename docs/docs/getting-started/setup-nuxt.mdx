@@ -49,7 +49,7 @@ import '@wearesyntesa/karbit-ui/define';
 
 ## Vue wrapper path
 
-The Vue wrappers register the specific custom elements they render, so you can use them like normal Vue components:
+The Vue wrappers register the specific custom elements they render, so you can use them like normal Vue components. Reach for the global `@wearesyntesa/karbit-ui/define` entry only when the same Nuxt app also renders raw `kb-*` tags.
 
 ```vue title="pages/index.vue"
 <script setup lang="ts">
@@ -79,7 +79,7 @@ const roleOptions = [
 
 - Start with Vue wrappers for forms and inputs.
 - Use `<ClientOnly>` around routes or sections that still hit hydration mismatches.
-- Keep raw custom elements for cases where you want the direct web-component API, but expect to use property binding for arrays and objects.
+- Keep raw custom elements for cases where you want the direct web-component API, but expect to use property binding for arrays and objects plus explicit client registration.
 
 ```vue
 <ClientOnly>
@@ -90,5 +90,6 @@ const roleOptions = [
 ## Next steps
 
 - [Vue setup](/docs/getting-started/setup-vue)
+- [SSR playbook](/docs/getting-started/ssr-playbook)
 - [Official wrappers](/docs/getting-started/wrappers)
 - [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)

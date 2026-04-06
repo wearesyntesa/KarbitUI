@@ -1,0 +1,101 @@
+---
+sidebar_position: 8
+title: SSR playbook
+---
+
+# SSR Playbook
+
+KarbitUI works in SSR apps, but not every integration path has the same tradeoffs. Use this page to choose the safest default before you start tuning framework-specific details.
+
+## Start here
+
+| App shape | Recommended path | Why |
+| --- | --- | --- |
+| React or Next.js app using Karbit form controls | React wrappers first | Wrappers give framework-native props and register the elements they render |
+| Vue or Nuxt app using Karbit form controls | Vue wrappers first | Wrappers avoid manual `CustomEvent` casting and `.prop` friction |
+| Svelte or SvelteKit app | Raw custom elements with explicit registration | No official Svelte wrapper surface yet |
+| Mixed app using wrappers and raw `kb-*` tags | Wrappers plus `@wearesyntesa/karbit-ui/define` | Wrappers cover wrapped controls; raw tags still need registration |
+| App using raw custom elements everywhere | Raw elements plus `@wearesyntesa/karbit-ui/define` or per-component `*/define` imports | Registration must be explicit |
+
+## Decision matrix
+
+| Concern | React / Next.js | Vue / Nuxt | Svelte / SvelteKit | Vanilla / other |
+| --- | --- | --- | --- | --- |
+| Primary adoption path | React wrappers | Vue wrappers | Raw custom elements | Raw custom elements |
+| Need `@wearesyntesa/karbit-ui/define` for wrapped controls | No | No | n/a | n/a |
+| Need `@wearesyntesa/karbit-ui/define` for raw `kb-*` tags | Yes | Yes | Yes | Yes |
+| Client-only boundary often useful for hydration-sensitive UI | Yes | Yes | Yes | Usually not applicable |
+| Complex arrays / objects must be passed as properties in raw mode | Sometimes | Yes | Yes | Yes |
+| Best first fallback when hydration keeps failing | Smaller client boundary | `<ClientOnly>` or app wrapper fallback | `onMount` / client boundary fallback | Render on client only |
+
+## The safe baseline
+
+If you are integrating KarbitUI into an SSR product and want the lowest-risk starting point:
+
+1. choose wrappers when they exist
+2. keep raw `kb-*` tags behind explicit registration
+3. use client-only boundaries for hydration-sensitive controls that fail on hard refresh
+4. render simple server fallback markup when the same component repeatedly crashes during hydration
+5. move to raw custom elements only when you intentionally want the lower-level API surface
+
+## When wrappers are enough
+
+Wrappers are usually the right default when you need:
+
+- framework-native state binding
+- fewer event/detail casts
+- less `.prop` syntax in templates
+- a narrower public surface for app teams
+
+Wrappers do **not** remove all SSR tradeoffs. They reduce framework friction, but Lit hydration still runs after the element upgrades on the client.
+
+## When raw custom elements are better
+
+Use raw `kb-*` tags when:
+
+- your framework has no official wrapper surface yet
+- you want one consistent web-component API across several frameworks
+- you are building framework-agnostic demos, content pages, or design-system sandboxes
+- you want selective per-component registration imports
+
+## Hydration-sensitive component categories
+
+The following categories deserve extra care in SSR apps:
+
+- form controls with internal Lit rendering and live interaction
+- overlays and menus that depend on client measurements or portals
+- tables and data-heavy views when they are rendered inside hydration-sensitive layouts
+- lightweight display elements such as badges only when they live inside a larger subtree that is already mismatching during hydration
+
+That does **not** mean they are unusable in SSR. It means you should be ready to move them behind a smaller client boundary if hard-refresh hydration keeps failing.
+
+## Theme choice in SSR apps
+
+Use this shortcut when deciding how to style KarbitUI in an SSR app:
+
+- use `theme.css` when you want the fastest path and can accept KarbitUI owning more of the global styling setup
+- use `theme.tokens.css` plus your own Tailwind pipeline when the app already has a strong design layer or existing Tailwind architecture
+- use the custom Tailwind path when your team needs the most control over scanning, layering, and override behavior
+
+See [Theming](/docs/design-system/theming) for the CSS-level details.
+
+## Recommended app-level pattern
+
+For product teams, the most stable structure is usually:
+
+- framework wrapper or raw Karbit component at the bottom
+- app wrapper in the middle (`UiAppInput`, `UiAppSelect`, `UiAppButton`, etc.)
+- product page usage at the top
+
+That middle layer is where you standardize labels, validation, SSR fallbacks, analytics hooks, and future migration work.
+
+## Where to go next
+
+- [React setup](/docs/getting-started/setup-react)
+- [Vue setup](/docs/getting-started/setup-vue)
+- [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)
+- [Official wrappers](/docs/getting-started/wrappers)
+- [Nuxt setup](/docs/getting-started/setup-nuxt)
+- [Next.js setup](/docs/getting-started/setup-nextjs)
+- [Svelte setup](/docs/getting-started/setup-svelte)
+- [Vanilla setup](/docs/getting-started/setup-vanilla)

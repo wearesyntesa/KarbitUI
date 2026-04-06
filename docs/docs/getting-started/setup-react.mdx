@@ -32,19 +32,11 @@ import { Input } from "@wearesyntesa/karbit-ui/react/input";
 Individual imports produce smaller bundles since your bundler only includes the components you use.
 :::
 
-## Register custom elements
+## Registration behavior
 
-React wrappers create the React component interface, but the underlying custom element still needs registration:
+React wrappers register the specific Karbit elements they render.
 
-```tsx title="src/main.tsx"
-// Register all custom elements (do this once at app entry)
-import "@wearesyntesa/karbit-ui/define";
-
-import { createRoot } from "react-dom/client";
-import App from "./App";
-
-createRoot(document.getElementById("root")!).render(<App />);
-```
+Use `@wearesyntesa/karbit-ui/define` only if your app also renders raw `kb-*` tags outside the React wrapper surface.
 
 ## Usage example
 

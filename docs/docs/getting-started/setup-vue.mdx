@@ -26,6 +26,7 @@ The Vue wrappers remove the most common pain points in forms:
 - no manual `CustomEvent` casting
 - no `.prop` binding for `Select` options
 - named `v-model` bindings that match the underlying API
+- automatic registration for the wrapped Karbit controls they render
 
 ```vue title="src/App.vue"
 <script setup lang="ts">
@@ -154,5 +155,6 @@ Vue binds attributes by default. For complex data (arrays, objects), use `.prop`
 For Nuxt and other SSR environments, start with the Vue wrappers for forms and use `<ClientOnly>` when a route still produces hydration issues.
 
 - [Nuxt setup](/docs/getting-started/setup-nuxt)
+- [SSR playbook](/docs/getting-started/ssr-playbook)
 - [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)
 - [Official wrappers](/docs/getting-started/wrappers)

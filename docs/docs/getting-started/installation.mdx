@@ -43,6 +43,9 @@ If you already have Tailwind CSS configured, add the KarbitUI source to your CSS
 
 KarbitUI separates component class definitions from custom element registration for tree-shaking.
 
+- if you render raw `kb-*` elements directly, register them explicitly
+- if you use the official React or Vue wrappers, the wrappers register the specific elements they render
+
 ### Register all components
 
 ```ts
@@ -55,6 +58,22 @@ import "@wearesyntesa/karbit-ui/define";
 // Only registers <kb-button> in the custom element registry
 import "@wearesyntesa/karbit-ui/button/define";
 ```
+
+## Wrapper registration
+
+Official wrappers avoid the raw-registration step for the controls they render:
+
+```tsx
+import { Button, Input } from '@wearesyntesa/karbit-ui/react';
+```
+
+```vue
+<script setup lang="ts">
+import { Input, Select } from '@wearesyntesa/karbit-ui/vue';
+</script>
+```
+
+Use `@wearesyntesa/karbit-ui/define` when your app renders raw `kb-*` tags, mixes wrapper and raw usage, or wants to register the full element set up front.
 
 ## Verify installation
 
@@ -74,5 +93,6 @@ After setup, this should render a styled button:
 - [Nuxt setup](/docs/getting-started/setup-nuxt) — Vue SSR guidance and client-only patterns
 - [Svelte setup](/docs/getting-started/setup-svelte) — Svelte and SvelteKit integration
 - [Official wrappers](/docs/getting-started/wrappers) — Framework-native APIs and app-level wrapper patterns
+- [SSR playbook](/docs/getting-started/ssr-playbook) — Cross-framework guidance for wrappers, raw elements, and client boundaries
 - [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting) — Fix SSR mismatch issues
 - [Dark mode](/docs/getting-started/dark-mode) — Enable dark mode support

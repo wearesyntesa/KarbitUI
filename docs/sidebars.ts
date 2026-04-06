@@ -17,6 +17,7 @@ const sidebars: SidebarsConfig = {
         'getting-started/setup-vanilla',
         'getting-started/wrappers',
         'getting-started/dark-mode',
+        'getting-started/ssr-playbook',
         'getting-started/hydration-troubleshooting',
         'getting-started/testing',
       ],

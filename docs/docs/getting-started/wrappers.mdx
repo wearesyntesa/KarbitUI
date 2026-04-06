@@ -12,6 +12,8 @@ KarbitUI ships two framework-specific wrapper surfaces today:
 
 Use wrappers when you want framework-native state binding and event handling. Use raw custom elements when you want the lowest-level API or need to mix KarbitUI into a non-framework environment.
 
+For the components they cover, the official React and Vue wrappers register the Karbit custom elements they render. Use `@wearesyntesa/karbit-ui/define` when you render raw `kb-*` tags directly or want the entire element set registered up front.
+
 ## Vue wrappers
 
 The Vue wrappers currently cover the form controls that cause the most friction with raw custom elements:

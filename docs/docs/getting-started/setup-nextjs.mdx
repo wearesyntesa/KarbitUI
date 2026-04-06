@@ -27,32 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-## Register custom elements once
+## Registration behavior
 
-```tsx title="app/karbit-provider.tsx"
-'use client';
+The React wrappers register the specific Karbit elements they render.
 
-import '@wearesyntesa/karbit-ui/define';
-
-export function KarbitProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
-```
-
-```tsx title="app/layout.tsx"
-import '@wearesyntesa/karbit-ui/theme.css';
-import { KarbitProvider } from './karbit-provider';
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <KarbitProvider>{children}</KarbitProvider>
-      </body>
-    </html>
-  );
-}
-```
+Import `@wearesyntesa/karbit-ui/define` only if part of your Next.js app still renders raw `kb-*` tags.
 
 ## Use wrappers in client components
 
@@ -86,10 +65,14 @@ export default function Page() {
 
 - Put interactive Karbit UI behind a client component boundary.
 - Prefer the React wrappers in Next.js instead of raw custom elements.
+- Import `@wearesyntesa/karbit-ui/define` from a client-only provider only when you intentionally render raw `kb-*` tags.
 - If a route still produces hydration issues, isolate the component behind a dynamic import with `ssr: false` or move it into a smaller client-only subtree.
 
 ## Next steps
 
+- [React setup](/docs/getting-started/setup-react)
+- [Official wrappers](/docs/getting-started/wrappers)
+- [SSR playbook](/docs/getting-started/ssr-playbook)
 - [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)
 - [Testing KarbitUI](/docs/getting-started/testing)
 - [Theming](/docs/design-system/theming)

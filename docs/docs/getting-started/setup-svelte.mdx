@@ -70,7 +70,7 @@ For complex data (arrays, objects), bind to the DOM property directly:
   ];
 </script>
 
-<!-- Svelte binds to properties when using the prop: prefix -->
+<!-- Svelte custom elements map JavaScript expressions to DOM properties -->
 <kb-table columns={columns} rows={rows} />
 <kb-tree-view items={treeItems} />
 ```
@@ -84,6 +84,8 @@ SvelteKit can render KarbitUI on the server, but interactive controls are still 
 - test the post-hydration behavior for interactive components such as `kb-select`
 
 See [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting) if a route only fails on first render.
+
+For the broader wrapper-vs-raw decision, use the [SSR playbook](/docs/getting-started/ssr-playbook).
 
 ## TypeScript
 

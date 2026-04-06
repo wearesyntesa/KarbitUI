@@ -21,6 +21,27 @@ KarbitUI renders interactive Lit components in the Light DOM. That is framework-
 3. Confirm complex props are passed as properties, not serialized attributes, when you use raw custom elements.
 4. Prefer framework wrappers where they exist instead of manually unpacking `CustomEvent` payloads.
 
+## Cross-framework SSR-safe starting point
+
+If your app uses SSR, start with this posture before optimizing further:
+
+- use React or Vue wrappers where they exist
+- keep raw `kb-*` tags behind an explicit registration step
+- prefer client-only boundaries for hydration-sensitive UI such as form controls and complex data views when a route still mismatches on hard refresh
+- render simple fallback markup on the server when a component repeatedly fails during hydration
+
+Need the broader framework choice first? Start with the [SSR playbook](/docs/getting-started/ssr-playbook).
+
+## Quick decision matrix
+
+| Situation | Preferred move |
+| --- | --- |
+| React or Vue forms in an SSR app | Use the official wrappers first |
+| Raw `kb-*` tags in any SSR app | Add explicit `define` registration on the client |
+| Same route still mismatches after correct registration | Move the problematic subtree behind a client-only boundary |
+| Hydration keeps failing after smaller boundaries | Render server fallback markup and mount the interactive control on the client |
+| Existing design system already owns Tailwind and tokens | Prefer the token-only or custom Tailwind theming path |
+
 ## Framework-specific guidance
 
 ### Nuxt
@@ -32,13 +53,19 @@ KarbitUI renders interactive Lit components in the Light DOM. That is framework-
 ### Next.js
 
 - Put KarbitUI usage in client components.
-- Register `@wearesyntesa/karbit-ui/define` from a client-only provider.
+- Register `@wearesyntesa/karbit-ui/define` from a client-only provider only when you render raw `kb-*` tags outside the React wrappers.
 - If a route still mismatches, move the problematic component behind a smaller client-only boundary.
 
 ### SvelteKit
 
 - Import `@wearesyntesa/karbit-ui/define` from a client entry or `onMount` boundary when needed.
 - Keep arrays and objects bound as properties.
+
+### Any other framework
+
+- If it can render raw custom elements, KarbitUI can usually integrate through explicit client registration plus property/event binding.
+- Treat wrappers as ergonomics helpers, not as a universal SSR guarantee.
+- Start from a small interactive surface and expand after hard-refresh hydration is stable.
 
 ## When to switch from raw elements to wrappers
 

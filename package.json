@@ -885,7 +885,7 @@
   ],
   "scripts": {
     "dev": "vite build --watch",
-    "build": "tsc --noEmit && vite build && vite build --config vite.config.css.ts",
+    "build": "tsc --noEmit && vite build && vite build --config vite.config.css.ts && node verify-define-entry.mjs",
     "typecheck": "tsc --noEmit",
     "cem": "cem analyze",
     "lint": "biome check .",
