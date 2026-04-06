@@ -9,7 +9,16 @@ KarbitUI uses Tailwind CSS v4's CSS-first theming via `@theme` directives. You c
 
 ## Theme CSS file
 
-The package exports a ready-to-use theme file:
+KarbitUI ships two CSS entry points:
+
+- `@wearesyntesa/karbit-ui/theme.css` — full Tailwind + tokens + sources + component animation setup
+- `@wearesyntesa/karbit-ui/theme.tokens.css` — tokens only, for apps that already own their Tailwind pipeline
+
+### Use `theme.css` when
+
+- you want the fastest setup path
+- you are starting a new app
+- you want KarbitUI to provide the Tailwind and token wiring for you
 
 ```css title="src/index.css"
 @import "@wearesyntesa/karbit-ui/theme.css";
@@ -17,11 +26,26 @@ The package exports a ready-to-use theme file:
 
 This file includes:
 - Tailwind CSS v4 import
-- Dark mode configuration (class-based via `.dark`)
-- All `@theme` design tokens (colors, fonts, radius, animations)
+- dark mode configuration
+- all `@theme` design tokens
 - `@source` directives for component class scanning
-- `@keyframes` for all component animations
-- Reduced motion accessibility overrides
+- `@keyframes` for component animations
+- reduced motion overrides
+
+### Use `theme.tokens.css` when
+
+- your app already imports `tailwindcss`
+- you only want KarbitUI design tokens
+- you want to control your own `@source` rules
+
+```css title="src/index.css"
+@import "tailwindcss";
+@import "@wearesyntesa/karbit-ui/theme.tokens.css";
+
+@source "../node_modules/@wearesyntesa/karbit-ui/dist/**/*.js";
+```
+
+That split is especially useful in Nuxt, Next.js, and other SSR apps where the application already owns the global CSS pipeline.
 
 ## Customizing colors
 

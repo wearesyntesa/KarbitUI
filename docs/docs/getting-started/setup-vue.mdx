@@ -5,15 +5,62 @@ title: Vue
 
 # Vue Setup
 
-Vue 3 has built-in support for custom elements. KarbitUI components work natively in Vue templates.
+Vue 3 supports KarbitUI in two modes:
+
+- raw custom elements with `kb-*`
+- official Vue wrappers from `@wearesyntesa/karbit-ui/vue`
+
+Use the wrappers for application forms and use the raw custom element path when you want direct web-component access.
 
 ## Installation
 
 ```bash
-pnpm add @wearesyntesa/karbit-ui
+pnpm add @wearesyntesa/karbit-ui vue
 ```
 
-## Configure Vue
+## Official Vue wrappers
+
+The Vue wrappers remove the most common pain points in forms:
+
+- no `isCustomElement` config for wrapped controls
+- no manual `CustomEvent` casting
+- no `.prop` binding for `Select` options
+- named `v-model` bindings that match the underlying API
+
+```vue title="src/App.vue"
+<script setup lang="ts">
+import { Checkbox, Input, Select, Switch, Textarea } from '@wearesyntesa/karbit-ui/vue';
+import { ref } from 'vue';
+
+const name = ref('');
+const role = ref('');
+const notes = ref('');
+const accepted = ref(false);
+const notifications = ref(false);
+
+const roleOptions = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'viewer', label: 'Viewer' },
+];
+</script>
+
+<template>
+  <div class="space-y-4">
+    <Input v-model:value="name" placeholder="Name" />
+    <Select v-model:value="role" :options="roleOptions" placeholder="Role" />
+    <Textarea v-model:value="notes" placeholder="Notes" />
+    <Checkbox v-model:checked="accepted">Accept terms</Checkbox>
+    <Switch v-model:checked="notifications">Notifications</Switch>
+  </div>
+</template>
+```
+
+## Raw custom element path
+
+The raw path is still supported and is the right choice when you want the direct web-component API.
+
+### Configure Vue
 
 Tell Vue to treat `kb-*` tags as custom elements so it doesn't try to resolve them as Vue components:
 
@@ -34,7 +81,7 @@ export default defineConfig({
 });
 ```
 
-## Register custom elements
+### Register custom elements
 
 ```ts title="src/main.ts"
 import "@wearesyntesa/karbit-ui/define";
@@ -45,7 +92,7 @@ import App from "./App.vue";
 createApp(App).mount("#app");
 ```
 
-## Usage example
+### Usage example
 
 ```vue title="src/App.vue"
 <script setup lang="ts">
@@ -67,7 +114,7 @@ function handleChange(e: CustomEvent) {
 </template>
 ```
 
-## Event handling
+### Event handling
 
 KarbitUI components emit `CustomEvent`s. In Vue, listen with `@event-name`:
 
@@ -80,7 +127,7 @@ KarbitUI components emit `CustomEvent`s. In Vue, listen with `@event-name`:
 </template>
 ```
 
-## Attribute vs. property binding
+### Attribute vs. property binding
 
 Vue binds attributes by default. For complex data (arrays, objects), use `.prop` modifier or `v-bind`:
 
@@ -92,6 +139,7 @@ Vue binds attributes by default. For complex data (arrays, objects), use `.prop`
   <!-- Complex data needs property binding -->
   <kb-table :columns.prop="columns" :rows.prop="rows" />
   <kb-tree-view :items.prop="treeItems" />
+  <kb-select :options.prop="options" />
 </template>
 ```
 
@@ -100,3 +148,11 @@ Vue binds attributes by default. For complex data (arrays, objects), use `.prop`
 ```css title="src/style.css"
 @import "@wearesyntesa/karbit-ui/theme.css";
 ```
+
+## SSR and Nuxt
+
+For Nuxt and other SSR environments, start with the Vue wrappers for forms and use `<ClientOnly>` when a route still produces hydration issues.
+
+- [Nuxt setup](/docs/getting-started/setup-nuxt)
+- [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)
+- [Official wrappers](/docs/getting-started/wrappers)

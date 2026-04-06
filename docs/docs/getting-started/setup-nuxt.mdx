@@ -1,0 +1,94 @@
+---
+sidebar_position: 5
+title: Nuxt
+---
+
+# Nuxt Setup
+
+Nuxt can use KarbitUI in two ways:
+
+- raw custom elements with `kb-*`
+- Vue wrappers from `@wearesyntesa/karbit-ui/vue`
+
+Use the Vue wrappers for application forms and keep the raw custom element path for lower-level or mixed-framework use cases.
+
+## Installation
+
+```bash
+pnpm add @wearesyntesa/karbit-ui vue
+```
+
+## Add the theme
+
+```ts title="nuxt.config.ts"
+export default defineNuxtConfig({
+  css: ['@wearesyntesa/karbit-ui/theme.css'],
+});
+```
+
+## Raw custom element path
+
+If you want to render `kb-*` tags directly, tell Vue not to resolve them as Vue components:
+
+```ts title="nuxt.config.ts"
+export default defineNuxtConfig({
+  css: ['@wearesyntesa/karbit-ui/theme.css'],
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith('kb-'),
+    },
+  },
+});
+```
+
+Register the elements on the client:
+
+```ts title="plugins/karbit.client.ts"
+import '@wearesyntesa/karbit-ui/define';
+```
+
+## Vue wrapper path
+
+The Vue wrappers register the specific custom elements they render, so you can use them like normal Vue components:
+
+```vue title="pages/index.vue"
+<script setup lang="ts">
+import { Input, Select, Switch } from '@wearesyntesa/karbit-ui/vue';
+import { ref } from 'vue';
+
+const role = ref('');
+const notifications = ref(false);
+
+const roleOptions = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'viewer', label: 'Viewer' },
+];
+</script>
+
+<template>
+  <div class="max-w-md space-y-4 p-6">
+    <Input v-model:value="role" placeholder="Name" />
+    <Select v-model:value="role" :options="roleOptions" placeholder="Role" />
+    <Switch v-model:checked="notifications">Email notifications</Switch>
+  </div>
+</template>
+```
+
+## SSR and hydration guidance
+
+- Start with Vue wrappers for forms and inputs.
+- Use `<ClientOnly>` around routes or sections that still hit hydration mismatches.
+- Keep raw custom elements for cases where you want the direct web-component API, but expect to use property binding for arrays and objects.
+
+```vue
+<ClientOnly>
+  <Select v-model:value="role" :options="roleOptions" placeholder="Role" />
+</ClientOnly>
+```
+
+## Next steps
+
+- [Vue setup](/docs/getting-started/setup-vue)
+- [Official wrappers](/docs/getting-started/wrappers)
+- [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)

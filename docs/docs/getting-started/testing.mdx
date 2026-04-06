@@ -1,0 +1,43 @@
+---
+sidebar_position: 9
+title: Testing
+---
+
+# Testing KarbitUI
+
+KarbitUI components render accessible roles in the Light DOM, so prefer user-facing selectors over implementation details.
+
+## Recommended selectors
+
+- `getByRole('button')`
+- `getByRole('textbox')`
+- `getByRole('combobox')`
+- `getByRole('checkbox')`
+- `getByRole('switch')`
+
+`kb-select` uses combobox and listbox semantics instead of native `<select>` markup, so test it like a custom listbox:
+
+```ts
+await page.getByRole('combobox').click();
+await page.getByRole('option', { name: 'Admin' }).click();
+```
+
+## Vue wrappers vs raw elements
+
+- Test Vue wrappers with normal Vue component patterns and `v-model` assertions.
+- Test raw custom elements by listening for `CustomEvent` detail payloads.
+
+```vue
+<Input v-model:value="name" />
+<Checkbox v-model:checked="accepted" />
+```
+
+## SSR apps
+
+If a control is intentionally behind a client-only boundary, write the test against the client-rendered state instead of asserting SSR markup shape.
+
+## What to avoid
+
+- brittle selectors tied to internal class names
+- assuming `kb-select` exposes native `<option>` elements
+- asserting framework-specific event internals when the same behavior is observable through role, label, or text

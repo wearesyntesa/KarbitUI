@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Checkbox, Input, Select, Switch, Textarea } from '@wearesyntesa/karbit-ui/vue'
 import { ref } from 'vue'
 
 const ROLE_OPTIONS = [
@@ -61,21 +62,19 @@ function handleSubmit(e: Event) {
 
       <kb-form-control>
         <kb-form-label>Username</kb-form-label>
-        <kb-input
-          :value="username"
+        <Input
+          v-model:value="username"
           placeholder="Enter username"
           clearable
-          @kb-input="username = ($event as CustomEvent).detail.value"
         />
       </kb-form-control>
 
       <kb-form-control>
         <kb-form-label>Role</kb-form-label>
-        <kb-select
-          :options.prop="ROLE_OPTIONS"
-          :value="role"
+        <Select
+          v-model:value="role"
+          :options="ROLE_OPTIONS"
           placeholder="Pick a role"
-          @kb-change="role = ($event as CustomEvent).detail.value"
         />
       </kb-form-control>
 
@@ -96,31 +95,24 @@ function handleSubmit(e: Event) {
 
       <kb-form-control>
         <kb-form-label>Notes</kb-form-label>
-        <kb-textarea
+        <Textarea
           placeholder="Add a note..."
-          :value="notes"
-          rows="4"
+          v-model:value="notes"
+          :rows="4"
           resize="vertical"
-          @kb-input="notes = ($event as CustomEvent).detail.value"
         />
       </kb-form-control>
 
       <kb-form-control>
-        <kb-checkbox
-          :checked="termsAccepted"
-          @kb-change="termsAccepted = ($event as CustomEvent).detail.checked"
-        >
+        <Checkbox v-model:checked="termsAccepted">
           Accept terms and conditions
-        </kb-checkbox>
+        </Checkbox>
       </kb-form-control>
 
       <kb-form-control>
-        <kb-switch
-          :checked="notifications"
-          @kb-change="notifications = ($event as CustomEvent).detail.checked"
-        >
+        <Switch v-model:checked="notifications">
           Enable notifications
-        </kb-switch>
+        </Switch>
       </kb-form-control>
 
       <kb-form-control>

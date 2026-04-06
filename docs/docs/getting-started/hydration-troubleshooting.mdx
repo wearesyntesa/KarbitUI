@@ -1,0 +1,45 @@
+---
+sidebar_position: 8
+title: Hydration troubleshooting
+---
+
+# Hydration Troubleshooting
+
+KarbitUI renders interactive Lit components in the Light DOM. That is framework-friendly, but SSR apps still need a few guardrails.
+
+## Common symptoms
+
+- Vue or Nuxt hydration mismatch warnings
+- Next.js warnings after interactive controls mount
+- Lit runtime errors such as `ChildPart has no parentNode`
+- controls that work after navigation but fail on the first SSR render
+
+## First checks
+
+1. Confirm the theme CSS is loaded exactly once.
+2. Confirm the custom elements are registered on the client before first interaction.
+3. Confirm complex props are passed as properties, not serialized attributes, when you use raw custom elements.
+4. Prefer framework wrappers where they exist instead of manually unpacking `CustomEvent` payloads.
+
+## Framework-specific guidance
+
+### Nuxt
+
+- Use the Vue wrappers for forms first.
+- Wrap hydration-sensitive controls in `<ClientOnly>`.
+- If you render raw `kb-*` tags, keep `isCustomElement` enabled and register KarbitUI in a `.client` plugin.
+
+### Next.js
+
+- Put KarbitUI usage in client components.
+- Register `@wearesyntesa/karbit-ui/define` from a client-only provider.
+- If a route still mismatches, move the problematic component behind a smaller client-only boundary.
+
+### SvelteKit
+
+- Import `@wearesyntesa/karbit-ui/define` from a client entry or `onMount` boundary when needed.
+- Keep arrays and objects bound as properties.
+
+## When to switch from raw elements to wrappers
+
+Switch to wrappers when you see repeated casts like `($event as CustomEvent).detail.value`, frequent `.prop` usage in forms, or repeated SSR boundary workarounds for the same controls.

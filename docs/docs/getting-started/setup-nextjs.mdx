@@ -1,0 +1,95 @@
+---
+sidebar_position: 3
+title: Next.js
+---
+
+# Next.js Setup
+
+Next.js works best with KarbitUI through the React wrappers plus a client boundary for interactive UI.
+
+## Installation
+
+```bash
+pnpm add @wearesyntesa/karbit-ui @lit/react react react-dom
+```
+
+## Import the theme
+
+```tsx title="app/layout.tsx"
+import '@wearesyntesa/karbit-ui/theme.css';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+## Register custom elements once
+
+```tsx title="app/karbit-provider.tsx"
+'use client';
+
+import '@wearesyntesa/karbit-ui/define';
+
+export function KarbitProvider({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+```
+
+```tsx title="app/layout.tsx"
+import '@wearesyntesa/karbit-ui/theme.css';
+import { KarbitProvider } from './karbit-provider';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <KarbitProvider>{children}</KarbitProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+## Use wrappers in client components
+
+```tsx title="app/page.tsx"
+'use client';
+
+import { Button, Input, Select } from '@wearesyntesa/karbit-ui/react';
+import { useState } from 'react';
+
+const roleOptions = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'viewer', label: 'Viewer' },
+];
+
+export default function Page() {
+  const [name, setName] = useState('');
+  const [role, setRole] = useState('');
+
+  return (
+    <div className="max-w-md space-y-4 p-6">
+      <Input value={name} onKbInput={(event) => setName(event.detail.value)} placeholder="Name" />
+      <Select value={role} options={roleOptions} onKbChange={(event) => setRole(event.detail.value)} />
+      <Button variant="solid">Save</Button>
+    </div>
+  );
+}
+```
+
+## SSR guidance
+
+- Put interactive Karbit UI behind a client component boundary.
+- Prefer the React wrappers in Next.js instead of raw custom elements.
+- If a route still produces hydration issues, isolate the component behind a dynamic import with `ssr: false` or move it into a smaller client-only subtree.
+
+## Next steps
+
+- [Hydration troubleshooting](/docs/getting-started/hydration-troubleshooting)
+- [Testing KarbitUI](/docs/getting-started/testing)
+- [Theming](/docs/design-system/theming)

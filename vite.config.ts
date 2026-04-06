@@ -79,6 +79,7 @@ export default defineConfig({
         'core/recipe': resolve(__dirname, 'src/core/recipe.ts'),
         'utils/cx': resolve(__dirname, 'src/utils/cx.ts'),
         'react/index': resolve(__dirname, 'src/react/index.ts'),
+        'vue/index': resolve(__dirname, 'src/vue/index.ts'),
         'components/data-display/kb-accordion': resolve(__dirname, 'src/components/data-display/kb-accordion.ts'),
         'components/data-display/kb-accordion-group': resolve(
           __dirname,
@@ -292,11 +293,16 @@ export default defineConfig({
         'react/components/kb-blockquote': resolve(__dirname, 'src/react/components/kb-blockquote.ts'),
         'react/components/kb-highlight': resolve(__dirname, 'src/react/components/kb-highlight.ts'),
         'react/components/kb-scroll-area': resolve(__dirname, 'src/react/components/kb-scroll-area.ts'),
+        'vue/components/kb-input': resolve(__dirname, 'src/vue/components/kb-input.ts'),
+        'vue/components/kb-textarea': resolve(__dirname, 'src/vue/components/kb-textarea.ts'),
+        'vue/components/kb-select': resolve(__dirname, 'src/vue/components/kb-select.ts'),
+        'vue/components/kb-checkbox': resolve(__dirname, 'src/vue/components/kb-checkbox.ts'),
+        'vue/components/kb-switch': resolve(__dirname, 'src/vue/components/kb-switch.ts'),
       },
       formats: ['es'],
     },
     rollupOptions: {
-      external: [/^lit(?:\/|$)/, '@lit/react', 'react', 'tailwind-merge'],
+      external: [/^lit(?:\/|$)/, '@lit/react', 'react', 'tailwind-merge', 'vue'],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',

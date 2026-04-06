@@ -1,0 +1,82 @@
+---
+sidebar_position: 6
+title: Wrappers
+---
+
+# Official Wrappers
+
+KarbitUI ships two framework-specific wrapper surfaces today:
+
+- `@wearesyntesa/karbit-ui/react`
+- `@wearesyntesa/karbit-ui/vue`
+
+Use wrappers when you want framework-native state binding and event handling. Use raw custom elements when you want the lowest-level API or need to mix KarbitUI into a non-framework environment.
+
+## Vue wrappers
+
+The Vue wrappers currently cover the form controls that cause the most friction with raw custom elements:
+
+- `Input`
+- `Textarea`
+- `Select`
+- `Checkbox`
+- `Switch`
+
+They use named `v-model` bindings so the state vocabulary matches the underlying component API:
+
+```vue
+<script setup lang="ts">
+import { Checkbox, Input, Select, Switch, Textarea } from '@wearesyntesa/karbit-ui/vue';
+import { ref } from 'vue';
+
+const name = ref('');
+const role = ref('');
+const notes = ref('');
+const termsAccepted = ref(false);
+const notifications = ref(false);
+
+const roleOptions = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'viewer', label: 'Viewer' },
+];
+</script>
+
+<template>
+  <Input v-model:value="name" placeholder="Name" />
+  <Select v-model:value="role" :options="roleOptions" placeholder="Role" />
+  <Textarea v-model:value="notes" placeholder="Notes" />
+  <Checkbox v-model:checked="termsAccepted">Accept terms</Checkbox>
+  <Switch v-model:checked="notifications">Notifications</Switch>
+</template>
+```
+
+The wrappers also re-emit the original `kb-*` events, so you can still hook into lower-level behavior when you need it.
+
+## App-level wrappers
+
+Most production apps still benefit from a small application layer on top of KarbitUI. That is where you can centralize labels, validation messages, analytics hooks, and product-specific defaults.
+
+```vue
+<script setup lang="ts">
+import { Input } from '@wearesyntesa/karbit-ui/vue';
+
+defineProps<{
+  label: string;
+  value: string;
+}>();
+
+const emit = defineEmits<{
+  'update:value': [value: string];
+}>();
+</script>
+
+<template>
+  <label class="space-y-2">
+    <span class="text-xs uppercase tracking-widest text-slate-500">{{ label }}</span>
+    <Input :value="value" @update:value="emit('update:value', $event)" />
+  </label>
+</template>
+```
+
+That pattern is encouraged. The official wrappers remove framework friction; your app wrappers keep product usage consistent.

@@ -10,10 +10,15 @@ const sidebars: SidebarsConfig = {
       items: [
         'getting-started/installation',
         'getting-started/setup-react',
+        'getting-started/setup-nextjs',
         'getting-started/setup-vue',
+        'getting-started/setup-nuxt',
         'getting-started/setup-svelte',
         'getting-started/setup-vanilla',
+        'getting-started/wrappers',
         'getting-started/dark-mode',
+        'getting-started/hydration-troubleshooting',
+        'getting-started/testing',
       ],
     },
     {

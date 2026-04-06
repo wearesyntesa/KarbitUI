@@ -76,6 +76,7 @@ let instanceCounter = 0;
  * ```
  */
 export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
+  @property({ type: String, attribute: 'input-id' }) inputId?: string;
   /** Form select visual variant. @defaultValue 'outline' */
   @property({ type: String }) variant: FormVariant = 'outline';
   /** Select size controlling padding, font size, and icon sizing. @defaultValue 'md' */
@@ -689,6 +690,7 @@ export class KbSelect<V extends string = string> extends KbBaseElement<'icon'> {
       <div class=${outerClasses}>
         <div
           class=${innerClasses}
+          id=${this.inputId ?? nothing}
           role="combobox"
           tabindex=${this.disabled ? '-1' : '0'}
           aria-haspopup="listbox"

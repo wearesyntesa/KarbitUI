@@ -29,7 +29,7 @@ export const reactCode = `import { Select } from '@wearesyntesa/karbit-ui/react'
     ]
 } />`;
 export const vueCode = `<script setup>
-import '@wearesyntesa/karbit-ui/define';
+import { Select } from '@wearesyntesa/karbit-ui/vue';
 
 const options = [
     { value: 'apple', label: 'Apple' },
@@ -38,7 +38,7 @@ const options = [
 </script>
 
 <template>
-  <kb-select placeholder="Choose a fruit" :options="options" />
+  <Select placeholder="Choose a fruit" :options="options" />
 </template>`;
 export const svelteCode = `<script>
   import '@wearesyntesa/karbit-ui/define';
@@ -55,8 +55,32 @@ export const setupDemo = (container) => {
   container.querySelector('kb-select').options = [
       { value: 'apple', label: 'Apple' },
       { value: 'banana', label: 'Banana' },
-    ];
+  ];
 };
+
+Karbit `Select` is a custom combobox/listbox component, not a thin wrapper over native `<select>` / `<option>` markup.
+
+- use the `options` array API intentionally
+- use `:options.prop` when you render raw `kb-select` in Vue
+- use the official Vue wrapper when you want normal prop binding and `v-model:value`
+
+```vue
+<script setup lang="ts">
+import { Select } from '@wearesyntesa/karbit-ui/vue';
+import { ref } from 'vue';
+
+const role = ref('');
+const options = [
+  { value: 'admin', label: 'Admin' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'viewer', label: 'Viewer' },
+];
+</script>
+
+<template>
+  <Select v-model:value="role" :options="options" placeholder="Role" />
+</template>
+```
 export const exDefault = `<kb-select placeholder="Choose a framework" size="md">
 </kb-select>`;
 export const exDefaultReact = `import { Select } from '@wearesyntesa/karbit-ui/react';
